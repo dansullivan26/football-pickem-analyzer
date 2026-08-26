@@ -2,7 +2,7 @@
 
 :root {
   color: #15231c;
-  background: #f4f7f2;
+  background: #ffffff;
   font-family: 'DM Sans', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,9 +14,7 @@
   --green-dark: #08472f;
   --green-soft: #e7f5ed;
   --gold: #c49200;
-  --gold-soft: #fbf6e4;
   --orange: #d36b1f;
-  --orange-soft: #fdf1e6;
   --amber: #9a5b00;
   --amber-soft: #fff2d9;
   --blue: #245c8b;
@@ -347,29 +345,31 @@ select:focus {
   box-shadow: 0 3px 12px rgba(30, 53, 40, 0.035);
 }
 
+/* Row tints sit on a white page, so each stays a shade darker than the
+   surface it covers. */
 .game-card.hammer {
-  border-color: #c5e4d2;
-  background: var(--green-soft);
+  border-color: #aed8c1;
+  background: #dcf1e5;
 }
 
 .game-card.lean {
-  border-color: #ead8a0;
-  background: var(--gold-soft);
+  border-color: #e5cd8b;
+  background: #faf1d3;
 }
 
 .game-card.slight {
-  border-color: #efd0b4;
-  background: var(--orange-soft);
+  border-color: #eec5a3;
+  background: #fbe7d5;
 }
 
 .game-card.neutral {
-  border-color: #d9dfd9;
-  background: var(--gray-soft);
+  border-color: #d2dad3;
+  background: #eaefea;
 }
 
 .game-card.pending {
-  border-color: #c9dceb;
-  background: var(--blue-soft);
+  border-color: #b6d2e9;
+  background: #e0edfa;
 }
 
 .game-meta {

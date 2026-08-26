@@ -106,6 +106,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   if (category === 'pending') {
     return (
       <div className="recommendation-block">
+        <div className="edge-label">Line Value</div>
         <div className="recommendation pending">
           <span className="category-dot" />
           Awaiting odds
@@ -119,6 +120,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
 
   return (
     <div className="recommendation-block">
+      <div className="edge-label">Line Value</div>
       <div className="edge-copy">
         {team.abbrev} {formatSpread(poolNumber)}
       </div>

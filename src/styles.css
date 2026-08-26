@@ -471,6 +471,14 @@ select:focus {
   justify-items: end;
 }
 
+.edge-label {
+  color: var(--muted);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+
 .edge-copy {
   font-family: 'Manrope', sans-serif;
   font-size: 0.95rem;

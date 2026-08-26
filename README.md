@@ -50,7 +50,8 @@ until kickoff.
 2. Add the API key to the GitHub repository as an Actions secret named
    `SHARP_API_KEY`.
 3. Run the **Refresh sportsbook lines** workflow manually, or wait for its
-   two-hour schedule.
+   hourly schedule (`23 * * * *` UTC). GitHub can delay or skip cron jobs, so
+   the Action history is the source of truth, not the clock.
 
 The browser's **Refresh lines** button reloads the latest generated odds file;
 it does not spend an API request.

@@ -109,7 +109,6 @@ function reject(reason) {
 function usableSpread(row) {
   const failure =
     (row.market_type !== 'point_spread' && 'not a point spread') ||
-    (row.selection_type !== 'home' && 'not the home side') ||
     (typeof row.line !== 'number' && 'missing line value') ||
     (row.is_live === true && 'live market') ||
     (row.is_active === false && 'suspended market') ||
@@ -120,6 +119,32 @@ function usableSpread(row) {
     return false
   }
   return true
+}
+
+// selection_type is unreliable — the provider has been seen labelling both sides
+// of a game "home" — so the side is taken from team_side and confirmed against
+// the selection name.
+function rowSide(row, game) {
+  if (row.selection) {
+    if (teamMatches(game.home, row.selection)) return 'home'
+    if (teamMatches(game.away, row.selection)) return 'away'
+  }
+  if (row.team_side === 'home' || row.team_side === 'away') return row.team_side
+  return null
+}
+
+// A true main line is priced near even money, which separates a real spread from
+// a mislabelled alternate when the provider's flags disagree.
+function rowRank(row) {
+  return {
+    main: row.is_main_line === true ? 1 : 0,
+    balance: Math.abs((row.odds_american ?? -110) + 110),
+  }
+}
+
+function outranks(candidate, current) {
+  if (candidate.main !== current.main) return candidate.main > current.main
+  return candidate.balance < current.balance
 }
 
 const matched = new Map()
@@ -154,11 +179,18 @@ for (const row of rawRows) {
     continue
   }
 
+  const side = rowSide(row, game)
+  if (!side) {
+    reject('side could not be identified')
+    continue
+  }
+
   const entry = matched.get(game.cbsEventId) ?? { game, books: new Map() }
-  const priority = row.is_main_line === true ? 2 : 1
+  const rank = rowRank(row)
+  const candidate = { line: side === 'home' ? row.line : -row.line, ...rank }
   const previous = entry.books.get(row.sportsbook)
-  if (!previous || priority >= previous.priority) {
-    entry.books.set(row.sportsbook, { line: row.line, priority })
+  if (!previous || outranks(candidate, previous)) {
+    entry.books.set(row.sportsbook, candidate)
   }
   matched.set(game.cbsEventId, entry)
 }
@@ -191,13 +223,27 @@ const runAt = new Date().toISOString()
 const now = Date.now()
 let carried = 0
 
+// Markets never disagree with a locked pool line by this much. A gap this large
+// means the row was misread — a flipped sign or a bad match — so it is dropped
+// rather than published as an enormous fake edge.
+const MAX_DISAGREEMENT = 14
+const suspect = []
+
 const events = slate.games
   .filter((game) => new Date(game.kickoff).getTime() > now)
   .map((game) => {
     const books = matched.get(game.cbsEventId)?.books ?? new Map()
-    const lines = Object.fromEntries(
-      [...books].map(([book, { line }]) => [book, { line, retrievedAt: runAt }]),
-    )
+    const lines = {}
+
+    for (const [book, { line }] of books) {
+      if (Math.abs(line - game.homeSpread) > MAX_DISAGREEMENT) {
+        suspect.push(
+          `${game.away.name} @ ${game.home.name} — ${book} ${line} vs pool ${game.homeSpread}`,
+        )
+        continue
+      }
+      lines[book] = { line, retrievedAt: runAt }
+    }
 
     for (const [book, previous] of Object.entries(
       previousLines.get(game.cbsEventId) ?? {},
@@ -235,6 +281,12 @@ await writeFile(OUTPUT, `${JSON.stringify(feed, null, 2)}\n`)
 console.log(`\nMatched ${matched.size}/${slate.games.length} slate games.`)
 if (carried) {
   console.log(`Carried forward ${carried} price(s) missing from this snapshot.`)
+}
+if (suspect.length) {
+  console.log(`\nDropped ${suspect.length} implausible price(s):`)
+  for (const line of suspect) {
+    console.log(`  - ${line}`)
+  }
 }
 
 console.log('\nRows returned per sportsbook:')

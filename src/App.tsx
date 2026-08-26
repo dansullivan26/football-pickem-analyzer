@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import slateData from './data/current-slate.json'
+import playerHistoryData from './data/player-history.json'
+import PlayersView from './PlayersView'
 import type {
   BookKey,
   EdgeCategory,
   OddsEvent,
   OddsFeed,
+  PlayerHistory,
   Slate,
   SlateGame,
 } from './types'
 
 const slate = slateData as Slate
+const playerHistory = playerHistoryData as PlayerHistory
 const bookNames: Record<BookKey, string> = {
   draftkings: 'DraftKings',
   fanduel: 'FanDuel',
@@ -189,6 +193,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 }
 
 function App() {
+  const [view, setView] = useState<'lines' | 'players'>('lines')
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -264,16 +269,44 @@ function App() {
           <span className="brand-mark">PE</span>
           <span>Pick&apos;em Edge</span>
         </a>
-        <div className="header-actions">
-          <span className="feed-status">{formatUpdatedAt(feed?.updatedAt ?? null)}</span>
-          <button className="refresh-button" type="button" onClick={loadOdds} disabled={loading}>
-            <span aria-hidden="true">↻</span>
-            {loading ? 'Refreshing…' : 'Refresh lines'}
+        <nav className="primary-nav" aria-label="Primary navigation">
+          <button
+            className={view === 'lines' ? 'active' : ''}
+            type="button"
+            onClick={() => setView('lines')}
+          >
+            Lines
           </button>
+          <button
+            className={view === 'players' ? 'active' : ''}
+            type="button"
+            onClick={() => setView('players')}
+          >
+            Players
+          </button>
+        </nav>
+        <div className="header-actions">
+          {view === 'lines' && (
+            <>
+              <span className="feed-status">
+                {formatUpdatedAt(feed?.updatedAt ?? null)}
+              </span>
+              <button
+                className="refresh-button"
+                type="button"
+                onClick={loadOdds}
+                disabled={loading}
+              >
+                <span aria-hidden="true">↻</span>
+                {loading ? 'Refreshing…' : 'Refresh lines'}
+              </button>
+            </>
+          )}
         </div>
       </header>
 
-      <main>
+      {view === 'lines' ? (
+        <main>
         <section className="hero">
           <div>
             <p className="eyebrow">
@@ -400,15 +433,31 @@ function App() {
             </div>
           )}
         </section>
-      </main>
+        </main>
+      ) : (
+        <PlayersView history={playerHistory} />
+      )}
 
       <footer>
-        CBS line captured{' '}
-        {new Intl.DateTimeFormat(undefined, {
-          dateStyle: 'medium',
-          timeStyle: 'short',
-        }).format(new Date(slate.source.fetchedAt))}
-        . Sportsbook data provided by SharpAPI.
+        {view === 'lines' ? (
+          <>
+            CBS line captured{' '}
+            {new Intl.DateTimeFormat(undefined, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            }).format(new Date(slate.source.fetchedAt))}
+            . Sportsbook data provided by SharpAPI.
+          </>
+        ) : (
+          <>
+            Player history captured{' '}
+            {new Intl.DateTimeFormat(undefined, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            }).format(new Date(playerHistory.source.fetchedAt))}
+            .
+          </>
+        )}
       </footer>
     </div>
   )

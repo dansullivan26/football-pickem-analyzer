@@ -22,6 +22,17 @@ npm run prepare-slate -- --input path/to/cbs-slate.json
 Commit the generated `src/data/current-slate.json`. Normalized odds are loaded
 from `public/data/odds.json`.
 
+To prepare a GrokBot player-history export:
+
+```bash
+npm run prepare-players -- --input path/to/players.json
+```
+
+This validates the roster and weekly pick grids, strips the private pool URL,
+and writes `src/data/player-history.json`. The Players view can render unpicked
+weeks immediately; tendency metrics populate as scored Tuesday exports add
+selections and results.
+
 ## Refresh sportsbook lines
 
 1. Create a free SharpAPI account.

@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare-slate": "node scripts/prepare-slate.mjs"
+    "prepare-slate": "node scripts/prepare-slate.mjs",
+    "prepare-players": "node scripts/prepare-players.mjs"
   },
   "keywords": [],
   "author": "",

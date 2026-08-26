@@ -71,3 +71,71 @@ export type OddsFeed = {
 }
 
 export type EdgeCategory = 'hammer' | 'lean' | 'neutral' | 'pending'
+
+export type PickResult = 'win' | 'loss' | 'push' | null
+export type PickMatchStatus = 'matched' | 'unpicked' | 'ambiguous' | 'unmatched'
+
+export type PlayerPick = {
+  gameId: string
+  cbsEventId: number
+  sport: 'NFL' | 'NCAAF'
+  away: string
+  home: string
+  homeSpread: number
+  pickedTeamId: string | null
+  pickedTeam: string | null
+  pickedSide: 'home' | 'away' | null
+  result: PickResult
+  points: number | null
+  pickStatus: 'NONE' | 'CORRECT' | 'INCORRECT' | null
+  matchStatus: PickMatchStatus
+}
+
+export type PlayerRosterEntry = {
+  entryId: string
+  name: string
+  hasMadeAPick: boolean
+  season: {
+    score: number | null
+    rank: number | null
+    correctPicks: number | null
+    picksMadeCount: number | null
+  }
+}
+
+export type PlayerWeekEntry = {
+  entryId: string
+  name: string
+  weekScore: number | null
+  weekRank: number | null
+  correctPicks: number | null
+  picksCount: number | null
+  tiebreaker: {
+    question: string
+    answer: number | null
+  }
+  picks: PlayerPick[]
+}
+
+export type PlayerWeek = {
+  week: number
+  periodId: string
+  label: string
+  status: 'upcoming' | 'in_progress' | 'scored'
+  scored: boolean
+  slateFile: string
+  entries: PlayerWeekEntry[]
+}
+
+export type PlayerHistory = {
+  source: {
+    fetchedAt: string
+    timezone: string
+  }
+  pool: {
+    name: string
+    seasonYear: number
+  }
+  entries: PlayerRosterEntry[]
+  weeks: PlayerWeek[]
+}

@@ -144,6 +144,53 @@ for (const row of rawRows) {
   matched.set(game.cbsEventId, entry)
 }
 
+const OUTPUT = new URL('public/data/odds.json', ROOT)
+
+// Book coverage fluctuates between runs, so a game priced earlier can vanish
+// from a later snapshot. Keep the last known price until kickoff rather than
+// letting the site lose a line it already had.
+const previousLines = new Map()
+try {
+  const previous = JSON.parse(await readFile(OUTPUT, 'utf8'))
+  for (const event of previous.events ?? []) {
+    previousLines.set(event.cbsEventId, event.lines ?? {})
+  }
+} catch {
+  // First run, or the file was never generated.
+}
+
+const now = Date.now()
+let carried = 0
+
+const events = slate.games
+  .filter((game) => new Date(game.kickoff).getTime() > now)
+  .map((game) => {
+    const books = matched.get(game.cbsEventId)?.books ?? new Map()
+    const lines = Object.fromEntries(
+      [...books].map(([book, { line }]) => [book, line]),
+    )
+
+    for (const [book, line] of Object.entries(
+      previousLines.get(game.cbsEventId) ?? {},
+    )) {
+      if (!(book in lines)) {
+        lines[book] = line
+        carried += 1
+      }
+    }
+
+    return {
+      cbsEventId: game.cbsEventId,
+      sport: game.sport,
+      kickoff: game.kickoff,
+      awayTeam: game.away.name,
+      homeTeam: game.home.name,
+      lines,
+    }
+  })
+  .filter((event) => Object.keys(event.lines).length > 0)
+  .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime())
+
 const feed = {
   provider: 'SharpAPI',
   updatedAt: new Date().toISOString(),
@@ -151,26 +198,15 @@ const feed = {
     { key: 'draftkings', name: 'DraftKings' },
     { key: 'fanduel', name: 'FanDuel' },
   ],
-  events: [...matched.values()]
-    .map(({ game, books }) => ({
-      cbsEventId: game.cbsEventId,
-      sport: game.sport,
-      kickoff: game.kickoff,
-      awayTeam: game.away.name,
-      homeTeam: game.home.name,
-      lines: Object.fromEntries(
-        [...books].map(([book, { line }]) => [book, line]),
-      ),
-    }))
-    .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime()),
+  events,
 }
 
-await writeFile(
-  new URL('public/data/odds.json', ROOT),
-  `${JSON.stringify(feed, null, 2)}\n`,
-)
+await writeFile(OUTPUT, `${JSON.stringify(feed, null, 2)}\n`)
 
 console.log(`\nMatched ${matched.size}/${slate.games.length} slate games.`)
+if (carried) {
+  console.log(`Carried forward ${carried} price(s) missing from this snapshot.`)
+}
 
 console.log('\nRows returned per sportsbook:')
 for (const book of new Set([...BOOKS, ...rowsByBook.keys()])) {
@@ -178,7 +214,8 @@ for (const book of new Set([...BOOKS, ...rowsByBook.keys()])) {
 }
 
 const coverage = BOOKS.map(
-  (book) => `${book}: ${feed.events.filter((event) => book in event.lines).length}`,
+  (book) =>
+    `${book}: ${feed.events.filter((event) => book in event.lines).length}`,
 )
 console.log(`\nSlate games priced per book — ${coverage.join(', ')}`)
 

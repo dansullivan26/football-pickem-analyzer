@@ -58,4 +58,5 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 
 The comparison uses the average available home-team spread across DraftKings
 and FanDuel. The recommended side is the team receiving the better number in
-the CBS pool.
+the CBS pool. If that number is the good side of a field-goal (2.5 / 3.5) or
+touchdown (6.5 / 7.5) hook versus the book, the card shows a favorable hook badge.

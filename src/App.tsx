@@ -71,6 +71,27 @@ function formatUpdatedAt(value: string | null) {
   }).format(new Date(value))}`
 }
 
+function classifyEdge(magnitude: number): EdgeCategory {
+  if (magnitude >= 3) return 'hammer'
+  if (magnitude >= 1.5) return 'lean'
+  if (magnitude > 0) return 'slight'
+  return 'neutral'
+}
+
+// The .5 that sits on either side of a field goal (3) or touchdown (7).
+// If the pool and the book are 2.5 vs 3.5 (or 6.5 vs 7.5), the better
+// number is always the side of that hook, so a recommendation already
+// points at the team that benefits.
+function favorableHook(poolHome: number, bookHome: number): 'fg' | 'td' | null {
+  if (poolHome === 0 || bookHome === 0) return null
+  if (Math.sign(poolHome) !== Math.sign(bookHome)) return null
+
+  const pair = new Set([Math.abs(poolHome), Math.abs(bookHome)])
+  if (pair.has(2.5) && pair.has(3.5)) return 'fg'
+  if (pair.has(6.5) && pair.has(7.5)) return 'td'
+  return null
+}
+
 function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis {
   const availableLines = odds
     ? Object.values(odds.lines)
@@ -100,14 +121,7 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
     odds,
     liveHomeSpread,
     edge: magnitude,
-    category:
-      magnitude >= 3
-        ? 'hammer'
-        : magnitude >= 1.5
-          ? 'lean'
-          : magnitude > 0
-            ? 'slight'
-            : 'neutral',
+    category: classifyEdge(magnitude),
     recommendedSide: edge > 0 ? 'home' : edge < 0 ? 'away' : null,
   }
 }
@@ -141,6 +155,10 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
 
   const team = game[recommendedSide]
   const poolNumber = game.homeSpread * (recommendedSide === 'away' ? -1 : 1)
+  const hook =
+    analysis.liveHomeSpread == null
+      ? null
+      : favorableHook(game.homeSpread, analysis.liveHomeSpread)
 
   return (
     <div className="recommendation-block">
@@ -152,6 +170,11 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
         <span className="category-dot" />
         {category}
       </div>
+      {hook && (
+        <div className="hook-badge">
+          favorable {hook === 'fg' ? 'FG' : 'TD'} hook
+        </div>
+      )}
     </div>
   )
 }

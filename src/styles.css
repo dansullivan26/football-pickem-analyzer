@@ -530,6 +530,19 @@ select:focus {
   margin-top: 2px;
 }
 
+.hook-badge {
+  margin-top: 5px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: #5c4a12;
+  background: #fff3cc;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .spread-note {
   color: var(--muted);
   font-size: 0.62rem;

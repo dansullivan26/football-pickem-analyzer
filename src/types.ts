@@ -70,7 +70,7 @@ export type OddsFeed = {
   events: OddsEvent[]
 }
 
-export type EdgeCategory = 'hammer' | 'lean' | 'neutral' | 'pending'
+export type EdgeCategory = 'hammer' | 'lean' | 'slight' | 'neutral' | 'pending'
 
 export type PickResult = 'win' | 'loss' | 'push' | null
 export type PickMatchStatus = 'matched' | 'unpicked' | 'ambiguous' | 'unmatched'

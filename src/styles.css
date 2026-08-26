@@ -17,6 +17,7 @@
   --amber-soft: #fff2d9;
   --blue: #245c8b;
   --blue-soft: #e9f2fb;
+  --teal: #1f6f64;
   --gray-soft: #edf1ed;
   --shadow: 0 10px 30px rgba(30, 53, 40, 0.07);
 }
@@ -222,7 +223,7 @@ h2 {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 14px;
 }
 
@@ -269,6 +270,10 @@ h2 {
 
 .summary-card.lean {
   border-left-color: #d88a13;
+}
+
+.summary-card.slight {
+  border-left-color: var(--teal);
 }
 
 .summary-card.neutral {
@@ -481,6 +486,10 @@ select:focus {
   color: var(--amber);
 }
 
+.recommendation.slight {
+  color: var(--teal);
+}
+
 .recommendation.neutral {
   color: var(--blue);
 }
@@ -507,6 +516,12 @@ select:focus {
   font-size: 0.95rem;
   font-weight: 800;
   text-align: right;
+}
+
+.edge-copy.none {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .recommendation-block .recommendation {
@@ -800,6 +815,10 @@ footer {
 }
 
 @media (max-width: 960px) {
+  .summary-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .game-card {
     grid-template-columns: 145px minmax(210px, 1fr) minmax(270px, 1fr);
   }

@@ -52,8 +52,9 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 ## Recommendation rules
 
 - **Hammer:** 3 or more points of value
-- **Lean:** 1.5–2.9 points
-- **Neutral:** less than 1.5 points
+- **Lean:** 1.5–2.5 points
+- **Slight:** 0.5–1 point
+- **Neutral:** lines match (no edge)
 
 The comparison uses the average available home-team spread across DraftKings
 and FanDuel. The recommended side is the team receiving the better number in

@@ -100,7 +100,14 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
     odds,
     liveHomeSpread,
     edge: magnitude,
-    category: magnitude >= 3 ? 'hammer' : magnitude >= 1.5 ? 'lean' : 'neutral',
+    category:
+      magnitude >= 3
+        ? 'hammer'
+        : magnitude >= 1.5
+          ? 'lean'
+          : magnitude > 0
+            ? 'slight'
+            : 'neutral',
     recommendedSide: edge > 0 ? 'home' : edge < 0 ? 'away' : null,
   }
 }
@@ -119,7 +126,20 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
     )
   }
 
-  const team = recommendedSide ? game[recommendedSide] : game.home
+  if (!recommendedSide) {
+    return (
+      <div className="recommendation-block">
+        <div className="edge-label">Line Value</div>
+        <div className="edge-copy none">No edge</div>
+        <div className={`recommendation ${category}`}>
+          <span className="category-dot" />
+          {category}
+        </div>
+      </div>
+    )
+  }
+
+  const team = game[recommendedSide]
   const poolNumber = game.homeSpread * (recommendedSide === 'away' ? -1 : 1)
 
   return (
@@ -243,7 +263,7 @@ function App() {
           totals[analysis.category] += 1
           return totals
         },
-        { hammer: 0, lean: 0, neutral: 0, pending: 0 },
+        { hammer: 0, lean: 0, slight: 0, neutral: 0, pending: 0 },
       ),
     [analyses],
   )
@@ -346,12 +366,17 @@ function App() {
           <button className="summary-card lean" onClick={() => setFilter('lean')}>
             <span>Leans</span>
             <strong>{counts.lean}</strong>
-            <small>1.5–2.9 points</small>
+            <small>1.5–2.5 points</small>
+          </button>
+          <button className="summary-card slight" onClick={() => setFilter('slight')}>
+            <span>Slights</span>
+            <strong>{counts.slight}</strong>
+            <small>0.5–1 point</small>
           </button>
           <button className="summary-card neutral" onClick={() => setFilter('neutral')}>
             <span>Neutral</span>
             <strong>{counts.neutral}</strong>
-            <small>Under 1.5 points</small>
+            <small>Lines match</small>
           </button>
           <button className="summary-card pending" onClick={() => setFilter('pending')}>
             <span>Awaiting lines</span>
@@ -400,6 +425,7 @@ function App() {
                   <option value="all">All games</option>
                   <option value="hammer">Hammers</option>
                   <option value="lean">Leans</option>
+                  <option value="slight">Slights</option>
                   <option value="neutral">Neutral</option>
                   <option value="pending">Awaiting lines</option>
                 </select>

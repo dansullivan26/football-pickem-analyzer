@@ -41,6 +41,24 @@ function formatSpread(value: number | null | undefined) {
   return value > 0 ? `+${points}` : `-${points}`
 }
 
+const STALE_AFTER_MS = 6 * 60 * 60 * 1000
+
+function formatAge(value: string, now: number) {
+  const minutes = Math.round((now - new Date(value).getTime()) / 60_000)
+  if (minutes < 1) return 'just now'
+  if (minutes < 60) return `${minutes}m ago`
+  const hours = Math.round(minutes / 60)
+  if (hours < 24) return `${hours}h ago`
+  return `${Math.round(hours / 24)}d ago`
+}
+
+function formatTimestamp(value: string) {
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(new Date(value))
+}
+
 function formatUpdatedAt(value: string | null) {
   if (!value) return 'Waiting for first odds refresh'
   return `Updated ${new Intl.DateTimeFormat(undefined, {
@@ -51,7 +69,9 @@ function formatUpdatedAt(value: string | null) {
 
 function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis {
   const availableLines = odds
-    ? Object.values(odds.lines).filter((line): line is number => typeof line === 'number')
+    ? Object.values(odds.lines)
+        .map((entry) => entry?.line)
+        .filter((line): line is number => typeof line === 'number')
     : []
 
   if (availableLines.length === 0) {
@@ -119,7 +139,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   )
 }
 
-function GameCard({ analysis }: { analysis: GameAnalysis }) {
+function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const { game, odds } = analysis
   return (
     <article className="game-card">
@@ -145,13 +165,26 @@ function GameCard({ analysis }: { analysis: GameAnalysis }) {
         <div className="line-cell locked">
           <span>CBS locked</span>
           <strong>{formatSpread(game.homeSpread)}</strong>
+          <em>pool line</em>
         </div>
-        {(Object.keys(bookNames) as BookKey[]).map((book) => (
-          <div className="line-cell" key={book}>
-            <span>{bookNames[book]}</span>
-            <strong>{formatSpread(odds?.lines[book])}</strong>
-          </div>
-        ))}
+        {(Object.keys(bookNames) as BookKey[]).map((book) => {
+          const entry = odds?.lines[book]
+          const stale =
+            !!entry && now - new Date(entry.retrievedAt).getTime() > STALE_AFTER_MS
+          return (
+            <div className={`line-cell${stale ? ' stale' : ''}`} key={book}>
+              <span>{bookNames[book]}</span>
+              <strong>{formatSpread(entry?.line)}</strong>
+              {entry ? (
+                <em title={`Retrieved ${formatTimestamp(entry.retrievedAt)}`}>
+                  {formatAge(entry.retrievedAt, now)}
+                </em>
+              ) : (
+                <em>no line yet</em>
+              )}
+            </div>
+          )
+        })}
       </div>
 
       <div className="card-footer">
@@ -168,6 +201,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
   const [query, setQuery] = useState('')
+  const [now, setNow] = useState(() => Date.now())
 
   const loadOdds = useCallback(async () => {
     setLoading(true)
@@ -178,6 +212,7 @@ function App() {
       })
       if (!response.ok) throw new Error(`Odds feed returned ${response.status}`)
       setFeed((await response.json()) as OddsFeed)
+      setNow(Date.now())
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Unable to load odds')
     } finally {
@@ -333,7 +368,11 @@ function App() {
 
           <div className="game-list">
             {visibleGames.map((analysis) => (
-              <GameCard key={analysis.game.cbsEventId} analysis={analysis} />
+              <GameCard
+                key={analysis.game.cbsEventId}
+                analysis={analysis}
+                now={now}
+              />
             ))}
           </div>
 

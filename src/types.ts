@@ -48,13 +48,19 @@ export type Slate = {
 
 export type BookKey = 'draftkings' | 'fanduel'
 
+export type BookLine = {
+  line: number
+  /** When this price was last successfully retrieved from the provider. */
+  retrievedAt: string
+}
+
 export type OddsEvent = {
   cbsEventId: number | null
   sport: 'NFL' | 'NCAAF'
   kickoff: string
   awayTeam: string
   homeTeam: string
-  lines: Partial<Record<BookKey, number>>
+  lines: Partial<Record<BookKey, BookLine>>
 }
 
 export type OddsFeed = {

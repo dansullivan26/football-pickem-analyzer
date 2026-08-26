@@ -409,6 +409,24 @@ select:focus {
   font-size: 0.98rem;
 }
 
+.line-cell em {
+  margin-top: 1px;
+  color: #8b968e;
+  font-size: 0.58rem;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.line-cell.stale {
+  border-color: #e8d3a8;
+  background: var(--amber-soft);
+}
+
+.line-cell.stale em {
+  color: var(--amber);
+  font-weight: 600;
+}
+
 .card-footer {
   display: grid;
   gap: 5px;

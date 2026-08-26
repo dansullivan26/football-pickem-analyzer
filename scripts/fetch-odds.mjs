@@ -159,6 +159,7 @@ try {
   // First run, or the file was never generated.
 }
 
+const runAt = new Date().toISOString()
 const now = Date.now()
 let carried = 0
 
@@ -167,14 +168,14 @@ const events = slate.games
   .map((game) => {
     const books = matched.get(game.cbsEventId)?.books ?? new Map()
     const lines = Object.fromEntries(
-      [...books].map(([book, { line }]) => [book, line]),
+      [...books].map(([book, { line }]) => [book, { line, retrievedAt: runAt }]),
     )
 
-    for (const [book, line] of Object.entries(
+    for (const [book, previous] of Object.entries(
       previousLines.get(game.cbsEventId) ?? {},
     )) {
-      if (!(book in lines)) {
-        lines[book] = line
+      if (!(book in lines) && typeof previous?.line === 'number') {
+        lines[book] = previous
         carried += 1
       }
     }
@@ -193,7 +194,7 @@ const events = slate.games
 
 const feed = {
   provider: 'SharpAPI',
-  updatedAt: new Date().toISOString(),
+  updatedAt: runAt,
   books: [
     { key: 'draftkings', name: 'DraftKings' },
     { key: 'fanduel', name: 'FanDuel' },

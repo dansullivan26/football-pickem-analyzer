@@ -102,39 +102,30 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
 }
 
 function Recommendation({ analysis }: { analysis: GameAnalysis }) {
-  const { game, category, edge, recommendedSide } = analysis
+  const { game, category, recommendedSide } = analysis
   if (category === 'pending') {
     return (
-      <div className="recommendation pending">
-        <span className="category-dot" />
-        Awaiting odds
+      <div className="recommendation-block">
+        <div className="recommendation pending">
+          <span className="category-dot" />
+          Awaiting odds
+        </div>
       </div>
     )
   }
 
-  const team = recommendedSide ? game[recommendedSide] : null
-  const flip = recommendedSide === 'away' ? -1 : 1
-  const poolNumber = game.homeSpread * flip
-  const bookNumber = (analysis.liveHomeSpread ?? 0) * flip
+  const team = recommendedSide ? game[recommendedSide] : game.home
+  const poolNumber = game.homeSpread * (recommendedSide === 'away' ? -1 : 1)
 
   return (
     <div className="recommendation-block">
+      <div className="edge-copy">
+        {team.abbrev} {formatSpread(poolNumber)}
+      </div>
       <div className={`recommendation ${category}`}>
         <span className="category-dot" />
         {category}
       </div>
-      {team && edge ? (
-        <>
-          <div className="edge-copy">
-            {team.abbrev} {formatSpread(poolNumber)}
-          </div>
-          <div className="edge-detail">
-            {formatPoints(edge)} better than {formatSpread(bookNumber)}
-          </div>
-        </>
-      ) : (
-        <div className="edge-detail">Line matches the book</div>
-      )}
     </div>
   )
 }
@@ -200,6 +191,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
+  const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
   const [now, setNow] = useState(() => Date.now())
 
@@ -253,14 +245,15 @@ function App() {
     const normalizedQuery = query.trim().toLowerCase()
     return analyses.filter(({ game, category }) => {
       const matchesFilter = filter === 'all' || category === filter
+      const matchesLeague = league === 'all' || game.sport === league
       const matchesQuery =
         !normalizedQuery ||
         [game.away.name, game.away.abbrev, game.home.name, game.home.abbrev].some(
           (value) => value.toLowerCase().includes(normalizedQuery),
         )
-      return matchesFilter && matchesQuery
+      return matchesFilter && matchesLeague && matchesQuery
     })
-  }, [analyses, filter, query])
+  }, [analyses, filter, league, query])
 
   return (
     <div className="app-shell">
@@ -349,6 +342,19 @@ function App() {
                 />
               </label>
               <label>
+                <span className="sr-only">Filter by league</span>
+                <select
+                  value={league}
+                  onChange={(event) =>
+                    setLeague(event.target.value as 'all' | 'NCAAF' | 'NFL')
+                  }
+                >
+                  <option value="all">All leagues</option>
+                  <option value="NCAAF">NCAAF</option>
+                  <option value="NFL">NFL</option>
+                </select>
+              </label>
+              <label>
                 <span className="sr-only">Filter recommendations</span>
                 <select
                   value={filter}
@@ -379,7 +385,14 @@ function App() {
           {visibleGames.length === 0 && (
             <div className="empty-state">
               No games match this filter.{' '}
-              <button type="button" onClick={() => { setFilter('all'); setQuery('') }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setFilter('all')
+                  setLeague('all')
+                  setQuery('')
+                }}
+              >
                 Clear filters
               </button>
             </div>

@@ -472,17 +472,14 @@ select:focus {
 }
 
 .edge-copy {
-  margin-top: 3px;
   font-family: 'Manrope', sans-serif;
   font-size: 0.95rem;
   font-weight: 800;
   text-align: right;
 }
 
-.edge-detail {
-  color: var(--muted);
-  font-size: 0.68rem;
-  text-align: right;
+.recommendation-block .recommendation {
+  margin-top: 2px;
 }
 
 .spread-note {
@@ -599,6 +596,10 @@ footer {
   .controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .controls .search {
+    grid-column: 1 / -1;
   }
 
   .game-card {

@@ -46,7 +46,7 @@ export type Slate = {
   games: SlateGame[]
 }
 
-export type BookKey = 'draftkings' | 'fanduel'
+export type BookKey = 'draftkings'
 
 export type BookLine = {
   line: number

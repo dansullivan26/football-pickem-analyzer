@@ -1,7 +1,7 @@
 # Pick'em Edge
 
 A mobile-friendly Vite app that compares locked CBS Football Pick'em spreads
-with current DraftKings and FanDuel lines from SharpAPI.
+with current DraftKings lines from SharpAPI.
 
 ## Local development
 
@@ -67,7 +67,7 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 - **Slight:** 0.5–1 point
 - **Neutral:** lines match (no edge)
 
-The comparison uses the average available home-team spread across DraftKings
-and FanDuel. The recommended side is the team receiving the better number in
-the CBS pool. If that number is the good side of a field-goal (2.5 / 3.5) or
-touchdown (6.5 / 7.5) hook versus the book, the card shows a favorable hook badge.
+The comparison uses the current DraftKings home-team spread. The recommended
+side is the team receiving the better number in the CBS pool. If that number is
+the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
+DraftKings, the card shows a favorable hook badge.

@@ -31,7 +31,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Fetch DraftKings and FanDuel spreads
+      - name: Fetch DraftKings spreads
         run: node scripts/fetch-odds.mjs
         env:
           SHARP_API_KEY: ${{ secrets.SHARP_API_KEY }}

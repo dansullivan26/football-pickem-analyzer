@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 
 const API_URL = 'https://api.sharpapi.io/api/v1/odds'
 const API_KEY = process.env.SHARP_API_KEY
-const BOOKS = ['draftkings', 'fanduel']
+const BOOKS = ['draftkings']
 const MAX_PAGES = 25
 const ROOT = new URL('../', import.meta.url)
 const slate = JSON.parse(
@@ -73,6 +73,7 @@ async function fetchLeague(league) {
     url.searchParams.set('league', league)
     url.searchParams.set('sportsbook', BOOKS.join(','))
     url.searchParams.set('market', 'point_spread')
+    url.searchParams.set('is_live', 'false')
     url.searchParams.set('limit', '200')
     if (cursor) url.searchParams.set('cursor', cursor)
 
@@ -99,6 +100,7 @@ const rawRows = (
 
 const rowsByBook = new Map()
 const rejections = new Map()
+const now = Date.now()
 
 function reject(reason) {
   rejections.set(reason, (rejections.get(reason) ?? 0) + 1)
@@ -179,6 +181,11 @@ for (const row of rawRows) {
     continue
   }
 
+  if (new Date(game.kickoff).getTime() <= now) {
+    reject('already kicked off')
+    continue
+  }
+
   const side = rowSide(row, game)
   if (!side) {
     reject('side could not be identified')
@@ -220,8 +227,8 @@ try {
 }
 
 const runAt = new Date().toISOString()
-const now = Date.now()
 let carried = 0
+let frozen = 0
 
 // Markets never disagree with a locked pool line by this much. A gap this large
 // means the row was misread — a flipped sign or a bad match — so it is dropped
@@ -230,8 +237,29 @@ const MAX_DISAGREEMENT = 14
 const suspect = []
 
 const events = slate.games
-  .filter((game) => new Date(game.kickoff).getTime() > now)
   .map((game) => {
+    const kickedOff = new Date(game.kickoff).getTime() <= now
+    const previous = previousLines.get(game.cbsEventId) ?? {}
+
+    // After kickoff keep the last pregame price and ignore anything new the
+    // feed might return, including live numbers the live-market filter missed.
+    if (kickedOff) {
+      const lines = Object.fromEntries(
+        Object.entries(previous).filter(
+          ([, entry]) => typeof entry?.line === 'number',
+        ),
+      )
+      if (Object.keys(lines).length) frozen += 1
+      return {
+        cbsEventId: game.cbsEventId,
+        sport: game.sport,
+        kickoff: game.kickoff,
+        awayTeam: game.away.name,
+        homeTeam: game.home.name,
+        lines,
+      }
+    }
+
     const books = matched.get(game.cbsEventId)?.books ?? new Map()
     const lines = {}
 
@@ -245,17 +273,15 @@ const events = slate.games
       lines[book] = { line, retrievedAt: runAt }
     }
 
-    for (const [book, previous] of Object.entries(
-      previousLines.get(game.cbsEventId) ?? {},
-    )) {
-      if (!(book in lines) && typeof previous?.line === 'number') {
-        if (Math.abs(previous.line - game.homeSpread) > MAX_DISAGREEMENT) {
+    for (const [book, previousLine] of Object.entries(previous)) {
+      if (!(book in lines) && typeof previousLine?.line === 'number') {
+        if (Math.abs(previousLine.line - game.homeSpread) > MAX_DISAGREEMENT) {
           suspect.push(
-            `${game.away.name} @ ${game.home.name} — carried ${book} ${previous.line} vs pool ${game.homeSpread}`,
+            `${game.away.name} @ ${game.home.name} — carried ${book} ${previousLine.line} vs pool ${game.homeSpread}`,
           )
           continue
         }
-        lines[book] = previous
+        lines[book] = previousLine
         carried += 1
       }
     }
@@ -275,10 +301,7 @@ const events = slate.games
 const feed = {
   provider: 'SharpAPI',
   updatedAt: runAt,
-  books: [
-    { key: 'draftkings', name: 'DraftKings' },
-    { key: 'fanduel', name: 'FanDuel' },
-  ],
+  books: [{ key: 'draftkings', name: 'DraftKings' }],
   events,
 }
 
@@ -287,6 +310,9 @@ await writeFile(OUTPUT, `${JSON.stringify(feed, null, 2)}\n`)
 console.log(`\nMatched ${matched.size}/${slate.games.length} slate games.`)
 if (carried) {
   console.log(`Carried forward ${carried} price(s) missing from this snapshot.`)
+}
+if (frozen) {
+  console.log(`Froze ${frozen} kicked-off game(s) at the last pregame price.`)
 }
 if (suspect.length) {
   console.log(`\nDropped ${suspect.length} implausible price(s):`)

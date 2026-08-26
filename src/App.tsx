@@ -20,7 +20,6 @@ const playerHistory = playerHistoryData as PlayerHistory
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const bookNames: Record<BookKey, string> = {
   draftkings: 'DraftKings',
-  fanduel: 'FanDuel',
 }
 
 type GameAnalysis = {
@@ -32,8 +31,7 @@ type GameAnalysis = {
   recommendedSide: 'home' | 'away' | null
 }
 
-// Spreads move in half points, so a consensus of several books is snapped back
-// onto that grid instead of showing averages like -8.25.
+// Spreads move in half points; keep a single book on that grid.
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
 }
@@ -368,8 +366,8 @@ function App() {
             </p>
             <h1>{slate.pool.name}</h1>
             <p className="hero-copy">
-              Compare the pool&apos;s locked line with DraftKings and FanDuel.
-              Recommendations use the average available live spread.
+              Compare the pool&apos;s locked line with DraftKings.
+              Recommendations use the current DraftKings spread.
             </p>
           </div>
           <div className="week-chip">

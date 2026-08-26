@@ -249,6 +249,12 @@ const events = slate.games
       previousLines.get(game.cbsEventId) ?? {},
     )) {
       if (!(book in lines) && typeof previous?.line === 'number') {
+        if (Math.abs(previous.line - game.homeSpread) > MAX_DISAGREEMENT) {
+          suspect.push(
+            `${game.away.name} @ ${game.home.name} — carried ${book} ${previous.line} vs pool ${game.homeSpread}`,
+          )
+          continue
+        }
         lines[book] = previous
         carried += 1
       }

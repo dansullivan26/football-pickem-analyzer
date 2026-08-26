@@ -1,6 +1,6 @@
 {
   "provider": "SharpAPI",
-  "updatedAt": "2026-08-26T19:21:12.541Z",
+  "updatedAt": "2026-08-26T19:25:54.869Z",
   "books": [
     {
       "key": "draftkings",
@@ -12,6 +12,16 @@
     }
   ],
   "events": [
+    {
+      "cbsEventId": 50027398,
+      "sport": "NCAAF",
+      "kickoff": "2026-08-29T12:00:00-04:00",
+      "awayTeam": "North Carolina",
+      "homeTeam": "TCU",
+      "lines": {
+        "draftkings": -8.5
+      }
+    },
     {
       "cbsEventId": 50027437,
       "sport": "NCAAF",
@@ -43,16 +53,6 @@
       }
     },
     {
-      "cbsEventId": 50027508,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-05T12:00:00-04:00",
-      "awayTeam": "East Carolina",
-      "homeTeam": "Alabama",
-      "lines": {
-        "draftkings": -28.5
-      }
-    },
-    {
       "cbsEventId": 50027505,
       "sport": "NCAAF",
       "kickoff": "2026-09-05T12:00:00-04:00",
@@ -60,6 +60,16 @@
       "homeTeam": "West Virginia",
       "lines": {
         "draftkings": -21.5
+      }
+    },
+    {
+      "cbsEventId": 50027508,
+      "sport": "NCAAF",
+      "kickoff": "2026-09-05T12:00:00-04:00",
+      "awayTeam": "East Carolina",
+      "homeTeam": "Alabama",
+      "lines": {
+        "draftkings": -28.5
       }
     },
     {

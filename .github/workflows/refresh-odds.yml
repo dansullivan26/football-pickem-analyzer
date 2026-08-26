@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '17 */2 * * *'
   workflow_dispatch:
+    inputs:
+      debug_event_id:
+        description: 'cbsEventId to dump raw provider rows for'
+        required: false
 
 permissions:
   contents: write
@@ -31,6 +35,7 @@ jobs:
         run: node scripts/fetch-odds.mjs
         env:
           SHARP_API_KEY: ${{ secrets.SHARP_API_KEY }}
+          DEBUG_EVENT_ID: ${{ inputs.debug_event_id }}
       - name: Commit changed lines
         run: |
           if git diff --quiet -- public/data/odds.json; then

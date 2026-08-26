@@ -125,8 +125,27 @@ function usableSpread(row) {
 const matched = new Map()
 const unmatched = new Map()
 
+// Set DEBUG_EVENT_ID to a cbsEventId to dump every raw row for that matchup,
+// including rows the filters discard.
+const DEBUG_EVENT_ID = process.env.DEBUG_EVENT_ID
+const debugGame = DEBUG_EVENT_ID
+  ? slate.games.find((game) => String(game.cbsEventId) === DEBUG_EVENT_ID)
+  : undefined
+const debugRows = []
+
 for (const row of rawRows) {
   rowsByBook.set(row.sportsbook, (rowsByBook.get(row.sportsbook) ?? 0) + 1)
+
+  if (
+    debugGame &&
+    (teamMatches(debugGame.home, row.home_team) ||
+      teamMatches(debugGame.home, row.away_team) ||
+      teamMatches(debugGame.away, row.home_team) ||
+      teamMatches(debugGame.away, row.away_team))
+  ) {
+    debugRows.push(row)
+  }
+
   if (!usableSpread(row)) continue
 
   const game = matchGame(row)
@@ -142,6 +161,15 @@ for (const row of rawRows) {
     entry.books.set(row.sportsbook, { line: row.line, priority })
   }
   matched.set(game.cbsEventId, entry)
+}
+
+if (debugGame) {
+  console.log(
+    `\nRaw rows touching ${debugGame.away.name} @ ${debugGame.home.name} (${debugRows.length}):`,
+  )
+  for (const row of debugRows) {
+    console.log(JSON.stringify(row))
+  }
 }
 
 const OUTPUT = new URL('public/data/odds.json', ROOT)

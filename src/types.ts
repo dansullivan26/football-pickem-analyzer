@@ -139,3 +139,32 @@ export type PlayerHistory = {
   entries: PlayerRosterEntry[]
   weeks: PlayerWeek[]
 }
+
+export type CoverResult = 'home' | 'away' | 'push' | null
+
+export type FrozenRecommendation = {
+  cbsEventId: number
+  sport: 'NFL' | 'NCAAF'
+  kickoff: string
+  away: string
+  home: string
+  homeSpread: number
+  liveHomeSpread: number | null
+  category: EdgeCategory
+  recommendedSide: 'home' | 'away' | null
+  hook: 'fg' | 'td' | null
+  cover: CoverResult
+}
+
+export type RecommendationWeek = {
+  week: number
+  label: string
+  capturedAt: string
+  scored: boolean
+  games: FrozenRecommendation[]
+}
+
+export type RecommendationHistory = {
+  updatedAt: string
+  weeks: RecommendationWeek[]
+}

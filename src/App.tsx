@@ -1,19 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import slateData from './data/current-slate.json'
 import playerHistoryData from './data/player-history.json'
+import recommendationHistoryData from './data/recommendation-history.json'
 import PlayersView from './PlayersView'
+import PerformanceView from './PerformanceView'
 import type {
   BookKey,
   EdgeCategory,
   OddsEvent,
   OddsFeed,
   PlayerHistory,
+  RecommendationHistory,
   Slate,
   SlateGame,
 } from './types'
 
 const slate = slateData as Slate
 const playerHistory = playerHistoryData as PlayerHistory
+const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const bookNames: Record<BookKey, string> = {
   draftkings: 'DraftKings',
   fanduel: 'FanDuel',
@@ -236,7 +240,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 }
 
 function App() {
-  const [view, setView] = useState<'lines' | 'players'>('lines')
+  const [view, setView] = useState<'lines' | 'players' | 'performance'>('lines')
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -326,6 +330,13 @@ function App() {
             onClick={() => setView('players')}
           >
             Players
+          </button>
+          <button
+            className={view === 'performance' ? 'active' : ''}
+            type="button"
+            onClick={() => setView('performance')}
+          >
+            Performance
           </button>
         </nav>
         <div className="header-actions">
@@ -483,8 +494,10 @@ function App() {
           )}
         </section>
         </main>
-      ) : (
+      ) : view === 'players' ? (
         <PlayersView history={playerHistory} />
+      ) : (
+        <PerformanceView history={recommendationHistory} />
       )}
 
       <footer>
@@ -497,13 +510,22 @@ function App() {
             }).format(new Date(slate.source.fetchedAt))}
             . Sportsbook data provided by SharpAPI.
           </>
-        ) : (
+        ) : view === 'players' ? (
           <>
             Player history captured{' '}
             {new Intl.DateTimeFormat(undefined, {
               dateStyle: 'medium',
               timeStyle: 'short',
             }).format(new Date(playerHistory.source.fetchedAt))}
+            .
+          </>
+        ) : (
+          <>
+            Recommendations frozen{' '}
+            {new Intl.DateTimeFormat(undefined, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            }).format(new Date(recommendationHistory.updatedAt))}
             .
           </>
         )}

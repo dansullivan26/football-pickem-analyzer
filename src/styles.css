@@ -548,8 +548,20 @@ select:focus {
   font-size: 0.62rem;
 }
 
-.players-hero {
-  padding-bottom: 28px;
+.performance-summary {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.performance-summary .summary-card {
+  cursor: default;
+}
+
+.performance-summary .summary-card:hover {
+  transform: none;
+}
+
+.performance-week {
+  margin: 28px 0 52px;
 }
 
 .players-layout {
@@ -917,6 +929,10 @@ footer {
   }
 
   .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .performance-summary {
     grid-template-columns: repeat(2, 1fr);
   }
 

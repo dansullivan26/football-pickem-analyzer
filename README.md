@@ -33,6 +33,17 @@ and writes `src/data/player-history.json`. The Players view can render unpicked
 weeks immediately; tendency metrics populate as scored Tuesday exports add
 selections and results.
 
+To freeze the current week's recommendations (open games update; kicked-off
+games stay locked):
+
+```bash
+npm run snapshot-recommendations
+```
+
+That writes `src/data/recommendation-history.json` for the Performance page.
+The odds refresh workflow runs the same snapshot so live recs keep updating
+until kickoff.
+
 ## Refresh sportsbook lines
 
 1. Create a free SharpAPI account.

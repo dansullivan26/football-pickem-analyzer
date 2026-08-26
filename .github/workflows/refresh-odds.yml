@@ -36,15 +36,17 @@ jobs:
         env:
           SHARP_API_KEY: ${{ secrets.SHARP_API_KEY }}
           DEBUG_EVENT_ID: ${{ inputs.debug_event_id }}
+      - name: Freeze open recommendations
+        run: node scripts/snapshot-recommendations.mjs
       - name: Commit changed lines
         run: |
-          if git diff --quiet -- public/data/odds.json; then
-            echo "No odds changes to commit."
+          if git diff --quiet -- public/data/odds.json src/data/recommendation-history.json; then
+            echo "No odds or recommendation snapshot changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/odds.json
+          git add public/data/odds.json src/data/recommendation-history.json
           git commit -m "data: refresh sportsbook lines"
           git push
       - run: npm run build

@@ -13,11 +13,13 @@
   --green: #0d6b45;
   --green-dark: #08472f;
   --green-soft: #e7f5ed;
+  --gold: #c49200;
+  --orange: #d36b1f;
   --amber: #9a5b00;
   --amber-soft: #fff2d9;
   --blue: #245c8b;
   --blue-soft: #e9f2fb;
-  --teal: #1f6f64;
+  --gray: #6b736e;
   --gray-soft: #edf1ed;
   --shadow: 0 10px 30px rgba(30, 53, 40, 0.07);
 }
@@ -269,19 +271,19 @@ h2 {
 }
 
 .summary-card.lean {
-  border-left-color: #d88a13;
+  border-left-color: var(--gold);
 }
 
 .summary-card.slight {
-  border-left-color: var(--teal);
+  border-left-color: var(--orange);
 }
 
 .summary-card.neutral {
-  border-left-color: var(--blue);
+  border-left-color: var(--gray);
 }
 
 .summary-card.pending {
-  border-left-color: #9aa49d;
+  border-left-color: var(--blue);
 }
 
 .slate-section {
@@ -483,19 +485,19 @@ select:focus {
 }
 
 .recommendation.lean {
-  color: var(--amber);
+  color: var(--gold);
 }
 
 .recommendation.slight {
-  color: var(--teal);
+  color: var(--orange);
 }
 
 .recommendation.neutral {
-  color: var(--blue);
+  color: var(--gray);
 }
 
 .recommendation.pending {
-  color: #7c8780;
+  color: var(--blue);
 }
 
 .recommendation-block {

@@ -24,10 +24,21 @@ type GameAnalysis = {
   recommendedSide: 'home' | 'away' | null
 }
 
+// Spreads move in half points, so a consensus of several books is snapped back
+// onto that grid instead of showing averages like -8.25.
+function roundToHalf(value: number) {
+  return Math.round(value * 2) / 2
+}
+
+function formatPoints(value: number) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1)
+}
+
 function formatSpread(value: number | null | undefined) {
   if (value == null) return '—'
   if (value === 0) return 'PK'
-  return value > 0 ? `+${value}` : `${value}`
+  const points = formatPoints(Math.abs(value))
+  return value > 0 ? `+${points}` : `-${points}`
 }
 
 function formatUpdatedAt(value: string | null) {
@@ -54,8 +65,9 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
     }
   }
 
-  const liveHomeSpread =
-    availableLines.reduce((total, line) => total + line, 0) / availableLines.length
+  const liveHomeSpread = roundToHalf(
+    availableLines.reduce((total, line) => total + line, 0) / availableLines.length,
+  )
   const edge = game.homeSpread - liveHomeSpread
   const magnitude = Math.abs(edge)
 
@@ -81,15 +93,28 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   }
 
   const team = recommendedSide ? game[recommendedSide] : null
+  const flip = recommendedSide === 'away' ? -1 : 1
+  const poolNumber = game.homeSpread * flip
+  const bookNumber = (analysis.liveHomeSpread ?? 0) * flip
+
   return (
-    <div>
+    <div className="recommendation-block">
       <div className={`recommendation ${category}`}>
         <span className="category-dot" />
         {category}
       </div>
-      <div className="edge-copy">
-        {team ? `${team.abbrev} +${edge?.toFixed(1)} pts` : 'No line edge'}
-      </div>
+      {team && edge ? (
+        <>
+          <div className="edge-copy">
+            {team.abbrev} {formatSpread(poolNumber)}
+          </div>
+          <div className="edge-detail">
+            {formatPoints(edge)} better than {formatSpread(bookNumber)}
+          </div>
+        </>
+      ) : (
+        <div className="edge-detail">Line matches the book</div>
+      )}
     </div>
   )
 }

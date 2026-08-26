@@ -181,10 +181,18 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   )
 }
 
+const CATEGORY_RANK: Record<EdgeCategory, number> = {
+  hammer: 0,
+  lean: 1,
+  slight: 2,
+  neutral: 3,
+  pending: 4,
+}
+
 function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
-  const { game, odds } = analysis
+  const { game, odds, category } = analysis
   return (
-    <article className="game-card">
+    <article className={`game-card ${category}`}>
       <div className="game-meta">
         <span className={`sport-tag ${game.sport.toLowerCase()}`}>{game.sport}</span>
         <time dateTime={game.kickoff}>{game.kickoffLabel.replace(' ET', '')}</time>
@@ -204,7 +212,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
       </div>
 
       <div className="line-grid">
-        <div className="line-cell locked">
+        <div className="line-cell">
           <span>CBS locked</span>
           <strong>{formatSpread(game.homeSpread)}</strong>
           <em>pool line</em>
@@ -243,6 +251,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
+  const [sort, setSort] = useState<'kickoff' | 'recommendation'>('kickoff')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
   const [now, setNow] = useState(() => Date.now())
@@ -295,7 +304,7 @@ function App() {
 
   const visibleGames = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
-    return analyses.filter(({ game, category }) => {
+    const filtered = analyses.filter(({ game, category }) => {
       const matchesFilter = filter === 'all' || category === filter
       const matchesLeague = league === 'all' || game.sport === league
       const matchesQuery =
@@ -305,7 +314,13 @@ function App() {
         )
       return matchesFilter && matchesLeague && matchesQuery
     })
-  }, [analyses, filter, league, query])
+
+    if (sort !== 'recommendation') return filtered
+
+    return [...filtered].sort(
+      (a, b) => CATEGORY_RANK[a.category] - CATEGORY_RANK[b.category],
+    )
+  }, [analyses, filter, league, query, sort])
 
   return (
     <div className="app-shell">
@@ -462,6 +477,18 @@ function App() {
                   <option value="pending">Awaiting lines</option>
                 </select>
               </label>
+              <label>
+                <span className="sr-only">Sort games</span>
+                <select
+                  value={sort}
+                  onChange={(event) =>
+                    setSort(event.target.value as 'kickoff' | 'recommendation')
+                  }
+                >
+                  <option value="kickoff">Kickoff time</option>
+                  <option value="recommendation">Recommendation</option>
+                </select>
+              </label>
             </div>
           </div>
 
@@ -483,6 +510,7 @@ function App() {
                 onClick={() => {
                   setFilter('all')
                   setLeague('all')
+                  setSort('kickoff')
                   setQuery('')
                 }}
               >

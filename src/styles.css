@@ -14,7 +14,9 @@
   --green-dark: #08472f;
   --green-soft: #e7f5ed;
   --gold: #c49200;
+  --gold-soft: #fbf6e4;
   --orange: #d36b1f;
+  --orange-soft: #fdf1e6;
   --amber: #9a5b00;
   --amber-soft: #fff2d9;
   --blue: #245c8b;
@@ -345,6 +347,31 @@ select:focus {
   box-shadow: 0 3px 12px rgba(30, 53, 40, 0.035);
 }
 
+.game-card.hammer {
+  border-color: #c5e4d2;
+  background: var(--green-soft);
+}
+
+.game-card.lean {
+  border-color: #ead8a0;
+  background: var(--gold-soft);
+}
+
+.game-card.slight {
+  border-color: #efd0b4;
+  background: var(--orange-soft);
+}
+
+.game-card.neutral {
+  border-color: #d9dfd9;
+  background: var(--gray-soft);
+}
+
+.game-card.pending {
+  border-color: #c9dceb;
+  background: var(--blue-soft);
+}
+
 .game-meta {
   display: flex;
   flex-wrap: wrap;
@@ -420,12 +447,7 @@ select:focus {
   padding: 9px 6px;
   border: 1px solid var(--border);
   border-radius: 9px;
-  background: #fafcfa;
-}
-
-.line-cell.locked {
-  border-color: #b9d8c6;
-  background: var(--green-soft);
+  background: #ffffff;
 }
 
 .line-cell span {

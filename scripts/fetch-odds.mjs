@@ -83,7 +83,7 @@ const rawRows = (
 ).flat()
 
 const events = new Map()
-const unmatched = new Set()
+const unmatched = new Map()
 
 for (const row of rawRows) {
   if (
@@ -99,7 +99,7 @@ for (const row of rawRows) {
 
   const game = matchGame(row)
   if (!game) {
-    unmatched.add(`${row.away_team} @ ${row.home_team}`)
+    unmatched.set(`${row.away_team} @ ${row.home_team}`, row.event_start_time)
     continue
   }
 
@@ -133,6 +133,20 @@ await writeFile(
 )
 
 console.log(`Matched ${events.size}/${slate.games.length} slate games.`)
+
+const missing = slate.games.filter((game) => !events.has(game.cbsEventId))
+if (missing.length) {
+  console.log(`\nSlate games without a book line (${missing.length}):`)
+  for (const game of missing) {
+    console.log(`  - ${game.away.name} @ ${game.home.name} (${game.kickoffLabel})`)
+  }
+}
+
 if (unmatched.size) {
-  console.log(`Ignored ${unmatched.size} non-slate or unmatched events.`)
+  console.log(`\nBook events not matched to the slate (${unmatched.size}):`)
+  for (const [name, start] of [...unmatched].sort((a, b) =>
+    a[1].localeCompare(b[1]),
+  )) {
+    console.log(`  - ${name} (${start})`)
+  }
 }

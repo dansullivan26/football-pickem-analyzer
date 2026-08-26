@@ -7,19 +7,26 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: refresh-odds
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   refresh:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+      - run: npm ci
       - name: Fetch DraftKings and FanDuel spreads
         run: node scripts/fetch-odds.mjs
         env:
@@ -35,3 +42,10 @@ jobs:
           git add public/data/odds.json
           git commit -m "data: refresh sportsbook lines"
           git push
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

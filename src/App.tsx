@@ -658,7 +658,11 @@ function App() {
               type="button"
               onClick={() =>
                 setSuggestedCard(
-                  generateSuggestedCard(analyses, slate.week.label),
+                  generateSuggestedCard(
+                    analyses,
+                    slate.week.label,
+                    slate.pool.seasonYear,
+                  ),
                 )
               }
             >

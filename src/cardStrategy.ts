@@ -18,12 +18,14 @@ export {
 export const CARD_STRATEGY_ID = 'v3-line-then-public-pool-bucket'
 
 export type SuggestedPick = {
+  gameId: string
   cbsEventId: number
   away: string
   home: string
   kickoff: string
   kickoffLabel: string
   pickedSide: 'home' | 'away'
+  pickedTeamId: string
   pickedTeam: string
   poolSpread: number
   source: 'line-value' | 'public-consensus'
@@ -34,6 +36,7 @@ export type SuggestedPick = {
 }
 
 export type UnpickedGame = {
+  gameId: string
   cbsEventId: number
   away: string
   home: string
@@ -44,6 +47,8 @@ export type UnpickedGame = {
 export type SuggestedCard = {
   strategyId: string
   generatedAt: string
+  seasonYear: number
+  week: number
   weekLabel: string
   picks: SuggestedPick[]
   unpicked: UnpickedGame[]
@@ -59,6 +64,7 @@ export type SuggestedCard = {
 export function generateSuggestedCard(
   analyses: GameAnalysis[],
   weekLabel: string,
+  seasonYear: number,
   generatedAt = new Date(),
 ): SuggestedCard {
   const picks: SuggestedPick[] = []
@@ -67,6 +73,7 @@ export function generateSuggestedCard(
   for (const analysis of analyses) {
     const { game, category, recommendedSide, consensus } = analysis
     const base = {
+      gameId: game.id,
       cbsEventId: game.cbsEventId,
       away: game.away.name,
       home: game.home.name,
@@ -93,6 +100,7 @@ export function generateSuggestedCard(
       picks.push({
         ...base,
         pickedSide: cardPick.pickedSide,
+        pickedTeamId: game[cardPick.pickedSide].id,
         pickedTeam: game[cardPick.pickedSide].name,
         poolSpread: cardPick.poolSpread,
         source: cardPick.source,
@@ -112,6 +120,8 @@ export function generateSuggestedCard(
   return {
     strategyId: CARD_STRATEGY_ID,
     generatedAt: generatedAt.toISOString(),
+    seasonYear,
+    week: analyses[0]?.game.week ?? 0,
     weekLabel,
     picks,
     unpicked,

@@ -119,6 +119,34 @@ public JS bundle, so anyone can dispatch those two workflows and burn Actions
 minutes; they cannot read `SHARP_API_KEY` or `DROPS_TOKEN`. For local testing,
 put the same token in `.env.local` as `VITE_GH_DISPATCH_TOKEN`.
 
+## Complete a card on CBS
+
+The generated-card modal POSTs GrokBot this JSON:
+
+```json
+{
+  "week": 1,
+  "source": "football-pickem-analyzer",
+  "picks": [
+    {
+      "gameId": "<slate games[].id>",
+      "pickedTeamId": "<that game's away.id or home.id>",
+      "pickedSide": "home"
+    }
+  ]
+}
+```
+
+Unpicked games are omitted; GrokBot validates against the live Week N slate.
+Add the routine URL and sender key as repository secrets
+named `GROKBOT_WEBHOOK_URL` and `GROKBOT_WEBHOOK_TOKEN`. For local testing, use
+`VITE_GROKBOT_WEBHOOK_URL` and `VITE_GROKBOT_WEBHOOK_TOKEN` in `.env.local`.
+
+Both webhook values are baked into the public JS bundle. The sender key must
+only wake this GrokBot routine; it must not grant direct CBS or repository
+access. Sending a card does not save it immediately: GrokBot asks for explicit
+confirmation in chat before filling and saving the CBS Picks page.
+
 ## Deploy
 
 In the GitHub repository settings, set **Pages → Build and deployment → Source**

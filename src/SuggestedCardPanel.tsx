@@ -7,6 +7,7 @@ import {
   sortSuggestedPicks,
   type SuggestedCard,
 } from './cardStrategy'
+import { sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
   card,
@@ -17,6 +18,11 @@ export default function SuggestedCardPanel({
 }) {
   const [copied, setCopied] = useState(false)
   const [sort, setSort] = useState<'strength' | 'slate'>('slate')
+  const [submitting, setSubmitting] = useState(false)
+  const [submitResult, setSubmitResult] = useState<{
+    kind: 'success' | 'error'
+    message: string
+  } | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const generated = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
@@ -50,6 +56,33 @@ export default function SuggestedCardPanel({
       window.setTimeout(() => setCopied(false), 2000)
     } catch {
       setCopied(false)
+    }
+  }
+
+  async function completeCard() {
+    const confirmed = window.confirm(
+      `Send ${card.picks.length} recommended picks to GrokBot for ${card.weekLabel}? ` +
+        'This does not save them on CBS yet; GrokBot will ask you to confirm in chat.',
+    )
+    if (!confirmed) return
+
+    setSubmitting(true)
+    setSubmitResult(null)
+    try {
+      await sendCardToGrokBot(card)
+      setSubmitResult({
+        kind: 'success',
+        message:
+          'Card sent to GrokBot. Confirm in chat before GrokBot fills and saves it on CBS.',
+      })
+    } catch (error) {
+      setSubmitResult({
+        kind: 'error',
+        message:
+          error instanceof Error ? error.message : 'Could not send the card to GrokBot.',
+      })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -100,6 +133,25 @@ export default function SuggestedCardPanel({
         </div>
 
         <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
+
+        <div className="complete-card">
+          <button
+            type="button"
+            disabled={submitting || card.picks.length === 0}
+            onClick={() => void completeCard()}
+          >
+            {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
+          </button>
+          <small>
+            Sends this exact card to GrokBot. You will confirm in chat before it is
+            saved on CBS.
+          </small>
+          {submitResult && (
+            <p className={submitResult.kind} role="status">
+              {submitResult.message}
+            </p>
+          )}
+        </div>
 
         <ol className="suggested-picks">
           {picks.map((pick) => (

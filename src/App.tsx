@@ -459,7 +459,6 @@ function App() {
             goTo('lines')
           }}
         >
-          <span className="brand-mark">PE</span>
           <span>Pick&apos;em Edge</span>
         </a>
         <nav className="primary-nav" aria-label="Primary navigation">

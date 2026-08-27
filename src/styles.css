@@ -69,18 +69,6 @@ button {
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 11px;
-  color: var(--green-dark);
-  background: #b8e3c9;
-  font-size: 0.78rem;
-  letter-spacing: -0.03em;
-}
-
 .header-actions {
   display: flex;
   gap: 16px;
@@ -395,6 +383,7 @@ h2 {
 }
 
 .suggested-card {
+  position: relative;
   width: min(720px, 100%);
   max-height: calc(100vh - 64px);
   margin: auto;
@@ -507,6 +496,80 @@ h2 {
 
 .complete-card p.error {
   color: #9b2c2c;
+}
+
+.card-password-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(16, 28, 22, 0.42);
+}
+
+.card-password {
+  display: grid;
+  gap: 10px;
+  width: min(360px, 100%);
+  padding: 18px 18px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgba(16, 28, 22, 0.28);
+}
+
+.card-password h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.card-password p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.card-password input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.card-password-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+}
+
+.card-password-actions button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.card-password-actions button[type='submit'] {
+  border: 0;
+  color: white;
+  background: var(--green);
+}
+
+.card-password-actions button[type='submit']:hover {
+  background: var(--green-dark);
+}
+
+.card-password p.error {
+  color: #9b2c2c;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .suggested-picks {
@@ -1369,12 +1432,17 @@ footer {
     padding: 12px 16px;
   }
 
-  .brand > span:last-child,
+  /* Nav already returns to Lines, and dropping the wordmark is what keeps
+     the refresh button inside the viewport. */
+  .brand,
   .feed-status {
     display: none;
   }
 
+  /* On the narrowest phones the nav and refresh button cannot share a row,
+     and an overflowing header widens main along with it. */
   .topbar {
+    flex-wrap: wrap;
     gap: 10px;
   }
 
@@ -1472,6 +1540,13 @@ footer {
     padding: 16px;
   }
 
+  /* Grid items default to min-width: auto, so on narrow phones the card and
+     its rows grow to their min-content and push the whole page sideways. */
+  .game-card,
+  .game-card > * {
+    min-width: 0;
+  }
+
   .players-layout {
     grid-template-columns: 1fr;
     padding-bottom: 36px;
@@ -1518,10 +1593,19 @@ footer {
 
   .matchup {
     padding: 3px 0;
+    flex-wrap: wrap;
+  }
+
+  /* The desktop columns are fixed, so names ellipsize there. Here the card is
+     the full width, so wrap the pairing instead of truncating team names. */
+  .team {
+    min-width: auto;
   }
 
   .team-name {
     font-size: 1.05rem;
+    overflow: visible;
+    white-space: normal;
   }
 
   .line-grid {

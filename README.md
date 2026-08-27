@@ -144,7 +144,10 @@ CORS preflight and will not allow the Pages origin, so the button dispatches
 **Complete card on CBS** (`complete-card.yml`) and the Action forwards the body
 server-side. Add the routine URL and sender key as repository secrets named
 `GROKBOT_WEBHOOK_URL` and `GROKBOT_WEBHOOK_TOKEN`. Neither is exposed to the
-browser; the button reuses `GH_DISPATCH_TOKEN`.
+browser; the button reuses `GH_DISPATCH_TOKEN`. The button opens a password
+prompt first. The check is a string in `src/completeCard.ts` — change
+`COMPLETE_CARD_PASSWORD` there. It is not real auth; it only stops a casual
+click. Anyone who reads the built JS can still skip it and dispatch the Action.
 
 A successful click only means the Action started. If GrokBot never posts the
 card in chat, read that workflow run for the status it returned. Nothing is

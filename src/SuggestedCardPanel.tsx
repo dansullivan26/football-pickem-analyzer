@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import {
   CARD_STRATEGY_NOTE,
@@ -7,7 +7,7 @@ import {
   sortSuggestedPicks,
   type SuggestedCard,
 } from './cardStrategy'
-import { sendCardToGrokBot } from './completeCard'
+import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
   card,
@@ -19,11 +19,15 @@ export default function SuggestedCardPanel({
   const [copied, setCopied] = useState(false)
   const [sort, setSort] = useState<'strength' | 'slate'>('slate')
   const [submitting, setSubmitting] = useState(false)
+  const [askPassword, setAskPassword] = useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState<string | null>(null)
   const [submitResult, setSubmitResult] = useState<{
     kind: 'success' | 'error'
     message: string
   } | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
   const generated = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -37,17 +41,28 @@ export default function SuggestedCardPanel({
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     dialogRef.current?.focus()
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [])
 
+  useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') onClose()
+      if (event.key !== 'Escape') return
+      if (askPassword) {
+        setAskPassword(false)
+        return
+      }
+      onClose()
     }
 
     window.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', onKeyDown)
-    }
-  }, [onClose])
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [askPassword, onClose])
+
+  useEffect(() => {
+    if (askPassword) passwordRef.current?.focus()
+  }, [askPassword])
 
   async function copyCard() {
     try {
@@ -59,13 +74,20 @@ export default function SuggestedCardPanel({
     }
   }
 
-  async function completeCard() {
-    const confirmed = window.confirm(
-      `Send ${card.picks.length} recommended picks to GrokBot for ${card.weekLabel}? ` +
-        'This does not save them on CBS yet; GrokBot will ask you to confirm in chat.',
-    )
-    if (!confirmed) return
+  function openPasswordPrompt() {
+    setPassword('')
+    setPasswordError(null)
+    setAskPassword(true)
+  }
 
+  async function completeCard(event: FormEvent) {
+    event.preventDefault()
+    if (!completeCardPasswordMatches(password)) {
+      setPasswordError('Wrong password.')
+      return
+    }
+
+    setAskPassword(false)
     setSubmitting(true)
     setSubmitResult(null)
     try {
@@ -138,7 +160,7 @@ export default function SuggestedCardPanel({
           <button
             type="button"
             disabled={submitting || card.picks.length === 0}
-            onClick={() => void completeCard()}
+            onClick={openPasswordPrompt}
           >
             {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
           </button>
@@ -210,6 +232,52 @@ export default function SuggestedCardPanel({
             alt="Let's ride"
           />
         </a>
+
+        {askPassword && (
+          <div
+            className="card-password-overlay"
+            onClick={() => setAskPassword(false)}
+          >
+            <form
+              className="card-password"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="card-password-title"
+              onClick={(event) => event.stopPropagation()}
+              onSubmit={(event) => void completeCard(event)}
+            >
+              <h3 id="card-password-title">Enter password</h3>
+              <p>
+                Sends {card.picks.length} picks to GrokBot for {card.weekLabel}.
+                Nothing is saved on CBS until you confirm in chat.
+              </p>
+              <label>
+                <span className="sr-only">Password</span>
+                <input
+                  ref={passwordRef}
+                  type="password"
+                  autoComplete="off"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                    setPasswordError(null)
+                  }}
+                />
+              </label>
+              <div className="card-password-actions">
+                <button type="button" onClick={() => setAskPassword(false)}>
+                  Cancel
+                </button>
+                <button type="submit">Send card</button>
+              </div>
+              {passwordError && (
+                <p className="error" role="alert">
+                  {passwordError}
+                </p>
+              )}
+            </form>
+          </div>
+        )}
       </div>
     </div>,
     document.body,

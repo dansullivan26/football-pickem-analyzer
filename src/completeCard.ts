@@ -3,6 +3,14 @@ import type { SuggestedCard } from './cardStrategy'
 const REPO = 'dansullivan26/football-pickem-analyzer'
 const WORKFLOW = 'complete-card.yml'
 
+// Checked only in the browser. Anyone who reads the JS can still skip this;
+// it is just a speed bump against a funny click on a shared URL.
+export const COMPLETE_CARD_PASSWORD = 'letsride'
+
+export function completeCardPasswordMatches(value: string) {
+  return value === COMPLETE_CARD_PASSWORD
+}
+
 // GrokBot's webhook rejects the browser's CORS preflight, so the card goes
 // through a GitHub Action that forwards it server-side.
 export async function sendCardToGrokBot(card: SuggestedCard) {

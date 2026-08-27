@@ -48,6 +48,33 @@ to the number Covers was showing at capture time rather than the locked pool
 line — the card tooltip shows both sides and how long ago the dump was taken.
 Capture a fresh dump as close to the day's first kickoff as practical.
 
+## GrokBot ingest
+
+Raw CBS and Covers dumps stay out of this public repo. GrokBot writes them to
+the private drop repo, then dispatches **Ingest GrokBot dump**, which runs the
+matching `prepare-*` script and commits only the sanitized `src/data` files.
+
+| | |
+| --- | --- |
+| App repo | `dansullivan26/football-pickem-analyzer` |
+| Drop repo | `dansullivan26/football-pickem-analyzer-drops` (private) |
+| Drop paths | `incoming/slate.json`, `incoming/players.json`, `incoming/consensus.json` |
+| Workflow | `Ingest GrokBot dump` (`ingest-grokbot.yml`) |
+
+After a scrape finishes:
+
+```bash
+# overwrite the matching drop file, then:
+gh workflow run "Ingest GrokBot dump" \
+  --repo dansullivan26/football-pickem-analyzer \
+  -f kind=slate   # or players, or consensus
+```
+
+This public repo needs a secret named `DROPS_TOKEN` with Contents: Read on the
+drop repo. GrokBot's login needs Contents: Write on the drop repo and Actions:
+Write on this repo so it can push the dump and dispatch the workflow. Use
+`gh auth login` (or a hidden token field) — never paste the token into chat.
+
 To freeze the current week's recommendations (open games update; kicked-off
 games stay locked):
 

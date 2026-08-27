@@ -1,0 +1,98 @@
+name: Ingest GrokBot dump
+
+on:
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: Which GrokBot dump to ingest from the private drop repo
+        required: true
+        type: choice
+        options:
+          - slate
+          - players
+          - consensus
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-grokbot
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download dump from private drop
+        env:
+          DROPS_TOKEN: ${{ secrets.DROPS_TOKEN }}
+          DROPS_REPO: ${{ vars.DROPS_REPO || 'dansullivan26/football-pickem-analyzer-drops' }}
+          KIND: ${{ inputs.kind }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DROPS_TOKEN:-}" ]; then
+            echo "Add a DROPS_TOKEN repository secret with Contents: Read on ${DROPS_REPO}."
+            exit 1
+          fi
+
+          git clone --depth 1 \
+            "https://x-access-token:${DROPS_TOKEN}@github.com/${DROPS_REPO}.git" \
+            /tmp/grokbot-drops
+
+          src="/tmp/grokbot-drops/incoming/${KIND}.json"
+          if [ ! -f "$src" ]; then
+            echo "No incoming/${KIND}.json in ${DROPS_REPO}."
+            exit 1
+          fi
+
+          mkdir -p incoming
+          cp "$src" "incoming/${KIND}.json"
+
+      - name: Prepare sanitized data
+        run: |
+          set -euo pipefail
+          case "${{ inputs.kind }}" in
+            slate)
+              npm run prepare-slate -- --input incoming/slate.json
+              ;;
+            players)
+              npm run prepare-players -- --input incoming/players.json
+              ;;
+            consensus)
+              npm run prepare-consensus -- --input incoming/consensus.json
+              ;;
+            *)
+              echo "Unknown kind: ${{ inputs.kind }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Commit prepared files
+        env:
+          KIND: ${{ inputs.kind }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/current-slate.json src/data/player-history.json src/data/consensus.json
+
+          if git diff --cached --quiet; then
+            echo "Prepared ${KIND} data matches what is already on main."
+            exit 0
+          fi
+
+          case "$KIND" in
+            slate) msg="data: ingest CBS slate" ;;
+            players) msg="data: ingest player history" ;;
+            consensus) msg="data: ingest Covers consensus" ;;
+          esac
+
+          git commit -m "$msg"
+          git pull --rebase origin main
+          git push

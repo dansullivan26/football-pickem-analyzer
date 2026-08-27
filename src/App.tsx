@@ -442,11 +442,6 @@ function App() {
               Recommendations use the current DraftKings spread.
             </p>
           </div>
-          <div className="week-chip">
-            <span>Current slate</span>
-            <strong>{slate.week.label}</strong>
-            <small>{slate.week.gamesOnSlate} games</small>
-          </div>
         </section>
 
         {error && (
@@ -461,103 +456,106 @@ function App() {
           </div>
         )}
 
-        <section className="summary-grid" aria-label="Recommendation summary">
-          <button className="summary-card hammer" onClick={() => setFilter('hammer')}>
-            <span>Hammers</span>
-            <strong>{counts.hammer}</strong>
-            <small>3+ point edge</small>
-          </button>
-          <button className="summary-card lean" onClick={() => setFilter('lean')}>
-            <span>Leans</span>
-            <strong>{counts.lean}</strong>
-            <small>1.5–2.5 points</small>
-          </button>
-          <button className="summary-card slight" onClick={() => setFilter('slight')}>
-            <span>Slights</span>
-            <strong>{counts.slight}</strong>
-            <small>0.5–1 point</small>
-          </button>
-          <button className="summary-card neutral" onClick={() => setFilter('neutral')}>
-            <span>Neutral</span>
-            <strong>{counts.neutral}</strong>
-            <small>Lines match</small>
-          </button>
-          <button className="summary-card pending" onClick={() => setFilter('pending')}>
-            <span>Awaiting lines</span>
-            <strong>{counts.pending}</strong>
-            <small>Not yet matched</small>
-          </button>
+        <section className="summary-section" aria-label="Recommendation summary">
+          <div className="summary-heading">
+            <p className="eyebrow">Current slate</p>
+            <h2>{slate.week.label}</h2>
+            <p className="summary-heading-meta">
+              {slate.week.gamesOnSlate} games
+            </p>
+          </div>
+          <div className="summary-grid">
+            <button className="summary-card hammer" onClick={() => setFilter('hammer')}>
+              <span>Hammers</span>
+              <strong>{counts.hammer}</strong>
+              <small>3+ point edge</small>
+            </button>
+            <button className="summary-card lean" onClick={() => setFilter('lean')}>
+              <span>Leans</span>
+              <strong>{counts.lean}</strong>
+              <small>1.5–2.5 points</small>
+            </button>
+            <button className="summary-card slight" onClick={() => setFilter('slight')}>
+              <span>Slights</span>
+              <strong>{counts.slight}</strong>
+              <small>0.5–1 point</small>
+            </button>
+            <button className="summary-card neutral" onClick={() => setFilter('neutral')}>
+              <span>Neutral</span>
+              <strong>{counts.neutral}</strong>
+              <small>Lines match</small>
+            </button>
+            <button className="summary-card pending" onClick={() => setFilter('pending')}>
+              <span>Awaiting lines</span>
+              <strong>{counts.pending}</strong>
+              <small>Not yet matched</small>
+            </button>
+          </div>
         </section>
 
         <section className="slate-section">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Against the spread</p>
-              <h2>Slate comparison</h2>
-            </div>
-            <div className="controls">
-              <button
-                className="generate-card-button"
-                type="button"
-                onClick={() =>
-                  setSuggestedCard(
-                    generateSuggestedCard(analyses, slate.week.label),
-                  )
+          <div className="controls">
+            <label className="search">
+              <span className="sr-only">Search teams</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search teams"
+              />
+            </label>
+            <label>
+              <span className="sr-only">Filter by league</span>
+              <select
+                value={league}
+                onChange={(event) =>
+                  setLeague(event.target.value as 'all' | 'NCAAF' | 'NFL')
                 }
               >
-                Generate card
-              </button>
-              <label className="search">
-                <span className="sr-only">Search teams</span>
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search teams"
-                />
-              </label>
-              <label>
-                <span className="sr-only">Filter by league</span>
-                <select
-                  value={league}
-                  onChange={(event) =>
-                    setLeague(event.target.value as 'all' | 'NCAAF' | 'NFL')
-                  }
-                >
-                  <option value="all">All leagues</option>
-                  <option value="NCAAF">NCAAF</option>
-                  <option value="NFL">NFL</option>
-                </select>
-              </label>
-              <label>
-                <span className="sr-only">Filter recommendations</span>
-                <select
-                  value={filter}
-                  onChange={(event) =>
-                    setFilter(event.target.value as EdgeCategory | 'all')
-                  }
-                >
-                  <option value="all">All games</option>
-                  <option value="hammer">Hammers</option>
-                  <option value="lean">Leans</option>
-                  <option value="slight">Slights</option>
-                  <option value="neutral">Neutral</option>
-                  <option value="pending">Awaiting lines</option>
-                </select>
-              </label>
-              <label>
-                <span className="sr-only">Sort games</span>
-                <select
-                  value={sort}
-                  onChange={(event) =>
-                    setSort(event.target.value as 'kickoff' | 'recommendation')
-                  }
-                >
-                  <option value="kickoff">Kickoff time</option>
-                  <option value="recommendation">Recommendation</option>
-                </select>
-              </label>
-            </div>
+                <option value="all">All leagues</option>
+                <option value="NCAAF">NCAAF</option>
+                <option value="NFL">NFL</option>
+              </select>
+            </label>
+            <label>
+              <span className="sr-only">Filter recommendations</span>
+              <select
+                value={filter}
+                onChange={(event) =>
+                  setFilter(event.target.value as EdgeCategory | 'all')
+                }
+              >
+                <option value="all">All games</option>
+                <option value="hammer">Hammers</option>
+                <option value="lean">Leans</option>
+                <option value="slight">Slights</option>
+                <option value="neutral">Neutral</option>
+                <option value="pending">Awaiting lines</option>
+              </select>
+            </label>
+            <label>
+              <span className="sr-only">Sort games</span>
+              <select
+                value={sort}
+                onChange={(event) =>
+                  setSort(event.target.value as 'kickoff' | 'recommendation')
+                }
+              >
+                <option value="kickoff">Kickoff time</option>
+                <option value="recommendation">Recommendation</option>
+              </select>
+            </label>
+            <button
+              className="generate-card-button"
+              type="button"
+              onClick={() =>
+                setSuggestedCard(
+                  generateSuggestedCard(analyses, slate.week.label),
+                )
+              }
+            >
+              Generate card
+            </button>
           </div>
 
           {suggestedCard && (

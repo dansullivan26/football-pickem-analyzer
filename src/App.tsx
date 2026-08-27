@@ -263,6 +263,7 @@ const CATEGORY_RANK: Record<EdgeCategory, number> = {
 function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
+  const isTiebreaker = game.id === slate.tiebreaker?.gameId
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
@@ -299,12 +300,16 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
         </div>
         {(Object.keys(bookNames) as BookKey[]).map((book) => {
           const entry = odds?.lines[book]
+          const total = isTiebreaker ? odds?.totals?.[book] : undefined
           const stale =
             !!entry && now - new Date(entry.retrievedAt).getTime() > STALE_AFTER_MS
           return (
             <div className={`line-cell${stale ? ' stale' : ''}`} key={book}>
               <span>{bookNames[book]}</span>
               <strong>{formatSpread(entry?.line)}</strong>
+              {total && (
+                <span className="line-total">O/U {formatPoints(total.line)}</span>
+              )}
               {entry ? (
                 <em title={`Retrieved ${formatTimestamp(entry.retrievedAt)}`}>
                   {formatAge(entry.retrievedAt, now)}

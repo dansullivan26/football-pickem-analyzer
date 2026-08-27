@@ -984,6 +984,14 @@ select:focus {
   font-size: 0.98rem;
 }
 
+.line-cell .line-total {
+  margin-top: 1px;
+  color: var(--ink);
+  font-size: 0.66rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .line-cell em {
   margin-top: 1px;
   color: #8b968e;

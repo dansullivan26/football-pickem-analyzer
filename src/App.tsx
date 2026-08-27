@@ -312,6 +312,7 @@ function App() {
   const [query, setQuery] = useState('')
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
+  const closeSuggestedCard = useCallback(() => setSuggestedCard(null), [])
 
   const loadOdds = useCallback(async () => {
     setLoading(true)
@@ -561,7 +562,7 @@ function App() {
           {suggestedCard && (
             <SuggestedCardPanel
               card={suggestedCard}
-              onClose={() => setSuggestedCard(null)}
+              onClose={closeSuggestedCard}
             />
           )}
 

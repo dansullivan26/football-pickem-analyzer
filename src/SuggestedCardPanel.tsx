@@ -94,6 +94,9 @@ export default function SuggestedCardPanel({
               <span className={`pick-source ${pick.source}`}>
                 {pick.source === 'line-value' ? 'Line value' : 'Public'}
               </span>
+              <span className={`pick-strength ${pick.strength}`}>
+                {pick.strength}
+              </span>
               <em>{pick.detail}</em>
             </li>
           ))}

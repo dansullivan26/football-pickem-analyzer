@@ -568,6 +568,18 @@ h2 {
   color: var(--ink);
 }
 
+.suggested-card-ride {
+  display: grid;
+  margin-top: 22px;
+  justify-items: center;
+}
+
+.suggested-card-ride img {
+  width: min(100%, 420px);
+  height: auto;
+  border-radius: 12px;
+}
+
 input,
 select {
   min-height: 42px;

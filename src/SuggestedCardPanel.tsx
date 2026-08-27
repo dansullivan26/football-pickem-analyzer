@@ -138,6 +138,18 @@ export default function SuggestedCardPanel({
             </ul>
           </div>
         )}
+
+        <a
+          className="suggested-card-ride"
+          href="https://giphy.com/gifs/nfl-russ-lets-ride-broncos-country-jYsoX0yaCMkppY7ihS"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="https://media.giphy.com/media/jYsoX0yaCMkppY7ihS/giphy.gif"
+            alt="Let's ride"
+          />
+        </a>
       </div>
     </div>,
     document.body,

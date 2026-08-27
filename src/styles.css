@@ -1334,8 +1334,10 @@ select:focus {
   font-size: 1.35rem;
 }
 
+/* clip rather than hidden: both round off the corners, but hidden would make
+   this a scroll container and stop the frozen card header from sticking. */
 .week-card {
-  overflow: hidden;
+  overflow: clip;
   box-shadow: none;
 }
 
@@ -1426,6 +1428,61 @@ select:focus {
 .history-matchup strong,
 .history-selection strong {
   font-size: 0.84rem;
+}
+
+/* The frozen card is a comparison table: one column per attribute so a tier or
+   strength can be scanned down the list instead of unpacked row by row. */
+.frozen-card-list .history-pick {
+  grid-template-columns:
+    minmax(140px, 1.5fr) 76px 92px 76px
+    minmax(112px, 1fr) 124px;
+  gap: 14px;
+}
+
+.frozen-head {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  min-height: 0;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  background: var(--surface);
+}
+
+.frozen-head span {
+  color: var(--muted);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.frozen-cell {
+  display: grid;
+  gap: 3px;
+  justify-items: start;
+  align-content: center;
+}
+
+.frozen-cell .recommendation,
+.frozen-cell .pick-source,
+.frozen-cell .pick-strength,
+.frozen-cell .pick-deviate {
+  align-self: start;
+}
+
+.frozen-pick strong {
+  font-size: 0.84rem;
+}
+
+.frozen-pick small {
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.frozen-empty {
+  color: #b3bdb6;
+  font-size: 0.72rem;
 }
 
 .pick-result {
@@ -1533,6 +1590,35 @@ footer {
   .pick-result {
     grid-column: 2;
     grid-row: 1 / span 2;
+  }
+
+  /* Six columns cannot fit a phone, so the frozen card returns to a stack with
+     the attributes on one wrapping line. */
+  .frozen-head {
+    display: none;
+  }
+
+  .frozen-card-list .history-pick {
+    grid-template-columns: repeat(3, auto) minmax(0, 1fr);
+    gap: 7px 8px;
+  }
+
+  .frozen-card-list .history-matchup,
+  .frozen-card-list .frozen-pick {
+    grid-column: 1 / -1;
+  }
+
+  .frozen-card-list .frozen-pick {
+    grid-auto-flow: column;
+    gap: 8px;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .frozen-card-list .pick-result {
+    grid-row: 2;
+    grid-column: 4;
+    justify-self: end;
   }
 }
 

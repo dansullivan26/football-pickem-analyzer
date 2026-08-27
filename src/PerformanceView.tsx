@@ -344,7 +344,15 @@ export default function PerformanceView({
         </div>
 
         <div className="week-card">
-          <div className="pick-history-list">
+          <div className="pick-history-list frozen-card-list">
+            <div className="history-pick frozen-head" aria-hidden="true">
+              <span>Game</span>
+              <span>Tier</span>
+              <span>Source</span>
+              <span>Strength</span>
+              <span>Pick</span>
+              <span>Result</span>
+            </div>
             {selectedWeek?.games.map((game) => (
               <div className="history-pick" key={game.cbsEventId}>
                 <div className="history-matchup">
@@ -359,25 +367,33 @@ export default function PerformanceView({
                       : ''}
                   </small>
                 </div>
-                <div className="history-selection">
+                <div className="frozen-cell frozen-tier">
                   <span className={`recommendation ${game.category}`}>
                     {game.category}
                   </span>
-                  {game.source && (
+                </div>
+                <div className="frozen-cell frozen-source">
+                  {game.source ? (
                     <span className={`pick-source ${game.source}`}>
                       {SOURCE_LABELS[game.source]}
                     </span>
+                  ) : (
+                    <span className="frozen-empty">—</span>
                   )}
-                  {game.strength && (
+                </div>
+                <div className="frozen-cell frozen-strength">
+                  {game.strength ? (
                     <span className={`pick-strength ${game.strength}`}>
                       {game.strength}
                     </span>
+                  ) : (
+                    <span className="frozen-empty">—</span>
                   )}
-                  {game.deviated && <span className="pick-deviate">Deviate</span>}
+                </div>
+                <div className="frozen-cell frozen-pick">
                   <strong>{sentLabel(game) ?? recLabel(game)}</strong>
-                  {game.deviated && (
-                    <small>rec was {recLabel(game)}</small>
-                  )}
+                  {game.deviated && <span className="pick-deviate">Deviate</span>}
+                  {game.deviated && <small>rec was {recLabel(game)}</small>}
                   {game.hook && (
                     <small>
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook

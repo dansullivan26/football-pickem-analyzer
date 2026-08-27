@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { resolveCardPick } from '../src/cardScoring.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -31,6 +32,7 @@ function analyze(game, event) {
   if (availableLines.length === 0) {
     return {
       liveHomeSpread: null,
+      edge: null,
       category: 'pending',
       recommendedSide: null,
       hook: null,
@@ -45,6 +47,7 @@ function analyze(game, event) {
 
   return {
     liveHomeSpread,
+    edge: magnitude,
     category: classifyEdge(magnitude),
     recommendedSide: edge > 0 ? 'home' : edge < 0 ? 'away' : null,
     hook: favorableHook(game.homeSpread, liveHomeSpread),
@@ -57,6 +60,9 @@ const slate = JSON.parse(
 const odds = JSON.parse(
   await readFile(new URL('public/data/odds.json', ROOT), 'utf8'),
 )
+const consensusFeed = JSON.parse(
+  await readFile(new URL('src/data/consensus.json', ROOT), 'utf8'),
+)
 
 let history = { updatedAt: null, weeks: [] }
 try {
@@ -66,6 +72,11 @@ try {
 }
 
 const oddsById = new Map((odds.events ?? []).map((event) => [event.cbsEventId, event]))
+const consensusByEvent = new Map(
+  consensusFeed.week?.order === slate.week.order
+    ? (consensusFeed.games ?? []).map((game) => [game.cbsEventId, game])
+    : [],
+)
 const now = Date.now()
 const capturedAt = new Date().toISOString()
 const existingWeek = history.weeks.find((week) => week.week === slate.week.order)
@@ -82,6 +93,14 @@ const games = slate.games.map((game) => {
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
+  const cardPick = resolveCardPick({
+    category: analysis.category,
+    recommendedSide: analysis.recommendedSide,
+    edge: analysis.edge,
+    homeSpread: game.homeSpread,
+    consensus: consensusByEvent.get(game.cbsEventId),
+  })
+
   return {
     cbsEventId: game.cbsEventId,
     sport: game.sport,
@@ -94,6 +113,10 @@ const games = slate.games.map((game) => {
     recommendedSide: analysis.recommendedSide,
     hook: analysis.hook,
     cover: previous?.cover ?? null,
+    source: cardPick.source,
+    pickedSide: cardPick.pickedSide,
+    strength: cardPick.strength,
+    score: cardPick.score,
   }
 })
 

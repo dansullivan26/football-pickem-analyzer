@@ -34,7 +34,7 @@ jobs:
         env:
           SHARP_API_KEY: ${{ secrets.SHARP_API_KEY }}
       - name: Freeze open recommendations
-        run: node scripts/snapshot-recommendations.mjs
+        run: node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts
       - name: Commit changed lines
         run: |
           if git diff --quiet -- public/data/odds.json src/data/recommendation-history.json; then

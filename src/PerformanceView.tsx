@@ -5,6 +5,7 @@ import type {
   RecommendationHistory,
   RecommendationWeek,
 } from './types'
+import type { PickStrength } from './cardScoring'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'hammer',
@@ -13,11 +14,19 @@ const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'neutral',
 ]
 
+const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
+
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
   hammer: 'Hammers',
   lean: 'Leans',
   slight: 'Slights',
   neutral: 'Neutral',
+}
+
+const STRENGTH_LABELS: Record<PickStrength, string> = {
+  strong: 'Strong',
+  solid: 'Solid',
+  mild: 'Mild',
 }
 
 function formatSpread(value: number | null | undefined) {
@@ -30,10 +39,10 @@ function formatSpread(value: number | null | undefined) {
 }
 
 function recLabel(game: FrozenRecommendation) {
-  if (game.category === 'pending' || !game.recommendedSide) return 'No edge'
-  const team = game[game.recommendedSide]
-  const number =
-    game.homeSpread * (game.recommendedSide === 'away' ? -1 : 1)
+  const side = game.pickedSide ?? game.recommendedSide
+  if (!side) return 'No edge'
+  const team = game[side]
+  const number = game.homeSpread * (side === 'away' ? -1 : 1)
   return `${team} ${formatSpread(number)}`
 }
 
@@ -42,6 +51,13 @@ function recResult(game: FrozenRecommendation) {
   if (game.cover === 'push') return 'push'
   if (!game.recommendedSide) return null
   return game.cover === game.recommendedSide ? 'win' : 'loss'
+}
+
+function strengthResult(game: FrozenRecommendation) {
+  if (!game.cover) return null
+  if (game.cover === 'push') return 'push'
+  if (!game.pickedSide) return null
+  return game.cover === game.pickedSide ? 'win' : 'loss'
 }
 
 function formatRate(wins: number, losses: number) {
@@ -85,6 +101,23 @@ function summarize(
   }
 }
 
+function summarizeStrength(games: FrozenRecommendation[], strength: PickStrength) {
+  const rows = games.filter((game) => game.strength === strength)
+  const results = rows.map(strengthResult)
+  const wins = results.filter((result) => result === 'win').length
+  const losses = results.filter((result) => result === 'loss').length
+  const pushes = results.filter((result) => result === 'push').length
+  return {
+    count: rows.length,
+    wins,
+    losses,
+    pushes,
+    pending: results.filter((result) => result == null).length,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS`,
+  }
+}
+
 function resultLabel(game: FrozenRecommendation) {
   if (!game.cover) return 'Awaiting result'
   if (game.category === 'neutral') {
@@ -114,6 +147,13 @@ export default function PerformanceView({
     () => Object.fromEntries(TRACKED.map((tier) => [tier, summarize(allGames, tier)])),
     [allGames],
   )
+  const strengthStats = useMemo(
+    () =>
+      Object.fromEntries(
+        STRENGTHS.map((strength) => [strength, summarizeStrength(allGames, strength)]),
+      ),
+    [allGames],
+  )
   const graded = allGames.filter((game) => game.cover).length
 
   return (
@@ -123,8 +163,9 @@ export default function PerformanceView({
           <p className="eyebrow">Model tracker</p>
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
-            Hit rates for frozen picks, by tier. Games lock at kickoff so a
-            Saturday move cannot rewrite Friday&apos;s recommendation.
+            Hit rates for frozen picks, by line-value tier and card strength.
+            Games lock at kickoff so a Saturday move cannot rewrite
+            Friday&apos;s recommendation.
           </p>
         </div>
         <div className="week-chip">
@@ -149,6 +190,24 @@ export default function PerformanceView({
           return (
             <div className={`summary-card ${tier}`} key={tier}>
               <span>{TIER_LABELS[tier]}</span>
+              <strong>{stats.rate}</strong>
+              <small>
+                {stats.count} rec{stats.count === 1 ? '' : 's'} · {stats.detail}
+              </small>
+            </div>
+          )
+        })}
+      </section>
+
+      <section
+        className="summary-grid performance-strength"
+        aria-label="Card strength hit rates"
+      >
+        {STRENGTHS.map((strength) => {
+          const stats = strengthStats[strength]
+          return (
+            <div className={`summary-card ${strength}`} key={strength}>
+              <span>{STRENGTH_LABELS[strength]}</span>
               <strong>{stats.rate}</strong>
               <small>
                 {stats.count} rec{stats.count === 1 ? '' : 's'} · {stats.detail}
@@ -199,11 +258,19 @@ export default function PerformanceView({
                   <span className={`recommendation ${game.category}`}>
                     {game.category}
                   </span>
+                  {game.strength && (
+                    <span className={`pick-strength ${game.strength}`}>
+                      {game.strength}
+                    </span>
+                  )}
                   <strong>{recLabel(game)}</strong>
                   {game.hook && (
                     <small>
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook
                     </small>
+                  )}
+                  {game.source === 'public-consensus' && (
+                    <small>public card pick</small>
                   )}
                 </div>
                 <span className={`pick-result ${recResult(game) ?? game.cover ?? 'pending'}`}>

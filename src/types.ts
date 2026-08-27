@@ -204,6 +204,11 @@ export type FrozenRecommendation = {
   recommendedSide: 'home' | 'away' | null
   hook: 'fg' | 'td' | null
   cover: CoverResult
+  /** Card-strategy source at freeze time. Null if the game was left unpicked. */
+  source: 'line-value' | 'public-consensus' | null
+  pickedSide: 'home' | 'away' | null
+  strength: 'mild' | 'solid' | 'strong' | null
+  score: number | null
 }
 
 export type RecommendationWeek = {

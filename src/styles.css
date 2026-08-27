@@ -860,6 +860,31 @@ select:focus {
   transform: none;
 }
 
+.performance-strength {
+  margin-top: 14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.performance-strength .summary-card {
+  cursor: default;
+}
+
+.performance-strength .summary-card:hover {
+  transform: none;
+}
+
+.summary-card.strong {
+  border-left-color: var(--green);
+}
+
+.summary-card.solid {
+  border-left-color: var(--gold);
+}
+
+.summary-card.mild {
+  border-left-color: var(--gray);
+}
+
 .performance-week {
   margin: 28px 0 52px;
 }
@@ -1066,6 +1091,22 @@ select:focus {
   font-size: 0.66rem;
 }
 
+.history-selection .pick-strength {
+  justify-self: start;
+  margin-top: 2px;
+}
+
+.history-selection .pick-strength.mild {
+  color: var(--gray);
+}
+
+.history-selection .pick-strength.solid {
+  color: var(--gold);
+}
+
+.history-selection .pick-strength.strong {
+  color: var(--green-dark);
+}
 .history-matchup strong,
 .history-selection strong {
   font-size: 0.84rem;

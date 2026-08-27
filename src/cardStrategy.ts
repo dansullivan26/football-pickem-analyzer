@@ -1,17 +1,20 @@
-import type { ConsensusGame, EdgeCategory, GameAnalysis } from './types'
+import {
+  CARD_STRATEGY_NOTE,
+  formatPoolSpread,
+  resolveCardPick,
+  type PickStrength,
+} from './cardScoring'
+import type { GameAnalysis } from './types'
+
+export {
+  CARD_STRATEGY_NOTE,
+  formatPoolSpread,
+  PCT_PER_SPREAD_POINT,
+  type PickStrength,
+} from './cardScoring'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
 export const CARD_STRATEGY_ID = 'v2-line-then-public-spread-gap'
-
-/** Extra public percentage required per point the pool number is worse than Covers. */
-export const PCT_PER_SPREAD_POINT = 3
-
-export const CARD_STRATEGY_NOTE =
-  'Line-value picks (hammer / lean / slight) come first. Public fallback needs (public% − 50) + 3 × (pool number − Covers number) above 0; worse Covers-to-pool gaps need a bigger majority. Strength is that score: mild under 6, solid 6–11, strong 12+.'
-
-const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>(['hammer', 'lean', 'slight'])
-
-export type PickStrength = 'mild' | 'solid' | 'strong'
 
 export type SuggestedPick = {
   cbsEventId: number
@@ -45,90 +48,6 @@ export type SuggestedCard = {
   unpicked: UnpickedGame[]
 }
 
-function formatPoints(value: number) {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1)
-}
-
-export function formatPoolSpread(value: number) {
-  if (value === 0) return 'PK'
-  const points = formatPoints(Math.abs(value))
-  return value > 0 ? `+${points}` : `-${points}`
-}
-
-function poolSpreadForSide(homeSpread: number, side: 'home' | 'away') {
-  return homeSpread * (side === 'away' ? -1 : 1)
-}
-
-function publicConsensusSide(consensus: ConsensusGame | undefined) {
-  if (!consensus || consensus.matchStatus !== 'matched') return null
-  const { away, home } = consensus
-  if (away.pct == null || home.pct == null) return null
-  if (away.pct === home.pct) return null
-  return home.pct > away.pct ? ('home' as const) : ('away' as const)
-}
-
-function lineValueScore(category: EdgeCategory, edge: number) {
-  if (category === 'hammer') return 12 + (edge - 3) * PCT_PER_SPREAD_POINT
-  if (category === 'lean') return 6 + (edge - 1.5) * 4
-  return edge * PCT_PER_SPREAD_POINT
-}
-
-function lineValueStrength(category: EdgeCategory): PickStrength {
-  if (category === 'hammer') return 'strong'
-  if (category === 'lean') return 'solid'
-  return 'mild'
-}
-
-function classifyPublicScore(score: number): PickStrength {
-  if (score >= 12) return 'strong'
-  if (score >= 6) return 'solid'
-  return 'mild'
-}
-
-function gapPhrase(gap: number) {
-  if (Math.abs(gap) < 0.05) return 'same number as the pool'
-  const points = formatPoints(Math.abs(gap))
-  const unit = Math.abs(gap) === 1 ? 'point' : 'points'
-  if (gap > 0) return `pool is ${points} ${unit} better`
-  return `public voted at a ${points}-point worse number`
-}
-
-/**
- * Positive gap = the pool number is more generous to this side than Covers.
- * Score = (public% - 50) + 3 × gap. At or below 0, skip the public pick.
- */
-function evaluatePublicPick(
-  consensus: ConsensusGame,
-  side: 'home' | 'away',
-  poolHomeSpread: number,
-) {
-  const leader = consensus[side]
-  const pct = leader.pct ?? 0
-  const poolSpread = poolSpreadForSide(poolHomeSpread, side)
-  const gap = leader.spread == null ? 0 : poolSpread - leader.spread
-  const score = pct - 50 + PCT_PER_SPREAD_POINT * gap
-  const coversLine =
-    leader.spread == null ? '' : ` at Covers ${formatPoolSpread(leader.spread)}`
-  const detail = `${pct}%${coversLine} · ${gapPhrase(gap)}`
-
-  if (score <= 0) {
-    const worse = Math.abs(gap)
-    const needed = Math.ceil(50 + PCT_PER_SPREAD_POINT * worse)
-    return {
-      ok: false as const,
-      reason: `Public ${pct}%${coversLine}; need ${needed}% to cover the ${formatPoints(worse)}-point worse pool number`,
-    }
-  }
-
-  return {
-    ok: true as const,
-    strength: classifyPublicScore(score),
-    score,
-    detail,
-    poolSpread,
-  }
-}
-
 /**
  * v2 card rules (swap this function when Performance data should weight tiers):
  * 1. Hammer / lean / slight → the line-value side.
@@ -154,57 +73,38 @@ export function generateSuggestedCard(
       kickoffLabel: game.kickoffLabel.replace(' ET', ''),
     }
 
-    if (LINE_VALUE_CATEGORIES.has(category) && recommendedSide) {
-      const team = game[recommendedSide]
-      const edge = analysis.edge ?? 0
-      const edgeLabel =
-        analysis.edge == null
-          ? `${category} on the pool number`
-          : `${formatPoints(analysis.edge)}-point ${category} on the pool number`
+    const cardPick = resolveCardPick({
+      category,
+      recommendedSide,
+      edge: analysis.edge,
+      homeSpread: game.homeSpread,
+      consensus,
+    })
+
+    if (
+      cardPick.source &&
+      cardPick.pickedSide &&
+      cardPick.strength != null &&
+      cardPick.score != null &&
+      cardPick.poolSpread != null &&
+      cardPick.detail
+    ) {
       picks.push({
         ...base,
-        pickedSide: recommendedSide,
-        pickedTeam: team.name,
-        poolSpread: poolSpreadForSide(game.homeSpread, recommendedSide),
-        source: 'line-value',
-        strength: lineValueStrength(category),
-        score: lineValueScore(category, edge),
-        detail: edgeLabel,
-      })
-      continue
-    }
-
-    const publicSide = publicConsensusSide(consensus)
-    if (publicSide && consensus) {
-      const publicPick = evaluatePublicPick(
-        consensus,
-        publicSide,
-        game.homeSpread,
-      )
-      if (publicPick.ok) {
-        picks.push({
-          ...base,
-          pickedSide: publicSide,
-          pickedTeam: game[publicSide].name,
-          poolSpread: publicPick.poolSpread,
-          source: 'public-consensus',
-          strength: publicPick.strength,
-          score: publicPick.score,
-          detail: publicPick.detail,
-        })
-        continue
-      }
-
-      unpicked.push({
-        ...base,
-        reason: publicPick.reason,
+        pickedSide: cardPick.pickedSide,
+        pickedTeam: game[cardPick.pickedSide].name,
+        poolSpread: cardPick.poolSpread,
+        source: cardPick.source,
+        strength: cardPick.strength,
+        score: cardPick.score,
+        detail: cardPick.detail,
       })
       continue
     }
 
     unpicked.push({
       ...base,
-      reason: unpickedReason(analysis),
+      reason: cardPick.skipReason ?? unpickedReason(analysis),
     })
   }
 

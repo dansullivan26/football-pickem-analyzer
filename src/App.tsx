@@ -343,6 +343,11 @@ function App() {
   const closeSuggestedCard = useCallback(() => setSuggestedCard(null), [])
 
   const refreshData = useCallback(async () => {
+    const confirmed = window.confirm(
+      'Reload DraftKings lines and Covers public consensus? This starts jobs that usually take a few minutes. New numbers will not show until you refresh the page.',
+    )
+    if (!confirmed) return
+
     setDispatching(true)
     try {
       await dispatchReviewRefresh()

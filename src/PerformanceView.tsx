@@ -52,6 +52,20 @@ function recLabel(game: FrozenRecommendation) {
   return `${team} ${formatSpread(number)}`
 }
 
+function submittedSide(game: FrozenRecommendation) {
+  if (!game.pickedSide) return null
+  if (!game.deviated) return game.pickedSide
+  return game.pickedSide === 'home' ? 'away' : 'home'
+}
+
+function sentLabel(game: FrozenRecommendation) {
+  const side = submittedSide(game)
+  if (!side || !game.deviated) return null
+  const team = game[side]
+  const number = game.homeSpread * (side === 'away' ? -1 : 1)
+  return `${team} ${formatSpread(number)}`
+}
+
 function recResult(game: FrozenRecommendation) {
   if (!game.cover) return null
   if (game.cover === 'push') return 'push'
@@ -64,6 +78,14 @@ function strengthResult(game: FrozenRecommendation) {
   if (game.cover === 'push') return 'push'
   if (!game.pickedSide) return null
   return game.cover === game.pickedSide ? 'win' : 'loss'
+}
+
+function submittedResult(game: FrozenRecommendation) {
+  if (!game.cover) return null
+  if (game.cover === 'push') return 'push'
+  const side = submittedSide(game)
+  if (!side) return null
+  return game.cover === side ? 'win' : 'loss'
 }
 
 function formatRate(wins: number, losses: number) {
@@ -130,13 +152,37 @@ function summarizeStrength(
   }
 }
 
+function summarizeDeviations(games: FrozenRecommendation[]) {
+  const rows = games.filter((game) => game.deviated && game.pickedSide)
+  const results = rows.map(submittedResult)
+  const wins = results.filter((result) => result === 'win').length
+  const losses = results.filter((result) => result === 'loss').length
+  const pushes = results.filter((result) => result === 'push').length
+  return {
+    count: rows.length,
+    wins,
+    losses,
+    pushes,
+    pending: results.filter((result) => result == null).length,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS`,
+  }
+}
+
 function cardResult(game: FrozenRecommendation) {
+  if (game.deviated && game.pickedSide) return submittedResult(game)
   if (game.pickedSide) return strengthResult(game)
   return recResult(game)
 }
 
 function resultLabel(game: FrozenRecommendation) {
   if (!game.cover) return 'Awaiting result'
+  if (game.deviated && game.pickedSide) {
+    const result = submittedResult(game)
+    if (result === 'push') return 'Push'
+    if (result === 'win') return 'Deviation hit'
+    if (result === 'loss') return 'Deviation missed'
+  }
   if (game.pickedSide) {
     const result = strengthResult(game)
     if (result === 'push') return 'Push'
@@ -182,6 +228,10 @@ export default function PerformanceView({
       ),
     [allGames],
   )
+  const deviationStats = useMemo(
+    () => summarizeDeviations(allGames),
+    [allGames],
+  )
   const graded = allGames.filter((game) => game.cover).length
 
   return (
@@ -192,7 +242,8 @@ export default function PerformanceView({
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
             Hit rates for frozen picks, by line-value tier and by card
-            strength split into line value vs public.
+            strength split into line value vs public. Deviations are games
+            where the completed card sent the other side.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
           </p>
@@ -257,6 +308,20 @@ export default function PerformanceView({
         ))}
       </div>
 
+      <section
+        className="summary-grid performance-deviations"
+        aria-label="Deviation hit rate"
+      >
+        <div className="summary-card slight">
+          <span>Deviations</span>
+          <strong>{deviationStats.rate}</strong>
+          <small>
+            {deviationStats.count} flip{deviationStats.count === 1 ? '' : 's'} ·{' '}
+            {deviationStats.detail}
+          </small>
+        </div>
+      </section>
+
       <section className="player-detail performance-week">
         <div className="player-detail-heading">
           <div>
@@ -308,7 +373,11 @@ export default function PerformanceView({
                       {game.strength}
                     </span>
                   )}
-                  <strong>{recLabel(game)}</strong>
+                  {game.deviated && <span className="pick-deviate">Deviate</span>}
+                  <strong>{sentLabel(game) ?? recLabel(game)}</strong>
+                  {game.deviated && (
+                    <small>rec was {recLabel(game)}</small>
+                  )}
                   {game.hook && (
                     <small>
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook

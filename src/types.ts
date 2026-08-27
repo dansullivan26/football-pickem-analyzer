@@ -227,6 +227,8 @@ export type FrozenRecommendation = {
   pickedSide: 'home' | 'away' | null
   strength: 'mild' | 'solid' | 'strong' | null
   score: number | null
+  /** True when the completed card sent the opposite of pickedSide. */
+  deviated?: boolean
 }
 
 export type RecommendationWeek = {
@@ -240,4 +242,20 @@ export type RecommendationWeek = {
 export type RecommendationHistory = {
   updatedAt: string
   weeks: RecommendationWeek[]
+}
+
+export type CardOverrideGame = {
+  gameId: string
+  deviate: true
+}
+
+export type CardOverrideWeek = {
+  week: number
+  sentAt: string
+  games: CardOverrideGame[]
+}
+
+export type CardOverrides = {
+  updatedAt: string | null
+  weeks: CardOverrideWeek[]
 }

@@ -21,7 +21,9 @@ export type SuggestedPick = {
   gameId: string
   cbsEventId: number
   away: string
+  awayId: string
   home: string
+  homeId: string
   kickoff: string
   kickoffLabel: string
   pickedSide: 'home' | 'away'
@@ -103,6 +105,8 @@ export function generateSuggestedCard(
     ) {
       picks.push({
         ...base,
+        awayId: game.away.id,
+        homeId: game.home.id,
         pickedSide: cardPick.pickedSide,
         pickedTeamId: game[cardPick.pickedSide].id,
         pickedTeam: game[cardPick.pickedSide].name,
@@ -149,6 +153,20 @@ function unpickedReason(analysis: GameAnalysis) {
   return 'No line-value pick and no Covers consensus yet'
 }
 
+export function oppositeSide(side: 'home' | 'away') {
+  return side === 'home' ? 'away' : 'home'
+}
+
+export function submittedPick(pick: SuggestedPick, deviate: boolean) {
+  const side = deviate ? oppositeSide(pick.pickedSide) : pick.pickedSide
+  return {
+    pickedSide: side,
+    pickedTeamId: side === 'home' ? pick.homeId : pick.awayId,
+    pickedTeam: side === 'home' ? pick.home : pick.away,
+    poolSpread: deviate ? -pick.poolSpread : pick.poolSpread,
+  }
+}
+
 export function sortSuggestedPicks(
   picks: SuggestedPick[],
   sort: 'slate' | 'strength',
@@ -169,16 +187,20 @@ export function sortSuggestedPicks(
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
+  deviations: ReadonlySet<string> = new Set(),
 ) {
   const when = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(card.generatedAt))
 
-  const pickLines = picks.map(
-    (pick) =>
-      `• ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''} · ${pick.detail}`,
-  )
+  const pickLines = picks.map((pick) => {
+    const deviate = deviations.has(pick.gameId)
+    const sent = submittedPick(pick, deviate)
+    const rec = `${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
+    const choice = `${sent.pickedTeam} ${formatPoolSpread(sent.poolSpread)}`
+    return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
+  })
   const skipLines = card.unpicked.map(
     (game) => `• ${game.away} @ ${game.home} — ${game.reason}`,
   )

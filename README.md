@@ -131,13 +131,21 @@ The generated-card modal sends GrokBot this JSON:
     {
       "gameId": "<slate games[].id>",
       "pickedTeamId": "<that game's away.id or home.id>",
-      "pickedSide": "home"
+      "pickedSide": "home",
+      "deviate": false
     }
   ]
 }
 ```
 
 Unpicked games are omitted; GrokBot validates against the live Week N slate.
+`pickedTeamId` / `pickedSide` are the team to save on CBS. If **Deviate** is
+checked on a pick, those fields are already the flipped side and `deviate` is
+`true`. GrokBot should save that team as-is and not flip it again.
+
+The Complete card Action also writes `src/data/card-overrides.json` and
+re-runs the recommendation snapshot so Performance can score deviations
+against the opposite of the frozen card pick.
 
 The browser cannot POST that webhook directly. GrokBot's server answers the
 CORS preflight and will not allow the Pages origin, so the button dispatches

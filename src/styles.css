@@ -582,12 +582,16 @@ h2 {
 
 .suggested-picks li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 4px 8px;
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: #f7faf7;
+}
+
+.suggested-picks li.deviated {
+  background: #fff8e8;
 }
 
 .suggested-pick-teams {
@@ -612,6 +616,24 @@ h2 {
 
 .suggested-picks em {
   grid-column: 1 / -1;
+}
+
+.suggested-pick-toggle {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  align-self: start;
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+.suggested-pick-toggle input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--green-dark);
 }
 
 .pick-source {
@@ -665,6 +687,19 @@ h2 {
   border-radius: 999px;
   color: #5c4a12;
   background: #fff3cc;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pick-deviate {
+  align-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #7a3b0f;
+  background: #f8d9c4;
   font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -1068,6 +1103,11 @@ select:focus {
 
 .performance-strength .summary-card:hover {
   transform: none;
+}
+
+.performance-deviations {
+  margin-top: 16px;
+  grid-template-columns: minmax(180px, 280px);
 }
 
 .summary-card.strong {
@@ -1495,6 +1535,10 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .performance-deviations {
+    grid-template-columns: 1fr;
+  }
+
   .slate-section {
     padding-top: 30px;
   }
@@ -1619,6 +1663,14 @@ footer {
   .card-footer {
     grid-column: auto;
     align-items: center;
+  }
+
+  .suggested-picks li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .suggested-pick-toggle {
+    grid-column: 1 / -1;
   }
 }
 

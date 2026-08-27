@@ -11,7 +11,8 @@
     "prepare-slate": "node scripts/prepare-slate.mjs",
     "prepare-players": "node scripts/prepare-players.mjs",
     "prepare-consensus": "node scripts/prepare-consensus.mjs",
-    "snapshot-recommendations": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts"
+    "snapshot-recommendations": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts",
+    "record-card-overrides": "node scripts/record-card-overrides.mjs"
   },
   "keywords": [],
   "author": "",

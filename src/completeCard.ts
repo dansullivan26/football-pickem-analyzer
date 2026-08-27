@@ -1,4 +1,4 @@
-import type { SuggestedCard } from './cardStrategy'
+import { submittedPick, type SuggestedCard } from './cardStrategy'
 
 const REPO = 'dansullivan26/football-pickem-analyzer'
 const WORKFLOW = 'complete-card.yml'
@@ -13,7 +13,10 @@ export function completeCardPasswordMatches(value: string) {
 
 // GrokBot's webhook rejects the browser's CORS preflight, so the card goes
 // through a GitHub Action that forwards it server-side.
-export async function sendCardToGrokBot(card: SuggestedCard) {
+export async function sendCardToGrokBot(
+  card: SuggestedCard,
+  deviations: ReadonlySet<string> = new Set(),
+) {
   const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
   if (!token) {
     throw new Error(
@@ -24,11 +27,15 @@ export async function sendCardToGrokBot(card: SuggestedCard) {
   const payload = JSON.stringify({
     week: card.week,
     source: 'football-pickem-analyzer',
-    picks: card.picks.map((pick) => ({
-      gameId: pick.gameId,
-      pickedTeamId: pick.pickedTeamId,
-      pickedSide: pick.pickedSide,
-    })),
+    picks: card.picks.map((pick) => {
+      const sent = submittedPick(pick, deviations.has(pick.gameId))
+      return {
+        gameId: pick.gameId,
+        pickedTeamId: sent.pickedTeamId,
+        pickedSide: sent.pickedSide,
+        deviate: deviations.has(pick.gameId),
+      }
+    }),
   })
 
   const response = await fetch(

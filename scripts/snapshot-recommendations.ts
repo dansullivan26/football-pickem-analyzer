@@ -62,6 +62,22 @@ try {
   // First snapshot.
 }
 
+let overrides = { updatedAt: null, weeks: [] }
+try {
+  overrides = JSON.parse(
+    await readFile(new URL('src/data/card-overrides.json', ROOT), 'utf8'),
+  )
+} catch {
+  // No completed card stored yet.
+}
+
+const deviationIds = new Set(
+  (overrides.weeks ?? [])
+    .find((week) => week.week === slate.week.order)
+    ?.games?.filter((game) => game.deviate)
+    .map((game) => game.gameId) ?? [],
+)
+
 const oddsById = new Map((odds.events ?? []).map((event) => [event.cbsEventId, event]))
 const consensusByEvent = new Map(
   consensusFeed.week?.order === slate.week.order
@@ -80,7 +96,7 @@ const games = slate.games.map((game) => {
   const kickedOff = new Date(game.kickoff).getTime() <= now
 
   if (kickedOff && previous) {
-    return previous
+    return deviationIds.has(game.id) ? { ...previous, deviated: true } : previous
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
@@ -92,8 +108,7 @@ const games = slate.games.map((game) => {
     liveHomeSpread: analysis.liveHomeSpread,
     consensus: consensusByEvent.get(game.cbsEventId),
   })
-
-  return {
+  const frozen = {
     cbsEventId: game.cbsEventId,
     sport: game.sport,
     kickoff: game.kickoff,
@@ -110,6 +125,7 @@ const games = slate.games.map((game) => {
     strength: cardPick.strength,
     score: cardPick.score,
   }
+  return deviationIds.has(game.id) ? { ...frozen, deviated: true } : frozen
 })
 
 const week = {

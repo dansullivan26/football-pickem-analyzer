@@ -5,6 +5,7 @@ import {
   formatPoolSpread,
   formatSuggestedCardText,
   sortSuggestedPicks,
+  submittedPick,
   type SuggestedCard,
 } from './cardStrategy'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
@@ -22,6 +23,7 @@ export default function SuggestedCardPanel({
   const [askPassword, setAskPassword] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [deviations, setDeviations] = useState<Set<string>>(() => new Set())
   const [submitResult, setSubmitResult] = useState<{
     kind: 'success' | 'error'
     message: string
@@ -66,12 +68,23 @@ export default function SuggestedCardPanel({
 
   async function copyCard() {
     try {
-      await navigator.clipboard.writeText(formatSuggestedCardText(card, picks))
+      await navigator.clipboard.writeText(
+        formatSuggestedCardText(card, picks, deviations),
+      )
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)
     } catch {
       setCopied(false)
     }
+  }
+
+  function toggleDeviate(gameId: string) {
+    setDeviations((current) => {
+      const next = new Set(current)
+      if (next.has(gameId)) next.delete(gameId)
+      else next.add(gameId)
+      return next
+    })
   }
 
   function openPasswordPrompt() {
@@ -91,7 +104,7 @@ export default function SuggestedCardPanel({
     setSubmitting(true)
     setSubmitResult(null)
     try {
-      await sendCardToGrokBot(card)
+      await sendCardToGrokBot(card, deviations)
       setSubmitResult({
         kind: 'success',
         message:
@@ -157,32 +170,48 @@ export default function SuggestedCardPanel({
         <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
 
         <ol className="suggested-picks">
-          {picks.map((pick) => (
-            <li key={pick.cbsEventId}>
-              <div className="suggested-pick-teams">
-                <strong>
-                  {pick.pickedTeam} {formatPoolSpread(pick.poolSpread)}
-                </strong>
-                <span>
-                  {pick.away} @ {pick.home}
-                </span>
-              </div>
-              <div className="suggested-pick-tags">
-                <span className={`pick-source ${pick.source}`}>
-                  {pick.source === 'line-value' ? 'Line value' : 'Public'}
-                </span>
-                <span className={`pick-strength ${pick.strength}`}>
-                  {pick.strength}
-                </span>
-                {pick.hook && (
-                  <span className="pick-hook">
-                    {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
+          {picks.map((pick) => {
+            const deviate = deviations.has(pick.gameId)
+            const sent = submittedPick(pick, deviate)
+            return (
+              <li key={pick.cbsEventId} className={deviate ? 'deviated' : undefined}>
+                <div className="suggested-pick-teams">
+                  <strong>
+                    {sent.pickedTeam} {formatPoolSpread(sent.poolSpread)}
+                  </strong>
+                  <span>
+                    {pick.away} @ {pick.home}
+                    {deviate
+                      ? ` · rec was ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
+                      : ''}
                   </span>
-                )}
-              </div>
-              <em>{pick.detail}</em>
-            </li>
-          ))}
+                </div>
+                <div className="suggested-pick-tags">
+                  <span className={`pick-source ${pick.source}`}>
+                    {pick.source === 'line-value' ? 'Line value' : 'Public'}
+                  </span>
+                  <span className={`pick-strength ${pick.strength}`}>
+                    {pick.strength}
+                  </span>
+                  {pick.hook && (
+                    <span className="pick-hook">
+                      {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
+                    </span>
+                  )}
+                  {deviate && <span className="pick-deviate">Deviate</span>}
+                </div>
+                <label className="suggested-pick-toggle">
+                  <input
+                    type="checkbox"
+                    checked={deviate}
+                    onChange={() => toggleDeviate(pick.gameId)}
+                  />
+                  Deviate
+                </label>
+                <em>{pick.detail}</em>
+              </li>
+            )
+          })}
         </ol>
 
         {card.unpicked.length > 0 && (
@@ -210,9 +239,12 @@ export default function SuggestedCardPanel({
             {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
           </button>
           <small>
-            Sends this exact card to GrokBot. You will confirm in chat before it is
-            saved on CBS. Delivery runs in a GitHub Action, so check its run if
-            GrokBot never posts the card.
+            Sends this exact card to GrokBot
+            {deviations.size
+              ? `, including ${deviations.size} deviation${deviations.size === 1 ? '' : 's'}`
+              : ''}
+            . You will confirm in chat before it is saved on CBS. Delivery runs in
+            a GitHub Action, so check its run if GrokBot never posts the card.
           </small>
           {submitResult && (
             <p className={submitResult.kind} role="status">
@@ -248,8 +280,12 @@ export default function SuggestedCardPanel({
             >
               <h3 id="card-password-title">Enter password</h3>
               <p>
-                Sends {card.picks.length} picks to GrokBot for {card.weekLabel}.
-                Nothing is saved on CBS until you confirm in chat.
+                Sends {card.picks.length} picks
+                {deviations.size
+                  ? ` (${deviations.size} deviation${deviations.size === 1 ? '' : 's'})`
+                  : ''}{' '}
+                to GrokBot for {card.weekLabel}. Nothing is saved on CBS until you
+                confirm in chat.
               </p>
               <label>
                 <span className="sr-only">Password</span>

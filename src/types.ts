@@ -11,6 +11,13 @@ export type Team = {
   pickemPctAgainstSpread: number
 }
 
+export type GameVenue = {
+  stadium: string | null
+  city: string | null
+  state: string | null
+  indoor: boolean | null
+}
+
 export type SlateGame = {
   id: string
   cbsEventId: number
@@ -24,6 +31,8 @@ export type SlateGame = {
   home: Team
   homeSpread: number
   line: string
+  /** CBS GraphQL venue. Absent on dumps from before venue was scraped. */
+  venue?: GameVenue | null
 }
 
 export type Slate = {

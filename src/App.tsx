@@ -17,6 +17,7 @@ import type {
   ConsensusGame,
   EdgeCategory,
   GameAnalysis,
+  GameVenue,
   OddsEvent,
   OddsFeed,
   PlayerHistory,
@@ -78,6 +79,14 @@ function formatUpdatedAt(value: string | null) {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(value))}`
+}
+
+function formatVenue(venue: GameVenue | null | undefined) {
+  if (!venue) return null
+  const place = [venue.city, venue.state].filter(Boolean).join(', ')
+  const parts = [venue.stadium, place].filter(Boolean)
+  if (!parts.length) return null
+  return parts.join(' · ')
 }
 
 function classifyEdge(magnitude: number): EdgeCategory {
@@ -267,12 +276,21 @@ const CATEGORY_RANK: Record<EdgeCategory, number> = {
 
 function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const { game, odds, category } = analysis
+  const venue = formatVenue(game.venue)
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
         <span className={`sport-tag ${game.sport.toLowerCase()}`}>{game.sport}</span>
         <time dateTime={game.kickoff}>{game.kickoffLabel.replace(' ET', '')}</time>
         {game.tv && <span>{game.tv}</span>}
+        {venue && (
+          <span
+            className="game-venue"
+            title={game.venue?.indoor ? `${venue} (indoor)` : venue}
+          >
+            {venue}
+          </span>
+        )}
       </div>
 
       <div className="matchup">

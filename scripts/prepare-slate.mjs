@@ -11,6 +11,39 @@ if (!inputPath) {
   throw new Error('Usage: npm run prepare-slate -- --input path/to/slate.json')
 }
 
+function readOptionalText(value) {
+  if (value == null) return null
+  if (typeof value !== 'string') return null
+  const text = value.trim()
+  return text || null
+}
+
+function readIndoor(value) {
+  if (typeof value === 'boolean') return value
+  if (value == null) return null
+  if (typeof value !== 'string') {
+    throw new Error('venue.indoor must be a boolean, indoor/outdoor, or null.')
+  }
+  const normalized = value.trim().toLowerCase()
+  if (normalized === 'indoor' || normalized === 'true') return true
+  if (normalized === 'outdoor' || normalized === 'false') return false
+  throw new Error(`venue.indoor has unexpected value "${value}".`)
+}
+
+function readVenue(game) {
+  if (game.venue == null) return undefined
+  if (typeof game.venue !== 'object' || Array.isArray(game.venue)) {
+    throw new Error(`${game.cbsEventId ?? game.id} venue must be an object.`)
+  }
+
+  return {
+    stadium: readOptionalText(game.venue.stadium),
+    city: readOptionalText(game.venue.city),
+    state: readOptionalText(game.venue.state),
+    indoor: readIndoor(game.venue.indoor),
+  }
+}
+
 const raw = JSON.parse(await readFile(resolve(inputPath), 'utf8'))
 const slate = {
   source: {
@@ -42,6 +75,7 @@ const slate = {
     home: game.home,
     homeSpread: game.homeSpread,
     line: game.line,
+    venue: readVenue(game),
   })),
 }
 

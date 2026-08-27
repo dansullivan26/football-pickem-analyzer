@@ -15,6 +15,8 @@ Pages serves the same SPA for those paths via `404.html`.
 
 The app loads its public slate from `src/data/current-slate.json`. Full CBS
 exports are ignored by git so private pool URLs and settings are not published.
+Each game may include a CBS `venue` (`stadium`, `city`, `state`, `indoor`);
+team `location` is still the school, not where the game is played.
 
 To prepare a newly captured slate:
 

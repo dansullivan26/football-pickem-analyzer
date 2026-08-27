@@ -156,26 +156,6 @@ export default function SuggestedCardPanel({
 
         <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
 
-        <div className="complete-card">
-          <button
-            type="button"
-            disabled={submitting || card.picks.length === 0}
-            onClick={openPasswordPrompt}
-          >
-            {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
-          </button>
-          <small>
-            Sends this exact card to GrokBot. You will confirm in chat before it is
-            saved on CBS. Delivery runs in a GitHub Action, so check its run if
-            GrokBot never posts the card.
-          </small>
-          {submitResult && (
-            <p className={submitResult.kind} role="status">
-              {submitResult.message}
-            </p>
-          )}
-        </div>
-
         <ol className="suggested-picks">
           {picks.map((pick) => (
             <li key={pick.cbsEventId}>
@@ -220,6 +200,26 @@ export default function SuggestedCardPanel({
             </ul>
           </div>
         )}
+
+        <div className="complete-card">
+          <button
+            type="button"
+            disabled={submitting || card.picks.length === 0}
+            onClick={openPasswordPrompt}
+          >
+            {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
+          </button>
+          <small>
+            Sends this exact card to GrokBot. You will confirm in chat before it is
+            saved on CBS. Delivery runs in a GitHub Action, so check its run if
+            GrokBot never posts the card.
+          </small>
+          {submitResult && (
+            <p className={submitResult.kind} role="status">
+              {submitResult.message}
+            </p>
+          )}
+        </div>
 
         <a
           className="suggested-card-ride"

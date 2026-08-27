@@ -133,6 +133,13 @@ export default function PlayersView({
   recommendations: RecommendationHistory
 }) {
   const [query, setQuery] = useState('')
+  const [namesHidden, setNamesHidden] = useState(() => {
+    try {
+      return sessionStorage.getItem('hidePlayerNames') === '1'
+    } catch {
+      return false
+    }
+  })
   const [selectedEntryId, setSelectedEntryId] = useState(
     history.entries[0]?.entryId ?? '',
   )
@@ -178,12 +185,32 @@ export default function PlayersView({
             weekly tiebreaker.
           </p>
         </div>
-        <div className="week-chip">
-          <span>History loaded</span>
-          <strong>{history.entries.length} players</strong>
-          <small>
-            {scoredWeeks} scored {scoredWeeks === 1 ? 'week' : 'weeks'}
-          </small>
+        <div className="hero-aside">
+          <div className="week-chip">
+            <span>History loaded</span>
+            <strong>{history.entries.length} players</strong>
+            <small>
+              {scoredWeeks} scored {scoredWeeks === 1 ? 'week' : 'weeks'}
+            </small>
+          </div>
+          <button
+            className="names-toggle"
+            type="button"
+            aria-pressed={namesHidden}
+            onClick={() => {
+              setNamesHidden((current) => {
+                const next = !current
+                try {
+                  sessionStorage.setItem('hidePlayerNames', next ? '1' : '0')
+                } catch {
+                  // Private mode can block sessionStorage.
+                }
+                return next
+              })
+            }}
+          >
+            {namesHidden ? 'Show names' : 'Hide names'}
+          </button>
         </div>
       </section>
 
@@ -194,7 +221,10 @@ export default function PlayersView({
         </div>
       )}
 
-      <section className="players-layout">
+      <section
+        className={`players-layout${namesHidden ? ' names-hidden' : ''}`}
+      >
+        {!namesHidden && (
         <aside className="player-directory" aria-label="Pool players">
           <div className="directory-heading">
             <div>
@@ -230,6 +260,7 @@ export default function PlayersView({
             ))}
           </div>
         </aside>
+        )}
 
         <section className="player-detail">
           {selectedPlayer && summary && (
@@ -237,7 +268,7 @@ export default function PlayersView({
               <div className="player-detail-heading">
                 <div>
                   <p className="eyebrow">Player profile</p>
-                  <h2>{selectedPlayer.name}</h2>
+                  <h2>{namesHidden ? 'Player' : selectedPlayer.name}</h2>
                 </div>
                 <label>
                   <span className="sr-only">Select week</span>

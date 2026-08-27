@@ -599,14 +599,26 @@ select:focus {
 }
 
 .team {
-  display: grid;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
 }
 
 .team:last-child {
+  flex-direction: row-reverse;
   text-align: right;
 }
 
+.team-logo {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
 .team-name {
+  min-width: 0;
   overflow: hidden;
   font-family: 'Manrope', sans-serif;
   font-size: 0.95rem;

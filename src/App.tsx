@@ -6,6 +6,7 @@ import recommendationHistoryData from './data/recommendation-history.json'
 import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
+import TeamLogo from './TeamLogo'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import type {
   BookKey,
@@ -256,10 +257,12 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 
       <div className="matchup">
         <div className="team">
+          <TeamLogo team={game.away} />
           <span className="team-name">{game.away.name}</span>
         </div>
         <span className="at">@</span>
         <div className="team">
+          <TeamLogo team={game.home} />
           <span className="team-name">{game.home.name}</span>
         </div>
       </div>

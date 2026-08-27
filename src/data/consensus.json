@@ -3,15 +3,15 @@
     "site": "Covers",
     "product": "King of Covers contest consensus",
     "description": "Contest-player ATS tickets, not industry experts. Percentages attach to the Covers displayed Sides, not the CBS slate line.",
-    "fetchedAt": "2026-08-26T22:00:52-04:00",
+    "fetchedAt": "2026-08-27T08:38:56-04:00",
     "timezone": "America/Indianapolis"
   },
   "week": {
     "order": 1,
     "label": "Week 1",
     "gamesOnSlate": 25,
-    "matched": 24,
-    "unmatched": 1
+    "matched": 25,
+    "unmatched": 0
   },
   "games": [
     {
@@ -27,16 +27,16 @@
         "abbrev": "UNC",
         "coversName": "North Carolina",
         "spread": 9.5,
-        "pct": 31,
-        "picks": 87
+        "pct": 33,
+        "picks": 96
       },
       "home": {
         "name": "TCU",
         "abbrev": "TCU",
         "coversName": "TCU",
         "spread": -9.5,
-        "pct": 69,
-        "picks": 191
+        "pct": 67,
+        "picks": 197
       }
     },
     {
@@ -52,16 +52,16 @@
         "abbrev": "HAWAII",
         "coversName": "Hawai'i",
         "spread": 3.5,
-        "pct": 53,
-        "picks": 121
+        "pct": 52,
+        "picks": 129
       },
       "home": {
         "name": "Stanford",
         "abbrev": "STNFRD",
         "coversName": "Stanford",
         "spread": -3.5,
-        "pct": 47,
-        "picks": 108
+        "pct": 48,
+        "picks": 118
       }
     },
     {
@@ -76,17 +76,17 @@
         "name": "Colorado",
         "abbrev": "COLO",
         "coversName": "Colorado",
-        "spread": 9.5,
-        "pct": 39,
-        "picks": 47
+        "spread": 6.5,
+        "pct": 40,
+        "picks": 50
       },
       "home": {
         "name": "Georgia Tech",
         "abbrev": "GATECH",
         "coversName": "Georgia Tech",
-        "spread": -9.5,
-        "pct": 61,
-        "picks": 74
+        "spread": -6.5,
+        "pct": 60,
+        "picks": 75
       }
     },
     {
@@ -101,15 +101,15 @@
         "name": "Toledo",
         "abbrev": "TOLEDO",
         "coversName": "Toledo",
-        "spread": 7.5,
+        "spread": 6.5,
         "pct": 45,
-        "picks": 49
+        "picks": 50
       },
       "home": {
         "name": "Michigan St.",
         "abbrev": "MICHST",
         "coversName": "Michigan State",
-        "spread": -7.5,
+        "spread": -6.5,
         "pct": 55,
         "picks": 60
       }
@@ -126,7 +126,7 @@
         "name": "Miami (Fla.)",
         "abbrev": "MIAMI",
         "coversName": "Miami (FL)",
-        "spread": -30.5,
+        "spread": -24,
         "pct": 38,
         "picks": 41
       },
@@ -134,9 +134,9 @@
         "name": "Stanford",
         "abbrev": "STNFRD",
         "coversName": "Stanford",
-        "spread": 30.5,
+        "spread": 24,
         "pct": 62,
-        "picks": 67
+        "picks": 68
       }
     },
     {
@@ -152,15 +152,15 @@
         "abbrev": "CSTCAR",
         "coversName": "Coastal Carolina",
         "spread": 21.5,
-        "pct": 53,
-        "picks": 51
+        "pct": 54,
+        "picks": 52
       },
       "home": {
         "name": "West Virginia",
         "abbrev": "WVU",
         "coversName": "West Virginia",
         "spread": -21.5,
-        "pct": 47,
+        "pct": 46,
         "picks": 45
       }
     },
@@ -169,24 +169,24 @@
       "cbsEventId": 50027508,
       "sport": "NCAAF",
       "kickoff": "2026-09-05T12:00:00-04:00",
-      "matchStatus": "unmatched",
-      "coversDetailsUrl": null,
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/bd9141e3-b58a-4a2d-b672-b448014899cf",
       "cbsHomeSpread": -28.5,
       "away": {
         "name": "East Carolina",
         "abbrev": "ECU",
-        "coversName": null,
-        "spread": null,
-        "pct": null,
-        "picks": null
+        "coversName": "East Carolina",
+        "spread": 28.5,
+        "pct": 51,
+        "picks": 53
       },
       "home": {
         "name": "Alabama",
         "abbrev": "BAMA",
-        "coversName": null,
-        "spread": null,
-        "pct": null,
-        "picks": null
+        "coversName": "Alabama",
+        "spread": -28.5,
+        "pct": 49,
+        "picks": 51
       }
     },
     {
@@ -202,7 +202,7 @@
         "abbrev": "MIAOH",
         "coversName": "Miami (OH)",
         "spread": 16.5,
-        "pct": 40,
+        "pct": 39,
         "picks": 35
       },
       "home": {
@@ -210,8 +210,8 @@
         "abbrev": "PITT",
         "coversName": "Pittsburgh",
         "spread": -16.5,
-        "pct": 60,
-        "picks": 52
+        "pct": 61,
+        "picks": 54
       }
     },
     {
@@ -227,7 +227,7 @@
         "abbrev": "BC",
         "coversName": "Boston College",
         "spread": 7.5,
-        "pct": 41,
+        "pct": 40,
         "picks": 40
       },
       "home": {
@@ -235,8 +235,8 @@
         "abbrev": "CINCY",
         "coversName": "Cincinnati",
         "spread": -7.5,
-        "pct": 59,
-        "picks": 58
+        "pct": 60,
+        "picks": 59
       }
     },
     {
@@ -276,7 +276,7 @@
         "name": "The Citadel",
         "abbrev": "CIT",
         "coversName": "Citadel",
-        "spread": 16.5,
+        "spread": 15.5,
         "pct": 49,
         "picks": 34
       },
@@ -284,9 +284,9 @@
         "name": "Charlotte",
         "abbrev": "CHARLO",
         "coversName": "Charlotte",
-        "spread": -16.5,
+        "spread": -15.5,
         "pct": 51,
-        "picks": 35
+        "picks": 36
       }
     },
     {
@@ -353,7 +353,7 @@
         "coversName": "Wyoming",
         "spread": 3.5,
         "pct": 60,
-        "picks": 54
+        "picks": 55
       },
       "home": {
         "name": "Colorado St.",
@@ -386,7 +386,7 @@
         "coversName": "Memphis",
         "spread": -8.5,
         "pct": 62,
-        "picks": 52
+        "picks": 53
       }
     },
     {
@@ -401,7 +401,7 @@
         "name": "Idaho State",
         "abbrev": "IDST",
         "coversName": "Idaho State",
-        "spread": 13,
+        "spread": 11.5,
         "pct": 27,
         "picks": 22
       },
@@ -409,7 +409,7 @@
         "name": "Utah St.",
         "abbrev": "UTAHST",
         "coversName": "Utah State",
-        "spread": -13,
+        "spread": -11.5,
         "pct": 73,
         "picks": 59
       }
@@ -426,15 +426,15 @@
         "name": "Clemson",
         "abbrev": "CLEM",
         "coversName": "Clemson",
-        "spread": 10.5,
+        "spread": 10,
         "pct": 56,
-        "picks": 52
+        "picks": 53
       },
       "home": {
         "name": "LSU",
         "abbrev": "LSU",
         "coversName": "LSU",
-        "spread": -10.5,
+        "spread": -10,
         "pct": 44,
         "picks": 41
       }
@@ -452,7 +452,7 @@
         "abbrev": "WMICH",
         "coversName": "Western Michigan",
         "spread": 27.5,
-        "pct": 55,
+        "pct": 54,
         "picks": 45
       },
       "home": {
@@ -460,8 +460,8 @@
         "abbrev": "MICH",
         "coversName": "Michigan",
         "spread": -27.5,
-        "pct": 45,
-        "picks": 37
+        "pct": 46,
+        "picks": 38
       }
     },
     {
@@ -502,7 +502,7 @@
         "abbrev": "UNLV",
         "coversName": "UNLV",
         "spread": -3.5,
-        "pct": 49,
+        "pct": 48,
         "picks": 44
       },
       "home": {
@@ -510,8 +510,8 @@
         "abbrev": "HAWAII",
         "coversName": "Hawai'i",
         "spread": 3.5,
-        "pct": 51,
-        "picks": 46
+        "pct": 52,
+        "picks": 47
       }
     },
     {
@@ -526,7 +526,7 @@
         "name": "UCLA",
         "abbrev": "UCLA",
         "coversName": "UCLA",
-        "spread": -1.5,
+        "spread": -1,
         "pct": 58,
         "picks": 56
       },
@@ -534,9 +534,9 @@
         "name": "California",
         "abbrev": "CAL",
         "coversName": "California",
-        "spread": 1.5,
+        "spread": 1,
         "pct": 42,
-        "picks": 40
+        "picks": 41
       }
     },
     {
@@ -551,17 +551,17 @@
         "name": "Washington St.",
         "abbrev": "WASHST",
         "coversName": "Washington State",
-        "spread": 22.5,
+        "spread": 23.5,
         "pct": 61,
-        "picks": 59
+        "picks": 60
       },
       "home": {
         "name": "Washington",
         "abbrev": "WASH",
         "coversName": "Washington",
-        "spread": -22.5,
+        "spread": -23.5,
         "pct": 39,
-        "picks": 37
+        "picks": 38
       }
     },
     {
@@ -586,7 +586,7 @@
         "coversName": "Mississippi",
         "spread": -6.5,
         "pct": 70,
-        "picks": 69
+        "picks": 71
       }
     },
     {
@@ -602,7 +602,7 @@
         "abbrev": "WISC",
         "coversName": "Wisconsin",
         "spread": 20.5,
-        "pct": 45,
+        "pct": 44,
         "picks": 42
       },
       "home": {
@@ -610,8 +610,8 @@
         "abbrev": "ND",
         "coversName": "Notre Dame",
         "spread": -20.5,
-        "pct": 55,
-        "picks": 51
+        "pct": 56,
+        "picks": 53
       }
     },
     {
@@ -627,16 +627,16 @@
         "abbrev": "SMU",
         "coversName": "SMU",
         "spread": -2.5,
-        "pct": 60,
-        "picks": 55
+        "pct": 61,
+        "picks": 57
       },
       "home": {
         "name": "Florida State",
         "abbrev": "FSU",
         "coversName": "Florida State",
         "spread": 2.5,
-        "pct": 40,
-        "picks": 36
+        "pct": 39,
+        "picks": 37
       }
     }
   ]

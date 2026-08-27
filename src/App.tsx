@@ -246,12 +246,12 @@ function ConsensusNote({
           rel="noreferrer"
           title={title}
         >
-          {headline}
+          {bucketSummary}
         </a>
       ) : (
-        <strong title={title}>{headline}</strong>
+        <strong title={title}>{bucketSummary}</strong>
       )}
-      <em>{bucketSummary}</em>
+      <em>{headline}</em>
     </span>
   )
 }

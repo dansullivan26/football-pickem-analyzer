@@ -838,10 +838,12 @@ select:focus {
 }
 
 .consensus-note em {
+  max-width: 230px;
   color: var(--muted);
   font-size: 0.58rem;
   font-style: normal;
-  white-space: nowrap;
+  line-height: 1.25;
+  text-align: right;
 }
 
 .consensus-note.empty {

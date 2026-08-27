@@ -46,10 +46,12 @@ This checks every row against the prepared slate, keeps the Covers matchup
 details URL, drops the page list and internal matchup ids, and writes
 `src/data/consensus.json`. Games Covers had not posted
 yet stay in the file as unmatched rows and render as "No public consensus yet".
-These are Covers contest-player tickets, not experts, and the percentages attach
-to the number Covers was showing at capture time rather than the locked pool
-line — the card tooltip shows both sides and how long ago the dump was taken.
-Capture a fresh dump as close to the day's first kickoff as practical.
+These are Covers contest-player tickets, not experts. Headline percentages
+combine tickets made at multiple lines; `atsByLine` preserves each Picks Per
+Line bucket. The app displays the headline without attaching it to Covers'
+current Sides number, and public card picks use a meaningful ticket bucket
+within one point of the locked pool line. Capture a fresh dump as close to the
+day's first kickoff as practical.
 
 ## GrokBot ingest
 

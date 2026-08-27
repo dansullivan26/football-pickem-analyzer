@@ -1,9 +1,12 @@
 import type { ConsensusGame, EdgeCategory } from './types'
 
 export const PCT_PER_SPREAD_POINT = 3
+export const MAX_PUBLIC_BUCKET_DISTANCE = 1
+export const MIN_PUBLIC_BUCKET_PICKS = 10
+export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line-value picks (hammer / lean / slight) come first. Public fallback needs (public% − 50) + 3 × (pool number − Covers number) above 0; worse Covers-to-pool gaps need a bigger majority. Strength is that score: mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
+  'Line-value picks (hammer / lean / slight) come first. Public fallback uses the Covers ticket bucket nearest the pool line within 1 point, excluding buckets under 10 picks or 5% of tickets, then scores (bucket public% − 50) + 3 × (pool number − bucket number). Strength is mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -44,12 +47,43 @@ export function poolSpreadForSide(homeSpread: number, side: 'home' | 'away') {
   return homeSpread * (side === 'away' ? -1 : 1)
 }
 
-export function publicConsensusSide(consensus: ConsensusGame | undefined) {
-  if (!consensus || consensus.matchStatus !== 'matched') return null
-  const { away, home } = consensus
-  if (away.pct == null || home.pct == null) return null
-  if (away.pct === home.pct) return null
-  return home.pct > away.pct ? ('home' as const) : ('away' as const)
+export function publicBucketForPool(
+  consensus: ConsensusGame,
+  poolHomeSpread = consensus.cbsHomeSpread,
+) {
+  const buckets = consensus.atsByLine ?? []
+  const allPicks = buckets.reduce(
+    (sum, row) => sum + row.awayPicks + row.homePicks,
+    0,
+  )
+  const minimumPicks = Math.max(
+    MIN_PUBLIC_BUCKET_PICKS,
+    Math.ceil(allPicks * MIN_PUBLIC_BUCKET_SHARE),
+  )
+  const poolAwaySpread = -poolHomeSpread
+
+  return (
+    [...buckets]
+      .filter((row) => {
+        const rowPicks = row.awayPicks + row.homePicks
+        return (
+          rowPicks >= minimumPicks &&
+          Math.abs(row.awaySpread - poolAwaySpread) <=
+            MAX_PUBLIC_BUCKET_DISTANCE
+        )
+      })
+      .sort((left, right) => {
+        const distance =
+          Math.abs(left.awaySpread - poolAwaySpread) -
+          Math.abs(right.awaySpread - poolAwaySpread)
+        if (distance) return distance
+        return (
+          right.awayPicks +
+          right.homePicks -
+          (left.awayPicks + left.homePicks)
+        )
+      })[0] ?? null
+  )
 }
 
 export function lineValueScore(category: EdgeCategory, edge: number) {
@@ -80,29 +114,48 @@ function gapPhrase(gap: number) {
 
 export function evaluatePublicPick(
   consensus: ConsensusGame,
-  side: 'home' | 'away',
   poolHomeSpread: number,
 ) {
-  const leader = consensus[side]
-  const pct = leader.pct ?? 0
-  const poolSpread = poolSpreadForSide(poolHomeSpread, side)
-  const gap = leader.spread == null ? 0 : poolSpread - leader.spread
-  const score = pct - 50 + PCT_PER_SPREAD_POINT * gap
-  const coversLine =
-    leader.spread == null ? '' : ` at Covers ${formatPoolSpread(leader.spread)}`
-  const detail = `${pct}%${coversLine} · ${gapPhrase(gap)}`
-
-  if (score <= 0) {
-    const worse = Math.abs(gap)
-    const needed = Math.ceil(50 + PCT_PER_SPREAD_POINT * worse)
+  const bucket = publicBucketForPool(consensus, poolHomeSpread)
+  if (!bucket) {
     return {
       ok: false as const,
-      reason: `Public ${pct}%${coversLine}; need ${needed}% to cover the ${formatPoints(worse)}-point worse pool number`,
+      reason: 'No meaningful Covers ticket bucket within 1 point of the pool line',
+    }
+  }
+
+  if (bucket.awayPicks === bucket.homePicks) {
+    return {
+      ok: false as const,
+      reason: `Covers public is split at ${formatPoolSpread(bucket.awaySpread)}`,
+    }
+  }
+
+  const side =
+    bucket.awayPicks > bucket.homePicks ? ('away' as const) : ('home' as const)
+  const leaderPicks =
+    side === 'away' ? bucket.awayPicks : bucket.homePicks
+  const otherPicks = side === 'away' ? bucket.homePicks : bucket.awayPicks
+  const pct = (leaderPicks / (leaderPicks + otherPicks)) * 100
+  const poolSpread = poolSpreadForSide(poolHomeSpread, side)
+  const coversSpread =
+    side === 'away' ? bucket.awaySpread : -bucket.awaySpread
+  const gap = poolSpread - coversSpread
+  const score = pct - 50 + PCT_PER_SPREAD_POINT * gap
+  const roundedPct = Math.round(pct)
+  const detail = `${roundedPct}% (${leaderPicks}–${otherPicks}) at Covers ${formatPoolSpread(coversSpread)} · ${gapPhrase(gap)}`
+
+  if (score <= 0) {
+    const needed = Math.ceil(50 - PCT_PER_SPREAD_POINT * gap)
+    return {
+      ok: false as const,
+      reason: `Public ${roundedPct}% at Covers ${formatPoolSpread(coversSpread)}; need ${needed}% for the pool number`,
     }
   }
 
   return {
     ok: true as const,
+    side,
     strength: classifyPublicScore(score),
     score,
     detail,
@@ -143,17 +196,12 @@ export function resolveCardPick(input: {
     }
   }
 
-  const publicSide = publicConsensusSide(input.consensus)
-  if (publicSide && input.consensus) {
-    const publicPick = evaluatePublicPick(
-      input.consensus,
-      publicSide,
-      input.homeSpread,
-    )
+  if (input.consensus?.matchStatus === 'matched') {
+    const publicPick = evaluatePublicPick(input.consensus, input.homeSpread)
     if (publicPick.ok) {
       return {
         source: 'public-consensus',
-        pickedSide: publicSide,
+        pickedSide: publicPick.side,
         strength: publicPick.strength,
         score: publicPick.score,
         poolSpread: publicPick.poolSpread,

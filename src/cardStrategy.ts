@@ -15,7 +15,7 @@ export {
 } from './cardScoring'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v2-line-then-public-spread-gap'
+export const CARD_STRATEGY_ID = 'v3-line-then-public-pool-bucket'
 
 export type SuggestedPick = {
   cbsEventId: number
@@ -50,10 +50,10 @@ export type SuggestedCard = {
 }
 
 /**
- * v2 card rules (swap this function when Performance data should weight tiers):
+ * v3 card rules:
  * 1. Hammer / lean / slight → the line-value side.
- * 2. Otherwise, if Covers has a majority that still clears a 3%-per-point
- *    penalty when the pool number is worse than Covers, take that public side.
+ * 2. Otherwise, use a meaningful Covers Picks Per Line bucket within one point
+ *    of the pool line. Take its majority if it clears the spread-gap penalty.
  * 3. No line-value pick and no qualifying Covers majority → leave unpicked.
  */
 export function generateSuggestedCard(

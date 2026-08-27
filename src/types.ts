@@ -154,10 +154,17 @@ export type ConsensusSide = {
   name: string
   abbrev: string
   coversName: string | null
-  /** The number Covers displayed for this side when the tickets were counted. */
+  /** Current Covers "Sides" number; it may not be a number tickets used. */
   spread: number | null
   pct: number | null
   picks: number | null
+}
+
+export type ConsensusAtsLine = {
+  /** Away-side spread for this Picks Per Line bucket. */
+  awaySpread: number
+  awayPicks: number
+  homePicks: number
 }
 
 export type ConsensusGame = {
@@ -170,6 +177,8 @@ export type ConsensusGame = {
   cbsHomeSpread: number
   away: ConsensusSide
   home: ConsensusSide
+  /** Optional while legacy dumps are replaced by the per-line format. */
+  atsByLine?: ConsensusAtsLine[]
 }
 
 export type ConsensusFeed = {

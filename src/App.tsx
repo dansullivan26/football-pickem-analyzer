@@ -7,6 +7,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
+import { publicBucketForPool } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { pathForView, viewFromPath, type AppView } from './routes'
 import type {
@@ -189,8 +190,8 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   )
 }
 
-// Covers contest players pick against the number Covers was showing, which is
-// rarely the locked pool number, so both are surfaced side by side.
+// Covers' headline blends tickets from multiple spread buckets. Keep it
+// separate from the bucket nearest the locked pool line.
 function ConsensusNote({
   consensus,
   now,
@@ -209,15 +210,32 @@ function ConsensusNote({
 
   const picks = (away.picks ?? 0) + (home.picks ?? 0)
   const captured = formatAge(consensusFeed.source.fetchedAt, now)
-  const detail = [away, home]
-    .map((side) => `${side.name} ${formatSpread(side.spread)} ${side.pct}%`)
+  const currentSides = [away, home]
+    .map((side) => `${side.name} ${formatSpread(side.spread)}`)
     .join(' · ')
   const leader = home.pct > away.pct ? home : away
   const split = away.pct === home.pct
   const headline = split
-    ? `Public split ${leader.pct}%`
-    : `Public ${leader.pct}% ${leader.name} ${formatSpread(leader.spread)}`
-  const title = `${consensusFeed.source.site} contest consensus, captured ${captured} — ${detail}`
+    ? `Public split ${leader.pct}% · ${picks} picks`
+    : `Public ${leader.pct}% ${leader.name} · ${picks} picks`
+  const bucket = publicBucketForPool(consensus)
+  let bucketSummary = 'Per-line breakdown unavailable'
+  if (bucket) {
+    const bucketPicks = bucket.awayPicks + bucket.homePicks
+    const bucketSide =
+      bucket.awayPicks >= bucket.homePicks ? ('away' as const) : ('home' as const)
+    const bucketLeader = consensus[bucketSide]
+    const leaderPicks =
+      bucketSide === 'away' ? bucket.awayPicks : bucket.homePicks
+    const otherPicks =
+      bucketSide === 'away' ? bucket.homePicks : bucket.awayPicks
+    const bucketSpread =
+      bucketSide === 'away' ? bucket.awaySpread : -bucket.awaySpread
+    bucketSummary = `Near pool: ${bucketLeader.name} ${Math.round((leaderPicks / bucketPicks) * 100)}% at ${formatSpread(bucketSpread)} (${leaderPicks}–${otherPicks})`
+  } else if (consensus.atsByLine) {
+    bucketSummary = 'No meaningful ticket bucket near the pool line'
+  }
+  const title = `${consensusFeed.source.site} contest consensus, captured ${captured}. Headline percentages combine all lines. Current Sides: ${currentSides}. ${bucketSummary}.`
 
   return (
     <span className="consensus-note">
@@ -233,7 +251,7 @@ function ConsensusNote({
       ) : (
         <strong title={title}>{headline}</strong>
       )}
-      <em>{picks} picks</em>
+      <em>{bucketSummary}</em>
     </span>
   )
 }

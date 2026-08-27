@@ -63,6 +63,44 @@ function readSide(side, label, game, matched) {
   }
 }
 
+function readAtsByLine(game, matched) {
+  if (!Array.isArray(game.atsByLine)) {
+    throw new Error(`${game.gameId} must include atsByLine[].`)
+  }
+  if (!matched && game.atsByLine.length > 0) {
+    throw new Error(`${game.gameId} is unmatched but has ATS line buckets.`)
+  }
+
+  const seenSpreads = new Set()
+  return game.atsByLine.map((row, index) => {
+    const label = `${game.gameId} atsByLine[${index}]`
+    if (
+      typeof row?.awaySpread !== 'number' ||
+      !Number.isFinite(row.awaySpread) ||
+      !Number.isInteger(row.awaySpread * 2)
+    ) {
+      throw new Error(`${label} must have a numeric half-point awaySpread.`)
+    }
+    if (
+      !Number.isInteger(row.awayPicks) ||
+      row.awayPicks < 0 ||
+      !Number.isInteger(row.homePicks) ||
+      row.homePicks < 0
+    ) {
+      throw new Error(`${label} must have non-negative integer pick counts.`)
+    }
+    if (seenSpreads.has(row.awaySpread)) {
+      throw new Error(`${game.gameId} has duplicate ATS bucket ${row.awaySpread}.`)
+    }
+    seenSpreads.add(row.awaySpread)
+    return {
+      awaySpread: row.awaySpread,
+      awayPicks: row.awayPicks,
+      homePicks: row.homePicks,
+    }
+  })
+}
+
 const games = raw.games.map((game) => {
   const slateGame = slateGames.get(game.cbsEventId)
   if (!slateGame) {
@@ -87,6 +125,7 @@ const games = raw.games.map((game) => {
 
   const away = readSide(game.away, 'Away side', game, matched)
   const home = readSide(game.home, 'Home side', game, matched)
+  const atsByLine = readAtsByLine(game, matched)
 
   if (matched) {
     const total = away.pct + home.pct
@@ -105,6 +144,17 @@ const games = raw.games.map((game) => {
         `Warning: ${away.name} @ ${home.name} has non-mirrored Covers sides (${away.spread} / ${home.spread}).`,
       )
     }
+
+    const headlinePicks = away.picks + home.picks
+    const bucketPicks = atsByLine.reduce(
+      (sum, row) => sum + row.awayPicks + row.homePicks,
+      0,
+    )
+    if (atsByLine.length > 0 && Math.abs(headlinePicks - bucketPicks) > 5) {
+      console.warn(
+        `Warning: ${away.name} @ ${home.name} headline has ${headlinePicks} picks but ATS buckets have ${bucketPicks}.`,
+      )
+    }
   }
 
   return {
@@ -117,6 +167,7 @@ const games = raw.games.map((game) => {
     cbsHomeSpread: slateGame.homeSpread,
     away,
     home,
+    atsByLine,
   }
 })
 

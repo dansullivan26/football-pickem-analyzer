@@ -128,11 +128,36 @@ const games = slate.games.map((game) => {
   return deviationIds.has(game.id) ? { ...frozen, deviated: true } : frozen
 })
 
+const tiebreakerGame = slate.tiebreaker
+  ? slate.games.find((game) => game.id === slate.tiebreaker.gameId)
+  : undefined
+const liveTotal =
+  tiebreakerGame != null
+    ? oddsById.get(tiebreakerGame.cbsEventId)?.totals?.draftkings?.line
+    : undefined
+const tiebreakerKickedOff =
+  tiebreakerGame != null && new Date(tiebreakerGame.kickoff).getTime() <= now
+const previousTiebreaker = existingWeek?.tiebreaker
+const tiebreaker =
+  tiebreakerGame == null
+    ? existingWeek?.tiebreaker ?? null
+    : tiebreakerKickedOff && typeof previousTiebreaker?.draftKingsTotal === 'number'
+      ? previousTiebreaker
+      : {
+          cbsEventId: tiebreakerGame.cbsEventId,
+          draftKingsTotal:
+            typeof liveTotal === 'number'
+              ? liveTotal
+              : (previousTiebreaker?.draftKingsTotal ?? null),
+          frozenAt: tiebreakerKickedOff ? capturedAt : null,
+        }
+
 const week = {
   week: slate.week.order,
   label: slate.week.label,
   capturedAt,
   scored: existingWeek?.scored ?? false,
+  tiebreaker,
   games,
 }
 
@@ -149,5 +174,10 @@ await writeFile(OUTPUT, `${JSON.stringify(next, null, 2)}\n`)
 const open = games.filter((game) => new Date(game.kickoff).getTime() > now).length
 const frozen = games.length - open
 console.log(
-  `Snapshot ${week.label}: ${games.length} games (${open} still open, ${frozen} frozen).`,
+  `Snapshot ${week.label}: ${games.length} games (${open} still open, ${frozen} frozen).` +
+    (typeof tiebreaker?.draftKingsTotal === 'number'
+      ? ` Tiebreaker O/U ${tiebreaker.draftKingsTotal}${
+          tiebreaker.frozenAt ? ' (frozen)' : ''
+        }.`
+      : ''),
 )

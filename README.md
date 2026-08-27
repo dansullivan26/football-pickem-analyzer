@@ -39,9 +39,11 @@ npm run prepare-players -- --input path/to/players.json
 ```
 
 This validates the roster and weekly pick grids, strips the private pool URL,
-and writes `src/data/player-history.json`. The Players view can render unpicked
-weeks immediately; tendency metrics populate as scored Tuesday exports add
-selections and results.
+and writes `src/data/player-history.json`. Each weekly entry may include
+`tiebreaker.answer` as an integer (or null). The Players view can render
+unpicked weeks immediately; tendency metrics populate as scored Tuesday
+exports add selections, results, and tiebreaker totals. Line-value agreement
+and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
 To prepare a GrokBot Covers consensus export:
 
@@ -86,6 +88,12 @@ This public repo needs a secret named `DROPS_TOKEN` with Contents: Read on the
 drop repo. GrokBot's login needs Contents: Write on the drop repo and Actions:
 Write on this repo so it can push the dump and dispatch the workflow. Use
 `gh auth login` (or a hidden token field) — never paste the token into chat.
+
+Tuesday player dumps already include `weeks[].entries[].tiebreaker` with
+`question` and `answer`. Populate `answer` with the integer CBS stored for
+that entry (omit or null if they left it blank). `gameId` is optional. The
+app freezes the DraftKings total itself at tiebreaker kickoff; GrokBot does
+not need to send book totals on the player dump.
 
 To freeze the current week's recommendations (open games update; kicked-off
 games stay locked):

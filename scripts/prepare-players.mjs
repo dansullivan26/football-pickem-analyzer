@@ -21,6 +21,39 @@ if (!Array.isArray(raw.entries) || !Array.isArray(raw.weeks)) {
 
 const rosterIds = new Set(raw.entries.map((entry) => entry.entryId))
 
+function readPlayerTiebreaker(entry) {
+  const value = entry.tiebreaker
+  if (value == null) {
+    return { question: null, answer: null }
+  }
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(
+      `${entry.name ?? entry.entryId} tiebreaker must be an object or null.`,
+    )
+  }
+
+  let answer = null
+  if (value.answer != null) {
+    if (typeof value.answer !== 'number' || !Number.isInteger(value.answer)) {
+      throw new Error(
+        `${entry.name ?? entry.entryId} tiebreaker.answer must be an integer or null.`,
+      )
+    }
+    answer = value.answer
+  }
+
+  const question =
+    typeof value.question === 'string' && value.question.trim()
+      ? value.question.trim()
+      : null
+  const gameId =
+    typeof value.gameId === 'string' && value.gameId.trim()
+      ? value.gameId.trim()
+      : undefined
+
+  return gameId ? { question, answer, gameId } : { question, answer }
+}
+
 const weeks = raw.weeks.map((week) => {
   if (!Array.isArray(week.entries)) {
     throw new Error(`${week.label ?? `Week ${week.week}`} is missing entries[].`)
@@ -89,7 +122,7 @@ const weeks = raw.weeks.map((week) => {
         weekRank: entry.weekRank,
         correctPicks: entry.correctPicks,
         picksCount: entry.picksCount,
-        tiebreaker: entry.tiebreaker,
+        tiebreaker: readPlayerTiebreaker(entry),
         picks: entry.picks.map((pick) => ({
           gameId: pick.gameId,
           cbsEventId: pick.cbsEventId,

@@ -151,8 +151,9 @@ export type PlayerWeekEntry = {
   correctPicks: number | null
   picksCount: number | null
   tiebreaker: {
-    question: string
+    question: string | null
     answer: number | null
+    gameId?: string
   }
   picks: PlayerPick[]
 }
@@ -252,11 +253,19 @@ export type FrozenRecommendation = {
   deviated?: boolean
 }
 
+export type FrozenTiebreaker = {
+  cbsEventId: number
+  /** DraftKings total at freeze (kickoff). Updates until then. */
+  draftKingsTotal: number | null
+  frozenAt: string | null
+}
+
 export type RecommendationWeek = {
   week: number
   label: string
   capturedAt: string
   scored: boolean
+  tiebreaker?: FrozenTiebreaker | null
   games: FrozenRecommendation[]
 }
 

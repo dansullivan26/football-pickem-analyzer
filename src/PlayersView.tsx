@@ -3,6 +3,8 @@ import type {
   PlayerHistory,
   PlayerPick,
   PlayerWeek,
+  RecommendationHistory,
+  RecommendationWeek,
 } from './types'
 
 function formatSpread(value: number) {
@@ -46,7 +48,16 @@ function Metric({
   )
 }
 
-function summarizePlayer(entryId: string, weeks: PlayerWeek[]) {
+function formatRate(hits: number, eligible: number) {
+  if (!eligible) return '—'
+  return `${Math.round((hits / eligible) * 100)}%`
+}
+
+function summarizePlayer(
+  entryId: string,
+  weeks: PlayerWeek[],
+  recWeeks: RecommendationWeek[],
+) {
   const picks = weeks.flatMap(
     (week) =>
       week.entries.find((entry) => entry.entryId === entryId)?.picks ?? [],
@@ -64,6 +75,37 @@ function summarizePlayer(entryId: string, weeks: PlayerWeek[]) {
   const percent = (count: number) =>
     made.length ? `${Math.round((count / made.length) * 100)}%` : '—'
 
+  let lineValueEligible = 0
+  let lineValueHits = 0
+  let tiebreakerEligible = 0
+  let tiebreakerNear = 0
+
+  for (const recWeek of recWeeks) {
+    const entry = weeks
+      .find((week) => week.week === recWeek.week)
+      ?.entries.find((row) => row.entryId === entryId)
+    if (!entry) continue
+
+    const picksByEvent = new Map(
+      entry.picks.map((pick) => [pick.cbsEventId, pick]),
+    )
+    for (const game of recWeek.games) {
+      const benefitingSide =
+        game.source === 'line-value' ? game.recommendedSide : null
+      if (!benefitingSide) continue
+      const pick = picksByEvent.get(game.cbsEventId)
+      if (!pick?.pickedSide) continue
+      lineValueEligible += 1
+      if (pick.pickedSide === benefitingSide) lineValueHits += 1
+    }
+
+    const total = recWeek.tiebreaker?.draftKingsTotal
+    const answer = entry.tiebreaker?.answer
+    if (typeof total !== 'number' || typeof answer !== 'number') continue
+    tiebreakerEligible += 1
+    if (Math.abs(answer - total) <= 2) tiebreakerNear += 1
+  }
+
   return {
     made: made.length,
     scored: scored.length,
@@ -72,10 +114,24 @@ function summarizePlayer(entryId: string, weeks: PlayerWeek[]) {
     winRate: scored.length
       ? `${Math.round((wins.length / scored.length) * 100)}%`
       : '—',
+    lineValueRate: formatRate(lineValueHits, lineValueEligible),
+    lineValueDetail: lineValueEligible
+      ? `${lineValueHits} of ${lineValueEligible} line-value games`
+      : 'No overlapping line-value picks yet',
+    tiebreakerRate: formatRate(tiebreakerNear, tiebreakerEligible),
+    tiebreakerDetail: tiebreakerEligible
+      ? `${tiebreakerNear} of ${tiebreakerEligible} within 2 of the frozen O/U`
+      : 'No freeze-time totals and answers yet',
   }
 }
 
-export default function PlayersView({ history }: { history: PlayerHistory }) {
+export default function PlayersView({
+  history,
+  recommendations,
+}: {
+  history: PlayerHistory
+  recommendations: RecommendationHistory
+}) {
   const [query, setQuery] = useState('')
   const [selectedEntryId, setSelectedEntryId] = useState(
     history.entries[0]?.entryId ?? '',
@@ -102,7 +158,11 @@ export default function PlayersView({ history }: { history: PlayerHistory }) {
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
   const summary = selectedPlayer
-    ? summarizePlayer(selectedPlayer.entryId, history.weeks)
+    ? summarizePlayer(
+        selectedPlayer.entryId,
+        history.weeks,
+        recommendations.weeks,
+      )
     : null
   const scoredWeeks = history.weeks.filter((week) => week.scored).length
 
@@ -114,7 +174,8 @@ export default function PlayersView({ history }: { history: PlayerHistory }) {
           <h1>Pool tendencies</h1>
           <p className="hero-copy">
             Track every weekly card, then compare how each player approaches
-            favorites, underdogs, home teams, and the locked CBS line.
+            favorites, underdogs, home teams, our line-value side, and the
+            weekly tiebreaker.
           </p>
         </div>
         <div className="week-chip">
@@ -216,6 +277,16 @@ export default function PlayersView({ history }: { history: PlayerHistory }) {
                   value={summary.winRate}
                   detail="Pushes excluded"
                 />
+                <Metric
+                  label="Line-value side"
+                  value={summary.lineValueRate}
+                  detail={summary.lineValueDetail}
+                />
+                <Metric
+                  label="Tiebreaker ±2"
+                  value={summary.tiebreakerRate}
+                  detail={summary.tiebreakerDetail}
+                />
               </div>
 
               <div className="week-card">
@@ -229,6 +300,9 @@ export default function PlayersView({ history }: { history: PlayerHistory }) {
                   <div className="week-score">
                     <span>Week score</span>
                     <strong>{weekEntry?.weekScore ?? '—'}</strong>
+                    {weekEntry?.tiebreaker?.answer != null && (
+                      <small>TB {weekEntry.tiebreaker.answer}</small>
+                    )}
                   </div>
                 </div>
 

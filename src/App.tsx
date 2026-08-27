@@ -711,7 +711,10 @@ function App() {
         </section>
         </main>
       ) : view === 'players' ? (
-        <PlayersView history={playerHistory} />
+        <PlayersView
+          history={playerHistory}
+          recommendations={recommendationHistory}
+        />
       ) : (
         <PerformanceView history={recommendationHistory} />
       )}

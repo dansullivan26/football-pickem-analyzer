@@ -152,6 +152,20 @@ function usableTotal(row) {
   )
 }
 
+function withoutPrior(entry) {
+  if (!entry || typeof entry.line !== 'number') return entry
+  const { previousLine: _dropped, ...rest } = entry
+  return rest
+}
+
+function withPrior(line, retrievedAt, previousEntry) {
+  const next = { line, retrievedAt }
+  if (typeof previousEntry?.line === 'number' && previousEntry.line !== line) {
+    next.previousLine = previousEntry.line
+  }
+  return next
+}
+
 // selection_type is unreliable — the provider has been seen labelling both sides
 // of a game "home" — so the side is taken from team_side and confirmed against
 // the selection name.
@@ -259,8 +273,10 @@ const OUTPUT = new URL('public/data/odds.json', ROOT)
 // from a later snapshot. Keep the last known price until kickoff rather than
 // letting the site lose a line it already had.
 const previousEvents = new Map()
+let previousUpdatedAt = null
 try {
   const previous = JSON.parse(await readFile(OUTPUT, 'utf8'))
+  previousUpdatedAt = previous.updatedAt ?? null
   for (const event of previous.events ?? []) {
     previousEvents.set(event.cbsEventId, event)
   }
@@ -277,6 +293,8 @@ let frozen = 0
 // rather than published as an enormous fake edge.
 const MAX_DISAGREEMENT = 14
 const suspect = []
+const spreadMoves = []
+const totalMoves = []
 
 const events = slate.games
   .map((game) => {
@@ -287,7 +305,17 @@ const events = slate.games
     const totals = {}
     if (isTiebreaker && !kickedOff) {
       for (const [book, { line }] of tiebreakerTotals) {
-        totals[book] = { line, retrievedAt: runAt }
+        const stamped = withPrior(
+          line,
+          runAt,
+          previousEvent?.totals?.[book],
+        )
+        totals[book] = stamped
+        if (stamped.previousLine != null) {
+          totalMoves.push(
+            `${game.away.name} @ ${game.home.name} — ${book} O/U ${stamped.previousLine} → ${line}`,
+          )
+        }
       }
     }
     if (isTiebreaker) {
@@ -295,7 +323,7 @@ const events = slate.games
         previousEvent?.totals ?? {},
       )) {
         if (!(book in totals) && typeof previousTotal?.line === 'number') {
-          totals[book] = previousTotal
+          totals[book] = withoutPrior(previousTotal)
         }
       }
     }
@@ -304,9 +332,9 @@ const events = slate.games
     // feed might return, including live numbers the live-market filter missed.
     if (kickedOff) {
       const lines = Object.fromEntries(
-        Object.entries(previous).filter(
-          ([, entry]) => typeof entry?.line === 'number',
-        ),
+        Object.entries(previous)
+          .filter(([, entry]) => typeof entry?.line === 'number')
+          .map(([book, entry]) => [book, withoutPrior(entry)]),
       )
       if (Object.keys(lines).length) frozen += 1
       return {
@@ -330,7 +358,13 @@ const events = slate.games
         )
         continue
       }
-      lines[book] = { line, retrievedAt: runAt }
+      const stamped = withPrior(line, runAt, previous[book])
+      lines[book] = stamped
+      if (stamped.previousLine != null) {
+        spreadMoves.push(
+          `${game.away.name} @ ${game.home.name} — ${book} ${stamped.previousLine} → ${line}`,
+        )
+      }
     }
 
     for (const [book, previousLine] of Object.entries(previous)) {
@@ -341,7 +375,7 @@ const events = slate.games
           )
           continue
         }
-        lines[book] = previousLine
+        lines[book] = withoutPrior(previousLine)
         carried += 1
       }
     }
@@ -366,6 +400,7 @@ const events = slate.games
 const feed = {
   provider: 'SharpAPI',
   updatedAt: runAt,
+  comparedTo: previousUpdatedAt,
   books: [{ key: 'draftkings', name: 'DraftKings' }],
   events,
 }
@@ -378,6 +413,18 @@ if (carried) {
 }
 if (frozen) {
   console.log(`Froze ${frozen} kicked-off game(s) at the last pregame price.`)
+}
+if (spreadMoves.length) {
+  console.log(`\nSpreads that moved since last pull (${spreadMoves.length}):`)
+  for (const line of spreadMoves) {
+    console.log(`  - ${line}`)
+  }
+}
+if (totalMoves.length) {
+  console.log(`\nTotals that moved since last pull (${totalMoves.length}):`)
+  for (const line of totalMoves) {
+    console.log(`  - ${line}`)
+  }
 }
 if (suspect.length) {
   console.log(`\nDropped ${suspect.length} implausible price(s):`)

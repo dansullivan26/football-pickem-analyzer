@@ -1016,6 +1016,14 @@ select:focus {
   white-space: nowrap;
 }
 
+.line-cell .line-move {
+  margin-top: 1px;
+  color: var(--amber);
+  font-size: 0.62rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .line-cell em {
   margin-top: 1px;
   color: #8b968e;

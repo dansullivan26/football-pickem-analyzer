@@ -307,8 +307,18 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
             <div className={`line-cell${stale ? ' stale' : ''}`} key={book}>
               <span>{bookNames[book]}</span>
               <strong>{formatSpread(entry?.line)}</strong>
+              {entry?.previousLine != null && (
+                <span className="line-move">
+                  was {formatSpread(entry.previousLine)}
+                </span>
+              )}
               {total && (
-                <span className="line-total">O/U {formatPoints(total.line)}</span>
+                <span className="line-total">
+                  O/U {formatPoints(total.line)}
+                  {total.previousLine != null
+                    ? ` · was ${formatPoints(total.previousLine)}`
+                    : ''}
+                </span>
               )}
               {entry ? (
                 <em title={`Retrieved ${formatTimestamp(entry.retrievedAt)}`}>
@@ -456,6 +466,22 @@ function App() {
       (a, b) => CATEGORY_RANK[a.category] - CATEGORY_RANK[b.category],
     )
   }, [analyses, filter, league, query, sort])
+
+  const lineMoves = useMemo(() => {
+    const spreads = analyses.filter((analysis) =>
+      (Object.keys(bookNames) as BookKey[]).some((book) => {
+        const entry = analysis.odds?.lines[book]
+        return entry?.previousLine != null && entry.previousLine !== entry.line
+      }),
+    ).length
+    const totals = analyses.filter((analysis) =>
+      (Object.keys(bookNames) as BookKey[]).some((book) => {
+        const entry = analysis.odds?.totals?.[book]
+        return entry?.previousLine != null && entry.previousLine !== entry.line
+      }),
+    ).length
+    return { spreads, totals }
+  }, [analyses])
 
   return (
     <div className="app-shell">
@@ -679,6 +705,26 @@ function App() {
               title={formatTimestamp(consensusFeed.source.fetchedAt)}
             >
               Covers.com data collected {formatAge(consensusFeed.source.fetchedAt, now)}
+            </p>
+          )}
+          {(lineMoves.spreads > 0 || lineMoves.totals > 0) && (
+            <p
+              className="list-meta"
+              title={
+                feed?.comparedTo
+                  ? `Compared with the pull from ${formatTimestamp(feed.comparedTo)}`
+                  : undefined
+              }
+            >
+              {lineMoves.spreads > 0
+                ? `${lineMoves.spreads} DraftKings spread${
+                    lineMoves.spreads === 1 ? '' : 's'
+                  } moved since the last pull.`
+                : ''}
+              {lineMoves.spreads > 0 && lineMoves.totals > 0 ? ' ' : ''}
+              {lineMoves.totals > 0
+                ? 'Tiebreaker total moved since the last pull.'
+                : ''}
             </p>
           )}
 

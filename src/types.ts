@@ -74,12 +74,15 @@ export type BookLine = {
   line: number
   /** When this price was last successfully retrieved from the provider. */
   retrievedAt: string
+  /** Home spread from the previous SharpAPI pull, if this run's number differed. */
+  previousLine?: number
 }
 
 export type BookTotal = {
   line: number
   /** When this price was last successfully retrieved from the provider. */
   retrievedAt: string
+  previousLine?: number
 }
 
 export type OddsEvent = {
@@ -96,6 +99,8 @@ export type OddsEvent = {
 export type OddsFeed = {
   provider: string
   updatedAt: string | null
+  /** updatedAt of the odds file this run compared against. */
+  comparedTo?: string | null
   books: Array<{ key: BookKey; name: string }>
   events: OddsEvent[]
 }

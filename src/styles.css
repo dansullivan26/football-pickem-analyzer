@@ -422,16 +422,11 @@ select:focus {
   text-align: right;
 }
 
-.team-abbrev {
-  font-family: 'Manrope', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-}
-
 .team-name {
   overflow: hidden;
-  color: var(--muted);
-  font-size: 0.7rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -473,11 +468,6 @@ select:focus {
   font-size: 0.58rem;
   font-style: normal;
   white-space: nowrap;
-}
-
-.line-cell.stale {
-  border-color: #e8d3a8;
-  background: var(--amber-soft);
 }
 
 .line-cell.stale em {
@@ -593,7 +583,7 @@ select:focus {
 .consensus-note a,
 .consensus-note strong {
   font-weight: 700;
-  white-space: nowrap;
+  text-align: right;
 }
 
 .consensus-note a {
@@ -1073,8 +1063,8 @@ footer {
     padding: 3px 0;
   }
 
-  .team-abbrev {
-    font-size: 1.1rem;
+  .team-name {
+    font-size: 1.05rem;
   }
 
   .line-grid {

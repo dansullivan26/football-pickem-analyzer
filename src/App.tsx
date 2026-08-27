@@ -180,7 +180,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
     <div className="recommendation-block">
       <div className="edge-label">Line Value</div>
       <div className="edge-copy">
-        {team.abbrev} {formatSpread(poolNumber)}
+        {team.name} {formatSpread(poolNumber)}
       </div>
       <div className={`recommendation ${category}`}>
         <span className="category-dot" />
@@ -216,13 +216,13 @@ function ConsensusNote({
   const picks = (away.picks ?? 0) + (home.picks ?? 0)
   const captured = formatAge(consensusFeed.source.fetchedAt, now)
   const detail = [away, home]
-    .map((side) => `${side.abbrev} ${formatSpread(side.spread)} ${side.pct}%`)
+    .map((side) => `${side.name} ${formatSpread(side.spread)} ${side.pct}%`)
     .join(' · ')
   const leader = home.pct > away.pct ? home : away
   const split = away.pct === home.pct
   const headline = split
     ? `Public split ${leader.pct}%`
-    : `Public ${leader.pct}% ${leader.abbrev} ${formatSpread(leader.spread)}`
+    : `Public ${leader.pct}% ${leader.name} ${formatSpread(leader.spread)}`
   const title = `${consensusFeed.source.site} contest consensus, captured ${captured} — ${detail}`
 
   return (
@@ -264,12 +264,10 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 
       <div className="matchup">
         <div className="team">
-          <span className="team-abbrev">{game.away.abbrev}</span>
           <span className="team-name">{game.away.name}</span>
         </div>
         <span className="at">@</span>
         <div className="team">
-          <span className="team-abbrev">{game.home.abbrev}</span>
           <span className="team-name">{game.home.name}</span>
         </div>
       </div>
@@ -303,7 +301,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
       <div className="card-footer">
         <Recommendation analysis={analysis} />
         <div className="card-notes">
-          <span className="spread-note">All lines shown for {game.home.abbrev}</span>
+          <span className="spread-note">All lines shown for {game.home.name}</span>
           <ConsensusNote consensus={analysis.consensus} now={now} />
         </div>
       </div>

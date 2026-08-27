@@ -33,6 +33,21 @@ and writes `src/data/player-history.json`. The Players view can render unpicked
 weeks immediately; tendency metrics populate as scored Tuesday exports add
 selections and results.
 
+To prepare a GrokBot Covers consensus export:
+
+```bash
+npm run prepare-consensus -- --input path/to/consensus.json
+```
+
+This checks every row against the prepared slate, keeps the Covers matchup
+details URL, drops the page list and internal matchup ids, and writes
+`src/data/consensus.json`. Games Covers had not posted
+yet stay in the file as unmatched rows and render as "No public consensus yet".
+These are Covers contest-player tickets, not experts, and the percentages attach
+to the number Covers was showing at capture time rather than the locked pool
+line — the card tooltip shows both sides and how long ago the dump was taken.
+Capture a fresh dump as close to the day's first kickoff as practical.
+
 To freeze the current week's recommendations (open games update; kicked-off
 games stay locked):
 

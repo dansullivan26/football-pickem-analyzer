@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "prepare-slate": "node scripts/prepare-slate.mjs",
     "prepare-players": "node scripts/prepare-players.mjs",
+    "prepare-consensus": "node scripts/prepare-consensus.mjs",
     "snapshot-recommendations": "node scripts/snapshot-recommendations.mjs"
   },
   "keywords": [],

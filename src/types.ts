@@ -140,6 +140,46 @@ export type PlayerHistory = {
   weeks: PlayerWeek[]
 }
 
+export type ConsensusSide = {
+  name: string
+  abbrev: string
+  coversName: string | null
+  /** The number Covers displayed for this side when the tickets were counted. */
+  spread: number | null
+  pct: number | null
+  picks: number | null
+}
+
+export type ConsensusGame = {
+  gameId: string
+  cbsEventId: number
+  sport: 'NFL' | 'NCAAF'
+  kickoff: string
+  matchStatus: 'matched' | 'unmatched'
+  coversDetailsUrl: string | null
+  cbsHomeSpread: number
+  away: ConsensusSide
+  home: ConsensusSide
+}
+
+export type ConsensusFeed = {
+  source: {
+    site: string
+    product: string
+    description: string
+    fetchedAt: string
+    timezone: string
+  }
+  week: {
+    order: number
+    label: string
+    gamesOnSlate: number
+    matched: number
+    unmatched: number
+  }
+  games: ConsensusGame[]
+}
+
 export type CoverResult = 'home' | 'away' | 'push' | null
 
 export type FrozenRecommendation = {

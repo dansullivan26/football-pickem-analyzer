@@ -333,6 +333,12 @@ select:focus {
   gap: 12px;
 }
 
+.list-meta {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
 .game-card {
   display: grid;
   grid-template-columns: 185px minmax(230px, 1.2fr) minmax(300px, 1fr) 160px;
@@ -565,9 +571,51 @@ select:focus {
   white-space: nowrap;
 }
 
+.card-notes {
+  display: grid;
+  gap: 3px;
+  justify-items: end;
+  text-align: right;
+}
+
 .spread-note {
   color: var(--muted);
   font-size: 0.62rem;
+}
+
+.consensus-note {
+  display: grid;
+  justify-items: end;
+  color: #4c5a51;
+  font-size: 0.62rem;
+}
+
+.consensus-note a,
+.consensus-note strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.consensus-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.consensus-note a:hover {
+  color: var(--green);
+}
+
+.consensus-note em {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.consensus-note.empty {
+  color: var(--muted);
+  cursor: default;
 }
 
 .performance-summary {

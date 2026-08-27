@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import consensusData from './data/consensus.json'
 import slateData from './data/current-slate.json'
 import playerHistoryData from './data/player-history.json'
 import recommendationHistoryData from './data/recommendation-history.json'
@@ -6,6 +7,8 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import type {
   BookKey,
+  ConsensusFeed,
+  ConsensusGame,
   EdgeCategory,
   OddsEvent,
   OddsFeed,
@@ -18,6 +21,13 @@ import type {
 const slate = slateData as Slate
 const playerHistory = playerHistoryData as PlayerHistory
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
+const consensusFeed = consensusData as ConsensusFeed
+// A dump from an earlier week would silently mislabel this week's rows.
+const consensusByEvent = new Map(
+  consensusFeed.week.order === slate.week.order
+    ? consensusFeed.games.map((game) => [game.cbsEventId, game])
+    : [],
+)
 const bookNames: Record<BookKey, string> = {
   draftkings: 'DraftKings',
 }
@@ -25,6 +35,7 @@ const bookNames: Record<BookKey, string> = {
 type GameAnalysis = {
   game: SlateGame
   odds: OddsEvent | undefined
+  consensus: ConsensusGame | undefined
   liveHomeSpread: number | null
   edge: number | null
   category: EdgeCategory
@@ -95,6 +106,7 @@ function favorableHook(poolHome: number, bookHome: number): 'fg' | 'td' | null {
 }
 
 function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis {
+  const consensus = consensusByEvent.get(game.cbsEventId)
   const availableLines = odds
     ? Object.values(odds.lines)
         .map((entry) => entry?.line)
@@ -105,6 +117,7 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
     return {
       game,
       odds,
+      consensus,
       liveHomeSpread: null,
       edge: null,
       category: 'pending',
@@ -121,6 +134,7 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
   return {
     game,
     odds,
+    consensus,
     liveHomeSpread,
     edge: magnitude,
     category: classifyEdge(magnitude),
@@ -178,6 +192,55 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
         </div>
       )}
     </div>
+  )
+}
+
+// Covers contest players pick against the number Covers was showing, which is
+// rarely the locked pool number, so both are surfaced side by side.
+function ConsensusNote({
+  consensus,
+  now,
+}: {
+  consensus: ConsensusGame | undefined
+  now: number
+}) {
+  if (!consensus || consensus.matchStatus !== 'matched') {
+    return <span className="consensus-note empty">No public consensus yet</span>
+  }
+
+  const { away, home } = consensus
+  if (away.pct == null || home.pct == null) {
+    return <span className="consensus-note empty">No public consensus yet</span>
+  }
+
+  const picks = (away.picks ?? 0) + (home.picks ?? 0)
+  const captured = formatAge(consensusFeed.source.fetchedAt, now)
+  const detail = [away, home]
+    .map((side) => `${side.abbrev} ${formatSpread(side.spread)} ${side.pct}%`)
+    .join(' · ')
+  const leader = home.pct > away.pct ? home : away
+  const split = away.pct === home.pct
+  const headline = split
+    ? `Public split ${leader.pct}%`
+    : `Public ${leader.pct}% ${leader.abbrev} ${formatSpread(leader.spread)}`
+  const title = `${consensusFeed.source.site} contest consensus, captured ${captured} — ${detail}`
+
+  return (
+    <span className="consensus-note">
+      {consensus.coversDetailsUrl ? (
+        <a
+          href={consensus.coversDetailsUrl}
+          target="_blank"
+          rel="noreferrer"
+          title={title}
+        >
+          {headline}
+        </a>
+      ) : (
+        <strong title={title}>{headline}</strong>
+      )}
+      <em>{picks} picks</em>
+    </span>
   )
 }
 
@@ -239,7 +302,10 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 
       <div className="card-footer">
         <Recommendation analysis={analysis} />
-        <span className="spread-note">All lines shown for {game.home.abbrev}</span>
+        <div className="card-notes">
+          <span className="spread-note">All lines shown for {game.home.abbrev}</span>
+          <ConsensusNote consensus={analysis.consensus} now={now} />
+        </div>
       </div>
     </article>
   )
@@ -491,6 +557,15 @@ function App() {
               </label>
             </div>
           </div>
+
+          {consensusFeed.week.order === slate.week.order && (
+            <p
+              className="list-meta"
+              title={formatTimestamp(consensusFeed.source.fetchedAt)}
+            >
+              Covers.com data collected {formatAge(consensusFeed.source.fetchedAt, now)}
+            </p>
+          )}
 
           <div className="game-list">
             {visibleGames.map((analysis) => (

@@ -24,6 +24,8 @@ export default function SuggestedCardPanel({
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState<string | null>(null)
   const [deviations, setDeviations] = useState<Set<string>>(() => new Set())
+  const [tiebreakerAnswer, setTiebreakerAnswer] = useState('')
+  const [tiebreakerError, setTiebreakerError] = useState<string | null>(null)
   const [submitResult, setSubmitResult] = useState<{
     kind: 'success' | 'error'
     message: string
@@ -68,14 +70,21 @@ export default function SuggestedCardPanel({
 
   async function copyCard() {
     try {
+      const answer = readTiebreakerAnswer()
       await navigator.clipboard.writeText(
-        formatSuggestedCardText(card, picks, deviations),
+        formatSuggestedCardText(card, picks, deviations, answer),
       )
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)
     } catch {
       setCopied(false)
     }
+  }
+
+  function readTiebreakerAnswer() {
+    if (!tiebreakerAnswer.trim()) return null
+    const answer = Number(tiebreakerAnswer)
+    return Number.isInteger(answer) && answer >= 0 ? answer : null
   }
 
   function toggleDeviate(gameId: string) {
@@ -88,6 +97,13 @@ export default function SuggestedCardPanel({
   }
 
   function openPasswordPrompt() {
+    if (
+      tiebreakerAnswer.trim() &&
+      readTiebreakerAnswer() == null
+    ) {
+      setTiebreakerError('Enter a whole number of points, or leave it blank.')
+      return
+    }
     setPassword('')
     setPasswordError(null)
     setAskPassword(true)
@@ -104,7 +120,7 @@ export default function SuggestedCardPanel({
     setSubmitting(true)
     setSubmitResult(null)
     try {
-      await sendCardToGrokBot(card, deviations)
+      await sendCardToGrokBot(card, deviations, readTiebreakerAnswer())
       setSubmitResult({
         kind: 'success',
         message:
@@ -230,6 +246,49 @@ export default function SuggestedCardPanel({
           </div>
         )}
 
+        {card.tiebreaker && (
+          <section className="card-tiebreaker" aria-labelledby="card-tiebreaker-title">
+            <div>
+              <p className="eyebrow">Weekly tiebreaker</p>
+              <h3 id="card-tiebreaker-title">
+                {card.tiebreaker.away} @ {card.tiebreaker.home}
+              </h3>
+              <p>{card.tiebreaker.question}</p>
+              {card.tiebreaker.draftKingsTotal != null ? (
+                <strong>
+                  DraftKings O/U {card.tiebreaker.draftKingsTotal}
+                </strong>
+              ) : (
+                <small>DraftKings total is not available yet.</small>
+              )}
+            </div>
+            <label>
+              <span>Total points</span>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                placeholder={
+                  card.tiebreaker.draftKingsTotal != null
+                    ? String(Math.round(card.tiebreaker.draftKingsTotal))
+                    : 'Optional'
+                }
+                value={tiebreakerAnswer}
+                onChange={(event) => {
+                  setTiebreakerAnswer(event.target.value)
+                  setTiebreakerError(null)
+                }}
+              />
+            </label>
+            {tiebreakerError && (
+              <p className="error" role="alert">
+                {tiebreakerError}
+              </p>
+            )}
+          </section>
+        )}
+
         <div className="complete-card">
           <button
             type="button"
@@ -284,8 +343,11 @@ export default function SuggestedCardPanel({
                 {deviations.size
                   ? ` (${deviations.size} deviation${deviations.size === 1 ? '' : 's'})`
                   : ''}{' '}
-                to GrokBot for {card.weekLabel}. Nothing is saved on CBS until you
-                confirm in chat.
+                to GrokBot for {card.weekLabel}
+                {card.tiebreaker && readTiebreakerAnswer() != null
+                  ? ` with a ${readTiebreakerAnswer()}-point tiebreaker`
+                  : ''}
+                . Nothing is saved on CBS until you confirm in chat.
               </p>
               <label>
                 <span className="sr-only">Password</span>

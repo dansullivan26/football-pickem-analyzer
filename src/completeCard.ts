@@ -16,6 +16,7 @@ export function completeCardPasswordMatches(value: string) {
 export async function sendCardToGrokBot(
   card: SuggestedCard,
   deviations: ReadonlySet<string> = new Set(),
+  tiebreakerAnswer: number | null = null,
 ) {
   const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
   if (!token) {
@@ -36,6 +37,15 @@ export async function sendCardToGrokBot(
         deviate: deviations.has(pick.gameId),
       }
     }),
+    ...(card.tiebreaker && tiebreakerAnswer != null
+      ? {
+          tiebreaker: {
+            questionId: card.tiebreaker.questionId,
+            gameId: card.tiebreaker.gameId,
+            answer: tiebreakerAnswer,
+          },
+        }
+      : {}),
   })
 
   const response = await fetch(

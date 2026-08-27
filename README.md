@@ -17,6 +17,9 @@ The app loads its public slate from `src/data/current-slate.json`. Full CBS
 exports are ignored by git so private pool URLs and settings are not published.
 Each game may include a CBS `venue` (`stadium`, `city`, `state`, `indoor`);
 team `location` is still the school, not where the game is played.
+The slate may also include one top-level `tiebreaker` (`gameId`,
+`cbsEventId`, `order`, `type`, `question`, `questionId`) and
+`games[].tiebreakerOrder` (1 on that matchup, null elsewhere).
 
 To prepare a newly captured slate:
 
@@ -25,7 +28,9 @@ npm run prepare-slate -- --input path/to/cbs-slate.json
 ```
 
 Commit the generated `src/data/current-slate.json`. Normalized odds are loaded
-from `public/data/odds.json`.
+from `public/data/odds.json`. The odds refresh fetches DraftKings spreads for
+the slate, then uses the matched SharpAPI event ID to request `total_points`
+only for the weekly tiebreaker game.
 
 To prepare a GrokBot player-history export:
 
@@ -134,7 +139,12 @@ The generated-card modal sends GrokBot this JSON:
       "pickedSide": "home",
       "deviate": false
     }
-  ]
+  ],
+  "tiebreaker": {
+    "questionId": "<slate tiebreaker.questionId>",
+    "gameId": "<slate tiebreaker.gameId>",
+    "answer": 47
+  }
 }
 ```
 
@@ -142,6 +152,9 @@ Unpicked games are omitted; GrokBot validates against the live Week N slate.
 `pickedTeamId` / `pickedSide` are the team to save on CBS. If **Deviate** is
 checked on a pick, those fields are already the flipped side and `deviate` is
 `true`. GrokBot should save that team as-is and not flip it again.
+The generated card shows the tiebreaker matchup and DraftKings O/U beside an
+optional whole-number answer. If the answer is blank, `tiebreaker` is omitted
+from the webhook so CBS remains blank.
 
 The Complete card Action also writes `src/data/card-overrides.json` and
 re-runs the recommendation snapshot so Performance can score deviations

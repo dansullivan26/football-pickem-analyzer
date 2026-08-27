@@ -652,6 +652,7 @@ function App() {
                     analyses,
                     slate.week.label,
                     slate.pool.seasonYear,
+                    slate.tiebreaker,
                   ),
                 )
               }

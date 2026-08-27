@@ -5,7 +5,7 @@ import {
   resolveCardPick,
   type PickStrength,
 } from './cardScoring'
-import type { GameAnalysis } from './types'
+import type { GameAnalysis, SlateTiebreaker } from './types'
 
 export {
   CARD_STRATEGY_NOTE,
@@ -55,6 +55,17 @@ export type SuggestedCard = {
   weekLabel: string
   picks: SuggestedPick[]
   unpicked: UnpickedGame[]
+  tiebreaker: SuggestedTiebreaker | null
+}
+
+export type SuggestedTiebreaker = {
+  questionId: string
+  gameId: string
+  question: string
+  away: string
+  home: string
+  draftKingsTotal: number | null
+  totalRetrievedAt: string | null
 }
 
 /**
@@ -70,6 +81,7 @@ export function generateSuggestedCard(
   analyses: GameAnalysis[],
   weekLabel: string,
   seasonYear: number,
+  tiebreaker: SlateTiebreaker | null | undefined,
   generatedAt = new Date(),
 ): SuggestedCard {
   const picks: SuggestedPick[] = []
@@ -126,6 +138,12 @@ export function generateSuggestedCard(
     })
   }
 
+  const tiebreakerAnalysis = tiebreaker
+    ? analyses.find((analysis) => analysis.game.id === tiebreaker.gameId)
+    : undefined
+  const draftKingsTotal =
+    tiebreakerAnalysis?.odds?.totals?.draftkings ?? null
+
   return {
     strategyId: CARD_STRATEGY_ID,
     generatedAt: generatedAt.toISOString(),
@@ -134,6 +152,18 @@ export function generateSuggestedCard(
     weekLabel,
     picks,
     unpicked,
+    tiebreaker:
+      tiebreaker && tiebreakerAnalysis
+        ? {
+            questionId: tiebreaker.questionId,
+            gameId: tiebreaker.gameId,
+            question: tiebreaker.question,
+            away: tiebreakerAnalysis.game.away.name,
+            home: tiebreakerAnalysis.game.home.name,
+            draftKingsTotal: draftKingsTotal?.line ?? null,
+            totalRetrievedAt: draftKingsTotal?.retrievedAt ?? null,
+          }
+        : null,
   }
 }
 
@@ -188,6 +218,7 @@ export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
   deviations: ReadonlySet<string> = new Set(),
+  tiebreakerAnswer: number | null = null,
 ) {
   const when = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
@@ -215,5 +246,17 @@ export function formatSuggestedCardText(
     '',
     `Left unpicked (${card.unpicked.length})`,
     ...(skipLines.length ? skipLines : ['• none']),
+    ...(card.tiebreaker
+      ? [
+          '',
+          `Tiebreaker: ${card.tiebreaker.away} @ ${card.tiebreaker.home} — ${
+            tiebreakerAnswer ?? 'blank'
+          }${
+            card.tiebreaker.draftKingsTotal != null
+              ? ` (DraftKings O/U ${card.tiebreaker.draftKingsTotal})`
+              : ''
+          }`,
+        ]
+      : []),
   ].join('\n')
 }

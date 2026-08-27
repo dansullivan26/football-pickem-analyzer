@@ -18,6 +18,15 @@ export type GameVenue = {
   indoor: boolean | null
 }
 
+export type SlateTiebreaker = {
+  gameId: string
+  cbsEventId: number
+  order: number
+  type: string
+  question: string
+  questionId: string
+}
+
 export type SlateGame = {
   id: string
   cbsEventId: number
@@ -33,6 +42,8 @@ export type SlateGame = {
   line: string
   /** CBS GraphQL venue. Absent on dumps from before venue was scraped. */
   venue?: GameVenue | null
+  /** 1 on the weekly tiebreaker game; null on the rest. */
+  tiebreakerOrder?: number | null
 }
 
 export type Slate = {
@@ -52,12 +63,20 @@ export type Slate = {
     ncaafGames: number
     nflGames: number
   }
+  /** CBS question attached to the one game used as the weekly tiebreaker. */
+  tiebreaker?: SlateTiebreaker | null
   games: SlateGame[]
 }
 
 export type BookKey = 'draftkings'
 
 export type BookLine = {
+  line: number
+  /** When this price was last successfully retrieved from the provider. */
+  retrievedAt: string
+}
+
+export type BookTotal = {
   line: number
   /** When this price was last successfully retrieved from the provider. */
   retrievedAt: string
@@ -70,6 +89,8 @@ export type OddsEvent = {
   awayTeam: string
   homeTeam: string
   lines: Partial<Record<BookKey, BookLine>>
+  /** Present only for the slate's tiebreaker game. */
+  totals?: Partial<Record<BookKey, BookTotal>>
 }
 
 export type OddsFeed = {

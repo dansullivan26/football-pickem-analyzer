@@ -18,6 +18,23 @@ function readOptionalText(value) {
   return text || null
 }
 
+function readInteger(value, label, { allowNull = false } = {}) {
+  if (value == null) {
+    if (allowNull) return null
+    throw new Error(`${label} is required.`)
+  }
+  if (typeof value !== 'number' || !Number.isInteger(value)) {
+    throw new Error(`${label} must be an integer.`)
+  }
+  return value
+}
+
+function readRequiredText(value, label) {
+  const text = readOptionalText(value)
+  if (!text) throw new Error(`${label} must be a non-empty string.`)
+  return text
+}
+
 function readIndoor(value) {
   if (typeof value === 'boolean') return value
   if (value == null) return null
@@ -41,6 +58,59 @@ function readVenue(game) {
     city: readOptionalText(game.venue.city),
     state: readOptionalText(game.venue.state),
     indoor: readIndoor(game.venue.indoor),
+  }
+}
+
+function readTiebreakerOrder(value, game) {
+  const order = readInteger(value, `${game.cbsEventId ?? game.id} tiebreakerOrder`, {
+    allowNull: true,
+  })
+  if (order != null && order < 1) {
+    throw new Error(
+      `${game.cbsEventId ?? game.id} tiebreakerOrder must be a positive integer.`,
+    )
+  }
+  return order
+}
+
+function readTiebreaker(raw, games) {
+  if (raw.tiebreaker == null) return undefined
+  const value = raw.tiebreaker
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error('tiebreaker must be an object or null.')
+  }
+
+  const gameId = readRequiredText(value.gameId, 'tiebreaker.gameId')
+  const questionId = readRequiredText(
+    value.questionId == null ? null : String(value.questionId),
+    'tiebreaker.questionId',
+  )
+  const cbsEventId = readInteger(value.cbsEventId, 'tiebreaker.cbsEventId')
+  const order = readInteger(value.order, 'tiebreaker.order')
+  if (order < 1) {
+    throw new Error('tiebreaker.order must be a positive integer.')
+  }
+  const question = readRequiredText(value.question, 'tiebreaker.question')
+  const type = readRequiredText(value.type, 'tiebreaker.type')
+
+  const game = games.find((row) => row.id === gameId)
+  if (!game) {
+    throw new Error('tiebreaker.gameId does not match a slate game.')
+  }
+  if (game.cbsEventId !== cbsEventId) {
+    throw new Error('tiebreaker.cbsEventId does not match tiebreaker.gameId.')
+  }
+  if (game.tiebreakerOrder != null && game.tiebreakerOrder !== order) {
+    throw new Error('tiebreaker.order does not match games[].tiebreakerOrder.')
+  }
+
+  return {
+    gameId,
+    cbsEventId,
+    order,
+    type,
+    question,
+    questionId,
   }
 }
 
@@ -76,8 +146,10 @@ const slate = {
     homeSpread: game.homeSpread,
     line: game.line,
     venue: readVenue(game),
+    tiebreakerOrder: readTiebreakerOrder(game.tiebreakerOrder, game),
   })),
 }
+slate.tiebreaker = readTiebreaker(raw, slate.games)
 
 await mkdir(resolve('src/data'), { recursive: true })
 await writeFile(
@@ -85,6 +157,16 @@ await writeFile(
   `${JSON.stringify(slate, null, 2)}\n`,
 )
 
+const tiebreakerNote = slate.tiebreaker
+  ? ` Tiebreaker is ${
+      slate.games.find((game) => game.id === slate.tiebreaker.gameId)?.away
+        .name ?? 'away'
+    } @ ${
+      slate.games.find((game) => game.id === slate.tiebreaker.gameId)?.home
+        .name ?? 'home'
+    }.`
+  : ''
+
 console.log(
-  `Prepared ${slate.week.label} with ${slate.games.length} games from ${inputPath}.`,
+  `Prepared ${slate.week.label} with ${slate.games.length} games from ${inputPath}.${tiebreakerNote}`,
 )

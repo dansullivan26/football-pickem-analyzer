@@ -63,7 +63,7 @@ function matchGame(row) {
   })
 }
 
-async function fetchLeague(league) {
+async function fetchLeague(league, market = 'point_spread', eventId) {
   const rows = []
   let cursor
   let pages = 0
@@ -72,9 +72,10 @@ async function fetchLeague(league) {
     const url = new URL(API_URL)
     url.searchParams.set('league', league)
     url.searchParams.set('sportsbook', BOOKS.join(','))
-    url.searchParams.set('market', 'point_spread')
+    url.searchParams.set('market', market)
     url.searchParams.set('is_live', 'false')
     url.searchParams.set('limit', '200')
+    if (eventId) url.searchParams.set('event_id', eventId)
     if (cursor) url.searchParams.set('cursor', cursor)
 
     const response = await fetch(url, { headers: { 'X-API-Key': API_KEY } })
@@ -90,13 +91,31 @@ async function fetchLeague(league) {
     cursor = body.pagination?.has_more ? body.pagination.next_cursor : undefined
   } while (cursor && pages < MAX_PAGES)
 
-  console.log(`${league}: ${rows.length} rows across ${pages} page(s).`)
+  console.log(
+    `${league} ${market}${eventId ? ' for the tiebreaker' : ''}: ` +
+      `${rows.length} rows across ${pages} page(s).`,
+  )
   return rows
 }
 
 const rawRows = (
   await Promise.all([fetchLeague('nfl'), fetchLeague('ncaaf')])
 ).flat()
+
+const tiebreakerGame = slate.tiebreaker
+  ? slate.games.find((game) => game.id === slate.tiebreaker.gameId)
+  : undefined
+const tiebreakerProviderEventId = tiebreakerGame
+  ? rawRows.find((row) => matchGame(row)?.id === tiebreakerGame.id)?.event_id
+  : undefined
+const rawTotalRows =
+  tiebreakerGame && tiebreakerProviderEventId
+    ? await fetchLeague(
+        tiebreakerGame.sport.toLowerCase(),
+        'total_points',
+        tiebreakerProviderEventId,
+      )
+    : []
 
 const rowsByBook = new Map()
 const rejections = new Map()
@@ -121,6 +140,16 @@ function usableSpread(row) {
     return false
   }
   return true
+}
+
+function usableTotal(row) {
+  return (
+    row.market_type === 'total_points' &&
+    typeof row.line === 'number' &&
+    row.is_live !== true &&
+    row.is_active !== false &&
+    row.is_alternate_line !== true
+  )
 }
 
 // selection_type is unreliable — the provider has been seen labelling both sides
@@ -151,6 +180,7 @@ function outranks(candidate, current) {
 
 const matched = new Map()
 const unmatched = new Map()
+const tiebreakerTotals = new Map()
 
 // Set DEBUG_EVENT_ID to a cbsEventId to dump every raw row for that matchup,
 // including rows the filters discard.
@@ -202,6 +232,18 @@ for (const row of rawRows) {
   matched.set(game.cbsEventId, entry)
 }
 
+for (const row of rawTotalRows) {
+  if (!usableTotal(row) || !tiebreakerGame) continue
+  if (matchGame(row)?.id !== tiebreakerGame.id) continue
+
+  const rank = rowRank(row)
+  const candidate = { line: row.line, ...rank }
+  const previous = tiebreakerTotals.get(row.sportsbook)
+  if (!previous || outranks(candidate, previous)) {
+    tiebreakerTotals.set(row.sportsbook, candidate)
+  }
+}
+
 if (debugGame) {
   console.log(
     `\nRaw rows touching ${debugGame.away.name} @ ${debugGame.home.name} (${debugRows.length}):`,
@@ -216,11 +258,11 @@ const OUTPUT = new URL('public/data/odds.json', ROOT)
 // Book coverage fluctuates between runs, so a game priced earlier can vanish
 // from a later snapshot. Keep the last known price until kickoff rather than
 // letting the site lose a line it already had.
-const previousLines = new Map()
+const previousEvents = new Map()
 try {
   const previous = JSON.parse(await readFile(OUTPUT, 'utf8'))
   for (const event of previous.events ?? []) {
-    previousLines.set(event.cbsEventId, event.lines ?? {})
+    previousEvents.set(event.cbsEventId, event)
   }
 } catch {
   // First run, or the file was never generated.
@@ -239,7 +281,24 @@ const suspect = []
 const events = slate.games
   .map((game) => {
     const kickedOff = new Date(game.kickoff).getTime() <= now
-    const previous = previousLines.get(game.cbsEventId) ?? {}
+    const previousEvent = previousEvents.get(game.cbsEventId)
+    const previous = previousEvent?.lines ?? {}
+    const isTiebreaker = game.id === slate.tiebreaker?.gameId
+    const totals = {}
+    if (isTiebreaker && !kickedOff) {
+      for (const [book, { line }] of tiebreakerTotals) {
+        totals[book] = { line, retrievedAt: runAt }
+      }
+    }
+    if (isTiebreaker) {
+      for (const [book, previousTotal] of Object.entries(
+        previousEvent?.totals ?? {},
+      )) {
+        if (!(book in totals) && typeof previousTotal?.line === 'number') {
+          totals[book] = previousTotal
+        }
+      }
+    }
 
     // After kickoff keep the last pregame price and ignore anything new the
     // feed might return, including live numbers the live-market filter missed.
@@ -257,6 +316,7 @@ const events = slate.games
         awayTeam: game.away.name,
         homeTeam: game.home.name,
         lines,
+        ...(Object.keys(totals).length ? { totals } : {}),
       }
     }
 
@@ -293,9 +353,14 @@ const events = slate.games
       awayTeam: game.away.name,
       homeTeam: game.home.name,
       lines,
+      ...(Object.keys(totals).length ? { totals } : {}),
     }
   })
-  .filter((event) => Object.keys(event.lines).length > 0)
+  .filter(
+    (event) =>
+      Object.keys(event.lines).length > 0 ||
+      Object.keys(event.totals ?? {}).length > 0,
+  )
   .sort((a, b) => new Date(a.kickoff).getTime() - new Date(b.kickoff).getTime())
 
 const feed = {

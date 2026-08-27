@@ -47,6 +47,8 @@ jobs:
           git commit -m "data: refresh sportsbook lines"
           git push
       - run: npm run build
+        env:
+          VITE_GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

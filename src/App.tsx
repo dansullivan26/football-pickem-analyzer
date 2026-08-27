@@ -9,6 +9,7 @@ import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
 import { publicBucketForPool } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
+import { dispatchReviewRefresh } from './dispatchRefresh'
 import { pathForView, viewFromPath, type AppView } from './routes'
 import type {
   BookKey,
@@ -326,7 +327,6 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 function App() {
   const [view, setView] = useState<AppView>(() => viewFromPath())
   const [feed, setFeed] = useState<OddsFeed | null>(null)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
   const [sort, setSort] = useState<'kickoff' | 'recommendation'>('kickoff')
@@ -334,7 +334,33 @@ function App() {
   const [query, setQuery] = useState('')
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
+  const [dispatching, setDispatching] = useState(false)
+  const [toast, setToast] = useState<string | null>(null)
   const closeSuggestedCard = useCallback(() => setSuggestedCard(null), [])
+
+  const refreshData = useCallback(async () => {
+    setDispatching(true)
+    try {
+      await dispatchReviewRefresh()
+      setToast(
+        'Refresh is under way. DraftKings lines and the latest Covers dump usually appear in a few minutes. Reload the page then.',
+      )
+    } catch (refreshError) {
+      setToast(
+        refreshError instanceof Error
+          ? refreshError.message
+          : 'Could not start the refresh.',
+      )
+    } finally {
+      setDispatching(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!toast) return undefined
+    const timer = window.setTimeout(() => setToast(null), 12000)
+    return () => window.clearTimeout(timer)
+  }, [toast])
 
   const goTo = useCallback((next: AppView) => {
     const path = pathForView(next)
@@ -346,7 +372,6 @@ function App() {
   }, [])
 
   const loadOdds = useCallback(async () => {
-    setLoading(true)
     setError(null)
     try {
       const response = await fetch(
@@ -358,8 +383,6 @@ function App() {
       setNow(Date.now())
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Unable to load odds')
-    } finally {
-      setLoading(false)
     }
   }, [])
 
@@ -476,16 +499,25 @@ function App() {
               <button
                 className="refresh-button"
                 type="button"
-                onClick={loadOdds}
-                disabled={loading}
+                onClick={() => void refreshData()}
+                disabled={dispatching}
               >
                 <span aria-hidden="true">↻</span>
-                {loading ? 'Refreshing…' : 'Refresh lines'}
+                {dispatching ? 'Starting…' : 'Refresh data'}
               </button>
             </>
           )}
         </div>
       </header>
+
+      {toast && (
+        <div className="refresh-toast" role="status" aria-live="polite">
+          <p>{toast}</p>
+          <button type="button" onClick={() => setToast(null)}>
+            Dismiss
+          </button>
+        </div>
+      )}
 
       {view === 'lines' ? (
         <main>

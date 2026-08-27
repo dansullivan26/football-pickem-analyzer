@@ -103,8 +103,19 @@ strength bucket separately.
    hourly schedule (`23 * * * *` UTC). GitHub can delay or skip cron jobs, so
    the Action history is the source of truth, not the clock.
 
-The browser's **Refresh lines** button reloads the latest generated odds file;
-it does not spend an API request.
+The browser's **Refresh data** button starts two GitHub Actions: **Refresh
+sportsbook lines** (DraftKings via SharpAPI) and **Ingest GrokBot dump**
+(`kind=consensus`, the latest Covers file already in the private drop repo).
+It does not scrape Covers itself. After the jobs finish and Pages deploys,
+reload the site. The toast is only an acknowledgement — data will not appear
+instantly.
+
+To enable the button on GitHub Pages, create a fine-grained personal access
+token with **Actions: Read and write** on this repository only. Add it as a
+repository secret named `GH_DISPATCH_TOKEN`. That token is baked into the
+public JS bundle, so anyone can dispatch those two workflows and burn Actions
+minutes; they cannot read `SHARP_API_KEY` or `DROPS_TOKEN`. For local testing,
+put the same token in `.env.local` as `VITE_GH_DISPATCH_TOKEN`.
 
 ## Deploy
 

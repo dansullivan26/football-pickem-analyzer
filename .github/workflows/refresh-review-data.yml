@@ -1,0 +1,21 @@
+name: Refresh review data
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kick off DraftKings and Covers jobs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh workflow run "Refresh sportsbook lines" --ref "${GITHUB_REF_NAME}"
+          gh workflow run "Ingest GrokBot dump" --ref "${GITHUB_REF_NAME}" -f kind=consensus

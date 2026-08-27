@@ -1167,6 +1167,10 @@ select:focus {
   text-align: right;
 }
 
+.note-part {
+  white-space: nowrap;
+}
+
 .consensus-note.empty {
   color: var(--muted);
   cursor: default;

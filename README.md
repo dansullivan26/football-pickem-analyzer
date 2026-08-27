@@ -121,7 +121,7 @@ put the same token in `.env.local` as `VITE_GH_DISPATCH_TOKEN`.
 
 ## Complete a card on CBS
 
-The generated-card modal POSTs GrokBot this JSON:
+The generated-card modal sends GrokBot this JSON:
 
 ```json
 {
@@ -138,14 +138,17 @@ The generated-card modal POSTs GrokBot this JSON:
 ```
 
 Unpicked games are omitted; GrokBot validates against the live Week N slate.
-Add the routine URL and sender key as repository secrets
-named `GROKBOT_WEBHOOK_URL` and `GROKBOT_WEBHOOK_TOKEN`. For local testing, use
-`VITE_GROKBOT_WEBHOOK_URL` and `VITE_GROKBOT_WEBHOOK_TOKEN` in `.env.local`.
 
-Both webhook values are baked into the public JS bundle. The sender key must
-only wake this GrokBot routine; it must not grant direct CBS or repository
-access. Sending a card does not save it immediately: GrokBot asks for explicit
-confirmation in chat before filling and saving the CBS Picks page.
+The browser cannot POST that webhook directly. GrokBot's server answers the
+CORS preflight and will not allow the Pages origin, so the button dispatches
+**Complete card on CBS** (`complete-card.yml`) and the Action forwards the body
+server-side. Add the routine URL and sender key as repository secrets named
+`GROKBOT_WEBHOOK_URL` and `GROKBOT_WEBHOOK_TOKEN`. Neither is exposed to the
+browser; the button reuses `GH_DISPATCH_TOKEN`.
+
+A successful click only means the Action started. If GrokBot never posts the
+card in chat, read that workflow run for the status it returned. Nothing is
+saved on CBS until you confirm in chat.
 
 ## Deploy
 

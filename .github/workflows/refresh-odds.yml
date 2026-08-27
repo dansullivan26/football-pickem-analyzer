@@ -50,8 +50,6 @@ jobs:
       - run: npm run build
         env:
           VITE_GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
-          VITE_GROKBOT_WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
-          VITE_GROKBOT_WEBHOOK_TOKEN: ${{ secrets.GROKBOT_WEBHOOK_TOKEN }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

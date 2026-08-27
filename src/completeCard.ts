@@ -1,32 +1,44 @@
 import type { SuggestedCard } from './cardStrategy'
 
-export async function sendCardToGrokBot(card: SuggestedCard) {
-  const url = import.meta.env.VITE_GROKBOT_WEBHOOK_URL
-  const token = import.meta.env.VITE_GROKBOT_WEBHOOK_TOKEN
+const REPO = 'dansullivan26/football-pickem-analyzer'
+const WORKFLOW = 'complete-card.yml'
 
-  if (!url || !token) {
+// GrokBot's webhook rejects the browser's CORS preflight, so the card goes
+// through a GitHub Action that forwards it server-side.
+export async function sendCardToGrokBot(card: SuggestedCard) {
+  const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
+  if (!token) {
     throw new Error(
-      'CBS completion is not configured on this deploy. Add the GrokBot webhook secrets and rebuild Pages.',
+      'CBS completion is not configured on this deploy. Add a GH_DISPATCH_TOKEN secret and rebuild Pages.',
     )
   }
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      week: card.week,
-      source: 'football-pickem-analyzer',
-      picks: card.picks.map((pick) => ({
-        gameId: pick.gameId,
-        pickedTeamId: pick.pickedTeamId,
-        pickedSide: pick.pickedSide,
-      })),
-    }),
+  const payload = JSON.stringify({
+    week: card.week,
+    source: 'football-pickem-analyzer',
+    picks: card.picks.map((pick) => ({
+      gameId: pick.gameId,
+      pickedTeamId: pick.pickedTeamId,
+      pickedSide: pick.pickedSide,
+    })),
   })
 
-  if (response.ok) return
-  throw new Error(`GrokBot could not receive the card (${response.status}).`)
+  const response = await fetch(
+    `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: `Bearer ${token}`,
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      body: JSON.stringify({ ref: 'main', inputs: { payload } }),
+    },
+  )
+
+  if (response.status === 204) return
+  const detail = await response.text()
+  throw new Error(
+    `Could not hand the card to GrokBot (${response.status}${detail ? `: ${detail}` : ''}).`,
+  )
 }

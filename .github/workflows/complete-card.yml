@@ -1,0 +1,55 @@
+name: Complete card on CBS
+
+# The browser cannot POST GrokBot's webhook directly: its server answers the
+# CORS preflight and will not allow the Pages origin. Forwarding here also
+# keeps the webhook token out of the public JS bundle.
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Card JSON to forward to GrokBot
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: complete-card
+  cancel-in-progress: false
+
+jobs:
+  forward:
+    runs-on: ubuntu-latest
+    steps:
+      # PAYLOAD stays in the environment rather than being interpolated into
+      # the script, since anyone holding the dispatch token can set it.
+      - name: Forward card to GrokBot
+        env:
+          WEBHOOK_URL: ${{ secrets.GROKBOT_WEBHOOK_URL }}
+          WEBHOOK_TOKEN: ${{ secrets.GROKBOT_WEBHOOK_TOKEN }}
+          PAYLOAD: ${{ inputs.payload }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${WEBHOOK_URL:-}" ] || [ -z "${WEBHOOK_TOKEN:-}" ]; then
+            echo "Add GROKBOT_WEBHOOK_URL and GROKBOT_WEBHOOK_TOKEN secrets."
+            exit 1
+          fi
+
+          printf '%s' "$PAYLOAD" | jq empty
+          week=$(printf '%s' "$PAYLOAD" | jq -r '.week')
+          count=$(printf '%s' "$PAYLOAD" | jq '.picks | length')
+          echo "Forwarding week $week with $count picks."
+
+          status=$(printf '%s' "$PAYLOAD" | curl -sS \
+            -o /tmp/grokbot-response.txt -w '%{http_code}' \
+            -X POST "$WEBHOOK_URL" \
+            -H "Authorization: Bearer $WEBHOOK_TOKEN" \
+            -H 'Content-Type: application/json' \
+            --data-binary @-)
+
+          echo "GrokBot responded $status."
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            cat /tmp/grokbot-response.txt
+            exit 1
+          fi

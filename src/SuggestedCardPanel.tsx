@@ -73,7 +73,7 @@ export default function SuggestedCardPanel({
       setSubmitResult({
         kind: 'success',
         message:
-          'Card sent to GrokBot. Confirm in chat before GrokBot fills and saves it on CBS.',
+          'Card handed off. GrokBot will post it in chat for your confirmation before anything is saved on CBS.',
       })
     } catch (error) {
       setSubmitResult({
@@ -144,7 +144,8 @@ export default function SuggestedCardPanel({
           </button>
           <small>
             Sends this exact card to GrokBot. You will confirm in chat before it is
-            saved on CBS.
+            saved on CBS. Delivery runs in a GitHub Action, so check its run if
+            GrokBot never posts the card.
           </small>
           {submitResult && (
             <p className={submitResult.kind} role="status">

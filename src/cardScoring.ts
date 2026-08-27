@@ -3,7 +3,7 @@ import type { ConsensusGame, EdgeCategory } from './types'
 export const PCT_PER_SPREAD_POINT = 3
 
 export const CARD_STRATEGY_NOTE =
-  'Line-value picks (hammer / lean / slight) come first. Public fallback needs (public% − 50) + 3 × (pool number − Covers number) above 0; worse Covers-to-pool gaps need a bigger majority. Strength is that score: mild under 6, solid 6–11, strong 12+.'
+  'Line-value picks (hammer / lean / slight) come first. Public fallback needs (public% − 50) + 3 × (pool number − Covers number) above 0; worse Covers-to-pool gaps need a bigger majority. Strength is that score: mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -13,6 +13,12 @@ export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
 
 export type PickStrength = 'mild' | 'solid' | 'strong'
 export type CardPickSource = 'line-value' | 'public-consensus'
+
+export const STRENGTH_RANK: Record<PickStrength, number> = {
+  strong: 3,
+  solid: 2,
+  mild: 1,
+}
 
 export type ResolvedCardPick = {
   source: CardPickSource | null

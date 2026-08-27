@@ -861,8 +861,18 @@ select:focus {
   transform: none;
 }
 
+.performance-strength-groups {
+  display: grid;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.performance-strength-groups .eyebrow {
+  margin-bottom: 8px;
+}
+
 .performance-strength {
-  margin-top: 14px;
+  margin-top: 0;
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -1092,9 +1102,18 @@ select:focus {
   font-size: 0.66rem;
 }
 
+.history-selection .pick-source,
 .history-selection .pick-strength {
   justify-self: start;
   margin-top: 2px;
+}
+
+.history-selection .pick-source.line-value {
+  color: var(--green-dark);
+}
+
+.history-selection .pick-source.public-consensus {
+  color: var(--blue);
 }
 
 .history-selection .pick-strength.mild {
@@ -1279,6 +1298,10 @@ footer {
 
   .performance-summary {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .performance-strength {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .slate-section {

@@ -5,7 +5,7 @@ import type {
   RecommendationHistory,
   RecommendationWeek,
 } from './types'
-import type { PickStrength } from './cardScoring'
+import type { CardPickSource, PickStrength } from './cardScoring'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'hammer',
@@ -15,6 +15,7 @@ const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
 ]
 
 const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
+const SOURCES: CardPickSource[] = ['line-value', 'public-consensus']
 
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
   hammer: 'Hammers',
@@ -27,6 +28,11 @@ const STRENGTH_LABELS: Record<PickStrength, string> = {
   strong: 'Strong',
   solid: 'Solid',
   mild: 'Mild',
+}
+
+const SOURCE_LABELS: Record<CardPickSource, string> = {
+  'line-value': 'Line value',
+  'public-consensus': 'Public',
 }
 
 function formatSpread(value: number | null | undefined) {
@@ -101,8 +107,14 @@ function summarize(
   }
 }
 
-function summarizeStrength(games: FrozenRecommendation[], strength: PickStrength) {
-  const rows = games.filter((game) => game.strength === strength)
+function summarizeStrength(
+  games: FrozenRecommendation[],
+  strength: PickStrength,
+  source: CardPickSource,
+) {
+  const rows = games.filter(
+    (game) => game.strength === strength && game.source === source,
+  )
   const results = rows.map(strengthResult)
   const wins = results.filter((result) => result === 'win').length
   const losses = results.filter((result) => result === 'loss').length
@@ -118,8 +130,19 @@ function summarizeStrength(games: FrozenRecommendation[], strength: PickStrength
   }
 }
 
+function cardResult(game: FrozenRecommendation) {
+  if (game.pickedSide) return strengthResult(game)
+  return recResult(game)
+}
+
 function resultLabel(game: FrozenRecommendation) {
   if (!game.cover) return 'Awaiting result'
+  if (game.pickedSide) {
+    const result = strengthResult(game)
+    if (result === 'push') return 'Push'
+    if (result === 'win') return 'Win'
+    if (result === 'loss') return 'Loss'
+  }
   if (game.category === 'neutral') {
     if (game.cover === 'push') return 'Push'
     return game.cover === 'home' ? 'Home covered' : 'Away covered'
@@ -150,7 +173,12 @@ export default function PerformanceView({
   const strengthStats = useMemo(
     () =>
       Object.fromEntries(
-        STRENGTHS.map((strength) => [strength, summarizeStrength(allGames, strength)]),
+        SOURCES.flatMap((source) =>
+          STRENGTHS.map((strength) => [
+            `${source}:${strength}`,
+            summarizeStrength(allGames, strength, source),
+          ]),
+        ),
       ),
     [allGames],
   )
@@ -163,7 +191,8 @@ export default function PerformanceView({
           <p className="eyebrow">Model tracker</p>
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
-            Hit rates for frozen picks, by line-value tier and card strength.
+            Hit rates for frozen picks, by line-value tier and by card
+            strength split into line value vs public.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
           </p>
@@ -199,23 +228,34 @@ export default function PerformanceView({
         })}
       </section>
 
-      <section
-        className="summary-grid performance-strength"
-        aria-label="Card strength hit rates"
+      <div
+        className="performance-strength-groups"
+        aria-label="Card strength hit rates by source"
       >
-        {STRENGTHS.map((strength) => {
-          const stats = strengthStats[strength]
-          return (
-            <div className={`summary-card ${strength}`} key={strength}>
-              <span>{STRENGTH_LABELS[strength]}</span>
-              <strong>{stats.rate}</strong>
-              <small>
-                {stats.count} rec{stats.count === 1 ? '' : 's'} · {stats.detail}
-              </small>
+        {SOURCES.map((source) => (
+          <section key={source} aria-label={`${SOURCE_LABELS[source]} hit rates`}>
+            <p className="eyebrow">{SOURCE_LABELS[source]}</p>
+            <div className="summary-grid performance-strength">
+              {STRENGTHS.map((strength) => {
+                const stats = strengthStats[`${source}:${strength}`]
+                return (
+                  <div
+                    className={`summary-card ${strength}`}
+                    key={`${source}:${strength}`}
+                  >
+                    <span>{STRENGTH_LABELS[strength]}</span>
+                    <strong>{stats.rate}</strong>
+                    <small>
+                      {stats.count} rec{stats.count === 1 ? '' : 's'} ·{' '}
+                      {stats.detail}
+                    </small>
+                  </div>
+                )
+              })}
             </div>
-          )
-        })}
-      </section>
+          </section>
+        ))}
+      </div>
 
       <section className="player-detail performance-week">
         <div className="player-detail-heading">
@@ -258,6 +298,11 @@ export default function PerformanceView({
                   <span className={`recommendation ${game.category}`}>
                     {game.category}
                   </span>
+                  {game.source && (
+                    <span className={`pick-source ${game.source}`}>
+                      {SOURCE_LABELS[game.source]}
+                    </span>
+                  )}
                   {game.strength && (
                     <span className={`pick-strength ${game.strength}`}>
                       {game.strength}
@@ -269,11 +314,10 @@ export default function PerformanceView({
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook
                     </small>
                   )}
-                  {game.source === 'public-consensus' && (
-                    <small>public card pick</small>
-                  )}
                 </div>
-                <span className={`pick-result ${recResult(game) ?? game.cover ?? 'pending'}`}>
+                <span
+                  className={`pick-result ${cardResult(game) ?? game.cover ?? 'pending'}`}
+                >
                   {resultLabel(game)}
                 </span>
               </div>

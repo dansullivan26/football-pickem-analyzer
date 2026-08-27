@@ -87,9 +87,10 @@ npm run snapshot-recommendations
 
 That writes `src/data/recommendation-history.json` for the Performance page.
 The odds refresh workflow runs the same snapshot so live recs keep updating
-until kickoff. Open games also store the generated-card strength score
-(mild / solid / strong); that value freezes at kickoff with the rest of the
-pick.
+until kickoff. Open games also store the generated-card source and strength
+(line value vs public, mild / solid / strong); those values freeze at kickoff
+with the rest of the pick. Performance tracks hit rates for each source ×
+strength bucket separately.
 
 ## Refresh sportsbook lines
 

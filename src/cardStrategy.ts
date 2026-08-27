@@ -1,5 +1,6 @@
 import {
   CARD_STRATEGY_NOTE,
+  STRENGTH_RANK,
   formatPoolSpread,
   resolveCardPick,
   type PickStrength,
@@ -139,6 +140,12 @@ export function sortSuggestedPicks(
 ) {
   if (sort === 'slate') return picks
   return [...picks].sort((left, right) => {
+    const strength =
+      STRENGTH_RANK[right.strength] - STRENGTH_RANK[left.strength]
+    if (strength) return strength
+    if (left.source !== right.source) {
+      return left.source === 'line-value' ? -1 : 1
+    }
     if (right.score !== left.score) return right.score - left.score
     return left.kickoff.localeCompare(right.kickoff)
   })

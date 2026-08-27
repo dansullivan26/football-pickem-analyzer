@@ -165,12 +165,19 @@ export default function SuggestedCardPanel({
                   {pick.away} @ {pick.home}
                 </span>
               </div>
-              <span className={`pick-source ${pick.source}`}>
-                {pick.source === 'line-value' ? 'Line value' : 'Public'}
-              </span>
-              <span className={`pick-strength ${pick.strength}`}>
-                {pick.strength}
-              </span>
+              <div className="suggested-pick-tags">
+                <span className={`pick-source ${pick.source}`}>
+                  {pick.source === 'line-value' ? 'Line value' : 'Public'}
+                </span>
+                <span className={`pick-strength ${pick.strength}`}>
+                  {pick.strength}
+                </span>
+                {pick.hook && (
+                  <span className="pick-hook">
+                    {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
+                  </span>
+                )}
+              </div>
               <em>{pick.detail}</em>
             </li>
           ))}

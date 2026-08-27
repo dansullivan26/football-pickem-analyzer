@@ -165,4 +165,5 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 The comparison uses the current DraftKings home-team spread. The recommended
 side is the team receiving the better number in the CBS pool. If that number is
 the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
-DraftKings, the card shows a favorable hook badge.
+DraftKings, the Lines card shows a favorable hook badge and the generated card
+scores that pick as solid line value (not mild) with an FG/TD hook badge.

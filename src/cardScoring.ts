@@ -6,7 +6,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line-value picks (hammer / lean / slight) come first. Public fallback uses the Covers ticket bucket nearest the pool line within 1 point, excluding buckets under 10 picks or 5% of tickets, then scores (bucket public% − 50) + 3 × (pool number − bucket number). Strength is mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
+  'Line-value picks (hammer / lean / slight) come first. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, but scores as solid so it ranks with leans instead of with 0.5-point slights. Public fallback uses the Covers ticket bucket nearest the pool line within 1 point, excluding buckets under 10 picks or 5% of tickets, then scores (bucket public% − 50) + 3 × (pool number − bucket number). Strength is mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -16,6 +16,7 @@ export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
 
 export type PickStrength = 'mild' | 'solid' | 'strong'
 export type CardPickSource = 'line-value' | 'public-consensus'
+export type HookKind = 'fg' | 'td'
 
 export const STRENGTH_RANK: Record<PickStrength, number> = {
   strong: 3,
@@ -31,6 +32,7 @@ export type ResolvedCardPick = {
   poolSpread: number | null
   detail: string | null
   skipReason: string | null
+  hook: HookKind | null
 }
 
 function formatPoints(value: number) {
@@ -86,15 +88,41 @@ export function publicBucketForPool(
   )
 }
 
-export function lineValueScore(category: EdgeCategory, edge: number) {
-  if (category === 'hammer') return 12 + (edge - 3) * PCT_PER_SPREAD_POINT
-  if (category === 'lean') return 6 + (edge - 1.5) * 4
-  return edge * PCT_PER_SPREAD_POINT
+export function favorableHook(
+  poolHome: number,
+  bookHome: number,
+): HookKind | null {
+  // The .5 on either side of a field goal (3) or touchdown (7). Same sign,
+  // both non-zero: the pool side of that pair is the hook.
+  if (poolHome === 0 || bookHome === 0) return null
+  if (Math.sign(poolHome) !== Math.sign(bookHome)) return null
+
+  const pair = new Set([Math.abs(poolHome), Math.abs(bookHome)])
+  if (pair.has(2.5) && pair.has(3.5)) return 'fg'
+  if (pair.has(6.5) && pair.has(7.5)) return 'td'
+  return null
 }
 
-export function lineValueStrength(category: EdgeCategory): PickStrength {
+const HOOK_SOLID_FLOOR = 6
+
+export function lineValueScore(
+  category: EdgeCategory,
+  edge: number,
+  hook: HookKind | null = null,
+) {
+  let score = edge * PCT_PER_SPREAD_POINT
+  if (category === 'hammer') score = 12 + (edge - 3) * PCT_PER_SPREAD_POINT
+  else if (category === 'lean') score = 6 + (edge - 1.5) * 4
+  if (hook && score < HOOK_SOLID_FLOOR) return HOOK_SOLID_FLOOR
+  return score
+}
+
+export function lineValueStrength(
+  category: EdgeCategory,
+  hook: HookKind | null = null,
+): PickStrength {
   if (category === 'hammer') return 'strong'
-  if (category === 'lean') return 'solid'
+  if (category === 'lean' || hook) return 'solid'
   return 'mild'
 }
 
@@ -168,6 +196,7 @@ export function resolveCardPick(input: {
   recommendedSide: 'home' | 'away' | null
   edge: number | null
   homeSpread: number
+  liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
 }): ResolvedCardPick {
   const empty: ResolvedCardPick = {
@@ -178,21 +207,30 @@ export function resolveCardPick(input: {
     poolSpread: null,
     detail: null,
     skipReason: null,
+    hook: null,
   }
+
+  const hook =
+    input.liveHomeSpread == null
+      ? null
+      : favorableHook(input.homeSpread, input.liveHomeSpread)
 
   if (LINE_VALUE_CATEGORIES.has(input.category) && input.recommendedSide) {
     const edge = input.edge ?? 0
+    const hookNote = hook ? ` · favorable ${hook === 'fg' ? 'FG' : 'TD'} hook` : ''
     return {
       source: 'line-value',
       pickedSide: input.recommendedSide,
-      strength: lineValueStrength(input.category),
-      score: lineValueScore(input.category, edge),
+      strength: lineValueStrength(input.category, hook),
+      score: lineValueScore(input.category, edge, hook),
       poolSpread: poolSpreadForSide(input.homeSpread, input.recommendedSide),
       detail:
-        input.edge == null
+        (input.edge == null
           ? `${input.category} on the pool number`
-          : `${formatPoints(input.edge)}-point ${input.category} on the pool number`,
+          : `${formatPoints(input.edge)}-point ${input.category} on the pool number`) +
+        hookNote,
       skipReason: null,
+      hook,
     }
   }
 
@@ -207,6 +245,7 @@ export function resolveCardPick(input: {
         poolSpread: publicPick.poolSpread,
         detail: publicPick.detail,
         skipReason: null,
+        hook: null,
       }
     }
     return { ...empty, skipReason: publicPick.reason }

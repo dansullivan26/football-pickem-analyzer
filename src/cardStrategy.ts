@@ -15,7 +15,7 @@ export {
 } from './cardScoring'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v3-line-then-public-pool-bucket'
+export const CARD_STRATEGY_ID = 'v4-line-hook-then-public'
 
 export type SuggestedPick = {
   gameId: string
@@ -30,6 +30,7 @@ export type SuggestedPick = {
   poolSpread: number
   source: 'line-value' | 'public-consensus'
   strength: PickStrength
+  hook: 'fg' | 'td' | null
   /** Comparable rank used to sort the modal. Higher is a stronger pick. */
   score: number
   detail: string
@@ -55,11 +56,13 @@ export type SuggestedCard = {
 }
 
 /**
- * v3 card rules:
+ * v4 card rules:
  * 1. Hammer / lean / slight → the line-value side.
- * 2. Otherwise, use a meaningful Covers Picks Per Line bucket within one point
+ * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
+ *    pick, scored as solid so it ranks with leans, not with 0.5-point slights.
+ * 3. Otherwise, use a meaningful Covers Picks Per Line bucket within one point
  *    of the pool line. Take its majority if it clears the spread-gap penalty.
- * 3. No line-value pick and no qualifying Covers majority → leave unpicked.
+ * 4. No line-value pick and no qualifying Covers majority → leave unpicked.
  */
 export function generateSuggestedCard(
   analyses: GameAnalysis[],
@@ -86,6 +89,7 @@ export function generateSuggestedCard(
       recommendedSide,
       edge: analysis.edge,
       homeSpread: game.homeSpread,
+      liveHomeSpread: analysis.liveHomeSpread,
       consensus,
     })
 
@@ -105,6 +109,7 @@ export function generateSuggestedCard(
         poolSpread: cardPick.poolSpread,
         source: cardPick.source,
         strength: cardPick.strength,
+        hook: cardPick.hook,
         score: cardPick.score,
         detail: cardPick.detail,
       })
@@ -172,7 +177,7 @@ export function formatSuggestedCardText(
 
   const pickLines = picks.map(
     (pick) =>
-      `• ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'} · ${pick.detail}`,
+      `• ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''} · ${pick.detail}`,
   )
   const skipLines = card.unpicked.map(
     (game) => `• ${game.away} @ ${game.home} — ${game.reason}`,

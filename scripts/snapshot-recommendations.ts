@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { resolveCardPick } from '../src/cardScoring.ts'
+import { resolveCardPick, favorableHook } from '../src/cardScoring.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -13,15 +13,6 @@ function classifyEdge(magnitude) {
   if (magnitude >= 1.5) return 'lean'
   if (magnitude > 0) return 'slight'
   return 'neutral'
-}
-
-function favorableHook(poolHome, bookHome) {
-  if (poolHome === 0 || bookHome === 0) return null
-  if (Math.sign(poolHome) !== Math.sign(bookHome)) return null
-  const pair = new Set([Math.abs(poolHome), Math.abs(bookHome)])
-  if (pair.has(2.5) && pair.has(3.5)) return 'fg'
-  if (pair.has(6.5) && pair.has(7.5)) return 'td'
-  return null
 }
 
 function analyze(game, event) {
@@ -98,6 +89,7 @@ const games = slate.games.map((game) => {
     recommendedSide: analysis.recommendedSide,
     edge: analysis.edge,
     homeSpread: game.homeSpread,
+    liveHomeSpread: analysis.liveHomeSpread,
     consensus: consensusByEvent.get(game.cbsEventId),
   })
 

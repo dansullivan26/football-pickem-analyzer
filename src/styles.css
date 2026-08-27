@@ -519,7 +519,7 @@ h2 {
 
 .suggested-picks li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 8px;
   padding: 10px 12px;
   border: 1px solid var(--border);
@@ -537,6 +537,14 @@ h2 {
   color: var(--muted);
   font-size: 0.72rem;
   font-style: normal;
+}
+
+.suggested-pick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: end;
+  align-self: start;
 }
 
 .suggested-picks em {
@@ -586,6 +594,19 @@ h2 {
 .pick-strength.strong {
   color: var(--green-dark);
   background: var(--green-soft);
+}
+
+.pick-hook {
+  align-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #5c4a12;
+  background: #fff3cc;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .suggested-unpicked {

@@ -94,7 +94,7 @@ button {
   background: rgba(255, 255, 255, 0.08);
 }
 
-.primary-nav button {
+.primary-nav a {
   padding: 7px 13px;
   border: 0;
   border-radius: 7px;
@@ -103,9 +103,10 @@ button {
   cursor: pointer;
   font-size: 0.82rem;
   font-weight: 700;
+  text-decoration: none;
 }
 
-.primary-nav button.active {
+.primary-nav a.active {
   color: var(--green-dark);
   background: #d8eee1;
 }
@@ -1239,7 +1240,7 @@ footer {
     margin-left: auto;
   }
 
-  .primary-nav button {
+  .primary-nav a {
     padding-inline: 10px;
   }
 

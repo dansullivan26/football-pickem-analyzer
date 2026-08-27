@@ -8,6 +8,7 @@ import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
+import { pathForView, viewFromPath, type AppView } from './routes'
 import type {
   BookKey,
   ConsensusFeed,
@@ -305,7 +306,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 }
 
 function App() {
-  const [view, setView] = useState<'lines' | 'players' | 'performance'>('lines')
+  const [view, setView] = useState<AppView>(() => viewFromPath())
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -317,13 +318,23 @@ function App() {
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
   const closeSuggestedCard = useCallback(() => setSuggestedCard(null), [])
 
+  const goTo = useCallback((next: AppView) => {
+    const path = pathForView(next)
+    if (`${window.location.pathname}${window.location.search}` !== path) {
+      window.history.pushState(null, '', path)
+    }
+    setView(next)
+    if (next !== 'lines') setSuggestedCard(null)
+  }, [])
+
   const loadOdds = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`./data/odds.json?t=${Date.now()}`, {
-        cache: 'no-store',
-      })
+      const response = await fetch(
+        `${import.meta.env.BASE_URL}data/odds.json?t=${Date.now()}`,
+        { cache: 'no-store' },
+      )
       if (!response.ok) throw new Error(`Odds feed returned ${response.status}`)
       setFeed((await response.json()) as OddsFeed)
       setNow(Date.now())
@@ -339,6 +350,14 @@ function App() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     void loadOdds()
   }, [loadOdds])
+
+  useEffect(() => {
+    function onPopState() {
+      setView(viewFromPath())
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   const analyses = useMemo(
     () =>
@@ -386,32 +405,49 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <a className="brand" href="./" aria-label="Pick'em Edge home">
+        <a
+          className="brand"
+          href={pathForView('lines')}
+          aria-label="Pick'em Edge home"
+          onClick={(event) => {
+            event.preventDefault()
+            goTo('lines')
+          }}
+        >
           <span className="brand-mark">PE</span>
           <span>Pick&apos;em Edge</span>
         </a>
         <nav className="primary-nav" aria-label="Primary navigation">
-          <button
+          <a
             className={view === 'lines' ? 'active' : ''}
-            type="button"
-            onClick={() => setView('lines')}
+            href={pathForView('lines')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('lines')
+            }}
           >
             Lines
-          </button>
-          <button
+          </a>
+          <a
             className={view === 'players' ? 'active' : ''}
-            type="button"
-            onClick={() => setView('players')}
+            href={pathForView('players')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('players')
+            }}
           >
             Players
-          </button>
-          <button
+          </a>
+          <a
             className={view === 'performance' ? 'active' : ''}
-            type="button"
-            onClick={() => setView('performance')}
+            href={pathForView('performance')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('performance')
+            }}
           >
             Performance
-          </button>
+          </a>
         </nav>
         <div className="header-actions">
           {view === 'lines' && (

@@ -10,6 +10,9 @@ npm install
 npm run dev
 ```
 
+Lines is `/`, Players is `/players`, and Performance is `/performance`. GitHub
+Pages serves the same SPA for those paths via `404.html`.
+
 The app loads its public slate from `src/data/current-slate.json`. Full CBS
 exports are ignored by git so private pool URLs and settings are not published.
 

@@ -592,10 +592,10 @@ select:focus {
 }
 
 .matchup {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
+  display: flex;
+  gap: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .team {
@@ -607,7 +607,6 @@ select:focus {
 
 .team:last-child {
   flex-direction: row-reverse;
-  text-align: right;
 }
 
 .team-logo {

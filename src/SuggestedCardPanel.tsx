@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
+  CARD_STRATEGY_NOTE,
   formatPoolSpread,
   formatSuggestedCardText,
+  sortSuggestedPicks,
   type SuggestedCard,
 } from './cardStrategy'
 
@@ -14,11 +16,16 @@ export default function SuggestedCardPanel({
   onClose: () => void
 }) {
   const [copied, setCopied] = useState(false)
+  const [sort, setSort] = useState<'strength' | 'slate'>('slate')
   const dialogRef = useRef<HTMLDivElement>(null)
   const generated = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(card.generatedAt))
+  const picks = useMemo(
+    () => sortSuggestedPicks(card.picks, sort),
+    [card.picks, sort],
+  )
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -38,7 +45,7 @@ export default function SuggestedCardPanel({
 
   async function copyCard() {
     try {
-      await navigator.clipboard.writeText(formatSuggestedCardText(card))
+      await navigator.clipboard.writeText(formatSuggestedCardText(card, picks))
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)
     } catch {
@@ -71,6 +78,18 @@ export default function SuggestedCardPanel({
             </p>
           </div>
           <div className="suggested-card-actions">
+            <label>
+              <span className="sr-only">Sort picks</span>
+              <select
+                value={sort}
+                onChange={(event) =>
+                  setSort(event.target.value as 'strength' | 'slate')
+                }
+              >
+                <option value="slate">Kickoff time</option>
+                <option value="strength">Strength</option>
+              </select>
+            </label>
             <button type="button" onClick={() => void copyCard()}>
               {copied ? 'Copied' : 'Copy card'}
             </button>
@@ -80,8 +99,10 @@ export default function SuggestedCardPanel({
           </div>
         </div>
 
+        <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
+
         <ol className="suggested-picks">
-          {card.picks.map((pick) => (
+          {picks.map((pick) => (
             <li key={pick.cbsEventId}>
               <div className="suggested-pick-teams">
                 <strong>

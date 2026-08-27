@@ -6,6 +6,9 @@ export const CARD_STRATEGY_ID = 'v2-line-then-public-spread-gap'
 /** Extra public percentage required per point the pool number is worse than Covers. */
 export const PCT_PER_SPREAD_POINT = 3
 
+export const CARD_STRATEGY_NOTE =
+  'Line-value picks (hammer / lean / slight) come first. Public fallback needs (public% − 50) + 3 × (pool number − Covers number) above 0; worse Covers-to-pool gaps need a bigger majority. Strength is that score: mild under 6, solid 6–11, strong 12+.'
+
 const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>(['hammer', 'lean', 'slight'])
 
 export type PickStrength = 'mild' | 'solid' | 'strong'
@@ -14,12 +17,15 @@ export type SuggestedPick = {
   cbsEventId: number
   away: string
   home: string
+  kickoff: string
   kickoffLabel: string
   pickedSide: 'home' | 'away'
   pickedTeam: string
   poolSpread: number
   source: 'line-value' | 'public-consensus'
   strength: PickStrength
+  /** Comparable rank used to sort the modal. Higher is a stronger pick. */
+  score: number
   detail: string
 }
 
@@ -59,6 +65,12 @@ function publicConsensusSide(consensus: ConsensusGame | undefined) {
   if (away.pct == null || home.pct == null) return null
   if (away.pct === home.pct) return null
   return home.pct > away.pct ? ('home' as const) : ('away' as const)
+}
+
+function lineValueScore(category: EdgeCategory, edge: number) {
+  if (category === 'hammer') return 12 + (edge - 3) * PCT_PER_SPREAD_POINT
+  if (category === 'lean') return 6 + (edge - 1.5) * 4
+  return edge * PCT_PER_SPREAD_POINT
 }
 
 function lineValueStrength(category: EdgeCategory): PickStrength {
@@ -111,6 +123,7 @@ function evaluatePublicPick(
   return {
     ok: true as const,
     strength: classifyPublicScore(score),
+    score,
     detail,
     poolSpread,
   }
@@ -137,11 +150,13 @@ export function generateSuggestedCard(
       cbsEventId: game.cbsEventId,
       away: game.away.name,
       home: game.home.name,
+      kickoff: game.kickoff,
       kickoffLabel: game.kickoffLabel.replace(' ET', ''),
     }
 
     if (LINE_VALUE_CATEGORIES.has(category) && recommendedSide) {
       const team = game[recommendedSide]
+      const edge = analysis.edge ?? 0
       const edgeLabel =
         analysis.edge == null
           ? `${category} on the pool number`
@@ -153,6 +168,7 @@ export function generateSuggestedCard(
         poolSpread: poolSpreadForSide(game.homeSpread, recommendedSide),
         source: 'line-value',
         strength: lineValueStrength(category),
+        score: lineValueScore(category, edge),
         detail: edgeLabel,
       })
       continue
@@ -173,6 +189,7 @@ export function generateSuggestedCard(
           poolSpread: publicPick.poolSpread,
           source: 'public-consensus',
           strength: publicPick.strength,
+          score: publicPick.score,
           detail: publicPick.detail,
         })
         continue
@@ -216,13 +233,27 @@ function unpickedReason(analysis: GameAnalysis) {
   return 'No line-value pick and no Covers consensus yet'
 }
 
-export function formatSuggestedCardText(card: SuggestedCard) {
+export function sortSuggestedPicks(
+  picks: SuggestedPick[],
+  sort: 'slate' | 'strength',
+) {
+  if (sort === 'slate') return picks
+  return [...picks].sort((left, right) => {
+    if (right.score !== left.score) return right.score - left.score
+    return left.kickoff.localeCompare(right.kickoff)
+  })
+}
+
+export function formatSuggestedCardText(
+  card: SuggestedCard,
+  picks: SuggestedPick[] = card.picks,
+) {
   const when = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(card.generatedAt))
 
-  const pickLines = card.picks.map(
+  const pickLines = picks.map(
     (pick) =>
       `• ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'} · ${pick.detail}`,
   )
@@ -233,8 +264,9 @@ export function formatSuggestedCardText(card: SuggestedCard) {
   return [
     `${card.weekLabel} suggested card`,
     `Generated ${when} · ${card.strategyId}`,
+    CARD_STRATEGY_NOTE,
     '',
-    `Picks (${card.picks.length})`,
+    `Picks (${picks.length})`,
     ...(pickLines.length ? pickLines : ['• none']),
     '',
     `Left unpicked (${card.unpicked.length})`,

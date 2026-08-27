@@ -389,9 +389,29 @@ h2 {
   font-size: 0.74rem;
 }
 
+.suggested-card-note {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #4c5a51;
+  background: #f7faf7;
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
 .suggested-card-actions {
   display: flex;
   gap: 8px;
+  align-items: center;
+}
+
+.suggested-card-actions select {
+  width: auto;
+  min-height: 36px;
+  padding: 0 28px 0 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .suggested-card-actions button {

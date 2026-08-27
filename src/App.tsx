@@ -5,11 +5,14 @@ import playerHistoryData from './data/player-history.json'
 import recommendationHistoryData from './data/recommendation-history.json'
 import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
+import SuggestedCardPanel from './SuggestedCardPanel'
+import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import type {
   BookKey,
   ConsensusFeed,
   ConsensusGame,
   EdgeCategory,
+  GameAnalysis,
   OddsEvent,
   OddsFeed,
   PlayerHistory,
@@ -32,17 +35,6 @@ const bookNames: Record<BookKey, string> = {
   draftkings: 'DraftKings',
 }
 
-type GameAnalysis = {
-  game: SlateGame
-  odds: OddsEvent | undefined
-  consensus: ConsensusGame | undefined
-  liveHomeSpread: number | null
-  edge: number | null
-  category: EdgeCategory
-  recommendedSide: 'home' | 'away' | null
-}
-
-// Spreads move in half points; keep a single book on that grid.
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
 }
@@ -319,6 +311,7 @@ function App() {
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
   const [now, setNow] = useState(() => Date.now())
+  const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
 
   const loadOdds = useCallback(async () => {
     setLoading(true)
@@ -503,6 +496,17 @@ function App() {
               <h2>Slate comparison</h2>
             </div>
             <div className="controls">
+              <button
+                className="generate-card-button"
+                type="button"
+                onClick={() =>
+                  setSuggestedCard(
+                    generateSuggestedCard(analyses, slate.week.label),
+                  )
+                }
+              >
+                Generate card
+              </button>
               <label className="search">
                 <span className="sr-only">Search teams</span>
                 <input
@@ -555,6 +559,13 @@ function App() {
               </label>
             </div>
           </div>
+
+          {suggestedCard && (
+            <SuggestedCardPanel
+              card={suggestedCard}
+              onClose={() => setSuggestedCard(null)}
+            />
+          )}
 
           {consensusFeed.week.order === slate.week.order && (
             <p

@@ -72,6 +72,16 @@ export type OddsFeed = {
 
 export type EdgeCategory = 'hammer' | 'lean' | 'slight' | 'neutral' | 'pending'
 
+export type GameAnalysis = {
+  game: SlateGame
+  odds: OddsEvent | undefined
+  consensus: ConsensusGame | undefined
+  liveHomeSpread: number | null
+  edge: number | null
+  category: EdgeCategory
+  recommendedSide: 'home' | 'away' | null
+}
+
 export type PickResult = 'win' | 'loss' | 'push' | null
 export type PickMatchStatus = 'matched' | 'unpicked' | 'ambiguous' | 'unmatched'
 

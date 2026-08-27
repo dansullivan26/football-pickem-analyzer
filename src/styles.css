@@ -301,6 +301,148 @@ h2 {
 .controls {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.generate-card-button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background: var(--green);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.generate-card-button:hover {
+  background: var(--green-dark);
+}
+
+.suggested-card {
+  margin: 0 0 18px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.suggested-card-header {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.suggested-card-header h2 {
+  margin: 2px 0 4px;
+  font-size: 1.2rem;
+}
+
+.suggested-card-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.suggested-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.suggested-card-actions button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.suggested-picks {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggested-picks li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f7faf7;
+}
+
+.suggested-pick-teams {
+  display: grid;
+  gap: 2px;
+}
+
+.suggested-pick-teams span,
+.suggested-picks em {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.suggested-picks em {
+  grid-column: 1 / -1;
+}
+
+.pick-source {
+  align-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pick-source.line-value {
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
+.pick-source.public-consensus {
+  color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.suggested-unpicked {
+  margin-top: 18px;
+}
+
+.suggested-unpicked h3 {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+}
+
+.suggested-unpicked ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggested-unpicked li {
+  display: grid;
+  gap: 2px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.suggested-unpicked strong {
+  color: var(--ink);
 }
 
 input,
@@ -1014,6 +1156,15 @@ footer {
   .controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .generate-card-button {
+    grid-column: 1 / -1;
+  }
+
+  .suggested-card-header {
+    display: grid;
+    gap: 12px;
   }
 
   .controls .search {

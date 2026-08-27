@@ -45,6 +45,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/data/odds.json src/data/recommendation-history.json
           git commit -m "data: refresh sportsbook lines"
+          git pull --rebase origin main
           git push
       - run: npm run build
         env:

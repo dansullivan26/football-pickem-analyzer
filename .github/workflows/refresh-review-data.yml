@@ -11,11 +11,40 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Kick off DraftKings and Covers jobs
+      # Covers first, then DraftKings. Running them together races two pushes to
+      # main, and the lines job would build Pages from a checkout taken before
+      # the consensus commit landed.
+      - name: Ingest the latest Covers dump
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          before=$(gh run list --workflow=ingest-grokbot.yml --limit 1 \
+            --json databaseId --jq '.[0].databaseId // 0')
+
+          gh workflow run "Ingest GrokBot dump" --ref "${GITHUB_REF_NAME}" -f kind=consensus
+
+          # workflow run returns no id, so wait for a newer one to show up.
+          run_id="$before"
+          for _ in $(seq 1 24); do
+            sleep 5
+            run_id=$(gh run list --workflow=ingest-grokbot.yml --limit 1 \
+              --json databaseId --jq '.[0].databaseId // 0')
+            [ "$run_id" != "$before" ] && break
+          done
+
+          if [ "$run_id" = "$before" ]; then
+            echo "Ingest run never started."
+            exit 1
+          fi
+
+          gh run watch "$run_id" --exit-status --interval 10
+
+      - name: Refresh DraftKings lines and deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           gh workflow run "Refresh sportsbook lines" --ref "${GITHUB_REF_NAME}"
-          gh workflow run "Ingest GrokBot dump" --ref "${GITHUB_REF_NAME}" -f kind=consensus

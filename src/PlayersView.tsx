@@ -1,4 +1,9 @@
 import { useMemo, useState } from 'react'
+import {
+  predictPlayerWeek,
+  predictionSeasonRecord,
+  type PredictedGame,
+} from './playerPrediction'
 import type {
   PlayerHistory,
   PlayerPick,
@@ -28,6 +33,17 @@ function resultLabel(pick: PlayerPick) {
   if (!pick.pickedSide) return 'Awaiting results'
   if (!pick.result) return 'Pending'
   return pick.result
+}
+
+function predictedPickLabel(game: PredictedGame) {
+  if (!game.predictedSide || !game.predictedTeam) return 'No call'
+  const spread =
+    game.predictedSide === 'home' ? game.homeSpread : game.homeSpread * -1
+  return `${game.predictedTeam} ${formatSpread(spread)}`
+}
+
+function formatAccuracy(value: number | null) {
+  return value == null ? '—' : `${Math.round(value * 100)}%`
 }
 
 function Metric({
@@ -144,7 +160,13 @@ export default function PlayersView({
     history.entries[0]?.entryId ?? '',
   )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
-    history.weeks.at(-1)?.week ?? 1,
+    Math.max(
+      history.weeks.at(-1)?.week ?? 1,
+      recommendations.weeks.at(-1)?.week ?? 1,
+    ),
+  )
+  const [detailView, setDetailView] = useState<'prediction' | 'actual'>(
+    'prediction',
   )
 
   const filteredPlayers = useMemo(() => {
@@ -154,14 +176,42 @@ export default function PlayersView({
       entry.name.toLowerCase().includes(normalized),
     )
   }, [history.entries, query])
+  const availableWeeks = useMemo(() => {
+    const weeks = new Map<
+      number,
+      { week: number; label: string; scored: boolean }
+    >()
+    for (const week of history.weeks) {
+      weeks.set(week.week, {
+        week: week.week,
+        label: week.label,
+        scored: week.scored,
+      })
+    }
+    for (const week of recommendations.weeks) {
+      const historyWeek = weeks.get(week.week)
+      weeks.set(week.week, {
+        week: week.week,
+        label: week.label,
+        scored: historyWeek?.scored ?? week.scored,
+      })
+    }
+    return [...weeks.values()].sort((a, b) => a.week - b.week)
+  }, [history.weeks, recommendations.weeks])
 
   const selectedPlayer =
     history.entries.find((entry) => entry.entryId === selectedEntryId) ??
     history.entries[0]
   const selectedWeek =
-    history.weeks.find((week) => week.week === selectedWeekNumber) ??
-    history.weeks.at(-1)
-  const weekEntry = selectedWeek?.entries.find(
+    availableWeeks.find((week) => week.week === selectedWeekNumber) ??
+    availableWeeks.at(-1)
+  const selectedHistoryWeek = history.weeks.find(
+    (week) => week.week === selectedWeek?.week,
+  )
+  const recommendationWeek = recommendations.weeks.find(
+    (week) => week.week === selectedWeek?.week,
+  )
+  const weekEntry = selectedHistoryWeek?.entries.find(
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
   const summary = selectedPlayer
@@ -169,6 +219,22 @@ export default function PlayersView({
         selectedPlayer.entryId,
         history.weeks,
         recommendations.weeks,
+      )
+    : null
+  const prediction =
+    selectedPlayer && recommendationWeek
+      ? predictPlayerWeek(
+          selectedPlayer.entryId,
+          recommendationWeek,
+          history,
+          recommendations,
+        )
+      : null
+  const predictionRecord = selectedPlayer
+    ? predictionSeasonRecord(
+        selectedPlayer.entryId,
+        history,
+        recommendations,
       )
     : null
   const scoredWeeks = history.weeks.filter((week) => week.scored).length
@@ -269,6 +335,12 @@ export default function PlayersView({
                 <div>
                   <p className="eyebrow">Player profile</p>
                   <h2>{namesHidden ? 'Player' : selectedPlayer.name}</h2>
+                  {prediction && (
+                    <div className="player-archetype">
+                      <strong>{prediction.profile.archetype}</strong>
+                      <span>{prediction.profile.archetypeDetail}</span>
+                    </div>
+                  )}
                 </div>
                 <label>
                   <span className="sr-only">Select week</span>
@@ -278,8 +350,8 @@ export default function PlayersView({
                       setSelectedWeekNumber(Number(event.target.value))
                     }
                   >
-                    {history.weeks.map((week) => (
-                      <option key={week.periodId} value={week.week}>
+                    {availableWeeks.map((week) => (
+                      <option key={week.week} value={week.week}>
                         {week.label}
                       </option>
                     ))}
@@ -320,48 +392,173 @@ export default function PlayersView({
                 />
               </div>
 
-              <div className="week-card">
-                <div className="week-card-heading">
-                  <div>
-                    <span>{selectedWeek?.label}</span>
-                    <strong>
-                      {selectedWeek?.scored ? 'Final picks' : 'Picks not yet public'}
-                    </strong>
-                  </div>
-                  <div className="week-score">
-                    <span>Week score</span>
-                    <strong>{weekEntry?.weekScore ?? '—'}</strong>
-                    {weekEntry?.tiebreaker?.answer != null && (
-                      <small>TB {weekEntry.tiebreaker.answer}</small>
-                    )}
-                  </div>
-                </div>
-
-                <div className="pick-history-list">
-                  {weekEntry?.picks.map((pick) => (
-                    <div className="history-pick" key={pick.gameId}>
-                      <div className="history-matchup">
-                        <span>{pick.sport}</span>
-                        <strong>
-                          {pick.away} @ {pick.home}
-                        </strong>
-                        <small>
-                          CBS: {pick.home} {formatSpread(pick.homeSpread)}
-                        </small>
-                      </div>
-                      <div className="history-selection">
-                        <span>Selection</span>
-                        <strong>{pickLabel(pick)}</strong>
-                      </div>
-                      <span
-                        className={`pick-result ${pick.result ?? pick.matchStatus}`}
-                      >
-                        {resultLabel(pick)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+              <div className="player-view-toggle" aria-label="Player week view">
+                <button
+                  className={detailView === 'prediction' ? 'active' : ''}
+                  type="button"
+                  onClick={() => setDetailView('prediction')}
+                >
+                  Prediction
+                </button>
+                <button
+                  className={detailView === 'actual' ? 'active' : ''}
+                  type="button"
+                  onClick={() => setDetailView('actual')}
+                >
+                  Actual picks
+                </button>
               </div>
+
+              {detailView === 'prediction' ? (
+                <div className="week-card prediction-card">
+                  <div className="week-card-heading">
+                    <div>
+                      <span>{selectedWeek?.label}</span>
+                      <strong>
+                        {selectedWeek?.scored
+                          ? 'Prediction report'
+                          : 'Predicted card'}
+                      </strong>
+                      <small>
+                        {prediction?.trainingThroughWeek
+                          ? `Uses scored picks through Week ${prediction.trainingThroughWeek}`
+                          : 'Waiting for an earlier scored week'}
+                      </small>
+                    </div>
+                    <div className="week-score">
+                      <span>
+                        {selectedWeek?.scored ? 'This week' : 'Season accuracy'}
+                      </span>
+                      <strong>
+                        {selectedWeek?.scored
+                          ? formatAccuracy(prediction?.accuracy ?? null)
+                          : formatAccuracy(predictionRecord?.accuracy ?? null)}
+                      </strong>
+                      <small>
+                        {selectedWeek?.scored
+                          ? `${prediction?.correct ?? 0} of ${prediction?.graded ?? 0} graded · ${prediction?.calls ?? 0} calls`
+                          : `${predictionRecord?.correct ?? 0} of ${predictionRecord?.calls ?? 0} graded`}
+                      </small>
+                    </div>
+                  </div>
+
+                  {!prediction || prediction.calls === 0 ? (
+                    <div className="prediction-empty">
+                      <strong>No responsible calls yet</strong>
+                      <p>
+                        The model waits for at least 20 prior picks, or a
+                        smaller but decisive line-value/public sample. This
+                        fills in automatically after Tuesday exports are
+                        scored.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="prediction-list">
+                      {prediction.games.map((game) => (
+                        <div className="prediction-row" key={game.cbsEventId}>
+                          <div className="history-matchup">
+                            <span>{game.sport}</span>
+                            <strong>
+                              {game.away} @ {game.home}
+                            </strong>
+                            <small>
+                              CBS: {game.home} {formatSpread(game.homeSpread)}
+                            </small>
+                          </div>
+                          <div className="prediction-selection">
+                            <span>Prediction</span>
+                            <strong>{predictedPickLabel(game)}</strong>
+                            <small>{game.reason}</small>
+                          </div>
+                          {game.confidence ? (
+                            <span
+                              className={`prediction-confidence ${game.confidence}`}
+                            >
+                              {game.confidence} confidence
+                            </span>
+                          ) : (
+                            <span className="prediction-confidence no-call">
+                              no call
+                            </span>
+                          )}
+                          {selectedWeek?.scored && (
+                            <div className="prediction-actual">
+                              <span>Actual</span>
+                              <strong>
+                                {game.actualSide === 'home'
+                                  ? game.home
+                                  : game.actualSide === 'away'
+                                    ? game.away
+                                    : '—'}
+                              </strong>
+                              <small
+                                className={
+                                  game.correct === true
+                                    ? 'hit'
+                                    : game.correct === false
+                                      ? 'miss'
+                                      : ''
+                                }
+                              >
+                                {game.correct === true
+                                  ? 'Hit'
+                                  : game.correct === false
+                                    ? 'Miss'
+                                    : 'Not graded'}
+                              </small>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="week-card">
+                  <div className="week-card-heading">
+                    <div>
+                      <span>{selectedWeek?.label}</span>
+                      <strong>
+                        {selectedWeek?.scored
+                          ? 'Final picks'
+                          : 'Picks not yet public'}
+                      </strong>
+                    </div>
+                    <div className="week-score">
+                      <span>Week score</span>
+                      <strong>{weekEntry?.weekScore ?? '—'}</strong>
+                      {weekEntry?.tiebreaker?.answer != null && (
+                        <small>TB {weekEntry.tiebreaker.answer}</small>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="pick-history-list">
+                    {weekEntry?.picks.map((pick) => (
+                      <div className="history-pick" key={pick.gameId}>
+                        <div className="history-matchup">
+                          <span>{pick.sport}</span>
+                          <strong>
+                            {pick.away} @ {pick.home}
+                          </strong>
+                          <small>
+                            CBS: {pick.home} {formatSpread(pick.homeSpread)}
+                          </small>
+                        </div>
+                        <div className="history-selection">
+                          <span>Selection</span>
+                          <strong>{pickLabel(pick)}</strong>
+                        </div>
+                        <span
+                          className={`pick-result ${pick.result ?? pick.matchStatus}`}
+                        >
+                          {resultLabel(pick)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </>
           )}
         </section>

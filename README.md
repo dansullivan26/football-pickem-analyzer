@@ -45,6 +45,17 @@ unpicked weeks immediately; tendency metrics populate as scored Tuesday
 exports add selections, results, and tiebreaker totals. Line-value agreement
 and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
+The Players view also builds a weekly prediction from that player's earlier
+scored weeks. V1 looks for decisive home/road, favorite/dog, line-value, and
+public-side habits; it withholds a call when the sample is thin or the signals
+conflict. The selected week's **Prediction** view is a forecast while picks are
+hidden, then becomes an automatic predicted-vs-actual report after Tuesday's
+player dump. Historical reports are reconstructed using only weeks that came
+before the week being graded, so later picks cannot leak into old forecasts.
+Archetype labels (for example, `Home-favorite taker` or `Public fader`) are
+assigned from the strongest sufficiently supported tendency and may change as
+new scored weeks arrive.
+
 To prepare a GrokBot Covers consensus export:
 
 ```bash

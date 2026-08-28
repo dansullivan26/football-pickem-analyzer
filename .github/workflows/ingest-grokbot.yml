@@ -64,6 +64,8 @@ jobs:
               ;;
             players)
               npm run prepare-players -- --input incoming/players.json
+              node --experimental-strip-types --no-warnings=ExperimentalWarning \
+                scripts/snapshot-predictions.ts
               ;;
             consensus)
               npm run prepare-consensus -- --input incoming/consensus.json
@@ -82,7 +84,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/current-slate.json src/data/player-history.json src/data/consensus.json
+          git add src/data/current-slate.json src/data/player-history.json src/data/consensus.json src/data/prediction-forecasts.json
 
           if git diff --cached --quiet; then
             echo "Prepared ${KIND} data matches what is already on main."

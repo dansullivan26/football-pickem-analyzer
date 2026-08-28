@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   buildPlayerPredictionProfile,
   predictPlayerWeek,
+  snapshotPlayerForecasts,
 } from '../src/playerPrediction.ts'
 import type {
   FrozenRecommendation,
@@ -246,4 +247,45 @@ test('excludes ambiguous actual picks from prediction accuracy', () => {
   assert.equal(report.calls, 1)
   assert.equal(report.graded, 0)
   assert.equal(report.accuracy, null)
+})
+
+test('freezes predicted sides after kickoff and grades without rewriting them', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home'),
+  )
+  const weekTwo = recWeek(2, [recGame(100, { homeSpread: 3 })], true)
+  const recs = recHistory([recWeek(1, []), weekTwo])
+  const openHistory = history([
+    historyWeek(1, priorPicks),
+    historyWeek(2, [], false),
+  ])
+  const frozen = snapshotPlayerForecasts(
+    openHistory,
+    recs,
+    null,
+    Date.parse('2026-09-06T16:00:00-04:00'),
+  )
+  const week = frozen.weeks.find((row) => row.week === 2)
+  assert.ok(week?.frozenAt)
+  assert.equal(week?.players[0].games[0].predictedSide, 'home')
+  assert.equal(week?.players[0].games[0].habitKey, 'home')
+
+  const scored = snapshotPlayerForecasts(
+    history([
+      historyWeek(1, priorPicks),
+      historyWeek(2, [pick(100, 'away', 3)]),
+    ]),
+    recs,
+    frozen,
+    Date.parse('2026-09-10T12:00:00-04:00'),
+  )
+  const graded = scored.weeks.find((row) => row.week === 2)?.players[0].games[0]
+  assert.equal(graded?.predictedSide, 'home')
+  assert.equal(graded?.actualSide, 'away')
+  assert.equal(graded?.correct, false)
+  assert.equal(scored.residuals?.overall.graded, 1)
+  assert.equal(
+    scored.residuals?.byMarket.find((cell) => cell.key === 'dog')?.correct,
+    0,
+  )
 })

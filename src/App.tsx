@@ -3,6 +3,7 @@ import consensusData from './data/consensus.json'
 import slateData from './data/current-slate.json'
 import playerHistoryData from './data/player-history.json'
 import recommendationHistoryData from './data/recommendation-history.json'
+import predictionForecastsData from './data/prediction-forecasts.json'
 import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
@@ -11,6 +12,7 @@ import { publicBucketForPool, favorableHook } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { pathForView, viewFromPath, type AppView } from './routes'
+import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
   ConsensusFeed,
@@ -29,6 +31,7 @@ import type {
 const slate = slateData as Slate
 const playerHistory = playerHistoryData as PlayerHistory
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
+const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
 // A dump from an earlier week would silently mislabel this week's rows.
 const consensusByEvent = new Map(
@@ -786,6 +789,7 @@ function App() {
         <PlayersView
           history={playerHistory}
           recommendations={recommendationHistory}
+          forecasts={predictionForecasts}
         />
       ) : (
         <PerformanceView history={recommendationHistory} />

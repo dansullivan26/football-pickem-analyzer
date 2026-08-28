@@ -50,11 +50,20 @@ scored weeks. V1 looks for decisive home/road, favorite/dog, line-value, and
 public-side habits; it withholds a call when the sample is thin or the signals
 conflict. The selected week's **Prediction** view is a forecast while picks are
 hidden, then becomes an automatic predicted-vs-actual report after Tuesday's
-player dump. Historical reports are reconstructed using only weeks that came
-before the week being graded, so later picks cannot leak into old forecasts.
+player dump. Open-week forecasts keep updating until the first kickoff; after
+that, `src/data/prediction-forecasts.json` freezes the v1 calls (`v1-habits`)
+so later rule changes cannot rewrite the report card. Tuesday's player ingest
+grades those frozen sides and refreshes the residual split (league, favorite vs
+dog, habit, confidence). Historical UI reports prefer the frozen file when it
+exists.
+
 Archetype labels (for example, `Home-favorite taker` or `Public fader`) are
 assigned from the strongest sufficiently supported tendency and may change as
 new scored weeks arrive.
+
+```bash
+npm run snapshot-predictions
+```
 
 To prepare a GrokBot Covers consensus export:
 
@@ -115,7 +124,9 @@ npm run snapshot-recommendations
 
 That writes `src/data/recommendation-history.json` for the Performance page.
 The odds refresh workflow runs the same snapshot so live recs keep updating
-until kickoff. Open games also store the generated-card source and strength
+until kickoff, then `npm run snapshot-predictions` so player forecasts freeze
+at the week's first kickoff. Open games also store the generated-card source
+and strength
 (line value vs public, mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×
 strength bucket separately.

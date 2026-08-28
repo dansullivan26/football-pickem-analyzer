@@ -1368,6 +1368,50 @@ select:focus {
   font-size: 0.68rem;
 }
 
+.residual-report {
+  margin: 0 0 18px;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.residual-heading p {
+  max-width: 62ch;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.residual-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.residual-card {
+  display: grid;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fbfcfb;
+}
+
+.residual-card span,
+.residual-card small {
+  color: var(--muted);
+  font-size: 0.66rem;
+  text-transform: capitalize;
+}
+
+.residual-card strong {
+  margin: 3px 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.2rem;
+}
+
 .tendency-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1775,7 +1819,8 @@ footer {
     grid-template-columns: 220px minmax(0, 1fr);
   }
 
-  .tendency-grid {
+  .tendency-grid,
+  .residual-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 

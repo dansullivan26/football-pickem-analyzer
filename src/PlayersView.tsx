@@ -1,8 +1,13 @@
 import { useMemo, useState } from 'react'
 import {
+  frozenPlayerWeek,
+  PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
   predictionSeasonRecord,
   type PredictedGame,
+  type PredictionForecasts,
+  type PredictionResidualReport,
+  type ResidualCell,
 } from './playerPrediction'
 import type {
   PlayerHistory,
@@ -44,6 +49,48 @@ function predictedPickLabel(game: PredictedGame) {
 
 function formatAccuracy(value: number | null) {
   return value == null ? '—' : `${Math.round(value * 100)}%`
+}
+
+function ResidualMetric({ cell }: { cell: ResidualCell }) {
+  return (
+    <div className="residual-card">
+      <span>{cell.key}</span>
+      <strong>{formatAccuracy(cell.accuracy)}</strong>
+      <small>
+        {cell.correct}/{cell.graded} graded · {Math.round((cell.noCallRate ?? 0) * 100)}%
+        no-call
+      </small>
+    </div>
+  )
+}
+
+function ResidualReport({ report }: { report: PredictionResidualReport }) {
+  return (
+    <section className="residual-report" aria-label="Prediction residuals">
+      <div className="residual-heading">
+        <p className="eyebrow">Frozen {report.strategyId} residuals</p>
+        <p>
+          Pool-wide hit rate on locked forecasts, split so later reviews can
+          see which slider to add next.
+        </p>
+      </div>
+      <div className="residual-grid">
+        <ResidualMetric cell={{ ...report.overall, key: 'Overall' }} />
+        {report.byLeague.map((cell) => (
+          <ResidualMetric key={cell.key} cell={cell} />
+        ))}
+        {report.byMarket.map((cell) => (
+          <ResidualMetric key={cell.key} cell={cell} />
+        ))}
+        {report.byHabit.map((cell) => (
+          <ResidualMetric key={cell.key} cell={cell} />
+        ))}
+        {report.byConfidence.map((cell) => (
+          <ResidualMetric key={`conf-${cell.key}`} cell={cell} />
+        ))}
+      </div>
+    </section>
+  )
 }
 
 function Metric({
@@ -144,9 +191,11 @@ function summarizePlayer(
 export default function PlayersView({
   history,
   recommendations,
+  forecasts,
 }: {
   history: PlayerHistory
   recommendations: RecommendationHistory
+  forecasts: PredictionForecasts | null
 }) {
   const [query, setQuery] = useState('')
   const [namesHidden, setNamesHidden] = useState(() => {
@@ -221,7 +270,7 @@ export default function PlayersView({
         recommendations.weeks,
       )
     : null
-  const prediction =
+  const livePrediction =
     selectedPlayer && recommendationWeek
       ? predictPlayerWeek(
           selectedPlayer.entryId,
@@ -230,11 +279,46 @@ export default function PlayersView({
           recommendations,
         )
       : null
+  const frozenWeek = forecasts?.weeks.find(
+    (week) =>
+      week.week === selectedWeek?.week &&
+      week.strategyId === PREDICTION_STRATEGY_ID,
+  )
+  const frozen = selectedPlayer
+    ? frozenPlayerWeek(
+        forecasts,
+        selectedPlayer.entryId,
+        selectedWeek?.week ?? 0,
+      )
+    : null
+  const gradedFrozen = frozen?.games.filter((game) => game.correct != null) ?? []
+  const prediction =
+    livePrediction && frozenWeek?.frozenAt && frozen
+      ? {
+          ...livePrediction,
+          trainingThroughWeek: frozenWeek.trainingThroughWeek,
+          profile: {
+            ...livePrediction.profile,
+            archetype: frozen.archetype,
+            archetypeDetail: frozen.archetypeDetail,
+            picks: frozen.priorPicks,
+          },
+          games: frozen.games,
+          calls: frozen.calls,
+          graded: gradedFrozen.length,
+          correct: gradedFrozen.filter((game) => game.correct).length,
+          accuracy: gradedFrozen.length
+            ? gradedFrozen.filter((game) => game.correct).length /
+              gradedFrozen.length
+            : null,
+        }
+      : livePrediction
   const predictionRecord = selectedPlayer
     ? predictionSeasonRecord(
         selectedPlayer.entryId,
         history,
         recommendations,
+        forecasts,
       )
     : null
   const scoredWeeks = history.weeks.filter((week) => week.scored).length
@@ -286,6 +370,8 @@ export default function PlayersView({
           populate automatically once picks and results are available.
         </div>
       )}
+
+      {forecasts?.residuals && <ResidualReport report={forecasts.residuals} />}
 
       <section
         className={`players-layout${namesHidden ? ' names-hidden' : ''}`}

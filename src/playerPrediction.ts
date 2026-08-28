@@ -27,6 +27,8 @@ export type PlayerPredictionProfile = {
   habits: Record<HabitKey, Habit>
 }
 
+export const PREDICTION_STRATEGY_ID = 'v1-habits'
+
 export type PredictedGame = {
   cbsEventId: number
   sport: 'NFL' | 'NCAAF'
@@ -36,6 +38,7 @@ export type PredictedGame = {
   predictedSide: 'home' | 'away' | null
   predictedTeam: string | null
   confidence: PredictionConfidence | null
+  habitKey: HabitKey | null
   reason: string
   sampleSize: number
   actualSide: 'home' | 'away' | null
@@ -52,6 +55,53 @@ export type PlayerPrediction = {
   graded: number
   correct: number
   accuracy: number | null
+}
+
+export type FrozenPlayerForecast = {
+  entryId: string
+  name: string
+  archetype: string
+  archetypeDetail: string
+  priorPicks: number
+  calls: number
+  games: PredictedGame[]
+}
+
+export type PredictionForecastWeek = {
+  week: number
+  label: string
+  strategyId: string
+  capturedAt: string
+  frozenAt: string | null
+  trainingThroughWeek: number | null
+  players: FrozenPlayerForecast[]
+}
+
+export type ResidualCell = {
+  key: string
+  games: number
+  calls: number
+  graded: number
+  correct: number
+  noCalls: number
+  accuracy: number | null
+  noCallRate: number | null
+}
+
+export type PredictionResidualReport = {
+  strategyId: string
+  updatedAt: string
+  overall: ResidualCell
+  byLeague: ResidualCell[]
+  byMarket: ResidualCell[]
+  byHabit: ResidualCell[]
+  byConfidence: ResidualCell[]
+}
+
+export type PredictionForecasts = {
+  updatedAt: string
+  weeks: PredictionForecastWeek[]
+  residuals: PredictionResidualReport | null
 }
 
 type HabitCounts = {
@@ -369,6 +419,7 @@ function predictGame(
           ? game.away
           : null,
     confidence: chosen ? predictionConfidence(chosen.habit) : null,
+    habitKey: chosen?.habit.key ?? null,
     reason: chosen
       ? `${chosen.reason} · ${chosen.habit.eligible} prior chances`
       : profile.picks < 20
@@ -436,23 +487,237 @@ export function predictionSeasonRecord(
   entryId: string,
   history: PlayerHistory,
   recommendations: RecommendationHistory,
+  forecasts?: PredictionForecasts | null,
 ) {
-  const reports = recommendations.weeks
-    .filter((week) =>
-      history.weeks.some(
-        (historyWeek) => historyWeek.week === week.week && historyWeek.scored,
-      ),
+  const frozen = forecasts?.weeks
+    .filter(
+      (week) =>
+        week.strategyId === PREDICTION_STRATEGY_ID && week.frozenAt,
     )
-    .map((week) =>
-      predictPlayerWeek(entryId, week, history, recommendations),
+    .flatMap(
+      (week) =>
+        week.players.find((player) => player.entryId === entryId)?.games ?? [],
     )
-  const graded = reports.flatMap((report) =>
-    report.games.filter((game) => game.correct != null),
-  )
+    .filter((game) => game.correct != null)
+  const graded =
+    frozen && frozen.length > 0
+      ? frozen
+      : recommendations.weeks
+          .filter((week) =>
+            history.weeks.some(
+              (historyWeek) =>
+                historyWeek.week === week.week && historyWeek.scored,
+            ),
+          )
+          .flatMap(
+            (week) =>
+              predictPlayerWeek(entryId, week, history, recommendations).games,
+          )
+          .filter((game) => game.correct != null)
   const correct = graded.filter((game) => game.correct).length
   return {
     calls: graded.length,
     correct,
     accuracy: graded.length ? correct / graded.length : null,
   }
+}
+
+function matchedActualSide(
+  entryId: string,
+  week: number,
+  cbsEventId: number,
+  history: PlayerHistory,
+) {
+  const pick = history.weeks
+    .find((historyWeek) => historyWeek.week === week)
+    ?.entries.find((entry) => entry.entryId === entryId)
+    ?.picks.find((row) => row.cbsEventId === cbsEventId)
+  if (
+    pick?.matchStatus !== 'matched' ||
+    (pick.pickedSide !== 'home' && pick.pickedSide !== 'away')
+  ) {
+    return null
+  }
+  return pick.pickedSide
+}
+
+function gradeForecastGames(
+  entryId: string,
+  week: number,
+  games: PredictedGame[],
+  history: PlayerHistory,
+) {
+  return games.map((game) => {
+    const actualSide = matchedActualSide(
+      entryId,
+      week,
+      game.cbsEventId,
+      history,
+    )
+    return {
+      ...game,
+      actualSide,
+      correct:
+        game.predictedSide && actualSide
+          ? game.predictedSide === actualSide
+          : null,
+    }
+  })
+}
+
+function residualCell(key: string, games: PredictedGame[]): ResidualCell {
+  const calls = games.filter((game) => game.predictedSide).length
+  const graded = games.filter((game) => game.correct != null)
+  const correct = graded.filter((game) => game.correct).length
+  return {
+    key,
+    games: games.length,
+    calls,
+    graded: graded.length,
+    correct,
+    noCalls: games.length - calls,
+    accuracy: graded.length ? correct / graded.length : null,
+    noCallRate: games.length ? (games.length - calls) / games.length : null,
+  }
+}
+
+function marketKey(game: PredictedGame) {
+  if (!game.predictedSide) return 'no-call'
+  const favoriteSide = sideForFavorite(game.homeSpread)
+  if (!favoriteSide) return 'pickem'
+  return game.predictedSide === favoriteSide ? 'favorite' : 'dog'
+}
+
+export function summarizePredictionResiduals(
+  weeks: PredictionForecastWeek[],
+  capturedAt: string,
+): PredictionResidualReport | null {
+  const games = weeks
+    .filter((week) => week.strategyId === PREDICTION_STRATEGY_ID)
+    .flatMap((week) => week.players.flatMap((player) => player.games))
+  if (games.length === 0) return null
+
+  const by = (keyFor: (game: PredictedGame) => string) => {
+    const buckets = new Map<string, PredictedGame[]>()
+    for (const game of games) {
+      const key = keyFor(game)
+      const rows = buckets.get(key) ?? []
+      rows.push(game)
+      buckets.set(key, rows)
+    }
+    return [...buckets.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, rows]) => residualCell(key, rows))
+  }
+
+  return {
+    strategyId: PREDICTION_STRATEGY_ID,
+    updatedAt: capturedAt,
+    overall: residualCell('overall', games),
+    byLeague: by((game) => game.sport),
+    byMarket: by(marketKey),
+    byHabit: by((game) => game.habitKey ?? 'no-call'),
+    byConfidence: by((game) => game.confidence ?? 'no-call'),
+  }
+}
+
+export function snapshotPlayerForecasts(
+  history: PlayerHistory,
+  recommendations: RecommendationHistory,
+  previous: PredictionForecasts | null,
+  now = Date.now(),
+): PredictionForecasts {
+  const capturedAt = new Date(now).toISOString()
+  const previousByWeek = new Map(
+    (previous?.weeks ?? [])
+      .filter((week) => week.strategyId === PREDICTION_STRATEGY_ID)
+      .map((week) => [week.week, week]),
+  )
+  const otherWeeks = (previous?.weeks ?? []).filter(
+    (week) => week.strategyId !== PREDICTION_STRATEGY_ID,
+  )
+
+  const weeks = recommendations.weeks.map((recWeek) => {
+    const existing = previousByWeek.get(recWeek.week)
+    const playerWeek = history.weeks.find((week) => week.week === recWeek.week)
+    const firstKickoff = recWeek.games
+      .map((game) => new Date(game.kickoff).getTime())
+      .sort((a, b) => a - b)[0]
+    const shouldFreeze =
+      playerWeek?.scored === true ||
+      (typeof firstKickoff === 'number' && firstKickoff <= now)
+
+    if (existing?.frozenAt) {
+      return {
+        ...existing,
+        players: existing.players.map((player) => {
+          const games = gradeForecastGames(
+            player.entryId,
+            recWeek.week,
+            player.games,
+            history,
+          )
+          return {
+            ...player,
+            games,
+            calls: games.filter((game) => game.predictedSide).length,
+          }
+        }),
+      }
+    }
+
+    const players = history.entries.map((entry) => {
+      const report = predictPlayerWeek(
+        entry.entryId,
+        recWeek,
+        history,
+        recommendations,
+      )
+      return {
+        entryId: entry.entryId,
+        name: entry.name,
+        archetype: report.profile.archetype,
+        archetypeDetail: report.profile.archetypeDetail,
+        priorPicks: report.profile.picks,
+        calls: report.calls,
+        games: report.games,
+      }
+    })
+
+    return {
+      week: recWeek.week,
+      label: recWeek.label,
+      strategyId: PREDICTION_STRATEGY_ID,
+      capturedAt,
+      frozenAt: shouldFreeze ? capturedAt : null,
+      trainingThroughWeek:
+        history.weeks
+          .filter(
+            (historyWeek) =>
+              historyWeek.scored && historyWeek.week < recWeek.week,
+          )
+          .at(-1)?.week ?? null,
+      players,
+    }
+  })
+
+  const nextWeeks = [...otherWeeks, ...weeks].sort((a, b) => a.week - b.week)
+  return {
+    updatedAt: capturedAt,
+    weeks: nextWeeks,
+    residuals: summarizePredictionResiduals(nextWeeks, capturedAt),
+  }
+}
+
+export function frozenPlayerWeek(
+  forecasts: PredictionForecasts | null | undefined,
+  entryId: string,
+  week: number,
+) {
+  return forecasts?.weeks
+    .find(
+      (row) =>
+        row.week === week && row.strategyId === PREDICTION_STRATEGY_ID,
+    )
+    ?.players.find((player) => player.entryId === entryId)
 }

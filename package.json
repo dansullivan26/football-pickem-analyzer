@@ -13,6 +13,7 @@
     "prepare-players": "node scripts/prepare-players.mjs",
     "prepare-consensus": "node scripts/prepare-consensus.mjs",
     "snapshot-recommendations": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts",
+    "snapshot-predictions": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-predictions.ts",
     "record-card-overrides": "node scripts/record-card-overrides.mjs"
   },
   "keywords": [],

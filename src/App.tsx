@@ -17,6 +17,7 @@ import type {
   BookKey,
   ConsensusFeed,
   ConsensusGame,
+  ConsensusReport,
   EdgeCategory,
   GameAnalysis,
   GameVenue,
@@ -373,6 +374,68 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
         </div>
       </div>
     </article>
+  )
+}
+
+function reportMatchup(
+  row: ConsensusReport['games'][number],
+  games: ConsensusGame[],
+) {
+  const game =
+    games.find((item) =>
+      row.cbsEventId != null ? item.cbsEventId === row.cbsEventId : false,
+    ) ?? games.find((item) => row.gameId != null && item.gameId === row.gameId)
+  if (game) return `${game.away.abbrev} @ ${game.home.abbrev}`
+  return row.gameId ?? `Event ${row.cbsEventId}`
+}
+
+function CoversCollected({
+  captured,
+  fetchedAt,
+  report,
+  games,
+}: {
+  captured: string
+  fetchedAt: string
+  report: ConsensusReport | null | undefined
+  games: ConsensusGame[]
+}) {
+  const stamp = formatTimestamp(fetchedAt)
+  if (!report) {
+    return (
+      <p className="list-meta" title={stamp}>
+        Covers.com data collected {captured}
+      </p>
+    )
+  }
+
+  return (
+    <details className="covers-report">
+      <summary className="list-meta" title={stamp}>
+        Covers.com data collected {captured}
+        <span className="covers-report-link">Consensus report</span>
+      </summary>
+      <div className="covers-report-body">
+        <p>{report.summary}</p>
+        {report.comparedTo && (
+          <p className="covers-report-compared">
+            Compared with the dump from {formatTimestamp(report.comparedTo)}
+          </p>
+        )}
+        {report.details && <p className="covers-report-details">{report.details}</p>}
+        {report.games.length > 0 && (
+          <ul>
+            {report.games.map((row, index) => (
+              <li key={row.cbsEventId ?? row.gameId ?? index}>
+                <strong>{reportMatchup(row, games)}</strong>
+                {row.sides ? ` · ${row.sides}` : ''}
+                {row.pct ? ` · ${row.pct}` : ''}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </details>
   )
 }
 
@@ -745,12 +808,12 @@ function App() {
           )}
 
           {consensusFeed.week.order === slate.week.order && (
-            <p
-              className="list-meta"
-              title={formatTimestamp(consensusFeed.source.fetchedAt)}
-            >
-              Covers.com data collected {formatAge(consensusFeed.source.fetchedAt, now)}
-            </p>
+            <CoversCollected
+              captured={formatAge(consensusFeed.source.fetchedAt, now)}
+              fetchedAt={consensusFeed.source.fetchedAt}
+              report={consensusFeed.report}
+              games={consensusFeed.games}
+            />
           )}
           {(lineMoves.spreads > 0 || lineMoves.totals > 0) && (
             <p

@@ -84,6 +84,13 @@ current Sides number, and public card picks use a meaningful ticket bucket
 within one point of the locked pool line. Capture a fresh dump as close to the
 day's first kickoff as practical.
 
+Top-level `report` is optional. When present it is allowlisted as
+`summary` (required), `details` (full chat-style blurb), `comparedTo` (prior
+dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
+`pct` prose diffs vs yesterday). The Lines page attaches that report to the
+"Covers.com data collected…" line and expands it on click. Dumps without
+`report` still ingest.
+
 ## GrokBot ingest
 
 Raw CBS and Covers dumps stay out of this public repo. GrokBot writes them to

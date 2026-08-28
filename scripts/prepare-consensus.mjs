@@ -33,6 +33,101 @@ if (raw.week?.order !== slate.week.order) {
 const slateGames = new Map(slate.games.map((game) => [game.cbsEventId, game]))
 const seen = new Set()
 
+function readOptionalText(value) {
+  if (value == null) return null
+  if (typeof value !== 'string') return null
+  const text = value.trim()
+  return text || null
+}
+
+function readRequiredText(value, label) {
+  const text = readOptionalText(value)
+  if (!text) throw new Error(`${label} must be a non-empty string.`)
+  return text
+}
+
+function readInteger(value, label, { allowNull = false } = {}) {
+  if (value == null) {
+    if (allowNull) return null
+    throw new Error(`${label} is required.`)
+  }
+  if (typeof value !== 'number' || !Number.isInteger(value)) {
+    throw new Error(`${label} must be an integer.`)
+  }
+  return value
+}
+
+function readReportGame(row, index, preparedByEvent, preparedByGameId) {
+  const label = `report.games[${index}]`
+  if (row == null || typeof row !== 'object' || Array.isArray(row)) {
+    throw new Error(`${label} must be an object.`)
+  }
+
+  const cbsEventId = readInteger(row.cbsEventId, `${label}.cbsEventId`, {
+    allowNull: true,
+  })
+  const gameId = readOptionalText(row.gameId)
+  if (cbsEventId == null && !gameId) {
+    throw new Error(`${label} needs cbsEventId or gameId.`)
+  }
+
+  const slateGame =
+    (cbsEventId != null ? preparedByEvent.get(cbsEventId) : undefined) ??
+    (gameId ? preparedByGameId.get(gameId) : undefined)
+  if (!slateGame) {
+    console.warn(
+      `Warning: ${label} does not match a prepared consensus game.`,
+    )
+  }
+
+  const sides = readOptionalText(row.sides)
+  const pct = readOptionalText(row.pct)
+  if (!sides && !pct) {
+    throw new Error(`${label} needs a sides or pct diff vs yesterday.`)
+  }
+
+  return {
+    cbsEventId: cbsEventId ?? slateGame?.cbsEventId ?? null,
+    gameId: gameId ?? slateGame?.gameId ?? null,
+    sides,
+    pct,
+  }
+}
+
+function readReport(raw, preparedGames) {
+  if (raw.report == null) return null
+  if (typeof raw.report !== 'object' || Array.isArray(raw.report)) {
+    throw new Error('report must be an object or null.')
+  }
+
+  const summary = readRequiredText(raw.report.summary, 'report.summary')
+  const details = readOptionalText(raw.report.details)
+  const comparedTo = readOptionalText(raw.report.comparedTo)
+  const preparedByEvent = new Map(
+    preparedGames.map((game) => [game.cbsEventId, game]),
+  )
+  const preparedByGameId = new Map(
+    preparedGames.map((game) => [game.gameId, game]),
+  )
+
+  let games = []
+  if (raw.report.games != null) {
+    if (!Array.isArray(raw.report.games)) {
+      throw new Error('report.games must be an array.')
+    }
+    games = raw.report.games.map((row, index) =>
+      readReportGame(row, index, preparedByEvent, preparedByGameId),
+    )
+  }
+
+  return {
+    summary,
+    details,
+    comparedTo,
+    games,
+  }
+}
+
 function readSide(side, label, game, matched) {
   if (!side?.name || !side?.abbrev) {
     throw new Error(`${label} in ${game.gameId} is missing a team name.`)
@@ -198,6 +293,7 @@ for (const game of missing) {
 }
 
 const matchedCount = games.filter((game) => game.matchStatus === 'matched').length
+const report = readReport(raw, games)
 
 const consensus = {
   source: {
@@ -214,6 +310,7 @@ const consensus = {
     matched: matchedCount,
     unmatched: games.length - matchedCount,
   },
+  report,
   games,
 }
 
@@ -224,5 +321,6 @@ await writeFile(
 )
 
 console.log(
-  `Prepared ${matchedCount} of ${slate.games.length} ${consensus.week.label} consensus rows from ${inputPath}.`,
+  `Prepared ${matchedCount} of ${slate.games.length} ${consensus.week.label} consensus rows from ${inputPath}.` +
+    (report ? ' Report included.' : ''),
 )

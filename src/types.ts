@@ -217,6 +217,24 @@ export type ConsensusGame = {
   atsByLine?: ConsensusAtsLine[]
 }
 
+export type ConsensusReportGame = {
+  cbsEventId: number | null
+  gameId: string | null
+  /** Prose Sides diff vs the previous dump, e.g. "TCU -9.5 (was -8.5)". */
+  sides: string | null
+  /** Prose ticket-share diff vs the previous dump, e.g. "TCU 64% (was 58%)". */
+  pct: string | null
+}
+
+export type ConsensusReport = {
+  summary: string
+  /** Full chat-style blurb. Null when GrokBot only sent summary + games. */
+  details: string | null
+  /** fetchedAt of the dump this report compared against. */
+  comparedTo: string | null
+  games: ConsensusReportGame[]
+}
+
 export type ConsensusFeed = {
   source: {
     site: string
@@ -232,6 +250,8 @@ export type ConsensusFeed = {
     matched: number
     unmatched: number
   }
+  /** GrokBot's vs-yesterday Sides/% blurb. Null on dumps from before report. */
+  report?: ConsensusReport | null
   games: ConsensusGame[]
 }
 

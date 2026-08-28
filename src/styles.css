@@ -890,6 +890,70 @@ select:focus {
   font-size: 0.74rem;
 }
 
+.covers-report {
+  margin: 0 0 10px;
+}
+
+.covers-report > summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-items: baseline;
+  margin: 0;
+  list-style: none;
+  cursor: pointer;
+}
+
+.covers-report > summary::-webkit-details-marker {
+  display: none;
+}
+
+.covers-report-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.covers-report[open] .covers-report-link {
+  color: var(--green);
+}
+
+.covers-report-body {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.covers-report-body p,
+.covers-report-body ul {
+  margin: 0;
+}
+
+.covers-report-body p + p,
+.covers-report-body p + ul {
+  margin-top: 8px;
+}
+
+.covers-report-compared {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.covers-report-details {
+  white-space: pre-wrap;
+}
+
+.covers-report-body ul {
+  display: grid;
+  gap: 4px;
+  padding-left: 1.1em;
+}
+
 .game-card {
   display: grid;
   grid-template-columns: 185px minmax(230px, 1.2fr) minmax(300px, 1fr) 160px;

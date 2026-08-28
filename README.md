@@ -223,3 +223,5 @@ side is the team receiving the better number in the CBS pool. If that number is
 the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
 DraftKings, the Lines card shows a favorable hook badge and the generated card
 scores that pick as solid line value (not mild) with an FG/TD hook badge.
+Generated-card strength sort puts every line-value pick above every public-only
+pick, then uses Covers agreement as a tie-break inside hammer / lean / slight.

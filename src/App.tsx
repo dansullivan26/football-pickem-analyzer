@@ -8,7 +8,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook } from './cardScoring'
+import { publicBucketForPool, favorableHook, publicSupportForSide, PUBLIC_SUPPORT_RANK } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { pathForView, viewFromPath, type AppView } from './routes'
@@ -491,9 +491,21 @@ function App() {
 
     if (sort !== 'recommendation') return filtered
 
-    return [...filtered].sort(
-      (a, b) => CATEGORY_RANK[a.category] - CATEGORY_RANK[b.category],
-    )
+    return [...filtered].sort((a, b) => {
+      const category = CATEGORY_RANK[a.category] - CATEGORY_RANK[b.category]
+      if (category) return category
+      const edge = (b.edge ?? -1) - (a.edge ?? -1)
+      if (edge) return edge
+      const publicSupport =
+        PUBLIC_SUPPORT_RANK[
+          publicSupportForSide(b.consensus, b.game.homeSpread, b.recommendedSide)
+        ] -
+        PUBLIC_SUPPORT_RANK[
+          publicSupportForSide(a.consensus, a.game.homeSpread, a.recommendedSide)
+        ]
+      if (publicSupport) return publicSupport
+      return a.game.kickoff.localeCompare(b.game.kickoff)
+    })
   }, [analyses, filter, league, query, sort])
 
   const lineMoves = useMemo(() => {

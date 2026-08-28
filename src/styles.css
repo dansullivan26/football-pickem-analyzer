@@ -718,6 +718,27 @@ h2 {
   white-space: nowrap;
 }
 
+.pick-public {
+  align-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pick-public.agree {
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
+.pick-public.fade {
+  color: var(--muted);
+  background: #eef1ee;
+}
+
 .pick-deviate {
   align-self: start;
   padding: 3px 8px;

@@ -214,6 +214,14 @@ export default function SuggestedCardPanel({
                       {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
                     </span>
                   )}
+                  {pick.source === 'line-value' &&
+                    pick.publicSupport !== 'none' && (
+                      <span className={`pick-public ${pick.publicSupport}`}>
+                        {pick.publicSupport === 'agree'
+                          ? 'Public agrees'
+                          : 'Public fades'}
+                      </span>
+                    )}
                   {deviate && <span className="pick-deviate">Deviate</span>}
                 </div>
                 <label className="suggested-pick-toggle">

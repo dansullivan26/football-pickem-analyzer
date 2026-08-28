@@ -6,7 +6,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line-value picks (hammer / lean / slight) come first. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, but scores as solid so it ranks with leans instead of with 0.5-point slights. Public fallback uses the Covers ticket bucket nearest the pool line within 1 point, excluding buckets under 10 picks or 5% of tickets, then scores (bucket public% − 50) + 3 × (pool number − bucket number). Strength is mild under 6, solid 6–11, strong 12+. Strength sort ranks line value above public in the same band.'
+  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, scored as solid so it ranks with leans instead of with 0.5-point slights. Public is a within-band modifier: agreement lifts a game over an otherwise similar line-value play; fade drops it a notch in that same band. Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -17,11 +17,18 @@ export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
 export type PickStrength = 'mild' | 'solid' | 'strong'
 export type CardPickSource = 'line-value' | 'public-consensus'
 export type HookKind = 'fg' | 'td'
+export type PublicSupport = 'agree' | 'none' | 'fade'
 
 export const STRENGTH_RANK: Record<PickStrength, number> = {
   strong: 3,
   solid: 2,
   mild: 1,
+}
+
+export const PUBLIC_SUPPORT_RANK: Record<PublicSupport, number> = {
+  agree: 2,
+  none: 1,
+  fade: 0,
 }
 
 export type ResolvedCardPick = {
@@ -33,6 +40,7 @@ export type ResolvedCardPick = {
   detail: string | null
   skipReason: string | null
   hook: HookKind | null
+  publicSupport: PublicSupport
 }
 
 function formatPoints(value: number) {
@@ -191,6 +199,46 @@ export function evaluatePublicPick(
   }
 }
 
+export function publicSupportForSide(
+  consensus: ConsensusGame | undefined,
+  homeSpread: number,
+  side: 'home' | 'away' | null,
+): PublicSupport {
+  if (!side || consensus?.matchStatus !== 'matched') return 'none'
+  const publicPick = evaluatePublicPick(consensus, homeSpread)
+  if (!publicPick.ok) return 'none'
+  return publicPick.side === side ? 'agree' : 'fade'
+}
+
+export function compareCardPicks(
+  left: {
+    source: CardPickSource
+    strength: PickStrength
+    publicSupport: PublicSupport
+    score: number
+    kickoff: string
+  },
+  right: {
+    source: CardPickSource
+    strength: PickStrength
+    publicSupport: PublicSupport
+    score: number
+    kickoff: string
+  },
+) {
+  if (left.source !== right.source) {
+    return left.source === 'line-value' ? -1 : 1
+  }
+  const strength = STRENGTH_RANK[right.strength] - STRENGTH_RANK[left.strength]
+  if (strength) return strength
+  const publicSupport =
+    PUBLIC_SUPPORT_RANK[right.publicSupport] -
+    PUBLIC_SUPPORT_RANK[left.publicSupport]
+  if (publicSupport) return publicSupport
+  if (right.score !== left.score) return right.score - left.score
+  return left.kickoff.localeCompare(right.kickoff)
+}
+
 export function resolveCardPick(input: {
   category: EdgeCategory
   recommendedSide: 'home' | 'away' | null
@@ -208,6 +256,7 @@ export function resolveCardPick(input: {
     detail: null,
     skipReason: null,
     hook: null,
+    publicSupport: 'none',
   }
 
   const hook =
@@ -231,6 +280,11 @@ export function resolveCardPick(input: {
         hookNote,
       skipReason: null,
       hook,
+      publicSupport: publicSupportForSide(
+        input.consensus,
+        input.homeSpread,
+        input.recommendedSide,
+      ),
     }
   }
 
@@ -246,6 +300,7 @@ export function resolveCardPick(input: {
         detail: publicPick.detail,
         skipReason: null,
         hook: null,
+        publicSupport: 'agree',
       }
     }
     return { ...empty, skipReason: publicPick.reason }

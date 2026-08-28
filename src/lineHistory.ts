@@ -137,3 +137,25 @@ export function lineHistoryByEvent(
   if (!history || history.week !== week) return new Map<number, LineHistoryGame>()
   return new Map(history.games.map((game) => [game.cbsEventId, game]))
 }
+
+/** History can lag the latest odds pull; the displayed path should still end on live. */
+export function ticksEndingAtLive(
+  ticks: LineTick[],
+  live: { line: number; retrievedAt: string } | null | undefined,
+): LineTick[] {
+  if (live == null || typeof live.line !== 'number') return ticks
+  const last = ticks[ticks.length - 1]
+  if (last?.home === live.line) return ticks
+  return [...ticks, { at: live.retrievedAt, home: live.line }]
+}
+
+export function totalsEndingAtLive(
+  ticks: TotalTick[] | undefined,
+  live: { line: number; retrievedAt: string } | null | undefined,
+): TotalTick[] {
+  const current = ticks ?? []
+  if (live == null || typeof live.line !== 'number') return current
+  const last = current[current.length - 1]
+  if (last?.line === live.line) return current
+  return [...current, { at: live.retrievedAt, line: live.line }]
+}

@@ -12,7 +12,7 @@ import TeamLogo from './TeamLogo'
 import { publicBucketForPool, favorableHook, compareRecommendationOrder, recommendationOrderKey } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
-import { lineHistoryByEvent } from './lineHistory'
+import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
 import { pathForView, viewFromPath, type AppView } from './routes'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
@@ -320,8 +320,6 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const venue = formatVenue(game.venue)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
-  const spreadPath = history ? formatSpreadPath(history.ticks, true) : null
-  const totalPath = history?.totals ? formatTotalPath(history.totals) : null
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
@@ -359,6 +357,10 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
         {(Object.keys(bookNames) as BookKey[]).map((book) => {
           const entry = odds?.lines[book]
           const total = isTiebreaker ? odds?.totals?.[book] : undefined
+          const ticks = ticksEndingAtLive(history?.ticks ?? [], entry)
+          const totals = totalsEndingAtLive(history?.totals, total)
+          const spreadPath = formatSpreadPath(ticks, true)
+          const totalPath = formatTotalPath(totals)
           const stale =
             !!entry && now - new Date(entry.retrievedAt).getTime() > STALE_AFTER_MS
           return (
@@ -366,7 +368,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
               <span>{bookNames[book]}</span>
               <strong>{formatSpread(entry?.line)}</strong>
               {spreadPath ? (
-                <span className="line-path" title={pathTitle(history?.ticks ?? [])}>
+                <span className="line-path" title={pathTitle(ticks)}>
                   {spreadPath}
                 </span>
               ) : (
@@ -379,7 +381,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
               {total && (
                 <span
                   className="line-total"
-                  title={history?.totals ? pathTitle(history.totals) : undefined}
+                  title={totals.length > 0 ? pathTitle(totals) : undefined}
                 >
                   {totalPath
                     ? `O/U ${totalPath}`
@@ -479,27 +481,41 @@ function LineHistoryNote({
   history,
   comparedTo,
   lineMoves,
+  events,
 }: {
   history: LineHistory
   comparedTo: string | null | undefined
   lineMoves: { spreads: number; totals: number }
+  events: OddsEvent[] | undefined
 }) {
+  const liveByEvent = new Map(
+    (events ?? []).map((event) => [event.cbsEventId, event]),
+  )
   const movers =
     history.week === slate.week.order
       ? history.games
-          .filter(
-            (game) => game.ticks.length > 1 || (game.totals?.length ?? 0) > 1,
-          )
           .map((game) => {
+            const live = liveByEvent.get(game.cbsEventId)
+            const ticks = ticksEndingAtLive(
+              game.ticks,
+              live?.lines.draftkings,
+            )
+            const totals = totalsEndingAtLive(
+              game.totals,
+              live?.totals?.draftkings,
+            )
             const slateGame = slate.games.find(
               (item) => item.cbsEventId === game.cbsEventId,
             )
-            const first = game.ticks[0]
-            const last = game.ticks[game.ticks.length - 1]
+            const first = ticks[0]
+            const last = ticks[ticks.length - 1]
             const delta =
               first && last ? Math.abs(last.home - first.home) : 0
-            return { game, slateGame, delta }
+            return { game, slateGame, ticks, totals, delta }
           })
+          .filter(
+            ({ ticks, totals }) => ticks.length > 1 || totals.length > 1,
+          )
           .sort((a, b) => {
             if (b.delta !== a.delta) return b.delta - a.delta
             return (a.slateGame?.kickoff ?? '').localeCompare(
@@ -551,17 +567,15 @@ function LineHistoryNote({
           </p>
         )}
         <ul>
-          {movers.map(({ game, slateGame }) => (
+          {movers.map(({ game, slateGame, ticks, totals }) => (
             <li key={game.cbsEventId}>
               <strong>
                 {slateGame
                   ? `${slateGame.away.abbrev} @ ${slateGame.home.abbrev}`
                   : `Event ${game.cbsEventId}`}
               </strong>
-              {game.ticks.length > 1 ? ` · ${formatSpreadPath(game.ticks)}` : ''}
-              {game.totals && game.totals.length > 1
-                ? ` · O/U ${formatTotalPath(game.totals)}`
-                : ''}
+              {ticks.length > 1 ? ` · ${formatSpreadPath(ticks)}` : ''}
+              {totals.length > 1 ? ` · O/U ${formatTotalPath(totals)}` : ''}
             </li>
           ))}
         </ul>
@@ -955,6 +969,7 @@ function App() {
             history={lineHistory}
             comparedTo={feed?.comparedTo}
             lineMoves={lineMoves}
+            events={feed?.events}
           />
 
           <div className="game-list">

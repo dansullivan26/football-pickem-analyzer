@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { lineHistoryByEvent, updateLineHistory } from '../src/lineHistory.ts'
+import {
+  lineHistoryByEvent,
+  ticksEndingAtLive,
+  totalsEndingAtLive,
+  updateLineHistory,
+} from '../src/lineHistory.ts'
 import type { LineHistory, OddsEvent } from '../src/types.ts'
 
 const week = { order: 1, label: 'Week 1' }
@@ -198,5 +203,50 @@ test('drops an implausible jump instead of recording a bad snapshot', () => {
   assert.deepEqual(
     restored.games[0]?.ticks.map((tick) => tick.home),
     [-23.5],
+  )
+})
+
+test('displayed path appends the live number when history lags', () => {
+  const ticks = [
+    { at: '2026-08-26T19:25:54.869Z', home: -8.5 },
+    { at: '2026-08-26T23:05:26.891Z', home: -9.5 },
+  ]
+
+  assert.deepEqual(
+    ticksEndingAtLive(ticks, {
+      line: -8.5,
+      retrievedAt: '2026-08-28T14:25:50.414Z',
+    }).map((tick) => tick.home),
+    [-8.5, -9.5, -8.5],
+  )
+  assert.equal(
+    ticksEndingAtLive(ticks, {
+      line: -9.5,
+      retrievedAt: '2026-08-28T14:25:50.414Z',
+    }),
+    ticks,
+  )
+  assert.equal(ticksEndingAtLive(ticks, undefined), ticks)
+})
+
+test('displayed totals path appends the live number when history lags', () => {
+  const ticks = [
+    { at: '2026-08-27T12:00:00Z', line: 52.5 },
+    { at: '2026-08-27T18:00:00Z', line: 53.5 },
+  ]
+
+  assert.deepEqual(
+    totalsEndingAtLive(ticks, {
+      line: 54.5,
+      retrievedAt: '2026-08-28T14:25:50.414Z',
+    }).map((tick) => tick.line),
+    [52.5, 53.5, 54.5],
+  )
+  assert.deepEqual(
+    totalsEndingAtLive(undefined, {
+      line: 54.5,
+      retrievedAt: '2026-08-28T14:25:50.414Z',
+    }),
+    [{ at: '2026-08-28T14:25:50.414Z', line: 54.5 }],
   )
 })

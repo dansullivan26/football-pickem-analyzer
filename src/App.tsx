@@ -137,7 +137,11 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
 }
 
 function Recommendation({ analysis }: { analysis: GameAnalysis }) {
-  const { game, category, recommendedSide } = analysis
+  const { game, category, recommendedSide, edge } = analysis
+  const band =
+    edge && category !== 'pending' && category !== 'neutral'
+      ? `${formatPoints(edge)} pt ${category}`
+      : category
   if (category === 'pending') {
     return (
       <div className="recommendation-block">
@@ -157,7 +161,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
         <div className="edge-copy none">No edge</div>
         <div className={`recommendation ${category}`}>
           <span className="category-dot" />
-          {category}
+          {band}
         </div>
       </div>
     )
@@ -178,7 +182,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
       </div>
       <div className={`recommendation ${category}`}>
         <span className="category-dot" />
-        {category}
+        {band}
       </div>
       {hook && (
         <div className="hook-badge">

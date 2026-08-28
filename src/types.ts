@@ -105,6 +105,31 @@ export type OddsFeed = {
   events: OddsEvent[]
 }
 
+export type LineTick = {
+  at: string
+  /** DraftKings home spread. */
+  home: number
+}
+
+export type TotalTick = {
+  at: string
+  line: number
+}
+
+export type LineHistoryGame = {
+  cbsEventId: number
+  ticks: LineTick[]
+  /** Present only for the weekly tiebreaker. */
+  totals?: TotalTick[]
+}
+
+export type LineHistory = {
+  week: number
+  label: string
+  updatedAt: string
+  games: LineHistoryGame[]
+}
+
 export type EdgeCategory = 'hammer' | 'lean' | 'slight' | 'neutral' | 'pending'
 
 export type GameAnalysis = {

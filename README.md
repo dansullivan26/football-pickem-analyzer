@@ -149,6 +149,13 @@ strength bucket separately.
    hourly schedule (`23 * * * *` UTC). GitHub can delay or skip cron jobs, so
    the Action history is the source of truth, not the clock.
 
+Each refresh also appends DraftKings ticks to `src/data/line-history.json`
+when a home spread or the tiebreaker total actually changes. The Lines page
+expands that week-long path from the meta line and on each game card. Unchanged
+hourly pulls do not add a row; a new slate week starts a new file. Implausible
+jumps (the same bound used to drop a bad match vs the pool line) are ignored
+so a flipped snapshot cannot masquerade as movement.
+
 The browser's **Refresh data** button starts two GitHub Actions: **Refresh
 sportsbook lines** (DraftKings via SharpAPI) and **Ingest GrokBot dump**
 (`kind=consensus`, the latest Covers file already in the private drop repo).

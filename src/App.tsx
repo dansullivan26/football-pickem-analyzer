@@ -4,6 +4,7 @@ import slateData from './data/current-slate.json'
 import playerHistoryData from './data/player-history.json'
 import recommendationHistoryData from './data/recommendation-history.json'
 import predictionForecastsData from './data/prediction-forecasts.json'
+import lineHistoryData from './data/line-history.json'
 import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
@@ -11,6 +12,7 @@ import TeamLogo from './TeamLogo'
 import { publicBucketForPool, favorableHook, publicSupportForSide, PUBLIC_SUPPORT_RANK } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
+import { lineHistoryByEvent } from './lineHistory'
 import { pathForView, viewFromPath, type AppView } from './routes'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
@@ -21,12 +23,15 @@ import type {
   EdgeCategory,
   GameAnalysis,
   GameVenue,
+  LineHistory,
+  LineTick,
   OddsEvent,
   OddsFeed,
   PlayerHistory,
   RecommendationHistory,
   Slate,
   SlateGame,
+  TotalTick,
 } from './types'
 
 const slate = slateData as Slate
@@ -34,6 +39,8 @@ const playerHistory = playerHistoryData as PlayerHistory
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
+const lineHistory = lineHistoryData as LineHistory
+const lineHistoryByCbs = lineHistoryByEvent(lineHistory, slate.week.order)
 // A dump from an earlier week would silently mislabel this week's rows.
 const consensusByEvent = new Map(
   consensusFeed.week.order === slate.week.order
@@ -57,6 +64,28 @@ function formatSpread(value: number | null | undefined) {
   if (value === 0) return 'PK'
   const points = formatPoints(Math.abs(value))
   return value > 0 ? `+${points}` : `-${points}`
+}
+
+function formatSpreadPath(ticks: LineTick[], compact = false) {
+  if (ticks.length < 2) return null
+  const formatted = ticks.map((tick) => formatSpread(tick.home))
+  if (!compact || formatted.length <= 4) return formatted.join(' → ')
+  return `${formatted[0]} → … → ${formatted[formatted.length - 1]}`
+}
+
+function formatTotalPath(ticks: TotalTick[]) {
+  if (ticks.length < 2) return null
+  return ticks.map((tick) => formatPoints(tick.line)).join(' → ')
+}
+
+function pathTitle(ticks: Array<{ at: string; home?: number; line?: number }>) {
+  return ticks
+    .map((tick) => {
+      const value =
+        typeof tick.home === 'number' ? formatSpread(tick.home) : formatPoints(tick.line ?? 0)
+      return `${value} at ${formatTimestamp(tick.at)}`
+    })
+    .join('\n')
 }
 
 const STALE_AFTER_MS = 6 * 60 * 60 * 1000
@@ -298,6 +327,9 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
+  const history = lineHistoryByCbs.get(game.cbsEventId)
+  const spreadPath = history ? formatSpreadPath(history.ticks, true) : null
+  const totalPath = history?.totals ? formatTotalPath(history.totals) : null
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
@@ -341,17 +373,29 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
             <div className={`line-cell${stale ? ' stale' : ''}`} key={book}>
               <span>{bookNames[book]}</span>
               <strong>{formatSpread(entry?.line)}</strong>
-              {entry?.previousLine != null && (
-                <span className="line-move">
-                  was {formatSpread(entry.previousLine)}
+              {spreadPath ? (
+                <span className="line-path" title={pathTitle(history?.ticks ?? [])}>
+                  {spreadPath}
                 </span>
+              ) : (
+                entry?.previousLine != null && (
+                  <span className="line-move">
+                    was {formatSpread(entry.previousLine)}
+                  </span>
+                )
               )}
               {total && (
-                <span className="line-total">
-                  O/U {formatPoints(total.line)}
-                  {total.previousLine != null
-                    ? ` · was ${formatPoints(total.previousLine)}`
-                    : ''}
+                <span
+                  className="line-total"
+                  title={history?.totals ? pathTitle(history.totals) : undefined}
+                >
+                  {totalPath
+                    ? `O/U ${totalPath}`
+                    : `O/U ${formatPoints(total.line)}${
+                        total.previousLine != null
+                          ? ` · was ${formatPoints(total.previousLine)}`
+                          : ''
+                      }`}
                 </span>
               )}
               {entry ? (
@@ -434,6 +478,101 @@ function CoversCollected({
             ))}
           </ul>
         )}
+      </div>
+    </details>
+  )
+}
+
+function LineHistoryNote({
+  history,
+  comparedTo,
+  lineMoves,
+}: {
+  history: LineHistory
+  comparedTo: string | null | undefined
+  lineMoves: { spreads: number; totals: number }
+}) {
+  const movers =
+    history.week === slate.week.order
+      ? history.games
+          .filter(
+            (game) => game.ticks.length > 1 || (game.totals?.length ?? 0) > 1,
+          )
+          .map((game) => {
+            const slateGame = slate.games.find(
+              (item) => item.cbsEventId === game.cbsEventId,
+            )
+            const first = game.ticks[0]
+            const last = game.ticks[game.ticks.length - 1]
+            const delta =
+              first && last ? Math.abs(last.home - first.home) : 0
+            return { game, slateGame, delta }
+          })
+          .sort((a, b) => {
+            if (b.delta !== a.delta) return b.delta - a.delta
+            return (a.slateGame?.kickoff ?? '').localeCompare(
+              b.slateGame?.kickoff ?? '',
+            )
+          })
+      : []
+
+  const thisPull = lineMoves.spreads > 0 || lineMoves.totals > 0
+  if (movers.length === 0 && !thisPull) return null
+
+  const comparedTitle = comparedTo
+    ? `Compared with the pull from ${formatTimestamp(comparedTo)}`
+    : undefined
+
+  if (movers.length === 0) {
+    return (
+      <p className="list-meta" title={comparedTitle}>
+        {lineMoves.spreads > 0
+          ? `${lineMoves.spreads} DraftKings spread${
+              lineMoves.spreads === 1 ? '' : 's'
+            } moved since the last pull.`
+          : ''}
+        {lineMoves.spreads > 0 && lineMoves.totals > 0 ? ' ' : ''}
+        {lineMoves.totals > 0
+          ? 'Tiebreaker total moved since the last pull.'
+          : ''}
+      </p>
+    )
+  }
+
+  return (
+    <details className="covers-report">
+      <summary className="list-meta" title={comparedTitle}>
+        {`${movers.length} DraftKings spread${
+          movers.length === 1 ? ' has' : 's have'
+        } moved this week`}
+        <span className="covers-report-link">Line history</span>
+      </summary>
+      <div className="covers-report-body">
+        {comparedTo && (
+          <p className="covers-report-compared">
+            Compared with the pull from {formatTimestamp(comparedTo)}
+            {thisPull
+              ? lineMoves.spreads > 0
+                ? ` · ${lineMoves.spreads} moved since then`
+                : ' · tiebreaker total moved since then'
+              : ''}
+          </p>
+        )}
+        <ul>
+          {movers.map(({ game, slateGame }) => (
+            <li key={game.cbsEventId}>
+              <strong>
+                {slateGame
+                  ? `${slateGame.away.abbrev} @ ${slateGame.home.abbrev}`
+                  : `Event ${game.cbsEventId}`}
+              </strong>
+              {game.ticks.length > 1 ? ` · ${formatSpreadPath(game.ticks)}` : ''}
+              {game.totals && game.totals.length > 1
+                ? ` · O/U ${formatTotalPath(game.totals)}`
+                : ''}
+            </li>
+          ))}
+        </ul>
       </div>
     </details>
   )
@@ -815,26 +954,11 @@ function App() {
               games={consensusFeed.games}
             />
           )}
-          {(lineMoves.spreads > 0 || lineMoves.totals > 0) && (
-            <p
-              className="list-meta"
-              title={
-                feed?.comparedTo
-                  ? `Compared with the pull from ${formatTimestamp(feed.comparedTo)}`
-                  : undefined
-              }
-            >
-              {lineMoves.spreads > 0
-                ? `${lineMoves.spreads} DraftKings spread${
-                    lineMoves.spreads === 1 ? '' : 's'
-                  } moved since the last pull.`
-                : ''}
-              {lineMoves.spreads > 0 && lineMoves.totals > 0 ? ' ' : ''}
-              {lineMoves.totals > 0
-                ? 'Tiebreaker total moved since the last pull.'
-                : ''}
-            </p>
-          )}
+          <LineHistoryNote
+            history={lineHistory}
+            comparedTo={feed?.comparedTo}
+            lineMoves={lineMoves}
+          />
 
           <div className="game-list">
             {visibleGames.map((analysis) => (

@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { updateLineHistory } from '../src/lineHistory.ts'
 
 const API_URL = 'https://api.sharpapi.io/api/v1/odds'
 const API_KEY = process.env.SHARP_API_KEY
@@ -407,12 +408,38 @@ const feed = {
 
 await writeFile(OUTPUT, `${JSON.stringify(feed, null, 2)}\n`)
 
+const HISTORY_OUTPUT = new URL('src/data/line-history.json', ROOT)
+let previousHistory = null
+try {
+  previousHistory = JSON.parse(await readFile(HISTORY_OUTPUT, 'utf8'))
+} catch {
+  // First week of line history.
+}
+
+const lineHistory = updateLineHistory({
+  previous: previousHistory,
+  week: slate.week,
+  events,
+  runAt,
+  previousUpdatedAt,
+})
+await writeFile(HISTORY_OUTPUT, `${JSON.stringify(lineHistory, null, 2)}\n`)
+const weekMoves = lineHistory.games.filter((game) => game.ticks.length > 1).length
+const totalWeekMoves = lineHistory.games.filter(
+  (game) => (game.totals?.length ?? 0) > 1,
+).length
+
 console.log(`\nMatched ${matched.size}/${slate.games.length} slate games.`)
 if (carried) {
   console.log(`Carried forward ${carried} price(s) missing from this snapshot.`)
 }
 if (frozen) {
   console.log(`Froze ${frozen} kicked-off game(s) at the last pregame price.`)
+}
+if (weekMoves || totalWeekMoves) {
+  console.log(
+    `Line history: ${weekMoves} spread${weekMoves === 1 ? '' : 's'} and ${totalWeekMoves} total${totalWeekMoves === 1 ? '' : 's'} have moved this week.`,
+  )
 }
 if (spreadMoves.length) {
   console.log(`\nSpreads that moved since last pull (${spreadMoves.length}):`)

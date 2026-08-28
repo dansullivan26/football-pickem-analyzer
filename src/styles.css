@@ -1101,12 +1101,18 @@ select:focus {
   white-space: nowrap;
 }
 
-.line-cell .line-move {
+.line-cell .line-move,
+.line-cell .line-path {
   margin-top: 1px;
   color: var(--amber);
   font-size: 0.62rem;
   font-weight: 700;
-  white-space: nowrap;
+}
+
+.line-cell .line-path {
+  text-align: center;
+  line-height: 1.25;
+  max-width: 100%;
 }
 
 .line-cell em {

@@ -77,7 +77,9 @@ details URL, drops the page list and internal matchup ids, and writes
 yet stay in the file as unmatched rows and render as "No public consensus yet".
 These are Covers contest-player tickets, not experts. Headline percentages
 combine tickets made at multiple lines; `atsByLine` preserves each Picks Per
-Line bucket. The app displays the headline without attaching it to Covers'
+Line bucket. Duplicate buckets at the same number are merged (identical rows
+are dropped; different pick counts are added) so a Covers scrape cannot fail
+ingest. The app displays the headline without attaching it to Covers'
 current Sides number, and public card picks use a meaningful ticket bucket
 within one point of the locked pool line. Capture a fresh dump as close to the
 day's first kickoff as practical.

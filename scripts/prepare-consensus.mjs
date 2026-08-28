@@ -71,8 +71,8 @@ function readAtsByLine(game, matched) {
     throw new Error(`${game.gameId} is unmatched but has ATS line buckets.`)
   }
 
-  const seenSpreads = new Set()
-  return game.atsByLine.map((row, index) => {
+  const seenSpreads = new Map()
+  game.atsByLine.forEach((row, index) => {
     const label = `${game.gameId} atsByLine[${index}]`
     if (
       typeof row?.awaySpread !== 'number' ||
@@ -89,16 +89,35 @@ function readAtsByLine(game, matched) {
     ) {
       throw new Error(`${label} must have non-negative integer pick counts.`)
     }
-    if (seenSpreads.has(row.awaySpread)) {
-      throw new Error(`${game.gameId} has duplicate ATS bucket ${row.awaySpread}.`)
+
+    const existing = seenSpreads.get(row.awaySpread)
+    if (!existing) {
+      seenSpreads.set(row.awaySpread, {
+        awaySpread: row.awaySpread,
+        awayPicks: row.awayPicks,
+        homePicks: row.homePicks,
+      })
+      return
     }
-    seenSpreads.add(row.awaySpread)
-    return {
-      awaySpread: row.awaySpread,
-      awayPicks: row.awayPicks,
-      homePicks: row.homePicks,
+
+    const identical =
+      existing.awayPicks === row.awayPicks &&
+      existing.homePicks === row.homePicks
+    if (identical) {
+      console.warn(
+        `Warning: ${game.gameId} repeated ATS bucket ${row.awaySpread}; keeping one copy.`,
+      )
+      return
     }
+
+    console.warn(
+      `Warning: ${game.gameId} has two ATS buckets at ${row.awaySpread}; combining pick counts.`,
+    )
+    existing.awayPicks += row.awayPicks
+    existing.homePicks += row.homePicks
   })
+
+  return [...seenSpreads.values()]
 }
 
 const games = raw.games.map((game) => {

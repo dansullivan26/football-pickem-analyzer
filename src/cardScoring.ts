@@ -6,7 +6,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, scored as solid so it ranks with leans instead of with 0.5-point slights. Public is a within-band modifier: agreement lifts a game over an otherwise similar line-value play; fade drops it a notch in that same band. Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
+  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, scored as solid so it ranks with leans instead of with 0.5-point slights. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -31,6 +31,14 @@ export const PUBLIC_SUPPORT_RANK: Record<PublicSupport, number> = {
   fade: 0,
 }
 
+export const CATEGORY_RANK: Record<EdgeCategory, number> = {
+  hammer: 0,
+  lean: 1,
+  slight: 2,
+  neutral: 3,
+  pending: 4,
+}
+
 export type ResolvedCardPick = {
   source: CardPickSource | null
   pickedSide: 'home' | 'away' | null
@@ -41,6 +49,8 @@ export type ResolvedCardPick = {
   skipReason: string | null
   hook: HookKind | null
   publicSupport: PublicSupport
+  /** Near-pool bucket % on the picked side, or the leader % when there is no side. */
+  publicPct: number | null
 }
 
 function formatPoints(value: number) {
@@ -210,11 +220,28 @@ export function publicSupportForSide(
   return publicPick.side === side ? 'agree' : 'fade'
 }
 
+/** Near-pool Covers % used to order games inside the same line-value band. */
+export function publicPctForSort(
+  consensus: ConsensusGame | undefined,
+  homeSpread: number,
+  side: 'home' | 'away' | null,
+): number | null {
+  if (consensus?.matchStatus !== 'matched') return null
+  const bucket = publicBucketForPool(consensus, homeSpread)
+  if (!bucket) return null
+  const total = bucket.awayPicks + bucket.homePicks
+  if (total <= 0) return null
+  if (side === 'away') return (bucket.awayPicks / total) * 100
+  if (side === 'home') return (bucket.homePicks / total) * 100
+  return (Math.max(bucket.awayPicks, bucket.homePicks) / total) * 100
+}
+
 export function compareCardPicks(
   left: {
     source: CardPickSource
     strength: PickStrength
     publicSupport: PublicSupport
+    publicPct?: number | null
     score: number
     kickoff: string
   },
@@ -222,6 +249,7 @@ export function compareCardPicks(
     source: CardPickSource
     strength: PickStrength
     publicSupport: PublicSupport
+    publicPct?: number | null
     score: number
     kickoff: string
   },
@@ -235,7 +263,59 @@ export function compareCardPicks(
     PUBLIC_SUPPORT_RANK[right.publicSupport] -
     PUBLIC_SUPPORT_RANK[left.publicSupport]
   if (publicSupport) return publicSupport
+  const publicPct = (right.publicPct ?? -1) - (left.publicPct ?? -1)
+  if (publicPct) return publicPct
   if (right.score !== left.score) return right.score - left.score
+  return left.kickoff.localeCompare(right.kickoff)
+}
+
+export function compareRecommendationOrder(
+  left: {
+    category: EdgeCategory
+    edge: number | null
+    recommendedSide: 'home' | 'away' | null
+    homeSpread: number
+    consensus: ConsensusGame | undefined
+    kickoff: string
+  },
+  right: {
+    category: EdgeCategory
+    edge: number | null
+    recommendedSide: 'home' | 'away' | null
+    homeSpread: number
+    consensus: ConsensusGame | undefined
+    kickoff: string
+  },
+) {
+  const category = CATEGORY_RANK[left.category] - CATEGORY_RANK[right.category]
+  if (category) return category
+  const edge = (right.edge ?? -1) - (left.edge ?? -1)
+  if (edge) return edge
+  const publicSupport =
+    PUBLIC_SUPPORT_RANK[
+      publicSupportForSide(
+        right.consensus,
+        right.homeSpread,
+        right.recommendedSide,
+      )
+    ] -
+    PUBLIC_SUPPORT_RANK[
+      publicSupportForSide(
+        left.consensus,
+        left.homeSpread,
+        left.recommendedSide,
+      )
+    ]
+  if (publicSupport) return publicSupport
+  const publicPct =
+    (publicPctForSort(
+      right.consensus,
+      right.homeSpread,
+      right.recommendedSide,
+    ) ?? -1) -
+    (publicPctForSort(left.consensus, left.homeSpread, left.recommendedSide) ??
+      -1)
+  if (publicPct) return publicPct
   return left.kickoff.localeCompare(right.kickoff)
 }
 
@@ -257,6 +337,7 @@ export function resolveCardPick(input: {
     skipReason: null,
     hook: null,
     publicSupport: 'none',
+    publicPct: null,
   }
 
   const hook =
@@ -285,6 +366,11 @@ export function resolveCardPick(input: {
         input.homeSpread,
         input.recommendedSide,
       ),
+      publicPct: publicPctForSort(
+        input.consensus,
+        input.homeSpread,
+        input.recommendedSide,
+      ),
     }
   }
 
@@ -301,6 +387,11 @@ export function resolveCardPick(input: {
         skipReason: null,
         hook: null,
         publicSupport: 'agree',
+        publicPct: publicPctForSort(
+          input.consensus,
+          input.homeSpread,
+          publicPick.side,
+        ),
       }
     }
     return { ...empty, skipReason: publicPick.reason }

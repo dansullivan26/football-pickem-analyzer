@@ -9,7 +9,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook, publicSupportForSide, PUBLIC_SUPPORT_RANK } from './cardScoring'
+import { publicBucketForPool, favorableHook, compareRecommendationOrder } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent } from './lineHistory'
@@ -313,14 +313,6 @@ function ConsensusNote({
       </em>
     </span>
   )
-}
-
-const CATEGORY_RANK: Record<EdgeCategory, number> = {
-  hammer: 0,
-  lean: 1,
-  slight: 2,
-  neutral: 3,
-  pending: 4,
 }
 
 function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
@@ -697,21 +689,26 @@ function App() {
 
     if (sort !== 'recommendation') return filtered
 
-    return [...filtered].sort((a, b) => {
-      const category = CATEGORY_RANK[a.category] - CATEGORY_RANK[b.category]
-      if (category) return category
-      const edge = (b.edge ?? -1) - (a.edge ?? -1)
-      if (edge) return edge
-      const publicSupport =
-        PUBLIC_SUPPORT_RANK[
-          publicSupportForSide(b.consensus, b.game.homeSpread, b.recommendedSide)
-        ] -
-        PUBLIC_SUPPORT_RANK[
-          publicSupportForSide(a.consensus, a.game.homeSpread, a.recommendedSide)
-        ]
-      if (publicSupport) return publicSupport
-      return a.game.kickoff.localeCompare(b.game.kickoff)
-    })
+    return [...filtered].sort((a, b) =>
+      compareRecommendationOrder(
+        {
+          category: a.category,
+          edge: a.edge,
+          recommendedSide: a.recommendedSide,
+          homeSpread: a.game.homeSpread,
+          consensus: a.consensus,
+          kickoff: a.game.kickoff,
+        },
+        {
+          category: b.category,
+          edge: b.edge,
+          recommendedSide: b.recommendedSide,
+          homeSpread: b.game.homeSpread,
+          consensus: b.consensus,
+          kickoff: b.game.kickoff,
+        },
+      ),
+    )
   }, [analyses, filter, league, query, sort])
 
   const lineMoves = useMemo(() => {

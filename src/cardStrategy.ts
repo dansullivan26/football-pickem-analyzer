@@ -35,6 +35,8 @@ export type SuggestedPick = {
   strength: PickStrength
   hook: 'fg' | 'td' | null
   publicSupport: PublicSupport
+  /** Near-pool bucket % on the picked side. Used to order inside a band. */
+  publicPct: number | null
   /** Comparable rank used to sort the modal. Higher is a stronger pick. */
   score: number
   detail: string
@@ -76,9 +78,8 @@ export type SuggestedTiebreaker = {
  *    these, even a mild slight vs a strong Covers majority.
  * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
  *    pick, scored as solid so it ranks with leans, not with 0.5-point slights.
- * 3. Inside a line-value band, Covers agreement lifts a game over an
- *    otherwise similar play; fade drops it a notch. Public is a modifier,
- *    not a competing source.
+ * 3. Inside a line-value band, the higher near-pool public % on the
+ *    picked side ranks first. Fade therefore sinks; no bucket sits last.
  * 4. Otherwise, use a meaningful Covers Picks Per Line bucket within one
  *    point of the pool line. Those leftover fills always sit below slights.
  * 5. No line-value pick and no qualifying Covers majority → leave unpicked.
@@ -133,6 +134,7 @@ export function generateSuggestedCard(
         strength: cardPick.strength,
         hook: cardPick.hook,
         publicSupport: cardPick.publicSupport,
+        publicPct: cardPick.publicPct,
         score: cardPick.score,
         detail: cardPick.detail,
       })

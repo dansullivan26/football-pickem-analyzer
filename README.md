@@ -237,7 +237,7 @@ side is the team receiving the better number in the CBS pool. If that number is
 the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
 DraftKings, the Lines card shows a favorable hook badge and the generated card
 scores that pick as solid line value (not mild) with an FG/TD hook badge.
-Generated-card strength sort puts every line-value pick above every public-only
-pick, then uses the near-pool public % on the picked side to order inside
-hammer / lean / slight. The Lines Recommendation sort uses the same public-%
-tie-break inside each visible edge band (including neutrals).
+Generated-card Recommendation sort matches the Lines page: hammer, then lean,
+then slight by edge size, then public fills, with near-pool public % as the
+tie-break inside each band. A hook still badges as solid but stays in its
+point band.

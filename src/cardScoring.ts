@@ -6,7 +6,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value, scored as solid so it ranks with leans instead of with 0.5-point slights. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
+  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort still keeps it in its point band, same as Lines. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'hammer',
@@ -269,52 +269,52 @@ export function compareCardPicks(
   return left.kickoff.localeCompare(right.kickoff)
 }
 
+export type RecommendationOrderKey = {
+  category: EdgeCategory
+  edge: number | null
+  publicSupport: PublicSupport
+  publicPct: number | null
+  kickoff: string
+}
+
+export function recommendationOrderKey(input: {
+  category: EdgeCategory
+  edge: number | null
+  recommendedSide: 'home' | 'away' | null
+  homeSpread: number
+  consensus: ConsensusGame | undefined
+  kickoff: string
+}): RecommendationOrderKey {
+  return {
+    category: input.category,
+    edge: input.edge,
+    publicSupport: publicSupportForSide(
+      input.consensus,
+      input.homeSpread,
+      input.recommendedSide,
+    ),
+    publicPct: publicPctForSort(
+      input.consensus,
+      input.homeSpread,
+      input.recommendedSide,
+    ),
+    kickoff: input.kickoff,
+  }
+}
+
 export function compareRecommendationOrder(
-  left: {
-    category: EdgeCategory
-    edge: number | null
-    recommendedSide: 'home' | 'away' | null
-    homeSpread: number
-    consensus: ConsensusGame | undefined
-    kickoff: string
-  },
-  right: {
-    category: EdgeCategory
-    edge: number | null
-    recommendedSide: 'home' | 'away' | null
-    homeSpread: number
-    consensus: ConsensusGame | undefined
-    kickoff: string
-  },
+  left: RecommendationOrderKey,
+  right: RecommendationOrderKey,
 ) {
   const category = CATEGORY_RANK[left.category] - CATEGORY_RANK[right.category]
   if (category) return category
   const edge = (right.edge ?? -1) - (left.edge ?? -1)
   if (edge) return edge
   const publicSupport =
-    PUBLIC_SUPPORT_RANK[
-      publicSupportForSide(
-        right.consensus,
-        right.homeSpread,
-        right.recommendedSide,
-      )
-    ] -
-    PUBLIC_SUPPORT_RANK[
-      publicSupportForSide(
-        left.consensus,
-        left.homeSpread,
-        left.recommendedSide,
-      )
-    ]
+    PUBLIC_SUPPORT_RANK[right.publicSupport] -
+    PUBLIC_SUPPORT_RANK[left.publicSupport]
   if (publicSupport) return publicSupport
-  const publicPct =
-    (publicPctForSort(
-      right.consensus,
-      right.homeSpread,
-      right.recommendedSide,
-    ) ?? -1) -
-    (publicPctForSort(left.consensus, left.homeSpread, left.recommendedSide) ??
-      -1)
+  const publicPct = (right.publicPct ?? -1) - (left.publicPct ?? -1)
   if (publicPct) return publicPct
   return left.kickoff.localeCompare(right.kickoff)
 }

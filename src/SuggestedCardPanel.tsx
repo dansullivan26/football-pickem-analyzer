@@ -18,7 +18,7 @@ export default function SuggestedCardPanel({
   onClose: () => void
 }) {
   const [copied, setCopied] = useState(false)
-  const [sort, setSort] = useState<'strength' | 'slate'>('slate')
+  const [sort, setSort] = useState<'recommendation' | 'slate'>('recommendation')
   const [submitting, setSubmitting] = useState(false)
   const [askPassword, setAskPassword] = useState(false)
   const [password, setPassword] = useState('')
@@ -167,11 +167,11 @@ export default function SuggestedCardPanel({
               <select
                 value={sort}
                 onChange={(event) =>
-                  setSort(event.target.value as 'strength' | 'slate')
+                  setSort(event.target.value as 'recommendation' | 'slate')
                 }
               >
+                <option value="recommendation">Recommendation</option>
                 <option value="slate">Kickoff time</option>
-                <option value="strength">Strength</option>
               </select>
             </label>
             <button type="button" onClick={() => void copyCard()}>

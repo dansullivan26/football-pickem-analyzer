@@ -9,7 +9,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook, compareRecommendationOrder } from './cardScoring'
+import { publicBucketForPool, favorableHook, compareRecommendationOrder, recommendationOrderKey } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent } from './lineHistory'
@@ -691,22 +691,22 @@ function App() {
 
     return [...filtered].sort((a, b) =>
       compareRecommendationOrder(
-        {
+        recommendationOrderKey({
           category: a.category,
           edge: a.edge,
           recommendedSide: a.recommendedSide,
           homeSpread: a.game.homeSpread,
           consensus: a.consensus,
           kickoff: a.game.kickoff,
-        },
-        {
+        }),
+        recommendationOrderKey({
           category: b.category,
           edge: b.edge,
           recommendedSide: b.recommendedSide,
           homeSpread: b.game.homeSpread,
           consensus: b.consensus,
           kickoff: b.game.kickoff,
-        },
+        }),
       ),
     )
   }, [analyses, filter, league, query, sort])

@@ -1,12 +1,12 @@
 import {
   CARD_STRATEGY_NOTE,
-  compareCardPicks,
+  compareRecommendationOrder,
   formatPoolSpread,
   resolveCardPick,
   type PickStrength,
   type PublicSupport,
 } from './cardScoring'
-import type { GameAnalysis, SlateTiebreaker } from './types'
+import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types'
 
 export {
   CARD_STRATEGY_NOTE,
@@ -32,6 +32,9 @@ export type SuggestedPick = {
   pickedTeam: string
   poolSpread: number
   source: 'line-value' | 'public-consensus'
+  /** Visible Lines band; Recommendation sort uses this, not the strength badge. */
+  category: EdgeCategory
+  edge: number | null
   strength: PickStrength
   hook: 'fg' | 'td' | null
   publicSupport: PublicSupport
@@ -77,7 +80,8 @@ export type SuggestedTiebreaker = {
  * 1. Hammer / lean / slight → the line-value side. Public never outranks
  *    these, even a mild slight vs a strong Covers majority.
  * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
- *    pick, scored as solid so it ranks with leans, not with 0.5-point slights.
+ *    pick and badges as solid. Recommendation sort keeps it in its point
+ *    band, matching the Lines page.
  * 3. Inside a line-value band, the higher near-pool public % on the
  *    picked side ranks first. Fade therefore sinks; no bucket sits last.
  * 4. Otherwise, use a meaningful Covers Picks Per Line bucket within one
@@ -131,6 +135,8 @@ export function generateSuggestedCard(
         pickedTeam: game[cardPick.pickedSide].name,
         poolSpread: cardPick.poolSpread,
         source: cardPick.source,
+        category,
+        edge: analysis.edge,
         strength: cardPick.strength,
         hook: cardPick.hook,
         publicSupport: cardPick.publicSupport,
@@ -208,10 +214,27 @@ export function submittedPick(pick: SuggestedPick, deviate: boolean) {
 
 export function sortSuggestedPicks(
   picks: SuggestedPick[],
-  sort: 'slate' | 'strength',
+  sort: 'slate' | 'recommendation',
 ) {
   if (sort === 'slate') return picks
-  return [...picks].sort(compareCardPicks)
+  return [...picks].sort((left, right) =>
+    compareRecommendationOrder(
+      {
+        category: left.category,
+        edge: left.edge,
+        publicSupport: left.publicSupport,
+        publicPct: left.publicPct,
+        kickoff: left.kickoff,
+      },
+      {
+        category: right.category,
+        edge: right.edge,
+        publicSupport: right.publicSupport,
+        publicPct: right.publicPct,
+        kickoff: right.kickoff,
+      },
+    ),
+  )
 }
 
 export function formatSuggestedCardText(

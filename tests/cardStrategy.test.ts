@@ -125,24 +125,20 @@ test('publicSupportForSide agrees when the Covers bucket matches the pick', () =
 })
 
 test('within a 1-point slight band, higher public % on the picked side ranks first', () => {
-  const quiet = consensus(40, 60)
-  const loud = consensus(20, 80)
   const ids = [
     {
       category: 'slight' as const,
       edge: 1,
-      recommendedSide: 'home' as const,
-      homeSpread: -3,
-      consensus: quiet,
+      publicSupport: 'agree' as const,
+      publicPct: 60,
       kickoff: '2026-09-05T12:00:00-04:00',
       id: 'quiet',
     },
     {
       category: 'slight' as const,
       edge: 1,
-      recommendedSide: 'home' as const,
-      homeSpread: -3,
-      consensus: loud,
+      publicSupport: 'agree' as const,
+      publicPct: 80,
       kickoff: '2026-09-05T19:00:00-04:00',
       id: 'loud',
     },
@@ -154,24 +150,20 @@ test('within a 1-point slight band, higher public % on the picked side ranks fir
 })
 
 test('within neutrals, the higher near-pool public leader ranks first', () => {
-  const split = consensus(45, 55)
-  const heavy = consensus(25, 75)
   const ids = [
     {
       category: 'neutral' as const,
       edge: 0,
-      recommendedSide: null,
-      homeSpread: -3,
-      consensus: split,
+      publicSupport: 'none' as const,
+      publicPct: 55,
       kickoff: '2026-09-05T12:00:00-04:00',
       id: 'split',
     },
     {
       category: 'neutral' as const,
       edge: 0,
-      recommendedSide: null,
-      homeSpread: -3,
-      consensus: heavy,
+      publicSupport: 'none' as const,
+      publicPct: 75,
       kickoff: '2026-09-05T19:00:00-04:00',
       id: 'heavy',
     },
@@ -182,23 +174,48 @@ test('within neutrals, the higher near-pool public leader ranks first', () => {
   assert.deepEqual(ids, ['heavy', 'split'])
 })
 
-test('card strength sort uses public % after agree/none/fade inside a band', () => {
-  assert.deepEqual(
-    orderedIds([
-      pick({
-        gameId: 'quiet-agree',
-        publicSupport: 'agree',
-        publicPct: 55,
-        score: 3,
-      }),
-      pick({
-        gameId: 'loud-agree',
-        publicSupport: 'agree',
-        publicPct: 72,
-        score: 3,
-        kickoff: '2026-09-05T19:00:00-04:00',
-      }),
-    ]),
-    ['loud-agree', 'quiet-agree'],
-  )
+test('recommendation sort keeps a hook slight in its point band below a 1-point slight', () => {
+  const ids = [
+    {
+      category: 'neutral' as const,
+      edge: 0,
+      publicSupport: 'agree' as const,
+      publicPct: 80,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'public-fill',
+    },
+    {
+      category: 'slight' as const,
+      edge: 0.5,
+      publicSupport: 'agree' as const,
+      publicPct: 70,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'hook-slight',
+    },
+    {
+      category: 'slight' as const,
+      edge: 1,
+      publicSupport: 'none' as const,
+      publicPct: 55,
+      kickoff: '2026-09-05T19:00:00-04:00',
+      id: 'one-point-slight',
+    },
+    {
+      category: 'lean' as const,
+      edge: 1.5,
+      publicSupport: 'fade' as const,
+      publicPct: 40,
+      kickoff: '2026-09-05T15:00:00-04:00',
+      id: 'lean',
+    },
+  ]
+    .sort(compareRecommendationOrder)
+    .map((row) => row.id)
+
+  assert.deepEqual(ids, [
+    'lean',
+    'one-point-slight',
+    'hook-slight',
+    'public-fill',
+  ])
 })

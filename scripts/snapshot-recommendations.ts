@@ -1,18 +1,11 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { resolveCardPick, favorableHook } from '../src/cardScoring.ts'
+import { resolveCardPick, favorableHook, classifyEdge } from '../src/cardScoring.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
 
 function roundToHalf(value) {
   return Math.round(value * 2) / 2
-}
-
-function classifyEdge(magnitude) {
-  if (magnitude >= 3) return 'hammer'
-  if (magnitude >= 1.5) return 'lean'
-  if (magnitude > 0) return 'slight'
-  return 'neutral'
 }
 
 function analyze(game, event) {

@@ -130,7 +130,13 @@ export type LineHistory = {
   games: LineHistoryGame[]
 }
 
-export type EdgeCategory = 'hammer' | 'lean' | 'slight' | 'neutral' | 'pending'
+export type EdgeCategory =
+  | 'lock'
+  | 'hammer'
+  | 'lean'
+  | 'slight'
+  | 'neutral'
+  | 'pending'
 
 export type GameAnalysis = {
   game: SlateGame

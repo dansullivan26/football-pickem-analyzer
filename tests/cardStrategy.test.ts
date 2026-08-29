@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  classifyEdge,
   compareCardPicks,
   compareRecommendationOrder,
+  favorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
 import type { ConsensusGame } from '../src/types.ts'
@@ -218,4 +220,43 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     'hook-slight',
     'public-fill',
   ])
+})
+
+test('classifyEdge puts 4+ in lock and keeps 3 / 3.5 as hammer', () => {
+  assert.equal(classifyEdge(4), 'lock')
+  assert.equal(classifyEdge(4.5), 'lock')
+  assert.equal(classifyEdge(3.5), 'hammer')
+  assert.equal(classifyEdge(3), 'hammer')
+  assert.equal(classifyEdge(2.5), 'lean')
+  assert.equal(classifyEdge(1), 'slight')
+})
+
+test('an FG hook is a 1-point slight, not a lock or hammer', () => {
+  assert.equal(favorableHook(-2.5, -3.5), 'fg')
+  assert.equal(classifyEdge(1), 'slight')
+})
+
+test('recommendation sort ranks a lock above a hammer', () => {
+  const ids = [
+    {
+      category: 'hammer' as const,
+      edge: 3.5,
+      publicSupport: 'agree' as const,
+      publicPct: 80,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'hammer',
+    },
+    {
+      category: 'lock' as const,
+      edge: 4,
+      publicSupport: 'fade' as const,
+      publicPct: 40,
+      kickoff: '2026-09-05T19:00:00-04:00',
+      id: 'lock',
+    },
+  ]
+    .sort(compareRecommendationOrder)
+    .map((row) => row.id)
+
+  assert.deepEqual(ids, ['lock', 'hammer'])
 })

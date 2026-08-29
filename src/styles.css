@@ -307,7 +307,7 @@ h2 {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -346,6 +346,10 @@ h2 {
 .summary-card small {
   color: var(--muted);
   font-size: 0.72rem;
+}
+
+.summary-card.lock {
+  border-left-color: var(--green-dark);
 }
 
 .summary-card.hammer {
@@ -1003,6 +1007,11 @@ select:focus {
 
 /* Row tints sit on a white page, so each stays a shade darker than the
    surface it covers. */
+.game-card.lock {
+  border-color: #7bb899;
+  background: #c5e8d4;
+}
+
 .game-card.hammer {
   border-color: #aed8c1;
   background: #dcf1e5;
@@ -1187,6 +1196,10 @@ select:focus {
   background: currentColor;
 }
 
+.recommendation.lock {
+  color: var(--green-dark);
+}
+
 .recommendation.hammer {
   color: var(--green);
 }
@@ -1304,7 +1317,7 @@ select:focus {
 }
 
 .performance-summary {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .performance-summary .summary-card {

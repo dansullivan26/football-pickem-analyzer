@@ -8,6 +8,7 @@ import type {
 import type { CardPickSource, PickStrength } from './cardScoring'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
+  'lock',
   'hammer',
   'lean',
   'slight',
@@ -18,6 +19,7 @@ const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
 const SOURCES: CardPickSource[] = ['line-value', 'public-consensus']
 
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
+  lock: 'Locks',
   hammer: 'Hammers',
   lean: 'Leans',
   slight: 'Slights',

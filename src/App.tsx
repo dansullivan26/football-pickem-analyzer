@@ -9,7 +9,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook, compareRecommendationOrder, recommendationOrderKey } from './cardScoring'
+import { publicBucketForPool, favorableHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
@@ -120,13 +120,6 @@ function formatVenue(venue: GameVenue | null | undefined) {
   const parts = [venue.stadium, place].filter(Boolean)
   if (!parts.length) return null
   return parts.join(' · ')
-}
-
-function classifyEdge(magnitude: number): EdgeCategory {
-  if (magnitude >= 3) return 'hammer'
-  if (magnitude >= 1.5) return 'lean'
-  if (magnitude > 0) return 'slight'
-  return 'neutral'
 }
 
 function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis {
@@ -683,7 +676,7 @@ function App() {
           totals[analysis.category] += 1
           return totals
         },
-        { hammer: 0, lean: 0, slight: 0, neutral: 0, pending: 0 },
+        { lock: 0, hammer: 0, lean: 0, slight: 0, neutral: 0, pending: 0 },
       ),
     [analyses],
   )
@@ -852,10 +845,15 @@ function App() {
             </p>
           </div>
           <div className="summary-grid">
+            <button className="summary-card lock" onClick={() => setFilter('lock')}>
+              <span>Locks</span>
+              <strong>{counts.lock}</strong>
+              <small>4+ point edge</small>
+            </button>
             <button className="summary-card hammer" onClick={() => setFilter('hammer')}>
               <span>Hammers</span>
               <strong>{counts.hammer}</strong>
-              <small>3+ point edge</small>
+              <small>3–3.5 points</small>
             </button>
             <button className="summary-card lean" onClick={() => setFilter('lean')}>
               <span>Leans</span>
@@ -913,6 +911,7 @@ function App() {
                 }
               >
                 <option value="all">All games</option>
+                <option value="lock">Locks</option>
                 <option value="hammer">Hammers</option>
                 <option value="lean">Leans</option>
                 <option value="slight">Slights</option>

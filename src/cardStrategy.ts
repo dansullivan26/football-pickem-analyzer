@@ -77,7 +77,7 @@ export type SuggestedTiebreaker = {
 
 /**
  * v5 card rules:
- * 1. Hammer / lean / slight → the line-value side. Public never outranks
+ * 1. Lock / hammer / lean / slight → the line-value side. Public never outranks
  *    these, even a mild slight vs a strong Covers majority.
  * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
  *    pick and badges as solid. Recommendation sort keeps it in its point

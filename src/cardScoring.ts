@@ -6,13 +6,22 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Any line-value pick (hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort still keeps it in its point band, same as Lines. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
+  'Any line-value pick (lock / hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort still keeps it in its point band, same as Lines. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
+  'lock',
   'hammer',
   'lean',
   'slight',
 ])
+
+export function classifyEdge(magnitude: number): EdgeCategory {
+  if (magnitude >= 4) return 'lock'
+  if (magnitude >= 3) return 'hammer'
+  if (magnitude >= 1.5) return 'lean'
+  if (magnitude > 0) return 'slight'
+  return 'neutral'
+}
 
 export type PickStrength = 'mild' | 'solid' | 'strong'
 export type CardPickSource = 'line-value' | 'public-consensus'
@@ -32,11 +41,12 @@ export const PUBLIC_SUPPORT_RANK: Record<PublicSupport, number> = {
 }
 
 export const CATEGORY_RANK: Record<EdgeCategory, number> = {
-  hammer: 0,
-  lean: 1,
-  slight: 2,
-  neutral: 3,
-  pending: 4,
+  lock: 0,
+  hammer: 1,
+  lean: 2,
+  slight: 3,
+  neutral: 4,
+  pending: 5,
 }
 
 export type ResolvedCardPick = {
@@ -129,7 +139,8 @@ export function lineValueScore(
   hook: HookKind | null = null,
 ) {
   let score = edge * PCT_PER_SPREAD_POINT
-  if (category === 'hammer') score = 12 + (edge - 3) * PCT_PER_SPREAD_POINT
+  if (category === 'lock') score = 15 + (edge - 4) * PCT_PER_SPREAD_POINT
+  else if (category === 'hammer') score = 12 + (edge - 3) * PCT_PER_SPREAD_POINT
   else if (category === 'lean') score = 6 + (edge - 1.5) * 4
   if (hook && score < HOOK_SOLID_FLOOR) return HOOK_SOLID_FLOOR
   return score
@@ -139,7 +150,7 @@ export function lineValueStrength(
   category: EdgeCategory,
   hook: HookKind | null = null,
 ): PickStrength {
-  if (category === 'hammer') return 'strong'
+  if (category === 'lock' || category === 'hammer') return 'strong'
   if (category === 'lean' || hook) return 'solid'
   return 'mild'
 }

@@ -42,7 +42,10 @@ This validates the roster and weekly pick grids, strips the private pool URL,
 and writes `src/data/player-history.json`. Each weekly entry may include
 `tiebreaker.answer` as an integer (or null). The Players view can render
 unpicked weeks immediately; tendency metrics populate as scored Tuesday
-exports add selections, results, and tiebreaker totals. Line-value agreement
+exports add selections, results, and tiebreaker totals. Graded pick
+`result` values (`win` / `loss` / `push`) also stamp `cover` on the
+frozen recommendation snapshot so the Performance page can score those
+games. A later overwrite of the same dump updates covers again. Line-value agreement
 and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
 The Players view also builds a weekly prediction from that player's earlier
@@ -134,7 +137,9 @@ npm run snapshot-recommendations
 That writes `src/data/recommendation-history.json` for the Performance page.
 The odds refresh workflow runs the same snapshot so live recs keep updating
 until kickoff, then `npm run snapshot-predictions` so player forecasts freeze
-at the week's first kickoff. Open games also store the generated-card source
+at the week's first kickoff. Player ingest runs `npm run apply-covers` so ATS
+outcomes from CBS pick results fill `cover` (`home` / `away` / `push`) without
+rewriting the frozen rec. Hourly snapshots keep those covers. Open games also store the generated-card source
 and strength
 (line value vs public, mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×

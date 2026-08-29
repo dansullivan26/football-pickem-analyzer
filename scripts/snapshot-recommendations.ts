@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolveCardPick, favorableHook, classifyEdge } from '../src/cardScoring.ts'
+import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -64,6 +65,16 @@ try {
   // No completed card stored yet.
 }
 
+let playerHistory = { weeks: [] }
+try {
+  playerHistory = JSON.parse(
+    await readFile(new URL('src/data/player-history.json', ROOT), 'utf8'),
+  )
+} catch {
+  // Player ingest has not landed yet.
+}
+const covers = coversFromPlayerHistory(playerHistory)
+
 const deviationIds = new Set(
   (overrides.weeks ?? [])
     .find((week) => week.week === slate.week.order)
@@ -88,8 +99,12 @@ const games = slate.games.map((game) => {
   const previous = previousById.get(game.cbsEventId)
   const kickedOff = new Date(game.kickoff).getTime() <= now
 
+  const cover =
+    lookupCover(covers, slate.week.order, game.cbsEventId) ?? previous?.cover ?? null
+
   if (kickedOff && previous) {
-    return deviationIds.has(game.id) ? { ...previous, deviated: true } : previous
+    const frozen = cover === previous.cover ? previous : { ...previous, cover }
+    return deviationIds.has(game.id) ? { ...frozen, deviated: true } : frozen
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
@@ -112,7 +127,7 @@ const games = slate.games.map((game) => {
     category: analysis.category,
     recommendedSide: analysis.recommendedSide,
     hook: analysis.hook,
-    cover: previous?.cover ?? null,
+    cover,
     source: cardPick.source,
     pickedSide: cardPick.pickedSide,
     strength: cardPick.strength,

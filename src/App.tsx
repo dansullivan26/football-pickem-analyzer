@@ -797,24 +797,6 @@ function App() {
             Performance
           </a>
         </nav>
-        <div className="header-actions">
-          {view === 'lines' && (
-            <>
-              <span className="feed-status">
-                {formatUpdatedAt(feed?.updatedAt ?? null)}
-              </span>
-              <button
-                className="refresh-button"
-                type="button"
-                onClick={() => void refreshData()}
-                disabled={dispatching}
-              >
-                <span aria-hidden="true">↻</span>
-                {dispatching ? 'Starting…' : 'Refresh data'}
-              </button>
-            </>
-          )}
-        </div>
       </header>
 
       {toast && (
@@ -828,7 +810,7 @@ function App() {
 
       {view === 'lines' ? (
         <main>
-        <section className="hero">
+        <section className="hero players-hero">
           <div>
             <p className="eyebrow">
               {slate.pool.seasonYear} season · {slate.pool.entriesCount} entries
@@ -838,6 +820,22 @@ function App() {
               Compare the pool&apos;s locked line with DraftKings.
               Recommendations use the current DraftKings spread.
             </p>
+          </div>
+          <div className="hero-aside">
+            <div className="week-chip">
+              <span>DraftKings</span>
+              <strong>{feed?.updatedAt ? 'Live' : '—'}</strong>
+              <small>{formatUpdatedAt(feed?.updatedAt ?? null)}</small>
+            </div>
+            <button
+              className="refresh-button in-page"
+              type="button"
+              onClick={() => void refreshData()}
+              disabled={dispatching}
+            >
+              <span aria-hidden="true">↻</span>
+              {dispatching ? 'Starting…' : 'Refresh data'}
+            </button>
           </div>
         </section>
 

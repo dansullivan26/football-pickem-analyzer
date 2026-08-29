@@ -1,8 +1,9 @@
-export type AppView = 'lines' | 'players' | 'performance'
+export type AppView = 'lines' | 'players' | 'teams' | 'performance'
 
 const ROUTES: Record<AppView, string> = {
   lines: '/',
   players: '/players',
+  teams: '/teams',
   performance: '/performance',
 }
 
@@ -21,6 +22,7 @@ export function viewFromPath(pathname = window.location.pathname): AppView {
     : pathname
   const clean = rest.replace(/\/$/, '') || '/'
   if (clean === '/players') return 'players'
+  if (clean === '/teams') return 'teams'
   if (clean === '/performance') return 'performance'
   return 'lines'
 }

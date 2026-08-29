@@ -10,8 +10,10 @@ npm install
 npm run dev
 ```
 
-Lines is `/`, Players is `/players`, and Performance is `/performance`. GitHub
-Pages serves the same SPA for those paths via `404.html`.
+Lines is `/`, Players is `/players`, Teams is `/teams`, and Performance is
+`/performance`. GitHub Pages serves the same SPA for those paths via `404.html`.
+Teams grades each side against the locked CBS line (home/away, favorite/dog)
+from the same covers Performance uses.
 
 The app loads its public slate from `src/data/current-slate.json`. Full CBS
 exports are ignored by git so private pool URLs and settings are not published.
@@ -146,9 +148,9 @@ rewriting the frozen rec. Hourly snapshots keep those covers. Open games also st
 and strength
 (line value vs public, mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×
-strength bucket separately. The top tile is the combined ATS record of
-every frozen Lines recommendation (the side we liked, not a public fill
-or a deviation).
+strength bucket separately. The top tiles are the combined ATS record of every frozen Lines
+recommendation (the side we liked), then every line-value card pick and
+every public fill. Strength buckets still sit under those.
 
 ## Refresh sportsbook lines
 

@@ -1341,7 +1341,7 @@ select:focus {
 }
 
 .performance-overall {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-bottom: 16px;
 }
 
@@ -1355,6 +1355,48 @@ select:focus {
 
 .performance-overall .summary-card strong {
   font-size: 2.3rem;
+}
+
+.teams-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 22px;
+}
+
+.teams-summary .summary-card {
+  cursor: default;
+}
+
+.teams-summary .summary-card:hover {
+  transform: none;
+}
+
+.team-directory-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 14px 12px;
+}
+
+.team-directory-filters select {
+  width: 100%;
+}
+
+.team-detail-title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.team-detail-title .team-logo {
+  width: 44px;
+  height: 44px;
+}
+
+.team-empty {
+  margin: 0;
+  padding: 4px 0 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .performance-summary {
@@ -2133,7 +2175,8 @@ footer {
     grid-row: span 2;
   }
 
-  .summary-grid {
+  .summary-grid,
+  .teams-summary {
     grid-template-columns: repeat(2, 1fr);
   }
 

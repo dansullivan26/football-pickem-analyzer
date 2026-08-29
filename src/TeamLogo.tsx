@@ -5,7 +5,7 @@ import type { Team } from './types'
 /** Unknown team ids answer 200 with a generic 24x24 shield; real marks are 250x250. */
 const PLACEHOLDER_SIZE = 24
 
-export default function TeamLogo({ team }: { team: Team }) {
+export default function TeamLogo({ team }: { team: Pick<Team, 'id'> }) {
   const [hiddenSrc, setHiddenSrc] = useState<string | null>(null)
   const src = cbsTeamLogoUrl(team.id)
 

@@ -171,6 +171,23 @@ function summarizeRecommendations(games: FrozenRecommendation[]) {
   }
 }
 
+function summarizeSource(games: FrozenRecommendation[], source: CardPickSource) {
+  const rows = games.filter((game) => game.source === source && game.pickedSide)
+  const results = rows.map(strengthResult)
+  const wins = results.filter((result) => result === 'win').length
+  const losses = results.filter((result) => result === 'loss').length
+  const pushes = results.filter((result) => result === 'push').length
+  return {
+    count: rows.length,
+    wins,
+    losses,
+    pushes,
+    pending: results.filter((result) => result == null).length,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS`,
+  }
+}
+
 function summarizeDeviations(games: FrozenRecommendation[]) {
   const rows = games.filter((game) => game.deviated && game.pickedSide)
   const results = rows.map(submittedResult)
@@ -251,6 +268,14 @@ export default function PerformanceView({
     () => summarizeRecommendations(allGames),
     [allGames],
   )
+  const lineValueStats = useMemo(
+    () => summarizeSource(allGames, 'line-value'),
+    [allGames],
+  )
+  const publicStats = useMemo(
+    () => summarizeSource(allGames, 'public-consensus'),
+    [allGames],
+  )
   const deviationStats = useMemo(
     () => summarizeDeviations(allGames),
     [allGames],
@@ -264,9 +289,9 @@ export default function PerformanceView({
           <p className="eyebrow">Model tracker</p>
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
-            The top tile is the frozen Lines recommendation versus the
-            cover — did the side we liked actually win. Tiers, card
-            strength, and public vs line-value sit under that. Deviations
+            The top tiles are overall ATS for the frozen Lines
+            recommendation, then every line-value card pick and every
+            public fill. Tiers and strength sit under that. Deviations
             are games where the completed card sent the other side.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
@@ -290,7 +315,7 @@ export default function PerformanceView({
 
       <section
         className="summary-grid performance-overall"
-        aria-label="Overall recommendation hit rate"
+        aria-label="Overall recommendation hit rates"
       >
         <div className="summary-card lock">
           <span>Recommendations</span>
@@ -299,6 +324,22 @@ export default function PerformanceView({
             {recommendationStats.count} rec
             {recommendationStats.count === 1 ? '' : 's'} ·{' '}
             {recommendationStats.detail}
+          </small>
+        </div>
+        <div className="summary-card hammer">
+          <span>Line value</span>
+          <strong>{lineValueStats.rate}</strong>
+          <small>
+            {lineValueStats.count} rec
+            {lineValueStats.count === 1 ? '' : 's'} · {lineValueStats.detail}
+          </small>
+        </div>
+        <div className="summary-card lean">
+          <span>Public</span>
+          <strong>{publicStats.rate}</strong>
+          <small>
+            {publicStats.count} rec
+            {publicStats.count === 1 ? '' : 's'} · {publicStats.detail}
           </small>
         </div>
       </section>

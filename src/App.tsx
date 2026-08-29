@@ -6,6 +6,7 @@ import recommendationHistoryData from './data/recommendation-history.json'
 import predictionForecastsData from './data/prediction-forecasts.json'
 import lineHistoryData from './data/line-history.json'
 import PlayersView from './PlayersView'
+import TeamsView from './TeamsView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
@@ -776,6 +777,16 @@ function App() {
             Players
           </a>
           <a
+            className={view === 'teams' ? 'active' : ''}
+            href={pathForView('teams')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('teams')
+            }}
+          >
+            Teams
+          </a>
+          <a
             className={view === 'performance' ? 'active' : ''}
             href={pathForView('performance')}
             onClick={(event) => {
@@ -1020,6 +1031,8 @@ function App() {
           recommendations={recommendationHistory}
           forecasts={predictionForecasts}
         />
+      ) : view === 'teams' ? (
+        <TeamsView slate={slate} recommendations={recommendationHistory} />
       ) : (
         <PerformanceView history={recommendationHistory} />
       )}
@@ -1041,6 +1054,16 @@ function App() {
               dateStyle: 'medium',
               timeStyle: 'short',
             }).format(new Date(playerHistory.source.fetchedAt))}
+            .
+          </>
+        ) : view === 'teams' ? (
+          <>
+            Team ATS uses CBS covers from the frozen recommendation snapshot
+            updated{' '}
+            {new Intl.DateTimeFormat(undefined, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            }).format(new Date(recommendationHistory.updatedAt))}
             .
           </>
         ) : (

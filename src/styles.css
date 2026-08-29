@@ -1340,6 +1340,23 @@ select:focus {
   cursor: default;
 }
 
+.performance-overall {
+  grid-template-columns: 1fr;
+  margin-bottom: 16px;
+}
+
+.performance-overall .summary-card {
+  cursor: default;
+}
+
+.performance-overall .summary-card:hover {
+  transform: none;
+}
+
+.performance-overall .summary-card strong {
+  font-size: 2.3rem;
+}
+
 .performance-summary {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
@@ -2118,6 +2135,10 @@ footer {
 
   .summary-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .performance-overall {
+    grid-template-columns: 1fr;
   }
 
   .performance-summary {

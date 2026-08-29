@@ -154,6 +154,23 @@ function summarizeStrength(
   }
 }
 
+function summarizeRecommendations(games: FrozenRecommendation[]) {
+  const rows = games.filter((game) => game.recommendedSide)
+  const results = rows.map(recResult)
+  const wins = results.filter((result) => result === 'win').length
+  const losses = results.filter((result) => result === 'loss').length
+  const pushes = results.filter((result) => result === 'push').length
+  return {
+    count: rows.length,
+    wins,
+    losses,
+    pushes,
+    pending: results.filter((result) => result == null).length,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS`,
+  }
+}
+
 function summarizeDeviations(games: FrozenRecommendation[]) {
   const rows = games.filter((game) => game.deviated && game.pickedSide)
   const results = rows.map(submittedResult)
@@ -230,6 +247,10 @@ export default function PerformanceView({
       ),
     [allGames],
   )
+  const recommendationStats = useMemo(
+    () => summarizeRecommendations(allGames),
+    [allGames],
+  )
   const deviationStats = useMemo(
     () => summarizeDeviations(allGames),
     [allGames],
@@ -243,9 +264,10 @@ export default function PerformanceView({
           <p className="eyebrow">Model tracker</p>
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
-            Hit rates for frozen picks, by line-value tier and by card
-            strength split into line value vs public. Deviations are games
-            where the completed card sent the other side.
+            The top tile is the frozen Lines recommendation versus the
+            cover — did the side we liked actually win. Tiers, card
+            strength, and public vs line-value sit under that. Deviations
+            are games where the completed card sent the other side.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
           </p>
@@ -265,6 +287,21 @@ export default function PerformanceView({
           fill in after games complete and covers are recorded.
         </div>
       )}
+
+      <section
+        className="summary-grid performance-overall"
+        aria-label="Overall recommendation hit rate"
+      >
+        <div className="summary-card lock">
+          <span>Recommendations</span>
+          <strong>{recommendationStats.rate}</strong>
+          <small>
+            {recommendationStats.count} rec
+            {recommendationStats.count === 1 ? '' : 's'} ·{' '}
+            {recommendationStats.detail}
+          </small>
+        </div>
+      </section>
 
       <section className="summary-grid performance-summary" aria-label="Season hit rates">
         {TRACKED.map((tier) => {

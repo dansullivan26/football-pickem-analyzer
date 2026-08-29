@@ -146,7 +146,9 @@ rewriting the frozen rec. Hourly snapshots keep those covers. Open games also st
 and strength
 (line value vs public, mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×
-strength bucket separately.
+strength bucket separately. The top tile is the combined ATS record of
+every frozen Lines recommendation (the side we liked, not a public fill
+or a deviation).
 
 ## Refresh sportsbook lines
 

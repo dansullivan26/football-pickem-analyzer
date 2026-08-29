@@ -82,8 +82,9 @@ export type SuggestedTiebreaker = {
  * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
  *    pick and badges as solid. Recommendation sort keeps it in its point
  *    band, matching the Lines page.
- * 3. Inside a line-value band, the higher near-pool public % on the
- *    picked side ranks first. Fade therefore sinks; no bucket sits last.
+ * 3. Inside a line-value band, same edge: a favorable TD hook ranks
+ *    above an FG hook, and either ranks above no hook. Then the higher
+ *    near-pool public % on the picked side ranks first. Fade sinks.
  * 4. Otherwise, use a meaningful Covers Picks Per Line bucket within one
  *    point of the pool line. Those leftover fills always sit below slights.
  * 5. No line-value pick and no qualifying Covers majority → leave unpicked.
@@ -222,6 +223,7 @@ export function sortSuggestedPicks(
       {
         category: left.category,
         edge: left.edge,
+        hook: left.hook,
         publicSupport: left.publicSupport,
         publicPct: left.publicPct,
         kickoff: left.kickoff,
@@ -229,6 +231,7 @@ export function sortSuggestedPicks(
       {
         category: right.category,
         edge: right.edge,
+        hook: right.hook,
         publicSupport: right.publicSupport,
         publicPct: right.publicPct,
         kickoff: right.kickoff,

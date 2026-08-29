@@ -239,6 +239,7 @@ the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
 DraftKings, the Lines card shows a favorable hook badge and the generated card
 scores that pick as solid line value (not mild) with an FG/TD hook badge.
 Generated-card Recommendation sort matches the Lines page: lock, then hammer,
-then lean, then slight by edge size, then public fills, with near-pool public
-% as the tie-break inside each band. A hook still badges as solid but stays
-in its point band.
+then lean, then slight by edge size, then public fills. Inside the same edge,
+a favorable TD hook ranks above an FG hook, and either ranks above no hook;
+near-pool public % is the next tie-break. A hook still badges as solid but
+stays in its point band.

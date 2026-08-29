@@ -131,6 +131,7 @@ test('within a 1-point slight band, higher public % on the picked side ranks fir
     {
       category: 'slight' as const,
       edge: 1,
+      hook: null,
       publicSupport: 'agree' as const,
       publicPct: 60,
       kickoff: '2026-09-05T12:00:00-04:00',
@@ -139,6 +140,7 @@ test('within a 1-point slight band, higher public % on the picked side ranks fir
     {
       category: 'slight' as const,
       edge: 1,
+      hook: null,
       publicSupport: 'agree' as const,
       publicPct: 80,
       kickoff: '2026-09-05T19:00:00-04:00',
@@ -156,6 +158,7 @@ test('within neutrals, the higher near-pool public leader ranks first', () => {
     {
       category: 'neutral' as const,
       edge: 0,
+      hook: null,
       publicSupport: 'none' as const,
       publicPct: 55,
       kickoff: '2026-09-05T12:00:00-04:00',
@@ -164,6 +167,7 @@ test('within neutrals, the higher near-pool public leader ranks first', () => {
     {
       category: 'neutral' as const,
       edge: 0,
+      hook: null,
       publicSupport: 'none' as const,
       publicPct: 75,
       kickoff: '2026-09-05T19:00:00-04:00',
@@ -181,6 +185,7 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     {
       category: 'neutral' as const,
       edge: 0,
+      hook: null,
       publicSupport: 'agree' as const,
       publicPct: 80,
       kickoff: '2026-09-05T12:00:00-04:00',
@@ -189,6 +194,7 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     {
       category: 'slight' as const,
       edge: 0.5,
+      hook: 'fg' as const,
       publicSupport: 'agree' as const,
       publicPct: 70,
       kickoff: '2026-09-05T12:00:00-04:00',
@@ -197,6 +203,7 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     {
       category: 'slight' as const,
       edge: 1,
+      hook: null,
       publicSupport: 'none' as const,
       publicPct: 55,
       kickoff: '2026-09-05T19:00:00-04:00',
@@ -205,6 +212,7 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     {
       category: 'lean' as const,
       edge: 1.5,
+      hook: null,
       publicSupport: 'fade' as const,
       publicPct: 40,
       kickoff: '2026-09-05T15:00:00-04:00',
@@ -241,6 +249,7 @@ test('recommendation sort ranks a lock above a hammer', () => {
     {
       category: 'hammer' as const,
       edge: 3.5,
+      hook: null,
       publicSupport: 'agree' as const,
       publicPct: 80,
       kickoff: '2026-09-05T12:00:00-04:00',
@@ -249,6 +258,7 @@ test('recommendation sort ranks a lock above a hammer', () => {
     {
       category: 'lock' as const,
       edge: 4,
+      hook: null,
       publicSupport: 'fade' as const,
       publicPct: 40,
       kickoff: '2026-09-05T19:00:00-04:00',
@@ -259,4 +269,40 @@ test('recommendation sort ranks a lock above a hammer', () => {
     .map((row) => row.id)
 
   assert.deepEqual(ids, ['lock', 'hammer'])
+})
+
+test('inside the same edge, a TD hook ranks above an FG hook and either ranks above no hook', () => {
+  const ids = [
+    {
+      category: 'slight' as const,
+      edge: 1,
+      hook: null,
+      publicSupport: 'agree' as const,
+      publicPct: 80,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'no-hook',
+    },
+    {
+      category: 'slight' as const,
+      edge: 1,
+      hook: 'fg' as const,
+      publicSupport: 'fade' as const,
+      publicPct: 40,
+      kickoff: '2026-09-05T15:00:00-04:00',
+      id: 'fg-hook',
+    },
+    {
+      category: 'slight' as const,
+      edge: 1,
+      hook: 'td' as const,
+      publicSupport: 'none' as const,
+      publicPct: 55,
+      kickoff: '2026-09-05T19:00:00-04:00',
+      id: 'td-hook',
+    },
+  ]
+    .sort(compareRecommendationOrder)
+    .map((row) => row.id)
+
+  assert.deepEqual(ids, ['td-hook', 'fg-hook', 'no-hook'])
 })

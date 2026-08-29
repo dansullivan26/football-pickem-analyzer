@@ -6,7 +6,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Any line-value pick (lock / hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort still keeps it in its point band, same as Lines. Public is a within-band modifier: inside the same edge, the higher near-pool public % on the picked side ranks first (agreement floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
+  'Any line-value pick (lock / hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort keeps it in its point band, same as Lines. Inside the same edge, a TD hook ranks above an FG hook, and either ranks above no hook, then public is the modifier (higher near-pool % on the picked side floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -38,6 +38,12 @@ export const PUBLIC_SUPPORT_RANK: Record<PublicSupport, number> = {
   agree: 2,
   none: 1,
   fade: 0,
+}
+
+export const HOOK_RANK: Record<HookKind | 'none', number> = {
+  td: 2,
+  fg: 1,
+  none: 0,
 }
 
 export const CATEGORY_RANK: Record<EdgeCategory, number> = {
@@ -283,6 +289,7 @@ export function compareCardPicks(
 export type RecommendationOrderKey = {
   category: EdgeCategory
   edge: number | null
+  hook: HookKind | null
   publicSupport: PublicSupport
   publicPct: number | null
   kickoff: string
@@ -293,12 +300,17 @@ export function recommendationOrderKey(input: {
   edge: number | null
   recommendedSide: 'home' | 'away' | null
   homeSpread: number
+  liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
   kickoff: string
 }): RecommendationOrderKey {
   return {
     category: input.category,
     edge: input.edge,
+    hook:
+      input.liveHomeSpread == null
+        ? null
+        : favorableHook(input.homeSpread, input.liveHomeSpread),
     publicSupport: publicSupportForSide(
       input.consensus,
       input.homeSpread,
@@ -321,6 +333,9 @@ export function compareRecommendationOrder(
   if (category) return category
   const edge = (right.edge ?? -1) - (left.edge ?? -1)
   if (edge) return edge
+  const hook =
+    HOOK_RANK[right.hook ?? 'none'] - HOOK_RANK[left.hook ?? 'none']
+  if (hook) return hook
   const publicSupport =
     PUBLIC_SUPPORT_RANK[right.publicSupport] -
     PUBLIC_SUPPORT_RANK[left.publicSupport]

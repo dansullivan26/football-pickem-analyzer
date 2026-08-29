@@ -251,17 +251,10 @@ function ConsensusNote({
     return <span className="consensus-note empty">No public consensus yet</span>
   }
 
-  const picks = (away.picks ?? 0) + (home.picks ?? 0)
   const captured = formatAge(consensusFeed.source.fetchedAt, now)
   const currentSides = [away, home]
     .map((side) => `${side.name} ${formatSpread(side.spread)}`)
     .join(' · ')
-  const leader = home.pct > away.pct ? home : away
-  const split = away.pct === home.pct
-  const headlineParts = [
-    split ? `Public split ${leader.pct}%` : `Public ${leader.pct}% ${leader.name}`,
-    `· ${picks} picks`,
-  ]
   const bucket = publicBucketForPool(consensus)
   let bucketParts = ['Per-line breakdown unavailable']
   if (bucket) {
@@ -276,7 +269,7 @@ function ConsensusNote({
     const bucketSpread =
       bucketSide === 'away' ? bucket.awaySpread : -bucket.awaySpread
     bucketParts = [
-      `Near pool: ${bucketLeader.name} ${Math.round((leaderPicks / bucketPicks) * 100)}%`,
+      `${bucketLeader.name} ${Math.round((leaderPicks / bucketPicks) * 100)}%`,
       `at ${formatSpread(bucketSpread)} (${leaderPicks}–${otherPicks})`,
     ]
   } else if (consensus.atsByLine) {
@@ -301,9 +294,6 @@ function ConsensusNote({
           <NoteParts parts={bucketParts} />
         </strong>
       )}
-      <em>
-        <NoteParts parts={headlineParts} />
-      </em>
     </span>
   )
 }

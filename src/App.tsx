@@ -581,6 +581,7 @@ function App() {
   const [sort, setSort] = useState<'kickoff' | 'recommendation'>('kickoff')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
+  const [upcomingOnly, setUpcomingOnly] = useState(false)
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
   const [dispatching, setDispatching] = useState(false)
@@ -647,6 +648,11 @@ function App() {
   }, [loadOdds])
 
   useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 60_000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
     function onPopState() {
       setView(viewFromPath())
     }
@@ -687,7 +693,9 @@ function App() {
         [game.away.name, game.away.abbrev, game.home.name, game.home.abbrev].some(
           (value) => value.toLowerCase().includes(normalizedQuery),
         )
-      return matchesFilter && matchesLeague && matchesQuery
+      const matchesUpcoming =
+        !upcomingOnly || new Date(game.kickoff).getTime() > now
+      return matchesFilter && matchesLeague && matchesQuery && matchesUpcoming
     })
 
     if (sort !== 'recommendation') return filtered
@@ -714,7 +722,7 @@ function App() {
         }),
       ),
     )
-  }, [analyses, filter, league, query, sort])
+  }, [analyses, filter, league, now, query, sort, upcomingOnly])
 
   const lineMoves = useMemo(() => {
     const spreads = analyses.filter((analysis) =>
@@ -929,6 +937,14 @@ function App() {
                 <option value="recommendation">Recommendation</option>
               </select>
             </label>
+            <label className="upcoming-filter">
+              <input
+                type="checkbox"
+                checked={upcomingOnly}
+                onChange={(event) => setUpcomingOnly(event.target.checked)}
+              />
+              Upcoming only
+            </label>
             <button
               className="generate-card-button"
               type="button"
@@ -989,6 +1005,7 @@ function App() {
                   setLeague('all')
                   setSort('kickoff')
                   setQuery('')
+                  setUpcomingOnly(false)
                 }}
               >
                 Clear filters

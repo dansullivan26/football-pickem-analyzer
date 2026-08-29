@@ -425,6 +425,11 @@ export default function PlayersView({
                     <div className="player-archetype">
                       <strong>{prediction.profile.archetype}</strong>
                       <span>{prediction.profile.archetypeDetail}</span>
+                      {prediction.profile.insight && (
+                        <p className="player-insight">
+                          {prediction.profile.insight}
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>

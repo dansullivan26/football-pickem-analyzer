@@ -138,6 +138,7 @@ test('withholds calls before a player has enough history', () => {
   )
 
   assert.equal(report.profile.archetype, 'Building profile')
+  assert.equal(report.profile.insight, null)
   assert.equal(report.calls, 0)
   assert.equal(report.games[0].reason, 'Not enough prior picks')
 })
@@ -223,6 +224,34 @@ test('assigns a supported home-favorite archetype on the fly', () => {
 
   assert.equal(profile.archetype, 'Home-favorite taker')
   assert.match(profile.archetypeDetail, /20 home-favorite matchups/)
+  assert.equal(profile.insight, null)
+})
+
+test('adds a second-habit sentence when it is loud and not a restatement', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home', index < 8 ? -3.5 : 3.5),
+  )
+  const lineValueGames = priorPicks.slice(0, 12).map((playerPick) =>
+    recGame(playerPick.cbsEventId, {
+      homeSpread: playerPick.homeSpread,
+      category: 'lean',
+      source: 'line-value',
+      recommendedSide: playerPick.pickedSide,
+      pickedSide: playerPick.pickedSide,
+    }),
+  )
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    2,
+    history([historyWeek(1, priorPicks)]),
+    recHistory([recWeek(1, lineValueGames)]),
+  )
+
+  assert.equal(profile.archetype, 'Home-team lean')
+  assert.equal(
+    profile.insight,
+    'Has taken our line-value side on 12 of 12 chances.',
+  )
 })
 
 test('excludes ambiguous actual picks from prediction accuracy', () => {

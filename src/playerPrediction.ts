@@ -23,6 +23,8 @@ export type Habit = {
 export type PlayerPredictionProfile = {
   archetype: string
   archetypeDetail: string
+  /** Second-strongest leftover habit, when it is loud enough to mention. */
+  insight: string | null
   picks: number
   habits: Record<HabitKey, Habit>
 }
@@ -109,13 +111,21 @@ type HabitCounts = {
   eligible: number
 }
 
+type InsightKey = HabitKey | 'home-favorite'
+
 type Candidate = {
+  key: InsightKey
   label: string
   detail: string
+  insight: string
+  eligible: number
+  directionalRate: number
   strength: number
 }
 
 const PRIOR_PICKS = 4
+const INSIGHT_MIN_ELIGIBLE = 12
+const INSIGHT_MIN_RATE = 0.7
 const ACTIVE_RULES: Record<
   HabitKey,
   { minimum: number; minimumRate: number }
@@ -202,6 +212,38 @@ function makeHabit(
   }
 }
 
+function insightSentence(
+  key: InsightKey,
+  preferred: 'follow' | 'fade',
+  hits: number,
+  eligible: number,
+) {
+  const of = `${hits} of ${eligible}`
+  if (key === 'line-value') {
+    return preferred === 'follow'
+      ? `Has taken our line-value side on ${of} chances.`
+      : `Has faded our line-value side on ${of} chances.`
+  }
+  if (key === 'public') {
+    return preferred === 'follow'
+      ? `Has taken the public side on ${of} chances.`
+      : `Has faded the public side on ${of} chances.`
+  }
+  if (key === 'favorite') {
+    return preferred === 'follow'
+      ? `Has backed the favorite on ${of} chances.`
+      : `Has hunted the dog on ${of} chances.`
+  }
+  if (key === 'home') {
+    return preferred === 'follow'
+      ? `Has taken the home team on ${of} chances.`
+      : `Has taken the road team on ${of} chances.`
+  }
+  return preferred === 'follow'
+    ? `Has taken home favorites on ${of} of those matchups.`
+    : `Has taken the road dog on ${of} home-favorite matchups.`
+}
+
 function habitCandidate(
   habit: Habit,
   followLabel: string,
@@ -210,11 +252,43 @@ function habitCandidate(
   if (!habit.active || !habit.preferred || habit.rate == null) return null
   const directionalRate =
     habit.preferred === 'follow' ? habit.rate : 1 - habit.rate
+  const hits =
+    habit.preferred === 'follow'
+      ? habit.follows
+      : habit.eligible - habit.follows
   return {
+    key: habit.key,
     label: habit.preferred === 'follow' ? followLabel : fadeLabel,
     detail: `${Math.round(directionalRate * 100)}% across ${habit.eligible} eligible picks`,
+    insight: insightSentence(habit.key, habit.preferred, hits, habit.eligible),
+    eligible: habit.eligible,
+    directionalRate,
     strength: habit.strength * Math.min(1, habit.eligible / 20),
   }
+}
+
+function redundantInsight(first: InsightKey, next: InsightKey) {
+  if (first === next) return true
+  const pair = new Set([first, next])
+  return (
+    pair.has('home-favorite') && (pair.has('home') || pair.has('favorite'))
+  )
+}
+
+function profileInsight(ranked: Candidate[]) {
+  const [first, ...rest] = ranked
+  if (!first) return null
+  for (const candidate of rest) {
+    if (redundantInsight(first.key, candidate.key)) continue
+    if (
+      candidate.eligible < INSIGHT_MIN_ELIGIBLE ||
+      candidate.directionalRate < INSIGHT_MIN_RATE
+    ) {
+      continue
+    }
+    return candidate.insight
+  }
+  return null
 }
 
 export function buildPlayerPredictionProfile(
@@ -268,6 +342,7 @@ export function buildPlayerPredictionProfile(
     return {
       archetype: 'Building profile',
       archetypeDetail: `${picks.length} prior picks; 20 are needed before assigning a style`,
+      insight: null,
       picks: picks.length,
       habits,
     }
@@ -288,9 +363,23 @@ export function buildPlayerPredictionProfile(
     const rate = homeFavorite.follows / homeFavorite.eligible
     const directionalRate = Math.max(rate, 1 - rate)
     if (directionalRate >= 0.65) {
+      const preferred = rate >= 0.5 ? 'follow' : 'fade'
+      const hits =
+        preferred === 'follow'
+          ? homeFavorite.follows
+          : homeFavorite.eligible - homeFavorite.follows
       candidates.push({
-        label: rate >= 0.5 ? 'Home-favorite taker' : 'Road-dog hunter',
+        key: 'home-favorite',
+        label: preferred === 'follow' ? 'Home-favorite taker' : 'Road-dog hunter',
         detail: `${Math.round(directionalRate * 100)}% across ${homeFavorite.eligible} home-favorite matchups`,
+        insight: insightSentence(
+          'home-favorite',
+          preferred,
+          hits,
+          homeFavorite.eligible,
+        ),
+        eligible: homeFavorite.eligible,
+        directionalRate,
         strength:
           (directionalRate - 0.5) *
           2 *
@@ -299,12 +388,17 @@ export function buildPlayerPredictionProfile(
     }
   }
 
-  const strongest = candidates.sort((a, b) => b.strength - a.strength)[0]
+  const ranked = [...candidates].sort((left, right) => {
+    if (right.strength !== left.strength) return right.strength - left.strength
+    return left.key.localeCompare(right.key)
+  })
+  const strongest = ranked[0]
   return {
     archetype: strongest?.label ?? 'No dominant pattern',
     archetypeDetail:
       strongest?.detail ??
       `${picks.length} prior picks, but no tendency is strong enough to label`,
+    insight: profileInsight(ranked),
     picks: picks.length,
     habits,
   }

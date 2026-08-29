@@ -62,7 +62,10 @@ exists.
 
 Archetype labels (for example, `Home-favorite taker` or `Public fader`) are
 assigned from the strongest sufficiently supported tendency and may change as
-new scored weeks arrive.
+new scored weeks arrive. When a second habit is loud enough (12+ chances and
+70%+ one way) and is not just a restatement of the archetype, the profile
+adds one templated sentence under the label. Most players get no sentence
+until that bar is met.
 
 ```bash
 npm run snapshot-predictions

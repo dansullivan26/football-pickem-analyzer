@@ -151,6 +151,23 @@ export default function SuggestedCardPanel({
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
+        <button
+          type="button"
+          className="suggested-card-dismiss"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M3.2 3.2 12.8 12.8M12.8 3.2 3.2 12.8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+        <div className="suggested-card-body">
         <div className="suggested-card-header">
           <div>
             <p className="eyebrow">Suggested card</p>
@@ -176,9 +193,6 @@ export default function SuggestedCardPanel({
             </label>
             <button type="button" onClick={() => void copyCard()}>
               {copied ? 'Copied' : 'Copy card'}
-            </button>
-            <button type="button" onClick={onClose}>
-              Close
             </button>
           </div>
         </div>
@@ -331,6 +345,7 @@ export default function SuggestedCardPanel({
             alt="Let's ride"
           />
         </a>
+        </div>
 
         {askPassword && (
           <div

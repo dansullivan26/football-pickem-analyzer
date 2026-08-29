@@ -127,6 +127,14 @@ function rosterFromSlate(slate: Slate) {
   return roster
 }
 
+function rosterName(
+  roster: Map<string, RosterEntry>,
+  sport: 'NFL' | 'NCAAF',
+  abbrev: string,
+) {
+  return roster.get(teamKey(sport, abbrev))?.name ?? abbrev
+}
+
 function addAppearance(
   groups: Map<string, { info: RosterEntry; appearances: TeamAppearance[] }>,
   roster: Map<string, RosterEntry>,
@@ -167,13 +175,14 @@ export function buildTeamDirectory(
         { abbrev: game.home, venue: 'home' },
       ]
       for (const { abbrev, venue } of sides) {
+        const opponentAbbrev = venue === 'home' ? game.away : game.home
         addAppearance(
           groups,
           roster,
           {
             sport: game.sport,
             abbrev,
-            name: roster.get(teamKey(game.sport, abbrev))?.name ?? abbrev,
+            name: rosterName(roster, game.sport, abbrev),
             conference:
               roster.get(teamKey(game.sport, abbrev))?.conference ?? null,
             teamId: roster.get(teamKey(game.sport, abbrev))?.teamId ?? null,
@@ -183,7 +192,7 @@ export function buildTeamDirectory(
             weekLabel: week.label,
             cbsEventId: game.cbsEventId,
             sport: game.sport,
-            opponent: venue === 'home' ? game.away : game.home,
+            opponent: rosterName(roster, game.sport, opponentAbbrev),
             venue,
             market: marketForSide(venue, game.homeSpread),
             homeSpread: game.homeSpread,

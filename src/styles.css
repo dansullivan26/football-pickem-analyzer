@@ -757,6 +757,11 @@ h2 {
   white-space: nowrap;
 }
 
+.pick-hook.unfavorable {
+  color: #5c5346;
+  background: #ece8e0;
+}
+
 .pick-public {
   align-self: start;
   padding: 3px 8px;
@@ -1261,6 +1266,11 @@ select:focus {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.hook-badge.unfavorable {
+  color: #5c5346;
+  background: #ece8e0;
 }
 
 .card-notes {

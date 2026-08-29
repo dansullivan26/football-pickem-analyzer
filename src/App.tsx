@@ -9,7 +9,7 @@ import PlayersView from './PlayersView'
 import PerformanceView from './PerformanceView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
+import { publicBucketForPool, favorableHook, unfavorableHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
@@ -196,6 +196,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
     analysis.liveHomeSpread == null
       ? null
       : favorableHook(game.homeSpread, analysis.liveHomeSpread)
+  const badHook = hook ? null : unfavorableHook(poolNumber)
 
   return (
     <div className="recommendation-block">
@@ -210,6 +211,11 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
       {hook && (
         <div className="hook-badge">
           favorable {hook === 'fg' ? 'FG' : 'TD'} hook
+        </div>
+      )}
+      {badHook && (
+        <div className="hook-badge unfavorable">
+          unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
         </div>
       )}
     </div>

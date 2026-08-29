@@ -8,6 +8,7 @@ import {
   submittedPick,
   type SuggestedCard,
 } from './cardStrategy'
+import { unfavorableHook } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
@@ -203,6 +204,7 @@ export default function SuggestedCardPanel({
           {picks.map((pick) => {
             const deviate = deviations.has(pick.gameId)
             const sent = submittedPick(pick, deviate)
+            const badHook = pick.hook ? null : unfavorableHook(pick.poolSpread)
             return (
               <li key={pick.cbsEventId} className={deviate ? 'deviated' : undefined}>
                 <div className="suggested-pick-teams">
@@ -226,6 +228,11 @@ export default function SuggestedCardPanel({
                   {pick.hook && (
                     <span className="pick-hook">
                       {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
+                    </span>
+                  )}
+                  {badHook && (
+                    <span className="pick-hook unfavorable">
+                      Unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
                     </span>
                   )}
                   {pick.source === 'line-value' &&

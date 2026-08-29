@@ -238,8 +238,10 @@ side is the team receiving the better number in the CBS pool. If that number is
 the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
 DraftKings, the Lines card shows a favorable hook badge and the generated card
 scores that pick as solid line value (not mild) with an FG/TD hook badge.
-Generated-card Recommendation sort matches the Lines page: lock, then hammer,
-then lean, then slight by edge size, then public fills. Inside the same edge,
-a favorable TD hook ranks above an FG hook, and either ranks above no hook;
-near-pool public % is the next tie-break. A hook still badges as solid but
-stays in its point band.
+If the recommended pool number sits on the bad side of 3 or 7 (favorite −3.5 /
+−7.5, dog +2.5 / +6.5), the card shows an unfavorable hook badge instead. That
+badge is display-only and does not change rank. Generated-card Recommendation
+sort matches the Lines page: lock, then hammer, then lean, then slight by edge
+size, then public fills. Inside the same edge, a favorable TD hook ranks above
+an FG hook, and either ranks above no hook; near-pool public % is the next
+tie-break. A favorable hook still badges as solid but stays in its point band.

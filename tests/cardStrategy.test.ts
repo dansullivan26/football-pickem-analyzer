@@ -5,6 +5,7 @@ import {
   compareCardPicks,
   compareRecommendationOrder,
   favorableHook,
+  unfavorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
 import type { ConsensusGame } from '../src/types.ts'
@@ -242,6 +243,17 @@ test('classifyEdge puts 4+ in lock and keeps 3 / 3.5 as hammer', () => {
 test('an FG hook is a 1-point slight, not a lock or hammer', () => {
   assert.equal(favorableHook(-2.5, -3.5), 'fg')
   assert.equal(classifyEdge(1), 'slight')
+})
+
+test('unfavorableHook flags the bad side of 3 and 7 on the recommended number', () => {
+  assert.equal(unfavorableHook(-7.5), 'td')
+  assert.equal(unfavorableHook(6.5), 'td')
+  assert.equal(unfavorableHook(-3.5), 'fg')
+  assert.equal(unfavorableHook(2.5), 'fg')
+  assert.equal(unfavorableHook(-8.5), null)
+  assert.equal(unfavorableHook(-6.5), null)
+  assert.equal(unfavorableHook(7.5), null)
+  assert.equal(favorableHook(-7.5, -8.5), null)
 })
 
 test('recommendation sort ranks a lock above a hammer', () => {

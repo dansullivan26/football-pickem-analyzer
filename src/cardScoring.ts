@@ -137,6 +137,13 @@ export function favorableHook(
   return null
 }
 
+/** Pool number sits on the bad side of 3 or 7 for the side we are taking. */
+export function unfavorableHook(poolSpread: number): HookKind | null {
+  if (poolSpread === -3.5 || poolSpread === 2.5) return 'fg'
+  if (poolSpread === -7.5 || poolSpread === 6.5) return 'td'
+  return null
+}
+
 const HOOK_SOLID_FLOOR = 6
 
 export function lineValueScore(

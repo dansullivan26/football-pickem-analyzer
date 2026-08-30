@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-30T17:38:06.239Z",
+  "updatedAt": "2026-08-30T21:15:50.304Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-08-30T17:38:06.239Z",
+      "capturedAt": "2026-08-30T21:15:50.304Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -28,7 +28,9 @@
           "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3
+          "score": 3,
+          "awayScore": 15,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50027437,
@@ -45,7 +47,9 @@
           "source": "line-value",
           "pickedSide": "away",
           "strength": "mild",
-          "score": 3
+          "score": 3,
+          "awayScore": 27,
+          "homeScore": 37
         },
         {
           "cbsEventId": 50027446,

@@ -905,6 +905,67 @@ h2 {
   align-content: center;
 }
 
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: rgba(16, 28, 22, 0.48);
+}
+
+.confirm-dialog {
+  display: grid;
+  gap: 10px;
+  width: min(400px, 100%);
+  padding: 20px 20px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 24px 60px rgba(16, 28, 22, 0.28);
+}
+
+.confirm-dialog h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.confirm-dialog p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+  margin-top: 6px;
+}
+
+.confirm-dialog-actions button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.confirm-dialog-actions button.danger {
+  border: 0;
+  color: white;
+  background: #6b2a4a;
+}
+
+.confirm-dialog-actions button.danger:hover {
+  background: #541f39;
+}
+
 .bad-beat-actions a,
 .bad-beat-actions button:not(.bad-beat-chip) {
   padding: 0;

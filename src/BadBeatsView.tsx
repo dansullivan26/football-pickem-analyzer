@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   cardSideLabel,
   formatBadBeatDate,
@@ -38,6 +39,7 @@ export default function BadBeatsView({
   }, [])
 
   const seasonBeats = beats.filter((beat) => beat.seasonYear === seasonYear)
+  const [pendingClear, setPendingClear] = useState<BadBeat | null>(null)
 
   return (
     <main>
@@ -109,7 +111,7 @@ export default function BadBeatsView({
                     >
                       Watch
                     </a>
-                    <button type="button" onClick={() => onClear(beat)}>
+                    <button type="button" onClick={() => setPendingClear(beat)}>
                       Clear
                     </button>
                   </div>
@@ -119,7 +121,66 @@ export default function BadBeatsView({
           )}
         </div>
       </section>
+      {pendingClear && (
+        <ClearBadBeatDialog
+          beat={pendingClear}
+          onCancel={() => setPendingClear(null)}
+          onConfirm={() => {
+            onClear(pendingClear)
+            setPendingClear(null)
+          }}
+        />
+      )}
     </main>
+  )
+}
+
+function ClearBadBeatDialog({
+  beat,
+  onCancel,
+  onConfirm,
+}: {
+  beat: BadBeat
+  onCancel: () => void
+  onConfirm: () => void
+}) {
+  const cancelRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    cancelRef.current?.focus()
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onCancel()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onCancel])
+
+  return createPortal(
+    <div className="confirm-overlay" onClick={onCancel}>
+      <div
+        className="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="clear-bad-beat-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <h2 id="clear-bad-beat-title">Clear this bad beat?</h2>
+        <p>
+          {`${beat.away} @ ${beat.home} leaves the year-end list${
+            beat.note ? `, along with "${beat.note}"` : ''
+          }.`}
+        </p>
+        <div className="confirm-dialog-actions">
+          <button type="button" ref={cancelRef} onClick={onCancel}>
+            Keep it
+          </button>
+          <button type="button" className="danger" onClick={onConfirm}>
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body,
   )
 }
 

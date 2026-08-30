@@ -169,6 +169,21 @@ export function mergeBadBeats(file: BadBeatsFile, overlay = readOverlay()) {
   )
 }
 
+export function unpublishedBadBeatChanges(
+  file: BadBeatsFile,
+  overlay = readOverlay(),
+) {
+  const fileByKey = new Map(
+    file.beats.map((beat) => [badBeatKey(beat.seasonYear, beat.cbsEventId), beat]),
+  )
+  const adds = overlay.added.filter((beat) => {
+    const existing = fileByKey.get(badBeatKey(beat.seasonYear, beat.cbsEventId))
+    return !existing || existing.note !== beat.note
+  })
+  const removes = overlay.removed.filter((key) => fileByKey.has(key))
+  return { adds, removes }
+}
+
 export function rememberBadBeatChange(
   change: { action: 'add'; beat: BadBeat } | { action: 'remove'; key: string },
 ) {

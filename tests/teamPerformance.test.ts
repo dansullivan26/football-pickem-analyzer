@@ -35,6 +35,7 @@ function slateGame(
   away: Team,
   home: Team,
   homeSpread: number,
+  scores?: { awayScore: number; homeScore: number },
 ): SlateGame {
   return {
     id: `game-${cbsEventId}`,
@@ -49,6 +50,7 @@ function slateGame(
     home,
     homeSpread,
     line: `${home.abbrev} ${homeSpread}`,
+    ...scores,
   }
 }
 
@@ -120,7 +122,7 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   const stanford = team('STNFRD', 'Stanford', 'ACC')
   const directory = buildTeamDirectory(
     slate([
-      slateGame(1, unc, tcu, -7.5),
+      slateGame(1, unc, tcu, -7.5, { awayScore: 15, homeScore: 10 }),
       slateGame(2, hawaii, stanford, -5.5),
     ]),
     history([
@@ -148,10 +150,14 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(tcuRecord?.home.detail, '0-1 ATS')
   assert.equal(tcuRecord?.favorite.detail, '0-1 ATS')
   assert.equal(tcuRecord?.appearances[0]?.opponent, 'North Carolina')
+  assert.equal(tcuRecord?.appearances[0]?.awayScore, 15)
+  assert.equal(tcuRecord?.appearances[0]?.homeScore, 10)
   assert.equal(
     tcuRecord?.appearances[0]?.kickoff,
     '2026-08-29T12:00:00-04:00',
   )
+  assert.equal(hawaiiRecord?.appearances[0]?.awayScore, null)
+  assert.equal(hawaiiRecord?.appearances[0]?.homeScore, null)
   assert.equal(uncRecord?.overall.detail, '1-0 ATS')
   assert.equal(uncRecord?.away.detail, '1-0 ATS')
   assert.equal(uncRecord?.dog.detail, '1-0 ATS')
@@ -164,6 +170,26 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(directory.dog.detail, '1-0 ATS')
   assert.equal(tcuRecord?.slug, 'tcu')
   assert.equal(uncRecord?.slug, 'north-carolina')
+})
+
+test('buildTeamDirectory keeps a frozen score after the live slate moves on', () => {
+  const directory = buildTeamDirectory(
+    slate([]),
+    history([
+      rec({
+        cbsEventId: 2,
+        away: 'HAWAII',
+        home: 'STNFRD',
+        homeSpread: -5.5,
+        cover: 'home',
+        awayScore: 27,
+        homeScore: 37,
+      }),
+    ]),
+  )
+  const hawaiiRecord = directory.teams.find((row) => row.abbrev === 'HAWAII')
+  assert.equal(hawaiiRecord?.appearances[0]?.awayScore, 27)
+  assert.equal(hawaiiRecord?.appearances[0]?.homeScore, 37)
 })
 
 test('teamSlug turns school names into URL paths', () => {

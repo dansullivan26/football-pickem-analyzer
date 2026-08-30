@@ -313,6 +313,9 @@ export type FrozenRecommendation = {
   score: number | null
   /** True when the completed card sent the opposite of pickedSide. */
   deviated?: boolean
+  /** CBS score when the slate dump has one. Not the card-strategy `score`. */
+  awayScore?: number | null
+  homeScore?: number | null
 }
 
 export type FrozenTiebreaker = {

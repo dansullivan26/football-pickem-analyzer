@@ -2285,6 +2285,9 @@ select:focus {
 }
 
 .pick-result {
+  display: inline-grid;
+  justify-items: center;
+  gap: 1px;
   min-width: 92px;
   padding: 5px 8px;
   border-radius: 999px;
@@ -2294,6 +2297,13 @@ select:focus {
   font-weight: 800;
   text-align: center;
   text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.pick-result small {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .pick-result.win {

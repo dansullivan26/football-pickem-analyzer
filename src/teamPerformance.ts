@@ -1,4 +1,5 @@
 import { weeksForSeason } from './careerHistory.ts'
+import { gameScores } from './gameStatus.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -22,6 +23,8 @@ export type TeamAppearance = {
   market: TeamMarket
   homeSpread: number
   result: CoverOutcome
+  awayScore: number | null
+  homeScore: number | null
 }
 
 export type TeamSplit = {
@@ -109,6 +112,17 @@ export function resultForSide(
   if (!cover) return null
   if (cover === 'push') return 'push'
   return cover === side ? 'win' : 'loss'
+}
+
+function appearanceScores(
+  frozen: FrozenRecommendation,
+  live?: Pick<Slate['games'][number], 'awayScore' | 'homeScore'>,
+) {
+  const scores = gameScores(live ?? {}) ?? gameScores(frozen)
+  return {
+    awayScore: scores?.away ?? null,
+    homeScore: scores?.home ?? null,
+  }
 }
 
 function formatRate(wins: number, losses: number) {
@@ -199,6 +213,9 @@ export function buildTeamDirectory(
     groups.set(teamKey(info.sport, info.abbrev), { info, appearances: [] })
   }
 
+  const slateByEvent = new Map(
+    slate.games.map((game) => [game.cbsEventId, game]),
+  )
   const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
   for (const week of seasonWeeks) {
     for (const game of week.games) {
@@ -233,6 +250,7 @@ export function buildTeamDirectory(
             market: marketForSide(venue, game.homeSpread),
             homeSpread: game.homeSpread,
             result: resultForSide(venue, game.cover),
+            ...appearanceScores(game, slateByEvent.get(game.cbsEventId)),
           },
         )
       }

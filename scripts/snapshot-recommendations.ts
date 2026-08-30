@@ -6,6 +6,20 @@ import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
 
+function attachSlateScores(frozen, game) {
+  if (typeof game.awayScore !== 'number' || typeof game.homeScore !== 'number') {
+    return frozen
+  }
+  if (frozen.awayScore === game.awayScore && frozen.homeScore === game.homeScore) {
+    return frozen
+  }
+  return {
+    ...frozen,
+    awayScore: game.awayScore,
+    homeScore: game.homeScore,
+  }
+}
+
 function roundToHalf(value) {
   return Math.round(value * 2) / 2
 }
@@ -110,7 +124,8 @@ const games = slate.games.map((game) => {
 
   if (kickedOff && previous) {
     const frozen = cover === previous.cover ? previous : { ...previous, cover }
-    return deviationIds.has(game.id) ? { ...frozen, deviated: true } : frozen
+    const withScores = attachSlateScores(frozen, game)
+    return deviationIds.has(game.id) ? { ...withScores, deviated: true } : withScores
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
@@ -139,7 +154,8 @@ const games = slate.games.map((game) => {
     strength: cardPick.strength,
     score: cardPick.score,
   }
-  return deviationIds.has(game.id) ? { ...frozen, deviated: true } : frozen
+  const withScores = attachSlateScores(frozen, game)
+  return deviationIds.has(game.id) ? { ...withScores, deviated: true } : withScores
 })
 
 const tiebreakerGame = slate.tiebreaker

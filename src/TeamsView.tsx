@@ -8,6 +8,7 @@ import {
 } from './teamPerformance'
 import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
+import { formatGameScore } from './gameStatus'
 import { pathForView } from './routes'
 import type { RecommendationHistory, Slate } from './types'
 
@@ -322,6 +323,7 @@ export default function TeamsView({
                           entry.cbsEventId === row.cbsEventId &&
                           entry.seasonYear === slate.pool.seasonYear,
                       )
+                      const score = formatGameScore(row)
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -343,6 +345,7 @@ export default function TeamsView({
                           className={`pick-result ${row.result ?? 'pending'}`}
                         >
                           {resultLabel(row.result)}
+                          {score && <small>{score}</small>}
                         </span>
                         <BadBeatMenu
                           beat={beat}

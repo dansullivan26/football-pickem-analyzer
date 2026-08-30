@@ -134,6 +134,27 @@ test('starts a new file when the slate week changes', () => {
   assert.equal(week2.games[0]?.cbsEventId, 99)
 })
 
+test('starts a new file when the season year changes on the same week number', () => {
+  const week1 = updateLineHistory({
+    previous: null,
+    week: { order: 1, label: 'Week 1', seasonYear: 2026 },
+    events: [event(1, -7.5, '2026-08-27T12:00:00Z')],
+    runAt: '2026-08-27T12:00:00Z',
+    previousUpdatedAt: null,
+  })
+  const nextYear = updateLineHistory({
+    previous: week1,
+    week: { order: 1, label: 'Week 1', seasonYear: 2027 },
+    events: [event(99, -3.5, '2027-08-26T12:00:00Z')],
+    runAt: '2027-08-26T12:00:00Z',
+    previousUpdatedAt: week1.updatedAt,
+  })
+
+  assert.equal(nextYear.seasonYear, 2027)
+  assert.equal(nextYear.games.length, 1)
+  assert.equal(nextYear.games[0]?.cbsEventId, 99)
+})
+
 test('tracks tiebreaker totals the same way as spreads', () => {
   const opening = updateLineHistory({
     previous: null,

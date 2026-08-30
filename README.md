@@ -10,7 +10,8 @@ npm install
 npm run dev
 ```
 
-Lines is `/`, Players is `/players`, Teams is `/teams`, and Performance is
+Lines is `/`, Players is `/players`, Teams is `/teams`, a team profile is
+`/teams/alabama` (or `/teams/north-carolina`, and so on), and Performance is
 `/performance`. GitHub Pages serves the same SPA for those paths via `404.html`.
 Teams grades each side against the locked CBS line (home/away, favorite/dog)
 from the same covers Performance uses.
@@ -41,7 +42,10 @@ npm run prepare-players -- --input path/to/players.json
 ```
 
 This validates the roster and weekly pick grids, strips the private pool URL,
-and writes `src/data/player-history.json`. Each weekly entry may include
+and writes `src/data/player-history.json`. When the incoming `seasonYear` is
+newer than the file already on disk, that prior season is copied to
+`src/data/player-seasons/{year}.json` so picker habits can keep a career
+sample. Each weekly entry may include
 `tiebreaker.answer` as an integer (or null). The Players view can render
 unpicked weeks immediately; tendency metrics populate as scored Tuesday
 exports add selections, results, and tiebreaker totals. Graded pick
@@ -104,6 +108,9 @@ dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
 Raw CBS and Covers dumps stay out of this public repo. GrokBot writes them to
 the private drop repo, then dispatches **Ingest GrokBot dump**, which runs the
 matching `prepare-*` script and commits only the sanitized `src/data` files.
+A players ingest whose `seasonYear` is newer than the file on disk also
+commits `src/data/player-seasons/{year}.json` so last year's picks stay in
+the habit model. GrokBot's dump shape does not change.
 
 | | |
 | --- | --- |

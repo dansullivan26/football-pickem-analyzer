@@ -125,6 +125,7 @@ export type LineHistoryGame = {
 
 export type LineHistory = {
   week: number
+  seasonYear?: number
   label: string
   updatedAt: string
   games: LineHistoryGame[]
@@ -196,6 +197,8 @@ export type PlayerWeekEntry = {
 
 export type PlayerWeek = {
   week: number
+  /** Present on archived and newly prepared weeks. Older dumps infer pool.seasonYear. */
+  seasonYear?: number
   periodId: string
   label: string
   status: 'upcoming' | 'in_progress' | 'scored'
@@ -318,6 +321,7 @@ export type FrozenTiebreaker = {
 
 export type RecommendationWeek = {
   week: number
+  seasonYear?: number
   label: string
   capturedAt: string
   scored: boolean

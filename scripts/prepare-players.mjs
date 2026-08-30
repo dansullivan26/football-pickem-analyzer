@@ -63,6 +63,7 @@ const weeks = raw.weeks.map((week) => {
 
   return {
     week: week.week,
+    seasonYear: raw.pool?.seasonYear,
     periodId: week.periodId,
     label: week.label,
     status: week.status,
@@ -161,11 +162,28 @@ const history = {
   weeks,
 }
 
+const currentPath = resolve('src/data/player-history.json')
+try {
+  const existing = JSON.parse(await readFile(currentPath, 'utf8'))
+  const existingYear = existing.pool?.seasonYear
+  const incomingYear = history.pool.seasonYear
+  if (
+    typeof existingYear === 'number' &&
+    typeof incomingYear === 'number' &&
+    incomingYear > existingYear
+  ) {
+    const archiveDir = resolve('src/data/player-seasons')
+    await mkdir(archiveDir, { recursive: true })
+    const archivePath = resolve(archiveDir, `${existingYear}.json`)
+    await writeFile(archivePath, `${JSON.stringify(existing, null, 2)}\n`)
+    console.log(`Archived ${existingYear} player history to ${archivePath}.`)
+  }
+} catch {
+  // First player-history file.
+}
+
 await mkdir(resolve('src/data'), { recursive: true })
-await writeFile(
-  resolve('src/data/player-history.json'),
-  `${JSON.stringify(history, null, 2)}\n`,
-)
+await writeFile(currentPath, `${JSON.stringify(history, null, 2)}\n`)
 
 const pickRows = weeks.reduce(
   (total, week) =>

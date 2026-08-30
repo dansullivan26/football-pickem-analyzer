@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  assignTeamSlugs,
   buildTeamDirectory,
   marketForSide,
   resultForSide,
+  teamSlug,
 } from '../src/teamPerformance.ts'
 import type {
   FrozenRecommendation,
@@ -156,4 +158,24 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(directory.away.detail, '1-0 ATS')
   assert.equal(directory.favorite.detail, '0-1 ATS')
   assert.equal(directory.dog.detail, '1-0 ATS')
+  assert.equal(tcuRecord?.slug, 'tcu')
+  assert.equal(uncRecord?.slug, 'north-carolina')
+})
+
+test('teamSlug turns school names into URL paths', () => {
+  assert.equal(teamSlug('Alabama'), 'alabama')
+  assert.equal(teamSlug('North Carolina'), 'north-carolina')
+  assert.equal(teamSlug('C. Carolina'), 'c-carolina')
+  assert.equal(teamSlug('Miami (Fla.)'), 'miami-fla')
+  assert.equal(teamSlug('Miami-OH'), 'miami-oh')
+})
+
+test('assignTeamSlugs disambiguates the same name in two leagues', () => {
+  assert.deepEqual(
+    assignTeamSlugs([
+      { name: 'Washington', sport: 'NCAAF', abbrev: 'WASH' },
+      { name: 'Washington', sport: 'NFL', abbrev: 'WAS' },
+    ]),
+    ['washington-ncaaf', 'washington-nfl'],
+  )
 })

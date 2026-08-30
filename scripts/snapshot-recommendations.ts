@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolveCardPick, favorableHook, classifyEdge } from '../src/cardScoring.ts'
+import { upsertSeasonWeek, weekSeason } from '../src/careerHistory.ts'
 import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
 
 const ROOT = new URL('../', import.meta.url)
@@ -90,7 +91,12 @@ const consensusByEvent = new Map(
 )
 const now = Date.now()
 const capturedAt = new Date().toISOString()
-const existingWeek = history.weeks.find((week) => week.week === slate.week.order)
+const seasonYear = slate.pool.seasonYear
+const existingWeek = history.weeks.find(
+  (week) =>
+    week.week === slate.week.order &&
+    weekSeason(week, seasonYear) === seasonYear,
+)
 const previousById = new Map(
   (existingWeek?.games ?? []).map((game) => [game.cbsEventId, game]),
 )
@@ -162,6 +168,7 @@ const tiebreaker =
 
 const week = {
   week: slate.week.order,
+  seasonYear,
   label: slate.week.label,
   capturedAt,
   scored: existingWeek?.scored ?? false,
@@ -169,10 +176,7 @@ const week = {
   games,
 }
 
-const weeks = [
-  ...history.weeks.filter((entry) => entry.week !== slate.week.order),
-  week,
-].sort((a, b) => a.week - b.week)
+const weeks = upsertSeasonWeek(history.weeks, week, seasonYear)
 
 const next = { updatedAt: capturedAt, weeks }
 

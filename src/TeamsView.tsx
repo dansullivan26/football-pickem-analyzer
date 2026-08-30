@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import TeamLogo from './TeamLogo'
 import {
   buildTeamDirectory,
@@ -6,6 +6,7 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import { pathForView } from './routes'
 import type { RecommendationHistory, Slate } from './types'
 
 function formatSpread(value: number) {
@@ -65,9 +66,13 @@ function compareTeams(
 export default function TeamsView({
   slate,
   recommendations,
+  selectedSlug,
+  onSelectTeam,
 }: {
   slate: Slate
   recommendations: RecommendationHistory
+  selectedSlug: string | null
+  onSelectTeam: (slug: string | null) => void
 }) {
   const directory = useMemo(
     () => buildTeamDirectory(slate, recommendations),
@@ -76,7 +81,6 @@ export default function TeamsView({
   const [query, setQuery] = useState('')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [sort, setSort] = useState<'name' | 'ats'>('name')
-  const [selectedKey, setSelectedKey] = useState(directory.teams[0]?.key ?? '')
 
   const visibleTeams = useMemo(() => {
     const normalized = query.trim().toLowerCase()
@@ -93,8 +97,22 @@ export default function TeamsView({
       .sort((left, right) => compareTeams(left, right, sort))
   }, [directory.teams, league, query, sort])
 
-  const selected =
-    visibleTeams.find((team) => team.key === selectedKey) ?? visibleTeams[0]
+  const selected = selectedSlug
+    ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
+    : (visibleTeams[0] ?? null)
+
+  useEffect(() => {
+    const previous = document.title
+    document.title = selected
+      ? `${selected.name} · Pick'em Edge`
+      : selectedSlug
+        ? 'Team not found · Pick\'em Edge'
+        : 'Teams · Pick\'em Edge'
+    return () => {
+      document.title = previous
+    }
+  }, [selected, selectedSlug])
+
   const graded = directory.teams.filter(
     (team) => team.overall.wins + team.overall.losses + team.overall.pushes > 0,
   ).length
@@ -209,17 +227,20 @@ export default function TeamsView({
           </div>
           <div className="player-list">
             {visibleTeams.map((team) => (
-              <button
-                className={team.key === selected?.key ? 'active' : ''}
+              <a
+                className={team.slug === selected?.slug ? 'active' : ''}
                 key={team.key}
-                type="button"
-                onClick={() => setSelectedKey(team.key)}
+                href={pathForView('teams', team.slug)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  onSelectTeam(team.slug)
+                }}
               >
                 <span>{team.name}</span>
                 <small>
                   {team.conference ?? team.sport} · {team.overall.detail}
                 </small>
-              </button>
+              </a>
             ))}
           </div>
         </aside>
@@ -283,6 +304,10 @@ export default function TeamsView({
                 </div>
               </div>
             </>
+          ) : selectedSlug ? (
+            <div className="empty-state">
+              No team matches <code>/{selectedSlug}</code>.
+            </div>
           ) : (
             <div className="empty-state">No teams match this filter.</div>
           )}

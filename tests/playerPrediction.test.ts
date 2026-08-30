@@ -318,3 +318,22 @@ test('freezes predicted sides after kickoff and grades without rewriting them', 
     0,
   )
 })
+
+test('prior-season scored picks count toward the next Year Week 1 profile', () => {
+  const prior = historyWeek(
+    1,
+    Array.from({ length: 20 }, (_, index) => pick(index + 1, 'home', -3)),
+  )
+  prior.seasonYear = 2025
+  const current = historyWeek(1, [], false)
+  current.seasonYear = 2026
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    1,
+    history([prior, current]),
+    { updatedAt: '', weeks: [] },
+    2026,
+  )
+  assert.equal(profile.picks, 20)
+  assert.notEqual(profile.archetype, 'Building profile')
+})

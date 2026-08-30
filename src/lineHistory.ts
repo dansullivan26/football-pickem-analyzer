@@ -80,12 +80,17 @@ export function updateLineHistory({
   previousUpdatedAt,
 }: {
   previous: LineHistory | null
-  week: { order: number; label: string }
+  week: { order: number; label: string; seasonYear?: number }
   events: HistoryEvent[]
   runAt: string
   previousUpdatedAt: string | null
 }): LineHistory {
-  const keepPrevious = previous?.week === week.order ? previous : null
+  const keepPrevious =
+    previous?.week === week.order &&
+    (previous.seasonYear ?? null) ===
+      (week.seasonYear ?? previous.seasonYear ?? null)
+      ? previous
+      : null
   const byEvent = new Map(
     (keepPrevious?.games ?? []).map((game) => [game.cbsEventId, game]),
   )
@@ -124,6 +129,7 @@ export function updateLineHistory({
 
   return {
     week: week.order,
+    ...(week.seasonYear != null ? { seasonYear: week.seasonYear } : {}),
     label: week.label,
     updatedAt: runAt,
     games,
@@ -133,8 +139,16 @@ export function updateLineHistory({
 export function lineHistoryByEvent(
   history: LineHistory | null | undefined,
   week: number,
+  seasonYear?: number,
 ) {
   if (!history || history.week !== week) return new Map<number, LineHistoryGame>()
+  if (
+    seasonYear != null &&
+    history.seasonYear != null &&
+    history.seasonYear !== seasonYear
+  ) {
+    return new Map<number, LineHistoryGame>()
+  }
   return new Map(history.games.map((game) => [game.cbsEventId, game]))
 }
 

@@ -9,6 +9,7 @@ import {
   type PredictionResidualReport,
   type ResidualCell,
 } from './playerPrediction'
+import { careerSeasonYears, sameSeasonWeek, weeksForSeason } from './careerHistory'
 import type {
   PlayerHistory,
   PlayerPick,
@@ -120,6 +121,7 @@ function summarizePlayer(
   entryId: string,
   weeks: PlayerWeek[],
   recWeeks: RecommendationWeek[],
+  fallbackSeason: number,
 ) {
   const picks = weeks.flatMap(
     (week) =>
@@ -145,7 +147,7 @@ function summarizePlayer(
 
   for (const recWeek of recWeeks) {
     const entry = weeks
-      .find((week) => week.week === recWeek.week)
+      .find((week) => sameSeasonWeek(week, recWeek, fallbackSeason))
       ?.entries.find((row) => row.entryId === entryId)
     if (!entry) continue
 
@@ -190,10 +192,12 @@ function summarizePlayer(
 
 export default function PlayersView({
   history,
+  careerHistory = history,
   recommendations,
   forecasts,
 }: {
   history: PlayerHistory
+  careerHistory?: PlayerHistory
   recommendations: RecommendationHistory
   forecasts: PredictionForecasts | null
 }) {
@@ -237,7 +241,10 @@ export default function PlayersView({
         scored: week.scored,
       })
     }
-    for (const week of recommendations.weeks) {
+    for (const week of weeksForSeason(
+      recommendations.weeks,
+      history.pool.seasonYear,
+    )) {
       const historyWeek = weeks.get(week.week)
       weeks.set(week.week, {
         week: week.week,
@@ -257,17 +264,19 @@ export default function PlayersView({
   const selectedHistoryWeek = history.weeks.find(
     (week) => week.week === selectedWeek?.week,
   )
-  const recommendationWeek = recommendations.weeks.find(
-    (week) => week.week === selectedWeek?.week,
-  )
+  const recommendationWeek = weeksForSeason(
+    recommendations.weeks,
+    history.pool.seasonYear,
+  ).find((week) => week.week === selectedWeek?.week)
   const weekEntry = selectedHistoryWeek?.entries.find(
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
   const summary = selectedPlayer
     ? summarizePlayer(
         selectedPlayer.entryId,
-        history.weeks,
+        careerHistory.weeks,
         recommendations.weeks,
+        careerHistory.pool.seasonYear,
       )
     : null
   const livePrediction =
@@ -275,7 +284,7 @@ export default function PlayersView({
       ? predictPlayerWeek(
           selectedPlayer.entryId,
           recommendationWeek,
-          history,
+          careerHistory,
           recommendations,
         )
       : null
@@ -322,6 +331,11 @@ export default function PlayersView({
       )
     : null
   const scoredWeeks = history.weeks.filter((week) => week.scored).length
+  const habitYears = careerSeasonYears(careerHistory)
+  const habitSeasonLabel =
+    habitYears.length > 1
+      ? `${habitYears[0]}–${habitYears[habitYears.length - 1]} career`
+      : `${habitYears[0] ?? history.pool.seasonYear} season`
 
   return (
     <main>
@@ -332,7 +346,8 @@ export default function PlayersView({
           <p className="hero-copy">
             Track every weekly card, then compare how each player approaches
             favorites, underdogs, home teams, our line-value side, and the
-            weekly tiebreaker.
+            weekly tiebreaker. Habit labels use every archived season for the
+            same CBS entry.
           </p>
         </div>
         <div className="hero-aside">
@@ -454,7 +469,7 @@ export default function PlayersView({
                 <Metric
                   label="Picks tracked"
                   value={String(summary.made)}
-                  detail={`${summary.scored} scored`}
+                  detail={`${summary.scored} scored · ${habitSeasonLabel}`}
                 />
                 <Metric
                   label="Favorites"

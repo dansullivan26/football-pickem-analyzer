@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { weeksForSeason } from './careerHistory'
 import type {
   EdgeCategory,
   FrozenRecommendation,
@@ -234,19 +235,25 @@ function resultLabel(game: FrozenRecommendation) {
 
 export default function PerformanceView({
   history,
+  seasonYear,
 }: {
   history: RecommendationHistory
+  seasonYear: number
 }) {
+  const seasonWeeks = useMemo(
+    () => weeksForSeason(history.weeks, seasonYear),
+    [history.weeks, seasonYear],
+  )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
-    history.weeks.at(-1)?.week ?? 1,
+    seasonWeeks.at(-1)?.week ?? 1,
   )
   const selectedWeek: RecommendationWeek | undefined =
-    history.weeks.find((week) => week.week === selectedWeekNumber) ??
-    history.weeks.at(-1)
+    seasonWeeks.find((week) => week.week === selectedWeekNumber) ??
+    seasonWeeks.at(-1)
 
   const allGames = useMemo(
-    () => history.weeks.flatMap((week) => week.games),
-    [history.weeks],
+    () => seasonWeeks.flatMap((week) => week.games),
+    [seasonWeeks],
   )
   const seasonStats = useMemo(
     () => Object.fromEntries(TRACKED.map((tier) => [tier, summarize(allGames, tier)])),
@@ -301,7 +308,7 @@ export default function PerformanceView({
           <span>Graded recs</span>
           <strong>{graded}</strong>
           <small>
-            {history.weeks.length} {history.weeks.length === 1 ? 'week' : 'weeks'}
+            {seasonWeeks.length} {seasonWeeks.length === 1 ? 'week' : 'weeks'}
           </small>
         </div>
       </section>
@@ -414,8 +421,8 @@ export default function PerformanceView({
               value={selectedWeek?.week}
               onChange={(event) => setSelectedWeekNumber(Number(event.target.value))}
             >
-              {history.weeks.map((week) => (
-                <option key={week.week} value={week.week}>
+              {seasonWeeks.map((week) => (
+                <option key={`${week.seasonYear ?? seasonYear}:${week.week}`} value={week.week}>
                   {week.label}
                 </option>
               ))}

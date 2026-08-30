@@ -1,3 +1,4 @@
+import { weeksForSeason } from './careerHistory.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -34,6 +35,7 @@ export type TeamSplit = {
 
 export type TeamRecord = {
   key: string
+  slug: string
   sport: 'NFL' | 'NCAAF'
   abbrev: string
   name: string
@@ -57,6 +59,37 @@ export type TeamDirectory = {
 
 export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
   return `${sport}:${abbrev}`
+}
+
+export function teamSlug(name: string) {
+  return name
+    .replace(/['’.]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+export function assignTeamSlugs(
+  teams: Array<{ name: string; sport: string; abbrev: string }>,
+) {
+  const bases = teams.map((team) => teamSlug(team.name))
+  const counts = new Map<string, number>()
+  for (const base of bases) counts.set(base, (counts.get(base) ?? 0) + 1)
+
+  const slugs = teams.map((team, index) => {
+    const base = bases[index] ?? teamSlug(team.abbrev)
+    return (counts.get(base) ?? 0) > 1
+      ? `${base}-${team.sport.toLowerCase()}`
+      : base
+  })
+
+  const used = new Map<string, number>()
+  return slugs.map((slug, index) => {
+    const seen = used.get(slug) ?? 0
+    used.set(slug, seen + 1)
+    if (seen === 0) return slug
+    return `${slug}-${teamSlug(teams[index]?.abbrev ?? String(seen + 1))}`
+  })
 }
 
 export function marketForSide(
@@ -165,7 +198,8 @@ export function buildTeamDirectory(
     groups.set(teamKey(info.sport, info.abbrev), { info, appearances: [] })
   }
 
-  for (const week of history.weeks) {
+  const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
+  for (const week of seasonWeeks) {
     for (const game of week.games) {
       const sides: Array<{
         abbrev: string
@@ -229,9 +263,15 @@ export function buildTeamDirectory(
     })
     .sort((left, right) => left.name.localeCompare(right.name))
 
-  const all = teams.flatMap((team) => team.appearances)
+  const slugs = assignTeamSlugs(teams)
+  const teamsWithSlugs = teams.map((team, index) => ({
+    ...team,
+    slug: slugs[index] ?? teamSlug(team.name),
+  }))
+
+  const all = teamsWithSlugs.flatMap((team) => team.appearances)
   return {
-    teams,
+    teams: teamsWithSlugs,
     home: summarizeAppearances(all, (row) => row.venue === 'home'),
     away: summarizeAppearances(all, (row) => row.venue === 'away'),
     favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),

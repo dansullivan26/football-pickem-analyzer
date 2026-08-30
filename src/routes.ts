@@ -1,28 +1,53 @@
 export type AppView = 'lines' | 'players' | 'teams' | 'performance'
 
-const ROUTES: Record<AppView, string> = {
+export type AppLocation = {
+  view: AppView
+  teamSlug: string | null
+}
+
+const VIEW_PATHS: Record<AppView, string> = {
   lines: '/',
   players: '/players',
   teams: '/teams',
   performance: '/performance',
 }
 
-function basePath() {
-  return import.meta.env.BASE_URL.replace(/\/$/, '')
+export function basePath() {
+  const raw =
+    typeof import.meta.env?.BASE_URL === 'string'
+      ? import.meta.env.BASE_URL
+      : '/'
+  return raw.replace(/\/$/, '')
 }
 
-export function pathForView(view: AppView) {
-  const suffix = ROUTES[view]
+export function pathForView(view: AppView, teamSlug?: string | null) {
+  const suffix =
+    view === 'teams' && teamSlug ? `/teams/${teamSlug}` : VIEW_PATHS[view]
   return `${basePath()}${suffix === '/' ? '/' : suffix}`
 }
 
-export function viewFromPath(pathname = window.location.pathname): AppView {
-  const rest = pathname.startsWith(basePath())
-    ? pathname.slice(basePath().length)
+export function locationFromPath(
+  pathname =
+    typeof window !== 'undefined' ? window.location.pathname : '/',
+  base = basePath(),
+): AppLocation {
+  const rest = pathname.startsWith(base)
+    ? pathname.slice(base.length)
     : pathname
   const clean = rest.replace(/\/$/, '') || '/'
-  if (clean === '/players') return 'players'
-  if (clean === '/teams') return 'teams'
-  if (clean === '/performance') return 'performance'
-  return 'lines'
+  if (clean === '/players') return { view: 'players', teamSlug: null }
+  if (clean === '/performance') return { view: 'performance', teamSlug: null }
+  if (clean === '/teams') return { view: 'teams', teamSlug: null }
+  if (clean.startsWith('/teams/')) {
+    const slug = clean.slice('/teams/'.length).split('/').filter(Boolean)[0]
+    return { view: 'teams', teamSlug: slug ?? null }
+  }
+  return { view: 'lines', teamSlug: null }
+}
+
+export function viewFromPath(
+  pathname?: string,
+  base?: string,
+): AppView {
+  return locationFromPath(pathname, base).view
 }

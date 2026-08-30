@@ -14,7 +14,8 @@ import { publicBucketForPool, favorableHook, unfavorableHook, compareRecommendat
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
-import { pathForView, viewFromPath, type AppView } from './routes'
+import { careerPlayerHistory } from './playerArchives'
+import { locationFromPath, pathForView, type AppView } from './routes'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -37,11 +38,16 @@ import type {
 
 const slate = slateData as Slate
 const playerHistory = playerHistoryData as PlayerHistory
+const careerHistory = careerPlayerHistory(playerHistory)
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
-const lineHistoryByCbs = lineHistoryByEvent(lineHistory, slate.week.order)
+const lineHistoryByCbs = lineHistoryByEvent(
+  lineHistory,
+  slate.week.order,
+  slate.pool.seasonYear,
+)
 // A dump from an earlier week would silently mislabel this week's rows.
 const consensusByEvent = new Map(
   consensusFeed.week.order === slate.week.order
@@ -575,7 +581,10 @@ function LineHistoryNote({
 }
 
 function App() {
-  const [view, setView] = useState<AppView>(() => viewFromPath())
+  const [view, setView] = useState<AppView>(() => locationFromPath().view)
+  const [teamSlug, setTeamSlug] = useState<string | null>(
+    () => locationFromPath().teamSlug,
+  )
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
@@ -618,12 +627,13 @@ function App() {
     return () => window.clearTimeout(timer)
   }, [toast])
 
-  const goTo = useCallback((next: AppView) => {
-    const path = pathForView(next)
+  const goTo = useCallback((next: AppView, nextTeamSlug: string | null = null) => {
+    const path = pathForView(next, next === 'teams' ? nextTeamSlug : null)
     if (`${window.location.pathname}${window.location.search}` !== path) {
       window.history.pushState(null, '', path)
     }
     setView(next)
+    setTeamSlug(next === 'teams' ? nextTeamSlug : null)
     if (next !== 'lines') setSuggestedCard(null)
   }, [])
 
@@ -655,7 +665,9 @@ function App() {
 
   useEffect(() => {
     function onPopState() {
-      setView(viewFromPath())
+      const location = locationFromPath()
+      setView(location.view)
+      setTeamSlug(location.teamSlug)
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -1026,13 +1038,22 @@ function App() {
       ) : view === 'players' ? (
         <PlayersView
           history={playerHistory}
+          careerHistory={careerHistory}
           recommendations={recommendationHistory}
           forecasts={predictionForecasts}
         />
       ) : view === 'teams' ? (
-        <TeamsView slate={slate} recommendations={recommendationHistory} />
+        <TeamsView
+          slate={slate}
+          recommendations={recommendationHistory}
+          selectedSlug={teamSlug}
+          onSelectTeam={(slug) => goTo('teams', slug)}
+        />
       ) : (
-        <PerformanceView history={recommendationHistory} />
+        <PerformanceView
+          history={recommendationHistory}
+          seasonYear={slate.pool.seasonYear}
+        />
       )}
 
       <footer>

@@ -418,7 +418,7 @@ try {
 
 const lineHistory = updateLineHistory({
   previous: previousHistory,
-  week: slate.week,
+  week: { ...slate.week, seasonYear: slate.pool?.seasonYear },
   events,
   runAt,
   previousUpdatedAt,

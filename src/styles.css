@@ -1537,32 +1537,39 @@ select:focus {
   padding: 0 8px 8px;
 }
 
-.player-list button {
+.player-list button,
+.player-list a {
   display: grid;
   width: 100%;
   gap: 2px;
   padding: 10px 11px;
   border: 0;
   border-radius: 9px;
+  color: inherit;
   text-align: left;
+  text-decoration: none;
   background: transparent;
   cursor: pointer;
 }
 
-.player-list button:hover {
+.player-list button:hover,
+.player-list a:hover {
   background: var(--gray-soft);
 }
 
-.player-list button.active {
+.player-list button.active,
+.player-list a.active {
   color: var(--green-dark);
   background: var(--green-soft);
 }
 
-.player-list button span {
+.player-list button span,
+.player-list a span {
   font-weight: 700;
 }
 
-.player-list button small {
+.player-list button small,
+.player-list a small {
   color: var(--muted);
   font-size: 0.67rem;
 }
@@ -2271,7 +2278,8 @@ footer {
     padding: 0 10px 12px;
   }
 
-  .player-list button {
+  .player-list button,
+  .player-list a {
     min-width: 170px;
   }
 

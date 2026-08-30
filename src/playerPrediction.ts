@@ -1,3 +1,4 @@
+import { sameSeasonWeek, weekIsBefore, weekSeason } from './careerHistory.ts'
 import type {
   FrozenRecommendation,
   PlayerHistory,
@@ -71,6 +72,7 @@ export type FrozenPlayerForecast = {
 
 export type PredictionForecastWeek = {
   week: number
+  seasonYear?: number
   label: string
   strategyId: string
   capturedAt: string
@@ -149,9 +151,19 @@ function playerPicksBefore(
   entryId: string,
   targetWeek: number,
   history: PlayerHistory,
+  targetSeason = history.pool.seasonYear,
 ) {
   return history.weeks
-    .filter((week) => week.scored && week.week < targetWeek)
+    .filter(
+      (week) =>
+        week.scored &&
+        weekIsBefore(
+          week,
+          targetWeek,
+          targetSeason,
+          history.pool.seasonYear,
+        ),
+    )
     .flatMap(
       (week) =>
         week.entries.find((entry) => entry.entryId === entryId)?.picks ?? [],
@@ -165,10 +177,12 @@ function playerPicksBefore(
 function recommendationByEvent(
   recommendations: RecommendationHistory,
   maximumWeek: number,
+  targetSeason: number,
+  fallbackSeason: number,
 ) {
   const games = new Map<number, FrozenRecommendation>()
   for (const week of recommendations.weeks) {
-    if (week.week >= maximumWeek) continue
+    if (!weekIsBefore(week, maximumWeek, targetSeason, fallbackSeason)) continue
     for (const game of week.games) games.set(game.cbsEventId, game)
   }
   return games
@@ -296,9 +310,15 @@ export function buildPlayerPredictionProfile(
   targetWeek: number,
   history: PlayerHistory,
   recommendations: RecommendationHistory,
+  targetSeason = history.pool.seasonYear,
 ): PlayerPredictionProfile {
-  const picks = playerPicksBefore(entryId, targetWeek, history)
-  const recs = recommendationByEvent(recommendations, targetWeek)
+  const picks = playerPicksBefore(entryId, targetWeek, history, targetSeason)
+  const recs = recommendationByEvent(
+    recommendations,
+    targetWeek,
+    targetSeason,
+    history.pool.seasonYear,
+  )
   const home: HabitCounts = { follows: 0, eligible: 0 }
   const favorite: HabitCounts = { follows: 0, eligible: 0 }
   const lineValue: HabitCounts = { follows: 0, eligible: 0 }
@@ -532,16 +552,20 @@ export function predictPlayerWeek(
   history: PlayerHistory,
   recommendations: RecommendationHistory,
 ): PlayerPrediction {
+  const targetSeason = weekSeason(week, history.pool.seasonYear)
   const profile = buildPlayerPredictionProfile(
     entryId,
     week.week,
     history,
     recommendations,
+    targetSeason,
   )
   const actualPicks = new Map(
     (
       history.weeks
-        .find((historyWeek) => historyWeek.week === week.week)
+        .find((historyWeek) =>
+          sameSeasonWeek(historyWeek, week, history.pool.seasonYear),
+        )
         ?.entries.find((entry) => entry.entryId === entryId)?.picks ?? []
     )
       .filter(
@@ -566,7 +590,16 @@ export function predictPlayerWeek(
     label: week.label,
     trainingThroughWeek:
       history.weeks
-        .filter((historyWeek) => historyWeek.scored && historyWeek.week < week.week)
+        .filter(
+          (historyWeek) =>
+            historyWeek.scored &&
+            weekIsBefore(
+              historyWeek,
+              week.week,
+              targetSeason,
+              history.pool.seasonYear,
+            ),
+        )
         .at(-1)?.week ?? null,
     profile,
     games,
@@ -596,11 +629,12 @@ export function predictionSeasonRecord(
   const graded =
     frozen && frozen.length > 0
       ? frozen
-      : recommendations.weeks
+          : recommendations.weeks
           .filter((week) =>
             history.weeks.some(
               (historyWeek) =>
-                historyWeek.week === week.week && historyWeek.scored,
+                sameSeasonWeek(historyWeek, week, history.pool.seasonYear) &&
+                historyWeek.scored,
             ),
           )
           .flatMap(
@@ -722,18 +756,24 @@ export function snapshotPlayerForecasts(
   now = Date.now(),
 ): PredictionForecasts {
   const capturedAt = new Date(now).toISOString()
+  const seasonKey = (
+    week: { week: number; seasonYear?: number },
+    fallback = history.pool.seasonYear,
+  ) => `${weekSeason(week, fallback)}:${week.week}`
   const previousByWeek = new Map(
     (previous?.weeks ?? [])
       .filter((week) => week.strategyId === PREDICTION_STRATEGY_ID)
-      .map((week) => [week.week, week]),
+      .map((week) => [seasonKey(week), week]),
   )
   const otherWeeks = (previous?.weeks ?? []).filter(
     (week) => week.strategyId !== PREDICTION_STRATEGY_ID,
   )
 
   const weeks = recommendations.weeks.map((recWeek) => {
-    const existing = previousByWeek.get(recWeek.week)
-    const playerWeek = history.weeks.find((week) => week.week === recWeek.week)
+    const existing = previousByWeek.get(seasonKey(recWeek))
+    const playerWeek = history.weeks.find((week) =>
+      sameSeasonWeek(week, recWeek, history.pool.seasonYear),
+    )
     const firstKickoff = recWeek.games
       .map((game) => new Date(game.kickoff).getTime())
       .sort((a, b) => a - b)[0]
@@ -780,22 +820,32 @@ export function snapshotPlayerForecasts(
 
     return {
       week: recWeek.week,
+      seasonYear: weekSeason(recWeek, history.pool.seasonYear),
       label: recWeek.label,
       strategyId: PREDICTION_STRATEGY_ID,
       capturedAt,
       frozenAt: shouldFreeze ? capturedAt : null,
       trainingThroughWeek:
         history.weeks
-          .filter(
-            (historyWeek) =>
-              historyWeek.scored && historyWeek.week < recWeek.week,
+          .filter((historyWeek) =>
+            historyWeek.scored &&
+            weekIsBefore(
+              historyWeek,
+              recWeek.week,
+              weekSeason(recWeek, history.pool.seasonYear),
+              history.pool.seasonYear,
+            ),
           )
           .at(-1)?.week ?? null,
       players,
     }
   })
 
-  const nextWeeks = [...otherWeeks, ...weeks].sort((a, b) => a.week - b.week)
+  const nextWeeks = [...otherWeeks, ...weeks].sort(
+    (left, right) =>
+      weekSeason(left, history.pool.seasonYear) -
+        weekSeason(right, history.pool.seasonYear) || left.week - right.week,
+  )
   return {
     updatedAt: capturedAt,
     weeks: nextWeeks,

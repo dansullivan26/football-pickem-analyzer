@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { locationFromPath, pathForView, viewFromPath } from '../src/routes.ts'
+import {
+  locationFromPath,
+  pathForBadBeat,
+  pathForView,
+  viewFromPath,
+} from '../src/routes.ts'
 
 test('locationFromPath reads team slugs and keeps the Teams view', () => {
   assert.deepEqual(locationFromPath('/teams', ''), {
@@ -25,4 +30,5 @@ test('pathForView writes a team deep link', () => {
   assert.equal(pathForView('teams', 'alabama'), '/teams/alabama')
   assert.equal(pathForView('teams', null), '/teams')
   assert.equal(pathForView('bad-beats'), '/bad-beats')
+  assert.equal(pathForBadBeat(2026, 50027437), '/bad-beats#bad-beat-2026-50027437')
 })

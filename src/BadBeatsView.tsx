@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
+  badBeatAnchorId,
   cardSideLabel,
   formatBadBeatDate,
   frozenCardForBeat,
@@ -37,6 +38,13 @@ export default function BadBeatsView({
       document.title = previous
     }
   }, [])
+
+  useEffect(() => {
+    const id = window.location.hash.replace(/^#/, '')
+    if (!id) return
+    const node = document.getElementById(id)
+    node?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  }, [seasonYear, beats])
 
   const seasonBeats = beats.filter((beat) => beat.seasonYear === seasonYear)
   const [pendingClear, setPendingClear] = useState<BadBeat | null>(null)
@@ -82,7 +90,11 @@ export default function BadBeatsView({
                 frozenCardForBeat(recommendations.weeks, beat, seasonYear),
               )
               return (
-                <div className="history-pick bad-beat-row" key={badBeatRowKey(beat)}>
+                <div
+                  className="history-pick bad-beat-row"
+                  id={badBeatAnchorId(beat.seasonYear, beat.cbsEventId)}
+                  key={badBeatRowKey(beat)}
+                >
                   <div className="history-matchup">
                     <span>
                       {beat.weekLabel}

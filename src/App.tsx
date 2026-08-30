@@ -765,10 +765,18 @@ function App() {
     return () => window.clearTimeout(timer)
   }, [toast])
 
-  const goTo = useCallback((next: AppView, nextTeamSlug: string | null = null) => {
+  const goTo = useCallback((
+    next: AppView,
+    nextTeamSlug: string | null = null,
+    hash?: string,
+  ) => {
     const path = pathForView(next, next === 'teams' ? nextTeamSlug : null)
-    if (`${window.location.pathname}${window.location.search}` !== path) {
-      window.history.pushState(null, '', path)
+    const url = hash ? `${path}#${hash.replace(/^#/, '')}` : path
+    if (
+      `${window.location.pathname}${window.location.search}${window.location.hash}` !==
+      url
+    ) {
+      window.history.pushState(null, '', url)
     }
     setView(next)
     setTeamSlug(next === 'teams' ? nextTeamSlug : null)
@@ -1234,7 +1242,7 @@ function App() {
           seasonBeats={seasonBeats}
           onMarkBadBeat={markBadBeat}
           onClearBadBeat={clearBadBeat}
-          onOpenBadBeats={() => goTo('bad-beats')}
+          onOpenBadBeats={(hash) => goTo('bad-beats', null, hash)}
         />
       ) : view === 'bad-beats' ? (
         <BadBeatsView

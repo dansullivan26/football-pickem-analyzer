@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   applyBadBeatChange,
+  badBeatAnchorId,
   badBeatKey,
   cardSideLabel,
   unpublishedBadBeatChanges,
@@ -24,6 +25,10 @@ function beat(overrides: Partial<BadBeat> = {}): BadBeat {
     ...overrides,
   }
 }
+
+test('badBeatAnchorId is a hash-safe id for the year-end row', () => {
+  assert.equal(badBeatAnchorId(2026, 50027437), 'bad-beat-2026-50027437')
+})
 
 test('youtubeSearchUrl builds a highlights query from the matchup year', () => {
   assert.equal(

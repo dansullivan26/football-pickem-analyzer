@@ -27,6 +27,10 @@ export function pathForView(view: AppView, teamSlug?: string | null) {
   return `${basePath()}${suffix === '/' ? '/' : suffix}`
 }
 
+export function pathForBadBeat(seasonYear: number, cbsEventId: number) {
+  return `${pathForView('bad-beats')}#bad-beat-${seasonYear}-${cbsEventId}`
+}
+
 export function locationFromPath(
   pathname =
     typeof window !== 'undefined' ? window.location.pathname : '/',

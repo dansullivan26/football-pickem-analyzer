@@ -20,6 +20,10 @@ export function badBeatKey(seasonYear: number, cbsEventId: number) {
   return `${seasonYear}:${cbsEventId}`
 }
 
+export function badBeatAnchorId(seasonYear: number, cbsEventId: number) {
+  return `bad-beat-${seasonYear}-${cbsEventId}`
+}
+
 export function formatBadBeatDate(kickoff: string) {
   return new Intl.DateTimeFormat('en-US', {
     weekday: 'short',

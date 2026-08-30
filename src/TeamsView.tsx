@@ -7,10 +7,10 @@ import {
   type TeamSplit,
 } from './teamPerformance'
 import BadBeatMenu from './BadBeatMenu'
-import { type BadBeat } from './badBeats'
+import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
 import { ourPoolPickOnSide } from './ourEntry'
-import { pathForView } from './routes'
+import { pathForBadBeat, pathForView } from './routes'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
 function formatSpread(value: number) {
@@ -97,7 +97,7 @@ export default function TeamsView({
   seasonBeats: BadBeat[]
   onMarkBadBeat: (beat: Omit<BadBeat, 'markedAt'>) => void
   onClearBadBeat: (beat: BadBeat) => void
-  onOpenBadBeats: () => void
+  onOpenBadBeats: (hash?: string) => void
 }) {
   const directory = useMemo(
     () => buildTeamDirectory(slate, recommendations),
@@ -346,13 +346,26 @@ export default function TeamsView({
                           <strong>
                             {row.venue === 'home' ? 'vs' : 'at'} {row.opponent}
                             {beat && (
-                              <span
+                              <a
                                 className="bad-beat-mark"
-                                title="Bad beat"
-                                aria-label="Bad beat"
+                                href={pathForBadBeat(
+                                  beat.seasonYear,
+                                  beat.cbsEventId,
+                                )}
+                                title="Open this bad beat"
+                                aria-label="Open this bad beat"
+                                onClick={(event) => {
+                                  event.preventDefault()
+                                  onOpenBadBeats(
+                                    badBeatAnchorId(
+                                      beat.seasonYear,
+                                      beat.cbsEventId,
+                                    ),
+                                  )
+                                }}
                               >
                                 😞
-                              </span>
+                              </a>
                             )}
                           </strong>
                           <small>

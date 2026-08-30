@@ -981,6 +981,12 @@ h2 {
 .bad-beat-row {
   grid-template-columns: minmax(160px, 0.85fr) minmax(200px, 1.3fr) auto;
   align-items: start;
+  scroll-margin-top: 18px;
+}
+
+.bad-beat-row:target {
+  border-radius: 12px;
+  background: var(--amber-soft);
 }
 
 .bad-beat-note-field,
@@ -2240,8 +2246,15 @@ select:focus {
 
 .history-matchup .bad-beat-mark {
   margin-left: 0.35em;
+  color: inherit;
   font-size: 0.92em;
   font-weight: 400;
+  text-decoration: none;
+}
+
+.history-matchup .bad-beat-mark:hover {
+  text-decoration: none;
+  opacity: 0.8;
 }
 
 /* The frozen card is a comparison table: one column per attribute so a tier or

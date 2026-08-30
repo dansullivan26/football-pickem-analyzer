@@ -19,6 +19,7 @@ export type HourlyPeriod = {
   temperatureUnit: string
   windSpeed: string
   shortForecast: string
+  precipChance?: number | null
 }
 
 const GEOCODE_TTL_MS = 30 * 24 * 60 * 60 * 1000
@@ -220,6 +221,15 @@ function chipFromPeriod(period: HourlyPeriod): WeatherChip {
   }
 }
 
+function nwsHeaders() {
+  const headers: Record<string, string> = { Accept: 'application/geo+json' }
+  if (typeof window === 'undefined') {
+    headers['User-Agent'] =
+      'pickem-edge (https://github.com/dansullivan26/football-pickem-analyzer)'
+  }
+  return headers
+}
+
 async function geocodeCity(city: string, stateName: string) {
   const query = new URLSearchParams({
     name: `${city}, ${stateName}`,
@@ -243,7 +253,7 @@ async function geocodeCity(city: string, stateName: string) {
 async function nwsHourlyUrl(lat: number, lon: number) {
   const response = await fetch(
     `https://api.weather.gov/points/${lat.toFixed(4)},${lon.toFixed(4)}`,
-    { headers: { Accept: 'application/geo+json' } },
+    { headers: nwsHeaders() },
   )
   if (!response.ok) throw new Error(`NWS points failed (${response.status})`)
   const body = (await response.json()) as {
@@ -255,14 +265,41 @@ async function nwsHourlyUrl(lat: number, lon: number) {
 }
 
 async function nwsHourlyPeriods(url: string) {
-  const response = await fetch(url, {
-    headers: { Accept: 'application/geo+json' },
-  })
+  const response = await fetch(url, { headers: nwsHeaders() })
   if (!response.ok) throw new Error(`NWS hourly failed (${response.status})`)
   const body = (await response.json()) as {
-    properties?: { periods?: HourlyPeriod[] }
+    properties?: {
+      periods?: Array<
+        HourlyPeriod & {
+          probabilityOfPrecipitation?: { value?: number | null }
+        }
+      >
+    }
   }
-  return body.properties?.periods ?? []
+  return (body.properties?.periods ?? []).map((period) => ({
+    startTime: period.startTime,
+    endTime: period.endTime,
+    temperature: period.temperature,
+    temperatureUnit: period.temperatureUnit,
+    windSpeed: period.windSpeed,
+    shortForecast: period.shortForecast,
+    precipChance:
+      typeof period.probabilityOfPrecipitation?.value === 'number'
+        ? period.probabilityOfPrecipitation.value
+        : (period.precipChance ?? null),
+  }))
+}
+
+export async function loadHourlyPeriod(
+  venue: GameVenue,
+  kickoff: string,
+) {
+  const query = venueQuery(venue)
+  if (!query) return null
+  const coords = await geocodeCity(query.city, query.stateName)
+  const url = await nwsHourlyUrl(coords.lat, coords.lon)
+  const periods = await nwsHourlyPeriods(url)
+  return hourlyPeriodForKickoff(periods, kickoff)
 }
 
 export function peekWeatherChip(

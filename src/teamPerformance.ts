@@ -1,5 +1,6 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { gameScores } from './gameStatus.ts'
+import type { FrozenWeather, WeatherHistoryFile } from './weatherBuckets.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -25,6 +26,7 @@ export type TeamAppearance = {
   result: CoverOutcome
   awayScore: number | null
   homeScore: number | null
+  weather: FrozenWeather | null
 }
 
 export type TeamSplit = {
@@ -51,6 +53,11 @@ export type TeamRecord = {
   away: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
+  benign: TeamSplit
+  adverse: TeamSplit
+  wet: TeamSplit
+  windy: TeamSplit
+  indoor: TeamSplit
 }
 
 export type TeamDirectory = {
@@ -59,6 +66,11 @@ export type TeamDirectory = {
   away: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
+  benign: TeamSplit
+  adverse: TeamSplit
+  wet: TeamSplit
+  windy: TeamSplit
+  indoor: TeamSplit
 }
 
 export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
@@ -202,9 +214,32 @@ function addAppearance(
   })
 }
 
+function weatherSplits(appearances: TeamAppearance[]) {
+  return {
+    benign: summarizeAppearances(
+      appearances,
+      (row) => row.weather?.bucket === 'benign',
+    ),
+    adverse: summarizeAppearances(
+      appearances,
+      (row) => row.weather?.bucket === 'adverse',
+    ),
+    wet: summarizeAppearances(appearances, (row) => row.weather?.wet === true),
+    windy: summarizeAppearances(
+      appearances,
+      (row) => row.weather?.windy === true,
+    ),
+    indoor: summarizeAppearances(
+      appearances,
+      (row) => row.weather?.bucket === 'indoor',
+    ),
+  }
+}
+
 export function buildTeamDirectory(
   slate: Slate,
   history: RecommendationHistory,
+  weatherHistory: WeatherHistoryFile = { updatedAt: null, games: [] },
 ): TeamDirectory {
   const roster = rosterFromSlate(slate)
   const groups = new Map<string, { info: RosterEntry; appearances: TeamAppearance[] }>()
@@ -215,6 +250,11 @@ export function buildTeamDirectory(
 
   const slateByEvent = new Map(
     slate.games.map((game) => [game.cbsEventId, game]),
+  )
+  const weatherByEvent = new Map(
+    weatherHistory.games
+      .filter((game) => game.seasonYear === slate.pool.seasonYear)
+      .map((game) => [game.cbsEventId, game]),
   )
   const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
   for (const week of seasonWeeks) {
@@ -251,6 +291,7 @@ export function buildTeamDirectory(
             homeSpread: game.homeSpread,
             result: resultForSide(venue, game.cover),
             ...appearanceScores(game, slateByEvent.get(game.cbsEventId)),
+            weather: weatherByEvent.get(game.cbsEventId) ?? null,
           },
         )
       }
@@ -279,6 +320,7 @@ export function buildTeamDirectory(
           (row) => row.market === 'favorite',
         ),
         dog: summarizeAppearances(ordered, (row) => row.market === 'dog'),
+        ...weatherSplits(ordered),
       }
     })
     .sort((left, right) => left.name.localeCompare(right.name))
@@ -296,5 +338,6 @@ export function buildTeamDirectory(
     away: summarizeAppearances(all, (row) => row.venue === 'away'),
     favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
     dog: summarizeAppearances(all, (row) => row.market === 'dog'),
+    ...weatherSplits(all),
   }
 }

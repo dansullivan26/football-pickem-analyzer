@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import TeamLogo from './TeamLogo'
+import weatherHistoryData from './data/weather-history.json'
 import {
   buildTeamDirectory,
   type TeamAppearance,
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
@@ -100,7 +102,12 @@ export default function TeamsView({
   onOpenBadBeats: (hash?: string) => void
 }) {
   const directory = useMemo(
-    () => buildTeamDirectory(slate, recommendations),
+    () =>
+      buildTeamDirectory(
+        slate,
+        recommendations,
+        weatherHistoryData as WeatherHistoryFile,
+      ),
     [slate, recommendations],
   )
   const [query, setQuery] = useState('')
@@ -150,7 +157,9 @@ export default function TeamsView({
           <h1>Team performance</h1>
           <p className="hero-copy">
             Against the locked pool line, not DraftKings. Home, road,
-            favorite, and dog splits fill in as covers are recorded.
+            favorite, dog, and weather splits fill in as covers and
+            kickoff buckets are recorded. Adverse is wet or windy;
+            those tiles stay thin until a team has a few such games.
           </p>
         </div>
         <div className="hero-aside">
@@ -308,6 +317,13 @@ export default function TeamsView({
                 <Metric label="Favorite" split={selected.favorite} />
                 <Metric label="Dog" split={selected.dog} />
               </div>
+              <div className="tendency-grid" aria-label="Team weather ATS splits">
+                <Metric label="Benign" split={selected.benign} />
+                <Metric label="Adverse" split={selected.adverse} />
+                <Metric label="Wet" split={selected.wet} />
+                <Metric label="Windy" split={selected.windy} />
+                <Metric label="Indoor" split={selected.indoor} />
+              </div>
 
               <div className="week-card">
                 <div className="week-card-heading">
@@ -334,6 +350,7 @@ export default function TeamsView({
                         row.venue,
                       )
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
+                      const weatherLabel = formatWeatherBucket(row.weather)
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -379,6 +396,12 @@ export default function TeamsView({
                                     ? 'Our pick'
                                     : 'Not our pick'}
                                 </span>
+                              </>
+                            )}
+                            {weatherLabel && (
+                              <>
+                                {' · '}
+                                {weatherLabel}
                               </>
                             )}
                           </small>

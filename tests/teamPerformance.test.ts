@@ -7,6 +7,7 @@ import {
   resultForSide,
   teamSlug,
 } from '../src/teamPerformance.ts'
+import { weatherFromConditions } from '../src/weatherBuckets.ts'
 import type {
   FrozenRecommendation,
   RecommendationHistory,
@@ -170,6 +171,50 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(directory.dog.detail, '1-0 ATS')
   assert.equal(tcuRecord?.slug, 'tcu')
   assert.equal(uncRecord?.slug, 'north-carolina')
+  assert.equal(tcuRecord?.appearances[0]?.weather, null)
+  assert.equal(tcuRecord?.benign.games, 0)
+})
+
+test('buildTeamDirectory weather splits only count frozen buckets', () => {
+  const unc = team('UNC', 'North Carolina', 'ACC')
+  const tcu = team('TCU', 'TCU', 'BIG12')
+  const directory = buildTeamDirectory(
+    slate([slateGame(1, unc, tcu, -7.5)]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'UNC',
+        home: 'TCU',
+        homeSpread: -7.5,
+        cover: 'away',
+      }),
+    ]),
+    {
+      updatedAt: '2026-08-30T00:00:00.000Z',
+      games: [
+        weatherFromConditions(
+          {
+            cbsEventId: 1,
+            seasonYear: 2026,
+            week: 1,
+            kickoff: '2026-08-29T12:00:00-04:00',
+          },
+          {
+            temperature: 58,
+            windSpeed: '18 mph',
+            shortForecast: 'Rain',
+            precipChance: 70,
+          },
+        ),
+      ],
+    },
+  )
+  const tcuRecord = directory.teams.find((row) => row.abbrev === 'TCU')
+  assert.equal(tcuRecord?.adverse.detail, '0-1 ATS')
+  assert.equal(tcuRecord?.wet.detail, '0-1 ATS')
+  assert.equal(tcuRecord?.windy.detail, '0-1 ATS')
+  assert.equal(tcuRecord?.benign.games, 0)
+  assert.equal(directory.adverse.detail, '1-1 ATS')
 })
 
 test('buildTeamDirectory keeps a frozen score after the live slate moves on', () => {

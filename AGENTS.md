@@ -85,3 +85,6 @@ cleanup.
   `src/data/bad-beats.json`. Browser `localStorage` is only an overlay until
   that file (and Pages) catch up. Do not treat a local `bad-beats.json` as
   having a stamp that exists only in one browser.
+- Kickoff weather buckets live in `src/data/weather-history.json` and are
+  frozen by **Refresh sportsbook lines** (`npm run snapshot-weather`). Do
+  not reconstruct ATS from weather.

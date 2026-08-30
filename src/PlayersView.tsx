@@ -10,7 +10,7 @@ import {
   type ResidualCell,
 } from './playerPrediction'
 import { careerSeasonYears, sameSeasonWeek, weeksForSeason } from './careerHistory'
-import { sortPlayersByWinRate } from './playerDirectory'
+import { entryWinRecord, sortPlayersByWinRate } from './playerDirectory'
 import type {
   PlayerHistory,
   PlayerPick,
@@ -423,7 +423,12 @@ export default function PlayersView({
                 type="button"
                 onClick={() => setSelectedEntryId(entry.entryId)}
               >
-                <span>{entry.name}</span>
+                <span>
+                  {entry.name}
+                  <span className="player-win-count">
+                    {entryWinRecord(entry.entryId, careerHistory.weeks).wins}
+                  </span>
+                </span>
                 <small>
                   {entry.season.rank ? `Season rank ${entry.season.rank}` : 'No results yet'}
                 </small>

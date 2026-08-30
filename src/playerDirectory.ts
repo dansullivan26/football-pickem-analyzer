@@ -1,13 +1,21 @@
 import type { PlayerRosterEntry, PlayerWeek } from './types'
 
-export function entryWinRate(entryId: string, weeks: PlayerWeek[]) {
+export function entryWinRecord(entryId: string, weeks: PlayerWeek[]) {
   const picks = weeks.flatMap(
     (week) =>
       week.entries.find((entry) => entry.entryId === entryId)?.picks ?? [],
   )
   const scored = picks.filter((pick) => pick.pickedSide && pick.result)
-  if (!scored.length) return null
-  return scored.filter((pick) => pick.result === 'win').length / scored.length
+  return {
+    wins: scored.filter((pick) => pick.result === 'win').length,
+    scored: scored.length,
+  }
+}
+
+export function entryWinRate(entryId: string, weeks: PlayerWeek[]) {
+  const { wins, scored } = entryWinRecord(entryId, weeks)
+  if (!scored) return null
+  return wins / scored
 }
 
 function nameOrder(left: string, right: string) {

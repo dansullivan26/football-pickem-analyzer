@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   entryWinRate,
+  entryWinRecord,
   sortPlayersByWinRate,
 } from '../src/playerDirectory.ts'
 import type {
@@ -72,7 +73,9 @@ test('entryWinRate is wins over scored picks and ignores ungraded rows', () => {
       { entryId: 'a', results: ['win', 'loss', 'push', null] },
     ]),
   ]
+  assert.deepEqual(entryWinRecord('a', weeks), { wins: 1, scored: 3 })
   assert.equal(entryWinRate('a', weeks), 1 / 3)
+  assert.deepEqual(entryWinRecord('missing', weeks), { wins: 0, scored: 0 })
   assert.equal(entryWinRate('missing', weeks), null)
 })
 

@@ -1781,6 +1781,13 @@ select:focus {
   font-weight: 700;
 }
 
+.player-win-count {
+  margin-left: 0.45em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--muted);
+}
+
 .player-list button small,
 .player-list a small {
   color: var(--muted);

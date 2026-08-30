@@ -7,6 +7,7 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import { buildTeamProfile } from './teamProfile'
 import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
@@ -132,6 +133,7 @@ export default function TeamsView({
   const selected = selectedSlug
     ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
     : (visibleTeams[0] ?? null)
+  const selectedProfile = selected ? buildTeamProfile(selected) : null
 
   useEffect(() => {
     const previous = document.title
@@ -156,10 +158,10 @@ export default function TeamsView({
           <p className="eyebrow">CBS line tracker</p>
           <h1>Team performance</h1>
           <p className="hero-copy">
-            Against the locked pool line, not DraftKings. Home, road,
-            favorite, dog, and weather splits fill in as covers and
-            kickoff buckets are recorded. Adverse is wet or windy;
-            those tiles stay thin until a team has a few such games.
+            Against the locked pool line, not DraftKings. Performance
+            and weather sit in their own sections. A team profile
+            appears after six graded games; weather tiles stay thin
+            until a team has a few such kickoffs.
           </p>
         </div>
         <div className="hero-aside">
@@ -306,24 +308,54 @@ export default function TeamsView({
                       {selected.conference ? ` · ${selected.conference}` : ''}
                     </p>
                     <h2>{selected.name}</h2>
+                    {selectedProfile && (
+                      <div className="player-archetype">
+                        <strong>{selectedProfile.archetype}</strong>
+                        <span>{selectedProfile.archetypeDetail}</span>
+                        {selectedProfile.insight && (
+                          <p className="player-insight">
+                            {selectedProfile.insight}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
 
-              <div className="tendency-grid" aria-label="Team CBS ATS splits">
-                <Metric label="Overall" split={selected.overall} />
-                <Metric label="Home" split={selected.home} />
-                <Metric label="Away" split={selected.away} />
-                <Metric label="Favorite" split={selected.favorite} />
-                <Metric label="Dog" split={selected.dog} />
-              </div>
-              <div className="tendency-grid" aria-label="Team weather ATS splits">
-                <Metric label="Benign" split={selected.benign} />
-                <Metric label="Adverse" split={selected.adverse} />
-                <Metric label="Wet" split={selected.wet} />
-                <Metric label="Windy" split={selected.windy} />
-                <Metric label="Indoor" split={selected.indoor} />
-              </div>
+              <section className="week-card team-split-card">
+                <div className="week-card-heading">
+                  <div>
+                    <span>CBS line</span>
+                    <strong>Performance</strong>
+                    <small>Home, road, favorite, and dog ATS</small>
+                  </div>
+                </div>
+                <div className="tendency-grid" aria-label="Team CBS ATS splits">
+                  <Metric label="Overall" split={selected.overall} />
+                  <Metric label="Home" split={selected.home} />
+                  <Metric label="Away" split={selected.away} />
+                  <Metric label="Favorite" split={selected.favorite} />
+                  <Metric label="Dog" split={selected.dog} />
+                </div>
+              </section>
+
+              <section className="week-card team-split-card">
+                <div className="week-card-heading">
+                  <div>
+                    <span>Kickoff weather</span>
+                    <strong>Weather</strong>
+                    <small>Frozen buckets only. Adverse is wet or windy.</small>
+                  </div>
+                </div>
+                <div className="tendency-grid" aria-label="Team weather ATS splits">
+                  <Metric label="Benign" split={selected.benign} />
+                  <Metric label="Adverse" split={selected.adverse} />
+                  <Metric label="Wet" split={selected.wet} />
+                  <Metric label="Windy" split={selected.windy} />
+                  <Metric label="Indoor" split={selected.indoor} />
+                </div>
+              </section>
 
               <div className="week-card">
                 <div className="week-card-heading">

@@ -1655,7 +1655,7 @@ select:focus {
 .team-detail-title {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .team-detail-title .team-logo {
@@ -1668,6 +1668,19 @@ select:focus {
   padding: 4px 0 8px;
   color: var(--muted);
   font-size: 0.82rem;
+}
+
+.team-split-card {
+  margin-bottom: 16px;
+}
+
+.team-split-card .tendency-grid {
+  padding: 12px 14px 14px;
+  margin-bottom: 0;
+}
+
+.team-detail-title .player-archetype {
+  margin-top: 8px;
 }
 
 .performance-summary {

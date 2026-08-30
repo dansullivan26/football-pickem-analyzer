@@ -23,6 +23,9 @@ team `location` is still the school, not where the game is played.
 The slate may also include one top-level `tiebreaker` (`gameId`,
 `cbsEventId`, `order`, `type`, `question`, `questionId`) and
 `games[].tiebreakerOrder` (1 on that matchup, null elsewhere).
+Games may include `awayScore` / `homeScore` when CBS has a score;
+Lines shows it on the card and the Completed filter uses kickoff,
+a final status, or those scores.
 
 To prepare a newly captured slate:
 

@@ -61,6 +61,14 @@ function readVenue(game) {
   }
 }
 
+function readScore(value, label) {
+  if (value == null) return null
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 0) {
+    throw new Error(`${label} must be a non-negative integer or null.`)
+  }
+  return value
+}
+
 function readTiebreakerOrder(value, game) {
   const order = readInteger(value, `${game.cbsEventId ?? game.id} tiebreakerOrder`, {
     allowNull: true,
@@ -145,6 +153,8 @@ const slate = {
     home: game.home,
     homeSpread: game.homeSpread,
     line: game.line,
+    awayScore: readScore(game.awayScore, `${game.cbsEventId ?? game.id} awayScore`),
+    homeScore: readScore(game.homeScore, `${game.cbsEventId ?? game.id} homeScore`),
     venue: readVenue(game),
     tiebreakerOrder: readTiebreakerOrder(game.tiebreakerOrder, game),
   })),

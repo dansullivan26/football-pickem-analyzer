@@ -26,6 +26,7 @@ import {
 } from './badBeats'
 import { careerPlayerHistory } from './playerArchives'
 import { locationFromPath, pathForView, type AppView } from './routes'
+import { formatGameScore, gameIsCompleted, gameIsUpcoming } from './gameStatus'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -342,11 +343,13 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
   const venue = formatVenue(game.venue)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
+  const score = formatGameScore(game)
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
         <span className={`sport-tag ${game.sport.toLowerCase()}`}>{game.sport}</span>
         <time dateTime={game.kickoff}>{game.kickoffLabel.replace(' ET', '')}</time>
+        {score && <span className="game-final">Final {score}</span>}
         {game.tv && <span>{game.tv}</span>}
         {venue && (
           <span
@@ -363,7 +366,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
           <TeamLogo team={game.away} />
           <span className="team-name">{game.away.name}</span>
         </div>
-        <span className="at">@</span>
+        <span className={score ? 'game-score' : 'at'}>{score ?? '@'}</span>
         <div className="team">
           <TeamLogo team={game.home} />
           <span className="team-name">{game.home.name}</span>
@@ -618,6 +621,7 @@ function App() {
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
   const [upcomingOnly, setUpcomingOnly] = useState(false)
+  const [completedOnly, setCompletedOnly] = useState(false)
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
   const [dispatching, setDispatching] = useState(false)
@@ -763,9 +767,15 @@ function App() {
         [game.away.name, game.away.abbrev, game.home.name, game.home.abbrev].some(
           (value) => value.toLowerCase().includes(normalizedQuery),
         )
-      const matchesUpcoming =
-        !upcomingOnly || new Date(game.kickoff).getTime() > now
-      return matchesFilter && matchesLeague && matchesQuery && matchesUpcoming
+      const matchesUpcoming = !upcomingOnly || gameIsUpcoming(game, now)
+      const matchesCompleted = !completedOnly || gameIsCompleted(game, now)
+      return (
+        matchesFilter &&
+        matchesLeague &&
+        matchesQuery &&
+        matchesUpcoming &&
+        matchesCompleted
+      )
     })
 
     if (sort !== 'recommendation') return filtered
@@ -792,7 +802,7 @@ function App() {
         }),
       ),
     )
-  }, [analyses, filter, league, now, query, sort, upcomingOnly])
+  }, [analyses, completedOnly, filter, league, now, query, sort, upcomingOnly])
 
   const lineMoves = useMemo(() => {
     const spreads = analyses.filter((analysis) =>
@@ -1029,9 +1039,25 @@ function App() {
               <input
                 type="checkbox"
                 checked={upcomingOnly}
-                onChange={(event) => setUpcomingOnly(event.target.checked)}
+                onChange={(event) => {
+                  const checked = event.target.checked
+                  setUpcomingOnly(checked)
+                  if (checked) setCompletedOnly(false)
+                }}
               />
               Upcoming only
+            </label>
+            <label className="upcoming-filter">
+              <input
+                type="checkbox"
+                checked={completedOnly}
+                onChange={(event) => {
+                  const checked = event.target.checked
+                  setCompletedOnly(checked)
+                  if (checked) setUpcomingOnly(false)
+                }}
+              />
+              Completed
             </label>
             <button
               className="generate-card-button"
@@ -1094,6 +1120,7 @@ function App() {
                   setSort('kickoff')
                   setQuery('')
                   setUpcomingOnly(false)
+                  setCompletedOnly(false)
                 }}
               >
                 Clear filters

@@ -1293,6 +1293,18 @@ select:focus {
   font-weight: 600;
 }
 
+.game-final {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.game-score {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
 .game-venue {
   flex-basis: 100%;
   line-height: 1.35;

@@ -40,6 +40,9 @@ export type SlateGame = {
   home: Team
   homeSpread: number
   line: string
+  /** Present when the CBS dump includes a final (or in-progress) score. */
+  awayScore?: number | null
+  homeScore?: number | null
   /** CBS GraphQL venue. Absent on dumps from before venue was scraped. */
   venue?: GameVenue | null
   /** 1 on the weekly tiebreaker game; null on the rest. */

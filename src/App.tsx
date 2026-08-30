@@ -27,6 +27,7 @@ import {
 import { careerPlayerHistory } from './playerArchives'
 import { locationFromPath, pathForView, type AppView } from './routes'
 import { formatGameScore, gameIsCompleted, gameIsUpcoming } from './gameStatus'
+import { ourPickForGame } from './ourEntry'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -41,6 +42,7 @@ import type {
   OddsEvent,
   OddsFeed,
   PlayerHistory,
+  PlayerPick,
   RecommendationHistory,
   Slate,
   SlateGame,
@@ -338,12 +340,50 @@ function ConsensusNote({
   )
 }
 
-function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
+function ourPickLabel(game: SlateGame, pick: PlayerPick | null) {
+  if (!pick?.pickedSide) return 'No pick recorded'
+  const team = game[pick.pickedSide].name
+  const number =
+    pick.pickedSide === 'home' ? game.homeSpread : game.homeSpread * -1
+  return `${team} ${formatSpread(number)}`
+}
+
+function OurPickNote({
+  game,
+  pick,
+}: {
+  game: SlateGame
+  pick: PlayerPick | null
+}) {
+  const result = pick?.result
+  return (
+    <div className="our-pick">
+      <span>Our pick</span>
+      <strong>{ourPickLabel(game, pick)}</strong>
+      {result && (
+        <small className={`pick-result ${result}`}>
+          {result === 'win' ? 'Win' : result === 'loss' ? 'Loss' : 'Push'}
+        </small>
+      )}
+    </div>
+  )
+}
+
+function GameCard({
+  analysis,
+  now,
+  ourPick,
+}: {
+  analysis: GameAnalysis
+  now: number
+  ourPick: PlayerPick | null
+}) {
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
+  const completed = gameIsCompleted(game, now)
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
@@ -431,6 +471,7 @@ function GameCard({ analysis, now }: { analysis: GameAnalysis; now: number }) {
 
       <div className="card-footer">
         <Recommendation analysis={analysis} />
+        {completed && <OurPickNote game={game} pick={ourPick} />}
         <div className="card-notes">
           <span className="spread-note">All lines shown for {game.home.name}</span>
           <ConsensusNote consensus={analysis.consensus} now={now} />
@@ -1109,6 +1150,11 @@ function App() {
                 key={analysis.game.cbsEventId}
                 analysis={analysis}
                 now={now}
+                ourPick={ourPickForGame(
+                  playerHistory,
+                  slate.week.order,
+                  analysis.game.cbsEventId,
+                )}
               />
             ))}
           </div>

@@ -1431,6 +1431,26 @@ select:focus {
   justify-items: end;
 }
 
+.our-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.our-pick > span {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.our-pick strong {
+  font-size: 0.78rem;
+}
+
 .recommendation {
   display: inline-flex;
   gap: 6px;

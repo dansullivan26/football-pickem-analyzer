@@ -641,6 +641,14 @@ function App() {
     setBeats(mergeBadBeats(badBeatsFile))
   }, [])
 
+  const updateBadBeatNote = useCallback((beat: BadBeat, note: string | null) => {
+    rememberBadBeatChange({
+      action: 'add',
+      beat: { ...beat, note: note?.trim() || null },
+    })
+    setBeats(mergeBadBeats(badBeatsFile))
+  }, [])
+
   const refreshData = useCallback(async () => {
     const confirmed = window.confirm(
       'Reload DraftKings lines and Covers public consensus? This starts jobs that usually take a few minutes. New numbers will not show until you refresh the page.',
@@ -850,6 +858,16 @@ function App() {
             }}
           >
             Performance
+          </a>
+          <a
+            className={view === 'bad-beats' ? 'active' : ''}
+            href={pathForView('bad-beats')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('bad-beats')
+            }}
+          >
+            Bad beats
           </a>
         </nav>
       </header>
@@ -1101,7 +1119,7 @@ function App() {
           seasonYear={slate.pool.seasonYear}
           beats={beats}
           onClear={clearBadBeat}
-          onBackToTeams={() => goTo('teams')}
+          onUpdateNote={updateBadBeatNote}
         />
       ) : (
         <PerformanceView

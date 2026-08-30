@@ -72,13 +72,15 @@ button {
 
 .primary-nav {
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 4px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
 }
 
 .primary-nav a {
-  padding: 7px 13px;
+  padding: 7px 11px;
   border: 0;
   border-radius: 7px;
   color: #c7d8ce;
@@ -871,6 +873,30 @@ h2 {
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+}
+
+.bad-beat-row {
+  grid-template-columns: minmax(160px, 0.85fr) minmax(200px, 1.3fr) auto;
+  align-items: start;
+}
+
+.bad-beat-note-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bad-beat-note-field > span {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bad-beat-note-field input {
+  width: 100%;
+  min-width: 0;
 }
 
 .week-card-heading > a {
@@ -2125,6 +2151,14 @@ footer {
 
   .history-pick {
     grid-template-columns: 1fr auto;
+  }
+
+  .bad-beat-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .bad-beat-note-field {
+    grid-column: 1 / -1;
   }
 
   .prediction-row,

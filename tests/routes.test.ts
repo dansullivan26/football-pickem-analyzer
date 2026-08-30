@@ -24,4 +24,5 @@ test('pathForView writes a team deep link', () => {
   assert.equal(pathForView('teams'), '/teams')
   assert.equal(pathForView('teams', 'alabama'), '/teams/alabama')
   assert.equal(pathForView('teams', null), '/teams')
+  assert.equal(pathForView('bad-beats'), '/bad-beats')
 })

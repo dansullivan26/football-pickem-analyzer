@@ -4,7 +4,6 @@ import {
   youtubeSearchUrl,
   type BadBeat,
 } from './badBeats'
-import { pathForView } from './routes'
 
 function formatSpread(value: number) {
   if (value === 0) return 'PK'
@@ -18,12 +17,12 @@ export default function BadBeatsView({
   seasonYear,
   beats,
   onClear,
-  onBackToTeams,
+  onUpdateNote,
 }: {
   seasonYear: number
   beats: BadBeat[]
   onClear: (beat: BadBeat) => void
-  onBackToTeams: () => void
+  onUpdateNote: (beat: BadBeat, note: string | null) => void
 }) {
   useEffect(() => {
     const previous = document.title
@@ -43,8 +42,8 @@ export default function BadBeatsView({
           <h1>Bad beats</h1>
           <p className="hero-copy">
             Real ATS losses that still hurt. Nothing here changes
-            rankings, habits, or the pool score. Open the YouTube
-            search in December and laugh.
+            rankings, habits, or the pool score. Add a note when you
+            remember why, then open the YouTube search in December.
           </p>
         </div>
         <div className="week-chip">
@@ -62,15 +61,6 @@ export default function BadBeatsView({
             <span>Year in review</span>
             <strong>{seasonYear}</strong>
           </div>
-          <a
-            href={pathForView('teams')}
-            onClick={(event) => {
-              event.preventDefault()
-              onBackToTeams()
-            }}
-          >
-            Back to Teams
-          </a>
         </div>
         <div className="pick-history-list">
           {seasonBeats.length === 0 ? (
@@ -80,7 +70,7 @@ export default function BadBeatsView({
             </p>
           ) : (
             seasonBeats.map((beat) => (
-              <div className="history-pick" key={badBeatRowKey(beat)}>
+              <div className="history-pick bad-beat-row" key={badBeatRowKey(beat)}>
                 <div className="history-matchup">
                   <span>
                     {beat.weekLabel}
@@ -94,11 +84,13 @@ export default function BadBeatsView({
                   </strong>
                   <small>
                     CBS {beat.home} {formatSpread(beat.homeSpread)}
-                    {beat.note ? ` · ${beat.note}` : ''}
                   </small>
                 </div>
+                <BadBeatNote
+                  note={beat.note}
+                  onSave={(note) => onUpdateNote(beat, note)}
+                />
                 <div className="bad-beat-actions">
-                  <span className="bad-beat-chip">Bad beat</span>
                   <a
                     href={youtubeSearchUrl(beat)}
                     target="_blank"
@@ -116,6 +108,40 @@ export default function BadBeatsView({
         </div>
       </section>
     </main>
+  )
+}
+
+function BadBeatNote({
+  note,
+  onSave,
+}: {
+  note: string | null
+  onSave: (note: string | null) => void
+}) {
+  const commit = (value: string) => {
+    const next = value.trim() || null
+    if (next !== note) onSave(next)
+  }
+
+  return (
+    <label className="bad-beat-note-field">
+      <span>Note</span>
+      <input
+        type="text"
+        defaultValue={note ?? ''}
+        maxLength={160}
+        placeholder="What happened?"
+        onChange={(event) => commit(event.currentTarget.value)}
+        onBlur={(event) => commit(event.currentTarget.value)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') event.currentTarget.blur()
+          if (event.key === 'Escape') {
+            event.currentTarget.value = note ?? ''
+            event.currentTarget.blur()
+          }
+        }}
+      />
+    </label>
   )
 }
 

@@ -5,6 +5,7 @@ import {
   compareCardPicks,
   compareRecommendationOrder,
   favorableHook,
+  keyNumberHook,
   unfavorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
@@ -243,6 +244,16 @@ test('classifyEdge puts 4+ in lock and keeps 3 / 3.5 as hammer', () => {
 test('an FG hook is a 1-point slight, not a lock or hammer', () => {
   assert.equal(favorableHook(-2.5, -3.5), 'fg')
   assert.equal(classifyEdge(1), 'slight')
+})
+
+test('keyNumberHook flags FG and TD hooks without picking a side', () => {
+  assert.equal(keyNumberHook(-3.5), 'fg')
+  assert.equal(keyNumberHook(2.5), 'fg')
+  assert.equal(keyNumberHook(7.5), 'td')
+  assert.equal(keyNumberHook(-6.5), 'td')
+  assert.equal(keyNumberHook(-3), null)
+  assert.equal(keyNumberHook(-7), null)
+  assert.equal(keyNumberHook(-8.5), null)
 })
 
 test('unfavorableHook flags the bad side of 3 and 7 on the recommended number', () => {

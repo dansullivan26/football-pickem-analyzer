@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
+import { keyNumberHook } from './cardScoring'
 import { weeksForSeason } from './careerHistory'
 import { pathForView } from './routes'
 import type {
@@ -467,7 +468,9 @@ export default function PerformanceView({
               <span>Result</span>
               <span />
             </div>
-            {selectedWeek?.games.map((game) => (
+            {selectedWeek?.games.map((game) => {
+              const sittingHook = keyNumberHook(game.homeSpread)
+              return (
               <div className="history-pick" key={game.cbsEventId}>
                 <div className="history-matchup">
                   <span>{game.sport}</span>
@@ -508,11 +511,15 @@ export default function PerformanceView({
                   <strong>{sentLabel(game) ?? recLabel(game)}</strong>
                   {game.deviated && <span className="pick-deviate">Deviate</span>}
                   {game.deviated && <small>rec was {recLabel(game)}</small>}
-                  {game.hook && (
+                  {game.hook ? (
                     <small>
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook
                     </small>
-                  )}
+                  ) : sittingHook && game.category === 'neutral' ? (
+                    <small>
+                      {sittingHook === 'fg' ? 'FG' : 'TD'} hook
+                    </small>
+                  ) : null}
                 </div>
                 <span
                   className={`pick-result ${cardResult(game) ?? game.cover ?? 'pending'}`}
@@ -541,7 +548,8 @@ export default function PerformanceView({
                   }
                 />
               </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

@@ -1509,6 +1509,11 @@ select:focus {
   background: #ece8e0;
 }
 
+.hook-badge.sitting {
+  color: var(--blue);
+  background: var(--blue-soft);
+}
+
 .card-notes {
   display: grid;
   gap: 3px;

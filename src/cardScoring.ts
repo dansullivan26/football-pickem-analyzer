@@ -144,6 +144,14 @@ export function unfavorableHook(poolSpread: number): HookKind | null {
   return null
 }
 
+/** CBS number is on a field-goal or touchdown hook, regardless of side. */
+export function keyNumberHook(spread: number): HookKind | null {
+  const points = Math.abs(spread)
+  if (points === 2.5 || points === 3.5) return 'fg'
+  if (points === 6.5 || points === 7.5) return 'td'
+  return null
+}
+
 const HOOK_SOLID_FLOOR = 6
 
 export function lineValueScore(

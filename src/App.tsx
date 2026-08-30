@@ -12,7 +12,7 @@ import PerformanceView from './PerformanceView'
 import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
-import { publicBucketForPool, favorableHook, unfavorableHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
+import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
@@ -205,6 +205,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
   }
 
   if (!recommendedSide) {
+    const sittingHook = keyNumberHook(game.homeSpread)
     return (
       <div className="recommendation-block">
         <div className="edge-label">Line Value</div>
@@ -213,6 +214,11 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
           <span className="category-dot" />
           {band}
         </div>
+        {sittingHook && (
+          <div className="hook-badge sitting">
+            {sittingHook === 'fg' ? 'FG' : 'TD'} hook
+          </div>
+        )}
       </div>
     )
   }

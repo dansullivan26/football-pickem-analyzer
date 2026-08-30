@@ -345,6 +345,15 @@ export default function TeamsView({
                           </span>
                           <strong>
                             {row.venue === 'home' ? 'vs' : 'at'} {row.opponent}
+                            {beat && (
+                              <span
+                                className="bad-beat-mark"
+                                title="Bad beat"
+                                aria-label="Bad beat"
+                              >
+                                😞
+                              </span>
+                            )}
                           </strong>
                           <small>
                             CBS {teamLine(row)} · {row.market}

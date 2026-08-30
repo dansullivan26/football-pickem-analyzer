@@ -14,6 +14,7 @@ export type TeamMarket = 'favorite' | 'dog' | 'pickem'
 export type TeamAppearance = {
   week: number
   weekLabel: string
+  kickoff: string
   cbsEventId: number
   sport: 'NFL' | 'NCAAF'
   opponent: string
@@ -224,6 +225,7 @@ export function buildTeamDirectory(
           {
             week: week.week,
             weekLabel: week.label,
+            kickoff: game.kickoff,
             cbsEventId: game.cbsEventId,
             sport: game.sport,
             opponent: rosterName(roster, game.sport, opponentAbbrev),

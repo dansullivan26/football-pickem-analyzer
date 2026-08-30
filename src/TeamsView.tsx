@@ -17,6 +17,17 @@ function formatSpread(value: number) {
   return value > 0 ? `+${points}` : `-${points}`
 }
 
+function formatGameDate(kickoff: string) {
+  return new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'America/New_York',
+  })
+    .format(new Date(kickoff))
+    .replace(',', '')
+}
+
 function teamLine(row: TeamAppearance) {
   const number = row.venue === 'home' ? row.homeSpread : row.homeSpread * -1
   return formatSpread(number)
@@ -285,7 +296,13 @@ export default function TeamsView({
                     selected.appearances.map((row) => (
                       <div className="history-pick" key={row.cbsEventId}>
                         <div className="history-matchup">
-                          <span>{row.weekLabel}</span>
+                          <span>
+                            {row.weekLabel}
+                            {' · '}
+                            <time dateTime={row.kickoff}>
+                              {formatGameDate(row.kickoff)}
+                            </time>
+                          </span>
                           <strong>
                             {row.venue === 'home' ? 'vs' : 'at'} {row.opponent}
                           </strong>

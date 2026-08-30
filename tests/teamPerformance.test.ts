@@ -148,6 +148,10 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(tcuRecord?.home.detail, '0-1 ATS')
   assert.equal(tcuRecord?.favorite.detail, '0-1 ATS')
   assert.equal(tcuRecord?.appearances[0]?.opponent, 'North Carolina')
+  assert.equal(
+    tcuRecord?.appearances[0]?.kickoff,
+    '2026-08-29T12:00:00-04:00',
+  )
   assert.equal(uncRecord?.overall.detail, '1-0 ATS')
   assert.equal(uncRecord?.away.detail, '1-0 ATS')
   assert.equal(uncRecord?.dog.detail, '1-0 ATS')

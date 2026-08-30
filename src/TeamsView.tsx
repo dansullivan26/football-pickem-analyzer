@@ -6,6 +6,7 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
 import { pathForView } from './routes'
 import type { RecommendationHistory, Slate } from './types'
@@ -322,7 +323,7 @@ export default function TeamsView({
                           entry.seasonYear === slate.pool.seasonYear,
                       )
                       return (
-                      <div className="history-pick" key={row.cbsEventId}>
+                      <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
                           <span>
                             {row.weekLabel}
@@ -337,33 +338,21 @@ export default function TeamsView({
                           <small>
                             CBS {teamLine(row)} · {row.market}
                           </small>
-                          {beat ? (
-                            <button
-                              className="bad-beat-chip"
-                              type="button"
-                              onClick={() => onClearBadBeat(beat)}
-                            >
-                              Bad beat
-                            </button>
-                          ) : (
-                            <button
-                              className="bad-beat-mark"
-                              type="button"
-                              onClick={() =>
-                                onMarkBadBeat(
-                                  appearanceBeat(selected, row, slate.pool.seasonYear),
-                                )
-                              }
-                            >
-                              Mark bad beat
-                            </button>
-                          )}
                         </div>
                         <span
                           className={`pick-result ${row.result ?? 'pending'}`}
                         >
                           {resultLabel(row.result)}
                         </span>
+                        <BadBeatMenu
+                          beat={beat}
+                          onClear={onClearBadBeat}
+                          onMark={() =>
+                            onMarkBadBeat(
+                              appearanceBeat(selected, row, slate.pool.seasonYear),
+                            )
+                          }
+                        />
                       </div>
                       )
                     })

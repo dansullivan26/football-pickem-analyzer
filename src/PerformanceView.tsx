@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
 import { weeksForSeason } from './careerHistory'
 import { pathForView } from './routes'
@@ -212,30 +213,6 @@ function cardResult(game: FrozenRecommendation) {
   if (game.deviated && game.pickedSide) return submittedResult(game)
   if (game.pickedSide) return strengthResult(game)
   return recResult(game)
-}
-
-function BadBeatStamp({
-  beat,
-  onClear,
-  onMark,
-}: {
-  beat?: BadBeat
-  onClear: (beat: BadBeat) => void
-  onMark: () => void
-}) {
-  return beat ? (
-    <button
-      className="bad-beat-chip"
-      type="button"
-      onClick={() => onClear(beat)}
-    >
-      Bad beat
-    </button>
-  ) : (
-    <button className="bad-beat-mark" type="button" onClick={onMark}>
-      Mark bad beat
-    </button>
-  )
 }
 
 function resultLabel(game: FrozenRecommendation) {
@@ -488,6 +465,7 @@ export default function PerformanceView({
               <span>Strength</span>
               <span>Pick</span>
               <span>Result</span>
+              <span />
             </div>
             {selectedWeek?.games.map((game) => (
               <div className="history-pick" key={game.cbsEventId}>
@@ -535,33 +513,33 @@ export default function PerformanceView({
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook
                     </small>
                   )}
-                  <BadBeatStamp
-                    beat={seasonBeats.find(
-                      (entry) =>
-                        entry.cbsEventId === game.cbsEventId &&
-                        entry.seasonYear === seasonYear,
-                    )}
-                    onClear={onClearBadBeat}
-                    onMark={() =>
-                      onMarkBadBeat({
-                        seasonYear,
-                        week: selectedWeek?.week ?? 0,
-                        weekLabel: selectedWeek?.label ?? 'Week',
-                        cbsEventId: game.cbsEventId,
-                        kickoff: game.kickoff,
-                        away: teamName(game.sport, game.away),
-                        home: teamName(game.sport, game.home),
-                        homeSpread: game.homeSpread,
-                        note: null,
-                      })
-                    }
-                  />
                 </div>
                 <span
                   className={`pick-result ${cardResult(game) ?? game.cover ?? 'pending'}`}
                 >
                   {resultLabel(game)}
                 </span>
+                <BadBeatMenu
+                  beat={seasonBeats.find(
+                    (entry) =>
+                      entry.cbsEventId === game.cbsEventId &&
+                      entry.seasonYear === seasonYear,
+                  )}
+                  onClear={onClearBadBeat}
+                  onMark={() =>
+                    onMarkBadBeat({
+                      seasonYear,
+                      week: selectedWeek?.week ?? 0,
+                      weekLabel: selectedWeek?.label ?? 'Week',
+                      cbsEventId: game.cbsEventId,
+                      kickoff: game.kickoff,
+                      away: teamName(game.sport, game.away),
+                      home: teamName(game.sport, game.home),
+                      homeSpread: game.homeSpread,
+                      note: null,
+                    })
+                  }
+                />
               </div>
             ))}
           </div>

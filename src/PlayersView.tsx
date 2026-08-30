@@ -10,6 +10,7 @@ import {
   type ResidualCell,
 } from './playerPrediction'
 import { careerSeasonYears, sameSeasonWeek, weeksForSeason } from './careerHistory'
+import { sortPlayersByWinRate } from './playerDirectory'
 import type {
   PlayerHistory,
   PlayerPick,
@@ -210,7 +211,9 @@ export default function PlayersView({
     }
   })
   const [selectedEntryId, setSelectedEntryId] = useState(
-    history.entries[0]?.entryId ?? '',
+    () =>
+      sortPlayersByWinRate(history.entries, careerHistory.weeks)[0]?.entryId ??
+      '',
   )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
     Math.max(
@@ -224,11 +227,12 @@ export default function PlayersView({
 
   const filteredPlayers = useMemo(() => {
     const normalized = query.trim().toLowerCase()
-    if (!normalized) return history.entries
-    return history.entries.filter((entry) =>
+    const ranked = sortPlayersByWinRate(history.entries, careerHistory.weeks)
+    if (!normalized) return ranked
+    return ranked.filter((entry) =>
       entry.name.toLowerCase().includes(normalized),
     )
-  }, [history.entries, query])
+  }, [careerHistory.weeks, history.entries, query])
   const availableWeeks = useMemo(() => {
     const weeks = new Map<
       number,
@@ -257,7 +261,7 @@ export default function PlayersView({
 
   const selectedPlayer =
     history.entries.find((entry) => entry.entryId === selectedEntryId) ??
-    history.entries[0]
+    filteredPlayers[0]
   const selectedWeek =
     availableWeeks.find((week) => week.week === selectedWeekNumber) ??
     availableWeeks.at(-1)

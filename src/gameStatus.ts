@@ -31,6 +31,18 @@ export function formatGameScore(game: {
   return scores ? `${scores.away}–${scores.home}` : null
 }
 
+/** Winning (larger) score first. Used on Teams badges, not the Lines matchup. */
+export function formatWinningScore(game: {
+  awayScore?: number | null
+  homeScore?: number | null
+}) {
+  const scores = gameScores(game)
+  if (!scores) return null
+  const high = Math.max(scores.away, scores.home)
+  const low = Math.min(scores.away, scores.home)
+  return `${high}–${low}`
+}
+
 export function gameIsUpcoming(game: Pick<SlateGame, 'kickoff'>, now: number) {
   return new Date(game.kickoff).getTime() > now
 }

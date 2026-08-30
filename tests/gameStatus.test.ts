@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   formatGameScore,
+  formatWinningScore,
   gameIsCompleted,
   gameIsFinal,
   gameIsUpcoming,
@@ -57,4 +58,11 @@ test('formatGameScore needs both sides', () => {
   assert.equal(formatGameScore({}), null)
   assert.equal(formatGameScore({ awayScore: 21 }), null)
   assert.equal(formatGameScore({ awayScore: 21, homeScore: 17 }), '21–17')
+})
+
+test('formatWinningScore puts the larger score first', () => {
+  assert.equal(formatWinningScore({ awayScore: 27, homeScore: 37 }), '37–27')
+  assert.equal(formatWinningScore({ awayScore: 37, homeScore: 27 }), '37–27')
+  assert.equal(formatWinningScore({ awayScore: 21, homeScore: 21 }), '21–21')
+  assert.equal(formatWinningScore({ awayScore: 15 }), null)
 })

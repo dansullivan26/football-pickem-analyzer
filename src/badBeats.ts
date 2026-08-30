@@ -143,35 +143,3 @@ export function rememberBadBeatChange(
     removed: [...overlay.removed.filter((entry) => entry !== change.key), change.key],
   })
 }
-
-const REPO = 'dansullivan26/football-pickem-analyzer'
-const WORKFLOW = 'record-bad-beat.yml'
-
-export async function dispatchBadBeatChange(
-  change: { action: 'add'; beat: BadBeat } | { action: 'remove'; key: string },
-) {
-  const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
-  if (!token) return false
-
-  const response = await fetch(
-    `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${token}`,
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-      body: JSON.stringify({
-        ref: 'main',
-        inputs: { payload: JSON.stringify(change) },
-      }),
-    },
-  )
-
-  if (response.status === 204) return true
-  const detail = await response.text()
-  throw new Error(
-    `Could not save the bad beat (${response.status}${detail ? `: ${detail}` : ''}).`,
-  )
-}

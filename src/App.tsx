@@ -19,7 +19,6 @@ import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lin
 import {
   badBeatKey,
   beatsForSeason,
-  dispatchBadBeatChange,
   mergeBadBeats,
   rememberBadBeatChange,
   type BadBeat,
@@ -624,7 +623,7 @@ function App() {
     [beats],
   )
 
-  const markBadBeat = useCallback(async (draft: Omit<BadBeat, 'markedAt'>) => {
+  const markBadBeat = useCallback((draft: Omit<BadBeat, 'markedAt'>) => {
     const beat: BadBeat = {
       ...draft,
       note: draft.note?.trim() || null,
@@ -632,35 +631,14 @@ function App() {
     }
     rememberBadBeatChange({ action: 'add', beat })
     setBeats(mergeBadBeats(badBeatsFile))
-    try {
-      const saved = await dispatchBadBeatChange({ action: 'add', beat })
-      setToast(
-        saved
-          ? 'Bad beat stamped. Reload after Pages rebuilds if you want it on the live site.'
-          : 'Bad beat stamped on this browser. Add a GH_DISPATCH_TOKEN to save it to git.',
-      )
-    } catch (saveError) {
-      setToast(
-        saveError instanceof Error
-          ? saveError.message
-          : 'Could not save the bad beat.',
-      )
-    }
   }, [])
 
-  const clearBadBeat = useCallback(async (beat: BadBeat) => {
-    const key = badBeatKey(beat.seasonYear, beat.cbsEventId)
-    rememberBadBeatChange({ action: 'remove', key })
+  const clearBadBeat = useCallback((beat: BadBeat) => {
+    rememberBadBeatChange({
+      action: 'remove',
+      key: badBeatKey(beat.seasonYear, beat.cbsEventId),
+    })
     setBeats(mergeBadBeats(badBeatsFile))
-    try {
-      await dispatchBadBeatChange({ action: 'remove', key })
-    } catch (saveError) {
-      setToast(
-        saveError instanceof Error
-          ? saveError.message
-          : 'Could not clear the bad beat.',
-      )
-    }
   }, [])
 
   const refreshData = useCallback(async () => {
@@ -1114,15 +1092,15 @@ function App() {
           selectedSlug={teamSlug}
           onSelectTeam={(slug) => goTo('teams', slug)}
           seasonBeats={seasonBeats}
-          onMarkBadBeat={(draft) => void markBadBeat(draft)}
-          onClearBadBeat={(beat) => void clearBadBeat(beat)}
+          onMarkBadBeat={markBadBeat}
+          onClearBadBeat={clearBadBeat}
           onOpenBadBeats={() => goTo('bad-beats')}
         />
       ) : view === 'bad-beats' ? (
         <BadBeatsView
           seasonYear={slate.pool.seasonYear}
           beats={beats}
-          onClear={(beat) => void clearBadBeat(beat)}
+          onClear={clearBadBeat}
           onBackToTeams={() => goTo('teams')}
         />
       ) : (
@@ -1131,8 +1109,8 @@ function App() {
           seasonYear={slate.pool.seasonYear}
           seasonBeats={seasonBeats}
           teamName={slateTeamName}
-          onMarkBadBeat={(draft) => void markBadBeat(draft)}
-          onClearBadBeat={(beat) => void clearBadBeat(beat)}
+          onMarkBadBeat={markBadBeat}
+          onClearBadBeat={clearBadBeat}
           onOpenBadBeats={() => goTo('bad-beats')}
         />
       )}

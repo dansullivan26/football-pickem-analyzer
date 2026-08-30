@@ -1316,6 +1316,21 @@ select:focus {
   line-height: 1.35;
 }
 
+.game-weather {
+  flex-basis: 100%;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.game-weather.ready {
+  color: var(--ink);
+}
+
+.game-weather.unavailable,
+.game-weather.loading {
+  color: var(--muted);
+}
+
 .sport-tag {
   padding: 3px 7px;
   border-radius: 5px;
@@ -2679,7 +2694,8 @@ footer {
 
   /* Left in the first column, a long stadium name widens that track and
      squeezes the kickoff time onto two lines. */
-  .game-venue {
+  .game-venue,
+  .game-weather {
     grid-column: 1 / -1;
   }
 

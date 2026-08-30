@@ -12,6 +12,7 @@ import PerformanceView from './PerformanceView'
 import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
+import GameWeather from './GameWeather'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
@@ -401,6 +402,7 @@ function GameCard({
             {venue}
           </span>
         )}
+        <GameWeather game={game} />
       </div>
 
       <div className="matchup">

@@ -2199,6 +2199,15 @@ select:focus {
   font-size: 0.66rem;
 }
 
+.history-matchup .our-pool-pick.picked {
+  color: var(--green-dark);
+  font-weight: 800;
+}
+
+.history-matchup .our-pool-pick.not-picked {
+  color: var(--muted);
+}
+
 .history-selection .pick-source,
 .history-selection .pick-strength {
   justify-self: start;

@@ -1227,6 +1227,7 @@ function App() {
       ) : view === 'teams' ? (
         <TeamsView
           slate={slate}
+          playerHistory={playerHistory}
           recommendations={recommendationHistory}
           selectedSlug={teamSlug}
           onSelectTeam={(slug) => goTo('teams', slug)}

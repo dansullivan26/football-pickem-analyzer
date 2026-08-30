@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { ourPickForGame, ourRosterEntry } from '../src/ourEntry.ts'
+import {
+  ourPickForGame,
+  ourPoolPickOnSide,
+  ourRosterEntry,
+} from '../src/ourEntry.ts'
 import type { PlayerHistory, PlayerPick } from '../src/types.ts'
 
 function pick(cbsEventId: number, side: 'home' | 'away'): PlayerPick {
@@ -70,4 +74,11 @@ test('ourPickForGame reads that entry’s pick for the slate week', () => {
   const row = ourPickForGame(history(['Dan Sullivan']), 1, 100)
   assert.equal(row?.pickedSide, 'home')
   assert.equal(ourPickForGame(history(['Dan Sullivan']), 1, 999), null)
+})
+
+test('ourPoolPickOnSide marks the pool team we took, not the opponent', () => {
+  const dump = history(['Dan Sullivan'])
+  assert.equal(ourPoolPickOnSide(dump, 1, 100, 'home'), 'picked')
+  assert.equal(ourPoolPickOnSide(dump, 1, 100, 'away'), 'not-picked')
+  assert.equal(ourPoolPickOnSide(dump, 1, 999, 'home'), null)
 })

@@ -9,8 +9,9 @@ import {
 import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
+import { ourPoolPickOnSide } from './ourEntry'
 import { pathForView } from './routes'
-import type { RecommendationHistory, Slate } from './types'
+import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
 function formatSpread(value: number) {
   if (value === 0) return 'PK'
@@ -79,6 +80,7 @@ function compareTeams(
 
 export default function TeamsView({
   slate,
+  playerHistory,
   recommendations,
   selectedSlug,
   onSelectTeam,
@@ -88,6 +90,7 @@ export default function TeamsView({
   onOpenBadBeats,
 }: {
   slate: Slate
+  playerHistory: PlayerHistory
   recommendations: RecommendationHistory
   selectedSlug: string | null
   onSelectTeam: (slug: string | null) => void
@@ -324,6 +327,12 @@ export default function TeamsView({
                           entry.seasonYear === slate.pool.seasonYear,
                       )
                       const score = formatWinningScore(row)
+                      const poolPick = ourPoolPickOnSide(
+                        playerHistory,
+                        row.week,
+                        row.cbsEventId,
+                        row.venue,
+                      )
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -339,6 +348,16 @@ export default function TeamsView({
                           </strong>
                           <small>
                             CBS {teamLine(row)} · {row.market}
+                            {poolPick && (
+                              <>
+                                {' · '}
+                                <span className={`our-pool-pick ${poolPick}`}>
+                                  {poolPick === 'picked'
+                                    ? 'Our pick'
+                                    : 'Not our pick'}
+                                </span>
+                              </>
+                            )}
                           </small>
                         </div>
                         <span

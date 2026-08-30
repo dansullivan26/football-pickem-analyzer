@@ -25,3 +25,15 @@ export function ourPickForGame(
       ?.picks.find((pick) => pick.cbsEventId === cbsEventId) ?? null
   )
 }
+
+/** Whether Dan Sullivan's CBS pool pick is this side. Null if no pick is unlocked. */
+export function ourPoolPickOnSide(
+  history: PlayerHistory,
+  week: number,
+  cbsEventId: number,
+  side: 'home' | 'away',
+): 'picked' | 'not-picked' | null {
+  const pick = ourPickForGame(history, week, cbsEventId)
+  if (!pick?.pickedSide) return null
+  return pick.pickedSide === side ? 'picked' : 'not-picked'
+}

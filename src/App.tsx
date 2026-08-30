@@ -745,22 +745,9 @@ function App() {
     [feed],
   )
 
-  const counts = useMemo(
-    () =>
-      analyses.reduce(
-        (totals, analysis) => {
-          totals[analysis.category] += 1
-          return totals
-        },
-        { lock: 0, hammer: 0, lean: 0, slight: 0, neutral: 0, pending: 0 },
-      ),
-    [analyses],
-  )
-
-  const visibleGames = useMemo(() => {
+  const scopedAnalyses = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
-    const filtered = analyses.filter(({ game, category }) => {
-      const matchesFilter = filter === 'all' || category === filter
+    return analyses.filter(({ game }) => {
       const matchesLeague = league === 'all' || game.sport === league
       const matchesQuery =
         !normalizedQuery ||
@@ -770,13 +757,30 @@ function App() {
       const matchesUpcoming = !upcomingOnly || gameIsUpcoming(game, now)
       const matchesCompleted = !completedOnly || gameIsCompleted(game, now)
       return (
-        matchesFilter &&
         matchesLeague &&
         matchesQuery &&
         matchesUpcoming &&
         matchesCompleted
       )
     })
+  }, [analyses, completedOnly, league, now, query, upcomingOnly])
+
+  const counts = useMemo(
+    () =>
+      scopedAnalyses.reduce(
+        (totals, analysis) => {
+          totals[analysis.category] += 1
+          return totals
+        },
+        { lock: 0, hammer: 0, lean: 0, slight: 0, neutral: 0, pending: 0 },
+      ),
+    [scopedAnalyses],
+  )
+
+  const visibleGames = useMemo(() => {
+    const filtered = scopedAnalyses.filter(
+      ({ category }) => filter === 'all' || category === filter,
+    )
 
     if (sort !== 'recommendation') return filtered
 
@@ -802,7 +806,7 @@ function App() {
         }),
       ),
     )
-  }, [analyses, completedOnly, filter, league, now, query, sort, upcomingOnly])
+  }, [filter, scopedAnalyses, sort])
 
   const lineMoves = useMemo(() => {
     const spreads = analyses.filter((analysis) =>

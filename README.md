@@ -192,6 +192,14 @@ public JS bundle, so anyone can dispatch those two workflows and burn Actions
 minutes; they cannot read `SHARP_API_KEY` or `DROPS_TOKEN`. For local testing,
 put the same token in `.env.local` as `VITE_GH_DISPATCH_TOKEN`.
 
+Stamping or clearing a **bad beat** uses that same token to dispatch **Save
+bad beat** (`save-bad-beat.yml`). The Action writes `src/data/bad-beats.json`
+and redeploys Pages so every device sees the same list. Marks stay in
+`localStorage` on the browser that made them until that deploy lands; opening
+the live site on that browser publishes any stamps that never made it into
+the committed file. Anyone who can read the baked-in token can add or remove
+stamps the same way they can start a refresh.
+
 ## Complete a card on CBS
 
 The generated-card modal sends GrokBot this JSON:

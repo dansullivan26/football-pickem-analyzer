@@ -15,12 +15,14 @@ import TeamLogo from './TeamLogo'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
+import { dispatchBadBeatChange } from './dispatchBadBeat'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
 import {
   badBeatKey,
   beatsForSeason,
   mergeBadBeats,
   rememberBadBeatChange,
+  unpublishedBadBeatChanges,
   type BadBeat,
   type BadBeatsFile,
 } from './badBeats'
@@ -674,6 +676,21 @@ function App() {
     [beats],
   )
 
+  const persistBadBeat = useCallback(
+    async (change: Parameters<typeof dispatchBadBeatChange>[0]) => {
+      try {
+        await dispatchBadBeatChange(change)
+      } catch (persistError) {
+        setToast(
+          persistError instanceof Error
+            ? persistError.message
+            : 'Saved on this device, but could not publish the bad beat.',
+        )
+      }
+    },
+    [],
+  )
+
   const markBadBeat = useCallback((draft: Omit<BadBeat, 'markedAt'>) => {
     const beat: BadBeat = {
       ...draft,
@@ -682,23 +699,42 @@ function App() {
     }
     rememberBadBeatChange({ action: 'add', beat })
     setBeats(mergeBadBeats(badBeatsFile))
-  }, [])
+    void persistBadBeat({ action: 'add', beat })
+  }, [persistBadBeat])
 
   const clearBadBeat = useCallback((beat: BadBeat) => {
-    rememberBadBeatChange({
-      action: 'remove',
+    const change = {
+      action: 'remove' as const,
       key: badBeatKey(beat.seasonYear, beat.cbsEventId),
-    })
+    }
+    rememberBadBeatChange(change)
     setBeats(mergeBadBeats(badBeatsFile))
-  }, [])
+    void persistBadBeat(change)
+  }, [persistBadBeat])
 
   const updateBadBeatNote = useCallback((beat: BadBeat, note: string | null) => {
-    rememberBadBeatChange({
-      action: 'add',
-      beat: { ...beat, note: note?.trim() || null },
-    })
+    const next = { ...beat, note: note?.trim() || null }
+    rememberBadBeatChange({ action: 'add', beat: next })
     setBeats(mergeBadBeats(badBeatsFile))
-  }, [])
+    void persistBadBeat({ action: 'add', beat: next })
+  }, [persistBadBeat])
+
+  useEffect(() => {
+    const pending = unpublishedBadBeatChanges(badBeatsFile)
+    if (pending.adds.length === 0 && pending.removes.length === 0) return
+    try {
+      if (sessionStorage.getItem('pickem-bad-beats-flush')) return
+      sessionStorage.setItem('pickem-bad-beats-flush', '1')
+    } catch {
+      // Private mode can block sessionStorage.
+    }
+    for (const beat of pending.adds) {
+      void persistBadBeat({ action: 'add', beat })
+    }
+    for (const key of pending.removes) {
+      void persistBadBeat({ action: 'remove', key })
+    }
+  }, [persistBadBeat])
 
   const refreshData = useCallback(async () => {
     const confirmed = window.confirm(

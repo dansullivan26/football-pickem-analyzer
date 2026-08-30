@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
+import { type BadBeat } from './badBeats'
 import { weeksForSeason } from './careerHistory'
+import { pathForView } from './routes'
 import type {
   EdgeCategory,
   FrozenRecommendation,
@@ -212,6 +214,30 @@ function cardResult(game: FrozenRecommendation) {
   return recResult(game)
 }
 
+function BadBeatStamp({
+  beat,
+  onClear,
+  onMark,
+}: {
+  beat?: BadBeat
+  onClear: (beat: BadBeat) => void
+  onMark: () => void
+}) {
+  return beat ? (
+    <button
+      className="bad-beat-chip"
+      type="button"
+      onClick={() => onClear(beat)}
+    >
+      Bad beat
+    </button>
+  ) : (
+    <button className="bad-beat-mark" type="button" onClick={onMark}>
+      Mark bad beat
+    </button>
+  )
+}
+
 function resultLabel(game: FrozenRecommendation) {
   if (!game.cover) return 'Awaiting result'
   if (game.deviated && game.pickedSide) {
@@ -236,9 +262,19 @@ function resultLabel(game: FrozenRecommendation) {
 export default function PerformanceView({
   history,
   seasonYear,
+  seasonBeats,
+  teamName,
+  onMarkBadBeat,
+  onClearBadBeat,
+  onOpenBadBeats,
 }: {
   history: RecommendationHistory
   seasonYear: number
+  seasonBeats: BadBeat[]
+  teamName: (sport: 'NFL' | 'NCAAF', abbrev: string) => string
+  onMarkBadBeat: (beat: Omit<BadBeat, 'markedAt'>) => void
+  onClearBadBeat: (beat: BadBeat) => void
+  onOpenBadBeats: () => void
 }) {
   const seasonWeeks = useMemo(
     () => weeksForSeason(history.weeks, seasonYear),
@@ -304,12 +340,25 @@ export default function PerformanceView({
             Friday&apos;s recommendation.
           </p>
         </div>
-        <div className="week-chip">
-          <span>Graded recs</span>
-          <strong>{graded}</strong>
-          <small>
-            {seasonWeeks.length} {seasonWeeks.length === 1 ? 'week' : 'weeks'}
-          </small>
+        <div className="hero-aside">
+          <div className="week-chip">
+            <span>Graded recs</span>
+            <strong>{graded}</strong>
+            <small>
+              {seasonWeeks.length} {seasonWeeks.length === 1 ? 'week' : 'weeks'}
+            </small>
+          </div>
+          <a
+            className="refresh-button in-page"
+            href={pathForView('bad-beats')}
+            onClick={(event) => {
+              event.preventDefault()
+              onOpenBadBeats()
+            }}
+          >
+            Bad beats
+            <span>{seasonBeats.length}</span>
+          </a>
         </div>
       </section>
 
@@ -486,6 +535,27 @@ export default function PerformanceView({
                       favorable {game.hook === 'fg' ? 'FG' : 'TD'} hook
                     </small>
                   )}
+                  <BadBeatStamp
+                    beat={seasonBeats.find(
+                      (entry) =>
+                        entry.cbsEventId === game.cbsEventId &&
+                        entry.seasonYear === seasonYear,
+                    )}
+                    onClear={onClearBadBeat}
+                    onMark={() =>
+                      onMarkBadBeat({
+                        seasonYear,
+                        week: selectedWeek?.week ?? 0,
+                        weekLabel: selectedWeek?.label ?? 'Week',
+                        cbsEventId: game.cbsEventId,
+                        kickoff: game.kickoff,
+                        away: teamName(game.sport, game.away),
+                        home: teamName(game.sport, game.home),
+                        homeSpread: game.homeSpread,
+                        note: null,
+                      })
+                    }
+                  />
                 </div>
                 <span
                   className={`pick-result ${cardResult(game) ?? game.cover ?? 'pending'}`}

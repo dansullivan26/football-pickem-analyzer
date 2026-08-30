@@ -6,6 +6,7 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import { type BadBeat } from './badBeats'
 import { pathForView } from './routes'
 import type { RecommendationHistory, Slate } from './types'
 
@@ -79,11 +80,19 @@ export default function TeamsView({
   recommendations,
   selectedSlug,
   onSelectTeam,
+  seasonBeats,
+  onMarkBadBeat,
+  onClearBadBeat,
+  onOpenBadBeats,
 }: {
   slate: Slate
   recommendations: RecommendationHistory
   selectedSlug: string | null
   onSelectTeam: (slug: string | null) => void
+  seasonBeats: BadBeat[]
+  onMarkBadBeat: (beat: Omit<BadBeat, 'markedAt'>) => void
+  onClearBadBeat: (beat: BadBeat) => void
+  onOpenBadBeats: () => void
 }) {
   const directory = useMemo(
     () => buildTeamDirectory(slate, recommendations),
@@ -139,13 +148,26 @@ export default function TeamsView({
             favorite, and dog splits fill in as covers are recorded.
           </p>
         </div>
-        <div className="week-chip">
-          <span>Teams with a result</span>
-          <strong>{graded}</strong>
-          <small>
-            {directory.teams.length} on the{' '}
-            {recommendations.weeks.length === 1 ? 'slate' : 'season'}
-          </small>
+        <div className="hero-aside">
+          <div className="week-chip">
+            <span>Teams with a result</span>
+            <strong>{graded}</strong>
+            <small>
+              {directory.teams.length} on the{' '}
+              {recommendations.weeks.length === 1 ? 'slate' : 'season'}
+            </small>
+          </div>
+          <a
+            className="refresh-button in-page"
+            href={pathForView('bad-beats')}
+            onClick={(event) => {
+              event.preventDefault()
+              onOpenBadBeats()
+            }}
+          >
+            Bad beats
+            <span>{seasonBeats.length}</span>
+          </a>
         </div>
       </section>
 
@@ -293,7 +315,13 @@ export default function TeamsView({
                   {selected.appearances.length === 0 ? (
                     <p className="team-empty">No games on the frozen card yet.</p>
                   ) : (
-                    selected.appearances.map((row) => (
+                    selected.appearances.map((row) => {
+                      const beat = seasonBeats.find(
+                        (entry) =>
+                          entry.cbsEventId === row.cbsEventId &&
+                          entry.seasonYear === slate.pool.seasonYear,
+                      )
+                      return (
                       <div className="history-pick" key={row.cbsEventId}>
                         <div className="history-matchup">
                           <span>
@@ -309,6 +337,27 @@ export default function TeamsView({
                           <small>
                             CBS {teamLine(row)} · {row.market}
                           </small>
+                          {beat ? (
+                            <button
+                              className="bad-beat-chip"
+                              type="button"
+                              onClick={() => onClearBadBeat(beat)}
+                            >
+                              Bad beat
+                            </button>
+                          ) : (
+                            <button
+                              className="bad-beat-mark"
+                              type="button"
+                              onClick={() =>
+                                onMarkBadBeat(
+                                  appearanceBeat(selected, row, slate.pool.seasonYear),
+                                )
+                              }
+                            >
+                              Mark bad beat
+                            </button>
+                          )}
                         </div>
                         <span
                           className={`pick-result ${row.result ?? 'pending'}`}
@@ -316,7 +365,8 @@ export default function TeamsView({
                           {resultLabel(row.result)}
                         </span>
                       </div>
-                    ))
+                      )
+                    })
                   )}
                 </div>
               </div>
@@ -332,4 +382,22 @@ export default function TeamsView({
       </section>
     </main>
   )
+}
+
+function appearanceBeat(
+  team: TeamRecord,
+  row: TeamAppearance,
+  seasonYear: number,
+): Omit<BadBeat, 'markedAt'> {
+  return {
+    seasonYear,
+    week: row.week,
+    weekLabel: row.weekLabel,
+    cbsEventId: row.cbsEventId,
+    kickoff: row.kickoff,
+    away: row.venue === 'home' ? row.opponent : team.name,
+    home: row.venue === 'home' ? team.name : row.opponent,
+    homeSpread: row.homeSpread,
+    note: null,
+  }
 }

@@ -1,4 +1,4 @@
-export type AppView = 'lines' | 'players' | 'teams' | 'performance'
+export type AppView = 'lines' | 'players' | 'teams' | 'performance' | 'bad-beats'
 
 export type AppLocation = {
   view: AppView
@@ -10,6 +10,7 @@ const VIEW_PATHS: Record<AppView, string> = {
   players: '/players',
   teams: '/teams',
   performance: '/performance',
+  'bad-beats': '/bad-beats',
 }
 
 export function basePath() {
@@ -37,6 +38,7 @@ export function locationFromPath(
   const clean = rest.replace(/\/$/, '') || '/'
   if (clean === '/players') return { view: 'players', teamSlug: null }
   if (clean === '/performance') return { view: 'performance', teamSlug: null }
+  if (clean === '/bad-beats') return { view: 'bad-beats', teamSlug: null }
   if (clean === '/teams') return { view: 'teams', teamSlug: null }
   if (clean.startsWith('/teams/')) {
     const slug = clean.slice('/teams/'.length).split('/').filter(Boolean)[0]

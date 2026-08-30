@@ -17,6 +17,7 @@ test('locationFromPath reads team slugs and keeps the Teams view', () => {
   })
   assert.equal(viewFromPath('/teams/alabama', ''), 'teams')
   assert.equal(viewFromPath('/players', ''), 'players')
+  assert.equal(viewFromPath('/bad-beats', ''), 'bad-beats')
 })
 
 test('pathForView writes a team deep link', () => {

@@ -824,6 +824,62 @@ h2 {
   white-space: nowrap;
 }
 
+.bad-beat-chip,
+.bad-beat-mark {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.bad-beat-chip {
+  color: #6b2a4a;
+  background: #f6d6e4;
+}
+
+.bad-beat-mark {
+  color: var(--muted);
+  background: #eef1ee;
+}
+
+.bad-beat-mark:hover {
+  color: #6b2a4a;
+  background: #f6d6e4;
+}
+
+.bad-beat-actions {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+  align-content: center;
+}
+
+.bad-beat-actions a,
+.bad-beat-actions button:not(.bad-beat-chip) {
+  padding: 0;
+  border: 0;
+  color: var(--green-dark);
+  background: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.week-card-heading > a {
+  color: var(--green-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .suggested-unpicked {
   margin-top: 18px;
 }

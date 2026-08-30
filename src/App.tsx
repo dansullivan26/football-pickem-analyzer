@@ -5,15 +5,26 @@ import playerHistoryData from './data/player-history.json'
 import recommendationHistoryData from './data/recommendation-history.json'
 import predictionForecastsData from './data/prediction-forecasts.json'
 import lineHistoryData from './data/line-history.json'
+import badBeatsData from './data/bad-beats.json'
 import PlayersView from './PlayersView'
 import TeamsView from './TeamsView'
 import PerformanceView from './PerformanceView'
+import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
 import { publicBucketForPool, favorableHook, unfavorableHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
+import {
+  badBeatKey,
+  beatsForSeason,
+  dispatchBadBeatChange,
+  mergeBadBeats,
+  rememberBadBeatChange,
+  type BadBeat,
+  type BadBeatsFile,
+} from './badBeats'
 import { careerPlayerHistory } from './playerArchives'
 import { locationFromPath, pathForView, type AppView } from './routes'
 import type { PredictionForecasts } from './playerPrediction'
@@ -43,6 +54,16 @@ const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
+const badBeatsFile = badBeatsData as BadBeatsFile
+
+function slateTeamName(sport: 'NFL' | 'NCAAF', abbrev: string) {
+  for (const game of slate.games) {
+    if (game.sport !== sport) continue
+    if (game.away.abbrev === abbrev) return game.away.name
+    if (game.home.abbrev === abbrev) return game.home.name
+  }
+  return abbrev
+}
 const lineHistoryByCbs = lineHistoryByEvent(
   lineHistory,
   slate.week.order,
@@ -596,7 +617,51 @@ function App() {
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
   const [dispatching, setDispatching] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
+  const [beats, setBeats] = useState(() => mergeBadBeats(badBeatsFile))
   const closeSuggestedCard = useCallback(() => setSuggestedCard(null), [])
+  const seasonBeats = useMemo(
+    () => beatsForSeason(beats, slate.pool.seasonYear),
+    [beats],
+  )
+
+  const markBadBeat = useCallback(async (draft: Omit<BadBeat, 'markedAt'>) => {
+    const beat: BadBeat = {
+      ...draft,
+      note: draft.note?.trim() || null,
+      markedAt: new Date().toISOString(),
+    }
+    rememberBadBeatChange({ action: 'add', beat })
+    setBeats(mergeBadBeats(badBeatsFile))
+    try {
+      const saved = await dispatchBadBeatChange({ action: 'add', beat })
+      setToast(
+        saved
+          ? 'Bad beat stamped. Reload after Pages rebuilds if you want it on the live site.'
+          : 'Bad beat stamped on this browser. Add a GH_DISPATCH_TOKEN to save it to git.',
+      )
+    } catch (saveError) {
+      setToast(
+        saveError instanceof Error
+          ? saveError.message
+          : 'Could not save the bad beat.',
+      )
+    }
+  }, [])
+
+  const clearBadBeat = useCallback(async (beat: BadBeat) => {
+    const key = badBeatKey(beat.seasonYear, beat.cbsEventId)
+    rememberBadBeatChange({ action: 'remove', key })
+    setBeats(mergeBadBeats(badBeatsFile))
+    try {
+      await dispatchBadBeatChange({ action: 'remove', key })
+    } catch (saveError) {
+      setToast(
+        saveError instanceof Error
+          ? saveError.message
+          : 'Could not clear the bad beat.',
+      )
+    }
+  }, [])
 
   const refreshData = useCallback(async () => {
     const confirmed = window.confirm(
@@ -1048,11 +1113,27 @@ function App() {
           recommendations={recommendationHistory}
           selectedSlug={teamSlug}
           onSelectTeam={(slug) => goTo('teams', slug)}
+          seasonBeats={seasonBeats}
+          onMarkBadBeat={(draft) => void markBadBeat(draft)}
+          onClearBadBeat={(beat) => void clearBadBeat(beat)}
+          onOpenBadBeats={() => goTo('bad-beats')}
+        />
+      ) : view === 'bad-beats' ? (
+        <BadBeatsView
+          seasonYear={slate.pool.seasonYear}
+          beats={beats}
+          onClear={(beat) => void clearBadBeat(beat)}
+          onBackToTeams={() => goTo('teams')}
         />
       ) : (
         <PerformanceView
           history={recommendationHistory}
           seasonYear={slate.pool.seasonYear}
+          seasonBeats={seasonBeats}
+          teamName={slateTeamName}
+          onMarkBadBeat={(draft) => void markBadBeat(draft)}
+          onClearBadBeat={(beat) => void clearBadBeat(beat)}
+          onOpenBadBeats={() => goTo('bad-beats')}
         />
       )}
 
@@ -1084,6 +1165,11 @@ function App() {
               timeStyle: 'short',
             }).format(new Date(recommendationHistory.updatedAt))}
             .
+          </>
+        ) : view === 'bad-beats' ? (
+          <>
+            Bad beats are a display-only stamp. They do not change ATS,
+            recommendations, or picker habits.
           </>
         ) : (
           <>

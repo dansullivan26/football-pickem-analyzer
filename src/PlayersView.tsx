@@ -53,6 +53,40 @@ function formatAccuracy(value: number | null) {
   return value == null ? '—' : `${Math.round(value * 100)}%`
 }
 
+function PredictionMeter({ game }: { game: PredictedGame }) {
+  const meter = game.meter ?? null
+  const why = game.meterWhy || game.reason
+  if (meter == null) {
+    return (
+      <div className="prediction-meter no-call">
+        <div className="prediction-meter-head">
+          <span>No call</span>
+        </div>
+        <small>{why}</small>
+      </div>
+    )
+  }
+  return (
+    <div className={`prediction-meter ${game.confidence ?? 'low'}`}>
+      <div className="prediction-meter-head">
+        <strong>{meter}</strong>
+        <span>{game.confidence} confidence</span>
+      </div>
+      <div
+        className="prediction-meter-track"
+        role="meter"
+        aria-label="Prediction confidence"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={meter}
+      >
+        <span style={{ width: `${meter}%` }} />
+      </div>
+      <small>{why}</small>
+    </div>
+  )
+}
+
 function ResidualMetric({ cell }: { cell: ResidualCell }) {
   return (
     <div className="residual-card">
@@ -585,17 +619,7 @@ export default function PlayersView({
                             <strong>{predictedPickLabel(game)}</strong>
                             <small>{game.reason}</small>
                           </div>
-                          {game.confidence ? (
-                            <span
-                              className={`prediction-confidence ${game.confidence}`}
-                            >
-                              {game.confidence} confidence
-                            </span>
-                          ) : (
-                            <span className="prediction-confidence no-call">
-                              no call
-                            </span>
-                          )}
+                          <PredictionMeter game={game} />
                           {selectedWeek?.scored && (
                             <div className="prediction-actual">
                               <span>Actual</span>

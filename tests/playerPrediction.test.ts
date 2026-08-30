@@ -141,6 +141,8 @@ test('withholds calls before a player has enough history', () => {
   assert.equal(report.profile.insight, null)
   assert.equal(report.calls, 0)
   assert.equal(report.games[0].reason, 'Not enough prior picks')
+  assert.equal(report.games[0].meter, null)
+  assert.equal(report.games[0].meterWhy, 'Not enough prior picks')
 })
 
 test('uses only prior weeks and grades the later actual pick automatically', () => {
@@ -166,6 +168,9 @@ test('uses only prior weeks and grades the later actual pick automatically', () 
   assert.equal(report.games[0].actualSide, 'away')
   assert.equal(report.games[0].correct, false)
   assert.equal(report.accuracy, 0)
+  assert.equal(report.games[0].confidence, 'high')
+  assert.ok((report.games[0].meter ?? 0) >= 50)
+  assert.match(report.games[0].meterWhy ?? '', /Home\/road/)
 })
 
 test('a decisive small line-value sample can make an early call', () => {
@@ -209,6 +214,8 @@ test('a decisive small line-value sample can make an early call', () => {
   assert.equal(profile.habits['line-value'].active, true)
   assert.equal(report.games[0].predictedSide, 'away')
   assert.match(report.games[0].reason, /Line-value habit/)
+  assert.ok((report.games[0].meter ?? 0) > 0)
+  assert.match(report.games[0].meterWhy ?? '', /thin/)
 })
 
 test('assigns a supported home-favorite archetype on the fly', () => {

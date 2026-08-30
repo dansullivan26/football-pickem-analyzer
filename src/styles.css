@@ -2008,9 +2008,9 @@ select:focus {
 
 .prediction-row {
   display: grid;
-  grid-template-columns: minmax(140px, 1fr) minmax(170px, 1.25fr) auto;
+  grid-template-columns: minmax(140px, 1fr) minmax(150px, 1.1fr) minmax(160px, 1fr);
   gap: 16px;
-  align-items: center;
+  align-items: start;
   min-height: 76px;
   padding: 11px 16px;
   border-bottom: 1px solid var(--border);
@@ -2063,6 +2063,62 @@ select:focus {
   background: #eef1ee;
 }
 
+.prediction-meter {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.prediction-meter-head {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.prediction-meter-head strong {
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.prediction-meter-head span {
+  color: var(--muted);
+  font-size: 0.61rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.prediction-meter-track {
+  overflow: hidden;
+  height: 7px;
+  border-radius: 999px;
+  background: #e4e8e4;
+}
+
+.prediction-meter-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #c5bf7a;
+}
+
+.prediction-meter.medium .prediction-meter-track span {
+  background: #e0b24a;
+}
+
+.prediction-meter.high .prediction-meter-track span {
+  background: var(--green);
+}
+
+.prediction-meter.no-call .prediction-meter-head span {
+  color: var(--muted);
+}
+
+.prediction-meter small {
+  color: var(--muted);
+  font-size: 0.63rem;
+  line-height: 1.35;
+}
+
 .prediction-actual {
   justify-items: end;
   text-align: right;
@@ -2070,7 +2126,7 @@ select:focus {
 
 .prediction-card:has(.prediction-actual) .prediction-row {
   grid-template-columns:
-    minmax(130px, 1fr) minmax(155px, 1.15fr) auto minmax(70px, auto);
+    minmax(120px, 1fr) minmax(140px, 1fr) minmax(150px, 1fr) minmax(70px, auto);
 }
 
 .prediction-actual small {
@@ -2328,6 +2384,10 @@ footer {
 
   .prediction-selection {
     grid-column: 1;
+  }
+
+  .prediction-meter {
+    grid-column: 1 / -1;
   }
 
   .prediction-confidence {

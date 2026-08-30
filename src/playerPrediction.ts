@@ -41,6 +41,10 @@ export type PredictedGame = {
   predictedSide: 'home' | 'away' | null
   predictedTeam: string | null
   confidence: PredictionConfidence | null
+  /** 0–100 habit-strength meter. Null on a no-call. Absent on older frozen weeks. */
+  meter?: number | null
+  /** Why the meter sits where it does, including what held it down. */
+  meterWhy?: string
   habitKey: HabitKey | null
   reason: string
   sampleSize: number
@@ -424,14 +428,40 @@ export function buildPlayerPredictionProfile(
   }
 }
 
+function habitDirectionalRate(habit: Habit) {
+  return habit.rate == null ? 0 : Math.max(habit.rate, 1 - habit.rate)
+}
+
 function predictionConfidence(
   habit: Habit,
 ): PredictionConfidence {
-  const directionalRate =
-    habit.rate == null ? 0 : Math.max(habit.rate, 1 - habit.rate)
+  const directionalRate = habitDirectionalRate(habit)
   if (habit.eligible >= 20 && directionalRate >= 0.75) return 'high'
   if (habit.eligible >= 12 || directionalRate >= 0.75) return 'medium'
   return 'low'
+}
+
+function predictionMeter(
+  habit: Habit,
+  agreed: boolean,
+): { meter: number; meterWhy: string } {
+  const directionalRate = habitDirectionalRate(habit)
+  const ratePct = Math.round(directionalRate * 100)
+  let meter = Math.round(habit.strength * 100)
+  if (agreed) meter = Math.min(100, meter + 8)
+  const verb = habit.preferred === 'fade' ? 'fade' : 'take'
+  const parts = [
+    `${ratePct}% ${verb} over ${habit.eligible} prior chances.`,
+  ]
+  if (agreed) parts.push('A second habit points the same way.')
+  if (habit.eligible < 20) {
+    parts.push(
+      `Sample is still thin (${habit.eligible} < 20), so the bar stays conservative.`,
+    )
+  } else if (directionalRate < 0.75) {
+    parts.push(`The lean is ${ratePct}%, not a 75% lock.`)
+  }
+  return { meter, meterWhy: parts.join(' ') }
 }
 
 function predictedSideFromHabit(
@@ -457,7 +487,12 @@ function predictGame(
         : null
 
   let chosen:
-    | { habit: Habit; followsSide: 'home' | 'away'; reason: string }
+    | {
+        habit: Habit
+        followsSide: 'home' | 'away'
+        reason: string
+        agreed: boolean
+      }
     | null = null
 
   if (situational?.habit.active) {
@@ -467,6 +502,7 @@ function predictGame(
         situational.habit.key === 'line-value'
           ? 'Line-value habit'
           : 'Public-side habit',
+      agreed: false,
     }
   } else {
     const general = [
@@ -491,7 +527,7 @@ function predictGame(
       .sort((a, b) => b.habit.strength - a.habit.strength)
 
     if (general.length === 1) {
-      chosen = general[0]
+      chosen = { ...general[0], agreed: false }
     } else if (general.length === 2) {
       const firstSide = predictedSideFromHabit(
         general[0].habit,
@@ -507,6 +543,7 @@ function predictGame(
       ) {
         chosen = {
           ...general[0],
+          agreed: firstSide === secondSide,
           reason:
             firstSide === secondSide
               ? `${general[0].reason} + ${general[1].reason.toLowerCase()}`
@@ -519,6 +556,11 @@ function predictGame(
   const predictedSide = chosen
     ? predictedSideFromHabit(chosen.habit, chosen.followsSide)
     : null
+  const noCallWhy =
+    profile.picks < 20
+      ? 'Not enough prior picks'
+      : 'Habits conflict or remain too close to 50/50'
+  const scored = chosen ? predictionMeter(chosen.habit, chosen.agreed) : null
   return {
     cbsEventId: game.cbsEventId,
     sport: game.sport,
@@ -533,12 +575,15 @@ function predictGame(
           ? game.away
           : null,
     confidence: chosen ? predictionConfidence(chosen.habit) : null,
+    meter: scored?.meter ?? null,
+    meterWhy:
+      scored && chosen
+        ? `${chosen.reason}. ${scored.meterWhy}`
+        : noCallWhy,
     habitKey: chosen?.habit.key ?? null,
     reason: chosen
       ? `${chosen.reason} · ${chosen.habit.eligible} prior chances`
-      : profile.picks < 20
-        ? 'Not enough prior picks'
-        : 'Habits conflict or remain too close to 50/50',
+      : noCallWhy,
     sampleSize: chosen?.habit.eligible ?? 0,
     actualSide,
     correct:

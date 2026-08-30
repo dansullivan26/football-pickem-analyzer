@@ -19,7 +19,7 @@ export default function SuggestedCardPanel({
   onClose: () => void
 }) {
   const [copied, setCopied] = useState(false)
-  const [sort, setSort] = useState<'recommendation' | 'slate'>('recommendation')
+  const [sort, setSort] = useState<'recommendation' | 'slate'>('slate')
   const [submitting, setSubmitting] = useState(false)
   const [askPassword, setAskPassword] = useState(false)
   const [password, setPassword] = useState('')

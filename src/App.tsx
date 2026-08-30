@@ -1227,6 +1227,7 @@ function App() {
         </main>
       ) : view === 'players' ? (
         <PlayersView
+          slate={slate}
           history={playerHistory}
           careerHistory={careerHistory}
           recommendations={recommendationHistory}

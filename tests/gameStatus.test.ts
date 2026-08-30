@@ -6,6 +6,7 @@ import {
   gameIsCompleted,
   gameIsFinal,
   gameIsUpcoming,
+  mergeEventScores,
 } from '../src/gameStatus.ts'
 
 const now = Date.parse('2026-08-30T16:00:00-04:00')
@@ -65,4 +66,17 @@ test('formatWinningScore puts the larger score first', () => {
   assert.equal(formatWinningScore({ awayScore: 37, homeScore: 27 }), '37–27')
   assert.equal(formatWinningScore({ awayScore: 21, homeScore: 21 }), '21–21')
   assert.equal(formatWinningScore({ awayScore: 15 }), null)
+})
+
+test('mergeEventScores lets the live slate overwrite a frozen score', () => {
+  const merged = mergeEventScores([
+    [
+      { cbsEventId: 1, awayScore: 14, homeScore: 10 },
+      { cbsEventId: 2, awayScore: 27, homeScore: 37 },
+    ],
+    [{ cbsEventId: 1, awayScore: 15, homeScore: 10 }],
+  ])
+  assert.deepEqual(merged.get(1), { awayScore: 15, homeScore: 10 })
+  assert.deepEqual(merged.get(2), { awayScore: 27, homeScore: 37 })
+  assert.equal(merged.get(3), undefined)
 })

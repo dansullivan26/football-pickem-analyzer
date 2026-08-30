@@ -10,6 +10,7 @@ import {
   type ResidualCell,
 } from './playerPrediction'
 import { careerSeasonYears, sameSeasonWeek, weeksForSeason } from './careerHistory'
+import { formatWinningScore, mergeEventScores } from './gameStatus'
 import { entryWinRecord, sortPlayersByWinRate } from './playerDirectory'
 import type {
   PlayerHistory,
@@ -17,6 +18,7 @@ import type {
   PlayerWeek,
   RecommendationHistory,
   RecommendationWeek,
+  Slate,
 } from './types'
 
 function formatSpread(value: number) {
@@ -226,11 +228,13 @@ function summarizePlayer(
 }
 
 export default function PlayersView({
+  slate,
   history,
   careerHistory = history,
   recommendations,
   forecasts,
 }: {
+  slate: Slate
   history: PlayerHistory
   careerHistory?: PlayerHistory
   recommendations: RecommendationHistory
@@ -257,6 +261,14 @@ export default function PlayersView({
   )
   const [detailView, setDetailView] = useState<'prediction' | 'actual'>(
     'prediction',
+  )
+  const scoresByEvent = useMemo(
+    () =>
+      mergeEventScores([
+        recommendations.weeks.flatMap((week) => week.games),
+        slate.games,
+      ]),
+    [recommendations.weeks, slate.games],
   )
 
   const filteredPlayers = useMemo(() => {
@@ -603,7 +615,11 @@ export default function PlayersView({
                     </div>
                   ) : (
                     <div className="prediction-list">
-                      {prediction.games.map((game) => (
+                      {prediction.games.map((game) => {
+                        const score = formatWinningScore(
+                          scoresByEvent.get(game.cbsEventId) ?? {},
+                        )
+                        return (
                         <div className="prediction-row" key={game.cbsEventId}>
                           <div className="history-matchup">
                             <span>{game.sport}</span>
@@ -612,6 +628,7 @@ export default function PlayersView({
                             </strong>
                             <small>
                               CBS: {game.home} {formatSpread(game.homeSpread)}
+                              {score ? ` · ${score}` : ''}
                             </small>
                           </div>
                           <div className="prediction-selection">
@@ -648,7 +665,8 @@ export default function PlayersView({
                             </div>
                           )}
                         </div>
-                      ))}
+                        )
+                      })}
                     </div>
                   )}
                 </div>
@@ -673,7 +691,11 @@ export default function PlayersView({
                   </div>
 
                   <div className="pick-history-list">
-                    {weekEntry?.picks.map((pick) => (
+                    {weekEntry?.picks.map((pick) => {
+                      const score = formatWinningScore(
+                        scoresByEvent.get(pick.cbsEventId) ?? {},
+                      )
+                      return (
                       <div className="history-pick" key={pick.gameId}>
                         <div className="history-matchup">
                           <span>{pick.sport}</span>
@@ -692,9 +714,11 @@ export default function PlayersView({
                           className={`pick-result ${pick.result ?? pick.matchStatus}`}
                         >
                           {resultLabel(pick)}
+                          {score && <small>{score}</small>}
                         </span>
                       </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               )}

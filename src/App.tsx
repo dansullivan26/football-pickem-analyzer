@@ -1110,7 +1110,9 @@ function App() {
               onClick={() =>
                 setSuggestedCard(
                   generateSuggestedCard(
-                    analyses,
+                    analyses.filter(({ game }) =>
+                      gameIsUpcoming(game, Date.now()),
+                    ),
                     slate.week.label,
                     slate.pool.seasonYear,
                     slate.tiebreaker,

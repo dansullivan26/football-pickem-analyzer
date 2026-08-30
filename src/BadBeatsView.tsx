@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   cardSideLabel,
   formatBadBeatDate,
@@ -130,26 +130,55 @@ function BadBeatNote({
   note: string | null
   onSave: (note: string | null) => void
 }) {
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState(note ?? '')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!editing) setDraft(note ?? '')
+  }, [note, editing])
+
+  useEffect(() => {
+    if (!editing) return
+    inputRef.current?.focus()
+    inputRef.current?.select()
+  }, [editing])
+
   const commit = (value: string) => {
     const next = value.trim() || null
     if (next !== note) onSave(next)
+    setEditing(false)
+  }
+
+  if (!editing) {
+    return (
+      <button
+        type="button"
+        className="bad-beat-note-text"
+        onClick={() => setEditing(true)}
+      >
+        <span>Note</span>
+        {note ? <p>{note}</p> : <p className="empty">Add a note</p>}
+      </button>
+    )
   }
 
   return (
     <label className="bad-beat-note-field">
       <span>Note</span>
       <input
+        ref={inputRef}
         type="text"
-        defaultValue={note ?? ''}
+        value={draft}
         maxLength={160}
         placeholder="What happened?"
-        onChange={(event) => commit(event.currentTarget.value)}
+        onChange={(event) => setDraft(event.target.value)}
         onBlur={(event) => commit(event.currentTarget.value)}
         onKeyDown={(event) => {
           if (event.key === 'Enter') event.currentTarget.blur()
           if (event.key === 'Escape') {
-            event.currentTarget.value = note ?? ''
-            event.currentTarget.blur()
+            setDraft(note ?? '')
+            setEditing(false)
           }
         }}
       />

@@ -922,13 +922,15 @@ h2 {
   align-items: start;
 }
 
-.bad-beat-note-field {
+.bad-beat-note-field,
+.bad-beat-note-text {
   display: grid;
   gap: 4px;
   min-width: 0;
 }
 
-.bad-beat-note-field > span {
+.bad-beat-note-field > span,
+.bad-beat-note-text > span {
   color: var(--muted);
   font-size: 0.66rem;
   font-weight: 700;
@@ -939,6 +941,27 @@ h2 {
 .bad-beat-note-field input {
   width: 100%;
   min-width: 0;
+}
+
+.bad-beat-note-text {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  cursor: text;
+  text-align: left;
+}
+
+.bad-beat-note-text p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.bad-beat-note-text p.empty {
+  color: var(--muted);
 }
 
 .week-card-heading > a {
@@ -2207,7 +2230,8 @@ footer {
     grid-template-columns: 1fr auto;
   }
 
-  .bad-beat-note-field {
+  .bad-beat-note-field,
+  .bad-beat-note-text {
     grid-column: 1 / -1;
   }
 

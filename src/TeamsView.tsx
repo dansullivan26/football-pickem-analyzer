@@ -9,7 +9,7 @@ import {
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
-import { ourPoolPickOnSide } from './ourEntry'
+import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
 import { pathForBadBeat, pathForView } from './routes'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
@@ -333,6 +333,7 @@ export default function TeamsView({
                         row.cbsEventId,
                         row.venue,
                       )
+                      const beatMark = beat ? badBeatSideMark(poolPick) : null
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -345,15 +346,15 @@ export default function TeamsView({
                           </span>
                           <strong>
                             {row.venue === 'home' ? 'vs' : 'at'} {row.opponent}
-                            {beat && (
+                            {beat && beatMark && (
                               <a
                                 className="bad-beat-mark"
                                 href={pathForBadBeat(
                                   beat.seasonYear,
                                   beat.cbsEventId,
                                 )}
-                                title="Open this bad beat"
-                                aria-label="Open this bad beat"
+                                title={beatMark.label}
+                                aria-label={beatMark.label}
                                 onClick={(event) => {
                                   event.preventDefault()
                                   onOpenBadBeats(
@@ -364,7 +365,7 @@ export default function TeamsView({
                                   )
                                 }}
                               >
-                                😞
+                                {beatMark.emoji}
                               </a>
                             )}
                           </strong>

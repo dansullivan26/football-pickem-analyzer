@@ -37,3 +37,11 @@ export function ourPoolPickOnSide(
   if (!pick?.pickedSide) return null
   return pick.pickedSide === side ? 'picked' : 'not-picked'
 }
+
+/** Sad face when we took the team; shamrock when we faded them and they benefitted. */
+export function badBeatSideMark(poolPick: 'picked' | 'not-picked' | null) {
+  if (poolPick === 'not-picked') {
+    return { emoji: '☘️', label: 'Benefitted from this bad beat' }
+  }
+  return { emoji: '😞', label: 'Open this bad beat' }
+}

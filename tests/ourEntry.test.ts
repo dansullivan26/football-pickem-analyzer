@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  badBeatSideMark,
   ourPickForGame,
   ourPoolPickOnSide,
   ourRosterEntry,
@@ -81,4 +82,10 @@ test('ourPoolPickOnSide marks the pool team we took, not the opponent', () => {
   assert.equal(ourPoolPickOnSide(dump, 1, 100, 'home'), 'picked')
   assert.equal(ourPoolPickOnSide(dump, 1, 100, 'away'), 'not-picked')
   assert.equal(ourPoolPickOnSide(dump, 1, 999, 'home'), null)
+})
+
+test('badBeatSideMark uses a shamrock on the team we faded', () => {
+  assert.equal(badBeatSideMark('not-picked').emoji, '☘️')
+  assert.equal(badBeatSideMark('picked').emoji, '😞')
+  assert.equal(badBeatSideMark(null).emoji, '😞')
 })

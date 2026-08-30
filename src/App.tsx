@@ -620,7 +620,7 @@ function App() {
   const [sort, setSort] = useState<'kickoff' | 'recommendation'>('kickoff')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
-  const [upcomingOnly, setUpcomingOnly] = useState(false)
+  const [upcomingOnly, setUpcomingOnly] = useState(true)
   const [completedOnly, setCompletedOnly] = useState(false)
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)

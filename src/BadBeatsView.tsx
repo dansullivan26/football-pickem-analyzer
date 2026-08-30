@@ -1,9 +1,12 @@
 import { useEffect } from 'react'
 import {
+  cardSideLabel,
   formatBadBeatDate,
+  frozenCardForBeat,
   youtubeSearchUrl,
   type BadBeat,
 } from './badBeats'
+import type { RecommendationHistory } from './types'
 
 function formatSpread(value: number) {
   if (value === 0) return 'PK'
@@ -16,11 +19,13 @@ function formatSpread(value: number) {
 export default function BadBeatsView({
   seasonYear,
   beats,
+  recommendations,
   onClear,
   onUpdateNote,
 }: {
   seasonYear: number
   beats: BadBeat[]
+  recommendations: RecommendationHistory
   onClear: (beat: BadBeat) => void
   onUpdateNote: (beat: BadBeat, note: string | null) => void
 }) {
@@ -69,41 +74,48 @@ export default function BadBeatsView({
               team appearance or the frozen card.
             </p>
           ) : (
-            seasonBeats.map((beat) => (
-              <div className="history-pick bad-beat-row" key={badBeatRowKey(beat)}>
-                <div className="history-matchup">
-                  <span>
-                    {beat.weekLabel}
-                    {' · '}
-                    <time dateTime={beat.kickoff}>
-                      {formatBadBeatDate(beat.kickoff)}
-                    </time>
-                  </span>
-                  <strong>
-                    {beat.away} @ {beat.home}
-                  </strong>
-                  <small>
-                    CBS {beat.home} {formatSpread(beat.homeSpread)}
-                  </small>
+            seasonBeats.map((beat) => {
+              const cardSide = cardSideLabel(
+                beat,
+                frozenCardForBeat(recommendations.weeks, beat, seasonYear),
+              )
+              return (
+                <div className="history-pick bad-beat-row" key={badBeatRowKey(beat)}>
+                  <div className="history-matchup">
+                    <span>
+                      {beat.weekLabel}
+                      {' · '}
+                      <time dateTime={beat.kickoff}>
+                        {formatBadBeatDate(beat.kickoff)}
+                      </time>
+                    </span>
+                    <strong>
+                      {beat.away} @ {beat.home}
+                    </strong>
+                    <small>
+                      CBS {beat.home} {formatSpread(beat.homeSpread)}
+                      {cardSide ? ` · we had ${cardSide}` : ''}
+                    </small>
+                  </div>
+                  <BadBeatNote
+                    note={beat.note}
+                    onSave={(note) => onUpdateNote(beat, note)}
+                  />
+                  <div className="bad-beat-actions">
+                    <a
+                      href={youtubeSearchUrl(beat)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Watch
+                    </a>
+                    <button type="button" onClick={() => onClear(beat)}>
+                      Clear
+                    </button>
+                  </div>
                 </div>
-                <BadBeatNote
-                  note={beat.note}
-                  onSave={(note) => onUpdateNote(beat, note)}
-                />
-                <div className="bad-beat-actions">
-                  <a
-                    href={youtubeSearchUrl(beat)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Watch
-                  </a>
-                  <button type="button" onClick={() => onClear(beat)}>
-                    Clear
-                  </button>
-                </div>
-              </div>
-            ))
+              )
+            })
           )}
         </div>
       </section>

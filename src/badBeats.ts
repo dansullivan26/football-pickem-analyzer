@@ -37,6 +37,56 @@ export function youtubeSearchUrl(beat: Pick<BadBeat, 'away' | 'home' | 'kickoff'
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
 }
 
+export type FrozenCardPick = {
+  cbsEventId: number
+  pickedSide: 'home' | 'away' | null
+  deviated?: boolean
+}
+
+export function submittedCardSide(
+  game: Pick<FrozenCardPick, 'pickedSide' | 'deviated'>,
+): 'home' | 'away' | null {
+  if (!game.pickedSide) return null
+  if (!game.deviated) return game.pickedSide
+  return game.pickedSide === 'home' ? 'away' : 'home'
+}
+
+export function frozenCardForBeat(
+  weeks: Array<{
+    week: number
+    seasonYear?: number
+    games: FrozenCardPick[]
+  }>,
+  beat: Pick<BadBeat, 'cbsEventId' | 'seasonYear' | 'week'>,
+  fallbackSeason: number,
+) {
+  const week = weeks.find(
+    (entry) =>
+      entry.week === beat.week &&
+      (entry.seasonYear ?? fallbackSeason) === beat.seasonYear,
+  )
+  return week?.games.find((game) => game.cbsEventId === beat.cbsEventId) ?? null
+}
+
+export function cardSideLabel(
+  beat: Pick<BadBeat, 'away' | 'home' | 'homeSpread'>,
+  game: Pick<FrozenCardPick, 'pickedSide' | 'deviated'> | null,
+) {
+  const side = game ? submittedCardSide(game) : null
+  if (!side) return null
+  const team = side === 'home' ? beat.home : beat.away
+  const spread = beat.homeSpread * (side === 'away' ? -1 : 1)
+  return `${team} ${formatBeatSpread(spread)}`
+}
+
+function formatBeatSpread(value: number) {
+  if (value === 0) return 'PK'
+  const points = Number.isInteger(Math.abs(value))
+    ? String(value)
+    : value.toFixed(1)
+  return value > 0 ? `+${points}` : points
+}
+
 export function applyBadBeatChange(
   file: BadBeatsFile,
   change: { action: 'add'; beat: BadBeat } | { action: 'remove'; key: string },

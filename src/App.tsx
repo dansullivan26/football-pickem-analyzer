@@ -1118,6 +1118,7 @@ function App() {
         <BadBeatsView
           seasonYear={slate.pool.seasonYear}
           beats={beats}
+          recommendations={recommendationHistory}
           onClear={clearBadBeat}
           onUpdateNote={updateBadBeatNote}
         />

@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   applyBadBeatChange,
   badBeatKey,
+  cardSideLabel,
   youtubeSearchUrl,
   type BadBeat,
 } from '../src/badBeats.ts'
@@ -28,6 +29,19 @@ test('youtubeSearchUrl builds a highlights query from the matchup year', () => {
     youtubeSearchUrl(beat()),
     'https://www.youtube.com/results?search_query=Hawaii%20Stanford%202026%20highlights',
   )
+})
+
+test('cardSideLabel uses the submitted frozen-card side, not a player entry', () => {
+  assert.equal(
+    cardSideLabel(beat(), { pickedSide: 'away' }),
+    'Hawaii +5.5',
+  )
+  assert.equal(
+    cardSideLabel(beat(), { pickedSide: 'away', deviated: true }),
+    'Stanford -5.5',
+  )
+  assert.equal(cardSideLabel(beat(), { pickedSide: null }), null)
+  assert.equal(cardSideLabel(beat(), null), null)
 })
 
 test('applyBadBeatChange adds, replaces, and removes without touching ATS math', () => {

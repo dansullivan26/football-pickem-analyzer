@@ -1399,6 +1399,13 @@ select:focus {
   object-fit: contain;
 }
 
+.team-logo.on-dark {
+  box-sizing: border-box;
+  padding: 2px;
+  border-radius: 4px;
+  background: #1a2b22;
+}
+
 .team-name {
   min-width: 0;
   overflow: hidden;

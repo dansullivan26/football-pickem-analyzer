@@ -1,6 +1,7 @@
 import type { TeamAppearance, TeamRecord } from './teamPerformance.ts'
 
-export const TEAM_PROFILE_MIN_DECIDED = 6
+/** Overall book size before a label. Same floor as a split so a loud 4-0 / 3-1 can profile. CBS NCAAF teams rarely appear six times; 3-0 is still too thin with the prior. */
+export const TEAM_PROFILE_MIN_DECIDED = 4
 export const TEAM_SPLIT_MIN_DECIDED = 4
 export const TEAM_SPLIT_MIN_RATE = 0.7
 export const TEAM_INSIGHT_MIN_DECIDED = 4

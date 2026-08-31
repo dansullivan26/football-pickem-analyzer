@@ -41,21 +41,32 @@ function rain(cbsEventId: number, week: number) {
   )
 }
 
-test('waits for six graded games before assigning a style', () => {
+test('waits for four graded games before assigning a style', () => {
   const profile = buildTeamProfile({
     appearances: [
       appearance({ cbsEventId: 1, result: 'win' }),
       appearance({ cbsEventId: 2, result: 'win' }),
       appearance({ cbsEventId: 3, result: 'loss' }),
-      appearance({ cbsEventId: 4, result: 'win' }),
-      appearance({ cbsEventId: 5, result: 'win' }),
-      appearance({ cbsEventId: 6, result: null }),
+      appearance({ cbsEventId: 4, result: null }),
     ],
   })
   assert.equal(profile.archetype, 'Building profile')
-  assert.match(profile.archetypeDetail, /5 graded games/)
+  assert.match(profile.archetypeDetail, /3 graded games/)
   assert.equal(profile.insight, null)
-  assert.equal(profile.decided, 5)
+  assert.equal(profile.decided, 3)
+})
+
+test('labels a 4-0 book once the gate is met', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({ cbsEventId: 1, week: 1, venue: 'home', market: 'favorite', result: 'win' }),
+      appearance({ cbsEventId: 2, week: 2, venue: 'home', market: 'dog', result: 'win' }),
+      appearance({ cbsEventId: 3, week: 3, venue: 'home', market: 'favorite', result: 'win' }),
+      appearance({ cbsEventId: 4, week: 4, venue: 'home', market: 'dog', result: 'win' }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers at home')
+  assert.equal(profile.decided, 4)
 })
 
 test('labels a loud home coverer and adds a leftover sentence', () => {

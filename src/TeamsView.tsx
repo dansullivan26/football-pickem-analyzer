@@ -161,7 +161,7 @@ export default function TeamsView({
           <p className="hero-copy">
             Against the locked pool line, not DraftKings. Performance
             and weather sit in their own sections. A team profile
-            appears after six graded games; weather tiles stay thin
+            appears after four graded games; weather tiles stay thin
             until a team has a few such kickoffs.
           </p>
         </div>

@@ -3,10 +3,12 @@ import test from 'node:test'
 import {
   formatWeatherChip,
   hourlyPeriodForKickoff,
+  periodsFromOpenMeteoHourly,
   usStateName,
   venueQuery,
   weatherCacheMs,
   weatherForVenueKind,
+  wmoShortForecast,
 } from '../src/nwsWeather.ts'
 
 test('usStateName accepts abbreviations and full names', () => {
@@ -40,6 +42,32 @@ test('weatherForVenueKind short-circuits indoor and unknown venues', () => {
       indoor: false,
     }),
     'fetch',
+  )
+})
+
+test('wmoShortForecast maps rain and storms for the wet bucket', () => {
+  assert.equal(wmoShortForecast(0), 'Clear')
+  assert.equal(wmoShortForecast(51), 'Drizzle')
+  assert.equal(wmoShortForecast(80), 'Rain Showers')
+  assert.equal(wmoShortForecast(95), 'Thunderstorms')
+})
+
+test('Open-Meteo hourly rows cover kickoffs past the NWS window', () => {
+  const start = Date.parse('2026-09-07T19:00:00-04:00') / 1000
+  const periods = periodsFromOpenMeteoHourly({
+    time: [start],
+    temperature_2m: [84.7],
+    weather_code: [51],
+    wind_speed_10m: [4.3],
+    precipitation_probability: [42],
+  })
+  assert.equal(periods[0]?.temperature, 85)
+  assert.equal(periods[0]?.windSpeed, '4 mph')
+  assert.equal(periods[0]?.shortForecast, 'Drizzle')
+  assert.equal(periods[0]?.precipChance, 42)
+  assert.equal(
+    hourlyPeriodForKickoff(periods, '2026-09-07T19:30:00-04:00')?.shortForecast,
+    'Drizzle',
   )
 })
 

@@ -24,7 +24,7 @@ export type HourlyPeriod = {
 
 const GEOCODE_TTL_MS = 30 * 24 * 60 * 60 * 1000
 const POINTS_TTL_MS = 7 * 24 * 60 * 60 * 1000
-const STORAGE_KEY = 'pickem-nws-weather-v1'
+const STORAGE_KEY = 'pickem-nws-weather-v2'
 const GAME_DAY_TTL_MS = 45 * 60 * 1000
 const AHEAD_TTL_MS = 4 * 60 * 60 * 1000
 const COVER_SLACK_MS = 90 * 60 * 1000
@@ -264,6 +264,75 @@ async function nwsHourlyUrl(lat: number, lon: number) {
   return url
 }
 
+export function wmoShortForecast(code: number) {
+  if (code === 0) return 'Clear'
+  if (code === 1) return 'Mostly Clear'
+  if (code === 2) return 'Partly Cloudy'
+  if (code === 3) return 'Overcast'
+  if (code === 45 || code === 48) return 'Fog'
+  if (code >= 51 && code <= 57) return 'Drizzle'
+  if (code >= 61 && code <= 67) return 'Rain'
+  if (code >= 71 && code <= 77) return 'Snow'
+  if (code >= 80 && code <= 82) return 'Rain Showers'
+  if (code >= 85 && code <= 86) return 'Snow Showers'
+  if (code >= 95) return 'Thunderstorms'
+  return 'Cloudy'
+}
+
+export function periodsFromOpenMeteoHourly(hourly: {
+  time: number[]
+  temperature_2m: Array<number | null>
+  weather_code: Array<number | null>
+  wind_speed_10m: Array<number | null>
+  precipitation_probability?: Array<number | null>
+}): HourlyPeriod[] {
+  return hourly.time.flatMap((start, index) => {
+    const temperature = hourly.temperature_2m[index]
+    const code = hourly.weather_code[index]
+    const wind = hourly.wind_speed_10m[index]
+    if (temperature == null || code == null || wind == null) return []
+    const startMs = start * 1000
+    const pop = hourly.precipitation_probability?.[index]
+    return [
+      {
+        startTime: new Date(startMs).toISOString(),
+        endTime: new Date(startMs + 60 * 60 * 1000).toISOString(),
+        temperature: Math.round(temperature),
+        temperatureUnit: 'F',
+        windSpeed: `${Math.round(wind)} mph`,
+        shortForecast: wmoShortForecast(code),
+        precipChance: typeof pop === 'number' ? pop : null,
+      },
+    ]
+  })
+}
+
+async function openMeteoHourlyPeriods(lat: number, lon: number) {
+  const query = new URLSearchParams({
+    latitude: String(lat),
+    longitude: String(lon),
+    hourly:
+      'temperature_2m,weather_code,wind_speed_10m,precipitation_probability',
+    temperature_unit: 'fahrenheit',
+    wind_speed_unit: 'mph',
+    timeformat: 'unixtime',
+    forecast_days: '16',
+  })
+  const response = await fetch(`https://api.open-meteo.com/v1/forecast?${query}`)
+  if (!response.ok) throw new Error(`Open-Meteo failed (${response.status})`)
+  const body = (await response.json()) as {
+    hourly?: {
+      time: number[]
+      temperature_2m: Array<number | null>
+      weather_code: Array<number | null>
+      wind_speed_10m: Array<number | null>
+      precipitation_probability?: Array<number | null>
+    }
+  }
+  if (!body.hourly?.time?.length) throw new Error('Open-Meteo had no hourly rows.')
+  return periodsFromOpenMeteoHourly(body.hourly)
+}
+
 async function nwsHourlyPeriods(url: string) {
   const response = await fetch(url, { headers: nwsHeaders() })
   if (!response.ok) throw new Error(`NWS hourly failed (${response.status})`)
@@ -290,6 +359,20 @@ async function nwsHourlyPeriods(url: string) {
   }))
 }
 
+async function periodForKickoff(
+  kickoff: string,
+  loadNws: () => Promise<HourlyPeriod[]>,
+  loadOpenMeteo: () => Promise<HourlyPeriod[]>,
+) {
+  try {
+    const covering = hourlyPeriodForKickoff(await loadNws(), kickoff)
+    if (covering) return covering
+  } catch {
+    // NWS hourly is only ~6.5 days; later kickoffs use Open-Meteo.
+  }
+  return hourlyPeriodForKickoff(await loadOpenMeteo(), kickoff)
+}
+
 export async function loadHourlyPeriod(
   venue: GameVenue,
   kickoff: string,
@@ -297,9 +380,11 @@ export async function loadHourlyPeriod(
   const query = venueQuery(venue)
   if (!query) return null
   const coords = await geocodeCity(query.city, query.stateName)
-  const url = await nwsHourlyUrl(coords.lat, coords.lon)
-  const periods = await nwsHourlyPeriods(url)
-  return hourlyPeriodForKickoff(periods, kickoff)
+  return periodForKickoff(
+    kickoff,
+    async () => nwsHourlyPeriods(await nwsHourlyUrl(coords.lat, coords.lon)),
+    () => openMeteoHourlyPeriods(coords.lat, coords.lon),
+  )
 }
 
 export function peekWeatherChip(
@@ -341,30 +426,44 @@ export async function weatherForGame(
     })
 
     const pointKey = `${coords.lat.toFixed(3)},${coords.lon.toFixed(3)}`
-    const hourlyUrl = await shared(`points:${pointKey}`, async () => {
-      const stored = cache.points[pointKey]
-      if (stored && now - stored.fetchedAt < POINTS_TTL_MS) {
-        return stored.hourlyUrl
-      }
-      const url = await nwsHourlyUrl(coords.lat, coords.lon)
-      cache.points[pointKey] = { hourlyUrl: url, fetchedAt: now }
-      writeCache(cache)
-      return url
-    })
-
     const ttl = weatherCacheMs(game.kickoff, now)
-    const periods = await shared(`hourly:${hourlyUrl}`, async () => {
-      const remembered = hourlyMemory.get(hourlyUrl)
-      if (remembered && now - remembered.fetchedAt < ttl) {
-        return remembered.periods
-      }
-      const next = await nwsHourlyPeriods(hourlyUrl)
-      hourlyMemory.set(hourlyUrl, { periods: next, fetchedAt: now })
-      return next
-    })
+    const period = await periodForKickoff(
+      game.kickoff,
+      async () => {
+        const hourlyUrl = await shared(`points:${pointKey}`, async () => {
+          const stored = cache.points[pointKey]
+          if (stored && now - stored.fetchedAt < POINTS_TTL_MS) {
+            return stored.hourlyUrl
+          }
+          const url = await nwsHourlyUrl(coords.lat, coords.lon)
+          cache.points[pointKey] = { hourlyUrl: url, fetchedAt: now }
+          writeCache(cache)
+          return url
+        })
+        return shared(`hourly:${hourlyUrl}`, async () => {
+          const remembered = hourlyMemory.get(hourlyUrl)
+          if (remembered && now - remembered.fetchedAt < ttl) {
+            return remembered.periods
+          }
+          const next = await nwsHourlyPeriods(hourlyUrl)
+          hourlyMemory.set(hourlyUrl, { periods: next, fetchedAt: now })
+          return next
+        })
+      },
+      () =>
+        shared(`open-meteo:${pointKey}`, async () => {
+          const remembered = hourlyMemory.get(`om:${pointKey}`)
+          if (remembered && now - remembered.fetchedAt < ttl) {
+            return remembered.periods
+          }
+          const next = await openMeteoHourlyPeriods(coords.lat, coords.lon)
+          hourlyMemory.set(`om:${pointKey}`, { periods: next, fetchedAt: now })
+          return next
+        }),
+    )
 
-    const period = hourlyPeriodForKickoff(periods, game.kickoff)
-    const chip = period ? chipFromPeriod(period) : { status: 'unavailable' as const }
+    if (!period) return { status: 'unavailable' }
+    const chip = chipFromPeriod(period)
     cache.chips[String(game.cbsEventId)] = { chip, expiresAt: now + ttl }
     writeCache(cache)
     return chip

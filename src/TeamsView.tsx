@@ -14,6 +14,7 @@ import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
 import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
 import { pathForBadBeat, pathForView } from './routes'
+import InjuryLink from './InjuryLink'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
 function formatSpread(value: number) {
@@ -321,6 +322,12 @@ export default function TeamsView({
                     )}
                   </div>
                 </div>
+                <InjuryLink
+                  className="team-injuries-link"
+                  team={selected}
+                >
+                  CBS injuries
+                </InjuryLink>
               </div>
 
               <section className="week-card team-split-card">

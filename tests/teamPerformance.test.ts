@@ -170,6 +170,8 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(directory.favorite.detail, '0-1 ATS')
   assert.equal(directory.dog.detail, '1-0 ATS')
   assert.equal(tcuRecord?.slug, 'tcu')
+  assert.equal(tcuRecord?.location, 'TCU')
+  assert.equal(tcuRecord?.nickname, 'TCU')
   assert.equal(uncRecord?.slug, 'north-carolina')
   assert.equal(tcuRecord?.appearances[0]?.weather, null)
   assert.equal(tcuRecord?.benign.games, 0)
@@ -235,6 +237,8 @@ test('buildTeamDirectory keeps a frozen score after the live slate moves on', ()
   const hawaiiRecord = directory.teams.find((row) => row.abbrev === 'HAWAII')
   assert.equal(hawaiiRecord?.appearances[0]?.awayScore, 27)
   assert.equal(hawaiiRecord?.appearances[0]?.homeScore, 37)
+  assert.equal(hawaiiRecord?.location, null)
+  assert.equal(hawaiiRecord?.nickname, null)
 })
 
 test('teamSlug turns school names into URL paths', () => {

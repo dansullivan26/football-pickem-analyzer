@@ -1331,6 +1331,35 @@ select:focus {
   color: var(--muted);
 }
 
+.game-injuries {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: baseline;
+  line-height: 1.35;
+}
+
+.injury-link,
+.team-injuries-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.injury-link:hover,
+.team-injuries-link:hover {
+  color: var(--green-dark);
+}
+
+.team-injuries-link {
+  flex: none;
+  align-self: flex-start;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
 .sport-tag {
   padding: 3px 7px;
   border-radius: 5px;
@@ -2708,7 +2737,8 @@ footer {
   /* Left in the first column, a long stadium name widens that track and
      squeezes the kickoff time onto two lines. */
   .game-venue,
-  .game-weather {
+  .game-weather,
+  .game-injuries {
     grid-column: 1 / -1;
   }
 

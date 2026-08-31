@@ -45,6 +45,8 @@ export type TeamRecord = {
   sport: 'NFL' | 'NCAAF'
   abbrev: string
   name: string
+  location: string | null
+  nickname: string | null
   conference: string | null
   teamId: string | null
   appearances: TeamAppearance[]
@@ -167,6 +169,8 @@ type RosterEntry = {
   sport: 'NFL' | 'NCAAF'
   abbrev: string
   name: string
+  location: string | null
+  nickname: string | null
   conference: string | null
   teamId: string | null
 }
@@ -179,6 +183,8 @@ function rosterFromSlate(slate: Slate) {
         sport: game.sport,
         abbrev: side.abbrev,
         name: side.name,
+        location: side.location || null,
+        nickname: side.nickname || null,
         conference: side.conference || null,
         teamId: side.id,
       })
@@ -205,7 +211,14 @@ function addAppearance(
   const existing = groups.get(key)
   if (existing) {
     existing.appearances.push(appearance)
-    if (!existing.info.teamId && info.teamId) existing.info = info
+    existing.info = {
+      ...existing.info,
+      name: existing.info.name || info.name,
+      location: existing.info.location ?? info.location,
+      nickname: existing.info.nickname ?? info.nickname,
+      conference: existing.info.conference ?? info.conference,
+      teamId: existing.info.teamId ?? info.teamId,
+    }
     return
   }
   groups.set(key, {
@@ -275,6 +288,10 @@ export function buildTeamDirectory(
             sport: game.sport,
             abbrev,
             name: rosterName(roster, game.sport, abbrev),
+            location:
+              roster.get(teamKey(game.sport, abbrev))?.location ?? null,
+            nickname:
+              roster.get(teamKey(game.sport, abbrev))?.nickname ?? null,
             conference:
               roster.get(teamKey(game.sport, abbrev))?.conference ?? null,
             teamId: roster.get(teamKey(game.sport, abbrev))?.teamId ?? null,
@@ -309,6 +326,8 @@ export function buildTeamDirectory(
         sport: info.sport,
         abbrev: info.abbrev,
         name: info.name,
+        location: info.location,
+        nickname: info.nickname,
         conference: info.conference,
         teamId: info.teamId,
         appearances: ordered,

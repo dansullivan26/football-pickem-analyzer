@@ -13,6 +13,7 @@ import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
 import GameWeather from './GameWeather'
+import InjuryLink from './InjuryLink'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
@@ -403,6 +404,16 @@ function GameCard({
           </span>
         )}
         <GameWeather game={game} />
+        <span className="game-injuries">
+          <span>Injuries</span>
+          <InjuryLink team={{ sport: game.sport, ...game.away }}>
+            {game.away.name}
+          </InjuryLink>
+          <span aria-hidden="true">·</span>
+          <InjuryLink team={{ sport: game.sport, ...game.home }}>
+            {game.home.name}
+          </InjuryLink>
+        </span>
       </div>
 
       <div className="matchup">

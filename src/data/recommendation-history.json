@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-31T20:13:06.211Z",
+  "updatedAt": "2026-08-31T23:56:15.187Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-08-31T20:13:06.211Z",
+      "capturedAt": "2026-08-31T23:56:15.187Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -58,15 +58,15 @@
           "away": "COLO",
           "home": "GATECH",
           "homeSpread": -6.5,
-          "liveHomeSpread": -6.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -7,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
+          "source": "line-value",
           "pickedSide": "home",
-          "strength": "strong",
-          "score": 16.319444444444443
+          "strength": "mild",
+          "score": 1.5
         },
         {
           "cbsEventId": 50027487,
@@ -75,15 +75,15 @@
           "away": "TOLEDO",
           "home": "MICHST",
           "homeSpread": -10.5,
-          "liveHomeSpread": null,
-          "category": "pending",
-          "recommendedSide": null,
+          "liveHomeSpread": -9.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
-          "pickedSide": "home",
+          "source": "line-value",
+          "pickedSide": "away",
           "strength": "mild",
-          "score": 4.285714285714285
+          "score": 3
         },
         {
           "cbsEventId": 50027462,
@@ -109,15 +109,15 @@
           "away": "CSTCAR",
           "home": "WVU",
           "homeSpread": -21.5,
-          "liveHomeSpread": -21.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -20.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
+          "source": "line-value",
           "pickedSide": "away",
           "strength": "mild",
-          "score": 1.5527950310559007
+          "score": 3
         },
         {
           "cbsEventId": 50027508,
@@ -228,7 +228,7 @@
           "away": "OKLAST",
           "home": "TULSA",
           "homeSpread": 14.5,
-          "liveHomeSpread": 14,
+          "liveHomeSpread": 13.5,
           "category": "slight",
           "recommendedSide": "home",
           "hook": null,
@@ -236,7 +236,7 @@
           "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 1.5
+          "score": 3
         },
         {
           "cbsEventId": 50027546,
@@ -262,15 +262,15 @@
           "away": "ARKST",
           "home": "MEMP",
           "homeSpread": -9.5,
-          "liveHomeSpread": -10.5,
-          "category": "slight",
+          "liveHomeSpread": -11.5,
+          "category": "lean",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 3
+          "strength": "solid",
+          "score": 8
         },
         {
           "cbsEventId": 50027554,
@@ -296,7 +296,7 @@
           "away": "CLEM",
           "home": "LSU",
           "homeSpread": -9.5,
-          "liveHomeSpread": -10.5,
+          "liveHomeSpread": -10,
           "category": "slight",
           "recommendedSide": "home",
           "hook": null,
@@ -304,7 +304,7 @@
           "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3
+          "score": 1.5
         },
         {
           "cbsEventId": 50027486,

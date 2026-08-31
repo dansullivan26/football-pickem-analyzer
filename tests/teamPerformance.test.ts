@@ -5,6 +5,8 @@ import {
   buildTeamDirectory,
   marketForSide,
   resultForSide,
+  teamKey,
+  teamPageSlugs,
   teamSlug,
 } from '../src/teamPerformance.ts'
 import { weatherFromConditions } from '../src/weatherBuckets.ts'
@@ -257,4 +259,16 @@ test('assignTeamSlugs disambiguates the same name in two leagues', () => {
     ]),
     ['washington-ncaaf', 'washington-nfl'],
   )
+})
+
+test('teamPageSlugs matches the Teams directory for slate sides', () => {
+  const unc = team('UNC', 'North Carolina', 'ACC')
+  const tcu = team('TCU', 'TCU', 'BIG12')
+  const card = slate([slateGame(1, unc, tcu, -7.5)])
+  const recs = history([])
+  const directory = buildTeamDirectory(card, recs)
+  const slugs = teamPageSlugs(card, recs)
+  const uncRecord = directory.teams.find((row) => row.abbrev === 'UNC')
+  assert.equal(slugs.get(teamKey('NCAAF', 'UNC')), uncRecord?.slug)
+  assert.equal(slugs.get(teamKey('NCAAF', 'TCU')), 'tcu')
 })

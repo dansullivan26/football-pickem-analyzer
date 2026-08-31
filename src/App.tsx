@@ -39,6 +39,7 @@ import {
   slateKickoffDays,
 } from './gameStatus'
 import { ourPickForGame } from './ourEntry'
+import { teamKey, teamPageSlugs } from './teamPerformance'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -68,6 +69,7 @@ const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const badBeatsFile = badBeatsData as BadBeatsFile
+const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory)
 
 function slateTeamName(sport: 'NFL' | 'NCAAF', abbrev: string) {
   for (const game of slate.games) {
@@ -380,14 +382,47 @@ function OurPickNote({
   )
 }
 
+function TeamMatchupSide({
+  team,
+  slug,
+  onOpenTeam,
+}: {
+  team: SlateGame['away']
+  slug: string | undefined
+  onOpenTeam: (slug: string) => void
+}) {
+  const inner = (
+    <>
+      <TeamLogo team={team} />
+      <span className="team-name">{team.name}</span>
+    </>
+  )
+  if (!slug) return <div className="team">{inner}</div>
+  return (
+    <a
+      className="team team-page-link"
+      href={pathForView('teams', slug)}
+      title={`${team.name} team page`}
+      onClick={(event) => {
+        event.preventDefault()
+        onOpenTeam(slug)
+      }}
+    >
+      {inner}
+    </a>
+  )
+}
+
 function GameCard({
   analysis,
   now,
   ourPick,
+  onOpenTeam,
 }: {
   analysis: GameAnalysis
   now: number
   ourPick: PlayerPick | null
+  onOpenTeam: (slug: string) => void
 }) {
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
@@ -424,15 +459,17 @@ function GameCard({
       </div>
 
       <div className="matchup">
-        <div className="team">
-          <TeamLogo team={game.away} />
-          <span className="team-name">{game.away.name}</span>
-        </div>
+        <TeamMatchupSide
+          team={game.away}
+          slug={teamSlugsByKey.get(teamKey(game.sport, game.away.abbrev))}
+          onOpenTeam={onOpenTeam}
+        />
         <span className={score ? 'game-score' : 'at'}>{score ?? '@'}</span>
-        <div className="team">
-          <TeamLogo team={game.home} />
-          <span className="team-name">{game.home.name}</span>
-        </div>
+        <TeamMatchupSide
+          team={game.home}
+          slug={teamSlugsByKey.get(teamKey(game.sport, game.home.abbrev))}
+          onOpenTeam={onOpenTeam}
+        />
       </div>
 
       <div className="line-grid">
@@ -1253,6 +1290,7 @@ function App() {
                   slate.week.order,
                   analysis.game.cbsEventId,
                 )}
+                onOpenTeam={(slug) => goTo('teams', slug)}
               />
             ))}
           </div>

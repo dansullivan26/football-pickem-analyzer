@@ -1416,6 +1416,17 @@ select:focus {
   white-space: nowrap;
 }
 
+a.team-page-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.team-page-link:hover .team-name,
+a.team-page-link:focus-visible .team-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .at {
   color: #a0aaa3;
   font-size: 0.75rem;

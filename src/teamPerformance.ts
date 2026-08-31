@@ -360,3 +360,13 @@ export function buildTeamDirectory(
     ...weatherSplits(all),
   }
 }
+
+/** Same slugs Teams uses, keyed by `sport:abbrev`. */
+export function teamPageSlugs(
+  slate: Slate,
+  history: RecommendationHistory,
+): Map<string, string> {
+  return new Map(
+    buildTeamDirectory(slate, history).teams.map((team) => [team.key, team.slug]),
+  )
+}

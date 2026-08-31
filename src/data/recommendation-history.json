@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-31T14:09:39.826Z",
+  "updatedAt": "2026-08-31T20:13:06.211Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-08-31T14:09:39.826Z",
+      "capturedAt": "2026-08-31T20:13:06.211Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -194,13 +194,13 @@
           "away": "CIT",
           "home": "CHARLO",
           "homeSpread": -17.5,
-          "liveHomeSpread": -15.5,
+          "liveHomeSpread": -19.5,
           "category": "lean",
-          "recommendedSide": "away",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "away",
+          "pickedSide": "home",
           "strength": "solid",
           "score": 8
         },
@@ -262,13 +262,13 @@
           "away": "ARKST",
           "home": "MEMP",
           "homeSpread": -9.5,
-          "liveHomeSpread": -8.5,
+          "liveHomeSpread": -10.5,
           "category": "slight",
-          "recommendedSide": "away",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "away",
+          "pickedSide": "home",
           "strength": "mild",
           "score": 3
         },
@@ -398,15 +398,15 @@
           "away": "LVILLE",
           "home": "MISS",
           "homeSpread": -6.5,
-          "liveHomeSpread": -6.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -7,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
+          "source": "line-value",
           "pickedSide": "home",
-          "strength": "strong",
-          "score": 14.534883720930239
+          "strength": "mild",
+          "score": 1.5
         },
         {
           "cbsEventId": 50027573,
@@ -432,15 +432,15 @@
           "away": "SMU",
           "home": "FSU",
           "homeSpread": 2.5,
-          "liveHomeSpread": 2.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 3,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
+          "source": "line-value",
           "pickedSide": "away",
-          "strength": "solid",
-          "score": 8.450704225352112
+          "strength": "mild",
+          "score": 1.5
         }
       ]
     }

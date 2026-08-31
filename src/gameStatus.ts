@@ -91,3 +91,60 @@ export function gameIsCompleted(
 ) {
   return gameIsFinal(game) || !gameIsUpcoming(game, now)
 }
+
+export function etDayKey(value: string | number) {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return null
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date)
+  const year = parts.find((part) => part.type === 'year')?.value
+  const month = parts.find((part) => part.type === 'month')?.value
+  const day = parts.find((part) => part.type === 'day')?.value
+  if (!year || !month || !day) return null
+  return `${year}-${month}-${day}`
+}
+
+export function formatEtDayLabel(kickoff: string) {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  })
+    .format(new Date(kickoff))
+    .replace(',', '')
+}
+
+export function gameIsOnEtDay(
+  game: Pick<SlateGame, 'kickoff'>,
+  dayKey: string,
+) {
+  return etDayKey(game.kickoff) === dayKey
+}
+
+export function slateKickoffDays(
+  games: Array<Pick<SlateGame, 'kickoff'>>,
+  now = Date.now(),
+) {
+  const today = etDayKey(now)
+  const days = new Map<
+    string,
+    { key: string; label: string; isToday: boolean }
+  >()
+  for (const game of games) {
+    const key = etDayKey(game.kickoff)
+    if (!key || days.has(key)) continue
+    days.set(key, {
+      key,
+      label: formatEtDayLabel(game.kickoff),
+      isToday: key === today,
+    })
+  }
+  return [...days.values()].sort((left, right) =>
+    left.key.localeCompare(right.key),
+  )
+}

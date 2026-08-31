@@ -30,7 +30,14 @@ import {
 } from './badBeats'
 import { careerPlayerHistory } from './playerArchives'
 import { locationFromPath, pathForView, type AppView } from './routes'
-import { formatGameScore, gameIsCompleted, gameIsUpcoming } from './gameStatus'
+import {
+  etDayKey,
+  formatGameScore,
+  gameIsCompleted,
+  gameIsOnEtDay,
+  gameIsUpcoming,
+  slateKickoffDays,
+} from './gameStatus'
 import { ourPickForGame } from './ourEntry'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
@@ -678,6 +685,7 @@ function App() {
   const [query, setQuery] = useState('')
   const [upcomingOnly, setUpcomingOnly] = useState(true)
   const [completedOnly, setCompletedOnly] = useState(false)
+  const [dayFilter, setDayFilter] = useState<'all' | 'today' | string>('all')
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
   const [dispatching, setDispatching] = useState(false)
@@ -842,6 +850,11 @@ function App() {
       ),
     [feed],
   )
+  const kickoffDays = useMemo(
+    () => slateKickoffDays(slate.games, now),
+    [now],
+  )
+  const todayKickoff = kickoffDays.find((day) => day.isToday)
 
   const scopedAnalyses = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -854,14 +867,21 @@ function App() {
         )
       const matchesUpcoming = !upcomingOnly || gameIsUpcoming(game, now)
       const matchesCompleted = !completedOnly || gameIsCompleted(game, now)
+      const todayKey = etDayKey(now)
+      const matchesDay =
+        dayFilter === 'all' ||
+        (dayFilter === 'today'
+          ? todayKey != null && gameIsOnEtDay(game, todayKey)
+          : gameIsOnEtDay(game, dayFilter))
       return (
         matchesLeague &&
         matchesQuery &&
         matchesUpcoming &&
-        matchesCompleted
+        matchesCompleted &&
+        matchesDay
       )
     })
-  }, [analyses, completedOnly, league, now, query, upcomingOnly])
+  }, [analyses, completedOnly, dayFilter, league, now, query, upcomingOnly])
 
   const counts = useMemo(
     () =>
@@ -1137,6 +1157,25 @@ function App() {
                 <option value="recommendation">Recommendation</option>
               </select>
             </label>
+            <label>
+              <span className="sr-only">Filter by kickoff day</span>
+              <select
+                value={dayFilter}
+                onChange={(event) => setDayFilter(event.target.value)}
+              >
+                <option value="all">All days</option>
+                <option value="today">
+                  {todayKickoff ? `Today · ${todayKickoff.label}` : 'Today'}
+                </option>
+                {kickoffDays
+                  .filter((day) => !day.isToday)
+                  .map((day) => (
+                    <option key={day.key} value={day.key}>
+                      {day.label}
+                    </option>
+                  ))}
+              </select>
+            </label>
             <label className="upcoming-filter">
               <input
                 type="checkbox"
@@ -1230,6 +1269,7 @@ function App() {
                   setQuery('')
                   setUpcomingOnly(false)
                   setCompletedOnly(false)
+                  setDayFilter('all')
                 }}
               >
                 Clear filters

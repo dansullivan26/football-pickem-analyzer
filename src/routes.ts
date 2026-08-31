@@ -27,6 +27,12 @@ export function pathForView(view: AppView, teamSlug?: string | null) {
   return `${basePath()}${suffix === '/' ? '/' : suffix}`
 }
 
+export const TEAM_PROFILE_HASH = 'team-profile'
+
+export function pathForTeam(teamSlug: string) {
+  return `${pathForView('teams', teamSlug)}#${TEAM_PROFILE_HASH}`
+}
+
 export function pathForBadBeat(seasonYear: number, cbsEventId: number) {
   return `${pathForView('bad-beats')}#bad-beat-${seasonYear}-${cbsEventId}`
 }

@@ -3,7 +3,9 @@ import test from 'node:test'
 import {
   locationFromPath,
   pathForBadBeat,
+  pathForTeam,
   pathForView,
+  TEAM_PROFILE_HASH,
   viewFromPath,
 } from '../src/routes.ts'
 
@@ -31,4 +33,9 @@ test('pathForView writes a team deep link', () => {
   assert.equal(pathForView('teams', null), '/teams')
   assert.equal(pathForView('bad-beats'), '/bad-beats')
   assert.equal(pathForBadBeat(2026, 50027437), '/bad-beats#bad-beat-2026-50027437')
+})
+
+test('pathForTeam anchors on the profile section', () => {
+  assert.equal(pathForTeam('alabama'), `/teams/alabama#${TEAM_PROFILE_HASH}`)
+  assert.equal(TEAM_PROFILE_HASH, 'team-profile')
 })

@@ -29,7 +29,7 @@ import {
   type BadBeatsFile,
 } from './badBeats'
 import { careerPlayerHistory } from './playerArchives'
-import { locationFromPath, pathForView, type AppView } from './routes'
+import { locationFromPath, pathForTeam, pathForView, TEAM_PROFILE_HASH, type AppView } from './routes'
 import {
   etDayKey,
   formatGameScore,
@@ -401,7 +401,7 @@ function TeamMatchupSide({
   return (
     <a
       className="team team-page-link"
-      href={pathForView('teams', slug)}
+      href={pathForTeam(slug)}
       title={`${team.name} team page`}
       onClick={(event) => {
         event.preventDefault()
@@ -1290,7 +1290,7 @@ function App() {
                   slate.week.order,
                   analysis.game.cbsEventId,
                 )}
-                onOpenTeam={(slug) => goTo('teams', slug)}
+                onOpenTeam={(slug) => goTo('teams', slug, TEAM_PROFILE_HASH)}
               />
             ))}
           </div>
@@ -1330,7 +1330,7 @@ function App() {
           playerHistory={playerHistory}
           recommendations={recommendationHistory}
           selectedSlug={teamSlug}
-          onSelectTeam={(slug) => goTo('teams', slug)}
+          onSelectTeam={(slug) => goTo('teams', slug, TEAM_PROFILE_HASH)}
           seasonBeats={seasonBeats}
           onMarkBadBeat={markBadBeat}
           onClearBadBeat={clearBadBeat}

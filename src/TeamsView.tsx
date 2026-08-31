@@ -13,7 +13,7 @@ import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
 import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
-import { pathForBadBeat, pathForView } from './routes'
+import { pathForBadBeat, pathForTeam, pathForView, TEAM_PROFILE_HASH } from './routes'
 import InjuryLink from './InjuryLink'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
@@ -148,6 +148,13 @@ export default function TeamsView({
     }
   }, [selected, selectedSlug])
 
+  useEffect(() => {
+    if (!selectedSlug) return
+    document
+      .getElementById(TEAM_PROFILE_HASH)
+      ?.scrollIntoView({ block: 'start' })
+  }, [selectedSlug])
+
   const graded = directory.teams.filter(
     (team) => team.overall.wins + team.overall.losses + team.overall.pushes > 0,
   ).length
@@ -280,7 +287,7 @@ export default function TeamsView({
               <a
                 className={team.slug === selected?.slug ? 'active' : ''}
                 key={team.key}
-                href={pathForView('teams', team.slug)}
+                href={pathForTeam(team.slug)}
                 onClick={(event) => {
                   event.preventDefault()
                   onSelectTeam(team.slug)
@@ -295,7 +302,7 @@ export default function TeamsView({
           </div>
         </aside>
 
-        <section className="player-detail">
+        <section className="player-detail" id={TEAM_PROFILE_HASH}>
           {selected ? (
             <>
               <div className="player-detail-heading">

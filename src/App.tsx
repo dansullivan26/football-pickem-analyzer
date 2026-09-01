@@ -604,13 +604,9 @@ function CoversCollected({
 
 function LineHistoryNote({
   history,
-  comparedTo,
-  lineMoves,
   events,
 }: {
   history: LineHistory
-  comparedTo: string | null | undefined
-  lineMoves: { spreads: number; totals: number }
   events: OddsEvent[] | undefined
 }) {
   const liveByEvent = new Map(
@@ -649,48 +645,21 @@ function LineHistoryNote({
           })
       : []
 
-  const thisPull = lineMoves.spreads > 0 || lineMoves.totals > 0
-  if (movers.length === 0 && !thisPull) return null
-
-  const comparedTitle = comparedTo
-    ? `Compared with the pull from ${formatTimestamp(comparedTo)}`
-    : undefined
-
-  if (movers.length === 0) {
-    return (
-      <p className="list-meta" title={comparedTitle}>
-        {lineMoves.spreads > 0
-          ? `${lineMoves.spreads} DraftKings spread${
-              lineMoves.spreads === 1 ? '' : 's'
-            } moved since the last pull.`
-          : ''}
-        {lineMoves.spreads > 0 && lineMoves.totals > 0 ? ' ' : ''}
-        {lineMoves.totals > 0
-          ? 'Tiebreaker total moved since the last pull.'
-          : ''}
-      </p>
-    )
-  }
+  if (movers.length === 0) return null
 
   return (
     <details className="covers-report">
-      <summary className="list-meta" title={comparedTitle}>
+      <summary className="list-meta">
         {`${movers.length} DraftKings spread${
           movers.length === 1 ? ' has' : 's have'
         } moved this week`}
         <span className="covers-report-link">Line history</span>
       </summary>
       <div className="covers-report-body">
-        {comparedTo && (
-          <p className="covers-report-compared">
-            Compared with the pull from {formatTimestamp(comparedTo)}
-            {thisPull
-              ? lineMoves.spreads > 0
-                ? ` · ${lineMoves.spreads} moved since then`
-                : ' · tiebreaker total moved since then'
-              : ''}
-          </p>
-        )}
+        <p>
+          Every DraftKings number since the game first appeared on this
+          slate. Unchanged pulls are skipped. Paths freeze at kickoff.
+        </p>
         <ul>
           {movers.map(({ game, slateGame, ticks, totals }) => (
             <li key={game.cbsEventId}>
@@ -962,22 +931,6 @@ function App() {
       ),
     )
   }, [filter, scopedAnalyses, sort])
-
-  const lineMoves = useMemo(() => {
-    const spreads = analyses.filter((analysis) =>
-      (Object.keys(bookNames) as BookKey[]).some((book) => {
-        const entry = analysis.odds?.lines[book]
-        return entry?.previousLine != null && entry.previousLine !== entry.line
-      }),
-    ).length
-    const totals = analyses.filter((analysis) =>
-      (Object.keys(bookNames) as BookKey[]).some((book) => {
-        const entry = analysis.odds?.totals?.[book]
-        return entry?.previousLine != null && entry.previousLine !== entry.line
-      }),
-    ).length
-    return { spreads, totals }
-  }, [analyses])
 
   return (
     <div className="app-shell">
@@ -1274,8 +1227,6 @@ function App() {
           )}
           <LineHistoryNote
             history={lineHistory}
-            comparedTo={feed?.comparedTo}
-            lineMoves={lineMoves}
             events={feed?.events}
           />
 

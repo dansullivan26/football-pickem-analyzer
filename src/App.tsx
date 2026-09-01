@@ -18,7 +18,7 @@ import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, com
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
-import { lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
+import { formatLinePath, lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
 import {
   badBeatKey,
   beatsForSeason,
@@ -110,15 +110,19 @@ function formatSpread(value: number | null | undefined) {
 }
 
 function formatSpreadPath(ticks: LineTick[], compact = false) {
-  if (ticks.length < 2) return null
-  const formatted = ticks.map((tick) => formatSpread(tick.home))
-  if (!compact || formatted.length <= 4) return formatted.join(' → ')
-  return `${formatted[0]} → … → ${formatted[formatted.length - 1]}`
+  return formatLinePath(
+    ticks.map((tick) => tick.home),
+    formatSpread,
+    compact,
+  )
 }
 
-function formatTotalPath(ticks: TotalTick[]) {
-  if (ticks.length < 2) return null
-  return ticks.map((tick) => formatPoints(tick.line)).join(' → ')
+function formatTotalPath(ticks: TotalTick[], compact = false) {
+  return formatLinePath(
+    ticks.map((tick) => tick.line),
+    formatPoints,
+    compact,
+  )
 }
 
 function pathTitle(ticks: Array<{ at: string; home?: number; line?: number }>) {
@@ -484,7 +488,7 @@ function GameCard({
           const ticks = ticksEndingAtLive(history?.ticks ?? [], entry)
           const totals = totalsEndingAtLive(history?.totals, total)
           const spreadPath = formatSpreadPath(ticks, true)
-          const totalPath = formatTotalPath(totals)
+          const totalPath = formatTotalPath(totals, true)
           const stale =
             !!entry && now - new Date(entry.retrievedAt).getTime() > STALE_AFTER_MS
           return (

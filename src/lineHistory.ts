@@ -173,3 +173,19 @@ export function totalsEndingAtLive(
   if (last?.line === live.line) return current
   return [...current, { at: live.retrievedAt, line: live.line }]
 }
+
+/** Card tiles keep three numbers; the week list and hover keep the rest. */
+export const LINE_PATH_TILE_MAX = 3
+
+export function formatLinePath(
+  values: number[],
+  formatValue: (value: number) => string,
+  compact = false,
+): string | null {
+  if (values.length < 2) return null
+  const parts = values.map(formatValue)
+  if (!compact || parts.length <= LINE_PATH_TILE_MAX) {
+    return parts.join(' → ')
+  }
+  return `${parts[0]} → … → ${parts[parts.length - 1]}`
+}

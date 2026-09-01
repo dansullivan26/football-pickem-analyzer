@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  formatLinePath,
   lineHistoryByEvent,
   ticksEndingAtLive,
   totalsEndingAtLive,
@@ -269,5 +270,23 @@ test('displayed totals path appends the live number when history lags', () => {
       retrievedAt: '2026-08-28T14:25:50.414Z',
     }),
     [{ at: '2026-08-28T14:25:50.414Z', line: 54.5 }],
+  )
+})
+
+test('formatLinePath keeps three numbers on a tile and the full path otherwise', () => {
+  const format = (value: number) => String(value)
+  assert.equal(formatLinePath([-7.5], format, true), null)
+  assert.equal(formatLinePath([-7.5, -8.5], format, true), '-7.5 → -8.5')
+  assert.equal(
+    formatLinePath([-7.5, -8.5, -9.5], format, true),
+    '-7.5 → -8.5 → -9.5',
+  )
+  assert.equal(
+    formatLinePath([-7.5, -8.5, -9.5, -10.5], format, true),
+    '-7.5 → … → -10.5',
+  )
+  assert.equal(
+    formatLinePath([-7.5, -8.5, -9.5, -10.5], format),
+    '-7.5 → -8.5 → -9.5 → -10.5',
   )
 })

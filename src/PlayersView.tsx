@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   frozenPlayerWeek,
   PREDICTION_STRATEGY_ID,
@@ -11,7 +11,12 @@ import {
 } from './playerPrediction'
 import { careerSeasonYears, weeksForSeason } from './careerHistory'
 import { formatWinningScore, mergeEventScores } from './gameStatus'
-import { entryWinRecord, sortPlayersByWinRate } from './playerDirectory'
+import {
+  entryWinRecord,
+  playerSlugByEntryId,
+  sortPlayersByWinRate,
+} from './playerDirectory'
+import { pathForPlayer } from './routes'
 import {
   PLAYER_TIER_KEYS,
   PLAYER_TIER_LABELS,
@@ -159,12 +164,16 @@ export default function PlayersView({
   careerHistory = history,
   recommendations,
   forecasts,
+  selectedSlug,
+  onSelectPlayer,
 }: {
   slate: Slate
   history: PlayerHistory
   careerHistory?: PlayerHistory
   recommendations: RecommendationHistory
   forecasts: PredictionForecasts | null
+  selectedSlug: string | null
+  onSelectPlayer: (slug: string) => void
 }) {
   const [query, setQuery] = useState('')
   const [namesHidden, setNamesHidden] = useState(() => {
@@ -174,10 +183,9 @@ export default function PlayersView({
       return false
     }
   })
-  const [selectedEntryId, setSelectedEntryId] = useState(
-    () =>
-      sortPlayersByWinRate(history.entries, careerHistory.weeks)[0]?.entryId ??
-      '',
+  const slugsByEntryId = useMemo(
+    () => playerSlugByEntryId(history.entries),
+    [history.entries],
   )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
     Math.max(
@@ -231,9 +239,23 @@ export default function PlayersView({
     return [...weeks.values()].sort((a, b) => a.week - b.week)
   }, [history.weeks, recommendations.weeks])
 
-  const selectedPlayer =
-    history.entries.find((entry) => entry.entryId === selectedEntryId) ??
-    filteredPlayers[0]
+  const selectedPlayer = selectedSlug
+    ? (history.entries.find(
+        (entry) => slugsByEntryId.get(entry.entryId) === selectedSlug,
+      ) ?? null)
+    : (filteredPlayers[0] ?? null)
+
+  useEffect(() => {
+    const previous = document.title
+    document.title = selectedPlayer
+      ? `${namesHidden ? 'Player' : selectedPlayer.name} · Pick'em Edge`
+      : selectedSlug
+        ? 'Player not found · Pick\'em Edge'
+        : 'Players · Pick\'em Edge'
+    return () => {
+      document.title = previous
+    }
+  }, [namesHidden, selectedPlayer, selectedSlug])
   const selectedWeek =
     availableWeeks.find((week) => week.week === selectedWeekNumber) ??
     availableWeeks.at(-1)
@@ -387,14 +409,20 @@ export default function PlayersView({
             />
           </label>
           <div className="player-list">
-            {filteredPlayers.map((entry) => (
-              <button
+            {filteredPlayers.map((entry) => {
+              const slug = slugsByEntryId.get(entry.entryId)
+              if (!slug) return null
+              return (
+              <a
                 className={
                   entry.entryId === selectedPlayer?.entryId ? 'active' : ''
                 }
                 key={entry.entryId}
-                type="button"
-                onClick={() => setSelectedEntryId(entry.entryId)}
+                href={pathForPlayer(slug)}
+                onClick={(event) => {
+                  event.preventDefault()
+                  onSelectPlayer(slug)
+                }}
               >
                 <span>
                   {entry.name}
@@ -405,14 +433,15 @@ export default function PlayersView({
                 <small>
                   {entry.season.rank ? `Season rank ${entry.season.rank}` : 'No results yet'}
                 </small>
-              </button>
-            ))}
+              </a>
+              )
+            })}
           </div>
         </aside>
         )}
 
         <section className="player-detail">
-          {selectedPlayer && summary && (
+          {selectedPlayer && summary ? (
             <>
               <div className="player-detail-heading">
                 <div>
@@ -669,6 +698,12 @@ export default function PlayersView({
                 </div>
               )}
             </>
+          ) : selectedSlug ? (
+            <div className="empty-state">
+              No player matches <code>/{selectedSlug}</code>.
+            </div>
+          ) : (
+            <div className="empty-state">No players match this filter.</div>
           )}
         </section>
       </section>

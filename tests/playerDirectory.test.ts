@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  assignPlayerSlugs,
   entryWinRate,
   entryWinRecord,
+  playerSlug,
   sortPlayersByWinRate,
 } from '../src/playerDirectory.ts'
 import type {
@@ -115,5 +117,23 @@ test('sortPlayersByWinRate uses alphabetical order when rates match', () => {
   assert.deepEqual(
     sortPlayersByWinRate(entries, weeks).map((row) => row.name),
     ['Ada', 'Mia', 'zoe'],
+  )
+})
+
+test('playerSlug turns roster names into URL paths', () => {
+  assert.equal(playerSlug('Dan Sullivan'), 'dan-sullivan')
+  assert.equal(playerSlug('DAVID KOLICH'), 'david-kolich')
+  assert.equal(playerSlug('jeff miller'), 'jeff-miller')
+  assert.equal(playerSlug('Shawn  Sedate'), 'shawn-sedate')
+  assert.equal(playerSlug('Phil SQ'), 'phil-sq')
+})
+
+test('assignPlayerSlugs disambiguates the same name twice', () => {
+  assert.deepEqual(
+    assignPlayerSlugs([
+      { entryId: 'a', name: 'Dan Sullivan' },
+      { entryId: 'b', name: 'Dan  Sullivan' },
+    ]),
+    ['dan-sullivan', 'dan-sullivan-2'],
   )
 })

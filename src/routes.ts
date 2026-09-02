@@ -3,6 +3,7 @@ export type AppView = 'lines' | 'players' | 'teams' | 'performance' | 'bad-beats
 export type AppLocation = {
   view: AppView
   teamSlug: string | null
+  playerSlug: string | null
 }
 
 const VIEW_PATHS: Record<AppView, string> = {
@@ -13,6 +14,13 @@ const VIEW_PATHS: Record<AppView, string> = {
   'bad-beats': '/bad-beats',
 }
 
+function at(
+  view: AppView,
+  extras: Partial<Pick<AppLocation, 'teamSlug' | 'playerSlug'>> = {},
+): AppLocation {
+  return { view, teamSlug: null, playerSlug: null, ...extras }
+}
+
 export function basePath() {
   const raw =
     typeof import.meta.env?.BASE_URL === 'string'
@@ -21,9 +29,13 @@ export function basePath() {
   return raw.replace(/\/$/, '')
 }
 
-export function pathForView(view: AppView, teamSlug?: string | null) {
+export function pathForView(view: AppView, slug?: string | null) {
   const suffix =
-    view === 'teams' && teamSlug ? `/teams/${teamSlug}` : VIEW_PATHS[view]
+    view === 'teams' && slug
+      ? `/teams/${slug}`
+      : view === 'players' && slug
+        ? `/players/${slug}`
+        : VIEW_PATHS[view]
   return `${basePath()}${suffix === '/' ? '/' : suffix}`
 }
 
@@ -31,6 +43,10 @@ export const TEAM_PROFILE_HASH = 'team-profile'
 
 export function pathForTeam(teamSlug: string) {
   return `${pathForView('teams', teamSlug)}#${TEAM_PROFILE_HASH}`
+}
+
+export function pathForPlayer(playerSlug: string) {
+  return pathForView('players', playerSlug)
 }
 
 export function pathForBadBeat(seasonYear: number, cbsEventId: number) {
@@ -46,15 +62,19 @@ export function locationFromPath(
     ? pathname.slice(base.length)
     : pathname
   const clean = rest.replace(/\/$/, '') || '/'
-  if (clean === '/players') return { view: 'players', teamSlug: null }
-  if (clean === '/performance') return { view: 'performance', teamSlug: null }
-  if (clean === '/bad-beats') return { view: 'bad-beats', teamSlug: null }
-  if (clean === '/teams') return { view: 'teams', teamSlug: null }
+  if (clean === '/players') return at('players')
+  if (clean.startsWith('/players/')) {
+    const slug = clean.slice('/players/'.length).split('/').filter(Boolean)[0]
+    return at('players', { playerSlug: slug ?? null })
+  }
+  if (clean === '/performance') return at('performance')
+  if (clean === '/bad-beats') return at('bad-beats')
+  if (clean === '/teams') return at('teams')
   if (clean.startsWith('/teams/')) {
     const slug = clean.slice('/teams/'.length).split('/').filter(Boolean)[0]
-    return { view: 'teams', teamSlug: slug ?? null }
+    return at('teams', { teamSlug: slug ?? null })
   }
-  return { view: 'lines', teamSlug: null }
+  return at('lines')
 }
 
 export function viewFromPath(

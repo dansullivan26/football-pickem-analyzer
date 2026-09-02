@@ -689,6 +689,9 @@ function App() {
   const [teamSlug, setTeamSlug] = useState<string | null>(
     () => locationFromPath().teamSlug,
   )
+  const [playerSlug, setPlayerSlug] = useState<string | null>(
+    () => locationFromPath().playerSlug,
+  )
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
@@ -800,10 +803,10 @@ function App() {
 
   const goTo = useCallback((
     next: AppView,
-    nextTeamSlug: string | null = null,
+    slug: string | null = null,
     hash?: string,
   ) => {
-    const path = pathForView(next, next === 'teams' ? nextTeamSlug : null)
+    const path = pathForView(next, slug)
     const url = hash ? `${path}#${hash.replace(/^#/, '')}` : path
     if (
       `${window.location.pathname}${window.location.search}${window.location.hash}` !==
@@ -812,7 +815,8 @@ function App() {
       window.history.pushState(null, '', url)
     }
     setView(next)
-    setTeamSlug(next === 'teams' ? nextTeamSlug : null)
+    setTeamSlug(next === 'teams' ? slug : null)
+    setPlayerSlug(next === 'players' ? slug : null)
     if (next !== 'lines') setSuggestedCard(null)
   }, [])
 
@@ -847,6 +851,7 @@ function App() {
       const location = locationFromPath()
       setView(location.view)
       setTeamSlug(location.teamSlug)
+      setPlayerSlug(location.playerSlug)
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -1280,6 +1285,8 @@ function App() {
           careerHistory={careerHistory}
           recommendations={recommendationHistory}
           forecasts={predictionForecasts}
+          selectedSlug={playerSlug}
+          onSelectPlayer={(slug) => goTo('players', slug)}
         />
       ) : view === 'teams' ? (
         <TeamsView

@@ -1713,6 +1713,13 @@ a.team-page-link:focus-visible .team-name {
   height: 44px;
 }
 
+.team-rank-trail {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
 .team-empty {
   margin: 0;
   padding: 4px 0 8px;

@@ -314,6 +314,35 @@ test('formatRankedTeamName prefixes a CBS rank when present', () => {
   assert.equal(formatRankedTeamName('Stanford', null), 'Stanford')
 })
 
+test('buildTeamDirectory reads stamped rec ranks and falls back to the live slate', () => {
+  const miami = { ...team('MIAMI', 'Miami (Fla.)', 'ACC'), rank: 7 }
+  const stanford = team('STNFRD', 'Stanford', 'ACC')
+  const directory = buildTeamDirectory(
+    slate([slateGame(1, miami, stanford, -24.5)]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'MIAMI',
+        home: 'STNFRD',
+        homeSpread: -24.5,
+      }),
+      rec({
+        cbsEventId: 2,
+        away: 'MIAMI',
+        home: 'STNFRD',
+        homeSpread: -21.5,
+        awayRank: 5,
+        homeRank: null,
+      }),
+    ]),
+  )
+  const miamiRecord = directory.teams.find((row) => row.abbrev === 'MIAMI')
+  assert.equal(miamiRecord?.appearances[0]?.rank, 7)
+  assert.equal(miamiRecord?.appearances[0]?.opponentRank, null)
+  assert.equal(miamiRecord?.appearances[1]?.rank, 5)
+  assert.equal(miamiRecord?.appearances[1]?.opponentRank, null)
+})
+
 test('teamSlug turns school names into URL paths', () => {
   assert.equal(teamSlug('Alabama'), 'alabama')
   assert.equal(teamSlug('North Carolina'), 'north-carolina')

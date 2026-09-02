@@ -1,4 +1,5 @@
 import { weeksForSeason } from './careerHistory.ts'
+import { cbsTeamRank, frozenRanksCaptured } from './teamRanks.ts'
 import { gameScores } from './gameStatus.ts'
 import {
   isColdTemp,
@@ -32,6 +33,9 @@ export type TeamAppearance = {
   awayScore: number | null
   homeScore: number | null
   weather: FrozenWeather | null
+  /** This team's CBS rank that week. Undefined if we never stamped the rec. */
+  rank?: number | null
+  opponentRank?: number | null
 }
 
 export type TeamSplit = {
@@ -143,6 +147,29 @@ export function resultForSide(
   if (!cover) return null
   if (cover === 'push') return 'push'
   return cover === side ? 'win' : 'loss'
+}
+
+function appearanceRanks(
+  frozen: FrozenRecommendation,
+  venue: TeamVenue,
+  live?: Pick<Slate['games'][number], 'away' | 'home'>,
+) {
+  const captured = frozenRanksCaptured(frozen)
+  const awayRank = captured
+    ? (frozen.awayRank ?? null)
+    : live
+      ? cbsTeamRank(live.away)
+      : undefined
+  const homeRank = captured
+    ? (frozen.homeRank ?? null)
+    : live
+      ? cbsTeamRank(live.home)
+      : undefined
+  if (awayRank === undefined && homeRank === undefined) return {}
+  return {
+    rank: venue === 'home' ? homeRank ?? null : awayRank ?? null,
+    opponentRank: venue === 'home' ? awayRank ?? null : homeRank ?? null,
+  }
 }
 
 function appearanceScores(
@@ -336,6 +363,7 @@ export function buildTeamDirectory(
             result: resultForSide(venue, game.cover),
             ...appearanceScores(game, slateByEvent.get(game.cbsEventId)),
             weather: weatherByEvent.get(game.cbsEventId) ?? null,
+            ...appearanceRanks(game, venue, slateByEvent.get(game.cbsEventId)),
           },
         )
       }

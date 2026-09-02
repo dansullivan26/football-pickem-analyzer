@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolveCardPick, favorableHook, classifyEdge } from '../src/cardScoring.ts'
 import { upsertSeasonWeek, weekSeason } from '../src/careerHistory.ts'
 import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
+import { attachFrozenRanks } from '../src/teamRanks.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -125,7 +126,8 @@ const games = slate.games.map((game) => {
   if (kickedOff && previous) {
     const frozen = cover === previous.cover ? previous : { ...previous, cover }
     const withScores = attachSlateScores(frozen, game)
-    return deviationIds.has(game.id) ? { ...withScores, deviated: true } : withScores
+    const withRanks = attachFrozenRanks(withScores, game, true)
+    return deviationIds.has(game.id) ? { ...withRanks, deviated: true } : withRanks
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
@@ -155,7 +157,8 @@ const games = slate.games.map((game) => {
     score: cardPick.score,
   }
   const withScores = attachSlateScores(frozen, game)
-  return deviationIds.has(game.id) ? { ...withScores, deviated: true } : withScores
+  const withRanks = attachFrozenRanks(withScores, game, false)
+  return deviationIds.has(game.id) ? { ...withRanks, deviated: true } : withRanks
 })
 
 const tiebreakerGame = slate.tiebreaker

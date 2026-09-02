@@ -300,6 +300,9 @@ export type FrozenRecommendation = {
   kickoff: string
   away: string
   home: string
+  /** CBS rank the week this game was on the card. Null if unranked. Absent on older recs. */
+  awayRank?: number | null
+  homeRank?: number | null
   homeSpread: number
   liveHomeSpread: number | null
   category: EdgeCategory

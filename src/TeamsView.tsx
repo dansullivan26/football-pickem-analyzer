@@ -9,6 +9,7 @@ import {
   type TeamSplit,
 } from './teamPerformance'
 import { buildTeamProfile } from './teamProfile'
+import { formatRankTrail } from './teamRanks'
 import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
@@ -139,6 +140,9 @@ export default function TeamsView({
     ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
     : (visibleTeams[0] ?? null)
   const selectedProfile = selected ? buildTeamProfile(selected) : null
+  const rankTrail = selected
+    ? formatRankTrail(selected.appearances.map((row) => row.rank))
+    : null
 
   useEffect(() => {
     const previous = document.title
@@ -320,6 +324,11 @@ export default function TeamsView({
                       {selected.conference ? ` · ${selected.conference}` : ''}
                     </p>
                     <h2>{formatRankedTeamName(selected.name, selected.rank)}</h2>
+                    {rankTrail && (
+                      <p className="team-rank-trail">
+                        CBS rank · {rankTrail}
+                      </p>
+                    )}
                     {selectedProfile && (
                       <div className="player-archetype">
                         <strong>{selectedProfile.archetype}</strong>
@@ -442,7 +451,14 @@ export default function TeamsView({
                             </time>
                           </span>
                           <strong>
-                            {row.venue === 'home' ? 'vs' : 'at'} {row.opponent}
+                            {row.rank !== undefined && (
+                              <>
+                                {row.rank == null ? 'Unranked' : `#${row.rank}`}
+                                {' · '}
+                              </>
+                            )}
+                            {row.venue === 'home' ? 'vs' : 'at'}{' '}
+                            {formatRankedTeamName(row.opponent, row.opponentRank)}
                             {beat && beatMark && (
                               <a
                                 className="bad-beat-mark"

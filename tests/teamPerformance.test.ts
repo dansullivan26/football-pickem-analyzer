@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   assignTeamSlugs,
   buildTeamDirectory,
+  formatRankedTeamName,
   marketForSide,
   resultForSide,
   teamKey,
@@ -306,6 +307,11 @@ test('buildTeamDirectory keeps a frozen score after the live slate moves on', ()
   assert.equal(hawaiiRecord?.appearances[0]?.homeScore, 37)
   assert.equal(hawaiiRecord?.location, null)
   assert.equal(hawaiiRecord?.nickname, null)
+})
+
+test('formatRankedTeamName prefixes a CBS rank when present', () => {
+  assert.equal(formatRankedTeamName('Miami (Fla.)', 7), '#7 Miami (Fla.)')
+  assert.equal(formatRankedTeamName('Stanford', null), 'Stanford')
 })
 
 test('teamSlug turns school names into URL paths', () => {

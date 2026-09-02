@@ -3,6 +3,7 @@ import TeamLogo from './TeamLogo'
 import weatherHistoryData from './data/weather-history.json'
 import {
   buildTeamDirectory,
+  formatRankedTeamName,
   type TeamAppearance,
   type TeamRecord,
   type TeamSplit,
@@ -296,7 +297,7 @@ export default function TeamsView({
                   onSelectTeam(team.slug)
                 }}
               >
-                <span>{team.name}</span>
+                <span>{formatRankedTeamName(team.name, team.rank)}</span>
                 <small>
                   {team.conference ?? team.sport} · {team.overall.detail}
                 </small>
@@ -318,7 +319,7 @@ export default function TeamsView({
                       {selected.sport}
                       {selected.conference ? ` · ${selected.conference}` : ''}
                     </p>
-                    <h2>{selected.name}</h2>
+                    <h2>{formatRankedTeamName(selected.name, selected.rank)}</h2>
                     {selectedProfile && (
                       <div className="player-archetype">
                         <strong>{selectedProfile.archetype}</strong>

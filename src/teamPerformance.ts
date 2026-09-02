@@ -54,6 +54,7 @@ export type TeamRecord = {
   nickname: string | null
   conference: string | null
   teamId: string | null
+  rank: number | null
   appearances: TeamAppearance[]
   overall: TeamSplit
   home: TeamSplit
@@ -86,6 +87,13 @@ export type TeamDirectory = {
 
 export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
   return `${sport}:${abbrev}`
+}
+
+export function formatRankedTeamName(
+  name: string,
+  rank: number | null | undefined,
+) {
+  return typeof rank === 'number' ? `#${rank} ${name}` : name
 }
 
 export function teamSlug(name: string) {
@@ -182,6 +190,7 @@ type RosterEntry = {
   nickname: string | null
   conference: string | null
   teamId: string | null
+  rank: number | null
 }
 
 function rosterFromSlate(slate: Slate) {
@@ -196,6 +205,7 @@ function rosterFromSlate(slate: Slate) {
         nickname: side.nickname || null,
         conference: side.conference || null,
         teamId: side.id,
+        rank: typeof side.rank === 'number' ? side.rank : null,
       })
     }
   }
@@ -227,6 +237,7 @@ function addAppearance(
       nickname: existing.info.nickname ?? info.nickname,
       conference: existing.info.conference ?? info.conference,
       teamId: existing.info.teamId ?? info.teamId,
+      rank: existing.info.rank ?? info.rank,
     }
     return
   }
@@ -310,6 +321,7 @@ export function buildTeamDirectory(
             conference:
               roster.get(teamKey(game.sport, abbrev))?.conference ?? null,
             teamId: roster.get(teamKey(game.sport, abbrev))?.teamId ?? null,
+            rank: roster.get(teamKey(game.sport, abbrev))?.rank ?? null,
           },
           {
             week: week.week,
@@ -345,6 +357,7 @@ export function buildTeamDirectory(
         nickname: info.nickname,
         conference: info.conference,
         teamId: info.teamId,
+        rank: info.rank,
         appearances: ordered,
         overall: summarizeAppearances(ordered),
         home: summarizeAppearances(ordered, (row) => row.venue === 'home'),

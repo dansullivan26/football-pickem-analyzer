@@ -39,7 +39,7 @@ import {
   slateKickoffDays,
 } from './gameStatus'
 import { ourPickForGame } from './ourEntry'
-import { teamKey, teamPageSlugs } from './teamPerformance'
+import { formatRankedTeamName, teamKey, teamPageSlugs } from './teamPerformance'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -398,7 +398,9 @@ function TeamMatchupSide({
   const inner = (
     <>
       <TeamLogo team={team} />
-      <span className="team-name">{team.name}</span>
+      <span className="team-name">
+        {formatRankedTeamName(team.name, team.rank)}
+      </span>
     </>
   )
   if (!slug) return <div className="team">{inner}</div>

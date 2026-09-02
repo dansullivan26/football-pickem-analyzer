@@ -9,15 +9,18 @@ import {
   type PredictionResidualReport,
   type ResidualCell,
 } from './playerPrediction'
-import { careerSeasonYears, sameSeasonWeek, weeksForSeason } from './careerHistory'
+import { careerSeasonYears, weeksForSeason } from './careerHistory'
 import { formatWinningScore, mergeEventScores } from './gameStatus'
 import { entryWinRecord, sortPlayersByWinRate } from './playerDirectory'
+import {
+  PLAYER_TIER_KEYS,
+  PLAYER_TIER_LABELS,
+  summarizePlayer,
+} from './playerTendencies'
 import type {
   PlayerHistory,
   PlayerPick,
-  PlayerWeek,
   RecommendationHistory,
-  RecommendationWeek,
   Slate,
 } from './types'
 
@@ -149,83 +152,6 @@ function Metric({
   )
 }
 
-function formatRate(hits: number, eligible: number) {
-  if (!eligible) return '—'
-  return `${Math.round((hits / eligible) * 100)}%`
-}
-
-function summarizePlayer(
-  entryId: string,
-  weeks: PlayerWeek[],
-  recWeeks: RecommendationWeek[],
-  fallbackSeason: number,
-) {
-  const picks = weeks.flatMap(
-    (week) =>
-      week.entries.find((entry) => entry.entryId === entryId)?.picks ?? [],
-  )
-  const made = picks.filter((pick) => pick.pickedSide)
-  const scored = made.filter((pick) => pick.result)
-  const home = made.filter((pick) => pick.pickedSide === 'home')
-  const favorites = made.filter(
-    (pick) =>
-      (pick.homeSpread < 0 && pick.pickedSide === 'home') ||
-      (pick.homeSpread > 0 && pick.pickedSide === 'away'),
-  )
-  const wins = scored.filter((pick) => pick.result === 'win')
-
-  const percent = (count: number) =>
-    made.length ? `${Math.round((count / made.length) * 100)}%` : '—'
-
-  let lineValueEligible = 0
-  let lineValueHits = 0
-  let tiebreakerEligible = 0
-  let tiebreakerNear = 0
-
-  for (const recWeek of recWeeks) {
-    const entry = weeks
-      .find((week) => sameSeasonWeek(week, recWeek, fallbackSeason))
-      ?.entries.find((row) => row.entryId === entryId)
-    if (!entry) continue
-
-    const picksByEvent = new Map(
-      entry.picks.map((pick) => [pick.cbsEventId, pick]),
-    )
-    for (const game of recWeek.games) {
-      const benefitingSide =
-        game.source === 'line-value' ? game.recommendedSide : null
-      if (!benefitingSide) continue
-      const pick = picksByEvent.get(game.cbsEventId)
-      if (!pick?.pickedSide) continue
-      lineValueEligible += 1
-      if (pick.pickedSide === benefitingSide) lineValueHits += 1
-    }
-
-    const total = recWeek.tiebreaker?.draftKingsTotal
-    const answer = entry.tiebreaker?.answer
-    if (typeof total !== 'number' || typeof answer !== 'number') continue
-    tiebreakerEligible += 1
-    if (Math.abs(answer - total) <= 2) tiebreakerNear += 1
-  }
-
-  return {
-    made: made.length,
-    scored: scored.length,
-    homeRate: percent(home.length),
-    favoriteRate: percent(favorites.length),
-    winRate: scored.length
-      ? `${Math.round((wins.length / scored.length) * 100)}%`
-      : '—',
-    lineValueRate: formatRate(lineValueHits, lineValueEligible),
-    lineValueDetail: lineValueEligible
-      ? `${lineValueHits} of ${lineValueEligible} line-value games`
-      : 'No overlapping line-value picks yet',
-    tiebreakerRate: formatRate(tiebreakerNear, tiebreakerEligible),
-    tiebreakerDetail: tiebreakerEligible
-      ? `${tiebreakerNear} of ${tiebreakerEligible} within 2 of the frozen O/U`
-      : 'No freeze-time totals and answers yet',
-  }
-}
 
 export default function PlayersView({
   slate,
@@ -396,8 +322,9 @@ export default function PlayersView({
           <p className="hero-copy">
             Track every weekly card, then compare how each player approaches
             favorites, underdogs, home teams, our line-value side, and the
-            weekly tiebreaker. Habit labels use every archived season for the
-            same CBS entry.
+            weekly tiebreaker. Line-value follow rates also split by the
+            kickoff-frozen lock, hammer, lean, slight, and neutral tier.
+            Habit labels use every archived season for the same CBS entry.
           </p>
         </div>
         <div className="hero-aside">
@@ -551,6 +478,25 @@ export default function PlayersView({
                   value={summary.tiebreakerRate}
                   detail={summary.tiebreakerDetail}
                 />
+              </div>
+
+              <div className="player-tier-block">
+                <p className="eyebrow">Kickoff-frozen tiers</p>
+                <div
+                  className="summary-grid player-tier-summary"
+                  aria-label="Line-value follow rates by tier"
+                >
+                  {PLAYER_TIER_KEYS.map((tier) => {
+                    const stats = summary.tiers[tier]
+                    return (
+                      <div className={`summary-card ${tier}`} key={tier}>
+                        <span>{PLAYER_TIER_LABELS[tier]}</span>
+                        <strong>{stats.rate}</strong>
+                        <small>{stats.detail}</small>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
 
               <div className="player-view-toggle" aria-label="Player week view">

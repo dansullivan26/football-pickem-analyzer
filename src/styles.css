@@ -1740,8 +1740,25 @@ a.team-page-link:focus-visible .team-name {
   margin-top: 8px;
 }
 
-.performance-summary {
+.performance-summary,
+.player-tier-summary {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.player-tier-block {
+  margin-bottom: 20px;
+}
+
+.player-tier-block .eyebrow {
+  margin-bottom: 8px;
+}
+
+.player-tier-summary .summary-card {
+  cursor: default;
+}
+
+.player-tier-summary .summary-card:hover {
+  transform: none;
 }
 
 .performance-summary .summary-card {
@@ -2644,7 +2661,8 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .performance-summary {
+  .performance-summary,
+  .player-tier-summary {
     grid-template-columns: repeat(2, 1fr);
   }
 

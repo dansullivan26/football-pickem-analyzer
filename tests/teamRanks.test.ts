@@ -36,8 +36,14 @@ test('attachFrozenRanks writes slate ranks and then locks them', () => {
 
 test('formatRankTrail skips weeks we never stamped', () => {
   assert.equal(formatRankStamp(7), '#7')
-  assert.equal(formatRankStamp(null), 'unranked')
+  assert.equal(formatRankStamp(null), null)
+  assert.equal(formatRankStamp(null, true), 'unranked')
   assert.equal(formatRankStamp(undefined), null)
   assert.equal(formatRankTrail([7, undefined, null, 5]), '#7 → unranked → #5')
   assert.equal(formatRankTrail([undefined]), null)
+})
+
+test('formatRankTrail omits unranked unless the team was ranked once', () => {
+  assert.equal(formatRankTrail([null, null]), null)
+  assert.equal(formatRankTrail([null, 7, null]), 'unranked → #7 → unranked')
 })

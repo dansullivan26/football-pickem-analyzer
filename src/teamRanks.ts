@@ -27,16 +27,25 @@ export function attachFrozenRanks<
   return { ...frozen, awayRank, homeRank }
 }
 
-export function formatRankStamp(rank: number | null | undefined) {
-  if (rank === undefined) return null
-  return rank == null ? 'unranked' : `#${rank}`
+export function teamWasRanked(ranks: Array<number | null | undefined>) {
+  return ranks.some((rank) => typeof rank === 'number')
+}
+
+export function formatRankStamp(
+  rank: number | null | undefined,
+  includeUnranked = false,
+) {
+  if (typeof rank === 'number') return `#${rank}`
+  if (rank === null && includeUnranked) return 'unranked'
+  return null
 }
 
 export function formatRankTrail(
   ranks: Array<number | null | undefined>,
 ) {
+  const includeUnranked = teamWasRanked(ranks)
   const stamps = ranks
-    .map((rank) => formatRankStamp(rank))
+    .map((rank) => formatRankStamp(rank, includeUnranked))
     .filter((stamp): stamp is string => stamp != null)
   if (stamps.length === 0) return null
   return stamps.join(' → ')

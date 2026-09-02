@@ -9,7 +9,7 @@ import {
   type TeamSplit,
 } from './teamPerformance'
 import { buildTeamProfile } from './teamProfile'
-import { formatRankTrail } from './teamRanks'
+import { formatRankStamp, formatRankTrail, teamWasRanked } from './teamRanks'
 import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
@@ -140,9 +140,11 @@ export default function TeamsView({
     ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
     : (visibleTeams[0] ?? null)
   const selectedProfile = selected ? buildTeamProfile(selected) : null
-  const rankTrail = selected
-    ? formatRankTrail(selected.appearances.map((row) => row.rank))
-    : null
+  const appearanceRanks = selected
+    ? selected.appearances.map((row) => row.rank)
+    : []
+  const rankTrail = selected ? formatRankTrail(appearanceRanks) : null
+  const showUnranked = teamWasRanked(appearanceRanks)
 
   useEffect(() => {
     const previous = document.title
@@ -440,6 +442,7 @@ export default function TeamsView({
                       )
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
                       const weatherLabel = formatWeatherBucket(row.weather)
+                      const rankStamp = formatRankStamp(row.rank, showUnranked)
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -451,9 +454,9 @@ export default function TeamsView({
                             </time>
                           </span>
                           <strong>
-                            {row.rank !== undefined && (
+                            {rankStamp && (
                               <>
-                                {row.rank == null ? 'Unranked' : `#${row.rank}`}
+                                {rankStamp === 'unranked' ? 'Unranked' : rankStamp}
                                 {' · '}
                               </>
                             )}

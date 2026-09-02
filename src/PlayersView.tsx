@@ -481,10 +481,10 @@ export default function PlayersView({
               </div>
 
               <div className="player-tier-block">
-                <p className="eyebrow">Kickoff-frozen tiers</p>
+                <h3 className="player-tier-heading">Pick % by Line Value Tiers</h3>
                 <div
                   className="summary-grid player-tier-summary"
-                  aria-label="Line-value follow rates by tier"
+                  aria-label="Pick % by Line Value Tiers"
                 >
                   {PLAYER_TIER_KEYS.map((tier) => {
                     const stats = summary.tiers[tier]

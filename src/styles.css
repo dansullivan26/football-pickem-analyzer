@@ -1749,16 +1749,36 @@ a.team-page-link:focus-visible .team-name {
   margin-bottom: 20px;
 }
 
-.player-tier-block .eyebrow {
-  margin-bottom: 8px;
+.player-tier-heading {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .player-tier-summary .summary-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  padding: 12px 14px;
   cursor: default;
 }
 
 .player-tier-summary .summary-card:hover {
   transform: none;
+}
+
+.player-tier-summary .summary-card span,
+.player-tier-summary .summary-card small {
+  align-self: start;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.player-tier-summary .summary-card strong {
+  grid-row: auto;
+  margin: 2px 0 1px;
+  font-size: 1.35rem;
 }
 
 .performance-summary .summary-card {

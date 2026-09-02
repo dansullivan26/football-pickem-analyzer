@@ -1,6 +1,11 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { gameScores } from './gameStatus.ts'
-import type { FrozenWeather, WeatherHistoryFile } from './weatherBuckets.ts'
+import {
+  isColdTemp,
+  isHotTemp,
+  type FrozenWeather,
+  type WeatherHistoryFile,
+} from './weatherBuckets.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -59,6 +64,8 @@ export type TeamRecord = {
   adverse: TeamSplit
   wet: TeamSplit
   windy: TeamSplit
+  hot: TeamSplit
+  cold: TeamSplit
   indoor: TeamSplit
 }
 
@@ -72,6 +79,8 @@ export type TeamDirectory = {
   adverse: TeamSplit
   wet: TeamSplit
   windy: TeamSplit
+  hot: TeamSplit
+  cold: TeamSplit
   indoor: TeamSplit
 }
 
@@ -241,6 +250,12 @@ function weatherSplits(appearances: TeamAppearance[]) {
     windy: summarizeAppearances(
       appearances,
       (row) => row.weather?.windy === true,
+    ),
+    hot: summarizeAppearances(appearances, (row) =>
+      isHotTemp(row.weather?.temperature),
+    ),
+    cold: summarizeAppearances(appearances, (row) =>
+      isColdTemp(row.weather?.temperature),
     ),
     indoor: summarizeAppearances(
       appearances,

@@ -387,6 +387,16 @@ export default function TeamsView({
                     hint="15 mph or more"
                   />
                   <Metric
+                    label="Hot"
+                    split={selected.hot}
+                    hint="85°F or warmer"
+                  />
+                  <Metric
+                    label="Cold"
+                    split={selected.cold}
+                    hint="35°F or colder"
+                  />
+                  <Metric
                     label="Indoor"
                     split={selected.indoor}
                     hint="Dome or closed roof"

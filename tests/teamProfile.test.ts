@@ -201,6 +201,140 @@ test('can lead with a weather split when that is the loudest signal', () => {
   assert.match(profile.archetypeDetail, /indoor games/)
 })
 
+test('labels a loud heat coverer', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        venue: 'away',
+        market: 'dog',
+        result: 'win',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 1,
+            seasonYear: 2026,
+            week: 1,
+            kickoff: '2026-09-05T12:00:00-04:00',
+          },
+          {
+            temperature: 91,
+            windSpeed: '6 mph',
+            shortForecast: 'Sunny',
+            precipChance: 5,
+          },
+        ),
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        venue: 'home',
+        market: 'favorite',
+        result: 'win',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 2,
+            seasonYear: 2026,
+            week: 2,
+            kickoff: '2026-09-12T12:00:00-04:00',
+          },
+          {
+            temperature: 88,
+            windSpeed: '7 mph',
+            shortForecast: 'Sunny',
+            precipChance: 10,
+          },
+        ),
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        venue: 'away',
+        market: 'favorite',
+        result: 'win',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 3,
+            seasonYear: 2026,
+            week: 3,
+            kickoff: '2026-09-19T12:00:00-04:00',
+          },
+          {
+            temperature: 86,
+            windSpeed: '5 mph',
+            shortForecast: 'Mostly Sunny',
+            precipChance: 15,
+          },
+        ),
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 4,
+            seasonYear: 2026,
+            week: 4,
+            kickoff: '2026-09-26T12:00:00-04:00',
+          },
+          {
+            temperature: 90,
+            windSpeed: '8 mph',
+            shortForecast: 'Hot',
+            precipChance: 5,
+          },
+        ),
+      }),
+      appearance({
+        cbsEventId: 5,
+        week: 5,
+        venue: 'home',
+        market: 'favorite',
+        result: 'loss',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 5,
+            seasonYear: 2026,
+            week: 5,
+            kickoff: '2026-10-03T12:00:00-04:00',
+          },
+          {
+            temperature: 70,
+            windSpeed: '6 mph',
+            shortForecast: 'Sunny',
+            precipChance: 5,
+          },
+        ),
+      }),
+      appearance({
+        cbsEventId: 6,
+        week: 6,
+        venue: 'away',
+        market: 'dog',
+        result: 'loss',
+        weather: weatherFromConditions(
+          {
+            cbsEventId: 6,
+            seasonYear: 2026,
+            week: 6,
+            kickoff: '2026-10-10T12:00:00-04:00',
+          },
+          {
+            temperature: 68,
+            windSpeed: '7 mph',
+            shortForecast: 'Cloudy',
+            precipChance: 10,
+          },
+        ),
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers in the heat')
+})
+
 test('says no dominant pattern when the book is even', () => {
   const profile = buildTeamProfile({
     appearances: [

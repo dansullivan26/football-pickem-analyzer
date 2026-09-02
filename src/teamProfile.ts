@@ -1,3 +1,4 @@
+import { isColdTemp, isHotTemp } from './weatherBuckets.ts'
 import type { TeamAppearance, TeamRecord } from './teamPerformance.ts'
 
 /** Overall book size before a label. Same floor as a split so a loud 4-0 / 3-1 can profile. CBS NCAAF teams rarely appear six times; 3-0 is still too thin with the prior. */
@@ -18,6 +19,8 @@ export type TeamProfileKey =
   | 'adverse'
   | 'wet'
   | 'windy'
+  | 'hot'
+  | 'cold'
   | 'indoor'
 
 export type TeamProfile = {
@@ -130,6 +133,24 @@ const SPLITS: SplitDef[] = [
     fadePhrase: 'in the wind',
     detailNoun: 'windy',
     match: (row) => row.weather?.windy === true,
+  },
+  {
+    key: 'hot',
+    coverLabel: 'Covers in the heat',
+    fadeLabel: 'Struggles in the heat',
+    coverPhrase: 'in the heat',
+    fadePhrase: 'in the heat',
+    detailNoun: 'hot',
+    match: (row) => isHotTemp(row.weather?.temperature),
+  },
+  {
+    key: 'cold',
+    coverLabel: 'Covers in the cold',
+    fadeLabel: 'Struggles in the cold',
+    coverPhrase: 'in the cold',
+    fadePhrase: 'in the cold',
+    detailNoun: 'cold',
+    match: (row) => isColdTemp(row.weather?.temperature),
   },
   {
     key: 'indoor',

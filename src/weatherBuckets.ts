@@ -1,5 +1,9 @@
 export const WINDY_MPH = 15
 export const WET_POP = 40
+/** Outdoor kickoff heat that starts to change football. */
+export const HOT_F = 85
+/** Near-freezing: kicking and ball handling get worse. */
+export const COLD_F = 35
 
 export type WeatherBucket = 'benign' | 'adverse' | 'indoor'
 
@@ -40,6 +44,14 @@ export function isWetForecast(
 ) {
   if (typeof precipChance === 'number' && precipChance >= WET_POP) return true
   return WET_FORECAST.test(shortForecast)
+}
+
+export function isHotTemp(temperature: number | null | undefined) {
+  return typeof temperature === 'number' && temperature >= HOT_F
+}
+
+export function isColdTemp(temperature: number | null | undefined) {
+  return typeof temperature === 'number' && temperature <= COLD_F
 }
 
 export function classifyOutdoorWeather(input: {
@@ -113,11 +125,13 @@ export function formatWeatherBucket(weather: FrozenWeather | null) {
   const flags = [
     weather.wet ? 'wet' : null,
     weather.windy ? 'wind' : null,
+    isHotTemp(weather.temperature) ? 'hot' : null,
+    isColdTemp(weather.temperature) ? 'cold' : null,
   ].filter(Boolean)
   if (weather.bucket === 'adverse') {
     return flags.length ? `Adverse · ${flags.join(' · ')}` : 'Adverse'
   }
-  return 'Benign'
+  return flags.length ? `Benign · ${flags.join(' · ')}` : 'Benign'
 }
 
 export function upsertFrozenWeather(

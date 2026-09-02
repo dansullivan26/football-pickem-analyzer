@@ -4,6 +4,8 @@ import {
   classifyOutdoorWeather,
   formatWeatherBucket,
   indoorWeatherSnapshot,
+  isColdTemp,
+  isHotTemp,
   parseWindMph,
   weatherFromConditions,
 } from '../src/weatherBuckets.ts'
@@ -79,5 +81,36 @@ test('formatWeatherBucket writes the appearance label', () => {
     ),
     'Benign',
   )
+  assert.equal(
+    formatWeatherBucket(
+      weatherFromConditions(game, {
+        temperature: 91,
+        windSpeed: '6 mph',
+        shortForecast: 'Sunny',
+        precipChance: 5,
+      }),
+    ),
+    'Benign · hot',
+  )
+  assert.equal(
+    formatWeatherBucket(
+      weatherFromConditions(game, {
+        temperature: 28,
+        windSpeed: '8 mph',
+        shortForecast: 'Snow',
+        precipChance: 70,
+      }),
+    ),
+    'Adverse · wet · cold',
+  )
   assert.equal(formatWeatherBucket(null), null)
+})
+
+test('hot is 85°F and up, cold is 35°F and down', () => {
+  assert.equal(isHotTemp(84), false)
+  assert.equal(isHotTemp(85), true)
+  assert.equal(isColdTemp(36), false)
+  assert.equal(isColdTemp(35), true)
+  assert.equal(isHotTemp(null), false)
+  assert.equal(isColdTemp(null), false)
 })

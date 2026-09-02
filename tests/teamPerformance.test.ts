@@ -217,8 +217,73 @@ test('buildTeamDirectory weather splits only count frozen buckets', () => {
   assert.equal(tcuRecord?.adverse.detail, '0-1 ATS')
   assert.equal(tcuRecord?.wet.detail, '0-1 ATS')
   assert.equal(tcuRecord?.windy.detail, '0-1 ATS')
+  assert.equal(tcuRecord?.hot.games, 0)
+  assert.equal(tcuRecord?.cold.games, 0)
   assert.equal(tcuRecord?.benign.games, 0)
   assert.equal(directory.adverse.detail, '1-1 ATS')
+})
+
+test('buildTeamDirectory hot and cold splits follow the frozen temperature', () => {
+  const unc = team('UNC', 'North Carolina', 'ACC')
+  const tcu = team('TCU', 'TCU', 'BIG12')
+  const directory = buildTeamDirectory(
+    slate([
+      slateGame(1, unc, tcu, -7.5),
+      slateGame(2, unc, tcu, -3.5),
+    ]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'UNC',
+        home: 'TCU',
+        homeSpread: -7.5,
+        cover: 'home',
+      }),
+      rec({
+        cbsEventId: 2,
+        away: 'UNC',
+        home: 'TCU',
+        homeSpread: -3.5,
+        cover: 'away',
+      }),
+    ]),
+    {
+      updatedAt: '2026-08-30T00:00:00.000Z',
+      games: [
+        weatherFromConditions(
+          {
+            cbsEventId: 1,
+            seasonYear: 2026,
+            week: 1,
+            kickoff: '2026-08-29T12:00:00-04:00',
+          },
+          {
+            temperature: 91,
+            windSpeed: '6 mph',
+            shortForecast: 'Sunny',
+            precipChance: 5,
+          },
+        ),
+        weatherFromConditions(
+          {
+            cbsEventId: 2,
+            seasonYear: 2026,
+            week: 2,
+            kickoff: '2026-11-21T12:00:00-05:00',
+          },
+          {
+            temperature: 28,
+            windSpeed: '8 mph',
+            shortForecast: 'Cloudy',
+            precipChance: 10,
+          },
+        ),
+      ],
+    },
+  )
+  const tcuRecord = directory.teams.find((row) => row.abbrev === 'TCU')
+  assert.equal(tcuRecord?.hot.detail, '1-0 ATS')
+  assert.equal(tcuRecord?.cold.detail, '0-1 ATS')
 })
 
 test('buildTeamDirectory keeps a frozen score after the live slate moves on', () => {

@@ -51,13 +51,16 @@ function resultLabel(result: TeamAppearance['result']) {
 function Metric({
   label,
   split,
+  hint,
 }: {
   label: string
   split: TeamSplit
+  hint?: string
 }) {
   return (
-    <div className="tendency-card">
+    <div className="tendency-card" title={hint}>
       <span>{label}</span>
+      {hint && <em className="metric-hint">{hint}</em>}
       <strong>{split.rate}</strong>
       <small>
         {split.games} game{split.games === 1 ? '' : 's'} · {split.detail}
@@ -359,15 +362,35 @@ export default function TeamsView({
                   <div>
                     <span>Kickoff weather</span>
                     <strong>Weather</strong>
-                    <small>Frozen buckets only. Adverse is wet or windy.</small>
+                    <small>Frozen kickoff hour only.</small>
                   </div>
                 </div>
                 <div className="tendency-grid" aria-label="Team weather ATS splits">
-                  <Metric label="Benign" split={selected.benign} />
-                  <Metric label="Adverse" split={selected.adverse} />
-                  <Metric label="Wet" split={selected.wet} />
-                  <Metric label="Windy" split={selected.windy} />
-                  <Metric label="Indoor" split={selected.indoor} />
+                  <Metric
+                    label="Benign"
+                    split={selected.benign}
+                    hint="Fair outdoor weather"
+                  />
+                  <Metric
+                    label="Adverse"
+                    split={selected.adverse}
+                    hint="Wet or 15+ mph wind"
+                  />
+                  <Metric
+                    label="Wet"
+                    split={selected.wet}
+                    hint="Rain, snow, or 40%+ chance"
+                  />
+                  <Metric
+                    label="Windy"
+                    split={selected.windy}
+                    hint="15 mph or more"
+                  />
+                  <Metric
+                    label="Indoor"
+                    split={selected.indoor}
+                    hint="Dome or closed roof"
+                  />
                 </div>
               </section>
 

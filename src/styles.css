@@ -2008,9 +2008,15 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .tendency-card span,
-.tendency-card small {
+.tendency-card small,
+.tendency-card .metric-hint {
   color: var(--muted);
   font-size: 0.68rem;
+}
+
+.tendency-card .metric-hint {
+  font-style: normal;
+  line-height: 1.3;
 }
 
 .tendency-card strong {

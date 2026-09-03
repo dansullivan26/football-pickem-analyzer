@@ -10,6 +10,7 @@ import {
   type RestSplitKey,
   type TravelSplitKey,
 } from './travelRest.ts'
+import { recIsNeutralSite } from './teamSite.ts'
 import type { PlayerWeek, RecommendationWeek } from './types'
 
 export const PLAYER_LINE_TIERS = ['lock', 'hammer', 'lean', 'slight'] as const
@@ -149,7 +150,14 @@ export function summarizePlayer(
   )
   const made = picks.filter((pick) => pick.pickedSide)
   const scored = made.filter((pick) => pick.result)
-  const home = made.filter((pick) => pick.pickedSide === 'home')
+  const recByEvent = new Map(
+    recWeeks.flatMap((week) => week.games.map((game) => [game.cbsEventId, game])),
+  )
+  const homeEligible = made.filter((pick) => {
+    const rec = recByEvent.get(pick.cbsEventId)
+    return !rec || !recIsNeutralSite(rec)
+  })
+  const home = homeEligible.filter((pick) => pick.pickedSide === 'home')
   const favorites = made.filter(
     (pick) =>
       (pick.homeSpread < 0 && pick.pickedSide === 'home') ||
@@ -157,8 +165,8 @@ export function summarizePlayer(
   )
   const wins = scored.filter((pick) => pick.result === 'win')
 
-  const percent = (count: number) =>
-    made.length ? `${Math.round((count / made.length) * 100)}%` : '—'
+  const percent = (count: number, total = made.length) =>
+    total ? `${Math.round((count / total) * 100)}%` : '—'
 
   let lineValueEligible = 0
   let lineValueHits = 0
@@ -226,7 +234,7 @@ export function summarizePlayer(
   return {
     made: made.length,
     scored: scored.length,
-    homeRate: percent(home.length),
+    homeRate: percent(home.length, homeEligible.length),
     favoriteRate: percent(favorites.length),
     winRate: scored.length
       ? `${Math.round((wins.length / scored.length) * 100)}%`

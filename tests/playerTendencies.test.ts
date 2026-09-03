@@ -256,3 +256,40 @@ test('summarizePlayer pick rates follow the traveling and rested sides', () => {
   assert.equal(summary.rest.bye.rate, '0%')
   assert.equal(summary.rest.bye.detail, '0 of 1 bye teams')
 })
+
+test('summarizePlayer home rate skips Dublin neutrals', () => {
+  const aviva = {
+    stadium: 'Aviva Stadium',
+    city: 'Dublin',
+    state: 'IE',
+    indoor: false,
+  }
+  const stanford = {
+    stadium: 'Stanford Stadium',
+    city: 'Stanford',
+    state: 'CA',
+    indoor: false,
+  }
+  const summary = summarizePlayer(
+    'dan',
+    [
+      playerWeek(1, [
+        pick(1, 'home'),
+        pick(2, 'home'),
+        pick(3, 'away'),
+        pick(4, 'away'),
+      ]),
+    ],
+    [
+      recWeek(1, [
+        rec(1, { venue: aviva, neutralSite: true }),
+        rec(2, { venue: stanford, neutralSite: false }),
+        rec(3, { venue: stanford, neutralSite: false }),
+        rec(4, { venue: aviva, neutralSite: true }),
+      ]),
+    ],
+    2026,
+  )
+
+  assert.equal(summary.homeRate, '50%')
+})

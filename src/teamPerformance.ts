@@ -1,6 +1,12 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { cbsTeamRank, frozenRanksCaptured } from './teamRanks.ts'
 import {
+  classifyGameSites,
+  collectHomeVenues,
+  type CbsSide,
+  type TeamSite,
+} from './teamSite.ts'
+import {
   buildTravelRestIndex,
   restSplitKey,
   travelSplitKey,
@@ -22,7 +28,7 @@ import type {
 } from './types'
 
 export type CoverOutcome = 'win' | 'loss' | 'push' | null
-export type TeamVenue = 'home' | 'away'
+export type TeamVenue = TeamSite
 export type TeamMarket = 'favorite' | 'dog' | 'pickem'
 
 export type TeamAppearance = {
@@ -32,6 +38,9 @@ export type TeamAppearance = {
   cbsEventId: number
   sport: 'NFL' | 'NCAAF'
   opponent: string
+  /** CBS home/away designation — the line, not the site. */
+  side: CbsSide
+  /** Actual site: campus home, road, or a third-city / abroad neutral. */
   venue: TeamVenue
   market: TeamMarket
   homeSpread: number
@@ -71,6 +80,7 @@ export type TeamRecord = {
   overall: TeamSplit
   home: TeamSplit
   away: TeamSplit
+  neutral: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
   dogOutright: TeamSplit
@@ -94,6 +104,7 @@ export type TeamDirectory = {
   teams: TeamRecord[]
   home: TeamSplit
   away: TeamSplit
+  neutral: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
   dogOutright: TeamSplit
@@ -184,10 +195,10 @@ export function spreadSize(points: number): SpreadSize | null {
 }
 
 export function appearanceMarketLabel(
-  row: Pick<TeamAppearance, 'venue' | 'market' | 'homeSpread'>,
+  row: Pick<TeamAppearance, 'side' | 'market' | 'homeSpread'>,
 ) {
   if (row.market === 'pickem') return row.market
-  const size = spreadSize(sideSpread(row.venue, row.homeSpread))
+  const size = spreadSize(sideSpread(row.side, row.homeSpread))
   return size ? `${size} ${row.market}` : row.market
 }
 
@@ -201,10 +212,10 @@ export function resultForSide(
 }
 
 export function straightUpResult(
-  row: Pick<TeamAppearance, 'venue' | 'awayScore' | 'homeScore'>,
+  row: Pick<TeamAppearance, 'side' | 'awayScore' | 'homeScore'>,
 ): 'win' | 'loss' | 'tie' | null {
-  const ours = row.venue === 'home' ? row.homeScore : row.awayScore
-  const theirs = row.venue === 'home' ? row.awayScore : row.homeScore
+  const ours = row.side === 'home' ? row.homeScore : row.awayScore
+  const theirs = row.side === 'home' ? row.awayScore : row.homeScore
   if (typeof ours !== 'number' || typeof theirs !== 'number') return null
   if (ours > theirs) return 'win'
   if (ours < theirs) return 'loss'
@@ -212,14 +223,14 @@ export function straightUpResult(
 }
 
 export function wonOutrightAsDog(
-  row: Pick<TeamAppearance, 'market' | 'venue' | 'awayScore' | 'homeScore'>,
+  row: Pick<TeamAppearance, 'market' | 'side' | 'awayScore' | 'homeScore'>,
 ) {
   return row.market === 'dog' && straightUpResult(row) === 'win'
 }
 
 function appearanceRanks(
   frozen: FrozenRecommendation,
-  venue: TeamVenue,
+  side: CbsSide,
   live?: Pick<Slate['games'][number], 'away' | 'home'>,
 ) {
   const captured = frozenRanksCaptured(frozen)
@@ -235,8 +246,8 @@ function appearanceRanks(
       : undefined
   if (awayRank === undefined && homeRank === undefined) return {}
   return {
-    rank: venue === 'home' ? homeRank ?? null : awayRank ?? null,
-    opponentRank: venue === 'home' ? awayRank ?? null : homeRank ?? null,
+    rank: side === 'home' ? homeRank ?? null : awayRank ?? null,
+    opponentRank: side === 'home' ? awayRank ?? null : homeRank ?? null,
   }
 }
 
@@ -442,17 +453,37 @@ export function buildTeamDirectory(
   )
   const travelRest = buildTravelRestIndex(slate, history)
   const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
+  const homeVenues = collectHomeVenues(
+    seasonWeeks.flatMap((week) =>
+      week.games.map((game) => ({
+        sport: game.sport,
+        home: game.home,
+        venue: game.venue ?? slateByEvent.get(game.cbsEventId)?.venue ?? null,
+      })),
+    ),
+  )
   for (const week of seasonWeeks) {
     for (const game of week.games) {
+      const live = slateByEvent.get(game.cbsEventId)
+      const awayInfo = roster.get(teamKey(game.sport, game.away))
+      const homeInfo = roster.get(teamKey(game.sport, game.home))
+      const sites = classifyGameSites(
+        game.venue ?? live?.venue ?? null,
+        { location: awayInfo?.location, name: awayInfo?.name },
+        { location: homeInfo?.location, name: homeInfo?.name },
+        homeVenues.get(`${game.sport}:${game.away}`) ?? [],
+        homeVenues.get(`${game.sport}:${game.home}`) ?? [],
+      )
       const sides: Array<{
         abbrev: string
-        venue: TeamVenue
+        side: CbsSide
+        site: TeamSite
       }> = [
-        { abbrev: game.away, venue: 'away' },
-        { abbrev: game.home, venue: 'home' },
+        { abbrev: game.away, side: 'away', site: sites.away },
+        { abbrev: game.home, side: 'home', site: sites.home },
       ]
-      for (const { abbrev, venue } of sides) {
-        const opponentAbbrev = venue === 'home' ? game.away : game.home
+      for (const { abbrev, side, site } of sides) {
+        const opponentAbbrev = side === 'home' ? game.away : game.home
         addAppearance(
           groups,
           roster,
@@ -476,18 +507,19 @@ export function buildTeamDirectory(
             cbsEventId: game.cbsEventId,
             sport: game.sport,
             opponent: rosterName(roster, game.sport, opponentAbbrev),
-            venue,
-            market: marketForSide(venue, game.homeSpread),
+            side,
+            venue: site,
+            market: marketForSide(side, game.homeSpread),
             homeSpread: game.homeSpread,
-            result: resultForSide(venue, game.cover),
-            ...appearanceScores(game, slateByEvent.get(game.cbsEventId)),
+            result: resultForSide(side, game.cover),
+            ...appearanceScores(game, live),
             weather: weatherByEvent.get(game.cbsEventId) ?? null,
-            ...appearanceRanks(game, venue, slateByEvent.get(game.cbsEventId)),
+            ...appearanceRanks(game, side, live),
             travel:
-              travelRest.byAppearance.get(`${game.cbsEventId}:${venue}`)
+              travelRest.byAppearance.get(`${game.cbsEventId}:${side}`)
                 ?.travel ?? null,
             rest:
-              travelRest.byAppearance.get(`${game.cbsEventId}:${venue}`)
+              travelRest.byAppearance.get(`${game.cbsEventId}:${side}`)
                 ?.rest ?? null,
           },
         )
@@ -515,6 +547,10 @@ export function buildTeamDirectory(
         overall: summarizeAppearances(ordered),
         home: summarizeAppearances(ordered, (row) => row.venue === 'home'),
         away: summarizeAppearances(ordered, (row) => row.venue === 'away'),
+        neutral: summarizeAppearances(
+          ordered,
+          (row) => row.venue === 'neutral',
+        ),
         favorite: summarizeAppearances(
           ordered,
           (row) => row.market === 'favorite',
@@ -538,6 +574,7 @@ export function buildTeamDirectory(
     teams: teamsWithSlugs,
     home: summarizeAppearances(all, (row) => row.venue === 'home'),
     away: summarizeAppearances(all, (row) => row.venue === 'away'),
+    neutral: summarizeAppearances(all, (row) => row.venue === 'neutral'),
     favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
     dog: summarizeAppearances(all, (row) => row.market === 'dog'),
     dogOutright: summarizeDogOutright(all),

@@ -3,6 +3,7 @@ import { resolveCardPick, favorableHook, classifyEdge } from '../src/cardScoring
 import { upsertSeasonWeek, weekSeason } from '../src/careerHistory.ts'
 import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
 import { attachFrozenRanks } from '../src/teamRanks.ts'
+import { attachFrozenNeutralSite } from '../src/teamSite.ts'
 import { attachFrozenVenue } from '../src/travelRest.ts'
 
 const ROOT = new URL('../', import.meta.url)
@@ -129,7 +130,8 @@ const games = slate.games.map((game) => {
     const withScores = attachSlateScores(frozen, game)
     const withRanks = attachFrozenRanks(withScores, game, true)
     const withVenue = attachFrozenVenue(withRanks, game, true)
-    return deviationIds.has(game.id) ? { ...withVenue, deviated: true } : withVenue
+    const withSite = attachFrozenNeutralSite(withVenue, game, true)
+    return deviationIds.has(game.id) ? { ...withSite, deviated: true } : withSite
   }
 
   const analysis = analyze(game, oddsById.get(game.cbsEventId))
@@ -161,7 +163,8 @@ const games = slate.games.map((game) => {
   const withScores = attachSlateScores(frozen, game)
   const withRanks = attachFrozenRanks(withScores, game, false)
   const withVenue = attachFrozenVenue(withRanks, game, false)
-  return deviationIds.has(game.id) ? { ...withVenue, deviated: true } : withVenue
+  const withSite = attachFrozenNeutralSite(withVenue, game, false)
+  return deviationIds.has(game.id) ? { ...withSite, deviated: true } : withSite
 })
 
 const tiebreakerGame = slate.tiebreaker

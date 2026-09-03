@@ -99,7 +99,8 @@ const CITY_TZ: Record<string, string> = {
   'dublin|ie': 'Europe/Dublin',
 }
 
-const NEUTRAL_STADIUM = /aviva|nissan stadium|lambeau|wembley|tottenham|estadio azteca|deutsche bank park|allianz arena/i
+const NEUTRAL_STADIUM =
+  /aviva|nissan stadium|lambeau|wembley|tottenham|estadio azteca|deutsche bank park|allianz arena|mercedes-benz|at&t stadium|allegiant|sofi stadium|neo qu[ií]mica|morumbi|corinthians/i
 
 function normalize(value: string) {
   return value.trim().toLowerCase().replace(/\./g, '')
@@ -127,31 +128,39 @@ export function timeZoneFromVenue(venue: GameVenue | null | undefined) {
 
 export function timeZoneFromTeamLabel(label: string | null | undefined) {
   if (!label) return null
-  const trimmed = label.trim()
-  const asState = usStateName(trimmed)
-  if (asState) return timeZoneForStateName(asState)
-
-  const paren = trimmed.match(/\(([^)]+)\)/)
-  if (paren) {
-    const inner = paren[1].replace(/\./g, '').trim()
-    const alias = STATE_ALIASES[inner.toUpperCase()]
-    const innerState = usStateName(inner) ?? (alias ? usStateName(alias) : null)
-    if (innerState) return timeZoneForStateName(innerState)
-  }
-
-  const stateSuffix = trimmed.match(/^(.*)\s+State$/i)
-  if (stateSuffix) {
-    const prefixState = usStateName(stateSuffix[1])
-    if (prefixState) return timeZoneForStateName(prefixState)
-  }
-
-  return SCHOOL_TZ[normalize(trimmed)] ?? null
+  const fromState = stateFromTeamLabel(label)
+  if (fromState) return timeZoneForStateName(fromState)
+  return SCHOOL_TZ[normalize(label.trim())] ?? null
 }
 
 export function venueLooksNeutral(venue: GameVenue | null | undefined) {
   if (!venue?.city || !venue.state) return true
   if (!usStateName(venue.state)) return true
   return NEUTRAL_STADIUM.test(venue.stadium ?? '')
+}
+
+/** US state implied by a school or NFL location label, if any. */
+export function stateFromTeamLabel(label: string | null | undefined) {
+  if (!label) return null
+  const trimmed = label.trim()
+  const asState = usStateName(trimmed)
+  if (asState) return asState
+
+  const paren = trimmed.match(/\(([^)]+)\)/)
+  if (paren) {
+    const inner = paren[1].replace(/\./g, '').trim()
+    const alias = STATE_ALIASES[inner.toUpperCase()]
+    const innerState = usStateName(inner) ?? (alias ? usStateName(alias) : null)
+    if (innerState) return innerState
+  }
+
+  const stateSuffix = trimmed.match(/^(.*)\s+State$/i)
+  if (stateSuffix) {
+    const prefixState = usStateName(stateSuffix[1])
+    if (prefixState) return prefixState
+  }
+
+  return null
 }
 
 const TZ_ALIASES: Record<string, string> = {

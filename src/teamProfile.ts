@@ -19,6 +19,7 @@ export type TeamProfileKey =
   | 'overall'
   | 'home'
   | 'away'
+  | 'neutral'
   | 'favorite'
   | 'dog'
   | 'benign'
@@ -93,6 +94,15 @@ const SPLITS: SplitDef[] = [
     fadePhrase: 'on the road',
     detailNoun: 'road',
     match: (row) => row.venue === 'away',
+  },
+  {
+    key: 'neutral',
+    coverLabel: 'Covers on a neutral site',
+    fadeLabel: 'Struggles on a neutral site',
+    coverPhrase: 'on a neutral site',
+    fadePhrase: 'on a neutral site',
+    detailNoun: 'neutral-site',
+    match: (row) => row.venue === 'neutral',
   },
   {
     key: 'favorite',

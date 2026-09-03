@@ -491,3 +491,35 @@ test('line-value still outranks travel when both apply', () => {
   assert.equal(report.games[0].predictedSide, 'away')
   assert.match(report.games[0].reason, /Line-value habit/)
 })
+
+test('skips Dublin games when training and applying a home-team lean', () => {
+  const aviva = {
+    stadium: 'Aviva Stadium',
+    city: 'Dublin',
+    state: 'IE',
+    indoor: false,
+  }
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home', 0),
+  )
+  const priorGames = priorPicks.map((playerPick) =>
+    recGame(playerPick.cbsEventId, {
+      homeSpread: 0,
+      venue: aviva,
+      neutralSite: true,
+    }),
+  )
+  const target = recWeek(2, [
+    recGame(100, { homeSpread: 0, venue: aviva, neutralSite: true }),
+  ])
+  const report = predictPlayerWeek(
+    entryId,
+    target,
+    history([historyWeek(1, priorPicks), historyWeek(2, [], false)]),
+    recHistory([recWeek(1, priorGames, true), target]),
+  )
+
+  assert.equal(report.profile.habits.home.eligible, 0)
+  assert.equal(report.profile.habits.home.active, false)
+  assert.equal(report.games[0].predictedSide, null)
+})

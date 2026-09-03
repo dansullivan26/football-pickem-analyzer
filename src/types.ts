@@ -321,6 +321,8 @@ export type FrozenRecommendation = {
   homeScore?: number | null
   /** Game venue at freeze time. Absent on older recs. */
   venue?: GameVenue | null
+  /** True when both sides are on a neutral site. Absent on older recs. */
+  neutralSite?: boolean
 }
 
 export type FrozenTiebreaker = {

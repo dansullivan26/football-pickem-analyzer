@@ -357,8 +357,8 @@ export default function PlayersView({
           <h1>Pool tendencies</h1>
           <p className="hero-copy">
             Track every weekly card, then compare how each player approaches
-            favorites, underdogs, home teams, our line-value side, and the
-            weekly tiebreaker. Line-value follow rates also split by the
+            favorites, underdogs, home teams (neutral sites excluded), our
+            line-value side, and the weekly tiebreaker. Line-value follow rates also split by the
             kickoff-frozen lock, hammer, lean, slight, and neutral tier.
             Pick rates on traveling and rested teams use the same
             time-zone hops and CBS-card rest as Lines.
@@ -506,7 +506,7 @@ export default function PlayersView({
                 <Metric
                   label="Home teams"
                   value={summary.homeRate}
-                  detail="Share of recorded picks"
+                  detail="CBS home side · neutrals excluded"
                 />
                 <Metric
                   label="Win rate"

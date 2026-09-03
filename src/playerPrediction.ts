@@ -1,4 +1,5 @@
 import { sameSeasonWeek, weekIsBefore, weekSeason } from './careerHistory.ts'
+import { recIsNeutralSite } from './teamSite.ts'
 import {
   appearancePair,
   buildTravelRestIndex,
@@ -359,8 +360,12 @@ export function buildPlayerPredictionProfile(
   const homeFavorite: HabitCounts = { follows: 0, eligible: 0 }
 
   for (const pick of picks) {
-    home.eligible += 1
-    if (pick.pickedSide === 'home') home.follows += 1
+    const rec = recs.get(pick.cbsEventId)
+    const neutralSite = rec ? recIsNeutralSite(rec) : false
+    if (!neutralSite) {
+      home.eligible += 1
+      if (pick.pickedSide === 'home') home.follows += 1
+    }
 
     const favoriteSide = sideForFavorite(pick.homeSpread)
     if (favoriteSide) {
@@ -368,12 +373,11 @@ export function buildPlayerPredictionProfile(
       if (pick.pickedSide === favoriteSide) favorite.follows += 1
     }
 
-    if (pick.homeSpread < 0) {
+    if (!neutralSite && pick.homeSpread < 0) {
       homeFavorite.eligible += 1
       if (pick.pickedSide === 'home') homeFavorite.follows += 1
     }
 
-    const rec = recs.get(pick.cbsEventId)
     if (rec?.source === 'line-value' && rec.recommendedSide) {
       lineValue.eligible += 1
       if (pick.pickedSide === rec.recommendedSide) lineValue.follows += 1
@@ -617,7 +621,7 @@ function predictGame(
   } else {
     chosen = chooseHabitCall([
       ...extra,
-      profile.habits.home.active
+      profile.habits.home.active && !recIsNeutralSite(game)
         ? {
             habit: profile.habits.home,
             followsSide: 'home' as const,

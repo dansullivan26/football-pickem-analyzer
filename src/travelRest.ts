@@ -1,5 +1,6 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { etDayKey } from './gameStatus.ts'
+import { collectHomeVenues } from './teamSite.ts'
 import {
   timeZoneFromTeamLabel,
   timeZoneFromVenue,
@@ -343,14 +344,7 @@ export function buildTravelRestIndex(
   history: RecommendationHistory,
 ) {
   const games = collectGames(slate, history)
-  const homeVenues = new Map<string, GameVenue[]>()
-  for (const game of games) {
-    if (!game.venue || venueLooksNeutral(game.venue)) continue
-    const key = `${game.sport}:${game.home}`
-    const list = homeVenues.get(key) ?? []
-    list.push(game.venue)
-    homeVenues.set(key, list)
-  }
+  const homeVenues = collectHomeVenues(games)
 
   const byEvent = new Map<number, GameTravelRest>()
   const byAppearance = new Map<string, AppearanceTravelRest>()

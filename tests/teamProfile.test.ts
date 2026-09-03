@@ -13,6 +13,7 @@ function appearance(
     kickoff: '2026-09-05T12:00:00-04:00',
     sport: 'NCAAF',
     opponent: 'Rival',
+    side: overrides.side ?? (overrides.venue === 'away' ? 'away' : 'home'),
     venue: 'home',
     market: 'favorite',
     homeSpread: -7,
@@ -56,6 +57,84 @@ test('waits for four graded games before assigning a style', () => {
   assert.match(profile.archetypeDetail, /3 graded games/)
   assert.equal(profile.insight, null)
   assert.equal(profile.decided, 3)
+})
+
+test('does not count a Dublin appearance as a home cover', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        venue: 'home',
+        market: 'favorite',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        venue: 'home',
+        market: 'favorite',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        side: 'home',
+        venue: 'neutral',
+        market: 'dog',
+        result: 'win',
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers ATS')
+  assert.notEqual(profile.archetype, 'Covers at home')
+})
+
+test('labels a 4-0 neutral-site book', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        side: 'home',
+        venue: 'neutral',
+        market: 'favorite',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        side: 'away',
+        venue: 'neutral',
+        market: 'dog',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        side: 'home',
+        venue: 'neutral',
+        market: 'favorite',
+        result: 'win',
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        side: 'away',
+        venue: 'neutral',
+        market: 'dog',
+        result: 'win',
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers on a neutral site')
 })
 
 test('labels a 4-0 book once the gate is met', () => {

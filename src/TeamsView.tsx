@@ -10,6 +10,7 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance'
+import { appearanceVenueWord } from './teamSite'
 import { buildTeamProfile } from './teamProfile'
 import { formatRankStamp, formatRankTrail, teamWasRanked } from './teamRanks'
 import { travelRestTitle } from './travelRest'
@@ -42,7 +43,7 @@ function formatGameDate(kickoff: string) {
 }
 
 function teamLine(row: TeamAppearance) {
-  const number = row.venue === 'home' ? row.homeSpread : row.homeSpread * -1
+  const number = row.side === 'home' ? row.homeSpread : row.homeSpread * -1
   return formatSpread(number)
 }
 
@@ -179,7 +180,8 @@ export default function TeamsView({
           <p className="eyebrow">CBS line tracker</p>
           <h1>Team performance</h1>
           <p className="hero-copy">
-            Against the locked pool line, not DraftKings. Performance,
+            Against the locked pool line, not DraftKings. Home and away
+            use the game site, not the CBS home designation. Performance,
             weather, travel, and rest sit in their own sections. A team
             profile appears after four graded games; weather, travel,
             and rest tiles stay thin until a team has a few such
@@ -231,6 +233,14 @@ export default function TeamsView({
           <small>
             {directory.away.games} game{directory.away.games === 1 ? '' : 's'} ·{' '}
             {directory.away.detail}
+          </small>
+        </div>
+        <div className="summary-card neutral">
+          <span>Neutral</span>
+          <strong>{directory.neutral.rate}</strong>
+          <small>
+            {directory.neutral.games} game
+            {directory.neutral.games === 1 ? '' : 's'} · {directory.neutral.detail}
           </small>
         </div>
         <div className="summary-card lean">
@@ -361,13 +371,26 @@ export default function TeamsView({
                   <div>
                     <span>CBS line</span>
                     <strong>Performance</strong>
-                    <small>Home, road, favorite, and dog ATS</small>
+                    <small>Home, road, neutral site, favorite, and dog ATS</small>
                   </div>
                 </div>
                 <div className="tendency-grid" aria-label="Team CBS ATS splits">
                   <Metric label="Overall" split={selected.overall} />
-                  <Metric label="Home" split={selected.home} />
-                  <Metric label="Away" split={selected.away} />
+                  <Metric
+                    label="Home"
+                    split={selected.home}
+                    hint="At this team’s own campus or stadium"
+                  />
+                  <Metric
+                    label="Away"
+                    split={selected.away}
+                    hint="At the opponent’s campus or stadium"
+                  />
+                  <Metric
+                    label="Neutral"
+                    split={selected.neutral}
+                    hint="Abroad, a bowl/NFL stadium, or a third city"
+                  />
                   <Metric label="Favorite" split={selected.favorite} />
                   <Metric label="Dog" split={selected.dog} />
                   <Metric
@@ -511,7 +534,7 @@ export default function TeamsView({
                         playerHistory,
                         row.week,
                         row.cbsEventId,
-                        row.venue,
+                        row.side,
                       )
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
                       const weatherLabel = formatWeatherBucket(row.weather)
@@ -533,7 +556,7 @@ export default function TeamsView({
                                 {' · '}
                               </>
                             )}
-                            {row.venue === 'home' ? 'vs' : 'at'}{' '}
+                            {appearanceVenueWord(row.venue)}{' '}
                             {formatRankedTeamName(row.opponent, row.opponentRank)}
                             {beat && beatMark && (
                               <a
@@ -641,8 +664,8 @@ function appearanceBeat(
     weekLabel: row.weekLabel,
     cbsEventId: row.cbsEventId,
     kickoff: row.kickoff,
-    away: row.venue === 'home' ? row.opponent : team.name,
-    home: row.venue === 'home' ? team.name : row.opponent,
+    away: row.side === 'home' ? row.opponent : team.name,
+    home: row.side === 'home' ? team.name : row.opponent,
     homeSpread: row.homeSpread,
     note: null,
   }

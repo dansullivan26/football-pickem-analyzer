@@ -131,7 +131,7 @@ test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', 
   assert.equal(spreadSize(-7.5), 'big')
   assert.equal(
     appearanceMarketLabel({
-      venue: 'away',
+      side: 'away',
       market: 'dog',
       homeSpread: -7.5,
     }),
@@ -139,7 +139,7 @@ test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', 
   )
   assert.equal(
     appearanceMarketLabel({
-      venue: 'home',
+      side: 'home',
       market: 'dog',
       homeSpread: 2.5,
     }),
@@ -147,7 +147,7 @@ test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', 
   )
   assert.equal(
     appearanceMarketLabel({
-      venue: 'home',
+      side: 'home',
       market: 'favorite',
       homeSpread: -7.5,
     }),
@@ -155,7 +155,7 @@ test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', 
   )
   assert.equal(
     appearanceMarketLabel({
-      venue: 'away',
+      side: 'away',
       market: 'favorite',
       homeSpread: 6.5,
     }),
@@ -166,7 +166,7 @@ test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', 
 test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
   assert.equal(
     straightUpResult({
-      venue: 'away',
+      side: 'away',
       awayScore: 20,
       homeScore: 17,
     }),
@@ -175,7 +175,7 @@ test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
   assert.equal(
     wonOutrightAsDog({
       market: 'dog',
-      venue: 'away',
+      side: 'away',
       awayScore: 20,
       homeScore: 17,
     }),
@@ -184,7 +184,7 @@ test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
   assert.equal(
     wonOutrightAsDog({
       market: 'dog',
-      venue: 'away',
+      side: 'away',
       awayScore: 14,
       homeScore: 20,
     }),
@@ -193,7 +193,7 @@ test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
   assert.equal(
     wonOutrightAsDog({
       market: 'favorite',
-      venue: 'away',
+      side: 'away',
       awayScore: 20,
       homeScore: 17,
     }),
@@ -533,6 +533,75 @@ test('assignTeamSlugs disambiguates the same name in two leagues', () => {
     ]),
     ['washington-ncaaf', 'washington-nfl'],
   )
+})
+
+test('Dublin is a neutral site for both CBS sides; Stanford stays a real home', () => {
+  const unc = team('UNC', 'North Carolina', 'ACC')
+  const tcu = team('TCU', 'TCU', 'BIG12')
+  const hawaii = team('HAWAII', 'Hawaii', 'MWC')
+  const stanford = team('STNFRD', 'Stanford', 'ACC')
+  const aviva = {
+    stadium: 'Aviva Stadium',
+    city: 'Dublin',
+    state: 'IE',
+    indoor: false,
+  }
+  const stanfordVenue = {
+    stadium: 'Stanford Stadium',
+    city: 'Stanford',
+    state: 'CA',
+    indoor: false,
+  }
+  const directory = buildTeamDirectory(
+    slate([
+      slateGame(1, unc, tcu, -7.5, {
+        awayScore: 15,
+        homeScore: 10,
+        venue: aviva,
+      }),
+      slateGame(2, hawaii, stanford, -5.5, { venue: stanfordVenue }),
+    ]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'UNC',
+        home: 'TCU',
+        homeSpread: -7.5,
+        cover: 'away',
+        venue: aviva,
+      }),
+      rec({
+        cbsEventId: 2,
+        away: 'HAWAII',
+        home: 'STNFRD',
+        homeSpread: -5.5,
+        venue: stanfordVenue,
+      }),
+    ]),
+  )
+
+  const tcuRecord = directory.teams.find((row) => row.abbrev === 'TCU')
+  const uncRecord = directory.teams.find((row) => row.abbrev === 'UNC')
+  const hawaiiRecord = directory.teams.find((row) => row.abbrev === 'HAWAII')
+  const stanfordRecord = directory.teams.find((row) => row.abbrev === 'STNFRD')
+
+  assert.equal(tcuRecord?.appearances[0]?.side, 'home')
+  assert.equal(tcuRecord?.appearances[0]?.venue, 'neutral')
+  assert.equal(uncRecord?.appearances[0]?.side, 'away')
+  assert.equal(uncRecord?.appearances[0]?.venue, 'neutral')
+  assert.equal(tcuRecord?.home.games, 0)
+  assert.equal(uncRecord?.away.games, 0)
+  assert.equal(tcuRecord?.neutral.detail, '0-1 ATS')
+  assert.equal(uncRecord?.neutral.detail, '1-0 ATS')
+  assert.equal(tcuRecord?.favorite.detail, '0-1 ATS')
+  assert.equal(uncRecord?.dog.detail, '1-0 ATS')
+  assert.equal(directory.home.games, 1)
+  assert.equal(directory.away.games, 1)
+  assert.equal(directory.home.detail, '0-0 ATS')
+  assert.equal(directory.away.detail, '0-0 ATS')
+  assert.equal(directory.neutral.detail, '1-1 ATS')
+  assert.equal(hawaiiRecord?.appearances[0]?.venue, 'away')
+  assert.equal(stanfordRecord?.appearances[0]?.venue, 'home')
 })
 
 test('teamPageSlugs matches the Teams directory for slate sides', () => {

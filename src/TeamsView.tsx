@@ -415,9 +415,9 @@ export default function TeamsView({
                 </div>
                 <div className="tendency-grid" aria-label="Team weather ATS splits">
                   <Metric
-                    label="Benign"
+                    label="Comfortable"
                     split={selected.benign}
-                    hint="Fair outdoor weather"
+                    hint="Fair outdoor weather, no rain or 15+ mph wind"
                   />
                   <Metric
                     label="Adverse"

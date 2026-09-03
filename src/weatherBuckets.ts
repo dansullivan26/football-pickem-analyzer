@@ -119,19 +119,21 @@ export function weatherFromConditions(
   }
 }
 
+function weatherPhrase(part: string) {
+  return `${part} weather`
+}
+
 export function formatWeatherBucket(weather: FrozenWeather | null) {
   if (!weather) return null
-  if (weather.bucket === 'indoor') return 'Indoor'
+  if (weather.bucket === 'indoor') return weatherPhrase('Indoor')
   const flags = [
     weather.wet ? 'wet' : null,
     weather.windy ? 'wind' : null,
     isHotTemp(weather.temperature) ? 'hot' : null,
     isColdTemp(weather.temperature) ? 'cold' : null,
-  ].filter(Boolean)
-  if (weather.bucket === 'adverse') {
-    return flags.length ? `Adverse · ${flags.join(' · ')}` : 'Adverse'
-  }
-  return flags.length ? `Benign · ${flags.join(' · ')}` : 'Benign'
+  ].filter((flag): flag is string => Boolean(flag))
+  const head = weather.bucket === 'adverse' ? 'Adverse' : 'Comfortable'
+  return [head, ...flags].map(weatherPhrase).join(' · ')
 }
 
 export function upsertFrozenWeather(

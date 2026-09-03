@@ -16,7 +16,7 @@ test('parseWindMph uses the high end of an NWS range', () => {
   assert.equal(parseWindMph('Calm'), null)
 })
 
-test('classifyOutdoorWeather buckets wet, windy, and benign', () => {
+test('classifyOutdoorWeather buckets wet, windy, and comfortable', () => {
   assert.deepEqual(
     classifyOutdoorWeather({
       shortForecast: 'Sunny',
@@ -58,7 +58,7 @@ test('formatWeatherBucket writes the appearance label', () => {
     week: 1,
     kickoff: '2026-08-30T19:00:00-04:00',
   }
-  assert.equal(formatWeatherBucket(indoorWeatherSnapshot(game)), 'Indoor')
+  assert.equal(formatWeatherBucket(indoorWeatherSnapshot(game)), 'Indoor weather')
   assert.equal(
     formatWeatherBucket(
       weatherFromConditions(game, {
@@ -68,7 +68,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 80,
       }),
     ),
-    'Adverse · wet · wind',
+    'Adverse weather · wet weather · wind weather',
   )
   assert.equal(
     formatWeatherBucket(
@@ -79,7 +79,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 0,
       }),
     ),
-    'Benign',
+    'Comfortable weather',
   )
   assert.equal(
     formatWeatherBucket(
@@ -90,7 +90,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 5,
       }),
     ),
-    'Benign · hot',
+    'Comfortable weather · hot weather',
   )
   assert.equal(
     formatWeatherBucket(
@@ -101,7 +101,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 70,
       }),
     ),
-    'Adverse · wet · cold',
+    'Adverse weather · wet weather · cold weather',
   )
   assert.equal(formatWeatherBucket(null), null)
 })

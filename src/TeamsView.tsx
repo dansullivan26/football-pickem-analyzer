@@ -484,35 +484,30 @@ export default function TeamsView({
               <section className="week-card team-split-card">
                 <div className="week-card-heading">
                   <div>
-                    <span>Card + schedule</span>
+                    <span>Days between kickoffs</span>
                     <strong>Rest</strong>
-                    <small>
-                      Days since this team&apos;s last kickoff on the CBS
-                      card or the season schedule. College bye needs that
-                      schedule row.
-                    </small>
                   </div>
                 </div>
                 <div className="tendency-grid" aria-label="Team rest ATS splits">
                   <Metric
                     label="Short week"
                     split={selected.shortRest}
-                    hint={travelRestTitle()}
+                    hint="<7 days"
                   />
                   <Metric
                     label="Normal week"
                     split={selected.normalRest}
-                    hint="Exactly 7 days since the last kickoff"
+                    hint="7 days"
                   />
                   <Metric
                     label="Long week"
                     split={selected.longRest}
-                    hint="8+ days; a college card gap without a schedule row is not a bye"
+                    hint="8+ days"
                   />
                   <Metric
                     label="Off a bye"
                     split={selected.byeRest}
-                    hint={travelRestTitle()}
+                    hint="13+ days"
                   />
                 </div>
               </section>

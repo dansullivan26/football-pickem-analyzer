@@ -6,9 +6,11 @@ import {
   formatRankedTeamName,
   marketForSide,
   resultForSide,
+  straightUpResult,
   teamKey,
   teamPageSlugs,
   teamSlug,
+  wonOutrightAsDog,
 } from '../src/teamPerformance.ts'
 import { weatherFromConditions } from '../src/weatherBuckets.ts'
 import type {
@@ -119,6 +121,44 @@ test('marketForSide and resultForSide follow the CBS home number', () => {
   assert.equal(resultForSide('home', null), null)
 })
 
+test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
+  assert.equal(
+    straightUpResult({
+      venue: 'away',
+      awayScore: 20,
+      homeScore: 17,
+    }),
+    'win',
+  )
+  assert.equal(
+    wonOutrightAsDog({
+      market: 'dog',
+      venue: 'away',
+      awayScore: 20,
+      homeScore: 17,
+    }),
+    true,
+  )
+  assert.equal(
+    wonOutrightAsDog({
+      market: 'dog',
+      venue: 'away',
+      awayScore: 14,
+      homeScore: 20,
+    }),
+    false,
+  )
+  assert.equal(
+    wonOutrightAsDog({
+      market: 'favorite',
+      venue: 'away',
+      awayScore: 20,
+      homeScore: 17,
+    }),
+    false,
+  )
+})
+
 test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () => {
   const unc = team('UNC', 'North Carolina', 'ACC')
   const tcu = team('TCU', 'TCU', 'BIG12')
@@ -165,6 +205,10 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(uncRecord?.overall.detail, '1-0 ATS')
   assert.equal(uncRecord?.away.detail, '1-0 ATS')
   assert.equal(uncRecord?.dog.detail, '1-0 ATS')
+  assert.equal(uncRecord?.dogOutright.detail, '1-0 SU')
+  assert.equal(uncRecord?.dogOutright.rate, '100%')
+  assert.equal(wonOutrightAsDog(uncRecord?.appearances[0]!), true)
+  assert.equal(tcuRecord?.dogOutright.games, 0)
   assert.equal(uncRecord?.appearances[0]?.opponent, 'TCU')
   assert.equal(hawaiiRecord?.overall.pending, 1)
   assert.equal(hawaiiRecord?.overall.rate, '—')

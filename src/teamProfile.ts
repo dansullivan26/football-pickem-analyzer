@@ -1,6 +1,11 @@
 import { restSplitKey, travelSplitKey } from './travelRest.ts'
 import { isColdTemp, isHotTemp } from './weatherBuckets.ts'
-import type { TeamAppearance, TeamRecord } from './teamPerformance.ts'
+import {
+  straightUpResult,
+  wonOutrightAsDog,
+  type TeamAppearance,
+  type TeamRecord,
+} from './teamPerformance.ts'
 
 /** Overall book size before a label. Same floor as a split so a loud 4-0 / 3-1 can profile. CBS NCAAF teams rarely appear six times; 3-0 is still too thin with the prior. */
 export const TEAM_PROFILE_MIN_DECIDED = 4
@@ -30,6 +35,7 @@ export type TeamProfileKey =
   | 'normalRest'
   | 'longRest'
   | 'byeRest'
+  | 'dogOutright'
 
 export type TeamProfile = {
   archetype: string
@@ -323,11 +329,41 @@ function profileInsight(ranked: Candidate[]) {
   return null
 }
 
+function dogOutrightCandidate(appearances: TeamAppearance[]): Candidate | null {
+  const dogs = appearances.filter((row) => {
+    const su = straightUpResult(row)
+    return row.market === 'dog' && (su === 'win' || su === 'loss')
+  })
+  const decided = dogs.length
+  if (decided < TEAM_SPLIT_MIN_DECIDED) return null
+
+  const wins = dogs.filter((row) => wonOutrightAsDog(row)).length
+  const rate = wins / decided
+  if (rate < TEAM_SPLIT_MIN_RATE) return null
+
+  const posteriorRate =
+    (wins + TEAM_PROFILE_PRIOR / 2) / (decided + TEAM_PROFILE_PRIOR)
+  return {
+    key: 'dogOutright',
+    label: 'Wins outright as a dog',
+    detail: `${Math.round(rate * 100)}% SU across ${decided} dog games`,
+    insight: `Has won outright as a dog in ${wins} of ${decided} graded games.`,
+    covers: true,
+    decided,
+    directionalRate: rate,
+    strength:
+      Math.max(0, (posteriorRate - 0.5) * 2) *
+      Math.min(1, decided / TEAM_PROFILE_MIN_DECIDED),
+    events: dogs.filter((row) => wonOutrightAsDog(row)).map((row) => row.cbsEventId),
+  }
+}
+
 export function buildTeamProfile(team: Pick<TeamRecord, 'appearances'>): TeamProfile {
   const decided = decidedRows(team.appearances, () => true).length
-  const candidates = SPLITS.map((split) =>
-    candidateFor(split, team.appearances),
-  ).filter((row): row is Candidate => row != null)
+  const candidates = [
+    ...SPLITS.map((split) => candidateFor(split, team.appearances)),
+    dogOutrightCandidate(team.appearances),
+  ].filter((row): row is Candidate => row != null)
 
   if (decided < TEAM_PROFILE_MIN_DECIDED) {
     return {

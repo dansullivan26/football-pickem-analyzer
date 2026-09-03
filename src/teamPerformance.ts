@@ -73,6 +73,7 @@ export type TeamRecord = {
   away: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
+  dogOutright: TeamSplit
   benign: TeamSplit
   adverse: TeamSplit
   wet: TeamSplit
@@ -95,6 +96,7 @@ export type TeamDirectory = {
   away: TeamSplit
   favorite: TeamSplit
   dog: TeamSplit
+  dogOutright: TeamSplit
   benign: TeamSplit
   adverse: TeamSplit
   wet: TeamSplit
@@ -171,6 +173,23 @@ export function resultForSide(
   return cover === side ? 'win' : 'loss'
 }
 
+export function straightUpResult(
+  row: Pick<TeamAppearance, 'venue' | 'awayScore' | 'homeScore'>,
+): 'win' | 'loss' | 'tie' | null {
+  const ours = row.venue === 'home' ? row.homeScore : row.awayScore
+  const theirs = row.venue === 'home' ? row.awayScore : row.homeScore
+  if (typeof ours !== 'number' || typeof theirs !== 'number') return null
+  if (ours > theirs) return 'win'
+  if (ours < theirs) return 'loss'
+  return 'tie'
+}
+
+export function wonOutrightAsDog(
+  row: Pick<TeamAppearance, 'market' | 'venue' | 'awayScore' | 'homeScore'>,
+) {
+  return row.market === 'dog' && straightUpResult(row) === 'win'
+}
+
 function appearanceRanks(
   frozen: FrozenRecommendation,
   venue: TeamVenue,
@@ -209,6 +228,23 @@ function formatRate(wins: number, losses: number) {
   const decided = wins + losses
   if (!decided) return '—'
   return `${Math.round((wins / decided) * 100)}%`
+}
+
+function summarizeDogOutright(appearances: TeamAppearance[]): TeamSplit {
+  const dogs = appearances.filter((row) => row.market === 'dog')
+  const wins = dogs.filter((row) => straightUpResult(row) === 'win').length
+  const losses = dogs.filter((row) => straightUpResult(row) === 'loss').length
+  const pushes = dogs.filter((row) => straightUpResult(row) === 'tie').length
+  const pending = dogs.filter((row) => straightUpResult(row) == null).length
+  return {
+    games: dogs.length,
+    wins,
+    losses,
+    pushes,
+    pending,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} SU`,
+  }
 }
 
 export function summarizeAppearances(
@@ -457,6 +493,7 @@ export function buildTeamDirectory(
           (row) => row.market === 'favorite',
         ),
         dog: summarizeAppearances(ordered, (row) => row.market === 'dog'),
+        dogOutright: summarizeDogOutright(ordered),
         ...weatherSplits(ordered),
         ...travelRestSplits(ordered),
       }
@@ -476,6 +513,7 @@ export function buildTeamDirectory(
     away: summarizeAppearances(all, (row) => row.venue === 'away'),
     favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
     dog: summarizeAppearances(all, (row) => row.market === 'dog'),
+    dogOutright: summarizeDogOutright(all),
     ...weatherSplits(all),
     ...travelRestSplits(all),
   }

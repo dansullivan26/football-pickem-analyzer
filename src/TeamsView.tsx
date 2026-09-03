@@ -4,6 +4,7 @@ import weatherHistoryData from './data/weather-history.json'
 import {
   buildTeamDirectory,
   formatRankedTeamName,
+  wonOutrightAsDog,
   type TeamAppearance,
   type TeamRecord,
   type TeamSplit,
@@ -45,8 +46,8 @@ function teamLine(row: TeamAppearance) {
 }
 
 function resultLabel(result: TeamAppearance['result']) {
-  if (result === 'win') return 'Win'
-  if (result === 'loss') return 'Loss'
+  if (result === 'win') return 'ATS win'
+  if (result === 'loss') return 'ATS loss'
   if (result === 'push') return 'Push'
   return 'Awaiting result'
 }
@@ -368,6 +369,11 @@ export default function TeamsView({
                   <Metric label="Away" split={selected.away} />
                   <Metric label="Favorite" split={selected.favorite} />
                   <Metric label="Dog" split={selected.dog} />
+                  <Metric
+                    label="Won outright as a dog"
+                    split={selected.dogOutright}
+                    hint="Straight-up wins when this team was an ATS underdog"
+                  />
                 </div>
               </section>
 
@@ -587,7 +593,12 @@ export default function TeamsView({
                           className={`pick-result ${row.result ?? 'pending'}`}
                         >
                           {resultLabel(row.result)}
-                          {score && <small>{score}</small>}
+                          {score && (
+                            <small>
+                              {score}
+                              {wonOutrightAsDog(row) ? ' · outright' : ''}
+                            </small>
+                          )}
                         </span>
                         <BadBeatMenu
                           beat={beat}

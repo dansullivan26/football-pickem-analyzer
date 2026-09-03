@@ -419,6 +419,63 @@ test('labels a loud 3+ time-zone coverer', () => {
   assert.match(profile.archetypeDetail, /3\+ time-zone games/)
 })
 
+test('mentions winning outright as a dog when that book is loud', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        venue: 'away',
+        market: 'dog',
+        result: 'win',
+        awayScore: 21,
+        homeScore: 17,
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+        awayScore: 10,
+        homeScore: 24,
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        venue: 'away',
+        market: 'dog',
+        result: 'win',
+        awayScore: 28,
+        homeScore: 24,
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+        awayScore: 13,
+        homeScore: 20,
+      }),
+      appearance({
+        cbsEventId: 5,
+        week: 5,
+        venue: 'away',
+        market: 'dog',
+        result: 'loss',
+        awayScore: 7,
+        homeScore: 35,
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers as a dog')
+  assert.equal(
+    profile.insight,
+    'Has won outright as a dog in 4 of 5 graded games.',
+  )
+})
+
 test('says no dominant pattern when the book is even', () => {
   const profile = buildTeamProfile({
     appearances: [

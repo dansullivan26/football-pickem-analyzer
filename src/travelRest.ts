@@ -35,8 +35,10 @@ export type SideRest = {
   days: number
   kind: RestKind
   label: string
-  /** For short-week rest: where they were coming from last kickoff (when known). */
-  travelFrom?: string | null
+  /** For short-week rest: where the previous kickoff game was played. */
+  lastGameAt?: string | null
+  /** For short-week rest: the prior kickoff's travel burden, when known. */
+  priorTravel?: SideTravel | null
 }
 
 export type GameTravelRest = {
@@ -246,13 +248,19 @@ function sideRest(
   days: number | null,
   sport: 'NFL' | 'NCAAF',
   scheduleBacked = false,
-  travelFrom?: string | null,
+  lastGameAt?: string | null,
+  priorTravel?: SideTravel | null,
 ): SideRest | null {
   if (days == null || days < 0) return null
   const kind = classifyRest(days, sport, scheduleBacked)
   const base = { days, kind, label: formatRestLabel(days, kind) }
-  if (kind !== 'short' || !travelFrom) return base
-  return { ...base, travelFrom }
+  if (kind !== 'short') return base
+  return {
+    ...base,
+    lastGameAt: lastGameAt ?? null,
+    priorTravel:
+      priorTravel && priorTravel.direction !== 'same' ? priorTravel : null,
+  }
 }
 
 function sideTravel(
@@ -428,28 +436,42 @@ export function buildTravelRestIndex(
       return venue.stadium ?? null
     }
 
-    // For short-week rest only: if the team was the away side in the prior
-    // kickoff game, show where they were coming from (the prior venue).
-    const awayTravelFrom =
-      awayKickoffFromCard && awayPrev?.away === game.away
-        ? venuePlace(awayPrev.venue)
-        : null
-    const homeTravelFrom =
-      homeKickoffFromCard && homePrev?.away === game.home
-        ? venuePlace(homePrev.venue)
-        : null
+    const priorTravelFor = (
+      previous: DatedGame | null,
+      teamAbbrev: string,
+      teamTz: string | null,
+    ) => {
+      if (!previous) return null
+      const previousVenueTz = timeZoneFromVenue(previous.venue)
+      if (previous.away === teamAbbrev) {
+        return sideTravel(teamTz, previousVenueTz, previous.kickoff)
+      }
+      const homeHop = sideTravel(teamTz, previousVenueTz, previous.kickoff)
+      return homeHop && homeHop.direction !== 'same' ? homeHop : null
+    }
+
+    const awayLastGameAt = awayKickoffFromCard ? venuePlace(awayPrev?.venue) : null
+    const homeLastGameAt = homeKickoffFromCard ? venuePlace(homePrev?.venue) : null
+    const awayPriorTravel = awayKickoffFromCard
+      ? priorTravelFor(awayPrev, game.away, awayTz)
+      : null
+    const homePriorTravel = homeKickoffFromCard
+      ? priorTravelFor(homePrev, game.home, homeTz)
+      : null
 
     const awayRest = sideRest(
       awayKickoff ? restDays(awayKickoff, game.kickoff) : null,
       game.sport,
       awayKickoffFromSchedule,
-      awayTravelFrom,
+      awayLastGameAt,
+      awayPriorTravel,
     )
     const homeRest = sideRest(
       homeKickoff ? restDays(homeKickoff, game.kickoff) : null,
       game.sport,
       homeKickoffFromSchedule,
-      homeTravelFrom,
+      homeLastGameAt,
+      homePriorTravel,
     )
 
     byEvent.set(game.cbsEventId, {
@@ -494,13 +516,21 @@ export function formatGameRestLine(
   const parts: string[] = []
   if (row.awayRest) {
     const who = names?.away?.trim() || 'Away'
-    const from = row.awayRest.travelFrom ? ` · from ${row.awayRest.travelFrom}` : ''
-    parts.push(`${who} ${row.awayRest.label}${from}`)
+    const where =
+      row.awayRest.lastGameAt ? ` · last game at ${row.awayRest.lastGameAt}` : ''
+    const trip = row.awayRest.priorTravel
+      ? ` · after traveling ${row.awayRest.priorTravel.label}`
+      : ''
+    parts.push(`${who} ${row.awayRest.label}${where}${trip}`)
   }
   if (row.homeRest) {
     const who = names?.home?.trim() || 'Home'
-    const from = row.homeRest.travelFrom ? ` · from ${row.homeRest.travelFrom}` : ''
-    parts.push(`${who} ${row.homeRest.label}${from}`)
+    const where =
+      row.homeRest.lastGameAt ? ` · last game at ${row.homeRest.lastGameAt}` : ''
+    const trip = row.homeRest.priorTravel
+      ? ` · after traveling ${row.homeRest.priorTravel.label}`
+      : ''
+    parts.push(`${who} ${row.homeRest.label}${where}${trip}`)
   }
   return parts.length ? `Rest: ${parts.join(' · ')}` : null
 }

@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { cbsInjurySlug, cbsInjuryUrl } from '../src/cbsInjuries.ts'
+import {
+  cbsInjurySlug,
+  cbsInjuryUrl,
+  cbsScheduleUrl,
+} from '../src/cbsInjuries.ts'
 
 test('cbsInjurySlug uses location plus nickname, not the short display name', () => {
   assert.equal(
@@ -41,6 +45,27 @@ test('cbsInjuryUrl writes the CBS per-team injuries path', () => {
       nickname: 'Chiefs',
     }),
     'https://www.cbssports.com/nfl/teams/KC/kansas-city-chiefs/injuries/',
+  )
+})
+
+test('cbsScheduleUrl writes the CBS per-team schedule path', () => {
+  assert.equal(
+    cbsScheduleUrl({
+      sport: 'NCAAF',
+      abbrev: 'STNFRD',
+      location: 'Stanford',
+      nickname: 'Cardinal',
+    }),
+    'https://www.cbssports.com/college-football/teams/STNFRD/stanford-cardinal/schedule/',
+  )
+  assert.equal(
+    cbsScheduleUrl({
+      sport: 'NFL',
+      abbrev: 'KC',
+      location: 'Kansas City',
+      nickname: 'Chiefs',
+    }),
+    'https://www.cbssports.com/nfl/teams/KC/kansas-city-chiefs/schedule/',
   )
 })
 

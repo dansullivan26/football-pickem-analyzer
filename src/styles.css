@@ -1342,6 +1342,7 @@ select:focus {
 }
 
 .injury-link,
+.schedule-link,
 .team-injuries-link {
   color: inherit;
   text-decoration: underline;
@@ -1349,6 +1350,7 @@ select:focus {
 }
 
 .injury-link:hover,
+.schedule-link:hover,
 .team-injuries-link:hover {
   color: var(--green-dark);
 }

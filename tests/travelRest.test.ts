@@ -8,6 +8,8 @@ import {
   formatTravelLabel,
   frozenVenueCaptured,
   gameTravelZones,
+  restSplitKey,
+  travelSplitKey,
 } from '../src/travelRest.ts'
 import {
   timeZoneFromTeamLabel,
@@ -160,6 +162,29 @@ test('Hawaii traveling to Stanford is three zones east', () => {
     ),
     'Hawaii traveling 3 time zones east',
   )
+})
+
+test('travel and rest split keys skip same-zone and missing rows', () => {
+  assert.equal(travelSplitKey(null), null)
+  assert.equal(
+    travelSplitKey({ zones: 0, direction: 'same', label: 'Same time zone' }),
+    null,
+  )
+  assert.equal(
+    travelSplitKey({ zones: 1, direction: 'west', label: '1 time zone west' }),
+    'oneZone',
+  )
+  assert.equal(
+    travelSplitKey({ zones: 2, direction: 'east', label: '2 time zones east' }),
+    'twoZones',
+  )
+  assert.equal(
+    travelSplitKey({ zones: 3, direction: 'east', label: '3 time zones east' }),
+    'threePlus',
+  )
+  assert.equal(restSplitKey(null), null)
+  assert.equal(restSplitKey({ days: 4, kind: 'short', label: 'Short week · 4d' }), 'short')
+  assert.equal(restSplitKey({ days: 14, kind: 'bye', label: 'Off a bye · 14d' }), 'bye')
 })
 
 test('gameTravelZones uses the larger hop on the card', () => {

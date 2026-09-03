@@ -177,10 +177,11 @@ export default function TeamsView({
           <p className="eyebrow">CBS line tracker</p>
           <h1>Team performance</h1>
           <p className="hero-copy">
-            Against the locked pool line, not DraftKings. Performance
-            and weather sit in their own sections. A team profile
-            appears after four graded games; weather tiles stay thin
-            until a team has a few such kickoffs.
+            Against the locked pool line, not DraftKings. Performance,
+            weather, travel, and rest sit in their own sections. A team
+            profile appears after four graded games; weather, travel,
+            and rest tiles stay thin until a team has a few such
+            kickoffs.
           </p>
         </div>
         <div className="hero-aside">
@@ -413,6 +414,70 @@ export default function TeamsView({
                     label="Indoor"
                     split={selected.indoor}
                     hint="Dome or closed roof"
+                  />
+                </div>
+              </section>
+
+              <section className="week-card team-split-card">
+                <div className="week-card-heading">
+                  <div>
+                    <span>Time-zone hops</span>
+                    <strong>Travel</strong>
+                    <small>
+                      Visitor hops, or a home team that left its own zone.
+                    </small>
+                  </div>
+                </div>
+                <div className="tendency-grid" aria-label="Team travel ATS splits">
+                  <Metric
+                    label="1 time zone"
+                    split={selected.oneZone}
+                    hint="One time-zone hop"
+                  />
+                  <Metric
+                    label="2 time zones"
+                    split={selected.twoZones}
+                    hint="Two time-zone hops"
+                  />
+                  <Metric
+                    label="3+ time zones"
+                    split={selected.threePlus}
+                    hint="Three or more time-zone hops"
+                  />
+                </div>
+              </section>
+
+              <section className="week-card team-split-card">
+                <div className="week-card-heading">
+                  <div>
+                    <span>CBS-card gap</span>
+                    <strong>Rest</strong>
+                    <small>
+                      Days since this team&apos;s last CBS-card kickoff.
+                      Bye is NFL-only.
+                    </small>
+                  </div>
+                </div>
+                <div className="tendency-grid" aria-label="Team rest ATS splits">
+                  <Metric
+                    label="Short week"
+                    split={selected.shortRest}
+                    hint={travelRestTitle()}
+                  />
+                  <Metric
+                    label="Normal rest"
+                    split={selected.normalRest}
+                    hint="6–8 days since the last card game"
+                  />
+                  <Metric
+                    label="Long week"
+                    split={selected.longRest}
+                    hint="9+ days; college card gaps are not byes"
+                  />
+                  <Metric
+                    label="Off a bye"
+                    split={selected.byeRest}
+                    hint={travelRestTitle()}
                   />
                 </div>
               </section>

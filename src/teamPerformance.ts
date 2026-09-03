@@ -1,6 +1,10 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { cbsTeamRank, frozenRanksCaptured } from './teamRanks.ts'
-import { buildTravelRestIndex } from './travelRest.ts'
+import {
+  buildTravelRestIndex,
+  restSplitKey,
+  travelSplitKey,
+} from './travelRest.ts'
 import type { SideRest, SideTravel } from './travelRest.ts'
 import { gameScores } from './gameStatus.ts'
 import {
@@ -76,6 +80,13 @@ export type TeamRecord = {
   hot: TeamSplit
   cold: TeamSplit
   indoor: TeamSplit
+  oneZone: TeamSplit
+  twoZones: TeamSplit
+  threePlus: TeamSplit
+  shortRest: TeamSplit
+  normalRest: TeamSplit
+  longRest: TeamSplit
+  byeRest: TeamSplit
 }
 
 export type TeamDirectory = {
@@ -91,6 +102,13 @@ export type TeamDirectory = {
   hot: TeamSplit
   cold: TeamSplit
   indoor: TeamSplit
+  oneZone: TeamSplit
+  twoZones: TeamSplit
+  threePlus: TeamSplit
+  shortRest: TeamSplit
+  normalRest: TeamSplit
+  longRest: TeamSplit
+  byeRest: TeamSplit
 }
 
 export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
@@ -306,6 +324,39 @@ function weatherSplits(appearances: TeamAppearance[]) {
   }
 }
 
+function travelRestSplits(appearances: TeamAppearance[]) {
+  return {
+    oneZone: summarizeAppearances(
+      appearances,
+      (row) => travelSplitKey(row.travel) === 'oneZone',
+    ),
+    twoZones: summarizeAppearances(
+      appearances,
+      (row) => travelSplitKey(row.travel) === 'twoZones',
+    ),
+    threePlus: summarizeAppearances(
+      appearances,
+      (row) => travelSplitKey(row.travel) === 'threePlus',
+    ),
+    shortRest: summarizeAppearances(
+      appearances,
+      (row) => restSplitKey(row.rest) === 'short',
+    ),
+    normalRest: summarizeAppearances(
+      appearances,
+      (row) => restSplitKey(row.rest) === 'normal',
+    ),
+    longRest: summarizeAppearances(
+      appearances,
+      (row) => restSplitKey(row.rest) === 'long',
+    ),
+    byeRest: summarizeAppearances(
+      appearances,
+      (row) => restSplitKey(row.rest) === 'bye',
+    ),
+  }
+}
+
 export function buildTeamDirectory(
   slate: Slate,
   history: RecommendationHistory,
@@ -407,6 +458,7 @@ export function buildTeamDirectory(
         ),
         dog: summarizeAppearances(ordered, (row) => row.market === 'dog'),
         ...weatherSplits(ordered),
+        ...travelRestSplits(ordered),
       }
     })
     .sort((left, right) => left.name.localeCompare(right.name))
@@ -425,6 +477,7 @@ export function buildTeamDirectory(
     favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
     dog: summarizeAppearances(all, (row) => row.market === 'dog'),
     ...weatherSplits(all),
+    ...travelRestSplits(all),
   }
 }
 

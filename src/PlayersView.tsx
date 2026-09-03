@@ -22,6 +22,13 @@ import {
   PLAYER_TIER_LABELS,
   summarizePlayer,
 } from './playerTendencies'
+import {
+  REST_SPLIT_KEYS,
+  REST_SPLIT_LABELS,
+  TRAVEL_SPLIT_KEYS,
+  TRAVEL_SPLIT_LABELS,
+  buildTravelRestIndex,
+} from './travelRest'
 import type {
   PlayerHistory,
   PlayerPick,
@@ -269,12 +276,17 @@ export default function PlayersView({
   const weekEntry = selectedHistoryWeek?.entries.find(
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
+  const travelRestByAppearance = useMemo(
+    () => buildTravelRestIndex(slate, recommendations).byAppearance,
+    [slate, recommendations],
+  )
   const summary = selectedPlayer
     ? summarizePlayer(
         selectedPlayer.entryId,
         careerHistory.weeks,
         recommendations.weeks,
         careerHistory.pool.seasonYear,
+        travelRestByAppearance,
       )
     : null
   const livePrediction =
@@ -346,6 +358,8 @@ export default function PlayersView({
             favorites, underdogs, home teams, our line-value side, and the
             weekly tiebreaker. Line-value follow rates also split by the
             kickoff-frozen lock, hammer, lean, slight, and neutral tier.
+            Pick rates on traveling and rested teams use the same
+            time-zone hops and CBS-card rest as Lines.
             Habit labels use every archived season for the same CBS entry.
           </p>
         </div>
@@ -523,6 +537,46 @@ export default function PlayersView({
                         <strong>{stats.rate}</strong>
                         <small>{stats.detail}</small>
                       </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="player-tier-block">
+                <h3 className="player-tier-heading">Pick % by Travel</h3>
+                <div
+                  className="tendency-grid"
+                  aria-label="Pick % on traveling teams"
+                >
+                  {TRAVEL_SPLIT_KEYS.map((key) => {
+                    const stats = summary.travel[key]
+                    return (
+                      <Metric
+                        key={key}
+                        label={TRAVEL_SPLIT_LABELS[key]}
+                        value={stats.rate}
+                        detail={stats.detail}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="player-tier-block">
+                <h3 className="player-tier-heading">Pick % by Rest</h3>
+                <div
+                  className="tendency-grid"
+                  aria-label="Pick % on rested teams"
+                >
+                  {REST_SPLIT_KEYS.map((key) => {
+                    const stats = summary.rest[key]
+                    return (
+                      <Metric
+                        key={key}
+                        label={REST_SPLIT_LABELS[key]}
+                        value={stats.rate}
+                        detail={stats.detail}
+                      />
                     )
                   })}
                 </div>

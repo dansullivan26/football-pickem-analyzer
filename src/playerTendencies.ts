@@ -1,4 +1,15 @@
 import { sameSeasonWeek } from './careerHistory.ts'
+import {
+  REST_SPLIT_KEYS,
+  REST_SPLIT_NOUNS,
+  TRAVEL_SPLIT_KEYS,
+  TRAVEL_SPLIT_NOUNS,
+  restSplitKey,
+  travelSplitKey,
+  type AppearanceTravelRest,
+  type RestSplitKey,
+  type TravelSplitKey,
+} from './travelRest.ts'
 import type { PlayerWeek, RecommendationWeek } from './types'
 
 export const PLAYER_LINE_TIERS = ['lock', 'hammer', 'lean', 'slight'] as const
@@ -32,6 +43,8 @@ export type PlayerTendencySummary = {
   tiebreakerRate: string
   tiebreakerDetail: string
   tiers: Record<PlayerTierKey, PlayerRateStat>
+  travel: Record<TravelSplitKey, PlayerRateStat>
+  rest: Record<RestSplitKey, PlayerRateStat>
 }
 
 function formatRate(hits: number, eligible: number) {
@@ -50,6 +63,24 @@ function emptyTierCounts(): Record<
     slight: { hits: 0, eligible: 0 },
     neutral: { hits: 0, eligible: 0 },
   }
+}
+
+function emptyFactorCounts<K extends string>(
+  keys: readonly K[],
+): Record<K, { hits: number; eligible: number }> {
+  return Object.fromEntries(
+    keys.map((key) => [key, { hits: 0, eligible: 0 }]),
+  ) as Record<K, { hits: number; eligible: number }>
+}
+
+function tallyFactor<K extends string>(
+  counts: Record<K, { hits: number; eligible: number }>,
+  key: K | null,
+  hit: boolean,
+) {
+  if (!key) return
+  counts[key].eligible += 1
+  if (hit) counts[key].hits += 1
 }
 
 function tierStat(
@@ -84,11 +115,33 @@ function tierStat(
   }
 }
 
+function factorStat(
+  noun: string,
+  hits: number,
+  eligible: number,
+): PlayerRateStat {
+  if (!eligible) {
+    return {
+      hits,
+      eligible,
+      rate: '—',
+      detail: `No overlapping ${noun} yet`,
+    }
+  }
+  return {
+    hits,
+    eligible,
+    rate: formatRate(hits, eligible),
+    detail: `${hits} of ${eligible} ${noun}`,
+  }
+}
+
 export function summarizePlayer(
   entryId: string,
   weeks: PlayerWeek[],
   recWeeks: RecommendationWeek[],
   fallbackSeason: number,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ): PlayerTendencySummary {
   const picks = weeks.flatMap(
     (week) =>
@@ -112,6 +165,8 @@ export function summarizePlayer(
   let tiebreakerEligible = 0
   let tiebreakerNear = 0
   const tierCounts = emptyTierCounts()
+  const travelCounts = emptyFactorCounts(TRAVEL_SPLIT_KEYS)
+  const restCounts = emptyFactorCounts(REST_SPLIT_KEYS)
 
   for (const recWeek of recWeeks) {
     const entry = weeks
@@ -125,6 +180,15 @@ export function summarizePlayer(
     for (const game of recWeek.games) {
       const pick = picksByEvent.get(game.cbsEventId)
       if (!pick?.pickedSide) continue
+
+      if (travelRestByAppearance) {
+        for (const side of ['away', 'home'] as const) {
+          const ctx = travelRestByAppearance.get(`${game.cbsEventId}:${side}`)
+          const tookSide = pick.pickedSide === side
+          tallyFactor(travelCounts, travelSplitKey(ctx?.travel), tookSide)
+          tallyFactor(restCounts, restSplitKey(ctx?.rest), tookSide)
+        }
+      }
 
       const benefitingSide =
         game.source === 'line-value' ? game.recommendedSide : null
@@ -181,5 +245,25 @@ export function summarizePlayer(
         tierStat(key, tierCounts[key].hits, tierCounts[key].eligible),
       ]),
     ) as Record<PlayerTierKey, PlayerRateStat>,
+    travel: Object.fromEntries(
+      TRAVEL_SPLIT_KEYS.map((key) => [
+        key,
+        factorStat(
+          TRAVEL_SPLIT_NOUNS[key],
+          travelCounts[key].hits,
+          travelCounts[key].eligible,
+        ),
+      ]),
+    ) as Record<TravelSplitKey, PlayerRateStat>,
+    rest: Object.fromEntries(
+      REST_SPLIT_KEYS.map((key) => [
+        key,
+        factorStat(
+          REST_SPLIT_NOUNS[key],
+          restCounts[key].hits,
+          restCounts[key].eligible,
+        ),
+      ]),
+    ) as Record<RestSplitKey, PlayerRateStat>,
   }
 }

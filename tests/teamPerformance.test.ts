@@ -39,7 +39,7 @@ function slateGame(
   away: Team,
   home: Team,
   homeSpread: number,
-  scores?: { awayScore: number; homeScore: number },
+  extras: Partial<SlateGame> = {},
 ): SlateGame {
   return {
     id: `game-${cbsEventId}`,
@@ -54,7 +54,7 @@ function slateGame(
     home,
     homeSpread,
     line: `${home.abbrev} ${homeSpread}`,
-    ...scores,
+    ...extras,
   }
 }
 
@@ -285,6 +285,94 @@ test('buildTeamDirectory hot and cold splits follow the frozen temperature', () 
   const tcuRecord = directory.teams.find((row) => row.abbrev === 'TCU')
   assert.equal(tcuRecord?.hot.detail, '1-0 ATS')
   assert.equal(tcuRecord?.cold.detail, '0-1 ATS')
+})
+
+test('buildTeamDirectory travel and rest splits follow hops and card gaps', () => {
+  const hawaii = team('HAWAII', 'Hawaii', 'MWC')
+  const stanford = team('STNFRD', 'Stanford', 'ACC')
+  const unlv = team('UNLV', 'UNLV', 'MWC')
+  const chiefs = team('KC', 'Kansas City', 'AFC West')
+  const eagles = team('PHI', 'Philadelphia', 'NFC East')
+  const stanfordVenue = {
+    stadium: 'Stanford Stadium',
+    city: 'Stanford',
+    state: 'CA',
+    indoor: false,
+  }
+  const hawaiiVenue = {
+    stadium: 'Ching Complex',
+    city: 'Honolulu',
+    state: 'Hawaii',
+    indoor: false,
+  }
+  const directory = buildTeamDirectory(
+    slate([
+      slateGame(1, hawaii, stanford, -5.5, {
+        kickoff: '2026-08-27T19:00:00-04:00',
+        venue: stanfordVenue,
+      }),
+      slateGame(2, unlv, hawaii, -3, {
+        kickoff: '2026-08-30T23:00:00-04:00',
+        venue: hawaiiVenue,
+      }),
+      slateGame(3, chiefs, eagles, -2.5, {
+        sport: 'NFL',
+        kickoff: '2026-09-06T13:00:00-04:00',
+      }),
+      slateGame(4, eagles, chiefs, -3, {
+        sport: 'NFL',
+        kickoff: '2026-09-20T13:00:00-04:00',
+      }),
+    ]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'HAWAII',
+        home: 'STNFRD',
+        homeSpread: -5.5,
+        cover: 'away',
+        kickoff: '2026-08-27T19:00:00-04:00',
+        venue: stanfordVenue,
+      }),
+      rec({
+        cbsEventId: 2,
+        away: 'UNLV',
+        home: 'HAWAII',
+        homeSpread: -3,
+        cover: 'home',
+        kickoff: '2026-08-30T23:00:00-04:00',
+        venue: hawaiiVenue,
+      }),
+      rec({
+        cbsEventId: 3,
+        sport: 'NFL',
+        away: 'KC',
+        home: 'PHI',
+        homeSpread: -2.5,
+        cover: 'home',
+        kickoff: '2026-09-06T13:00:00-04:00',
+      }),
+      rec({
+        cbsEventId: 4,
+        sport: 'NFL',
+        away: 'PHI',
+        home: 'KC',
+        homeSpread: -3,
+        cover: 'away',
+        kickoff: '2026-09-20T13:00:00-04:00',
+      }),
+    ]),
+  )
+
+  const hawaiiRecord = directory.teams.find((row) => row.abbrev === 'HAWAII')
+  const unlvRecord = directory.teams.find((row) => row.abbrev === 'UNLV')
+  const eaglesRecord = directory.teams.find((row) => row.abbrev === 'PHI')
+  assert.equal(hawaiiRecord?.threePlus.detail, '1-0 ATS')
+  assert.equal(hawaiiRecord?.shortRest.detail, '1-0 ATS')
+  assert.equal(hawaiiRecord?.oneZone.games, 0)
+  assert.equal(unlvRecord?.threePlus.detail, '0-1 ATS')
+  assert.equal(eaglesRecord?.byeRest.detail, '1-0 ATS')
+  assert.equal(directory.threePlus.detail, '1-1 ATS')
 })
 
 test('buildTeamDirectory keeps a frozen score after the live slate moves on', () => {

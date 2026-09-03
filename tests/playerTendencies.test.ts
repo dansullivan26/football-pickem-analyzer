@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { summarizePlayer } from '../src/playerTendencies.ts'
+import type { AppearanceTravelRest } from '../src/travelRest.ts'
 import type {
   FrozenRecommendation,
   PlayerPick,
@@ -195,4 +196,63 @@ test('summarizePlayer keeps the overall line-value tile on card source', () => {
   assert.equal(summary.lineValueRate, '100%')
   assert.equal(summary.lineValueDetail, '1 of 1 line-value games')
   assert.equal(summary.tiers.slight.detail, '1 of 2 slights')
+  assert.equal(summary.travel.threePlus.rate, '—')
+  assert.equal(summary.rest.short.detail, 'No overlapping short-week teams yet')
+})
+
+test('summarizePlayer pick rates follow the traveling and rested sides', () => {
+  const travelRest = new Map<string, AppearanceTravelRest>([
+    [
+      '1:away',
+      {
+        travel: { zones: 3, direction: 'east', label: '3 time zones east' },
+        rest: { days: 4, kind: 'short', label: 'Short week · 4d' },
+      },
+    ],
+    [
+      '1:home',
+      {
+        travel: { zones: 0, direction: 'same', label: 'Same time zone' },
+        rest: { days: 7, kind: 'normal', label: '7d rest' },
+      },
+    ],
+    [
+      '2:away',
+      {
+        travel: { zones: 1, direction: 'west', label: '1 time zone west' },
+        rest: null,
+      },
+    ],
+    [
+      '2:home',
+      {
+        travel: null,
+        rest: { days: 14, kind: 'bye', label: 'Off a bye · 14d' },
+      },
+    ],
+  ])
+
+  const summary = summarizePlayer(
+    'dan',
+    [playerWeek(1, [pick(1, 'home'), pick(2, 'away')])],
+    [
+      recWeek(1, [
+        rec(1, { category: 'slight', recommendedSide: 'home' }),
+        rec(2, { category: 'lean', recommendedSide: 'away' }),
+      ]),
+    ],
+    2026,
+    travelRest,
+  )
+
+  assert.equal(summary.travel.threePlus.rate, '0%')
+  assert.equal(summary.travel.threePlus.detail, '0 of 1 3+ time-zone teams')
+  assert.equal(summary.travel.oneZone.rate, '100%')
+  assert.equal(summary.travel.oneZone.detail, '1 of 1 1-time-zone teams')
+  assert.equal(summary.travel.twoZones.rate, '—')
+  assert.equal(summary.rest.short.rate, '0%')
+  assert.equal(summary.rest.short.detail, '0 of 1 short-week teams')
+  assert.equal(summary.rest.normal.rate, '100%')
+  assert.equal(summary.rest.bye.rate, '0%')
+  assert.equal(summary.rest.bye.detail, '0 of 1 bye teams')
 })

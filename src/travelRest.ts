@@ -124,6 +124,53 @@ export function formatTravelLabel(zones: number, direction: TravelDirection) {
   return `${zones} time zone${zones === 1 ? '' : 's'} ${direction}`
 }
 
+export const TRAVEL_SPLIT_KEYS = ['oneZone', 'twoZones', 'threePlus'] as const
+export const REST_SPLIT_KEYS = ['short', 'normal', 'long', 'bye'] as const
+
+export type TravelSplitKey = (typeof TRAVEL_SPLIT_KEYS)[number]
+export type RestSplitKey = (typeof REST_SPLIT_KEYS)[number]
+
+export const TRAVEL_SPLIT_LABELS: Record<TravelSplitKey, string> = {
+  oneZone: '1 time zone',
+  twoZones: '2 time zones',
+  threePlus: '3+ time zones',
+}
+
+export const REST_SPLIT_LABELS: Record<RestSplitKey, string> = {
+  short: 'Short week',
+  normal: 'Normal rest',
+  long: 'Long week',
+  bye: 'Off a bye',
+}
+
+export const TRAVEL_SPLIT_NOUNS: Record<TravelSplitKey, string> = {
+  oneZone: '1-time-zone teams',
+  twoZones: '2-time-zone teams',
+  threePlus: '3+ time-zone teams',
+}
+
+export const REST_SPLIT_NOUNS: Record<RestSplitKey, string> = {
+  short: 'short-week teams',
+  normal: 'normal-rest teams',
+  long: 'long-week teams',
+  bye: 'bye teams',
+}
+
+export function travelSplitKey(
+  travel: SideTravel | null | undefined,
+): TravelSplitKey | null {
+  if (!travel || travel.direction === 'same' || travel.zones < 1) return null
+  if (travel.zones === 1) return 'oneZone'
+  if (travel.zones === 2) return 'twoZones'
+  return 'threePlus'
+}
+
+export function restSplitKey(
+  rest: SideRest | null | undefined,
+): RestSplitKey | null {
+  return rest?.kind ?? null
+}
+
 /** Largest hop on the card — visitor or a home team that left its own zone. */
 export function gameTravelZones(row: GameTravelRest | null | undefined) {
   if (!row) return 0

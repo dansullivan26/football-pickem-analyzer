@@ -337,6 +337,88 @@ test('labels a loud heat coverer', () => {
   assert.equal(profile.archetype, 'Covers in the heat')
 })
 
+test('labels a loud short-week coverer', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        venue: 'away',
+        market: 'dog',
+        result: 'win',
+        rest: { days: 4, kind: 'short', label: 'Short week · 4d' },
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        venue: 'home',
+        market: 'favorite',
+        result: 'win',
+        rest: { days: 5, kind: 'short', label: 'Short week · 5d' },
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        venue: 'away',
+        market: 'favorite',
+        result: 'win',
+        rest: { days: 4, kind: 'short', label: 'Short week · 4d' },
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+        rest: { days: 3, kind: 'short', label: 'Short week · 3d' },
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers on a short week')
+  assert.match(profile.archetypeDetail, /short-week games/)
+})
+
+test('labels a loud 3+ time-zone coverer', () => {
+  const profile = buildTeamProfile({
+    appearances: [
+      appearance({
+        cbsEventId: 1,
+        week: 1,
+        venue: 'away',
+        market: 'dog',
+        result: 'win',
+        travel: { zones: 3, direction: 'east', label: '3 time zones east' },
+      }),
+      appearance({
+        cbsEventId: 2,
+        week: 2,
+        venue: 'home',
+        market: 'favorite',
+        result: 'win',
+        travel: { zones: 4, direction: 'east', label: '4 time zones east' },
+      }),
+      appearance({
+        cbsEventId: 3,
+        week: 3,
+        venue: 'away',
+        market: 'favorite',
+        result: 'win',
+        travel: { zones: 3, direction: 'west', label: '3 time zones west' },
+      }),
+      appearance({
+        cbsEventId: 4,
+        week: 4,
+        venue: 'home',
+        market: 'dog',
+        result: 'win',
+        travel: { zones: 5, direction: 'east', label: '5 time zones east' },
+      }),
+    ],
+  })
+  assert.equal(profile.archetype, 'Covers after a 3+ time-zone trip')
+  assert.match(profile.archetypeDetail, /3\+ time-zone games/)
+})
+
 test('says no dominant pattern when the book is even', () => {
   const profile = buildTeamProfile({
     appearances: [

@@ -1,3 +1,4 @@
+import { restSplitKey, travelSplitKey } from './travelRest.ts'
 import { isColdTemp, isHotTemp } from './weatherBuckets.ts'
 import type { TeamAppearance, TeamRecord } from './teamPerformance.ts'
 
@@ -22,6 +23,13 @@ export type TeamProfileKey =
   | 'hot'
   | 'cold'
   | 'indoor'
+  | 'oneZone'
+  | 'twoZones'
+  | 'threePlus'
+  | 'shortRest'
+  | 'normalRest'
+  | 'longRest'
+  | 'byeRest'
 
 export type TeamProfile = {
   archetype: string
@@ -160,6 +168,69 @@ const SPLITS: SplitDef[] = [
     fadePhrase: 'indoors',
     detailNoun: 'indoor',
     match: (row) => row.weather?.bucket === 'indoor',
+  },
+  {
+    key: 'oneZone',
+    coverLabel: 'Covers after a 1-time-zone trip',
+    fadeLabel: 'Struggles after a 1-time-zone trip',
+    coverPhrase: 'after a 1-time-zone trip',
+    fadePhrase: 'after a 1-time-zone trip',
+    detailNoun: '1-time-zone',
+    match: (row) => travelSplitKey(row.travel) === 'oneZone',
+  },
+  {
+    key: 'twoZones',
+    coverLabel: 'Covers after a 2-time-zone trip',
+    fadeLabel: 'Struggles after a 2-time-zone trip',
+    coverPhrase: 'after a 2-time-zone trip',
+    fadePhrase: 'after a 2-time-zone trip',
+    detailNoun: '2-time-zone',
+    match: (row) => travelSplitKey(row.travel) === 'twoZones',
+  },
+  {
+    key: 'threePlus',
+    coverLabel: 'Covers after a 3+ time-zone trip',
+    fadeLabel: 'Struggles after a 3+ time-zone trip',
+    coverPhrase: 'after a 3+ time-zone trip',
+    fadePhrase: 'after a 3+ time-zone trip',
+    detailNoun: '3+ time-zone',
+    match: (row) => travelSplitKey(row.travel) === 'threePlus',
+  },
+  {
+    key: 'shortRest',
+    coverLabel: 'Covers on a short week',
+    fadeLabel: 'Struggles on a short week',
+    coverPhrase: 'on a short week',
+    fadePhrase: 'on a short week',
+    detailNoun: 'short-week',
+    match: (row) => restSplitKey(row.rest) === 'short',
+  },
+  {
+    key: 'normalRest',
+    coverLabel: 'Covers on normal rest',
+    fadeLabel: 'Struggles on normal rest',
+    coverPhrase: 'on normal rest',
+    fadePhrase: 'on normal rest',
+    detailNoun: 'normal-rest',
+    match: (row) => restSplitKey(row.rest) === 'normal',
+  },
+  {
+    key: 'longRest',
+    coverLabel: 'Covers on a long week',
+    fadeLabel: 'Struggles on a long week',
+    coverPhrase: 'on a long week',
+    fadePhrase: 'on a long week',
+    detailNoun: 'long-week',
+    match: (row) => restSplitKey(row.rest) === 'long',
+  },
+  {
+    key: 'byeRest',
+    coverLabel: 'Covers off a bye',
+    fadeLabel: 'Struggles off a bye',
+    coverPhrase: 'off a bye',
+    fadePhrase: 'off a bye',
+    detailNoun: 'bye',
+    match: (row) => restSplitKey(row.rest) === 'bye',
   },
 ]
 

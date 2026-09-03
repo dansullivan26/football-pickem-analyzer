@@ -4,8 +4,8 @@ import {
   appearanceMarketLabel,
   assignTeamSlugs,
   buildTeamDirectory,
-  dogSize,
   formatRankedTeamName,
+  spreadSize,
   marketForSide,
   resultForSide,
   straightUpResult,
@@ -123,11 +123,12 @@ test('marketForSide and resultForSide follow the CBS home number', () => {
   assert.equal(resultForSide('home', null), null)
 })
 
-test('appearanceMarketLabel sizes dogs at the FG and TD numbers', () => {
-  assert.equal(dogSize(3), 'small')
-  assert.equal(dogSize(3.5), 'medium')
-  assert.equal(dogSize(7), 'medium')
-  assert.equal(dogSize(7.5), 'big')
+test('appearanceMarketLabel sizes dogs and favorites at the FG and TD numbers', () => {
+  assert.equal(spreadSize(3), 'small')
+  assert.equal(spreadSize(3.5), 'medium')
+  assert.equal(spreadSize(7), 'medium')
+  assert.equal(spreadSize(7.5), 'big')
+  assert.equal(spreadSize(-7.5), 'big')
   assert.equal(
     appearanceMarketLabel({
       venue: 'away',
@@ -150,7 +151,15 @@ test('appearanceMarketLabel sizes dogs at the FG and TD numbers', () => {
       market: 'favorite',
       homeSpread: -7.5,
     }),
-    'favorite',
+    'big favorite',
+  )
+  assert.equal(
+    appearanceMarketLabel({
+      venue: 'away',
+      market: 'favorite',
+      homeSpread: 6.5,
+    }),
+    'medium favorite',
   )
 })
 

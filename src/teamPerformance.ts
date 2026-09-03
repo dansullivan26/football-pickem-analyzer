@@ -164,7 +164,7 @@ export function marketForSide(
   return side === favoriteSide ? 'favorite' : 'dog'
 }
 
-export type DogSize = 'small' | 'medium' | 'big'
+export type SpreadSize = 'small' | 'medium' | 'big'
 
 /** This side’s plus-number. Positive when they are the dog. */
 export function sideSpread(side: 'home' | 'away', homeSpread: number) {
@@ -173,24 +173,22 @@ export function sideSpread(side: 'home' | 'away', homeSpread: number) {
 
 /**
  * Small ≤3 (a FG), medium 3.5–7 (up to a TD), big 7.5+ (more than a TD).
- * UNC +7.5 is a big dog.
+ * UNC +7.5 is a big dog; TCU -7.5 is a big favorite.
  */
-export function dogSize(points: number): DogSize | null {
-  if (points <= 0) return null
-  if (points <= 3) return 'small'
-  if (points <= 7) return 'medium'
+export function spreadSize(points: number): SpreadSize | null {
+  const magnitude = Math.abs(points)
+  if (magnitude === 0) return null
+  if (magnitude <= 3) return 'small'
+  if (magnitude <= 7) return 'medium'
   return 'big'
 }
 
 export function appearanceMarketLabel(
   row: Pick<TeamAppearance, 'venue' | 'market' | 'homeSpread'>,
 ) {
-  if (row.market !== 'dog') return row.market
-  const size = dogSize(sideSpread(row.venue, row.homeSpread))
-  if (size === 'big') return 'big dog'
-  if (size === 'medium') return 'medium dog'
-  if (size === 'small') return 'small dog'
-  return 'dog'
+  if (row.market === 'pickem') return row.market
+  const size = spreadSize(sideSpread(row.venue, row.homeSpread))
+  return size ? `${size} ${row.market}` : row.market
 }
 
 export function resultForSide(

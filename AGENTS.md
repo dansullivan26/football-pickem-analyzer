@@ -53,8 +53,8 @@ GitHub Pages serves these deep links via `404.html`. `vite.config.ts` sets a
 
 - Run `npm test` for logic changes; the suite covers scoring, cover results,
   team/career/line history, predictions, card strategy, and route parsing.
-- Run `npm run build` to confirm types still pass before opening a PR.
-- For any UI change, run the dev server and verify the affected page(s) render.
+- Run `npm run build` to confirm types still pass before pushing to `main`.
+- Ship on `main` and skip demo recordings — see `.cursor/rules/ship-on-main.mdc`.
 - There is no backend to run; do not add server infrastructure to test.
 
 ## Known lint state

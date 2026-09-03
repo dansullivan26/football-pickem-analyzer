@@ -125,10 +125,10 @@ export function classifyRest(
 }
 
 export function formatRestLabel(days: number, kind: RestKind) {
-  if (kind === 'short') return `Short week · ${days}d`
-  if (kind === 'long') return `Long week · ${days}d`
-  if (kind === 'bye') return `Off a bye · ${days}d`
-  return `Normal week · ${days}d`
+  if (kind === 'short') return `Short week (${days}d)`
+  if (kind === 'long') return `Long week (${days}d)`
+  if (kind === 'bye') return `Off a bye (${days}d)`
+  return `Normal week (${days}d)`
 }
 
 export function formatTravelLabel(zones: number, direction: TravelDirection) {

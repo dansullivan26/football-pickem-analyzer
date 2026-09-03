@@ -68,7 +68,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 80,
       }),
     ),
-    'Adverse weather · wet weather · wind weather',
+    'Adverse / wet / wind weather',
   )
   assert.equal(
     formatWeatherBucket(
@@ -90,7 +90,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 5,
       }),
     ),
-    'Comfortable weather · hot weather',
+    'Comfortable / hot weather',
   )
   assert.equal(
     formatWeatherBucket(
@@ -101,7 +101,7 @@ test('formatWeatherBucket writes the appearance label', () => {
         precipChance: 70,
       }),
     ),
-    'Adverse weather · wet weather · cold weather',
+    'Adverse / wet / cold weather',
   )
   assert.equal(formatWeatherBucket(null), null)
 })

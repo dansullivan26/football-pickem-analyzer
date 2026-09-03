@@ -320,7 +320,7 @@ export default function TeamsView({
                   onSelectTeam(team.slug)
                 }}
               >
-                <span>{formatRankedTeamName(team.name, team.rank)}</span>
+                <span>{team.name}</span>
                 <small>
                   {team.conference ?? team.sport} · {team.overall.detail}
                 </small>

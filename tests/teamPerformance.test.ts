@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  appearanceMarketLabel,
   assignTeamSlugs,
   buildTeamDirectory,
+  dogSize,
   formatRankedTeamName,
   marketForSide,
   resultForSide,
@@ -119,6 +121,37 @@ test('marketForSide and resultForSide follow the CBS home number', () => {
   assert.equal(resultForSide('home', 'away'), 'loss')
   assert.equal(resultForSide('home', 'push'), 'push')
   assert.equal(resultForSide('home', null), null)
+})
+
+test('appearanceMarketLabel sizes dogs at the FG and TD numbers', () => {
+  assert.equal(dogSize(3), 'small')
+  assert.equal(dogSize(3.5), 'medium')
+  assert.equal(dogSize(7), 'medium')
+  assert.equal(dogSize(7.5), 'big')
+  assert.equal(
+    appearanceMarketLabel({
+      venue: 'away',
+      market: 'dog',
+      homeSpread: -7.5,
+    }),
+    'big dog',
+  )
+  assert.equal(
+    appearanceMarketLabel({
+      venue: 'home',
+      market: 'dog',
+      homeSpread: 2.5,
+    }),
+    'small dog',
+  )
+  assert.equal(
+    appearanceMarketLabel({
+      venue: 'home',
+      market: 'favorite',
+      homeSpread: -7.5,
+    }),
+    'favorite',
+  )
 })
 
 test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {

@@ -164,6 +164,35 @@ export function marketForSide(
   return side === favoriteSide ? 'favorite' : 'dog'
 }
 
+export type DogSize = 'small' | 'medium' | 'big'
+
+/** This side’s plus-number. Positive when they are the dog. */
+export function sideSpread(side: 'home' | 'away', homeSpread: number) {
+  return side === 'home' ? homeSpread : -homeSpread
+}
+
+/**
+ * Small ≤3 (a FG), medium 3.5–7 (up to a TD), big 7.5+ (more than a TD).
+ * UNC +7.5 is a big dog.
+ */
+export function dogSize(points: number): DogSize | null {
+  if (points <= 0) return null
+  if (points <= 3) return 'small'
+  if (points <= 7) return 'medium'
+  return 'big'
+}
+
+export function appearanceMarketLabel(
+  row: Pick<TeamAppearance, 'venue' | 'market' | 'homeSpread'>,
+) {
+  if (row.market !== 'dog') return row.market
+  const size = dogSize(sideSpread(row.venue, row.homeSpread))
+  if (size === 'big') return 'big dog'
+  if (size === 'medium') return 'medium dog'
+  if (size === 'small') return 'small dog'
+  return 'dog'
+}
+
 export function resultForSide(
   side: 'home' | 'away',
   cover: CoverResult,

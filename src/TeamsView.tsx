@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import TeamLogo from './TeamLogo'
 import weatherHistoryData from './data/weather-history.json'
 import {
+  appearanceMarketLabel,
   buildTeamDirectory,
   formatRankedTeamName,
   wonOutrightAsDog,
@@ -558,7 +559,7 @@ export default function TeamsView({
                             )}
                           </strong>
                           <small>
-                            CBS {teamLine(row)} · {row.market}
+                            CBS {teamLine(row)} · {appearanceMarketLabel(row)}
                             {poolPick && (
                               <>
                                 {' · '}

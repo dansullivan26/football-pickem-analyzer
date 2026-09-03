@@ -114,8 +114,8 @@ export function classifyRest(
   sport: 'NFL' | 'NCAAF' = 'NCAAF',
   scheduleBacked = false,
 ): RestKind {
-  if (days < 6) return 'short'
-  if (days <= 8) return 'normal'
+  if (days < 7) return 'short'
+  if (days === 7) return 'normal'
   if (days >= 13 && (sport === 'NFL' || scheduleBacked)) return 'bye'
   return 'long'
 }
@@ -124,7 +124,7 @@ export function formatRestLabel(days: number, kind: RestKind) {
   if (kind === 'short') return `Short week · ${days}d`
   if (kind === 'long') return `Long week · ${days}d`
   if (kind === 'bye') return `Off a bye · ${days}d`
-  return `${days}d rest`
+  return `Normal week · ${days}d`
 }
 
 export function formatTravelLabel(zones: number, direction: TravelDirection) {
@@ -146,7 +146,7 @@ export const TRAVEL_SPLIT_LABELS: Record<TravelSplitKey, string> = {
 
 export const REST_SPLIT_LABELS: Record<RestSplitKey, string> = {
   short: 'Short week',
-  normal: 'Normal rest',
+  normal: 'Normal week',
   long: 'Long week',
   bye: 'Off a bye',
 }
@@ -159,7 +159,7 @@ export const TRAVEL_SPLIT_NOUNS: Record<TravelSplitKey, string> = {
 
 export const REST_SPLIT_NOUNS: Record<RestSplitKey, string> = {
   short: 'short-week teams',
-  normal: 'normal-rest teams',
+  normal: 'normal-week teams',
   long: 'long-week teams',
   bye: 'bye teams',
 }
@@ -449,10 +449,10 @@ export function formatGameTravelLine(
 
 export function formatGameRestLine(row: GameTravelRest) {
   const parts: string[] = []
-  if (row.awayRest && row.awayRest.kind !== 'normal') {
+  if (row.awayRest) {
     parts.push(`Away ${row.awayRest.label}`)
   }
-  if (row.homeRest && row.homeRest.kind !== 'normal') {
+  if (row.homeRest) {
     parts.push(`Home ${row.homeRest.label}`)
   }
   return parts.length ? parts.join(' · ') : null

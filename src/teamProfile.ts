@@ -223,11 +223,11 @@ const SPLITS: SplitDef[] = [
   },
   {
     key: 'normalRest',
-    coverLabel: 'Covers on normal rest',
-    fadeLabel: 'Struggles on normal rest',
-    coverPhrase: 'on normal rest',
-    fadePhrase: 'on normal rest',
-    detailNoun: 'normal-rest',
+    coverLabel: 'Covers on a normal week',
+    fadeLabel: 'Struggles on a normal week',
+    coverPhrase: 'on a normal week',
+    fadePhrase: 'on a normal week',
+    detailNoun: 'normal-week',
     match: (row) => restSplitKey(row.rest) === 'normal',
   },
   {

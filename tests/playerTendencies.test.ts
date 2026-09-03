@@ -213,7 +213,7 @@ test('summarizePlayer pick rates follow the traveling and rested sides', () => {
       '1:home',
       {
         travel: { zones: 0, direction: 'same', label: 'Same time zone' },
-        rest: { days: 7, kind: 'normal', label: '7d rest' },
+        rest: { days: 7, kind: 'normal', label: 'Normal week · 7d' },
       },
     ],
     [

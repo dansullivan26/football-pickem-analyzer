@@ -499,14 +499,14 @@ export default function TeamsView({
                     hint={travelRestTitle()}
                   />
                   <Metric
-                    label="Normal rest"
+                    label="Normal week"
                     split={selected.normalRest}
-                    hint="6–8 days since the last card game"
+                    hint="Exactly 7 days since the last kickoff"
                   />
                   <Metric
                     label="Long week"
                     split={selected.longRest}
-                    hint="9+ days; a college card gap without a schedule row is not a bye"
+                    hint="8+ days; a college card gap without a schedule row is not a bye"
                   />
                   <Metric
                     label="Off a bye"

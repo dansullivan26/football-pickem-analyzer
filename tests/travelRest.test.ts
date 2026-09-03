@@ -218,18 +218,18 @@ test('travelingSide needs a 2+ hop and shorterRestSide needs a days gap', () => 
     ),
     null,
   )
-  assert.equal(shorterRestSide(null, { days: 7, kind: 'normal', label: '7d rest' }), null)
+  assert.equal(shorterRestSide(null, { days: 7, kind: 'normal', label: 'Normal week · 7d' }), null)
   assert.equal(
     shorterRestSide(
       { days: 4, kind: 'short', label: 'Short week · 4d' },
-      { days: 7, kind: 'normal', label: '7d rest' },
+      { days: 7, kind: 'normal', label: 'Normal week · 7d' },
     ),
     'away',
   )
   assert.equal(
     shorterRestSide(
       { days: 14, kind: 'bye', label: 'Off a bye · 14d' },
-      { days: 7, kind: 'normal', label: '7d rest' },
+      { days: 7, kind: 'normal', label: 'Normal week · 7d' },
     ),
     'home',
   )
@@ -273,8 +273,9 @@ test('North Carolina traveling to Dublin is five zones east', () => {
 
 test('classifyRest only calls a 13+ day gap a bye in the NFL', () => {
   assert.equal(classifyRest(4, 'NCAAF'), 'short')
+  assert.equal(classifyRest(6, 'NFL'), 'short')
   assert.equal(classifyRest(7, 'NFL'), 'normal')
-  assert.equal(classifyRest(10, 'NCAAF'), 'long')
+  assert.equal(classifyRest(8, 'NCAAF'), 'long')
   assert.equal(classifyRest(14, 'NCAAF'), 'long')
   assert.equal(classifyRest(14, 'NCAAF', true), 'bye')
   assert.equal(classifyRest(14, 'NFL'), 'bye')

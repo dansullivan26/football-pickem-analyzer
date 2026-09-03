@@ -35,6 +35,8 @@ export type SideRest = {
   days: number
   kind: RestKind
   label: string
+  /** For short-week rest: where they were coming from last kickoff (when known). */
+  travelFrom?: string | null
 }
 
 export type GameTravelRest = {
@@ -244,10 +246,13 @@ function sideRest(
   days: number | null,
   sport: 'NFL' | 'NCAAF',
   scheduleBacked = false,
+  travelFrom?: string | null,
 ): SideRest | null {
   if (days == null || days < 0) return null
   const kind = classifyRest(days, sport, scheduleBacked)
-  return { days, kind, label: formatRestLabel(days, kind) }
+  const base = { days, kind, label: formatRestLabel(days, kind) }
+  if (kind !== 'short' || !travelFrom) return base
+  return { ...base, travelFrom }
 }
 
 function sideTravel(
@@ -401,15 +406,50 @@ export function buildTravelRestIndex(
     )
     const awayKickoff = mergePreviousKickoff(awayPrev?.kickoff, awaySchedule)
     const homeKickoff = mergePreviousKickoff(homePrev?.kickoff, homeSchedule)
+
+    // For "schedule-backed rest" (bye), we only want to allow bye when the
+    // schedule row actually won the merge — not when a card kickoff was later.
+    const awayKickoffFromSchedule = Boolean(
+      awaySchedule && awayKickoff === awaySchedule,
+    )
+    const homeKickoffFromSchedule = Boolean(
+      homeSchedule && homeKickoff === homeSchedule,
+    )
+    const awayKickoffFromCard = Boolean(
+      awayPrev?.kickoff && awayKickoff === awayPrev.kickoff,
+    )
+    const homeKickoffFromCard = Boolean(
+      homePrev?.kickoff && homeKickoff === homePrev.kickoff,
+    )
+
+    const venuePlace = (venue: GameVenue | null | undefined) => {
+      if (!venue) return null
+      if (venue.city && venue.state) return `${venue.city}, ${venue.state}`
+      return venue.stadium ?? null
+    }
+
+    // For short-week rest only: if the team was the away side in the prior
+    // kickoff game, show where they were coming from (the prior venue).
+    const awayTravelFrom =
+      awayKickoffFromCard && awayPrev?.away === game.away
+        ? venuePlace(awayPrev.venue)
+        : null
+    const homeTravelFrom =
+      homeKickoffFromCard && homePrev?.away === game.home
+        ? venuePlace(homePrev.venue)
+        : null
+
     const awayRest = sideRest(
       awayKickoff ? restDays(awayKickoff, game.kickoff) : null,
       game.sport,
-      awaySchedule != null,
+      awayKickoffFromSchedule,
+      awayTravelFrom,
     )
     const homeRest = sideRest(
       homeKickoff ? restDays(homeKickoff, game.kickoff) : null,
       game.sport,
-      homeSchedule != null,
+      homeKickoffFromSchedule,
+      homeTravelFrom,
     )
 
     byEvent.set(game.cbsEventId, {
@@ -454,11 +494,13 @@ export function formatGameRestLine(
   const parts: string[] = []
   if (row.awayRest) {
     const who = names?.away?.trim() || 'Away'
-    parts.push(`${who} ${row.awayRest.label}`)
+    const from = row.awayRest.travelFrom ? ` · from ${row.awayRest.travelFrom}` : ''
+    parts.push(`${who} ${row.awayRest.label}${from}`)
   }
   if (row.homeRest) {
     const who = names?.home?.trim() || 'Home'
-    parts.push(`${who} ${row.homeRest.label}`)
+    const from = row.homeRest.travelFrom ? ` · from ${row.homeRest.travelFrom}` : ''
+    parts.push(`${who} ${row.homeRest.label}${from}`)
   }
   return parts.length ? `Rest: ${parts.join(' · ')}` : null
 }

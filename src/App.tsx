@@ -43,6 +43,7 @@ import { formatRankedTeamName, teamKey, teamPageSlugs } from './teamPerformance'
 import {
   formatGameRestLine,
   formatGameTravelLine,
+  gameTravelZones,
   travelRestTitle,
   buildTravelRestIndex,
 } from './travelRest'
@@ -723,7 +724,10 @@ function App() {
   const [feed, setFeed] = useState<OddsFeed | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<EdgeCategory | 'all'>('all')
-  const [sort, setSort] = useState<'kickoff' | 'recommendation'>('kickoff')
+  const [sort, setSort] = useState<'kickoff' | 'recommendation' | 'travel'>(
+    'kickoff',
+  )
+  const [travelMin, setTravelMin] = useState<0 | 1 | 2 | 3>(0)
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
   const [upcomingOnly, setUpcomingOnly] = useState(true)
@@ -941,35 +945,52 @@ function App() {
   )
 
   const visibleGames = useMemo(() => {
-    const filtered = scopedAnalyses.filter(
-      ({ category }) => filter === 'all' || category === filter,
-    )
+    const filtered = scopedAnalyses.filter(({ category, game }) => {
+      if (filter !== 'all' && category !== filter) return false
+      if (travelMin > 0) {
+        const zones = gameTravelZones(travelRestByEvent.get(game.cbsEventId))
+        if (zones < travelMin) return false
+      }
+      return true
+    })
 
-    if (sort !== 'recommendation') return filtered
+    if (sort === 'recommendation') {
+      return [...filtered].sort((a, b) =>
+        compareRecommendationOrder(
+          recommendationOrderKey({
+            category: a.category,
+            edge: a.edge,
+            recommendedSide: a.recommendedSide,
+            homeSpread: a.game.homeSpread,
+            liveHomeSpread: a.liveHomeSpread,
+            consensus: a.consensus,
+            kickoff: a.game.kickoff,
+          }),
+          recommendationOrderKey({
+            category: b.category,
+            edge: b.edge,
+            recommendedSide: b.recommendedSide,
+            homeSpread: b.game.homeSpread,
+            liveHomeSpread: b.liveHomeSpread,
+            consensus: b.consensus,
+            kickoff: b.game.kickoff,
+          }),
+        ),
+      )
+    }
 
-    return [...filtered].sort((a, b) =>
-      compareRecommendationOrder(
-        recommendationOrderKey({
-          category: a.category,
-          edge: a.edge,
-          recommendedSide: a.recommendedSide,
-          homeSpread: a.game.homeSpread,
-          liveHomeSpread: a.liveHomeSpread,
-          consensus: a.consensus,
-          kickoff: a.game.kickoff,
-        }),
-        recommendationOrderKey({
-          category: b.category,
-          edge: b.edge,
-          recommendedSide: b.recommendedSide,
-          homeSpread: b.game.homeSpread,
-          liveHomeSpread: b.liveHomeSpread,
-          consensus: b.consensus,
-          kickoff: b.game.kickoff,
-        }),
-      ),
-    )
-  }, [filter, scopedAnalyses, sort])
+    if (sort === 'travel') {
+      return [...filtered].sort((a, b) => {
+        const zoneDiff =
+          gameTravelZones(travelRestByEvent.get(b.game.cbsEventId)) -
+          gameTravelZones(travelRestByEvent.get(a.game.cbsEventId))
+        if (zoneDiff !== 0) return zoneDiff
+        return a.game.kickoff.localeCompare(b.game.kickoff)
+      })
+    }
+
+    return filtered
+  }, [filter, scopedAnalyses, sort, travelMin])
 
   return (
     <div className="app-shell">
@@ -1179,11 +1200,17 @@ function App() {
               <select
                 value={sort}
                 onChange={(event) =>
-                  setSort(event.target.value as 'kickoff' | 'recommendation')
+                  setSort(
+                    event.target.value as
+                      | 'kickoff'
+                      | 'recommendation'
+                      | 'travel',
+                  )
                 }
               >
                 <option value="kickoff">Kickoff time</option>
                 <option value="recommendation">Recommendation</option>
+                <option value="travel">Travel (most zones)</option>
               </select>
             </label>
             <label>
@@ -1203,6 +1230,22 @@ function App() {
                       {day.label}
                     </option>
                   ))}
+              </select>
+            </label>
+            <label>
+              <span className="sr-only">Filter by travel</span>
+              <select
+                value={String(travelMin)}
+                onChange={(event) =>
+                  setTravelMin(
+                    Number(event.target.value) as 0 | 1 | 2 | 3,
+                  )
+                }
+              >
+                <option value="0">Any travel</option>
+                <option value="1">1+ time zones</option>
+                <option value="2">2+ time zones</option>
+                <option value="3">3+ time zones</option>
               </select>
             </label>
             <label className="upcoming-filter">
@@ -1294,6 +1337,7 @@ function App() {
                   setFilter('all')
                   setLeague('all')
                   setSort('kickoff')
+                  setTravelMin(0)
                   setQuery('')
                   setUpcomingOnly(false)
                   setCompletedOnly(false)

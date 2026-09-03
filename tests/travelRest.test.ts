@@ -7,6 +7,7 @@ import {
   formatGameTravelLine,
   formatTravelLabel,
   frozenVenueCaptured,
+  gameTravelZones,
 } from '../src/travelRest.ts'
 import {
   timeZoneFromTeamLabel,
@@ -145,18 +146,41 @@ test('Hawaii traveling to Stanford is three zones east', () => {
     kickoff,
   )
   assert.deepEqual(hop, { zones: 3, direction: 'east' })
-  assert.equal(formatTravelLabel(3, 'east'), '3 zones east')
+  assert.equal(formatTravelLabel(3, 'east'), '3 time zones east')
+  assert.equal(formatTravelLabel(1, 'west'), '1 time zone west')
   assert.equal(
     formatGameTravelLine(
       {
-        awayTravel: { zones: 3, direction: 'east', label: '3 zones east' },
+        awayTravel: { zones: 3, direction: 'east', label: '3 time zones east' },
         homeTravel: null,
         awayRest: null,
         homeRest: null,
       },
       { away: 'Hawaii' },
     ),
-    'Hawaii traveling 3 zones east',
+    'Hawaii traveling 3 time zones east',
+  )
+})
+
+test('gameTravelZones uses the larger hop on the card', () => {
+  assert.equal(gameTravelZones(null), 0)
+  assert.equal(
+    gameTravelZones({
+      awayTravel: { zones: 0, direction: 'same', label: 'Same time zone' },
+      homeTravel: null,
+      awayRest: null,
+      homeRest: null,
+    }),
+    0,
+  )
+  assert.equal(
+    gameTravelZones({
+      awayTravel: { zones: 3, direction: 'east', label: '3 time zones east' },
+      homeTravel: { zones: 1, direction: 'west', label: '1 time zone west' },
+      awayRest: null,
+      homeRest: null,
+    }),
+    3,
   )
 })
 
@@ -210,7 +234,7 @@ test('buildTravelRestIndex stamps away travel and Hawaii rest between card games
   )
 
   const atStanford = index.byEvent.get(1)
-  assert.equal(atStanford?.awayTravel?.label, '3 zones east')
+  assert.equal(atStanford?.awayTravel?.label, '3 time zones east')
   assert.equal(atStanford?.awayRest, null)
 
   const atHawaii = index.byEvent.get(2)

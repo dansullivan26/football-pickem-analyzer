@@ -121,7 +121,21 @@ export function formatRestLabel(days: number, kind: RestKind) {
 
 export function formatTravelLabel(zones: number, direction: TravelDirection) {
   if (direction === 'same' || zones === 0) return 'Same time zone'
-  return `${zones} zone${zones === 1 ? '' : 's'} ${direction}`
+  return `${zones} time zone${zones === 1 ? '' : 's'} ${direction}`
+}
+
+/** Largest hop on the card — visitor or a home team that left its own zone. */
+export function gameTravelZones(row: GameTravelRest | null | undefined) {
+  if (!row) return 0
+  const away =
+    row.awayTravel && row.awayTravel.direction !== 'same'
+      ? row.awayTravel.zones
+      : 0
+  const home =
+    row.homeTravel && row.homeTravel.direction !== 'same'
+      ? row.homeTravel.zones
+      : 0
+  return Math.max(away, home)
 }
 
 function sideRest(

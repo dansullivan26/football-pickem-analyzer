@@ -10,6 +10,7 @@ import {
 } from './teamPerformance'
 import { buildTeamProfile } from './teamProfile'
 import { formatRankStamp, formatRankTrail, teamWasRanked } from './teamRanks'
+import { travelRestTitle } from './travelRest'
 import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
@@ -501,6 +502,18 @@ export default function TeamsView({
                               <>
                                 {' · '}
                                 {weatherLabel}
+                              </>
+                            )}
+                            {row.travel && row.travel.direction !== 'same' && (
+                              <>
+                                {' · '}
+                                {row.travel.label}
+                              </>
+                            )}
+                            {row.rest && (
+                              <>
+                                {' · '}
+                                <span title={travelRestTitle()}>{row.rest.label}</span>
                               </>
                             )}
                           </small>

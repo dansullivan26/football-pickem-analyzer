@@ -1,0 +1,234 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import {
+  attachFrozenVenue,
+  buildTravelRestIndex,
+  classifyRest,
+  formatTravelLabel,
+  frozenVenueCaptured,
+} from '../src/travelRest.ts'
+import {
+  timeZoneFromTeamLabel,
+  timeZoneFromVenue,
+  travelZones,
+} from '../src/timeZones.ts'
+import type {
+  FrozenRecommendation,
+  RecommendationHistory,
+  Slate,
+  SlateGame,
+  Team,
+} from '../src/types.ts'
+
+function team(abbrev: string, location: string, extras: Partial<Team> = {}): Team {
+  return {
+    id: abbrev,
+    abbrev,
+    name: extras.name ?? location,
+    nickname: extras.nickname ?? location,
+    location,
+    conference: 'Test',
+    record: '',
+    rank: null,
+    pickemPctStraightUp: 50,
+    pickemPctAgainstSpread: 50,
+    ...extras,
+  }
+}
+
+function game(
+  cbsEventId: number,
+  away: Team,
+  home: Team,
+  extras: Partial<SlateGame> = {},
+): SlateGame {
+  return {
+    id: String(cbsEventId),
+    cbsEventId,
+    sport: 'NCAAF',
+    week: 1,
+    status: 'scheduled',
+    kickoff: extras.kickoff ?? '2026-08-29T19:00:00-04:00',
+    kickoffLabel: 'Sat 7:00 PM ET',
+    tv: null,
+    away,
+    home,
+    homeSpread: -3,
+    line: 'home -3',
+    venue: extras.venue ?? {
+      stadium: 'Home Stadium',
+      city: 'Stanford',
+      state: 'CA',
+      indoor: false,
+    },
+    ...extras,
+  }
+}
+
+function slateOf(games: SlateGame[]): Slate {
+  return {
+    source: { fetchedAt: '2026-09-01T00:00:00Z', timezone: 'America/New_York' },
+    pool: { name: 'Test', seasonYear: 2026, entriesCount: 25 },
+    week: {
+      label: 'Week 1',
+      order: 1,
+      gamesOnSlate: games.length,
+      ncaafGames: games.length,
+      nflGames: 0,
+    },
+    games,
+  }
+}
+
+function rec(
+  game: SlateGame,
+  extras: Partial<FrozenRecommendation> = {},
+): FrozenRecommendation {
+  return {
+    cbsEventId: game.cbsEventId,
+    sport: game.sport,
+    kickoff: game.kickoff,
+    away: game.away.abbrev,
+    home: game.home.abbrev,
+    homeSpread: game.homeSpread,
+    liveHomeSpread: game.homeSpread,
+    category: 'slight',
+    recommendedSide: 'home',
+    hook: null,
+    cover: null,
+    source: 'line-value',
+    pickedSide: 'home',
+    strength: 'mild',
+    score: 3,
+    venue: game.venue ?? null,
+    ...extras,
+  }
+}
+
+function historyOf(games: FrozenRecommendation[]): RecommendationHistory {
+  return {
+    updatedAt: '2026-09-01T00:00:00Z',
+    weeks: [
+      {
+        week: 1,
+        seasonYear: 2026,
+        label: 'Week 1',
+        capturedAt: '2026-09-01T00:00:00Z',
+        scored: false,
+        games,
+      },
+    ],
+  }
+}
+
+test('timeZoneFromTeamLabel reads states, Fla aliases, and school names', () => {
+  assert.equal(timeZoneFromTeamLabel('Hawaii'), 'Pacific/Honolulu')
+  assert.equal(timeZoneFromTeamLabel('Alabama'), 'America/Chicago')
+  assert.equal(timeZoneFromTeamLabel('Miami (Fla.)'), 'America/New_York')
+  assert.equal(timeZoneFromTeamLabel('Miami (OH)'), 'America/New_York')
+  assert.equal(timeZoneFromTeamLabel('Florida State'), 'America/New_York')
+  assert.equal(timeZoneFromTeamLabel('Boise State'), 'America/Boise')
+  assert.equal(timeZoneFromTeamLabel('Stanford'), 'America/Los_Angeles')
+})
+
+test('Hawaii traveling to Stanford is three zones east', () => {
+  const kickoff = new Date('2026-08-29T19:00:00-04:00')
+  const hop = travelZones(
+    timeZoneFromTeamLabel('Hawaii'),
+    timeZoneFromVenue({
+      stadium: 'Stanford Stadium',
+      city: 'Stanford',
+      state: 'CA',
+      indoor: false,
+    }),
+    kickoff,
+  )
+  assert.deepEqual(hop, { zones: 3, direction: 'east' })
+  assert.equal(formatTravelLabel(3, 'east'), '3 zones east')
+})
+
+test('North Carolina traveling to Dublin is five zones east', () => {
+  const hop = travelZones(
+    timeZoneFromTeamLabel('North Carolina'),
+    timeZoneFromVenue({
+      stadium: 'Aviva Stadium',
+      city: 'Dublin',
+      state: 'IE',
+      indoor: false,
+    }),
+    new Date('2026-08-29T12:00:00-04:00'),
+  )
+  assert.deepEqual(hop, { zones: 5, direction: 'east' })
+})
+
+test('classifyRest buckets short, long, and bye from calendar days', () => {
+  assert.equal(classifyRest(4), 'short')
+  assert.equal(classifyRest(7), 'normal')
+  assert.equal(classifyRest(10), 'long')
+  assert.equal(classifyRest(14), 'bye')
+})
+
+test('buildTravelRestIndex stamps away travel and Hawaii rest between card games', () => {
+  const hawaii = team('HAWAII', 'Hawaii')
+  const stanford = team('STNFRD', 'Stanford', { name: 'Stanford' })
+  const unlv = team('UNLV', 'UNLV')
+  const first = game(1, hawaii, stanford, {
+    kickoff: '2026-08-29T19:00:00-04:00',
+    venue: {
+      stadium: 'Stanford Stadium',
+      city: 'Stanford',
+      state: 'CA',
+      indoor: false,
+    },
+  })
+  const second = game(2, unlv, hawaii, {
+    kickoff: '2026-09-05T23:00:00-04:00',
+    venue: {
+      stadium: 'Ching Complex',
+      city: 'Honolulu',
+      state: 'Hawaii',
+      indoor: false,
+    },
+  })
+  const index = buildTravelRestIndex(
+    slateOf([first, second]),
+    historyOf([rec(first), rec(second)]),
+  )
+
+  const atStanford = index.byEvent.get(1)
+  assert.equal(atStanford?.awayTravel?.label, '3 zones east')
+  assert.equal(atStanford?.awayRest, null)
+
+  const atHawaii = index.byEvent.get(2)
+  assert.equal(atHawaii?.homeRest?.kind, 'normal')
+  assert.equal(atHawaii?.homeRest?.days, 7)
+  assert.equal(atHawaii?.awayTravel?.direction, 'west')
+})
+
+test('attachFrozenVenue writes then locks the slate venue', () => {
+  const first = attachFrozenVenue(
+    {},
+    {
+      venue: {
+        stadium: 'Stanford Stadium',
+        city: 'Stanford',
+        state: 'CA',
+        indoor: false,
+      },
+    },
+  )
+  assert.equal(frozenVenueCaptured(first), true)
+  const locked = attachFrozenVenue(
+    first,
+    {
+      venue: {
+        stadium: 'Aviva Stadium',
+        city: 'Dublin',
+        state: 'IE',
+        indoor: false,
+      },
+    },
+    true,
+  )
+  assert.deepEqual(locked, first)
+})

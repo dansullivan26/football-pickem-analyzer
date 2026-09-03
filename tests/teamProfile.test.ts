@@ -20,6 +20,8 @@ function appearance(
     awayScore: 10,
     homeScore: 24,
     weather: null,
+    travel: null,
+    rest: null,
     ...overrides,
   }
 }

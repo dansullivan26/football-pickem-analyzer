@@ -319,6 +319,8 @@ export type FrozenRecommendation = {
   /** CBS score when the slate dump has one. Not the card-strategy `score`. */
   awayScore?: number | null
   homeScore?: number | null
+  /** Game venue at freeze time. Absent on older recs. */
+  venue?: GameVenue | null
 }
 
 export type FrozenTiebreaker = {

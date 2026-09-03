@@ -1316,7 +1316,8 @@ select:focus {
   line-height: 1.35;
 }
 
-.game-weather {
+.game-weather,
+.game-travel-rest {
   flex-basis: 100%;
   color: var(--muted);
   line-height: 1.35;
@@ -2811,6 +2812,7 @@ footer {
      squeezes the kickoff time onto two lines. */
   .game-venue,
   .game-weather,
+  .game-travel-rest,
   .game-injuries {
     grid-column: 1 / -1;
   }

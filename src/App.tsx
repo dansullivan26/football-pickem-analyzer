@@ -40,6 +40,12 @@ import {
 } from './gameStatus'
 import { ourPickForGame } from './ourEntry'
 import { formatRankedTeamName, teamKey, teamPageSlugs } from './teamPerformance'
+import {
+  formatGameRestLine,
+  formatGameTravelLine,
+  travelRestTitle,
+  buildTravelRestIndex,
+} from './travelRest'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -70,6 +76,10 @@ const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory)
+const travelRestByEvent = buildTravelRestIndex(
+  slate,
+  recommendationHistory,
+).byEvent
 
 function slateTeamName(sport: 'NFL' | 'NCAAF', abbrev: string) {
   for (const game of slate.games) {
@@ -432,6 +442,9 @@ function GameCard({
 }) {
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
+  const travelRest = travelRestByEvent.get(game.cbsEventId)
+  const travelLine = travelRest ? formatGameTravelLine(travelRest) : null
+  const restLine = travelRest ? formatGameRestLine(travelRest) : null
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
@@ -452,6 +465,16 @@ function GameCard({
           </span>
         )}
         <GameWeather game={game} />
+        {travelLine && (
+          <span className="game-travel-rest" title={travelRestTitle()}>
+            {travelLine}
+          </span>
+        )}
+        {restLine && (
+          <span className="game-travel-rest" title={travelRestTitle()}>
+            {restLine}
+          </span>
+        )}
         <span className="game-injuries">
           <span>Injuries</span>
           <InjuryLink team={{ sport: game.sport, ...game.away }}>

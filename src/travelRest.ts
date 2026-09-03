@@ -1,0 +1,334 @@
+import { weeksForSeason } from './careerHistory.ts'
+import { etDayKey } from './gameStatus.ts'
+import {
+  timeZoneFromTeamLabel,
+  timeZoneFromVenue,
+  travelZones,
+  venueLooksNeutral,
+} from './timeZones.ts'
+import type {
+  FrozenRecommendation,
+  GameVenue,
+  RecommendationHistory,
+  Slate,
+  SlateGame,
+  Team,
+} from './types'
+
+export type RestKind = 'short' | 'normal' | 'long' | 'bye'
+export type TravelDirection = 'east' | 'west' | 'same'
+
+export type SideTravel = {
+  zones: number
+  direction: TravelDirection
+  label: string
+}
+
+export type SideRest = {
+  days: number
+  kind: RestKind
+  label: string
+}
+
+export type GameTravelRest = {
+  awayTravel: SideTravel | null
+  homeTravel: SideTravel | null
+  awayRest: SideRest | null
+  homeRest: SideRest | null
+}
+
+export type AppearanceTravelRest = {
+  travel: SideTravel | null
+  rest: SideRest | null
+}
+
+type TeamRef = {
+  sport: 'NFL' | 'NCAAF'
+  abbrev: string
+  location?: string | null
+  name?: string | null
+}
+
+type DatedGame = {
+  cbsEventId: number
+  sport: 'NFL' | 'NCAAF'
+  week: number
+  kickoff: string
+  away: string
+  home: string
+  venue: GameVenue | null
+}
+
+const REST_TITLE =
+  'Since this team last appeared on the CBS card, not a full schedule'
+
+export function venuesEqual(
+  left: GameVenue | null | undefined,
+  right: GameVenue | null | undefined,
+) {
+  if (left == null && right == null) return true
+  if (left == null || right == null) return false
+  return (
+    left.stadium === right.stadium &&
+    left.city === right.city &&
+    left.state === right.state &&
+    left.indoor === right.indoor
+  )
+}
+
+export function frozenVenueCaptured(game: { venue?: GameVenue | null }) {
+  return Object.hasOwn(game, 'venue')
+}
+
+/** Stamp the slate venue. After kickoff, keep the first stamp. */
+export function attachFrozenVenue<T extends { venue?: GameVenue | null }>(
+  frozen: T,
+  game: { venue?: GameVenue | null },
+  locked = false,
+): T {
+  if (locked && frozenVenueCaptured(frozen)) return frozen
+  const venue = game.venue ?? null
+  if (venuesEqual(frozen.venue, venue)) return frozen
+  return { ...frozen, venue }
+}
+
+function restDays(previousKickoff: string, kickoff: string) {
+  const previous = etDayKey(previousKickoff)
+  const next = etDayKey(kickoff)
+  if (!previous || !next) return null
+  const start = Date.parse(`${previous}T00:00:00Z`)
+  const end = Date.parse(`${next}T00:00:00Z`)
+  if (Number.isNaN(start) || Number.isNaN(end)) return null
+  return Math.round((end - start) / 86_400_000)
+}
+
+export function classifyRest(days: number): RestKind {
+  if (days < 6) return 'short'
+  if (days <= 8) return 'normal'
+  if (days <= 12) return 'long'
+  return 'bye'
+}
+
+export function formatRestLabel(days: number, kind: RestKind) {
+  if (kind === 'short') return `Short week · ${days}d`
+  if (kind === 'long') return `Long week · ${days}d`
+  if (kind === 'bye') return `Off a bye · ${days}d`
+  return `${days}d rest`
+}
+
+export function formatTravelLabel(zones: number, direction: TravelDirection) {
+  if (direction === 'same' || zones === 0) return 'Same time zone'
+  return `${zones} zone${zones === 1 ? '' : 's'} ${direction}`
+}
+
+function sideRest(days: number | null): SideRest | null {
+  if (days == null || days < 0) return null
+  const kind = classifyRest(days)
+  return { days, kind, label: formatRestLabel(days, kind) }
+}
+
+function sideTravel(
+  fromTz: string | null,
+  toTz: string | null,
+  kickoff: string,
+): SideTravel | null {
+  const at = new Date(kickoff)
+  if (Number.isNaN(at.getTime())) return null
+  const hop = travelZones(fromTz, toTz, at)
+  if (!hop) return null
+  return { ...hop, label: formatTravelLabel(hop.zones, hop.direction) }
+}
+
+function rosterTeam(
+  slate: Slate,
+  sport: 'NFL' | 'NCAAF',
+  abbrev: string,
+): Team | null {
+  for (const game of slate.games) {
+    if (game.sport !== sport) continue
+    if (game.away.abbrev === abbrev) return game.away
+    if (game.home.abbrev === abbrev) return game.home
+  }
+  return null
+}
+
+function teamTimeZone(team: TeamRef, homeVenues: GameVenue[]) {
+  const fromLabel =
+    timeZoneFromTeamLabel(team.location ?? null) ??
+    timeZoneFromTeamLabel(team.name ?? null)
+  if (fromLabel) return fromLabel
+  for (const venue of homeVenues) {
+    if (venueLooksNeutral(venue)) continue
+    const zone = timeZoneFromVenue(venue)
+    if (zone) return zone
+  }
+  return null
+}
+
+function collectGames(slate: Slate, history: RecommendationHistory) {
+  const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
+  const slateByEvent = new Map(slate.games.map((game) => [game.cbsEventId, game]))
+  const games = new Map<number, DatedGame>()
+
+  for (const week of seasonWeeks) {
+    for (const game of week.games) {
+      const live = slateByEvent.get(game.cbsEventId)
+      games.set(game.cbsEventId, {
+        cbsEventId: game.cbsEventId,
+        sport: game.sport,
+        week: week.week,
+        kickoff: game.kickoff,
+        away: game.away,
+        home: game.home,
+        venue: game.venue ?? live?.venue ?? null,
+      })
+    }
+  }
+
+  for (const game of slate.games) {
+    if (games.has(game.cbsEventId)) {
+      const existing = games.get(game.cbsEventId)
+      if (existing && !existing.venue && game.venue) {
+        games.set(game.cbsEventId, { ...existing, venue: game.venue })
+      }
+      continue
+    }
+    games.set(game.cbsEventId, {
+      cbsEventId: game.cbsEventId,
+      sport: game.sport,
+      week: slate.week.order,
+      kickoff: game.kickoff,
+      away: game.away.abbrev,
+      home: game.home.abbrev,
+      venue: game.venue ?? null,
+    })
+  }
+
+  return [...games.values()].sort(
+    (left, right) =>
+      left.kickoff.localeCompare(right.kickoff) ||
+      left.cbsEventId - right.cbsEventId,
+  )
+}
+
+function teamGames(games: DatedGame[], sport: string, abbrev: string) {
+  return games.filter(
+    (game) =>
+      game.sport === sport && (game.away === abbrev || game.home === abbrev),
+  )
+}
+
+function previousGame(games: DatedGame[], cbsEventId: number) {
+  const index = games.findIndex((game) => game.cbsEventId === cbsEventId)
+  if (index <= 0) return null
+  return games[index - 1] ?? null
+}
+
+export function buildTravelRestIndex(
+  slate: Slate,
+  history: RecommendationHistory,
+) {
+  const games = collectGames(slate, history)
+  const homeVenues = new Map<string, GameVenue[]>()
+  for (const game of games) {
+    if (!game.venue || venueLooksNeutral(game.venue)) continue
+    const key = `${game.sport}:${game.home}`
+    const list = homeVenues.get(key) ?? []
+    list.push(game.venue)
+    homeVenues.set(key, list)
+  }
+
+  const byEvent = new Map<number, GameTravelRest>()
+  const byAppearance = new Map<string, AppearanceTravelRest>()
+
+  for (const game of games) {
+    const venueTz = timeZoneFromVenue(game.venue)
+    const awayTeam = rosterTeam(slate, game.sport, game.away)
+    const homeTeam = rosterTeam(slate, game.sport, game.home)
+    const awayTz = teamTimeZone(
+      {
+        sport: game.sport,
+        abbrev: game.away,
+        location: awayTeam?.location,
+        name: awayTeam?.name,
+      },
+      homeVenues.get(`${game.sport}:${game.away}`) ?? [],
+    )
+    const homeTz = teamTimeZone(
+      {
+        sport: game.sport,
+        abbrev: game.home,
+        location: homeTeam?.location,
+        name: homeTeam?.name,
+      },
+      homeVenues.get(`${game.sport}:${game.home}`) ?? [],
+    )
+
+    const awayTravel = sideTravel(awayTz, venueTz, game.kickoff)
+    const homeHop = sideTravel(homeTz, venueTz, game.kickoff)
+    const homeTravel =
+      homeHop && homeHop.direction !== 'same' ? homeHop : null
+
+    const awayBook = teamGames(games, game.sport, game.away)
+    const homeBook = teamGames(games, game.sport, game.home)
+    const awayPrev = previousGame(awayBook, game.cbsEventId)
+    const homePrev = previousGame(homeBook, game.cbsEventId)
+    const awayRest = sideRest(
+      awayPrev ? restDays(awayPrev.kickoff, game.kickoff) : null,
+    )
+    const homeRest = sideRest(
+      homePrev ? restDays(homePrev.kickoff, game.kickoff) : null,
+    )
+
+    byEvent.set(game.cbsEventId, {
+      awayTravel,
+      homeTravel,
+      awayRest,
+      homeRest,
+    })
+    byAppearance.set(`${game.cbsEventId}:away`, {
+      travel: awayTravel,
+      rest: awayRest,
+    })
+    byAppearance.set(`${game.cbsEventId}:home`, {
+      travel: homeTravel,
+      rest: homeRest,
+    })
+  }
+
+  return { byEvent, byAppearance }
+}
+
+export function formatGameTravelLine(row: GameTravelRest) {
+  const parts: string[] = []
+  if (row.awayTravel && row.awayTravel.direction !== 'same') {
+    parts.push(`Away ${row.awayTravel.label}`)
+  }
+  if (row.homeTravel) {
+    parts.push(`Home ${row.homeTravel.label}`)
+  }
+  return parts.length ? parts.join(' · ') : null
+}
+
+export function formatGameRestLine(row: GameTravelRest) {
+  const parts: string[] = []
+  if (row.awayRest && row.awayRest.kind !== 'normal') {
+    parts.push(`Away ${row.awayRest.label}`)
+  }
+  if (row.homeRest && row.homeRest.kind !== 'normal') {
+    parts.push(`Home ${row.homeRest.label}`)
+  }
+  return parts.length ? parts.join(' · ') : null
+}
+
+export function travelRestTitle() {
+  return REST_TITLE
+}
+
+export function resolveGameVenue(
+  frozen: Pick<FrozenRecommendation, 'venue'>,
+  live?: Pick<SlateGame, 'venue'> | null,
+) {
+  if (frozenVenueCaptured(frozen)) return frozen.venue ?? null
+  return live?.venue ?? frozen.venue ?? null
+}

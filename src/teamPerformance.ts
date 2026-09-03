@@ -1,5 +1,7 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { cbsTeamRank, frozenRanksCaptured } from './teamRanks.ts'
+import { buildTravelRestIndex } from './travelRest.ts'
+import type { SideRest, SideTravel } from './travelRest.ts'
 import { gameScores } from './gameStatus.ts'
 import {
   isColdTemp,
@@ -36,6 +38,8 @@ export type TeamAppearance = {
   /** This team's CBS rank that week. Undefined if we never stamped the rec. */
   rank?: number | null
   opponentRank?: number | null
+  travel: SideTravel | null
+  rest: SideRest | null
 }
 
 export type TeamSplit = {
@@ -322,6 +326,7 @@ export function buildTeamDirectory(
       .filter((game) => game.seasonYear === slate.pool.seasonYear)
       .map((game) => [game.cbsEventId, game]),
   )
+  const travelRest = buildTravelRestIndex(slate, history)
   const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
   for (const week of seasonWeeks) {
     for (const game of week.games) {
@@ -364,6 +369,12 @@ export function buildTeamDirectory(
             ...appearanceScores(game, slateByEvent.get(game.cbsEventId)),
             weather: weatherByEvent.get(game.cbsEventId) ?? null,
             ...appearanceRanks(game, venue, slateByEvent.get(game.cbsEventId)),
+            travel:
+              travelRest.byAppearance.get(`${game.cbsEventId}:${venue}`)
+                ?.travel ?? null,
+            rest:
+              travelRest.byAppearance.get(`${game.cbsEventId}:${venue}`)
+                ?.rest ?? null,
           },
         )
       }

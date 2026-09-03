@@ -447,15 +447,20 @@ export function formatGameTravelLine(
   return parts.length ? parts.join(' · ') : null
 }
 
-export function formatGameRestLine(row: GameTravelRest) {
+export function formatGameRestLine(
+  row: GameTravelRest,
+  names?: { away?: string; home?: string },
+) {
   const parts: string[] = []
   if (row.awayRest) {
-    parts.push(`Away ${row.awayRest.label}`)
+    const who = names?.away?.trim() || 'Away'
+    parts.push(`${who} ${row.awayRest.label}`)
   }
   if (row.homeRest) {
-    parts.push(`Home ${row.homeRest.label}`)
+    const who = names?.home?.trim() || 'Home'
+    parts.push(`${who} ${row.homeRest.label}`)
   }
-  return parts.length ? parts.join(' · ') : null
+  return parts.length ? `Rest: ${parts.join(' · ')}` : null
 }
 
 export function travelRestTitle() {

@@ -453,7 +453,12 @@ function GameCard({
         home: game.home.name,
       })
     : null
-  const restLine = travelRest ? formatGameRestLine(travelRest) : null
+  const restLine = travelRest
+    ? formatGameRestLine(travelRest, {
+        away: game.away.name,
+        home: game.home.name,
+      })
+    : null
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)

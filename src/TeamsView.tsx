@@ -502,7 +502,7 @@ export default function TeamsView({
                   <Metric
                     label="Long week"
                     split={selected.longRest}
-                    hint="8+ days"
+                    hint="8–12 days"
                   />
                   <Metric
                     label="Off a bye"

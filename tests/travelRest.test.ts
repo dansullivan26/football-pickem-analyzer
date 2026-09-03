@@ -161,11 +161,12 @@ test('North Carolina traveling to Dublin is five zones east', () => {
   assert.deepEqual(hop, { zones: 5, direction: 'east' })
 })
 
-test('classifyRest buckets short, long, and bye from calendar days', () => {
-  assert.equal(classifyRest(4), 'short')
-  assert.equal(classifyRest(7), 'normal')
-  assert.equal(classifyRest(10), 'long')
-  assert.equal(classifyRest(14), 'bye')
+test('classifyRest only calls a 13+ day gap a bye in the NFL', () => {
+  assert.equal(classifyRest(4, 'NCAAF'), 'short')
+  assert.equal(classifyRest(7, 'NFL'), 'normal')
+  assert.equal(classifyRest(10, 'NCAAF'), 'long')
+  assert.equal(classifyRest(14, 'NCAAF'), 'long')
+  assert.equal(classifyRest(14, 'NFL'), 'bye')
 })
 
 test('buildTravelRestIndex stamps away travel and Hawaii rest between card games', () => {

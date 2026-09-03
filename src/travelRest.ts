@@ -60,7 +60,7 @@ type DatedGame = {
 }
 
 const REST_TITLE =
-  'Since this team last appeared on the CBS card, not a full schedule'
+  'Rest uses this team’s last CBS-card kickoff. Bye is NFL-only — college card gaps are not byes.'
 
 export function venuesEqual(
   left: GameVenue | null | undefined,
@@ -102,11 +102,14 @@ function restDays(previousKickoff: string, kickoff: string) {
   return Math.round((end - start) / 86_400_000)
 }
 
-export function classifyRest(days: number): RestKind {
+export function classifyRest(
+  days: number,
+  sport: 'NFL' | 'NCAAF' = 'NCAAF',
+): RestKind {
   if (days < 6) return 'short'
   if (days <= 8) return 'normal'
-  if (days <= 12) return 'long'
-  return 'bye'
+  if (sport === 'NFL' && days >= 13) return 'bye'
+  return 'long'
 }
 
 export function formatRestLabel(days: number, kind: RestKind) {
@@ -121,9 +124,12 @@ export function formatTravelLabel(zones: number, direction: TravelDirection) {
   return `${zones} zone${zones === 1 ? '' : 's'} ${direction}`
 }
 
-function sideRest(days: number | null): SideRest | null {
+function sideRest(
+  days: number | null,
+  sport: 'NFL' | 'NCAAF',
+): SideRest | null {
   if (days == null || days < 0) return null
-  const kind = classifyRest(days)
+  const kind = classifyRest(days, sport)
   return { days, kind, label: formatRestLabel(days, kind) }
 }
 
@@ -275,9 +281,11 @@ export function buildTravelRestIndex(
     const homePrev = previousGame(homeBook, game.cbsEventId)
     const awayRest = sideRest(
       awayPrev ? restDays(awayPrev.kickoff, game.kickoff) : null,
+      game.sport,
     )
     const homeRest = sideRest(
       homePrev ? restDays(homePrev.kickoff, game.kickoff) : null,
+      game.sport,
     )
 
     byEvent.set(game.cbsEventId, {

@@ -1,5 +1,6 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { cbsTeamRank, frozenRanksCaptured } from './teamRanks.ts'
+import type { LastKickoffFile } from './lastKickoff.ts'
 import {
   classifyGameSites,
   collectHomeVenues,
@@ -435,6 +436,7 @@ export function buildTeamDirectory(
   slate: Slate,
   history: RecommendationHistory,
   weatherHistory: WeatherHistoryFile = { updatedAt: null, games: [] },
+  lastKickoff: LastKickoffFile | null = null,
 ): TeamDirectory {
   const roster = rosterFromSlate(slate)
   const groups = new Map<string, { info: RosterEntry; appearances: TeamAppearance[] }>()
@@ -451,7 +453,7 @@ export function buildTeamDirectory(
       .filter((game) => game.seasonYear === slate.pool.seasonYear)
       .map((game) => [game.cbsEventId, game]),
   )
-  const travelRest = buildTravelRestIndex(slate, history)
+  const travelRest = buildTravelRestIndex(slate, history, lastKickoff)
   const seasonWeeks = weeksForSeason(history.weeks, slate.pool.seasonYear)
   const homeVenues = collectHomeVenues(
     seasonWeeks.flatMap((week) =>

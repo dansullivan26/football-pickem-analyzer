@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import TeamLogo from './TeamLogo'
 import weatherHistoryData from './data/weather-history.json'
+import lastKickoffData from './data/last-kickoff.json'
+import type { LastKickoffFile } from './lastKickoff'
 import {
   appearanceMarketLabel,
   buildTeamDirectory,
@@ -118,6 +120,7 @@ export default function TeamsView({
         slate,
         recommendations,
         weatherHistoryData as WeatherHistoryFile,
+        lastKickoffData as LastKickoffFile,
       ),
     [slate, recommendations],
   )
@@ -480,11 +483,12 @@ export default function TeamsView({
               <section className="week-card team-split-card">
                 <div className="week-card-heading">
                   <div>
-                    <span>CBS-card gap</span>
+                    <span>Card + schedule</span>
                     <strong>Rest</strong>
                     <small>
-                      Days since this team&apos;s last CBS-card kickoff.
-                      Bye is NFL-only.
+                      Days since this team&apos;s last kickoff on the CBS
+                      card or the season schedule. College bye needs that
+                      schedule row.
                     </small>
                   </div>
                 </div>
@@ -502,7 +506,7 @@ export default function TeamsView({
                   <Metric
                     label="Long week"
                     split={selected.longRest}
-                    hint="9+ days; college card gaps are not byes"
+                    hint="9+ days; a college card gap without a schedule row is not a bye"
                   />
                   <Metric
                     label="Off a bye"

@@ -79,8 +79,9 @@ cleanup.
   with matching tests under `tests/`.
 - Static data is committed under `src/data/`; raw private dumps are gitignored
   and never belong in this repo.
-- Secrets (`SHARP_API_KEY`, `DROPS_TOKEN`, `GH_DISPATCH_TOKEN`, GrokBot webhook
-  values) are GitHub Actions/repo secrets — never commit them or print them.
+- Secrets (`SHARP_API_KEY`, `CFBD_API_KEY`, `DROPS_TOKEN`, `GH_DISPATCH_TOKEN`,
+  GrokBot webhook values) are GitHub Actions/repo secrets — never commit them
+  or print them.
 - Bad-beat stamps are published by **Save bad beat** into
   `src/data/bad-beats.json`. Browser `localStorage` is only an overlay until
   that file (and Pages) catch up. Do not treat a local `bad-beats.json` as

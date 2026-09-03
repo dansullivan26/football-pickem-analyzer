@@ -276,6 +276,7 @@ test('classifyRest only calls a 13+ day gap a bye in the NFL', () => {
   assert.equal(classifyRest(7, 'NFL'), 'normal')
   assert.equal(classifyRest(10, 'NCAAF'), 'long')
   assert.equal(classifyRest(14, 'NCAAF'), 'long')
+  assert.equal(classifyRest(14, 'NCAAF', true), 'bye')
   assert.equal(classifyRest(14, 'NFL'), 'bye')
 })
 
@@ -314,6 +315,35 @@ test('buildTravelRestIndex stamps away travel and Hawaii rest between card games
   assert.equal(atHawaii?.homeRest?.kind, 'normal')
   assert.equal(atHawaii?.homeRest?.days, 7)
   assert.equal(atHawaii?.awayTravel?.direction, 'west')
+})
+
+test('buildTravelRestIndex uses a schedule last-kickoff when the card has no prior', () => {
+  const hawaii = team('HAWAII', 'Hawaii')
+  const unlv = team('UNLV', 'UNLV')
+  const card = game(2, unlv, hawaii, {
+    kickoff: '2026-09-05T23:00:00-04:00',
+    venue: {
+      stadium: 'Ching Complex',
+      city: 'Honolulu',
+      state: 'Hawaii',
+      indoor: false,
+    },
+  })
+  const index = buildTravelRestIndex(slateOf([card]), historyOf([rec(card)]), {
+    updatedAt: '2026-09-01T00:00:00Z',
+    seasonYear: 2026,
+    teams: [
+      {
+        key: 'NCAAF:HAWAII',
+        lastKickoff: '2026-08-29T19:00:00-04:00',
+        source: 'cfbd',
+        label: "Hawai'i",
+      },
+    ],
+  })
+
+  assert.equal(index.byEvent.get(2)?.homeRest?.days, 7)
+  assert.equal(index.byEvent.get(2)?.homeRest?.kind, 'normal')
 })
 
 test('attachFrozenVenue writes then locks the slate venue', () => {

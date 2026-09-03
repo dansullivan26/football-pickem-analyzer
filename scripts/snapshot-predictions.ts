@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { snapshotPlayerForecasts } from '../src/playerPrediction.ts'
+import type { LastKickoffFile } from '../src/lastKickoff.ts'
 import type { PlayerHistory, RecommendationHistory, Slate } from '../src/types.ts'
 import type { PredictionForecasts } from '../src/playerPrediction.ts'
 
@@ -15,6 +16,14 @@ const recommendations = JSON.parse(
 const slate = JSON.parse(
   await readFile(new URL('src/data/current-slate.json', ROOT), 'utf8'),
 ) as Slate
+let lastKickoff: LastKickoffFile | null = null
+try {
+  lastKickoff = JSON.parse(
+    await readFile(new URL('src/data/last-kickoff.json', ROOT), 'utf8'),
+  ) as LastKickoffFile
+} catch {
+  // Schedule ingest has not landed yet.
+}
 
 let previous: PredictionForecasts | null = null
 try {
@@ -29,6 +38,7 @@ const next = snapshotPlayerForecasts(
   previous,
   Date.now(),
   slate,
+  lastKickoff,
 )
 
 await mkdir(new URL('src/data', ROOT), { recursive: true })

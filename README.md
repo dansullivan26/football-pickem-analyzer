@@ -162,6 +162,25 @@ strength bucket separately. The top tiles are the combined ATS record of every f
 recommendation (the side we liked), then every line-value card pick and
 every public fill. Strength buckets still sit under those.
 
+## Last kickoff (rest)
+
+Rest chips use the later of the last CBS-card kickoff and a season-schedule
+last kickoff. College games come from [CollegeFootballData](https://collegefootballdata.com)
+(Actions only). NFL games come from the public [nflverse](https://github.com/nflverse/nflverse-data)
+schedule file — no key. The browser never calls either source. Covers still
+come from player-dump agreement, never from these schedules.
+
+1. Request a free CFBD key at https://collegefootballdata.com/key (email only,
+   no credit card).
+2. Add it as the GitHub Actions secret `CFBD_API_KEY`.
+3. Run **Refresh last kickoff**, or wait for its daily schedule
+   (`17 10 * * *` UTC). Without the key, NFL rows still refresh and any
+   previous college rows are kept.
+
+A 13+ day college gap is a bye only when that schedule row exists. A card
+gap alone stays a long week. NFL byes were already schedule-honest on the
+card; nflverse covers a Thursday/London game the pool slate might skip.
+
 ## Refresh sportsbook lines
 
 1. Create a free SharpAPI account.

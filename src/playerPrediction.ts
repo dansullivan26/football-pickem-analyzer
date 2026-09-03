@@ -1,4 +1,5 @@
 import { sameSeasonWeek, weekIsBefore, weekSeason } from './careerHistory.ts'
+import type { LastKickoffFile } from './lastKickoff.ts'
 import { recIsNeutralSite } from './teamSite.ts'
 import {
   appearancePair,
@@ -895,9 +896,10 @@ export function snapshotPlayerForecasts(
   previous: PredictionForecasts | null,
   now = Date.now(),
   slate?: Slate | null,
+  lastKickoff: LastKickoffFile | null = null,
 ): PredictionForecasts {
   const travelRestByAppearance = slate
-    ? buildTravelRestIndex(slate, recommendations).byAppearance
+    ? buildTravelRestIndex(slate, recommendations, lastKickoff).byAppearance
     : undefined
   const capturedAt = new Date(now).toISOString()
   const seasonKey = (

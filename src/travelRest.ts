@@ -1,5 +1,11 @@
 import { weeksForSeason } from './careerHistory.ts'
 import { etDayKey } from './gameStatus.ts'
+import {
+  lastKickoffByKey,
+  mergePreviousKickoff,
+  scheduleKickoffBefore,
+  type LastKickoffFile,
+} from './lastKickoff.ts'
 import { collectHomeVenues } from './teamSite.ts'
 import {
   timeZoneFromTeamLabel,
@@ -61,7 +67,7 @@ type DatedGame = {
 }
 
 const REST_TITLE =
-  'Rest uses this team’s last CBS-card kickoff. Bye is NFL-only — college card gaps are not byes.'
+  'Rest uses the later of this team’s last CBS-card kickoff and its last season-schedule kickoff. College bye needs that schedule row — a card gap alone is still a long week.'
 
 export function venuesEqual(
   left: GameVenue | null | undefined,
@@ -106,10 +112,11 @@ function restDays(previousKickoff: string, kickoff: string) {
 export function classifyRest(
   days: number,
   sport: 'NFL' | 'NCAAF' = 'NCAAF',
+  scheduleBacked = false,
 ): RestKind {
   if (days < 6) return 'short'
   if (days <= 8) return 'normal'
-  if (sport === 'NFL' && days >= 13) return 'bye'
+  if (days >= 13 && (sport === 'NFL' || scheduleBacked)) return 'bye'
   return 'long'
 }
 
@@ -236,9 +243,10 @@ export function gameTravelZones(row: GameTravelRest | null | undefined) {
 function sideRest(
   days: number | null,
   sport: 'NFL' | 'NCAAF',
+  scheduleBacked = false,
 ): SideRest | null {
   if (days == null || days < 0) return null
-  const kind = classifyRest(days, sport)
+  const kind = classifyRest(days, sport, scheduleBacked)
   return { days, kind, label: formatRestLabel(days, kind) }
 }
 
@@ -342,9 +350,11 @@ function previousGame(games: DatedGame[], cbsEventId: number) {
 export function buildTravelRestIndex(
   slate: Slate,
   history: RecommendationHistory,
+  lastKickoff: LastKickoffFile | null = null,
 ) {
   const games = collectGames(slate, history)
   const homeVenues = collectHomeVenues(games)
+  const schedule = lastKickoffByKey(lastKickoff)
 
   const byEvent = new Map<number, GameTravelRest>()
   const byAppearance = new Map<string, AppearanceTravelRest>()
@@ -381,13 +391,25 @@ export function buildTravelRestIndex(
     const homeBook = teamGames(games, game.sport, game.home)
     const awayPrev = previousGame(awayBook, game.cbsEventId)
     const homePrev = previousGame(homeBook, game.cbsEventId)
+    const awaySchedule = scheduleKickoffBefore(
+      schedule.get(`${game.sport}:${game.away}`)?.lastKickoff,
+      game.kickoff,
+    )
+    const homeSchedule = scheduleKickoffBefore(
+      schedule.get(`${game.sport}:${game.home}`)?.lastKickoff,
+      game.kickoff,
+    )
+    const awayKickoff = mergePreviousKickoff(awayPrev?.kickoff, awaySchedule)
+    const homeKickoff = mergePreviousKickoff(homePrev?.kickoff, homeSchedule)
     const awayRest = sideRest(
-      awayPrev ? restDays(awayPrev.kickoff, game.kickoff) : null,
+      awayKickoff ? restDays(awayKickoff, game.kickoff) : null,
       game.sport,
+      awaySchedule != null,
     )
     const homeRest = sideRest(
-      homePrev ? restDays(homePrev.kickoff, game.kickoff) : null,
+      homeKickoff ? restDays(homeKickoff, game.kickoff) : null,
       game.sport,
+      homeSchedule != null,
     )
 
     byEvent.set(game.cbsEventId, {

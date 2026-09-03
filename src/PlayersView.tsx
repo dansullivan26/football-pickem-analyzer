@@ -16,7 +16,9 @@ import {
   playerSlugByEntryId,
   sortPlayersByWinRate,
 } from './playerDirectory'
+import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
+import type { LastKickoffFile } from './lastKickoff'
 import {
   PLAYER_TIER_KEYS,
   PLAYER_TIER_LABELS,
@@ -277,7 +279,12 @@ export default function PlayersView({
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
   const travelRestByAppearance = useMemo(
-    () => buildTravelRestIndex(slate, recommendations).byAppearance,
+    () =>
+      buildTravelRestIndex(
+        slate,
+        recommendations,
+        lastKickoffData as LastKickoffFile,
+      ).byAppearance,
     [slate, recommendations],
   )
   const summary = selectedPlayer
@@ -361,7 +368,7 @@ export default function PlayersView({
             line-value side, and the weekly tiebreaker. Line-value follow rates also split by the
             kickoff-frozen lock, hammer, lean, slight, and neutral tier.
             Pick rates on traveling and rested teams use the same
-            time-zone hops and CBS-card rest as Lines.
+            time-zone hops and card-or-schedule rest as Lines.
             Habit labels use every archived season for the same CBS entry.
           </p>
         </div>

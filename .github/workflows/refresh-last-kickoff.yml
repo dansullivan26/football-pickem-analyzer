@@ -1,0 +1,41 @@
+name: Refresh last kickoff
+
+on:
+  # After Saturday/Sunday night college and early NFL windows.
+  schedule:
+    - cron: '17 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: last-kickoff
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Snapshot last kickoffs
+        run: npm run snapshot-last-kickoff
+        env:
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+      - name: Commit last-kickoff file
+        run: |
+          if git diff --quiet -- src/data/last-kickoff.json; then
+            echo "No last-kickoff changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/last-kickoff.json
+          git commit -m "data: refresh last kickoffs"
+          git pull --rebase origin main
+          git push

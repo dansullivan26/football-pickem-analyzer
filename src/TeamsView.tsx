@@ -6,6 +6,7 @@ import type { LastKickoffFile } from './lastKickoff'
 import {
   appearanceMarketLabel,
   buildTeamDirectory,
+  conferenceDisplayName,
   conferenceFilterOptions,
   conferenceFilterValue,
   formatRankedTeamName,
@@ -137,7 +138,10 @@ export default function TeamsView({
   )
 
   useEffect(() => {
-    if (conference !== 'all' && !conferenceOptions.includes(conference)) {
+    if (
+      conference !== 'all' &&
+      !conferenceOptions.some((option) => option.value === conference)
+    ) {
       setConference('all')
     }
   }, [conference, conferenceOptions])
@@ -154,7 +158,10 @@ export default function TeamsView({
           !normalized ||
           team.name.toLowerCase().includes(normalized) ||
           team.abbrev.toLowerCase().includes(normalized) ||
-          (team.conference ?? '').toLowerCase().includes(normalized)
+          (team.conference ?? '').toLowerCase().includes(normalized) ||
+          (conferenceDisplayName(team.conference) ?? '')
+            .toLowerCase()
+            .includes(normalized)
         return matchesLeague && matchesConference && matchesQuery
       })
       .sort((left, right) => compareTeams(left, right, sort))
@@ -333,9 +340,9 @@ export default function TeamsView({
                   onChange={(event) => setConference(event.target.value)}
                 >
                   <option value="all">All conferences</option>
-                  {conferenceOptions.map((value) => (
-                    <option key={value} value={value}>
-                      {value}
+                  {conferenceOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
                     </option>
                   ))}
                 </select>

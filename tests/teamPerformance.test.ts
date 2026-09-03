@@ -4,6 +4,7 @@ import {
   appearanceMarketLabel,
   assignTeamSlugs,
   buildTeamDirectory,
+  conferenceDisplayName,
   conferenceFilterOptions,
   conferenceFilterValue,
   formatRankedTeamName,
@@ -508,7 +509,11 @@ test('conferenceFilterValue keeps college codes and only NFL AFC/NFC', () => {
       ],
       'all',
     ),
-    ['ACC', 'AFC', 'SEC'],
+    [
+      { value: 'AFC', label: 'AFC' },
+      { value: 'ACC', label: 'Atlantic Coast' },
+      { value: 'SEC', label: 'Southeastern' },
+    ],
   )
   assert.deepEqual(
     conferenceFilterOptions(
@@ -518,8 +523,11 @@ test('conferenceFilterValue keeps college codes and only NFL AFC/NFC', () => {
       ],
       'NFL',
     ),
-    ['NFC'],
+    [{ value: 'NFC', label: 'NFC' }],
   )
+  assert.equal(conferenceDisplayName('AME'), 'American Athletic')
+  assert.equal(conferenceDisplayName('BIG10'), 'Big Ten')
+  assert.equal(conferenceDisplayName('IA'), 'Independent')
 })
 
 test('buildTeamDirectory reads stamped rec ranks and falls back to the live slate', () => {

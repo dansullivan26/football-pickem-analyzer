@@ -129,6 +129,46 @@ export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
   return `${sport}:${abbrev}`
 }
 
+const CONFERENCE_NAMES: Record<string, string> = {
+  AAC: 'American Athletic',
+  ACC: 'Atlantic Coast',
+  AFC: 'AFC',
+  AME: 'American Athletic',
+  AMERICAN: 'American Athletic',
+  ASUN: 'Atlantic Sun',
+  BELT: 'Sun Belt',
+  BIG10: 'Big Ten',
+  BIG12: 'Big 12',
+  BIGSKY: 'Big Sky',
+  BSKY: 'Big Sky',
+  'C-USA': 'Conference USA',
+  CAA: 'Coastal Athletic',
+  CUSA: 'Conference USA',
+  IA: 'Independent',
+  IND: 'Independent',
+  INDEP: 'Independent',
+  IVY: 'Ivy League',
+  MAC: 'Mid-American',
+  MEAC: 'Mid-Eastern Athletic',
+  MVFC: 'Missouri Valley',
+  MWC: 'Mountain West',
+  NEC: 'Northeast',
+  NFC: 'NFC',
+  OVC: 'Ohio Valley',
+  PAC12: 'Pac-12',
+  PAT: 'Patriot',
+  PATRIOT: 'Patriot',
+  PFL: 'Pioneer',
+  PIO: 'Pioneer',
+  SBELT: 'Sun Belt',
+  SEC: 'Southeastern',
+  SOCON: 'Southern',
+  SOUTHERN: 'Southern',
+  SWAC: 'Southwestern Athletic',
+  UAC: 'United Athletic',
+  WAC: 'Western Athletic',
+}
+
 /** Directory filter value. NFL only yields AFC/NFC; anything else is omitted. */
 export function conferenceFilterValue(
   sport: 'NFL' | 'NCAAF',
@@ -149,6 +189,12 @@ export function conferenceFilterValue(
   return value
 }
 
+export function conferenceDisplayName(code: string | null | undefined) {
+  const value = code?.trim() ?? ''
+  if (!value) return null
+  return CONFERENCE_NAMES[value.toUpperCase()] ?? value
+}
+
 export function conferenceFilterOptions(
   teams: Array<{ sport: 'NFL' | 'NCAAF'; conference: string | null }>,
   league: 'all' | 'NCAAF' | 'NFL' = 'all',
@@ -159,7 +205,12 @@ export function conferenceFilterOptions(
     const value = conferenceFilterValue(team.sport, team.conference)
     if (value) values.add(value)
   }
-  return [...values].sort((left, right) => left.localeCompare(right))
+  return [...values]
+    .map((value) => ({
+      value,
+      label: conferenceDisplayName(value) ?? value,
+    }))
+    .sort((left, right) => left.label.localeCompare(right.label))
 }
 
 export function formatRankedTeamName(

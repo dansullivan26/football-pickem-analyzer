@@ -4,6 +4,7 @@ import {
   attachFrozenVenue,
   buildTravelRestIndex,
   classifyRest,
+  formatGameTravelLine,
   formatTravelLabel,
   frozenVenueCaptured,
 } from '../src/travelRest.ts'
@@ -145,6 +146,18 @@ test('Hawaii traveling to Stanford is three zones east', () => {
   )
   assert.deepEqual(hop, { zones: 3, direction: 'east' })
   assert.equal(formatTravelLabel(3, 'east'), '3 zones east')
+  assert.equal(
+    formatGameTravelLine(
+      {
+        awayTravel: { zones: 3, direction: 'east', label: '3 zones east' },
+        homeTravel: null,
+        awayRest: null,
+        homeRest: null,
+      },
+      { away: 'Hawaii' },
+    ),
+    'Hawaii traveling 3 zones east',
+  )
 })
 
 test('North Carolina traveling to Dublin is five zones east', () => {

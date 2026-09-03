@@ -443,7 +443,12 @@ function GameCard({
   const { game, odds, category } = analysis
   const venue = formatVenue(game.venue)
   const travelRest = travelRestByEvent.get(game.cbsEventId)
-  const travelLine = travelRest ? formatGameTravelLine(travelRest) : null
+  const travelLine = travelRest
+    ? formatGameTravelLine(travelRest, {
+        away: game.away.name,
+        home: game.home.name,
+      })
+    : null
   const restLine = travelRest ? formatGameRestLine(travelRest) : null
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)

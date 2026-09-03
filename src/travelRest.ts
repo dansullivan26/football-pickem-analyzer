@@ -307,13 +307,18 @@ export function buildTravelRestIndex(
   return { byEvent, byAppearance }
 }
 
-export function formatGameTravelLine(row: GameTravelRest) {
+export function formatGameTravelLine(
+  row: GameTravelRest,
+  names?: { away?: string; home?: string },
+) {
   const parts: string[] = []
   if (row.awayTravel && row.awayTravel.direction !== 'same') {
-    parts.push(`Away ${row.awayTravel.label}`)
+    const who = names?.away?.trim() || 'Away'
+    parts.push(`${who} traveling ${row.awayTravel.label}`)
   }
   if (row.homeTravel) {
-    parts.push(`Home ${row.homeTravel.label}`)
+    const who = names?.home?.trim() || 'Home'
+    parts.push(`${who} traveling ${row.homeTravel.label}`)
   }
   return parts.length ? parts.join(' · ') : null
 }

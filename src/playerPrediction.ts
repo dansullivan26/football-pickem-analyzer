@@ -1,13 +1,27 @@
 import { sameSeasonWeek, weekIsBefore, weekSeason } from './careerHistory.ts'
+import {
+  appearancePair,
+  buildTravelRestIndex,
+  shorterRestSide,
+  travelingSide,
+  type AppearanceTravelRest,
+} from './travelRest.ts'
 import type {
   FrozenRecommendation,
   PlayerHistory,
   PlayerPick,
   RecommendationHistory,
   RecommendationWeek,
+  Slate,
 } from './types'
 
-export type HabitKey = 'home' | 'favorite' | 'line-value' | 'public'
+export type HabitKey =
+  | 'home'
+  | 'favorite'
+  | 'line-value'
+  | 'public'
+  | 'travel'
+  | 'rest'
 export type PredictionConfidence = 'low' | 'medium' | 'high'
 
 export type Habit = {
@@ -140,6 +154,8 @@ const ACTIVE_RULES: Record<
   favorite: { minimum: 20, minimumRate: 0.6 },
   'line-value': { minimum: 6, minimumRate: 2 / 3 },
   public: { minimum: 6, minimumRate: 2 / 3 },
+  travel: { minimum: 6, minimumRate: 2 / 3 },
+  rest: { minimum: 6, minimumRate: 2 / 3 },
 }
 
 function opposite(side: 'home' | 'away') {
@@ -257,6 +273,16 @@ function insightSentence(
       ? `Has taken the home team on ${of} chances.`
       : `Has taken the road team on ${of} chances.`
   }
+  if (key === 'travel') {
+    return preferred === 'follow'
+      ? `Has taken the traveling team on ${of} chances.`
+      : `Has faded the traveling team on ${of} chances.`
+  }
+  if (key === 'rest') {
+    return preferred === 'follow'
+      ? `Has taken the shorter-rest side on ${of} chances.`
+      : `Has taken the more-rested side on ${of} chances.`
+  }
   return preferred === 'follow'
     ? `Has taken home favorites on ${of} of those matchups.`
     : `Has taken the road dog on ${of} home-favorite matchups.`
@@ -315,6 +341,7 @@ export function buildPlayerPredictionProfile(
   history: PlayerHistory,
   recommendations: RecommendationHistory,
   targetSeason = history.pool.seasonYear,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ): PlayerPredictionProfile {
   const picks = playerPicksBefore(entryId, targetWeek, history, targetSeason)
   const recs = recommendationByEvent(
@@ -327,6 +354,8 @@ export function buildPlayerPredictionProfile(
   const favorite: HabitCounts = { follows: 0, eligible: 0 }
   const lineValue: HabitCounts = { follows: 0, eligible: 0 }
   const publicSide: HabitCounts = { follows: 0, eligible: 0 }
+  const travel: HabitCounts = { follows: 0, eligible: 0 }
+  const rest: HabitCounts = { follows: 0, eligible: 0 }
   const homeFavorite: HabitCounts = { follows: 0, eligible: 0 }
 
   for (const pick of picks) {
@@ -353,6 +382,18 @@ export function buildPlayerPredictionProfile(
       publicSide.eligible += 1
       if (pick.pickedSide === rec.pickedSide) publicSide.follows += 1
     }
+
+    const sides = appearancePair(travelRestByAppearance, pick.cbsEventId)
+    const traveler = travelingSide(sides.away?.travel, sides.home?.travel)
+    if (traveler) {
+      travel.eligible += 1
+      if (pick.pickedSide === traveler) travel.follows += 1
+    }
+    const shorter = shorterRestSide(sides.away?.rest, sides.home?.rest)
+    if (shorter) {
+      rest.eligible += 1
+      if (pick.pickedSide === shorter) rest.follows += 1
+    }
   }
 
   const habits = {
@@ -360,6 +401,8 @@ export function buildPlayerPredictionProfile(
     favorite: makeHabit('favorite', 'Favorites', favorite),
     'line-value': makeHabit('line-value', 'Line-value side', lineValue),
     public: makeHabit('public', 'Public side', publicSide),
+    travel: makeHabit('travel', 'Traveling teams', travel),
+    rest: makeHabit('rest', 'Rest edge', rest),
   }
 
   if (picks.length < 20) {
@@ -381,6 +424,12 @@ export function buildPlayerPredictionProfile(
     habitCandidate(habits.public, 'Public chalk taker', 'Public fader'),
     habitCandidate(habits.favorite, 'Favorite backer', 'Underdog hunter'),
     habitCandidate(habits.home, 'Home-team lean', 'Road-team lean'),
+    habitCandidate(
+      habits.travel,
+      'Traveling-team lean',
+      'Traveling-team fader',
+    ),
+    habitCandidate(habits.rest, 'Short-rest lean', 'Rested-team lean'),
   ].filter((candidate): candidate is Candidate => candidate != null)
 
   if (homeFavorite.eligible >= 10) {
@@ -471,41 +520,103 @@ function predictedSideFromHabit(
   return habit.preferred === 'fade' ? opposite(followsSide) : followsSide
 }
 
+type HabitCall = {
+  habit: Habit
+  followsSide: 'home' | 'away'
+  reason: string
+}
+
+function chooseHabitCall(candidates: HabitCall[]): (HabitCall & { agreed: boolean }) | null {
+  const ranked = [...candidates].sort(
+    (left, right) => right.habit.strength - left.habit.strength,
+  )
+  if (ranked.length === 0) return null
+  if (ranked.length === 1) return { ...ranked[0], agreed: false }
+
+  const first = ranked[0]
+  const second = ranked[1]
+  if (!first || !second) return null
+  const firstSide = predictedSideFromHabit(first.habit, first.followsSide)
+  const secondSide = predictedSideFromHabit(second.habit, second.followsSide)
+  if (
+    firstSide === secondSide ||
+    first.habit.strength - second.habit.strength >= 0.08
+  ) {
+    return {
+      ...first,
+      agreed: firstSide === secondSide,
+      reason:
+        firstSide === secondSide
+          ? `${first.reason} + ${second.reason.toLowerCase()}`
+          : first.reason,
+    }
+  }
+  return null
+}
+
+function travelRestCalls(
+  game: FrozenRecommendation,
+  profile: PlayerPredictionProfile,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+): HabitCall[] {
+  const sides = appearancePair(travelRestByAppearance, game.cbsEventId)
+  const traveler = travelingSide(sides.away?.travel, sides.home?.travel)
+  const shorter = shorterRestSide(sides.away?.rest, sides.home?.rest)
+  return [
+    profile.habits.travel.active && traveler
+      ? {
+          habit: profile.habits.travel,
+          followsSide: traveler,
+          reason: 'Travel habit',
+        }
+      : null,
+    profile.habits.rest.active && shorter
+      ? {
+          habit: profile.habits.rest,
+          followsSide: shorter,
+          reason: 'Rest habit',
+        }
+      : null,
+  ].filter((row): row is HabitCall => row != null)
+}
+
 function predictGame(
   game: FrozenRecommendation,
   profile: PlayerPredictionProfile,
   actualSide: 'home' | 'away' | null,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ): PredictedGame {
   const situational =
     game.source === 'line-value' && game.recommendedSide
       ? {
           habit: profile.habits['line-value'],
           followsSide: game.recommendedSide,
+          reason: 'Line-value habit',
         }
       : game.source === 'public-consensus' && game.pickedSide
-        ? { habit: profile.habits.public, followsSide: game.pickedSide }
+        ? {
+            habit: profile.habits.public,
+            followsSide: game.pickedSide,
+            reason: 'Public-side habit',
+          }
         : null
 
-  let chosen:
-    | {
-        habit: Habit
-        followsSide: 'home' | 'away'
-        reason: string
-        agreed: boolean
-      }
-    | null = null
+  const extra = travelRestCalls(game, profile, travelRestByAppearance)
+  let chosen: (HabitCall & { agreed: boolean }) | null = null
 
   if (situational?.habit.active) {
-    chosen = {
-      ...situational,
-      reason:
-        situational.habit.key === 'line-value'
-          ? 'Line-value habit'
-          : 'Public-side habit',
-      agreed: false,
-    }
+    const predicted = predictedSideFromHabit(
+      situational.habit,
+      situational.followsSide,
+    )
+    const agreed = extra.some(
+      (row) =>
+        predictedSideFromHabit(row.habit, row.followsSide) === predicted,
+    )
+    chosen = { ...situational, agreed }
   } else {
-    const general = [
+    chosen = chooseHabitCall([
+      ...extra,
       profile.habits.home.active
         ? {
             habit: profile.habits.home,
@@ -520,37 +631,7 @@ function predictGame(
             reason: 'Favorite/dog habit',
           }
         : null,
-    ]
-      .filter((candidate): candidate is NonNullable<typeof candidate> =>
-        Boolean(candidate),
-      )
-      .sort((a, b) => b.habit.strength - a.habit.strength)
-
-    if (general.length === 1) {
-      chosen = { ...general[0], agreed: false }
-    } else if (general.length === 2) {
-      const firstSide = predictedSideFromHabit(
-        general[0].habit,
-        general[0].followsSide,
-      )
-      const secondSide = predictedSideFromHabit(
-        general[1].habit,
-        general[1].followsSide,
-      )
-      if (
-        firstSide === secondSide ||
-        general[0].habit.strength - general[1].habit.strength >= 0.08
-      ) {
-        chosen = {
-          ...general[0],
-          agreed: firstSide === secondSide,
-          reason:
-            firstSide === secondSide
-              ? `${general[0].reason} + ${general[1].reason.toLowerCase()}`
-              : general[0].reason,
-        }
-      }
-    }
+    ].filter((row): row is HabitCall => row != null))
   }
 
   const predictedSide = chosen
@@ -596,6 +677,7 @@ export function predictPlayerWeek(
   week: RecommendationWeek,
   history: PlayerHistory,
   recommendations: RecommendationHistory,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ): PlayerPrediction {
   const targetSeason = weekSeason(week, history.pool.seasonYear)
   const profile = buildPlayerPredictionProfile(
@@ -604,6 +686,7 @@ export function predictPlayerWeek(
     history,
     recommendations,
     targetSeason,
+    travelRestByAppearance,
   )
   const actualPicks = new Map(
     (
@@ -625,6 +708,7 @@ export function predictPlayerWeek(
       game,
       profile,
       actualPicks.get(game.cbsEventId) ?? null,
+      travelRestByAppearance,
     ),
   )
   const graded = games.filter((game) => game.correct != null)
@@ -660,6 +744,7 @@ export function predictionSeasonRecord(
   history: PlayerHistory,
   recommendations: RecommendationHistory,
   forecasts?: PredictionForecasts | null,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ) {
   const frozen = forecasts?.weeks
     .filter(
@@ -684,7 +769,13 @@ export function predictionSeasonRecord(
           )
           .flatMap(
             (week) =>
-              predictPlayerWeek(entryId, week, history, recommendations).games,
+              predictPlayerWeek(
+                entryId,
+                week,
+                history,
+                recommendations,
+                travelRestByAppearance,
+              ).games,
           )
           .filter((game) => game.correct != null)
   const correct = graded.filter((game) => game.correct).length
@@ -799,7 +890,11 @@ export function snapshotPlayerForecasts(
   recommendations: RecommendationHistory,
   previous: PredictionForecasts | null,
   now = Date.now(),
+  slate?: Slate | null,
 ): PredictionForecasts {
+  const travelRestByAppearance = slate
+    ? buildTravelRestIndex(slate, recommendations).byAppearance
+    : undefined
   const capturedAt = new Date(now).toISOString()
   const seasonKey = (
     week: { week: number; seasonYear?: number },
@@ -851,6 +946,7 @@ export function snapshotPlayerForecasts(
         recWeek,
         history,
         recommendations,
+        travelRestByAppearance,
       )
       return {
         entryId: entry.entryId,

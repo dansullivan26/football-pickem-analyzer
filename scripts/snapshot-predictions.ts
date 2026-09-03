@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { snapshotPlayerForecasts } from '../src/playerPrediction.ts'
-import type { PlayerHistory, RecommendationHistory } from '../src/types.ts'
+import type { PlayerHistory, RecommendationHistory, Slate } from '../src/types.ts'
 import type { PredictionForecasts } from '../src/playerPrediction.ts'
 
 const ROOT = new URL('../', import.meta.url)
@@ -12,6 +12,9 @@ const history = JSON.parse(
 const recommendations = JSON.parse(
   await readFile(new URL('src/data/recommendation-history.json', ROOT), 'utf8'),
 ) as RecommendationHistory
+const slate = JSON.parse(
+  await readFile(new URL('src/data/current-slate.json', ROOT), 'utf8'),
+) as Slate
 
 let previous: PredictionForecasts | null = null
 try {
@@ -20,7 +23,13 @@ try {
   // First forecast snapshot.
 }
 
-const next = snapshotPlayerForecasts(history, recommendations, previous)
+const next = snapshotPlayerForecasts(
+  history,
+  recommendations,
+  previous,
+  Date.now(),
+  slate,
+)
 
 await mkdir(new URL('src/data', ROOT), { recursive: true })
 await writeFile(OUTPUT, `${JSON.stringify(next, null, 2)}\n`)

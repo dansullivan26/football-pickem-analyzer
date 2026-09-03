@@ -171,6 +171,53 @@ export function restSplitKey(
   return rest?.kind ?? null
 }
 
+/** Hops that can train a player travel habit. 1-zone noise stays out. */
+export const TRAVEL_HABIT_MIN_ZONES = 2
+
+function hopZones(travel: SideTravel | null | undefined) {
+  if (!travel || travel.direction === 'same' || travel.zones < 1) return 0
+  return travel.zones
+}
+
+/** Side with the clear hop. Equal 2+ hops on both sides are a wash. */
+export function travelingSide(
+  away: SideTravel | null | undefined,
+  home: SideTravel | null | undefined,
+  minZones = TRAVEL_HABIT_MIN_ZONES,
+): 'home' | 'away' | null {
+  const awayZones = hopZones(away)
+  const homeZones = hopZones(home)
+  const awayHop = awayZones >= minZones
+  const homeHop = homeZones >= minZones
+  if (awayHop && homeHop) {
+    if (awayZones === homeZones) return null
+    return awayZones > homeZones ? 'away' : 'home'
+  }
+  if (awayHop) return 'away'
+  if (homeHop) return 'home'
+  return null
+}
+
+/** Side with fewer days of rest. Missing or tied rest is a wash. */
+export function shorterRestSide(
+  away: SideRest | null | undefined,
+  home: SideRest | null | undefined,
+): 'home' | 'away' | null {
+  if (!away || !home) return null
+  if (away.days === home.days) return null
+  return away.days < home.days ? 'away' : 'home'
+}
+
+export function appearancePair(
+  byAppearance: Map<string, AppearanceTravelRest> | undefined,
+  cbsEventId: number,
+) {
+  return {
+    away: byAppearance?.get(`${cbsEventId}:away`) ?? null,
+    home: byAppearance?.get(`${cbsEventId}:home`) ?? null,
+  }
+}
+
 /** Largest hop on the card — visitor or a home team that left its own zone. */
 export function gameTravelZones(row: GameTravelRest | null | undefined) {
   if (!row) return 0

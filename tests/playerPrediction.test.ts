@@ -5,6 +5,7 @@ import {
   predictPlayerWeek,
   snapshotPlayerForecasts,
 } from '../src/playerPrediction.ts'
+import type { AppearanceTravelRest } from '../src/travelRest.ts'
 import type {
   FrozenRecommendation,
   PlayerHistory,
@@ -343,4 +344,150 @@ test('prior-season scored picks count toward the next Year Week 1 profile', () =
   )
   assert.equal(profile.picks, 20)
   assert.notEqual(profile.archetype, 'Building profile')
+})
+
+function hop(
+  zones: number,
+  direction: 'east' | 'west' | 'same' = 'east',
+): NonNullable<AppearanceTravelRest['travel']> {
+  return {
+    zones,
+    direction,
+    label:
+      direction === 'same'
+        ? 'Same time zone'
+        : `${zones} time zone${zones === 1 ? '' : 's'} ${direction}`,
+  }
+}
+
+function restDays(
+  days: number,
+  kind: 'short' | 'normal' | 'long' | 'bye',
+): NonNullable<AppearanceTravelRest['rest']> {
+  return { days, kind, label: `${kind} · ${days}d` }
+}
+
+function travelRestFor(
+  events: Array<{
+    cbsEventId: number
+    awayTravel?: AppearanceTravelRest['travel']
+    homeTravel?: AppearanceTravelRest['travel']
+    awayRest?: AppearanceTravelRest['rest']
+    homeRest?: AppearanceTravelRest['rest']
+  }>,
+) {
+  const map = new Map<string, AppearanceTravelRest>()
+  for (const row of events) {
+    map.set(`${row.cbsEventId}:away`, {
+      travel: row.awayTravel ?? null,
+      rest: row.awayRest ?? null,
+    })
+    map.set(`${row.cbsEventId}:home`, {
+      travel: row.homeTravel ?? null,
+      rest: row.homeRest ?? null,
+    })
+  }
+  return map
+}
+
+test('a decisive travel sample can make an early call', () => {
+  const priorPicks = Array.from({ length: 6 }, (_, index) =>
+    pick(index + 1, 'away'),
+  )
+  const priorGames = priorPicks.map((playerPick) => recGame(playerPick.cbsEventId))
+  const travelRest = travelRestFor([
+    ...priorPicks.map((playerPick) => ({
+      cbsEventId: playerPick.cbsEventId,
+      awayTravel: hop(3),
+    })),
+    { cbsEventId: 100, awayTravel: hop(2, 'west') },
+  ])
+  const target = recWeek(2, [recGame(100)])
+  const report = predictPlayerWeek(
+    entryId,
+    target,
+    history([historyWeek(1, priorPicks), historyWeek(2, [], false)]),
+    recHistory([recWeek(1, priorGames, true), target]),
+    travelRest,
+  )
+
+  assert.equal(report.profile.habits.travel.active, true)
+  assert.equal(report.profile.habits.travel.preferred, 'follow')
+  assert.equal(report.games[0].predictedSide, 'away')
+  assert.match(report.games[0].reason, /Travel habit/)
+})
+
+test('a decisive rest sample takes the more-rested side', () => {
+  const priorPicks = Array.from({ length: 6 }, (_, index) =>
+    pick(index + 1, 'home'),
+  )
+  const priorGames = priorPicks.map((playerPick) => recGame(playerPick.cbsEventId))
+  const travelRest = travelRestFor([
+    ...priorPicks.map((playerPick) => ({
+      cbsEventId: playerPick.cbsEventId,
+      awayRest: restDays(4, 'short'),
+      homeRest: restDays(7, 'normal'),
+    })),
+    {
+      cbsEventId: 100,
+      awayRest: restDays(5, 'short'),
+      homeRest: restDays(10, 'long'),
+    },
+  ])
+  const target = recWeek(2, [recGame(100)])
+  const report = predictPlayerWeek(
+    entryId,
+    target,
+    history([historyWeek(1, priorPicks), historyWeek(2, [], false)]),
+    recHistory([recWeek(1, priorGames, true), target]),
+    travelRest,
+  )
+
+  assert.equal(report.profile.habits.rest.active, true)
+  assert.equal(report.profile.habits.rest.preferred, 'fade')
+  assert.equal(report.games[0].predictedSide, 'home')
+  assert.match(report.games[0].reason, /Rest habit/)
+})
+
+test('line-value still outranks travel when both apply', () => {
+  const priorPicks = Array.from({ length: 6 }, (_, index) =>
+    pick(index + 1, 'home'),
+  )
+  const priorGames = priorPicks.map((playerPick) =>
+    recGame(playerPick.cbsEventId, {
+      category: 'lean',
+      source: 'line-value',
+      recommendedSide: 'away',
+      pickedSide: 'away',
+    }),
+  )
+  const travelRest = travelRestFor([
+    ...priorPicks.map((playerPick) => ({
+      cbsEventId: playerPick.cbsEventId,
+      awayTravel: hop(3),
+    })),
+    { cbsEventId: 100, awayTravel: hop(3) },
+  ])
+  const target = recWeek(2, [
+    recGame(100, {
+      category: 'lean',
+      source: 'line-value',
+      recommendedSide: 'home',
+      pickedSide: 'home',
+    }),
+  ])
+  const report = predictPlayerWeek(
+    entryId,
+    target,
+    history([historyWeek(1, priorPicks), historyWeek(2, [], false)]),
+    recHistory([recWeek(1, priorGames, true), target]),
+    travelRest,
+  )
+
+  assert.equal(report.profile.habits['line-value'].active, true)
+  assert.equal(report.profile.habits['line-value'].preferred, 'fade')
+  assert.equal(report.profile.habits.travel.active, true)
+  assert.equal(report.profile.habits.travel.preferred, 'fade')
+  assert.equal(report.games[0].predictedSide, 'away')
+  assert.match(report.games[0].reason, /Line-value habit/)
 })

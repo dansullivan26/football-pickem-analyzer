@@ -9,7 +9,9 @@ import {
   frozenVenueCaptured,
   gameTravelZones,
   restSplitKey,
+  shorterRestSide,
   travelSplitKey,
+  travelingSide,
 } from '../src/travelRest.ts'
 import {
   timeZoneFromTeamLabel,
@@ -185,6 +187,52 @@ test('travel and rest split keys skip same-zone and missing rows', () => {
   assert.equal(restSplitKey(null), null)
   assert.equal(restSplitKey({ days: 4, kind: 'short', label: 'Short week · 4d' }), 'short')
   assert.equal(restSplitKey({ days: 14, kind: 'bye', label: 'Off a bye · 14d' }), 'bye')
+})
+
+test('travelingSide needs a 2+ hop and shorterRestSide needs a days gap', () => {
+  assert.equal(
+    travelingSide(
+      { zones: 1, direction: 'east', label: '1 time zone east' },
+      null,
+    ),
+    null,
+  )
+  assert.equal(
+    travelingSide(
+      { zones: 3, direction: 'east', label: '3 time zones east' },
+      { zones: 0, direction: 'same', label: 'Same time zone' },
+    ),
+    'away',
+  )
+  assert.equal(
+    travelingSide(
+      { zones: 2, direction: 'east', label: '2 time zones east' },
+      { zones: 3, direction: 'west', label: '3 time zones west' },
+    ),
+    'home',
+  )
+  assert.equal(
+    travelingSide(
+      { zones: 2, direction: 'east', label: '2 time zones east' },
+      { zones: 2, direction: 'west', label: '2 time zones west' },
+    ),
+    null,
+  )
+  assert.equal(shorterRestSide(null, { days: 7, kind: 'normal', label: '7d rest' }), null)
+  assert.equal(
+    shorterRestSide(
+      { days: 4, kind: 'short', label: 'Short week · 4d' },
+      { days: 7, kind: 'normal', label: '7d rest' },
+    ),
+    'away',
+  )
+  assert.equal(
+    shorterRestSide(
+      { days: 14, kind: 'bye', label: 'Off a bye · 14d' },
+      { days: 7, kind: 'normal', label: '7d rest' },
+    ),
+    'home',
+  )
 })
 
 test('gameTravelZones uses the larger hop on the card', () => {

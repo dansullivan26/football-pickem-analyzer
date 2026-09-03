@@ -296,6 +296,7 @@ export default function PlayersView({
           recommendationWeek,
           careerHistory,
           recommendations,
+          travelRestByAppearance,
         )
       : null
   const frozenWeek = forecasts?.weeks.find(
@@ -338,6 +339,7 @@ export default function PlayersView({
         history,
         recommendations,
         forecasts,
+        travelRestByAppearance,
       )
     : null
   const scoredWeeks = history.weeks.filter((week) => week.scored).length
@@ -637,9 +639,9 @@ export default function PlayersView({
                       <strong>No responsible calls yet</strong>
                       <p>
                         The model waits for at least 20 prior picks, or a
-                        smaller but decisive line-value/public sample. This
-                        fills in automatically after Tuesday exports are
-                        scored.
+                        smaller but decisive line-value, public, travel, or
+                        rest sample. This fills in automatically after
+                        Tuesday exports are scored.
                       </p>
                     </div>
                   ) : (

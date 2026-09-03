@@ -23,6 +23,7 @@ import { formatWinningScore } from './gameStatus'
 import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
 import { pathForBadBeat, pathForTeam, pathForView, TEAM_PROFILE_HASH } from './routes'
 import InjuryLink from './InjuryLink'
+import ScheduleLink from './ScheduleLink'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
 function formatSpread(value: number) {
@@ -522,6 +523,7 @@ export default function TeamsView({
                     <span>CBS line</span>
                     <strong>Appearances</strong>
                   </div>
+                  <ScheduleLink team={selected}>Full schedule</ScheduleLink>
                 </div>
                 <div className="pick-history-list">
                   {selected.appearances.length === 0 ? (

@@ -6,6 +6,8 @@ import type { LastKickoffFile } from './lastKickoff'
 import {
   appearanceMarketLabel,
   buildTeamDirectory,
+  conferenceFilterOptions,
+  conferenceFilterValue,
   formatRankedTeamName,
   wonOutrightAsDog,
   type TeamAppearance,
@@ -127,22 +129,36 @@ export default function TeamsView({
   )
   const [query, setQuery] = useState('')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
+  const [conference, setConference] = useState('all')
   const [sort, setSort] = useState<'name' | 'ats'>('name')
+  const conferenceOptions = useMemo(
+    () => conferenceFilterOptions(directory.teams, league),
+    [directory.teams, league],
+  )
+
+  useEffect(() => {
+    if (conference !== 'all' && !conferenceOptions.includes(conference)) {
+      setConference('all')
+    }
+  }, [conference, conferenceOptions])
 
   const visibleTeams = useMemo(() => {
     const normalized = query.trim().toLowerCase()
     return directory.teams
       .filter((team) => {
         const matchesLeague = league === 'all' || team.sport === league
+        const matchesConference =
+          conference === 'all' ||
+          conferenceFilterValue(team.sport, team.conference) === conference
         const matchesQuery =
           !normalized ||
           team.name.toLowerCase().includes(normalized) ||
           team.abbrev.toLowerCase().includes(normalized) ||
           (team.conference ?? '').toLowerCase().includes(normalized)
-        return matchesLeague && matchesQuery
+        return matchesLeague && matchesConference && matchesQuery
       })
       .sort((left, right) => compareTeams(left, right, sort))
-  }, [directory.teams, league, query, sort])
+  }, [conference, directory.teams, league, query, sort])
 
   const selected = selectedSlug
     ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
@@ -309,6 +325,22 @@ export default function TeamsView({
                 <option value="ats">ATS rate</option>
               </select>
             </label>
+            {conferenceOptions.length > 0 && (
+              <label className="conference-filter">
+                <span className="sr-only">Filter by conference</span>
+                <select
+                  value={conference}
+                  onChange={(event) => setConference(event.target.value)}
+                >
+                  <option value="all">All conferences</option>
+                  {conferenceOptions.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
           </div>
           <div className="player-list">
             {visibleTeams.map((team) => (

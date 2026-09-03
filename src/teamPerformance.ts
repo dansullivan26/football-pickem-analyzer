@@ -129,6 +129,39 @@ export function teamKey(sport: 'NFL' | 'NCAAF', abbrev: string) {
   return `${sport}:${abbrev}`
 }
 
+/** Directory filter value. NFL only yields AFC/NFC; anything else is omitted. */
+export function conferenceFilterValue(
+  sport: 'NFL' | 'NCAAF',
+  conference: string | null | undefined,
+) {
+  const value = conference?.trim() ?? ''
+  if (!value) return null
+  if (sport === 'NFL') {
+    const upper = value.toUpperCase()
+    if (upper === 'AFC' || upper.startsWith('AFC ') || upper.startsWith('AFC-')) {
+      return 'AFC'
+    }
+    if (upper === 'NFC' || upper.startsWith('NFC ') || upper.startsWith('NFC-')) {
+      return 'NFC'
+    }
+    return null
+  }
+  return value
+}
+
+export function conferenceFilterOptions(
+  teams: Array<{ sport: 'NFL' | 'NCAAF'; conference: string | null }>,
+  league: 'all' | 'NCAAF' | 'NFL' = 'all',
+) {
+  const values = new Set<string>()
+  for (const team of teams) {
+    if (league !== 'all' && team.sport !== league) continue
+    const value = conferenceFilterValue(team.sport, team.conference)
+    if (value) values.add(value)
+  }
+  return [...values].sort((left, right) => left.localeCompare(right))
+}
+
 export function formatRankedTeamName(
   name: string,
   rank: number | null | undefined,

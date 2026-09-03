@@ -4,6 +4,8 @@ import {
   appearanceMarketLabel,
   assignTeamSlugs,
   buildTeamDirectory,
+  conferenceFilterOptions,
+  conferenceFilterValue,
   formatRankedTeamName,
   spreadSize,
   marketForSide,
@@ -486,6 +488,38 @@ test('buildTeamDirectory keeps a frozen score after the live slate moves on', ()
 test('formatRankedTeamName prefixes a CBS rank when present', () => {
   assert.equal(formatRankedTeamName('Miami (Fla.)', 7), '#7 Miami (Fla.)')
   assert.equal(formatRankedTeamName('Stanford', null), 'Stanford')
+})
+
+test('conferenceFilterValue keeps college codes and only NFL AFC/NFC', () => {
+  assert.equal(conferenceFilterValue('NCAAF', 'SEC'), 'SEC')
+  assert.equal(conferenceFilterValue('NCAAF', 'IA'), 'IA')
+  assert.equal(conferenceFilterValue('NFL', 'AFC'), 'AFC')
+  assert.equal(conferenceFilterValue('NFL', 'NFC West'), 'NFC')
+  assert.equal(conferenceFilterValue('NFL', 'NFC-East'), 'NFC')
+  assert.equal(conferenceFilterValue('NFL', 'NFL'), null)
+  assert.equal(conferenceFilterValue('NFL', null), null)
+  assert.deepEqual(
+    conferenceFilterOptions(
+      [
+        { sport: 'NCAAF', conference: 'SEC' },
+        { sport: 'NCAAF', conference: 'ACC' },
+        { sport: 'NFL', conference: 'AFC East' },
+        { sport: 'NFL', conference: 'League' },
+      ],
+      'all',
+    ),
+    ['ACC', 'AFC', 'SEC'],
+  )
+  assert.deepEqual(
+    conferenceFilterOptions(
+      [
+        { sport: 'NCAAF', conference: 'SEC' },
+        { sport: 'NFL', conference: 'NFC' },
+      ],
+      'NFL',
+    ),
+    ['NFC'],
+  )
 })
 
 test('buildTeamDirectory reads stamped rec ranks and falls back to the live slate', () => {

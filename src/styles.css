@@ -1696,13 +1696,18 @@ a.team-page-link:focus-visible .team-name {
 
 .team-directory-filters {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
   padding: 0 14px 12px;
 }
 
 .team-directory-filters select {
   width: 100%;
+  min-width: 0;
+}
+
+.team-directory-filters .conference-filter {
+  grid-column: 1 / -1;
 }
 
 .team-detail-title {

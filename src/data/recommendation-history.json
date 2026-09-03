@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-03T14:38:32.945Z",
+  "updatedAt": "2026-09-03T18:47:36.773Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-09-03T14:38:32.945Z",
+      "capturedAt": "2026-09-03T18:47:36.773Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -38,7 +38,8 @@
             "city": "Dublin",
             "state": "IE",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027437,
@@ -65,7 +66,8 @@
             "city": "Stanford",
             "state": "CA",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027446,
@@ -90,7 +92,8 @@
             "city": "Atlanta",
             "state": "GA",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027487,
@@ -115,7 +118,8 @@
             "city": "East Lansing",
             "state": "MI",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027462,
@@ -140,7 +144,8 @@
             "city": "Stanford",
             "state": "CA",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027505,
@@ -165,7 +170,8 @@
             "city": "Morgantown",
             "state": "WV",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027508,
@@ -190,7 +196,8 @@
             "city": "Tuscaloosa",
             "state": "AL",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027494,
@@ -215,7 +222,8 @@
             "city": "Pittsburgh",
             "state": "PA",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027470,
@@ -240,7 +248,8 @@
             "city": "Cincinnati",
             "state": "OH",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027561,
@@ -265,7 +274,8 @@
             "city": "Eugene",
             "state": "OR",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027468,
@@ -274,15 +284,15 @@
           "away": "CIT",
           "home": "CHARLO",
           "homeSpread": -17.5,
-          "liveHomeSpread": -19.5,
-          "category": "lean",
+          "liveHomeSpread": -20.5,
+          "category": "hammer",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "solid",
-          "score": 8,
+          "strength": "strong",
+          "score": 12,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -290,7 +300,8 @@
             "city": "Charlotte",
             "state": "NC",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027493,
@@ -315,7 +326,8 @@
             "city": "University Park",
             "state": "PA",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027540,
@@ -340,7 +352,8 @@
             "city": "Tulsa",
             "state": "OK",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027546,
@@ -365,7 +378,8 @@
             "city": "Fort Collins",
             "state": "CO",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027523,
@@ -390,7 +404,8 @@
             "city": "Memphis",
             "state": "TN",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027554,
@@ -415,7 +430,8 @@
             "city": "Logan",
             "state": "UT",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027519,
@@ -440,7 +456,8 @@
             "city": "Baton Rouge",
             "state": "LA",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027486,
@@ -465,7 +482,8 @@
             "city": "Ann Arbor",
             "state": "MI",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027550,
@@ -490,7 +508,8 @@
             "city": "Albuquerque",
             "state": "NM",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027569,
@@ -515,7 +534,8 @@
             "city": "Honolulu",
             "state": "Hawaii",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027558,
@@ -540,7 +560,8 @@
             "city": "Berkeley",
             "state": "CA",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         },
         {
           "cbsEventId": 50027566,
@@ -565,7 +586,8 @@
             "city": "Seattle",
             "state": "WA",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027574,
@@ -590,7 +612,8 @@
             "city": "Nashville",
             "state": "TN",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027573,
@@ -615,7 +638,8 @@
             "city": "Green Bay",
             "state": "WI",
             "indoor": false
-          }
+          },
+          "neutralSite": true
         },
         {
           "cbsEventId": 50027575,
@@ -640,7 +664,8 @@
             "city": "Tallahassee",
             "state": "FL",
             "indoor": false
-          }
+          },
+          "neutralSite": false
         }
       ]
     }

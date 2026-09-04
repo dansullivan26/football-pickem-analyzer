@@ -8,6 +8,7 @@ import {
   conferenceFilterOptions,
   conferenceFilterValue,
   formatRankedTeamName,
+  summarizeTeamMarketSplits,
   spreadSize,
   marketForSide,
   resultForSide,
@@ -528,6 +529,34 @@ test('conferenceFilterValue keeps college codes and only NFL AFC/NFC', () => {
   assert.equal(conferenceDisplayName('AME'), 'American Athletic')
   assert.equal(conferenceDisplayName('BIG10'), 'Big Ten')
   assert.equal(conferenceDisplayName('IA'), 'Independent')
+})
+
+test('summarizeTeamMarketSplits scopes home and dog books to the given teams', () => {
+  const unc = team('UNC', 'North Carolina', 'ACC')
+  const tcu = team('TCU', 'TCU', 'BIG12')
+  const directory = buildTeamDirectory(
+    slate([slateGame(1, unc, tcu, -7.5, { awayScore: 15, homeScore: 10 })]),
+    history([
+      rec({
+        cbsEventId: 1,
+        away: 'UNC',
+        home: 'TCU',
+        homeSpread: -7.5,
+        cover: 'away',
+      }),
+    ]),
+  )
+  const acc = directory.teams.filter((row) => row.conference === 'ACC')
+  const big12 = directory.teams.filter((row) => row.conference === 'BIG12')
+  const accSplits = summarizeTeamMarketSplits(acc)
+  const big12Splits = summarizeTeamMarketSplits(big12)
+
+  assert.equal(accSplits.away.detail, '1-0 ATS')
+  assert.equal(accSplits.dog.detail, '1-0 ATS')
+  assert.equal(accSplits.home.games, 0)
+  assert.equal(big12Splits.home.detail, '0-1 ATS')
+  assert.equal(big12Splits.favorite.detail, '0-1 ATS')
+  assert.equal(big12Splits.away.games, 0)
 })
 
 test('buildTeamDirectory reads stamped rec ranks and falls back to the live slate', () => {

@@ -370,6 +370,19 @@ function summarizeDogOutright(appearances: TeamAppearance[]): TeamSplit {
   }
 }
 
+export function summarizeTeamMarketSplits(
+  teams: Array<{ appearances: TeamAppearance[] }>,
+) {
+  const all = teams.flatMap((team) => team.appearances)
+  return {
+    home: summarizeAppearances(all, (row) => row.venue === 'home'),
+    away: summarizeAppearances(all, (row) => row.venue === 'away'),
+    neutral: summarizeAppearances(all, (row) => row.venue === 'neutral'),
+    favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
+    dog: summarizeAppearances(all, (row) => row.market === 'dog'),
+  }
+}
+
 export function summarizeAppearances(
   appearances: TeamAppearance[],
   match: (row: TeamAppearance) => boolean = () => true,
@@ -658,11 +671,7 @@ export function buildTeamDirectory(
   const all = teamsWithSlugs.flatMap((team) => team.appearances)
   return {
     teams: teamsWithSlugs,
-    home: summarizeAppearances(all, (row) => row.venue === 'home'),
-    away: summarizeAppearances(all, (row) => row.venue === 'away'),
-    neutral: summarizeAppearances(all, (row) => row.venue === 'neutral'),
-    favorite: summarizeAppearances(all, (row) => row.market === 'favorite'),
-    dog: summarizeAppearances(all, (row) => row.market === 'dog'),
+    ...summarizeTeamMarketSplits(teamsWithSlugs),
     dogOutright: summarizeDogOutright(all),
     ...weatherSplits(all),
     ...travelRestSplits(all),

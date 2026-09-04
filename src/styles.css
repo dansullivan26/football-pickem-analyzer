@@ -1681,9 +1681,17 @@ a.team-page-link:focus-visible .team-name {
   font-size: 2.3rem;
 }
 
+.teams-summary-block {
+  margin: 0 0 22px;
+}
+
+.teams-scope-heading h2 {
+  font-size: 1.05rem;
+}
+
 .teams-summary {
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: 0 0 22px;
+  margin: 0;
 }
 
 .teams-summary .summary-card {

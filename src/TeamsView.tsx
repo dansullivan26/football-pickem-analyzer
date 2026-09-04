@@ -10,6 +10,7 @@ import {
   conferenceFilterOptions,
   conferenceFilterValue,
   formatRankedTeamName,
+  summarizeTeamMarketSplits,
   wonOutrightAsDog,
   type TeamAppearance,
   type TeamRecord,
@@ -129,7 +130,7 @@ export default function TeamsView({
     [slate, recommendations],
   )
   const [query, setQuery] = useState('')
-  const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
+  const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('NCAAF')
   const [conference, setConference] = useState('all')
   const [sort, setSort] = useState<'name' | 'ats'>('name')
   const conferenceOptions = useMemo(
@@ -146,14 +147,32 @@ export default function TeamsView({
     }
   }, [conference, conferenceOptions])
 
-  const visibleTeams = useMemo(() => {
-    const normalized = query.trim().toLowerCase()
-    return directory.teams
-      .filter((team) => {
+  const scopedTeams = useMemo(
+    () =>
+      directory.teams.filter((team) => {
         const matchesLeague = league === 'all' || team.sport === league
         const matchesConference =
           conference === 'all' ||
           conferenceFilterValue(team.sport, team.conference) === conference
+        return matchesLeague && matchesConference
+      }),
+    [conference, directory.teams, league],
+  )
+  const scopedSplits = useMemo(
+    () => summarizeTeamMarketSplits(scopedTeams),
+    [scopedTeams],
+  )
+  const scopeLabel =
+    conference !== 'all'
+      ? `${conferenceDisplayName(conference) ?? conference} only`
+      : league === 'all'
+        ? 'All leagues'
+        : `${league} only`
+
+  const visibleTeams = useMemo(() => {
+    const normalized = query.trim().toLowerCase()
+    return scopedTeams
+      .filter((team) => {
         const matchesQuery =
           !normalized ||
           team.name.toLowerCase().includes(normalized) ||
@@ -162,10 +181,10 @@ export default function TeamsView({
           (conferenceDisplayName(team.conference) ?? '')
             .toLowerCase()
             .includes(normalized)
-        return matchesLeague && matchesConference && matchesQuery
+        return matchesQuery
       })
       .sort((left, right) => compareTeams(left, right, sort))
-  }, [conference, directory.teams, league, query, sort])
+  }, [query, scopedTeams, sort])
 
   const selected = selectedSlug
     ? (directory.teams.find((team) => team.slug === selectedSlug) ?? null)
@@ -245,46 +264,56 @@ export default function TeamsView({
         </div>
       )}
 
-      <section className="summary-grid teams-summary" aria-label="Pool-wide CBS ATS">
-        <div className="summary-card lock">
-          <span>Home</span>
-          <strong>{directory.home.rate}</strong>
-          <small>
-            {directory.home.games} game{directory.home.games === 1 ? '' : 's'} ·{' '}
-            {directory.home.detail}
-          </small>
+      <section className="summary-section teams-summary-block" aria-label={`${scopeLabel} CBS ATS`}>
+        <div className="summary-heading teams-scope-heading">
+          <p className="eyebrow">CBS ATS</p>
+          <h2>{scopeLabel}</h2>
         </div>
-        <div className="summary-card hammer">
-          <span>Away</span>
-          <strong>{directory.away.rate}</strong>
-          <small>
-            {directory.away.games} game{directory.away.games === 1 ? '' : 's'} ·{' '}
-            {directory.away.detail}
-          </small>
-        </div>
-        <div className="summary-card neutral">
-          <span>Neutral</span>
-          <strong>{directory.neutral.rate}</strong>
-          <small>
-            {directory.neutral.games} game
-            {directory.neutral.games === 1 ? '' : 's'} · {directory.neutral.detail}
-          </small>
-        </div>
-        <div className="summary-card lean">
-          <span>Favorites</span>
-          <strong>{directory.favorite.rate}</strong>
-          <small>
-            {directory.favorite.games} game
-            {directory.favorite.games === 1 ? '' : 's'} · {directory.favorite.detail}
-          </small>
-        </div>
-        <div className="summary-card slight">
-          <span>Dogs</span>
-          <strong>{directory.dog.rate}</strong>
-          <small>
-            {directory.dog.games} game{directory.dog.games === 1 ? '' : 's'} ·{' '}
-            {directory.dog.detail}
-          </small>
+        <div className="summary-grid teams-summary">
+          <div className="summary-card lock">
+            <span>Home</span>
+            <strong>{scopedSplits.home.rate}</strong>
+            <small>
+              {scopedSplits.home.games} game
+              {scopedSplits.home.games === 1 ? '' : 's'} ·{' '}
+              {scopedSplits.home.detail}
+            </small>
+          </div>
+          <div className="summary-card hammer">
+            <span>Away</span>
+            <strong>{scopedSplits.away.rate}</strong>
+            <small>
+              {scopedSplits.away.games} game
+              {scopedSplits.away.games === 1 ? '' : 's'} ·{' '}
+              {scopedSplits.away.detail}
+            </small>
+          </div>
+          <div className="summary-card neutral">
+            <span>Neutral</span>
+            <strong>{scopedSplits.neutral.rate}</strong>
+            <small>
+              {scopedSplits.neutral.games} game
+              {scopedSplits.neutral.games === 1 ? '' : 's'} ·{' '}
+              {scopedSplits.neutral.detail}
+            </small>
+          </div>
+          <div className="summary-card lean">
+            <span>Favorites</span>
+            <strong>{scopedSplits.favorite.rate}</strong>
+            <small>
+              {scopedSplits.favorite.games} game
+              {scopedSplits.favorite.games === 1 ? '' : 's'} ·{' '}
+              {scopedSplits.favorite.detail}
+            </small>
+          </div>
+          <div className="summary-card slight">
+            <span>Dogs</span>
+            <strong>{scopedSplits.dog.rate}</strong>
+            <small>
+              {scopedSplits.dog.games} game
+              {scopedSplits.dog.games === 1 ? '' : 's'} · {scopedSplits.dog.detail}
+            </small>
+          </div>
         </div>
       </section>
 

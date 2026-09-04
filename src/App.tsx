@@ -40,6 +40,12 @@ import {
   slateKickoffDays,
 } from './gameStatus'
 import { ourPickForGame } from './ourEntry'
+import {
+  formatPoolRecordDetail,
+  formatPoolRecordLabel,
+  poolRecordIsGraded,
+  poolRecordsForWeek,
+} from './poolRecord'
 import { formatRankedTeamName, teamKey, teamPageSlugs } from './teamPerformance'
 import {
   formatGameRestLine,
@@ -84,6 +90,11 @@ const travelRestByEvent = buildTravelRestIndex(
   recommendationHistory,
   lastKickoffData as LastKickoffFile,
 ).byEvent
+const poolRecordsByEvent = poolRecordsForWeek(
+  playerHistory,
+  slate.week.order,
+  slate.pool.seasonYear,
+)
 
 function slateTeamName(sport: 'NFL' | 'NCAAF', abbrev: string) {
   for (const game of slate.games) {
@@ -463,12 +474,24 @@ function GameCard({
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
   const completed = gameIsCompleted(game, now)
+  const poolRecord = poolRecordsByEvent.get(game.cbsEventId)
+  const poolLine = poolRecordIsGraded(poolRecord)
+    ? formatPoolRecordLabel(poolRecord)
+    : null
+  const poolDetail = poolRecordIsGraded(poolRecord)
+    ? formatPoolRecordDetail(poolRecord)
+    : null
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
         <span className={`sport-tag ${game.sport.toLowerCase()}`}>{game.sport}</span>
         <time dateTime={game.kickoff}>{game.kickoffLabel.replace(' ET', '')}</time>
         {score && <span className="game-final">Final {score}</span>}
+        {poolLine && (
+          <span className="game-pool-record" title={poolDetail ?? undefined}>
+            {poolLine}
+          </span>
+        )}
         {game.tv && <span>{game.tv}</span>}
         {venue && (
           <span

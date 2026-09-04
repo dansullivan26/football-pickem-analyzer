@@ -25,6 +25,12 @@ import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
 import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
+import {
+  formatPoolRecordDetail,
+  formatPoolRecordLabel,
+  poolRecordForGame,
+  poolRecordIsGraded,
+} from './poolRecord'
 import { pathForBadBeat, pathForTeam, pathForView, TEAM_PROFILE_HASH } from './routes'
 import InjuryLink from './InjuryLink'
 import ScheduleLink from './ScheduleLink'
@@ -605,6 +611,15 @@ export default function TeamsView({
                         row.cbsEventId,
                         row.side,
                       )
+                      const poolRecord = poolRecordForGame(
+                        playerHistory,
+                        row.week,
+                        row.cbsEventId,
+                        slate.pool.seasonYear,
+                      )
+                      const poolLine = poolRecordIsGraded(poolRecord)
+                        ? formatPoolRecordLabel(poolRecord)
+                        : null
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
                       const weatherLabel = formatWeatherBucket(row.weather)
                       const rankStamp = formatRankStamp(row.rank, showUnranked)
@@ -659,6 +674,14 @@ export default function TeamsView({
                                   {poolPick === 'picked'
                                     ? 'Our pick'
                                     : 'Not our pick'}
+                                </span>
+                              </>
+                            )}
+                            {poolLine && (
+                              <>
+                                {' · '}
+                                <span title={formatPoolRecordDetail(poolRecord)}>
+                                  {poolLine}
                                 </span>
                               </>
                             )}

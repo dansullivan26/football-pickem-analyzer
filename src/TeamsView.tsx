@@ -620,6 +620,9 @@ export default function TeamsView({
                       const poolLine = poolRecordIsGraded(poolRecord)
                         ? formatPoolRecordLabel(poolRecord)
                         : null
+                      const poolDetail = poolRecordIsGraded(poolRecord)
+                        ? formatPoolRecordDetail(poolRecord)
+                        : null
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
                       const weatherLabel = formatWeatherBucket(row.weather)
                       const rankStamp = formatRankStamp(row.rank, showUnranked)
@@ -677,12 +680,10 @@ export default function TeamsView({
                                 </span>
                               </>
                             )}
-                            {poolLine && (
+                            {poolLine && poolDetail && (
                               <>
                                 {' · '}
-                                <span title={formatPoolRecordDetail(poolRecord)}>
-                                  {poolLine}
-                                </span>
+                                <span title={poolDetail}>{poolLine}</span>
                               </>
                             )}
                             {weatherLabel && (

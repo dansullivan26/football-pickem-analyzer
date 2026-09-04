@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-04T11:56:33.076Z",
+  "updatedAt": "2026-09-04T14:25:23.486Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-09-04T09:52:38.033Z",
+      "capturedAt": "2026-09-04T14:25:23.486Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -93,7 +93,9 @@
             "state": "GA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 14,
+          "homeScore": 13
         },
         {
           "cbsEventId": 50027487,
@@ -240,7 +242,7 @@
           "source": "public-consensus",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 5.212355212355213,
+          "score": 4.3165467625899225,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -317,8 +319,8 @@
           "cover": null,
           "source": "public-consensus",
           "pickedSide": "away",
-          "strength": "mild",
-          "score": 4.356846473029044,
+          "strength": "solid",
+          "score": 6.296296296296298,
           "awayRank": null,
           "homeRank": 18,
           "venue": {
@@ -422,7 +424,7 @@
           "source": "public-consensus",
           "pickedSide": "home",
           "strength": "strong",
-          "score": 18.33333333333333,
+          "score": 13.076923076923073,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -544,15 +546,15 @@
           "away": "UCLA",
           "home": "CAL",
           "homeSpread": -1.5,
-          "liveHomeSpread": 1.5,
-          "category": "hammer",
+          "liveHomeSpread": 2.5,
+          "category": "lock",
           "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "strong",
-          "score": 12,
+          "score": 15,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -604,7 +606,7 @@
           "source": "public-consensus",
           "pickedSide": "home",
           "strength": "strong",
-          "score": 14.406779661016941,
+          "score": 14.532019704433495,
           "awayRank": 24,
           "homeRank": 9,
           "venue": {
@@ -630,7 +632,7 @@
           "source": "public-consensus",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 1.6666666666666714,
+          "score": 1.171875,
           "awayRank": null,
           "homeRank": 4,
           "venue": {

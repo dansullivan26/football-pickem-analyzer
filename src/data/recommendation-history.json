@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-05T13:34:49.168Z",
+  "updatedAt": "2026-09-05T14:08:29.680Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-09-05T12:51:09.564Z",
+      "capturedAt": "2026-09-05T14:08:29.680Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -121,7 +121,9 @@
             "state": "MI",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 20,
+          "homeScore": 30
         },
         {
           "cbsEventId": 50027462,
@@ -147,7 +149,9 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 45,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50027505,
@@ -251,7 +255,8 @@
             "state": "OH",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "deviated": true
         },
         {
           "cbsEventId": 50027561,

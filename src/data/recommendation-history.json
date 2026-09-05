@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-05T16:08:16.808Z",
+  "updatedAt": "2026-09-05T18:06:20.997Z",
   "weeks": [
     {
       "week": 1,
       "seasonYear": 2026,
       "label": "Week 1",
-      "capturedAt": "2026-09-05T16:08:16.808Z",
+      "capturedAt": "2026-09-05T18:06:20.997Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50027575,
@@ -177,7 +177,9 @@
             "state": "WV",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027508,
@@ -203,7 +205,9 @@
             "state": "AL",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027494,
@@ -229,7 +233,9 @@
             "state": "PA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50027470,
@@ -282,7 +288,8 @@
             "state": "OR",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "deviated": true
         },
         {
           "cbsEventId": 50027468,

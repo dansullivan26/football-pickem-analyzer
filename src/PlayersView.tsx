@@ -10,7 +10,13 @@ import {
   type ResidualCell,
 } from './playerPrediction'
 import { careerSeasonYears, weeksForSeason } from './careerHistory'
-import { formatWinningScore, mergeEventScores } from './gameStatus'
+import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
+import {
+  formatSpread,
+  pickResultLabel,
+  pickResultState,
+  pickSelectionLabel,
+} from './pickLabels'
 import {
   entryWinRecord,
   playerSlugByEntryId,
@@ -31,35 +37,7 @@ import {
   TRAVEL_SPLIT_LABELS,
   buildTravelRestIndex,
 } from './travelRest'
-import type {
-  PlayerHistory,
-  PlayerPick,
-  RecommendationHistory,
-  Slate,
-} from './types'
-
-function formatSpread(value: number) {
-  if (value === 0) return 'PK'
-  const points = Number.isInteger(Math.abs(value))
-    ? Math.abs(value).toFixed(0)
-    : Math.abs(value).toFixed(1)
-  return value > 0 ? `+${points}` : `-${points}`
-}
-
-function pickLabel(pick: PlayerPick) {
-  if (!pick.pickedSide || !pick.pickedTeam) return 'No pick recorded'
-  const spread =
-    pick.pickedSide === 'home' ? pick.homeSpread : pick.homeSpread * -1
-  return `${pick.pickedTeam} ${formatSpread(spread)}`
-}
-
-function resultLabel(pick: PlayerPick) {
-  if (pick.matchStatus === 'ambiguous') return 'Needs review'
-  if (pick.matchStatus === 'unmatched') return 'Unmatched'
-  if (!pick.pickedSide) return 'Awaiting results'
-  if (!pick.result) return 'Pending'
-  return pick.result
-}
+import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 
 function predictedPickLabel(game: PredictedGame) {
   if (!game.predictedSide || !game.predictedTeam) return 'No call'
@@ -213,6 +191,7 @@ export default function PlayersView({
       ]),
     [recommendations.weeks, slate.games],
   )
+  const finalEvents = useMemo(() => finalEventIds(slate.games), [slate.games])
 
   const filteredPlayers = useMemo(() => {
     const normalized = query.trim().toLowerCase()
@@ -733,6 +712,7 @@ export default function PlayersView({
                       const score = formatWinningScore(
                         scoresByEvent.get(pick.cbsEventId) ?? {},
                       )
+                      const isFinal = finalEvents.has(pick.cbsEventId)
                       return (
                       <div className="history-pick" key={pick.gameId}>
                         <div className="history-matchup">
@@ -746,12 +726,12 @@ export default function PlayersView({
                         </div>
                         <div className="history-selection">
                           <span>Selection</span>
-                          <strong>{pickLabel(pick)}</strong>
+                          <strong>{pickSelectionLabel(pick)}</strong>
                         </div>
                         <span
-                          className={`pick-result ${pick.result ?? pick.matchStatus}`}
+                          className={`pick-result ${pickResultState(pick, isFinal)}`}
                         >
-                          {resultLabel(pick)}
+                          {pickResultLabel(pick, isFinal)}
                           {score && <small>{score}</small>}
                         </span>
                       </div>

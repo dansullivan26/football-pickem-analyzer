@@ -9,8 +9,10 @@ import {
   gameIsFinal,
   gameIsOnEtDay,
   gameIsUpcoming,
+  finalEventIds,
   mergeEventScores,
   slateKickoffDays,
+  statusIsFinal,
 } from '../src/gameStatus.ts'
 
 const now = Date.parse('2026-08-30T16:00:00-04:00')
@@ -34,6 +36,23 @@ test('gameIsFinal uses status or a known score', () => {
     gameIsFinal({ status: 'SCHEDULED', awayScore: 21, homeScore: 17 }),
     true,
   )
+})
+
+test('statusIsFinal ignores a live score', () => {
+  assert.equal(statusIsFinal('FINAL'), true)
+  assert.equal(statusIsFinal(' final/ot '), true)
+  assert.equal(statusIsFinal('IN_PROGRESS'), false)
+  assert.equal(statusIsFinal('SCHEDULED'), false)
+})
+
+test('finalEventIds collects only finished games', () => {
+  const ids = finalEventIds([
+    { cbsEventId: 1, status: 'FINAL' },
+    { cbsEventId: 2, status: 'IN_PROGRESS' },
+    { cbsEventId: 3, status: 'SCHEDULED' },
+    { cbsEventId: 4, status: 'FINAL_OT' },
+  ])
+  assert.deepEqual([...ids].sort(), [1, 4])
 })
 
 test('gameIsCompleted includes kicked-off games and finals', () => {

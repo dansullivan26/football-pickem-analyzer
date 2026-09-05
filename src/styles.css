@@ -2498,6 +2498,12 @@ a.team-page-link:focus-visible .team-name {
   background: #fff0ef;
 }
 
+/* A no-show is settled, not wrong, so it stays muted next to a real loss. */
+.pick-result.miss {
+  color: #7c6a68;
+  background: #f4efee;
+}
+
 .pick-result.push {
   color: var(--blue);
   background: var(--blue-soft);

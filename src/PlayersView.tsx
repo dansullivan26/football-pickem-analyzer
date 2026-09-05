@@ -20,7 +20,7 @@ import {
 import {
   entryWinRecord,
   playerSlugByEntryId,
-  sortPlayersByWinRate,
+  sortPlayersByWins,
 } from './playerDirectory'
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
@@ -195,7 +195,7 @@ export default function PlayersView({
 
   const filteredPlayers = useMemo(() => {
     const normalized = query.trim().toLowerCase()
-    const ranked = sortPlayersByWinRate(history.entries, careerHistory.weeks)
+    const ranked = sortPlayersByWins(history.entries, careerHistory.weeks)
     if (!normalized) return ranked
     return ranked.filter((entry) =>
       entry.name.toLowerCase().includes(normalized),

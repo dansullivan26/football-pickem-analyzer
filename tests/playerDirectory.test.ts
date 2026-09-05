@@ -5,7 +5,7 @@ import {
   entryWinRate,
   entryWinRecord,
   playerSlug,
-  sortPlayersByWinRate,
+  sortPlayersByWins,
 } from '../src/playerDirectory.ts'
 import type {
   PlayerPick,
@@ -81,7 +81,7 @@ test('entryWinRate is wins over scored picks and ignores ungraded rows', () => {
   assert.equal(entryWinRate('missing', weeks), null)
 })
 
-test('sortPlayersByWinRate ranks higher percentages first, then name', () => {
+test('sortPlayersByWins ranks more wins first, then rate, then name', () => {
   const entries = [
     entry('c', 'Casey'),
     entry('a', 'Avery'),
@@ -93,18 +93,45 @@ test('sortPlayersByWinRate ranks higher percentages first, then name', () => {
     week([
       { entryId: 'c', results: ['win', 'win', 'loss'] },
       { entryId: 'a', results: ['win', 'loss'] },
-      { entryId: 'b', results: ['win', 'loss'] },
+      { entryId: 'b', results: ['win'] },
       { entryId: 'd', results: ['loss', 'loss'] },
     ]),
   ]
 
   assert.deepEqual(
-    sortPlayersByWinRate(entries, weeks).map((row) => row.name),
-    ['Casey', 'Avery', 'Blair', 'Drew', 'Eden'],
+    sortPlayersByWins(entries, weeks).map((row) => row.name),
+    ['Casey', 'Blair', 'Avery', 'Drew', 'Eden'],
   )
 })
 
-test('sortPlayersByWinRate uses alphabetical order when rates match', () => {
+test('a perfect short card does not outrank a bigger win count', () => {
+  const entries = [entry('trevor', 'Trevor Miller'), entry('tyler', 'Tyler Kopas')]
+  const weeks = [
+    week([
+      { entryId: 'trevor', results: ['win', 'win', 'win'] },
+      { entryId: 'tyler', results: ['win', 'win', 'win', 'win', 'win', 'loss', 'loss'] },
+    ]),
+  ]
+
+  assert.deepEqual(entryWinRecord('trevor', weeks), { wins: 3, scored: 3 })
+  assert.equal(entryWinRate('trevor', weeks), 1)
+  assert.deepEqual(
+    sortPlayersByWins(entries, weeks).map((row) => row.name),
+    ['Tyler Kopas', 'Trevor Miller'],
+  )
+})
+
+test('players without a graded pick stay under an 0-for-2 card', () => {
+  const entries = [entry('quiet', 'Quiet Quinn'), entry('cold', 'Cold Casey')]
+  const weeks = [week([{ entryId: 'cold', results: ['loss', 'loss'] }])]
+
+  assert.deepEqual(
+    sortPlayersByWins(entries, weeks).map((row) => row.name),
+    ['Cold Casey', 'Quiet Quinn'],
+  )
+})
+
+test('sortPlayersByWins uses alphabetical order when records match', () => {
   const entries = [entry('z', 'zoe'), entry('a', 'Ada'), entry('m', 'Mia')]
   const weeks = [
     week([
@@ -115,7 +142,7 @@ test('sortPlayersByWinRate uses alphabetical order when rates match', () => {
   ]
 
   assert.deepEqual(
-    sortPlayersByWinRate(entries, weeks).map((row) => row.name),
+    sortPlayersByWins(entries, weeks).map((row) => row.name),
     ['Ada', 'Mia', 'zoe'],
   )
 })

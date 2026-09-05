@@ -44,23 +44,43 @@ export function entryWinRecord(entryId: string, weeks: PlayerWeek[]) {
   }
 }
 
+type WinRecord = { wins: number; scored: number }
+
+function winRate(record: WinRecord) {
+  if (!record.scored) return null
+  return record.wins / record.scored
+}
+
 export function entryWinRate(entryId: string, weeks: PlayerWeek[]) {
-  const { wins, scored } = entryWinRecord(entryId, weeks)
-  if (!scored) return null
-  return wins / scored
+  return winRate(entryWinRecord(entryId, weeks))
 }
 
 function nameOrder(left: string, right: string) {
   return left.localeCompare(right, undefined, { sensitivity: 'base' })
 }
 
-export function sortPlayersByWinRate(
+/**
+ * Roster order follows the win count on the chip. Rate only breaks ties, so a
+ * player who skipped most of a slate cannot lead the list on a perfect 3-for-3.
+ */
+export function sortPlayersByWins(
   entries: PlayerRosterEntry[],
   weeks: PlayerWeek[],
 ) {
+  const records = new Map(
+    entries.map((entry) => [entry.entryId, entryWinRecord(entry.entryId, weeks)]),
+  )
+  const recordFor = (entryId: string): WinRecord =>
+    records.get(entryId) ?? { wins: 0, scored: 0 }
+
   return [...entries].sort((left, right) => {
-    const leftRate = entryWinRate(left.entryId, weeks)
-    const rightRate = entryWinRate(right.entryId, weeks)
+    const leftRecord = recordFor(left.entryId)
+    const rightRecord = recordFor(right.entryId)
+    if (rightRecord.wins !== leftRecord.wins) {
+      return rightRecord.wins - leftRecord.wins
+    }
+    const leftRate = winRate(leftRecord)
+    const rightRate = winRate(rightRecord)
     if (leftRate == null && rightRate == null) {
       return nameOrder(left.name, right.name)
     }

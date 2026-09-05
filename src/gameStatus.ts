@@ -71,15 +71,25 @@ export function gameIsUpcoming(game: Pick<SlateGame, 'kickoff'>, now: number) {
   return new Date(game.kickoff).getTime() > now
 }
 
+/** Status only. `gameIsFinal` also trusts a score, which a live game already has. */
+export function statusIsFinal(status: string) {
+  return FINAL_STATUSES.has(status.trim().toUpperCase())
+}
+
+export function finalEventIds(games: Iterable<{ cbsEventId: number; status: string }>) {
+  const ids = new Set<number>()
+  for (const game of games) {
+    if (statusIsFinal(game.status)) ids.add(game.cbsEventId)
+  }
+  return ids
+}
+
 export function gameIsFinal(game: {
   status: string
   awayScore?: number | null
   homeScore?: number | null
 }) {
-  return (
-    FINAL_STATUSES.has(game.status.trim().toUpperCase()) ||
-    gameScores(game) != null
-  )
+  return statusIsFinal(game.status) || gameScores(game) != null
 }
 
 export function gameIsCompleted(

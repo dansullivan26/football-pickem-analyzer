@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-05T09:33:30-04:00",
+    "fetchedAt": "2026-09-05T13:04:41-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -88,7 +88,7 @@
     {
       "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
       "name": "John Williams",
-      "hasMadeAPick": false,
+      "hasMadeAPick": true,
       "season": {
         "score": null,
         "rank": null,
@@ -198,7 +198,7 @@
     {
       "entryId": "ivxhi4tzhizdiojvgm3tamzr",
       "name": "Chuck Christopher",
-      "hasMadeAPick": false,
+      "hasMadeAPick": true,
       "season": {
         "score": null,
         "rank": null,
@@ -298,9 +298,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 4,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -389,13 +389,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -404,13 +404,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -419,13 +419,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -688,9 +688,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 8,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -779,13 +779,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -794,13 +794,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -809,13 +809,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -1080,7 +1080,7 @@
           "weekScore": 3,
           "weekRank": 1,
           "correctPicks": 3,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -1169,13 +1169,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -1184,13 +1184,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -1199,13 +1199,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -1468,9 +1468,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 8,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -1559,13 +1559,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -1574,13 +1574,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -1589,13 +1589,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -1858,9 +1858,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 4,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -1949,13 +1949,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -1964,13 +1964,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -1979,13 +1979,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -2248,9 +2248,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 8,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -2339,13 +2339,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -2354,13 +2354,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -2369,13 +2369,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -2638,9 +2638,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
           "weekScore": 0,
-          "weekRank": 22,
+          "weekRank": 18,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 3,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -2729,13 +2729,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -2744,13 +2744,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -2759,13 +2759,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -3028,9 +3028,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
           "weekScore": 0,
-          "weekRank": 22,
+          "weekRank": 25,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 3,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3119,13 +3119,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -3134,13 +3134,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -3149,13 +3149,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -3418,9 +3418,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 2,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3509,13 +3509,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -3524,13 +3524,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -3539,13 +3539,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -3808,9 +3808,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 18,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3899,13 +3899,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -3914,13 +3914,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -3929,13 +3929,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -4198,9 +4198,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsojs",
           "name": "rob bandelier",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 8,
           "correctPicks": 2,
-          "picksCount": 4,
+          "picksCount": 7,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -4289,13 +4289,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -4304,13 +4304,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -4319,13 +4319,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -4588,9 +4588,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 18,
           "correctPicks": 1,
-          "picksCount": 3,
+          "picksCount": 6,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -4679,13 +4679,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -4694,13 +4694,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -4709,13 +4709,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -4978,9 +4978,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 4,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5069,13 +5069,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -5084,13 +5084,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -5099,13 +5099,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -5368,9 +5368,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
           "weekScore": 0,
-          "weekRank": 22,
+          "weekRank": 18,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 3,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5459,13 +5459,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -5474,13 +5474,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -5489,13 +5489,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -5758,9 +5758,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 8,
           "correctPicks": 2,
-          "picksCount": 4,
+          "picksCount": 7,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5849,13 +5849,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -5864,13 +5864,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -5879,13 +5879,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -6148,9 +6148,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
           "weekScore": 3,
-          "weekRank": 1,
+          "weekRank": 2,
           "correctPicks": 3,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -6239,13 +6239,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -6254,13 +6254,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -6269,13 +6269,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -6538,9 +6538,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 8,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -6629,13 +6629,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -6644,13 +6644,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -6659,13 +6659,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -6928,9 +6928,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
           "weekScore": 0,
-          "weekRank": 22,
+          "weekRank": 16,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 3,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7019,13 +7019,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -7034,13 +7034,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -7049,13 +7049,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -7318,9 +7318,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 18,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7409,13 +7409,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -7424,13 +7424,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -7439,13 +7439,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -7708,9 +7708,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 8,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7799,13 +7799,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -7814,13 +7814,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -7829,13 +7829,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -8098,9 +8098,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 16,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -8189,13 +8189,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -8204,13 +8204,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -8219,13 +8219,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -8488,9 +8488,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 18,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -8579,13 +8579,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -8594,13 +8594,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -8609,13 +8609,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -8878,7 +8878,7 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 8,
           "correctPicks": 1,
           "picksCount": 25,
           "tiebreaker": {
@@ -8984,9 +8984,9 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": "krswc3j2gq2to===",
-              "pickedTeam": "BAMA",
-              "pickedSide": "home",
+              "pickedTeamId": "krswc3j2gu3dk===",
+              "pickedTeam": "ECU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
@@ -9014,9 +9014,9 @@
               "away": "BC",
               "home": "CINCY",
               "homeSpread": -7.5,
-              "pickedTeamId": "krswc3j2guztc===",
-              "pickedTeam": "CINCY",
-              "pickedSide": "home",
+              "pickedTeamId": "krswc3j2gq4tg===",
+              "pickedTeam": "BC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
@@ -9268,9 +9268,9 @@
           "entryId": "ivxhi4tzhizdkmjrguydonbw",
           "name": "Austin Downum",
           "weekScore": 1,
-          "weekRank": 11,
+          "weekRank": 18,
           "correctPicks": 1,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -9359,13 +9359,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -9374,13 +9374,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -9389,13 +9389,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43do===",
+              "pickedTeam": "PITT",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
@@ -9658,9 +9658,9 @@
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
           "weekScore": 2,
-          "weekRank": 3,
+          "weekRank": 4,
           "correctPicks": 2,
-          "picksCount": 5,
+          "picksCount": 8,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -9749,13 +9749,13 @@
               "away": "CSTCAR",
               "home": "WVU",
               "homeSpread": -21.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztcmrugu======",
+              "pickedTeam": "CSTCAR",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
@@ -9764,13 +9764,13 @@
               "away": "ECU",
               "home": "BAMA",
               "homeSpread": -28.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
@@ -9779,13 +9779,13 @@
               "away": "MIAOH",
               "home": "PITT",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4dq===",
+              "pickedTeam": "MIAOH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",

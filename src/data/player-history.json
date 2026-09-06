@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-05T20:38:44-04:00",
+    "fetchedAt": "2026-09-05T22:14:35-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -282,6 +282,17 @@
         "correctPicks": null,
         "picksMadeCount": null
       }
+    },
+    {
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "hasMadeAPick": true,
+      "season": {
+        "score": null,
+        "rank": null,
+        "correctPicks": null,
+        "picksMadeCount": null
+      }
     }
   ],
   "weeks": [
@@ -297,10 +308,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
-          "weekScore": 6,
-          "weekRank": 8,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "weekScore": 8,
+          "weekRank": 3,
+          "correctPicks": 8,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -467,9 +478,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -512,9 +523,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -584,13 +595,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -599,13 +610,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -687,10 +698,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
-          "weekScore": 4,
-          "weekRank": 8,
-          "correctPicks": 4,
-          "picksCount": 18,
+          "weekScore": 6,
+          "weekRank": 3,
+          "correctPicks": 6,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -857,9 +868,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -902,9 +913,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -974,13 +985,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -989,13 +1000,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -1077,10 +1088,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
-          "weekScore": 6,
-          "weekRank": 3,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "weekScore": 8,
+          "weekRank": 1,
+          "correctPicks": 8,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -1247,9 +1258,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -1292,9 +1303,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -1364,13 +1375,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -1379,13 +1390,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -1468,9 +1479,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
           "weekScore": 6,
-          "weekRank": 8,
+          "weekRank": 11,
           "correctPicks": 6,
-          "picksCount": 18,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -1637,9 +1648,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -1682,9 +1693,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -1754,13 +1765,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -1769,13 +1780,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -1858,9 +1869,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
           "weekScore": 6,
-          "weekRank": 1,
+          "weekRank": 11,
           "correctPicks": 6,
-          "picksCount": 18,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -2027,9 +2038,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2072,9 +2083,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2144,13 +2155,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -2159,13 +2170,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -2247,10 +2258,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
-          "weekScore": 7,
+          "weekScore": 8,
           "weekRank": 3,
-          "correctPicks": 7,
-          "picksCount": 18,
+          "correctPicks": 8,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -2417,9 +2428,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2462,9 +2473,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2534,13 +2545,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -2549,13 +2560,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -2637,10 +2648,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
-          "weekScore": 2,
-          "weekRank": 25,
-          "correctPicks": 2,
-          "picksCount": 13,
+          "weekScore": 3,
+          "weekRank": 23,
+          "correctPicks": 3,
+          "picksCount": 15,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -2807,9 +2818,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2852,9 +2863,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -2924,13 +2935,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -2939,13 +2950,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -3028,9 +3039,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
           "weekScore": 4,
-          "weekRank": 21,
+          "weekRank": 23,
           "correctPicks": 4,
-          "picksCount": 13,
+          "picksCount": 15,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3197,9 +3208,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -3242,9 +3253,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -3314,13 +3325,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -3329,13 +3340,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -3418,9 +3429,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
           "weekScore": 5,
-          "weekRank": 8,
+          "weekRank": 11,
           "correctPicks": 5,
-          "picksCount": 18,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3587,9 +3598,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -3632,9 +3643,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -3704,13 +3715,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -3719,13 +3730,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -3807,10 +3818,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
-          "weekScore": 6,
-          "weekRank": 16,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "weekScore": 7,
+          "weekRank": 11,
+          "correctPicks": 7,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -3977,9 +3988,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4022,9 +4033,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4094,13 +4105,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -4109,13 +4120,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -4197,10 +4208,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojs",
           "name": "rob bandelier",
-          "weekScore": 7,
+          "weekScore": 8,
           "weekRank": 8,
-          "correctPicks": 7,
-          "picksCount": 17,
+          "correctPicks": 8,
+          "picksCount": 19,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -4367,9 +4378,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4412,9 +4423,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4484,13 +4495,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -4499,13 +4510,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -4587,10 +4598,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
-          "weekScore": 5,
-          "weekRank": 21,
-          "correctPicks": 5,
-          "picksCount": 16,
+          "weekScore": 6,
+          "weekRank": 11,
+          "correctPicks": 6,
+          "picksCount": 18,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -4757,9 +4768,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4802,9 +4813,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -4874,13 +4885,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -4889,13 +4900,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -4977,10 +4988,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
-          "weekScore": 4,
-          "weekRank": 3,
-          "correctPicks": 4,
-          "picksCount": 18,
+          "weekScore": 5,
+          "weekRank": 17,
+          "correctPicks": 5,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5147,9 +5158,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -5192,9 +5203,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -5264,13 +5275,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -5279,13 +5290,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -5367,10 +5378,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
-          "weekScore": 5,
-          "weekRank": 8,
-          "correctPicks": 5,
-          "picksCount": 13,
+          "weekScore": 6,
+          "weekRank": 17,
+          "correctPicks": 6,
+          "picksCount": 15,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5537,9 +5548,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -5582,9 +5593,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -5654,13 +5665,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -5669,13 +5680,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -5757,10 +5768,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
-          "weekScore": 7,
+          "weekScore": 9,
           "weekRank": 3,
-          "correctPicks": 7,
-          "picksCount": 17,
+          "correctPicks": 9,
+          "picksCount": 19,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -5927,9 +5938,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -5972,9 +5983,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -6044,13 +6055,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -6059,13 +6070,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -6147,10 +6158,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
-          "weekScore": 6,
-          "weekRank": 8,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "weekScore": 7,
+          "weekRank": 3,
+          "correctPicks": 7,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -6317,9 +6328,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -6362,9 +6373,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -6434,13 +6445,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -6449,13 +6460,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -6537,10 +6548,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
-          "weekScore": 5,
-          "weekRank": 1,
-          "correctPicks": 5,
-          "picksCount": 18,
+          "weekScore": 6,
+          "weekRank": 17,
+          "correctPicks": 6,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -6707,9 +6718,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -6752,9 +6763,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -6824,13 +6835,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -6839,13 +6850,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -6927,10 +6938,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 5,
-          "weekRank": 16,
-          "correctPicks": 5,
-          "picksCount": 13,
+          "weekScore": 7,
+          "weekRank": 8,
+          "correctPicks": 7,
+          "picksCount": 15,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7097,9 +7108,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7142,9 +7153,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7214,13 +7225,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -7229,13 +7240,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -7317,10 +7328,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
-          "weekScore": 5,
-          "weekRank": 16,
-          "correctPicks": 5,
-          "picksCount": 18,
+          "weekScore": 6,
+          "weekRank": 17,
+          "correctPicks": 6,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7487,9 +7498,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7532,9 +7543,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7604,13 +7615,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -7619,13 +7630,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -7708,9 +7719,9 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
           "weekScore": 5,
-          "weekRank": 16,
+          "weekRank": 22,
           "correctPicks": 5,
-          "picksCount": 18,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -7877,9 +7888,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7922,9 +7933,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -7994,13 +8005,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -8009,13 +8020,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -8097,10 +8108,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
-          "weekScore": 6,
+          "weekScore": 8,
           "weekRank": 8,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "correctPicks": 8,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -8267,9 +8278,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -8312,9 +8323,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -8384,13 +8395,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -8399,13 +8410,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -8487,10 +8498,10 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
-          "weekScore": 5,
-          "weekRank": 21,
-          "correctPicks": 5,
-          "picksCount": 18,
+          "weekScore": 6,
+          "weekRank": 17,
+          "correctPicks": 6,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -8657,9 +8668,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -8702,9 +8713,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -8774,13 +8785,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -8789,13 +8800,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -8878,7 +8889,7 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
           "weekScore": 4,
-          "weekRank": 21,
+          "weekRank": 23,
           "correctPicks": 4,
           "picksCount": 25,
           "tiebreaker": {
@@ -9047,9 +9058,9 @@
               "pickedTeamId": "krswc3j2giydknbwge4a====",
               "pickedTeam": "CHARLO",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9092,9 +9103,9 @@
               "pickedTeamId": "krswc3j2heztc===",
               "pickedTeam": "WYO",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9267,10 +9278,10 @@
         {
           "entryId": "ivxhi4tzhizdkmjrguydonbw",
           "name": "Austin Downum",
-          "weekScore": 5,
-          "weekRank": 16,
-          "correctPicks": 5,
-          "picksCount": 18,
+          "weekScore": 7,
+          "weekRank": 11,
+          "correctPicks": 7,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -9437,9 +9448,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9482,9 +9493,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9554,13 +9565,13 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
@@ -9569,13 +9580,13 @@
               "away": "UNLV",
               "home": "HAWAII",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
@@ -9657,10 +9668,10 @@
         {
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
-          "weekScore": 6,
-          "weekRank": 3,
-          "correctPicks": 6,
-          "picksCount": 18,
+          "weekScore": 8,
+          "weekRank": 1,
+          "correctPicks": 8,
+          "picksCount": 20,
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -9827,9 +9838,9 @@
               "pickedTeamId": "krswc3j2ha3da===",
               "pickedTeam": "CIT",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9872,9 +9883,9 @@
               "pickedTeamId": "krswc3j2gu2dc===",
               "pickedTeam": "COLOST",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched"
             },
             {
@@ -9944,6 +9955,36 @@
               "away": "CMICH",
               "home": "NMEX",
               "homeSpread": -12.5,
+              "pickedTeamId": "krswc3j2guzda===",
+              "pickedTeam": "CMICH",
+              "pickedSide": "away",
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "matched"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
+              "cbsEventId": 50027569,
+              "sport": "NCAAF",
+              "away": "UNLV",
+              "home": "HAWAII",
+              "homeSpread": 3.5,
+              "pickedTeamId": "krswc3j2g4zdq===",
+              "pickedTeam": "UNLV",
+              "pickedSide": "away",
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "matched"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",
+              "cbsEventId": 50027558,
+              "sport": "NCAAF",
+              "away": "UCLA",
+              "home": "CAL",
+              "homeSpread": -1.5,
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
@@ -9953,12 +9994,12 @@
               "matchStatus": "unpicked"
             },
             {
-              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
-              "cbsEventId": 50027569,
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3dm===",
+              "cbsEventId": 50027566,
               "sport": "NCAAF",
-              "away": "UNLV",
-              "home": "HAWAII",
-              "homeSpread": 3.5,
+              "away": "WASHST",
+              "home": "WASH",
+              "homeSpread": -22.5,
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
@@ -9966,6 +10007,366 @@
               "points": null,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ti===",
+              "cbsEventId": 50027574,
+              "sport": "NCAAF",
+              "away": "LVILLE",
+              "home": "MISS",
+              "homeSpread": -6.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3tg===",
+              "cbsEventId": 50027573,
+              "sport": "NCAAF",
+              "away": "WISC",
+              "home": "ND",
+              "homeSpread": -20.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3tk===",
+              "cbsEventId": 50027575,
+              "sport": "NCAAF",
+              "away": "SMU",
+              "home": "FSU",
+              "homeSpread": 2.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            }
+          ]
+        },
+        {
+          "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+          "name": "Adam Gannon",
+          "weekScore": 0,
+          "weekRank": 26,
+          "correctPicks": 0,
+          "picksCount": 3,
+          "tiebreaker": {
+            "question": "How many total points will be scored?",
+            "answer": null,
+            "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3tk==="
+          },
+          "picks": [
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgm4tq===",
+              "cbsEventId": 50027398,
+              "sport": "NCAAF",
+              "away": "UNC",
+              "home": "TCU",
+              "homeSpread": -7.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgqzto===",
+              "cbsEventId": 50027437,
+              "sport": "NCAAF",
+              "away": "HAWAII",
+              "home": "STNFRD",
+              "homeSpread": -5.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq2dm===",
+              "cbsEventId": 50027446,
+              "sport": "NCAAF",
+              "away": "COLO",
+              "home": "GATECH",
+              "homeSpread": -6.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4do===",
+              "cbsEventId": 50027487,
+              "sport": "NCAAF",
+              "away": "TOLEDO",
+              "home": "MICHST",
+              "homeSpread": -10.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3de===",
+              "cbsEventId": 50027462,
+              "sport": "NCAAF",
+              "away": "MIAMI",
+              "home": "STNFRD",
+              "homeSpread": 24.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydk===",
+              "cbsEventId": 50027505,
+              "sport": "NCAAF",
+              "away": "CSTCAR",
+              "home": "WVU",
+              "homeSpread": -21.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguydq===",
+              "cbsEventId": 50027508,
+              "sport": "NCAAF",
+              "away": "ECU",
+              "home": "BAMA",
+              "homeSpread": -28.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4ti===",
+              "cbsEventId": 50027494,
+              "sport": "NCAAF",
+              "away": "MIAOH",
+              "home": "PITT",
+              "homeSpread": -16.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3ta===",
+              "cbsEventId": 50027470,
+              "sport": "NCAAF",
+              "away": "BC",
+              "home": "CINCY",
+              "homeSpread": -7.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3dc===",
+              "cbsEventId": 50027561,
+              "sport": "NCAAF",
+              "away": "BOISE",
+              "home": "OREG",
+              "homeSpread": -24.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq3dq===",
+              "cbsEventId": 50027468,
+              "sport": "NCAAF",
+              "away": "CIT",
+              "home": "CHARLO",
+              "homeSpread": -17.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4tg===",
+              "cbsEventId": 50027493,
+              "sport": "NCAAF",
+              "away": "MRSHL",
+              "home": "PSU",
+              "homeSpread": -24.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2da===",
+              "cbsEventId": 50027540,
+              "sport": "NCAAF",
+              "away": "OKLAST",
+              "home": "TULSA",
+              "homeSpread": 14.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2dm===",
+              "cbsEventId": 50027546,
+              "sport": "NCAAF",
+              "away": "WYO",
+              "home": "COLOST",
+              "homeSpread": -3.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguzdg===",
+              "cbsEventId": 50027523,
+              "sport": "NCAAF",
+              "away": "ARKST",
+              "home": "MEMP",
+              "homeSpread": -9.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2ti===",
+              "cbsEventId": 50027554,
+              "sport": "NCAAF",
+              "away": "IDST",
+              "home": "UTAHST",
+              "homeSpread": -13.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxguyts===",
+              "cbsEventId": 50027519,
+              "sport": "NCAAF",
+              "away": "CLEM",
+              "home": "LSU",
+              "homeSpread": -9.5,
+              "pickedTeamId": "krswc3j2gy3ds===",
+              "pickedTeam": "LSU",
+              "pickedSide": "home",
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "matched"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgq4dm===",
+              "cbsEventId": 50027486,
+              "sport": "NCAAF",
+              "away": "WMICH",
+              "home": "MICH",
+              "homeSpread": -26.5,
+              "pickedTeamId": null,
+              "pickedTeam": null,
+              "pickedSide": null,
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "unpicked"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2ta===",
+              "cbsEventId": 50027550,
+              "sport": "NCAAF",
+              "away": "CMICH",
+              "home": "NMEX",
+              "homeSpread": -12.5,
+              "pickedTeamId": "krswc3j2g4zte===",
+              "pickedTeam": "NMEX",
+              "pickedSide": "home",
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "matched"
+            },
+            {
+              "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ds===",
+              "cbsEventId": 50027569,
+              "sport": "NCAAF",
+              "away": "UNLV",
+              "home": "HAWAII",
+              "homeSpread": 3.5,
+              "pickedTeamId": "krswc3j2gyyte===",
+              "pickedTeam": "HAWAII",
+              "pickedSide": "home",
+              "result": null,
+              "points": null,
+              "pickStatus": "NONE",
+              "matchStatus": "matched"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu2tq===",

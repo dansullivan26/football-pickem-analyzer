@@ -1,18 +1,90 @@
 {
-  "updatedAt": "2026-09-05T13:28:06.764Z",
+  "updatedAt": "2026-09-06T13:42:17.447Z",
   "seasonYear": 2026,
   "teams": [
     {
+      "key": "NCAAF:ARKST",
+      "lastKickoff": "2026-09-05T23:00:00.000Z",
+      "source": "cfbd",
+      "label": "Arkansas State"
+    },
+    {
+      "key": "NCAAF:BAMA",
+      "lastKickoff": "2026-09-05T16:00:00.000Z",
+      "source": "cfbd",
+      "label": "Alabama"
+    },
+    {
+      "key": "NCAAF:BC",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Boston College"
+    },
+    {
+      "key": "NCAAF:BOISE",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Boise State"
+    },
+    {
+      "key": "NCAAF:CAL",
+      "lastKickoff": "2026-09-06T02:30:00.000Z",
+      "source": "cfbd",
+      "label": "California"
+    },
+    {
+      "key": "NCAAF:CHARLO",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Charlotte"
+    },
+    {
+      "key": "NCAAF:CINCY",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Cincinnati"
+    },
+    {
       "key": "NCAAF:CIT",
-      "lastKickoff": "2026-08-29T22:00:00.000Z",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
       "source": "cfbd",
       "label": "The Citadel"
+    },
+    {
+      "key": "NCAAF:CLEM",
+      "lastKickoff": "2026-09-05T23:30:00.000Z",
+      "source": "cfbd",
+      "label": "Clemson"
+    },
+    {
+      "key": "NCAAF:CMICH",
+      "lastKickoff": "2026-09-06T02:00:00.000Z",
+      "source": "cfbd",
+      "label": "Central Michigan"
     },
     {
       "key": "NCAAF:COLO",
       "lastKickoff": "2026-09-04T00:00:00.000Z",
       "source": "cfbd",
       "label": "Colorado"
+    },
+    {
+      "key": "NCAAF:COLOST",
+      "lastKickoff": "2026-09-05T22:00:00.000Z",
+      "source": "cfbd",
+      "label": "Colorado State"
+    },
+    {
+      "key": "NCAAF:CSTCAR",
+      "lastKickoff": "2026-09-05T16:00:00.000Z",
+      "source": "cfbd",
+      "label": "Coastal Carolina"
+    },
+    {
+      "key": "NCAAF:ECU",
+      "lastKickoff": "2026-09-05T16:00:00.000Z",
+      "source": "cfbd",
+      "label": "East Carolina"
     },
     {
       "key": "NCAAF:FSU",
@@ -28,19 +100,25 @@
     },
     {
       "key": "NCAAF:HAWAII",
-      "lastKickoff": "2026-08-29T23:00:00.000Z",
+      "lastKickoff": "2026-09-06T02:00:00.000Z",
       "source": "cfbd",
       "label": "Hawai'i"
     },
     {
       "key": "NCAAF:IDST",
-      "lastKickoff": "2026-08-29T22:00:00.000Z",
+      "lastKickoff": "2026-09-05T23:00:00.000Z",
       "source": "cfbd",
       "label": "Idaho State"
     },
     {
+      "key": "NCAAF:LSU",
+      "lastKickoff": "2026-09-05T23:30:00.000Z",
+      "source": "cfbd",
+      "label": "LSU"
+    },
+    {
       "key": "NCAAF:MEMP",
-      "lastKickoff": "2026-08-30T02:00:00.000Z",
+      "lastKickoff": "2026-09-05T23:00:00.000Z",
       "source": "cfbd",
       "label": "Memphis"
     },
@@ -51,10 +129,58 @@
       "label": "Miami"
     },
     {
+      "key": "NCAAF:MIAOH",
+      "lastKickoff": "2026-09-05T16:30:00.000Z",
+      "source": "cfbd",
+      "label": "Miami (OH)"
+    },
+    {
+      "key": "NCAAF:MICH",
+      "lastKickoff": "2026-09-05T23:30:00.000Z",
+      "source": "cfbd",
+      "label": "Michigan"
+    },
+    {
       "key": "NCAAF:MICHST",
       "lastKickoff": "2026-09-05T00:00:00.000Z",
       "source": "cfbd",
       "label": "Michigan State"
+    },
+    {
+      "key": "NCAAF:MRSHL",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Marshall"
+    },
+    {
+      "key": "NCAAF:NMEX",
+      "lastKickoff": "2026-09-06T02:00:00.000Z",
+      "source": "cfbd",
+      "label": "New Mexico"
+    },
+    {
+      "key": "NCAAF:OKLAST",
+      "lastKickoff": "2026-09-05T19:45:00.000Z",
+      "source": "cfbd",
+      "label": "Oklahoma State"
+    },
+    {
+      "key": "NCAAF:OREG",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Oregon"
+    },
+    {
+      "key": "NCAAF:PITT",
+      "lastKickoff": "2026-09-05T16:30:00.000Z",
+      "source": "cfbd",
+      "label": "Pittsburgh"
+    },
+    {
+      "key": "NCAAF:PSU",
+      "lastKickoff": "2026-09-05T19:30:00.000Z",
+      "source": "cfbd",
+      "label": "Penn State"
     },
     {
       "key": "NCAAF:STNFRD",
@@ -75,6 +201,18 @@
       "label": "Toledo"
     },
     {
+      "key": "NCAAF:TULSA",
+      "lastKickoff": "2026-09-05T19:45:00.000Z",
+      "source": "cfbd",
+      "label": "Tulsa"
+    },
+    {
+      "key": "NCAAF:UCLA",
+      "lastKickoff": "2026-09-06T02:30:00.000Z",
+      "source": "cfbd",
+      "label": "UCLA"
+    },
+    {
       "key": "NCAAF:UNC",
       "lastKickoff": "2026-08-29T16:00:00.000Z",
       "source": "cfbd",
@@ -82,9 +220,33 @@
     },
     {
       "key": "NCAAF:UNLV",
-      "lastKickoff": "2026-08-30T02:00:00.000Z",
+      "lastKickoff": "2026-09-06T02:00:00.000Z",
       "source": "cfbd",
       "label": "UNLV"
+    },
+    {
+      "key": "NCAAF:UTAHST",
+      "lastKickoff": "2026-09-05T23:00:00.000Z",
+      "source": "cfbd",
+      "label": "Utah State"
+    },
+    {
+      "key": "NCAAF:WMICH",
+      "lastKickoff": "2026-09-05T23:30:00.000Z",
+      "source": "cfbd",
+      "label": "Western Michigan"
+    },
+    {
+      "key": "NCAAF:WVU",
+      "lastKickoff": "2026-09-05T16:00:00.000Z",
+      "source": "cfbd",
+      "label": "West Virginia"
+    },
+    {
+      "key": "NCAAF:WYO",
+      "lastKickoff": "2026-09-05T22:00:00.000Z",
+      "source": "cfbd",
+      "label": "Wyoming"
     }
   ]
 }

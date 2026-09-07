@@ -463,13 +463,34 @@ export default function PlayersView({
                   {currentProfile && (
                     <div className="player-archetype">
                       <strong>{currentProfile.archetype}</strong>
-                      <span>{currentProfile.archetypeDetail}</span>
-                      {currentProfile.insight && (
-                        <p className="player-insight">
-                          {currentProfile.insight}
-                        </p>
+                      {currentProfile.signals.length === 0 && (
+                        <span>{currentProfile.archetypeDetail}</span>
                       )}
                     </div>
+                  )}
+                  {currentProfile && currentProfile.signals.length > 0 && (
+                    <ol
+                      className="player-signals"
+                      aria-label="Active tendencies, strongest first"
+                    >
+                      {currentProfile.signals.map((signal) => (
+                        <li key={signal.key}>
+                          <div className="player-signal-head">
+                            <strong>{signal.label}</strong>
+                            <span>
+                              {Math.round(signal.rate * 100)}% · {signal.hits}{' '}
+                              of {signal.eligible}
+                            </span>
+                            {signal.thin && (
+                              <em title="Enough to make a call, not enough to trust yet">
+                                thin
+                              </em>
+                            )}
+                          </div>
+                          <small>{signal.sentence}</small>
+                        </li>
+                      ))}
+                    </ol>
                   )}
                 </div>
                 <label>

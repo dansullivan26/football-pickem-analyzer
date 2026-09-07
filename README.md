@@ -77,10 +77,16 @@ new graded weeks arrive. The label in the player header is the current
 profile, trained on every graded pick including this week's finals. The label
 inside the Prediction card is the one the model held when it made that week's
 calls, since a week never trains on itself — that is why Week 1 forecasts read
-`0 graded picks` no matter how many Week 1 games have finished. When a second habit is loud enough (12+ chances and
-70%+ one way) and is not just a restatement of the archetype, the profile
-adds one templated sentence under the label. Most players get no sentence
-until that bar is met.
+`0 graded picks` no matter how many Week 1 games have finished.
+
+Under that label the header lists every tendency that cleared its bar,
+strongest first, each with its rate, its hit count, and one templated
+sentence. Row 1 is always the archetype. The home-favorite cross restates the
+home and favorite axes, so only the strongest of that group earns a row —
+a `Road-dog hunter` never also lists `Underdog hunter`. Line-value, public,
+travel, and rest go active at 6 chances, which is enough to drive a call but
+thin enough to mislead, so any row under 12 chances is tagged `thin`. Players
+under 20 graded picks get no rows at all.
 
 ```bash
 npm run snapshot-predictions

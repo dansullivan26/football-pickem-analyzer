@@ -2017,6 +2017,74 @@ a.team-page-link:focus-visible .team-name {
   line-height: 1.35;
 }
 
+.player-signals {
+  display: grid;
+  gap: 7px;
+  margin: 9px 0 0;
+  padding: 0;
+  counter-reset: signal;
+  list-style: none;
+}
+
+.player-signals li {
+  position: relative;
+  padding-left: 22px;
+  counter-increment: signal;
+}
+
+.player-signals li::before {
+  content: counter(signal);
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #1f5a3d;
+  background: var(--green-soft);
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.player-signal-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  align-items: baseline;
+}
+
+.player-signal-head strong {
+  font-size: 0.74rem;
+}
+
+.player-signal-head span {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-signal-head em {
+  padding: 1px 6px;
+  border-radius: 999px;
+  color: #8a5b12;
+  background: #fdf1dc;
+  font-size: 0.6rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.player-signals small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
 .residual-report {
   margin: 0 0 18px;
   padding: 16px 18px 18px;

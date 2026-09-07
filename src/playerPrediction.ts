@@ -42,11 +42,28 @@ export type Habit = {
   active: boolean
 }
 
+/** Habit axes plus the home-favorite cross, which is not a standalone habit. */
+export type ProfileSignalKey = HabitKey | 'home-favorite'
+
+/** One tendency that cleared its bar, ranked against the others. */
+export type ProfileSignal = {
+  key: ProfileSignalKey
+  label: string
+  detail: string
+  sentence: string
+  hits: number
+  eligible: number
+  /** Share on the preferred pole, so always 0.5 or better. */
+  rate: number
+  /** Active enough to drive a call, but too small to lean on yet. */
+  thin: boolean
+}
+
 export type PlayerPredictionProfile = {
   archetype: string
   archetypeDetail: string
-  /** Second-strongest leftover habit, when it is loud enough to mention. */
-  insight: string | null
+  /** Every active tendency, strongest first. The first is the archetype. */
+  signals: ProfileSignal[]
   picks: number
   habits: Record<HabitKey, Habit>
 }
@@ -138,21 +155,22 @@ type HabitCounts = {
   eligible: number
 }
 
-type InsightKey = HabitKey | 'home-favorite'
+type InsightKey = ProfileSignalKey
 
 type Candidate = {
   key: InsightKey
   label: string
   detail: string
   insight: string
+  hits: number
   eligible: number
   directionalRate: number
   strength: number
 }
 
 const PRIOR_PICKS = 4
-const INSIGHT_MIN_ELIGIBLE = 12
-const INSIGHT_MIN_RATE = 0.7
+/** Below this many chances a tendency is shown, but labeled thin. */
+const THIN_SAMPLE = 12
 const ACTIVE_RULES: Record<
   HabitKey,
   { minimum: number; minimumRate: number }
@@ -291,7 +309,7 @@ function insightSentence(
       : `Has taken the more-rested side on ${of} chances.`
   }
   return preferred === 'follow'
-    ? `Has taken home favorites on ${of} of those matchups.`
+    ? `Has taken home favorites on ${of} such matchups.`
     : `Has taken the road dog on ${of} home-favorite matchups.`
 }
 
@@ -312,6 +330,7 @@ function habitCandidate(
     label: habit.preferred === 'follow' ? followLabel : fadeLabel,
     detail: `${Math.round(directionalRate * 100)}% across ${habit.eligible} eligible picks`,
     insight: insightSentence(habit.key, habit.preferred, hits, habit.eligible),
+    hits,
     eligible: habit.eligible,
     directionalRate,
     strength: habit.strength * Math.min(1, habit.eligible / 20),
@@ -326,20 +345,18 @@ function redundantInsight(first: InsightKey, next: InsightKey) {
   )
 }
 
-function profileInsight(ranked: Candidate[]) {
-  const [first, ...rest] = ranked
-  if (!first) return null
-  for (const candidate of rest) {
-    if (redundantInsight(first.key, candidate.key)) continue
-    if (
-      candidate.eligible < INSIGHT_MIN_ELIGIBLE ||
-      candidate.directionalRate < INSIGHT_MIN_RATE
-    ) {
-      continue
-    }
-    return candidate.insight
-  }
-  return null
+/**
+ * The home-favorite cross restates the home and favorite axes, so only the
+ * strongest of that group earns a row.
+ */
+function distinctCandidates(ranked: Candidate[]) {
+  return ranked.reduce<Candidate[]>(
+    (kept, candidate) =>
+      kept.some((row) => redundantInsight(row.key, candidate.key))
+        ? kept
+        : [...kept, candidate],
+    [],
+  )
 }
 
 export function buildPlayerPredictionProfile(
@@ -419,7 +436,7 @@ export function buildPlayerPredictionProfile(
     return {
       archetype: 'Building profile',
       archetypeDetail: `${picks.length} graded picks; 20 are needed before assigning a style`,
-      insight: null,
+      signals: [],
       picks: picks.length,
       habits,
     }
@@ -461,6 +478,7 @@ export function buildPlayerPredictionProfile(
           hits,
           homeFavorite.eligible,
         ),
+        hits,
         eligible: homeFavorite.eligible,
         directionalRate,
         strength:
@@ -481,7 +499,16 @@ export function buildPlayerPredictionProfile(
     archetypeDetail:
       strongest?.detail ??
       `${picks.length} graded picks, but no tendency is strong enough to label`,
-    insight: profileInsight(ranked),
+    signals: distinctCandidates(ranked).map((candidate) => ({
+      key: candidate.key,
+      label: candidate.label,
+      detail: candidate.detail,
+      sentence: candidate.insight,
+      hits: candidate.hits,
+      eligible: candidate.eligible,
+      rate: candidate.directionalRate,
+      thin: candidate.eligible < THIN_SAMPLE,
+    })),
     picks: picks.length,
     habits,
   }

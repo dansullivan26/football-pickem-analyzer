@@ -140,7 +140,7 @@ test('withholds calls before a player has enough history', () => {
   )
 
   assert.equal(report.profile.archetype, 'Building profile')
-  assert.equal(report.profile.insight, null)
+  assert.deepEqual(report.profile.signals, [])
   assert.equal(report.calls, 0)
   assert.equal(report.games[0].reason, 'Not enough prior picks')
   assert.equal(report.games[0].meter, null)
@@ -233,10 +233,90 @@ test('assigns a supported home-favorite archetype on the fly', () => {
 
   assert.equal(profile.archetype, 'Home-favorite taker')
   assert.match(profile.archetypeDetail, /20 home-favorite matchups/)
-  assert.equal(profile.insight, null)
+  assert.deepEqual(
+    profile.signals.map((signal) => signal.label),
+    ['Home-favorite taker'],
+  )
+  assert.equal(
+    profile.signals[0].sentence,
+    'Has taken home favorites on 20 of 20 such matchups.',
+  )
 })
 
-test('adds a second-habit sentence when it is loud and not a restatement', () => {
+test('ranks every active tendency and flags the thin ones', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home', index < 8 ? -3.5 : 3.5),
+  )
+  const lineValueGames = priorPicks.slice(0, 12).map((playerPick) =>
+    recGame(playerPick.cbsEventId, {
+      homeSpread: playerPick.homeSpread,
+      category: 'lean',
+      source: 'line-value',
+      recommendedSide: playerPick.pickedSide,
+      pickedSide: playerPick.pickedSide,
+    }),
+  )
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    2,
+    history([historyWeek(1, priorPicks)]),
+    recHistory([recWeek(1, lineValueGames)]),
+  )
+
+  assert.deepEqual(
+    profile.signals.map((signal) => [signal.label, signal.thin]),
+    [
+      ['Home-team lean', false],
+      ['Line-value follower', false],
+      ['Underdog hunter', false],
+    ],
+  )
+  assert.equal(profile.signals[0].label, profile.archetype)
+  assert.deepEqual(
+    profile.signals.map((signal) => `${signal.hits}/${signal.eligible}`),
+    ['20/20', '12/12', '12/20'],
+  )
+})
+
+test('a thin but active sample is listed and marked thin', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, index < 7 ? 'away' : 'home', 3.5),
+  )
+  const publicGames = priorPicks.slice(0, 7).map((playerPick) =>
+    recGame(playerPick.cbsEventId, {
+      homeSpread: 3.5,
+      source: 'public-consensus',
+      pickedSide: playerPick.pickedSide,
+    }),
+  )
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    2,
+    history([historyWeek(1, priorPicks)]),
+    recHistory([recWeek(1, publicGames)]),
+  )
+
+  const publicSignal = profile.signals.find(
+    (signal) => signal.key === 'public',
+  )
+  assert.equal(publicSignal?.label, 'Public chalk taker')
+  assert.equal(publicSignal?.eligible, 7)
+  assert.equal(publicSignal?.thin, true)
+})
+
+test('a building profile has no tendency rows to show', () => {
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    2,
+    history([historyWeek(1, [pick(1, 'home')])]),
+    recHistory([recWeek(1, [])]),
+  )
+
+  assert.equal(profile.archetype, 'Building profile')
+  assert.deepEqual(profile.signals, [])
+})
+
+test('lists a second habit that is not a restatement of the archetype', () => {
   const priorPicks = Array.from({ length: 20 }, (_, index) =>
     pick(index + 1, 'home', index < 8 ? -3.5 : 3.5),
   )
@@ -258,7 +338,7 @@ test('adds a second-habit sentence when it is loud and not a restatement', () =>
 
   assert.equal(profile.archetype, 'Home-team lean')
   assert.equal(
-    profile.insight,
+    profile.signals.find((signal) => signal.key === 'line-value')?.sentence,
     'Has taken our line-value side on 12 of 12 chances.',
   )
 })

@@ -3,179 +3,23 @@
     "site": "Covers",
     "product": "King of Covers contest consensus",
     "description": "contest ATS tickets; headline % is all lines; atsByLine is picks at each number; away.spread/home.spread are current Sides, which may not match any ticket bucket.",
-    "fetchedAt": "2026-09-06T08:32:48-04:00",
+    "fetchedAt": "2026-09-07T08:44:11-04:00",
     "timezone": "America/Indianapolis"
   },
   "week": {
     "order": 1,
     "label": "Week 1",
     "gamesOnSlate": 25,
-    "matched": 4,
+    "matched": 1,
     "unmatched": 0
   },
   "report": {
-    "summary": "4 of 4 games moved since yesterday 08:39 ET. Sides: WASHST @ WASH 23.5 → 21.5; SMU @ FSU -3.5 → -2.5. WISC @ ND public 50/50 → 47/53.",
+    "summary": "1 of 1 games moved since yesterday 08:32 ET.",
     "details": null,
-    "comparedTo": "2026-09-05T08:39:53-04:00",
+    "comparedTo": "2026-09-06T08:32:48-04:00",
     "games": []
   },
   "games": [
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3dm===",
-      "cbsEventId": 50027566,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-06T16:00:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/5f9016a3-b17b-402f-854d-b45500df72c3",
-      "cbsHomeSpread": -22.5,
-      "away": {
-        "name": "Washington St.",
-        "abbrev": "WASHST",
-        "coversName": "Washington State",
-        "spread": 21.5,
-        "pct": 61,
-        "picks": 368
-      },
-      "home": {
-        "name": "Washington",
-        "abbrev": "WASH",
-        "coversName": "Washington",
-        "spread": -21.5,
-        "pct": 39,
-        "picks": 235
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 24.5,
-          "awayPicks": 74,
-          "homePicks": 43
-        },
-        {
-          "awaySpread": 23.5,
-          "awayPicks": 143,
-          "homePicks": 104
-        },
-        {
-          "awaySpread": 22.5,
-          "awayPicks": 145,
-          "homePicks": 88
-        },
-        {
-          "awaySpread": 21.5,
-          "awayPicks": 6,
-          "homePicks": 1
-        },
-        {
-          "awaySpread": 20.5,
-          "awayPicks": 2,
-          "homePicks": 2
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3ti===",
-      "cbsEventId": 50027574,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-06T19:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/dbb5a6f4-e57b-4b9d-bc12-b45500df79f7",
-      "cbsHomeSpread": -6.5,
-      "away": {
-        "name": "Louisville",
-        "abbrev": "LVILLE",
-        "coversName": "Louisville",
-        "spread": 6.5,
-        "pct": 42,
-        "picks": 290
-      },
-      "home": {
-        "name": "Ole Miss",
-        "abbrev": "MISS",
-        "coversName": "Mississippi",
-        "spread": -6.5,
-        "pct": 58,
-        "picks": 407
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 8.5,
-          "awayPicks": 21,
-          "homePicks": 4
-        },
-        {
-          "awaySpread": 7.5,
-          "awayPicks": 61,
-          "homePicks": 48
-        },
-        {
-          "awaySpread": 6.5,
-          "awayPicks": 177,
-          "homePicks": 314
-        },
-        {
-          "awaySpread": 5.5,
-          "awayPicks": 4,
-          "homePicks": 8
-        },
-        {
-          "awaySpread": 4.5,
-          "awayPicks": 31,
-          "homePicks": 35
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3tg===",
-      "cbsEventId": 50027573,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-06T19:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/b8a727e8-2cac-4c98-b98c-b44300dbe03b",
-      "cbsHomeSpread": -20.5,
-      "away": {
-        "name": "Wisconsin",
-        "abbrev": "WISC",
-        "coversName": "Wisconsin",
-        "spread": 20.5,
-        "pct": 47,
-        "picks": 306
-      },
-      "home": {
-        "name": "Notre Dame",
-        "abbrev": "ND",
-        "coversName": "Notre Dame",
-        "spread": -20.5,
-        "pct": 53,
-        "picks": 341
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 24.5,
-          "awayPicks": 31,
-          "homePicks": 12
-        },
-        {
-          "awaySpread": 23.5,
-          "awayPicks": 13,
-          "homePicks": 11
-        },
-        {
-          "awaySpread": 20.5,
-          "awayPicks": 184,
-          "homePicks": 216
-        },
-        {
-          "awaySpread": 19.5,
-          "awayPicks": 79,
-          "homePicks": 104
-        },
-        {
-          "awaySpread": 18.5,
-          "awayPicks": 2,
-          "homePicks": 1
-        }
-      ]
-    },
     {
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnztheztqnz2guydamrxgu3tk===",
       "cbsEventId": 50027575,
@@ -189,32 +33,32 @@
         "abbrev": "SMU",
         "coversName": "SMU",
         "spread": -2.5,
-        "pct": 53,
-        "picks": 301
+        "pct": 55,
+        "picks": 417
       },
       "home": {
         "name": "Florida State",
         "abbrev": "FSU",
         "coversName": "Florida State",
         "spread": 2.5,
-        "pct": 47,
-        "picks": 263
+        "pct": 45,
+        "picks": 347
       },
       "atsByLine": [
         {
           "awaySpread": -4.5,
-          "awayPicks": 0,
-          "homePicks": 1
+          "awayPicks": 29,
+          "homePicks": 33
         },
         {
           "awaySpread": -1.5,
-          "awayPicks": 13,
-          "homePicks": 6
+          "awayPicks": 14,
+          "homePicks": 7
         },
         {
           "awaySpread": -2.5,
-          "awayPicks": 266,
-          "homePicks": 196
+          "awayPicks": 352,
+          "homePicks": 247
         },
         {
           "awaySpread": -3.5,

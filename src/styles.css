@@ -1925,6 +1925,22 @@ a.team-page-link:focus-visible .team-name {
   padding: 0 14px 12px;
 }
 
+.player-ranking-filter {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 0 14px 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.player-ranking-filter select {
+  width: 100%;
+  min-width: 0;
+}
+
 .player-search input {
   width: 100%;
 }
@@ -1964,6 +1980,16 @@ a.team-page-link:focus-visible .team-name {
 .player-list button span,
 .player-list a span {
   font-weight: 700;
+}
+
+.player-rank-number {
+  display: inline-block;
+  width: 2.25em;
+  margin-right: 0.25em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  text-align: right;
 }
 
 .player-win-count {

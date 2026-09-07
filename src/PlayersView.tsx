@@ -19,9 +19,10 @@ import {
   pickSelectionLabel,
 } from './pickLabels'
 import {
-  entryWinRecord,
+  playerRankingWeeks,
   playerSlugByEntryId,
-  sortPlayersByWins,
+  rankPlayersByWins,
+  type PlayerRankingScope,
 } from './playerDirectory'
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
@@ -176,10 +177,10 @@ export default function PlayersView({
     [history.entries],
   )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
-    Math.max(
-      history.weeks.at(-1)?.week ?? 1,
-      recommendations.weeks.at(-1)?.week ?? 1,
-    ),
+    slate.week.order,
+  )
+  const [rankingScope, setRankingScope] = useState<PlayerRankingScope>(
+    slate.week.order,
   )
   const [detailView, setDetailView] = useState<'prediction' | 'actual'>(
     'prediction',
@@ -194,14 +195,6 @@ export default function PlayersView({
   )
   const finalEvents = useMemo(() => finalEventIds(slate.games), [slate.games])
 
-  const filteredPlayers = useMemo(() => {
-    const normalized = query.trim().toLowerCase()
-    const ranked = sortPlayersByWins(history.entries, careerHistory.weeks)
-    if (!normalized) return ranked
-    return ranked.filter((entry) =>
-      entry.name.toLowerCase().includes(normalized),
-    )
-  }, [careerHistory.weeks, history.entries, query])
   const availableWeeks = useMemo(() => {
     const weeks = new Map<
       number,
@@ -228,13 +221,38 @@ export default function PlayersView({
       })
     }
     return [...weeks.values()].sort((a, b) => a.week - b.week)
-  }, [history.weeks, recommendations.weeks])
+  }, [
+    history.pool.seasonYear,
+    history.weeks,
+    recommendations.weeks,
+  ])
+  const rankingWeeks = useMemo(
+    () =>
+      playerRankingWeeks(
+        careerHistory.weeks,
+        rankingScope,
+        history.pool.seasonYear,
+      ),
+    [
+      careerHistory.weeks,
+      history.pool.seasonYear,
+      rankingScope,
+    ],
+  )
+  const filteredPlayers = useMemo(() => {
+    const normalized = query.trim().toLowerCase()
+    const ranked = rankPlayersByWins(history.entries, rankingWeeks)
+    if (!normalized) return ranked
+    return ranked.filter(({ entry }) =>
+      entry.name.toLowerCase().includes(normalized),
+    )
+  }, [history.entries, query, rankingWeeks])
 
   const selectedPlayer = selectedSlug
     ? (history.entries.find(
         (entry) => slugsByEntryId.get(entry.entryId) === selectedSlug,
       ) ?? null)
-    : (filteredPlayers[0] ?? null)
+    : (filteredPlayers[0]?.entry ?? null)
 
   useEffect(() => {
     const previous = document.title
@@ -345,6 +363,11 @@ export default function PlayersView({
     habitYears.length > 1
       ? `${habitYears[0]}–${habitYears[habitYears.length - 1]} career`
       : `${habitYears[0] ?? history.pool.seasonYear} season`
+  const rankingLabel =
+    rankingScope === 'season'
+      ? 'Season'
+      : (availableWeeks.find((week) => week.week === rankingScope)?.label ??
+        `Week ${rankingScope}`)
 
   return (
     <main>
@@ -407,11 +430,33 @@ export default function PlayersView({
         <aside className="player-directory" aria-label="Pool players">
           <div className="directory-heading">
             <div>
-              <p className="eyebrow">Pool roster</p>
+              <p className="eyebrow">{rankingLabel} rankings</p>
               <h2>Players</h2>
             </div>
             <span>{filteredPlayers.length}</span>
           </div>
+          <label className="player-ranking-filter">
+            <span>Rank by</span>
+            <select
+              value={rankingScope}
+              onChange={(event) => {
+                const next =
+                  event.target.value === 'season'
+                    ? 'season'
+                    : Number(event.target.value)
+                setRankingScope(next)
+                if (next !== 'season') setSelectedWeekNumber(next)
+              }}
+            >
+              <option value="season">Season</option>
+              {availableWeeks.map((week) => (
+                <option key={week.week} value={week.week}>
+                  {week.label}
+                  {week.week === slate.week.order ? ' (Current)' : ''}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="search player-search">
             <span className="sr-only">Search players</span>
             <input
@@ -422,7 +467,7 @@ export default function PlayersView({
             />
           </label>
           <div className="player-list">
-            {filteredPlayers.map((entry) => {
+            {filteredPlayers.map(({ entry, rank, record }) => {
               const slug = slugsByEntryId.get(entry.entryId)
               if (!slug) return null
               return (
@@ -438,13 +483,19 @@ export default function PlayersView({
                 }}
               >
                 <span>
+                  <span className="player-rank-number">#{rank}</span>
                   {entry.name}
-                  <span className="player-win-count">
-                    {entryWinRecord(entry.entryId, careerHistory.weeks).wins}
+                  <span
+                    className="player-win-count"
+                    title={`${record.wins} correct picks`}
+                  >
+                    {record.wins}W
                   </span>
                 </span>
                 <small>
-                  {entry.season.rank ? `Season rank ${entry.season.rank}` : 'No results yet'}
+                  {record.scored
+                    ? `${record.wins} of ${record.scored} graded picks`
+                    : `No graded picks in ${rankingLabel.toLowerCase()}`}
                 </small>
               </a>
               )

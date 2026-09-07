@@ -1,4 +1,18 @@
+import { weekSeason } from './careerHistory.ts'
 import type { PlayerRosterEntry, PlayerWeek } from './types'
+
+export type PlayerRankingScope = 'season' | number
+
+export type PlayerWinRecord = {
+  wins: number
+  scored: number
+}
+
+export type RankedPlayer = {
+  entry: PlayerRosterEntry
+  record: PlayerWinRecord
+  rank: number
+}
 
 export function playerSlug(name: string) {
   return name
@@ -44,9 +58,7 @@ export function entryWinRecord(entryId: string, weeks: PlayerWeek[]) {
   }
 }
 
-type WinRecord = { wins: number; scored: number }
-
-function winRate(record: WinRecord) {
+function winRate(record: PlayerWinRecord) {
   if (!record.scored) return null
   return record.wins / record.scored
 }
@@ -59,34 +71,67 @@ function nameOrder(left: string, right: string) {
   return left.localeCompare(right, undefined, { sensitivity: 'base' })
 }
 
+export function playerRankingWeeks(
+  weeks: PlayerWeek[],
+  scope: PlayerRankingScope,
+  seasonYear: number,
+) {
+  return weeks.filter(
+    (week) =>
+      weekSeason(week, seasonYear) === seasonYear &&
+      (scope === 'season' || week.week === scope),
+  )
+}
+
+function compareRecords(
+  left: PlayerWinRecord,
+  right: PlayerWinRecord,
+) {
+  if (right.wins !== left.wins) return right.wins - left.wins
+  const leftRate = winRate(left)
+  const rightRate = winRate(right)
+  if (leftRate == null && rightRate == null) return 0
+  if (leftRate == null) return 1
+  if (rightRate == null) return -1
+  return rightRate - leftRate
+}
+
 /**
  * Roster order follows the win count on the chip. Rate only breaks ties, so a
  * player who skipped most of a slate cannot lead the list on a perfect 3-for-3.
  */
+export function rankPlayersByWins(
+  entries: PlayerRosterEntry[],
+  weeks: PlayerWeek[],
+): RankedPlayer[] {
+  const records = new Map(
+    entries.map((entry) => [entry.entryId, entryWinRecord(entry.entryId, weeks)]),
+  )
+  const recordFor = (entryId: string): PlayerWinRecord =>
+    records.get(entryId) ?? { wins: 0, scored: 0 }
+
+  const sorted = [...entries].sort((left, right) => {
+    const leftRecord = recordFor(left.entryId)
+    const rightRecord = recordFor(right.entryId)
+    return (
+      compareRecords(leftRecord, rightRecord) ||
+      nameOrder(left.name, right.name)
+    )
+  })
+
+  let rank = 0
+  let previous: PlayerWinRecord | null = null
+  return sorted.map((entry, index) => {
+    const record = recordFor(entry.entryId)
+    if (!previous || compareRecords(previous, record) !== 0) rank = index + 1
+    previous = record
+    return { entry, record, rank }
+  })
+}
+
 export function sortPlayersByWins(
   entries: PlayerRosterEntry[],
   weeks: PlayerWeek[],
 ) {
-  const records = new Map(
-    entries.map((entry) => [entry.entryId, entryWinRecord(entry.entryId, weeks)]),
-  )
-  const recordFor = (entryId: string): WinRecord =>
-    records.get(entryId) ?? { wins: 0, scored: 0 }
-
-  return [...entries].sort((left, right) => {
-    const leftRecord = recordFor(left.entryId)
-    const rightRecord = recordFor(right.entryId)
-    if (rightRecord.wins !== leftRecord.wins) {
-      return rightRecord.wins - leftRecord.wins
-    }
-    const leftRate = winRate(leftRecord)
-    const rightRate = winRate(rightRecord)
-    if (leftRate == null && rightRate == null) {
-      return nameOrder(left.name, right.name)
-    }
-    if (leftRate == null) return 1
-    if (rightRate == null) return -1
-    if (rightRate !== leftRate) return rightRate - leftRate
-    return nameOrder(left.name, right.name)
-  })
+  return rankPlayersByWins(entries, weeks).map((row) => row.entry)
 }

@@ -4,7 +4,9 @@ import {
   assignPlayerSlugs,
   entryWinRate,
   entryWinRecord,
+  playerRankingWeeks,
   playerSlug,
+  rankPlayersByWins,
   sortPlayersByWins,
 } from '../src/playerDirectory.ts'
 import type {
@@ -47,12 +49,14 @@ function pick(result: PlayerPick['result']): PlayerPick {
 
 function week(
   rows: Array<{ entryId: string; results: Array<PlayerPick['result']> }>,
+  weekNumber = 1,
+  seasonYear = 2026,
 ): PlayerWeek {
   return {
-    week: 1,
-    seasonYear: 2026,
-    periodId: '2026-1',
-    label: 'Week 1',
+    week: weekNumber,
+    seasonYear,
+    periodId: `${seasonYear}-${weekNumber}`,
+    label: `Week ${weekNumber}`,
     status: 'scored',
     scored: true,
     slateFile: '2026-1.json',
@@ -144,6 +148,59 @@ test('sortPlayersByWins uses alphabetical order when records match', () => {
   assert.deepEqual(
     sortPlayersByWins(entries, weeks).map((row) => row.name),
     ['Ada', 'Mia', 'zoe'],
+  )
+})
+
+test('rankPlayersByWins gives matching records the same displayed rank', () => {
+  const entries = [
+    entry('leader', 'Leader'),
+    entry('beta', 'Beta'),
+    entry('alpha', 'Alpha'),
+    entry('last', 'Last'),
+  ]
+  const weeks = [
+    week([
+      { entryId: 'leader', results: ['win', 'win'] },
+      { entryId: 'alpha', results: ['win', 'loss'] },
+      { entryId: 'beta', results: ['win', 'loss'] },
+      { entryId: 'last', results: ['loss'] },
+    ]),
+  ]
+
+  assert.deepEqual(
+    rankPlayersByWins(entries, weeks).map(({ entry: row, rank, record }) => [
+      row.name,
+      rank,
+      record.wins,
+      record.scored,
+    ]),
+    [
+      ['Leader', 1, 2, 2],
+      ['Alpha', 2, 1, 2],
+      ['Beta', 2, 1, 2],
+      ['Last', 4, 0, 1],
+    ],
+  )
+})
+
+test('playerRankingWeeks supports one week or the current season rollup', () => {
+  const weeks = [
+    week([{ entryId: 'a', results: ['win'] }], 1, 2025),
+    week([{ entryId: 'a', results: ['loss'] }], 1, 2026),
+    week([{ entryId: 'a', results: ['win'] }], 2, 2026),
+  ]
+
+  assert.deepEqual(
+    playerRankingWeeks(weeks, 2, 2026).map(
+      (row) => `${row.seasonYear}:${row.week}`,
+    ),
+    ['2026:2'],
+  )
+  assert.deepEqual(
+    playerRankingWeeks(weeks, 'season', 2026).map(
+      (row) => `${row.seasonYear}:${row.week}`,
+    ),
+    ['2026:1', '2026:2'],
   )
 })
 

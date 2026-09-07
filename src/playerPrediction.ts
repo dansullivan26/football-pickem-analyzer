@@ -1,4 +1,9 @@
-import { sameSeasonWeek, weekIsBefore, weekSeason } from './careerHistory.ts'
+import {
+  sameSeasonWeek,
+  weekIsBefore,
+  weekIsGraded,
+  weekSeason,
+} from './careerHistory.ts'
 import type { LastKickoffFile } from './lastKickoff.ts'
 import { recIsNeutralSite } from './teamSite.ts'
 import {
@@ -178,7 +183,7 @@ function playerPicksBefore(
   return history.weeks
     .filter(
       (week) =>
-        week.scored &&
+        weekIsGraded(week) &&
         weekIsBefore(
           week,
           targetWeek,
@@ -413,7 +418,7 @@ export function buildPlayerPredictionProfile(
   if (picks.length < 20) {
     return {
       archetype: 'Building profile',
-      archetypeDetail: `${picks.length} prior picks; 20 are needed before assigning a style`,
+      archetypeDetail: `${picks.length} graded picks; 20 are needed before assigning a style`,
       insight: null,
       picks: picks.length,
       habits,
@@ -475,11 +480,46 @@ export function buildPlayerPredictionProfile(
     archetype: strongest?.label ?? 'No dominant pattern',
     archetypeDetail:
       strongest?.detail ??
-      `${picks.length} prior picks, but no tendency is strong enough to label`,
+      `${picks.length} graded picks, but no tendency is strong enough to label`,
     insight: profileInsight(ranked),
     picks: picks.length,
     habits,
   }
+}
+
+/**
+ * Profile trained through every graded week, for the player header. Weekly
+ * forecasts stay on the leak-free profile that only sees earlier weeks.
+ */
+export function buildCurrentPlayerProfile(
+  entryId: string,
+  history: PlayerHistory,
+  recommendations: RecommendationHistory,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+): PlayerPredictionProfile {
+  const fallbackSeason = history.pool.seasonYear
+  const latest = history.weeks
+    .filter(weekIsGraded)
+    .reduce<{ week: number; seasonYear?: number } | null>((best, week) => {
+      if (!best) return week
+      return weekIsBefore(
+        best,
+        week.week,
+        weekSeason(week, fallbackSeason),
+        fallbackSeason,
+      )
+        ? week
+        : best
+    }, null)
+
+  return buildPlayerPredictionProfile(
+    entryId,
+    (latest?.week ?? 1) + 1,
+    history,
+    recommendations,
+    weekSeason(latest ?? {}, fallbackSeason),
+    travelRestByAppearance,
+  )
 }
 
 function habitDirectionalRate(habit: Habit) {
@@ -726,7 +766,7 @@ export function predictPlayerWeek(
       history.weeks
         .filter(
           (historyWeek) =>
-            historyWeek.scored &&
+            weekIsGraded(historyWeek) &&
             weekIsBefore(
               historyWeek,
               week.week,
@@ -769,7 +809,7 @@ export function predictionSeasonRecord(
             history.weeks.some(
               (historyWeek) =>
                 sameSeasonWeek(historyWeek, week, history.pool.seasonYear) &&
-                historyWeek.scored,
+                weekIsGraded(historyWeek),
             ),
           )
           .flatMap(
@@ -975,7 +1015,7 @@ export function snapshotPlayerForecasts(
       trainingThroughWeek:
         history.weeks
           .filter((historyWeek) =>
-            historyWeek.scored &&
+            weekIsGraded(historyWeek) &&
             weekIsBefore(
               historyWeek,
               recWeek.week,

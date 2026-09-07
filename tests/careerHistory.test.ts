@@ -4,8 +4,9 @@ import {
   mergeCareerHistory,
   upsertSeasonWeek,
   weekIsBefore,
+  weekIsGraded,
 } from '../src/careerHistory.ts'
-import type { PlayerHistory, PlayerWeek } from '../src/types.ts'
+import type { PlayerHistory, PlayerPick, PlayerWeek } from '../src/types.ts'
 
 function week(
   seasonYear: number,
@@ -37,6 +38,45 @@ test('weekIsBefore treats a prior season as earlier than week 1', () => {
   assert.equal(weekIsBefore({ week: 15, seasonYear: 2026 }, 1, 2027, 2027), true)
   assert.equal(weekIsBefore({ week: 1, seasonYear: 2027 }, 1, 2027, 2027), false)
   assert.equal(weekIsBefore({ week: 2 }, 3, 2026, 2026), true)
+})
+
+test('weekIsGraded counts an in-progress week that already has results', () => {
+  const pick = (result: PlayerPick['result']): PlayerPick => ({
+    gameId: 'game-1',
+    cbsEventId: 1,
+    sport: 'NCAAF',
+    away: 'AWAY',
+    home: 'HOME',
+    homeSpread: -3,
+    pickedTeamId: 'home',
+    pickedTeam: 'HOME',
+    pickedSide: 'home',
+    result,
+    points: result === 'win' ? 1 : 0,
+    pickStatus: null,
+    matchStatus: 'matched',
+  })
+  const entry = (picks: PlayerPick[]) => ({
+    entryId: 'player-1',
+    name: 'Player One',
+    weekScore: null,
+    weekRank: null,
+    correctPicks: null,
+    picksCount: picks.length,
+    tiebreaker: { question: null, answer: null },
+    picks,
+  })
+
+  const inProgress = week(2026, 1, false)
+  assert.equal(weekIsGraded(inProgress), false)
+
+  inProgress.entries = [entry([pick(null)])]
+  assert.equal(weekIsGraded(inProgress), false)
+
+  inProgress.entries = [entry([pick('win'), pick(null)])]
+  assert.equal(weekIsGraded(inProgress), true)
+
+  assert.equal(weekIsGraded(week(2026, 1)), true)
 })
 
 test('upsertSeasonWeek keeps last year when week numbers collide', () => {

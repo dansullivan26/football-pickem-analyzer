@@ -58,9 +58,11 @@ games. A later overwrite of the same dump updates covers again. Line-value agree
 and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
 The Players view also builds a weekly prediction from that player's earlier
-scored weeks. V1 looks for decisive home/road, favorite/dog, line-value, and
-public-side habits; it withholds a call when the sample is thin or the signals
-conflict. The selected week's **Prediction** view is a forecast while picks are
+graded weeks. A week counts as graded once any pick carries a `result`, so a
+still-`in_progress` CBS week feeds the habit math as soon as Saturday finals
+land — the dump's `scored` flag no longer gates training. V1 looks for
+decisive home/road, favorite/dog, line-value, and public-side habits; it
+withholds a call when the sample is thin or the signals conflict. The selected week's **Prediction** view is a forecast while picks are
 hidden, then becomes an automatic predicted-vs-actual report after Tuesday's
 player dump. Open-week forecasts keep updating until the first kickoff; after
 that, `src/data/prediction-forecasts.json` freezes the v1 calls (`v1-habits`)
@@ -71,7 +73,11 @@ exists.
 
 Archetype labels (for example, `Home-favorite taker` or `Public fader`) are
 assigned from the strongest sufficiently supported tendency and may change as
-new scored weeks arrive. When a second habit is loud enough (12+ chances and
+new graded weeks arrive. The label in the player header is the current
+profile, trained on every graded pick including this week's finals. The label
+inside the Prediction card is the one the model held when it made that week's
+calls, since a week never trains on itself — that is why Week 1 forecasts read
+`0 graded picks` no matter how many Week 1 games have finished. When a second habit is loud enough (12+ chances and
 70%+ one way) and is not just a restatement of the archetype, the profile
 adds one templated sentence under the label. Most players get no sentence
 until that bar is met.

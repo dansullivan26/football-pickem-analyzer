@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  buildCurrentPlayerProfile,
   buildPlayerPredictionProfile,
   predictPlayerWeek,
   snapshotPlayerForecasts,
@@ -344,6 +345,46 @@ test('prior-season scored picks count toward the next Year Week 1 profile', () =
   )
   assert.equal(profile.picks, 20)
   assert.notEqual(profile.archetype, 'Building profile')
+})
+
+test('an in-progress week with results still trains the next week', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home', -3),
+  )
+  const inProgress = historyWeek(1, priorPicks, false)
+  const profile = buildPlayerPredictionProfile(
+    entryId,
+    2,
+    history([inProgress]),
+    recHistory([recWeek(1, [])]),
+  )
+
+  assert.equal(profile.picks, 20)
+  assert.equal(profile.archetype, 'Home-favorite taker')
+})
+
+test('the current profile trains through the latest graded week', () => {
+  const priorPicks = Array.from({ length: 20 }, (_, index) =>
+    pick(index + 1, 'home', -3),
+  )
+  const playerHistory = history([
+    historyWeek(1, priorPicks, false),
+    historyWeek(2, [], false),
+  ])
+  const recommendations = recHistory([recWeek(1, []), recWeek(2, [recGame(100)])])
+
+  assert.equal(
+    buildPlayerPredictionProfile(entryId, 1, playerHistory, recommendations)
+      .picks,
+    0,
+  )
+  const current = buildCurrentPlayerProfile(
+    entryId,
+    playerHistory,
+    recommendations,
+  )
+  assert.equal(current.picks, 20)
+  assert.equal(current.archetype, 'Home-favorite taker')
 })
 
 function hop(

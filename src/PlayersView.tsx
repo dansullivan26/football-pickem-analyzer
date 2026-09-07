@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
+  buildCurrentPlayerProfile,
   frozenPlayerWeek,
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
@@ -9,7 +10,7 @@ import {
   type PredictionResidualReport,
   type ResidualCell,
 } from './playerPrediction'
-import { careerSeasonYears, weeksForSeason } from './careerHistory'
+import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory'
 import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
 import {
   formatSpread,
@@ -204,13 +205,14 @@ export default function PlayersView({
   const availableWeeks = useMemo(() => {
     const weeks = new Map<
       number,
-      { week: number; label: string; scored: boolean }
+      { week: number; label: string; scored: boolean; graded: boolean }
     >()
     for (const week of history.weeks) {
       weeks.set(week.week, {
         week: week.week,
         label: week.label,
         scored: week.scored,
+        graded: weekIsGraded(week),
       })
     }
     for (const week of weeksForSeason(
@@ -222,6 +224,7 @@ export default function PlayersView({
         week: week.week,
         label: week.label,
         scored: historyWeek?.scored ?? week.scored,
+        graded: historyWeek?.graded ?? week.scored,
       })
     }
     return [...weeks.values()].sort((a, b) => a.week - b.week)
@@ -272,6 +275,14 @@ export default function PlayersView({
         careerHistory.weeks,
         recommendations.weeks,
         careerHistory.pool.seasonYear,
+        travelRestByAppearance,
+      )
+    : null
+  const currentProfile = selectedPlayer
+    ? buildCurrentPlayerProfile(
+        selectedPlayer.entryId,
+        careerHistory,
+        recommendations,
         travelRestByAppearance,
       )
     : null
@@ -328,7 +339,7 @@ export default function PlayersView({
         travelRestByAppearance,
       )
     : null
-  const scoredWeeks = history.weeks.filter((week) => week.scored).length
+  const scoredWeeks = history.weeks.filter(weekIsGraded).length
   const habitYears = careerSeasonYears(careerHistory)
   const habitSeasonLabel =
     habitYears.length > 1
@@ -449,13 +460,13 @@ export default function PlayersView({
                 <div>
                   <p className="eyebrow">Player profile</p>
                   <h2>{namesHidden ? 'Player' : selectedPlayer.name}</h2>
-                  {prediction && (
+                  {currentProfile && (
                     <div className="player-archetype">
-                      <strong>{prediction.profile.archetype}</strong>
-                      <span>{prediction.profile.archetypeDetail}</span>
-                      {prediction.profile.insight && (
+                      <strong>{currentProfile.archetype}</strong>
+                      <span>{currentProfile.archetypeDetail}</span>
+                      {currentProfile.insight && (
                         <p className="player-insight">
-                          {prediction.profile.insight}
+                          {currentProfile.insight}
                         </p>
                       )}
                     </div>
@@ -593,27 +604,27 @@ export default function PlayersView({
                     <div>
                       <span>{selectedWeek?.label}</span>
                       <strong>
-                        {selectedWeek?.scored
+                        {selectedWeek?.graded
                           ? 'Prediction report'
                           : 'Predicted card'}
                       </strong>
                       <small>
                         {prediction?.trainingThroughWeek
-                          ? `Uses scored picks through Week ${prediction.trainingThroughWeek}`
-                          : 'Waiting for an earlier scored week'}
+                          ? `${prediction.profile.archetype} · trained through Week ${prediction.trainingThroughWeek}`
+                          : 'No earlier graded week to train on'}
                       </small>
                     </div>
                     <div className="week-score">
                       <span>
-                        {selectedWeek?.scored ? 'This week' : 'Season accuracy'}
+                        {selectedWeek?.graded ? 'This week' : 'Season accuracy'}
                       </span>
                       <strong>
-                        {selectedWeek?.scored
+                        {selectedWeek?.graded
                           ? formatAccuracy(prediction?.accuracy ?? null)
                           : formatAccuracy(predictionRecord?.accuracy ?? null)}
                       </strong>
                       <small>
-                        {selectedWeek?.scored
+                        {selectedWeek?.graded
                           ? `${prediction?.correct ?? 0} of ${prediction?.graded ?? 0} graded · ${prediction?.calls ?? 0} calls`
                           : `${predictionRecord?.correct ?? 0} of ${predictionRecord?.calls ?? 0} graded`}
                       </small>
@@ -624,10 +635,10 @@ export default function PlayersView({
                     <div className="prediction-empty">
                       <strong>No responsible calls yet</strong>
                       <p>
-                        The model waits for at least 20 prior picks, or a
-                        smaller but decisive line-value, public, travel, or
-                        rest sample. This fills in automatically after
-                        Tuesday exports are scored.
+                        The model waits for at least 20 picks from earlier
+                        weeks, or a smaller but decisive line-value, public,
+                        travel, or rest sample. A week never trains on
+                        itself, so calls start with the next slate.
                       </p>
                     </div>
                   ) : (
@@ -654,7 +665,7 @@ export default function PlayersView({
                             <small>{game.reason}</small>
                           </div>
                           <PredictionMeter game={game} />
-                          {selectedWeek?.scored && (
+                          {selectedWeek?.graded && (
                             <div className="prediction-actual">
                               <span>Actual</span>
                               <strong>
@@ -695,7 +706,9 @@ export default function PlayersView({
                       <strong>
                         {selectedWeek?.scored
                           ? 'Final picks'
-                          : 'Picks not yet public'}
+                          : selectedWeek?.graded
+                            ? 'Picks in progress'
+                            : 'Picks not yet public'}
                       </strong>
                     </div>
                     <div className="week-score">

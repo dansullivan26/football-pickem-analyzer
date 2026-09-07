@@ -17,6 +17,17 @@ export function weekIsBefore(
   return year < targetSeason || (year === targetSeason && week.week < targetWeek)
 }
 
+/**
+ * CBS only flips `scored` once a week is complete, so an in-progress week can
+ * hold graded picks the habit math should already train on.
+ */
+export function weekIsGraded(week: PlayerWeek) {
+  if (week.scored) return true
+  return week.entries.some((entry) =>
+    entry.picks.some((pick) => pick.result != null),
+  )
+}
+
 export function sameSeasonWeek(
   left: { week: number; seasonYear?: number },
   right: { week: number; seasonYear?: number },

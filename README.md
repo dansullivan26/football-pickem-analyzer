@@ -265,7 +265,10 @@ from the webhook so CBS remains blank.
 
 The Complete card Action also writes `src/data/card-overrides.json` and
 re-runs the recommendation snapshot so Performance can score deviations
-against the opposite of the frozen card pick.
+against the opposite of the frozen card pick. Opening Generate card again
+in the same week pre-checks those flips. A later send keeps deviations for
+games that are no longer on the live card (already kicked off) and only
+drops a mark if you uncheck it on a game that is still listed.
 
 The browser cannot POST that webhook directly. GrokBot's server answers the
 CORS preflight and will not allow the Pages origin, so the button dispatches

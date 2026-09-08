@@ -8,14 +8,17 @@ import {
   submittedPick,
   type SuggestedCard,
 } from './cardStrategy'
+import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
 import { unfavorableHook } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
   card,
+  savedDeviationIds = [],
   onClose,
 }: {
   card: SuggestedCard
+  savedDeviationIds?: Iterable<string>
   onClose: () => void
 }) {
   const [copied, setCopied] = useState(false)
@@ -24,7 +27,17 @@ export default function SuggestedCardPanel({
   const [askPassword, setAskPassword] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState<string | null>(null)
-  const [deviations, setDeviations] = useState<Set<string>>(() => new Set())
+  const [deviations, setDeviations] = useState<Set<string>>(
+    () =>
+      new Set(
+        rememberedDeviationIds({
+          week: card.week,
+          seasonYear: card.seasonYear,
+          savedIds: savedDeviationIds,
+          pickIds: card.picks.map((pick) => pick.gameId),
+        }),
+      ),
+  )
   const [tiebreakerAnswer, setTiebreakerAnswer] = useState('')
   const [tiebreakerError, setTiebreakerError] = useState<string | null>(null)
   const [submitResult, setSubmitResult] = useState<{
@@ -122,6 +135,7 @@ export default function SuggestedCardPanel({
     setSubmitResult(null)
     try {
       await sendCardToGrokBot(card, deviations, readTiebreakerAnswer())
+      storeDeviationIds(card.seasonYear, card.week, deviations)
       setSubmitResult({
         kind: 'success',
         message:
@@ -199,6 +213,14 @@ export default function SuggestedCardPanel({
         </div>
 
         <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
+        {deviations.size > 0 && (
+          <p className="suggested-card-kept">
+            {deviations.size === 1
+              ? '1 deviation from the last sent card is still marked.'
+              : `${deviations.size} deviations from the last sent card are still marked.`}{' '}
+            Uncheck one to send the recommended side this time.
+          </p>
+        )}
 
         <ol className="suggested-picks">
           {picks.map((pick) => {

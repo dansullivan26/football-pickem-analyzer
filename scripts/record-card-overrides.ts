@@ -1,4 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mergeOverrideGames } from '../src/cardOverrides.ts'
+import type { CardOverrides } from '../src/types.ts'
 
 const OUTPUT = new URL('../src/data/card-overrides.json', import.meta.url)
 
@@ -10,24 +12,17 @@ if (!Array.isArray(payload.picks)) {
   throw new Error('payload.picks must be an array.')
 }
 
-const games = payload.picks
-  .filter((pick) => pick.deviate === true)
-  .map((pick, index) => {
-    if (typeof pick.gameId !== 'string' || !pick.gameId) {
-      throw new Error(`picks[${index}] is missing gameId.`)
-    }
-    return { gameId: pick.gameId, deviate: true }
-  })
-
-let existing = { updatedAt: null, weeks: [] }
+let existing: CardOverrides = { updatedAt: null, weeks: [] }
 try {
-  existing = JSON.parse(await readFile(OUTPUT, 'utf8'))
+  existing = JSON.parse(await readFile(OUTPUT, 'utf8')) as CardOverrides
 } catch {
   // First completed card.
 }
 
+const previous = existing.weeks.find((week) => week.week === payload.week)
+const games = mergeOverrideGames(previous?.games, payload.picks)
 const sentAt = new Date().toISOString()
-const next = {
+const next: CardOverrides = {
   updatedAt: sentAt,
   weeks: [
     ...(existing.weeks ?? []).filter((week) => week.week !== payload.week),

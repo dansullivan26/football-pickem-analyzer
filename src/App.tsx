@@ -7,6 +7,7 @@ import predictionForecastsData from './data/prediction-forecasts.json'
 import lineHistoryData from './data/line-history.json'
 import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
+import cardOverridesData from './data/card-overrides.json'
 import PlayersView from './PlayersView'
 import TeamsView from './TeamsView'
 import PerformanceView from './PerformanceView'
@@ -17,6 +18,7 @@ import GameWeather from './GameWeather'
 import InjuryLink from './InjuryLink'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
+import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
 import { formatLinePath, lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
@@ -58,6 +60,7 @@ import type { LastKickoffFile } from './lastKickoff'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
+  CardOverrides,
   ConsensusFeed,
   ConsensusGame,
   ConsensusReport,
@@ -83,6 +86,7 @@ const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
+const cardOverrides = cardOverridesData as CardOverrides
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory)
 const travelRestByEvent = buildTravelRestIndex(
@@ -1326,6 +1330,10 @@ function App() {
           {suggestedCard && (
             <SuggestedCardPanel
               card={suggestedCard}
+              savedDeviationIds={deviationIdsForWeek(
+                cardOverrides,
+                slate.week.order,
+              )}
               onClose={closeSuggestedCard}
             />
           )}

@@ -518,6 +518,13 @@ h2 {
   line-height: 1.45;
 }
 
+.suggested-card-kept {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
 .suggested-card-actions {
   display: flex;
   gap: 8px;

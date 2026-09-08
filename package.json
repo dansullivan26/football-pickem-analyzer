@@ -17,7 +17,7 @@
     "snapshot-weather": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-weather.ts",
     "snapshot-last-kickoff": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-last-kickoff.ts",
     "apply-covers": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/apply-covers.ts",
-    "record-card-overrides": "node scripts/record-card-overrides.mjs"
+    "record-card-overrides": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/record-card-overrides.ts"
   },
   "keywords": [],
   "author": "",

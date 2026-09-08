@@ -490,6 +490,8 @@ test('buildTeamDirectory keeps a frozen score after the live slate moves on', ()
 test('formatRankedTeamName prefixes a CBS rank when present', () => {
   assert.equal(formatRankedTeamName('Miami (Fla.)', 7), '#7 Miami (Fla.)')
   assert.equal(formatRankedTeamName('Stanford', null), 'Stanford')
+  assert.equal(formatRankedTeamName('Kansas City', 1, 'NFL'), 'Kansas City')
+  assert.equal(formatRankedTeamName('Alabama', 4, 'NCAAF'), '#4 Alabama')
 })
 
 test('conferenceFilterValue keeps college codes and only NFL AFC/NFC', () => {

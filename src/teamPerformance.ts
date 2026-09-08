@@ -216,7 +216,9 @@ export function conferenceFilterOptions(
 export function formatRankedTeamName(
   name: string,
   rank: number | null | undefined,
+  sport?: 'NFL' | 'NCAAF',
 ) {
+  if (sport === 'NFL') return name
   return typeof rank === 'number' ? `#${rank} ${name}` : name
 }
 
@@ -322,12 +324,12 @@ function appearanceRanks(
   const awayRank = captured
     ? (frozen.awayRank ?? null)
     : live
-      ? cbsTeamRank(live.away)
+      ? cbsTeamRank(live.away, frozen.sport)
       : undefined
   const homeRank = captured
     ? (frozen.homeRank ?? null)
     : live
-      ? cbsTeamRank(live.home)
+      ? cbsTeamRank(live.home, frozen.sport)
       : undefined
   if (awayRank === undefined && homeRank === undefined) return {}
   return {
@@ -426,7 +428,7 @@ function rosterFromSlate(slate: Slate) {
         nickname: side.nickname || null,
         conference: side.conference || null,
         teamId: side.id,
-        rank: typeof side.rank === 'number' ? side.rank : null,
+        rank: cbsTeamRank(side, game.sport),
       })
     }
   }

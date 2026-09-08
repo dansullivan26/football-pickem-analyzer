@@ -12,6 +12,8 @@ test('cbsTeamRank only keeps a numeric CBS rank', () => {
   assert.equal(cbsTeamRank({ rank: 7 }), 7)
   assert.equal(cbsTeamRank({ rank: null }), null)
   assert.equal(cbsTeamRank({}), null)
+  assert.equal(cbsTeamRank({ rank: 3 }, 'NFL'), null)
+  assert.equal(cbsTeamRank({ rank: 3 }, 'NCAAF'), 3)
 })
 
 test('attachFrozenRanks writes slate ranks and then locks them', () => {
@@ -32,6 +34,18 @@ test('attachFrozenRanks writes slate ranks and then locks them', () => {
     false,
   )
   assert.deepEqual(open, { awayRank: 4, homeRank: 12 })
+})
+
+test('attachFrozenRanks does not stamp NFL power ranks as CBS ranks', () => {
+  const stamped = attachFrozenRanks(
+    {},
+    {
+      sport: 'NFL',
+      away: { rank: 12 },
+      home: { rank: 3 },
+    },
+  )
+  assert.deepEqual(stamped, { awayRank: null, homeRank: null })
 })
 
 test('formatRankTrail skips weeks we never stamped', () => {

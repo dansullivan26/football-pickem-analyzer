@@ -1,6 +1,8 @@
 export function cbsTeamRank(
   team: { rank?: number | null } | null | undefined,
+  sport?: 'NFL' | 'NCAAF',
 ): number | null {
+  if (sport === 'NFL') return null
   return typeof team?.rank === 'number' ? team.rank : null
 }
 
@@ -15,12 +17,16 @@ export function attachFrozenRanks<
   T extends { awayRank?: number | null; homeRank?: number | null },
 >(
   frozen: T,
-  game: { away?: { rank?: number | null }; home?: { rank?: number | null } },
+  game: {
+    sport?: 'NFL' | 'NCAAF'
+    away?: { rank?: number | null }
+    home?: { rank?: number | null }
+  },
   locked = false,
 ): T {
   if (locked && frozenRanksCaptured(frozen)) return frozen
-  const awayRank = cbsTeamRank(game.away)
-  const homeRank = cbsTeamRank(game.home)
+  const awayRank = cbsTeamRank(game.away, game.sport)
+  const homeRank = cbsTeamRank(game.home, game.sport)
   if (frozen.awayRank === awayRank && frozen.homeRank === homeRank) {
     return frozen
   }

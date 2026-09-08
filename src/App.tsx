@@ -417,10 +417,12 @@ function OurPickNote({
 
 function TeamMatchupSide({
   team,
+  sport,
   slug,
   onOpenTeam,
 }: {
   team: SlateGame['away']
+  sport: SlateGame['sport']
   slug: string | undefined
   onOpenTeam: (slug: string) => void
 }) {
@@ -428,7 +430,7 @@ function TeamMatchupSide({
     <>
       <TeamLogo team={team} />
       <span className="team-name">
-        {formatRankedTeamName(team.name, team.rank)}
+        {formatRankedTeamName(team.name, team.rank, sport)}
       </span>
     </>
   )
@@ -531,12 +533,14 @@ function GameCard({
       <div className="matchup">
         <TeamMatchupSide
           team={game.away}
+          sport={game.sport}
           slug={teamSlugsByKey.get(teamKey(game.sport, game.away.abbrev))}
           onOpenTeam={onOpenTeam}
         />
         <span className={score ? 'game-score' : 'at'}>{score ?? '@'}</span>
         <TeamMatchupSide
           team={game.home}
+          sport={game.sport}
           slug={teamSlugsByKey.get(teamKey(game.sport, game.home.abbrev))}
           onOpenTeam={onOpenTeam}
         />

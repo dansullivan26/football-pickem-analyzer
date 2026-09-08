@@ -417,8 +417,8 @@ export default function TeamsView({
                       {selected.sport}
                       {selected.conference ? ` · ${selected.conference}` : ''}
                     </p>
-                    <h2>{formatRankedTeamName(selected.name, selected.rank)}</h2>
-                    {rankTrail && (
+                    <h2>{formatRankedTeamName(selected.name, selected.rank, selected.sport)}</h2>
+                    {selected.sport !== 'NFL' && rankTrail && (
                       <p className="team-rank-trail">
                         CBS rank · {rankTrail}
                       </p>
@@ -644,7 +644,7 @@ export default function TeamsView({
                               </>
                             )}
                             {appearanceVenueWord(row.venue)}{' '}
-                            {formatRankedTeamName(row.opponent, row.opponentRank)}
+                            {formatRankedTeamName(row.opponent, row.opponentRank, row.sport)}
                             {beat && beatMark && (
                               <a
                                 className="bad-beat-mark"

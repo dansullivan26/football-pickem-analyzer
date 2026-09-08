@@ -625,7 +625,10 @@ export default function TeamsView({
                         : null
                       const beatMark = beat ? badBeatSideMark(poolPick) : null
                       const weatherLabel = formatWeatherBucket(row.weather)
-                      const rankStamp = formatRankStamp(row.rank, showUnranked)
+                      const rankStamp =
+                        selected.sport === 'NFL'
+                          ? null
+                          : formatRankStamp(row.rank, showUnranked)
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">

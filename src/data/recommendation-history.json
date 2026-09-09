@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T20:33:46.267Z",
+  "updatedAt": "2026-09-09T21:46:28.520Z",
   "weeks": [
     {
       "week": 1,
@@ -721,7 +721,7 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-09T20:33:46.267Z",
+      "capturedAt": "2026-09-09T21:46:28.520Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
@@ -736,15 +736,15 @@
           "away": "NE",
           "home": "SEA",
           "homeSpread": -3.5,
-          "liveHomeSpread": null,
-          "category": "pending",
-          "recommendedSide": null,
+          "liveHomeSpread": -3,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
+          "source": "line-value",
+          "pickedSide": "away",
+          "strength": "mild",
+          "score": 1.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

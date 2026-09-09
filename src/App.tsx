@@ -1325,7 +1325,7 @@ function App() {
                     analyses.filter(({ game }) =>
                       gameIsUpcoming(game, Date.now()),
                     ),
-                    slate.week.label,
+                    slate.week,
                     slate.pool.seasonYear,
                     slate.tiebreaker,
                     new Date(),

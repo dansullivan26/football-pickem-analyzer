@@ -94,7 +94,11 @@ export type SuggestedTiebreaker = {
  */
 export function generateSuggestedCard(
   analyses: GameAnalysis[],
-  weekLabel: string,
+  /**
+   * Pool week, not `game.week`: a slate carries each sport's own week number,
+   * so an NFL week 1 game can sit on pool Week 2.
+   */
+  week: { order: number; label: string },
   seasonYear: number,
   tiebreaker: SlateTiebreaker | null | undefined,
   generatedAt = new Date(),
@@ -174,8 +178,8 @@ export function generateSuggestedCard(
     strategyId: CARD_STRATEGY_ID,
     generatedAt: generatedAt.toISOString(),
     seasonYear,
-    week: analyses[0]?.game.week ?? 0,
-    weekLabel,
+    week: week.order,
+    weekLabel: week.label,
     picks,
     unpicked,
     tiebreaker:

@@ -1,5 +1,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import {
+  EMPTY_TEAM_ROSTER,
+  mergeTeamRoster,
+  teamsFromSlate,
+} from '../src/teamRoster.ts'
 
 const inputArg = process.argv.indexOf('--input')
 const inputPath =
@@ -166,6 +171,22 @@ await writeFile(
   resolve('src/data/current-slate.json'),
   `${JSON.stringify(slate, null, 2)}\n`,
 )
+
+// Frozen recommendations only keep abbrevs, so Teams needs a roster that
+// outlives the week a team is on the card.
+const rosterPath = resolve('src/data/team-roster.json')
+let priorRoster = EMPTY_TEAM_ROSTER
+try {
+  priorRoster = JSON.parse(await readFile(rosterPath, 'utf8'))
+} catch {
+  // First slate ingest.
+}
+const roster = mergeTeamRoster(
+  priorRoster,
+  teamsFromSlate(slate),
+  slate.source.fetchedAt,
+)
+await writeFile(rosterPath, `${JSON.stringify(roster, null, 2)}\n`)
 
 const tiebreakerNote = slate.tiebreaker
   ? ` Tiebreaker is ${

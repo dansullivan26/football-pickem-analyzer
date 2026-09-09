@@ -8,6 +8,7 @@ import lineHistoryData from './data/line-history.json'
 import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
 import cardOverridesData from './data/card-overrides.json'
+import teamRosterData from './data/team-roster.json'
 import PlayersView from './PlayersView'
 import TeamsView from './TeamsView'
 import PerformanceView from './PerformanceView'
@@ -57,6 +58,7 @@ import {
   buildTravelRestIndex,
 } from './travelRest'
 import type { LastKickoffFile } from './lastKickoff'
+import type { TeamRosterFile } from './teamRoster'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
   BookKey,
@@ -88,7 +90,8 @@ const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const cardOverrides = cardOverridesData as CardOverrides
 const badBeatsFile = badBeatsData as BadBeatsFile
-const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory)
+const teamRoster = teamRosterData as TeamRosterFile
+const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory, teamRoster)
 const travelRestByEvent = buildTravelRestIndex(
   slate,
   recommendationHistory,

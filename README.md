@@ -38,6 +38,14 @@ from `public/data/odds.json`. The odds refresh fetches DraftKings spreads for
 the slate, then uses the matched SharpAPI event ID to request `total_points`
 only for the weekly tiebreaker game.
 
+The same command also merges every team on that slate into
+`src/data/team-roster.json` (sport, abbrev, name, location, nickname,
+conference, CBS team id). Frozen recommendations only keep abbrevs, so Teams
+reads that roster to name a team whose week has already rolled off the live
+slate — without it, a Week 1 school shows as `ARKST` with no conference and no
+logo once Week 2 lands. A later slate can correct a value but never blanks one
+we already know. Commit this file alongside the slate.
+
 To prepare a GrokBot player-history export:
 
 ```bash

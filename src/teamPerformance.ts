@@ -8,6 +8,11 @@ import {
   type TeamSite,
 } from './teamSite.ts'
 import {
+  teamRosterIndex,
+  teamRosterKey,
+  type TeamRosterFile,
+} from './teamRoster.ts'
+import {
   buildTravelRestIndex,
   restSplitKey,
   travelSplitKey,
@@ -435,6 +440,32 @@ function rosterFromSlate(slate: Slate) {
   return roster
 }
 
+/**
+ * Frozen recs only store abbrevs, so a team that has rolled off the live slate
+ * needs the committed roster for its name, conference, and logo id.
+ */
+function rosterWithHistory(slate: Slate, teamRoster: TeamRosterFile | null) {
+  const roster = new Map<string, RosterEntry>()
+  for (const entry of teamRosterIndex(teamRoster).values()) {
+    roster.set(teamRosterKey(entry.sport, entry.abbrev), {
+      ...entry,
+      rank: null,
+    })
+  }
+  for (const [key, entry] of rosterFromSlate(slate)) {
+    const known = roster.get(key)
+    roster.set(key, {
+      ...entry,
+      name: entry.name || known?.name || entry.abbrev,
+      location: entry.location ?? known?.location ?? null,
+      nickname: entry.nickname ?? known?.nickname ?? null,
+      conference: entry.conference ?? known?.conference ?? null,
+      teamId: entry.teamId ?? known?.teamId ?? null,
+    })
+  }
+  return roster
+}
+
 function rosterName(
   roster: Map<string, RosterEntry>,
   sport: 'NFL' | 'NCAAF',
@@ -536,12 +567,18 @@ export function buildTeamDirectory(
   history: RecommendationHistory,
   weatherHistory: WeatherHistoryFile = { updatedAt: null, games: [] },
   lastKickoff: LastKickoffFile | null = null,
+  teamRoster: TeamRosterFile | null = null,
 ): TeamDirectory {
-  const roster = rosterFromSlate(slate)
+  const roster = rosterWithHistory(slate, teamRoster)
   const groups = new Map<string, { info: RosterEntry; appearances: TeamAppearance[] }>()
 
-  for (const info of roster.values()) {
-    groups.set(teamKey(info.sport, info.abbrev), { info, appearances: [] })
+  // Only the live slate seeds an empty group; the roster file exists to name
+  // teams that appear through a frozen week, not to list every team ever.
+  for (const info of rosterFromSlate(slate).values()) {
+    groups.set(teamKey(info.sport, info.abbrev), {
+      info: roster.get(teamKey(info.sport, info.abbrev)) ?? info,
+      appearances: [],
+    })
   }
 
   const slateByEvent = new Map(
@@ -684,8 +721,15 @@ export function buildTeamDirectory(
 export function teamPageSlugs(
   slate: Slate,
   history: RecommendationHistory,
+  teamRoster: TeamRosterFile | null = null,
 ): Map<string, string> {
   return new Map(
-    buildTeamDirectory(slate, history).teams.map((team) => [team.key, team.slug]),
+    buildTeamDirectory(
+      slate,
+      history,
+      undefined,
+      null,
+      teamRoster,
+    ).teams.map((team) => [team.key, team.slug]),
   )
 }

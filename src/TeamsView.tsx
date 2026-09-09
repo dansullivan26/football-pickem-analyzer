@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import TeamLogo from './TeamLogo'
 import weatherHistoryData from './data/weather-history.json'
 import lastKickoffData from './data/last-kickoff.json'
+import teamRosterData from './data/team-roster.json'
 import type { LastKickoffFile } from './lastKickoff'
+import type { TeamRosterFile } from './teamRoster'
 import {
   appearanceMarketLabel,
   buildTeamDirectory,
@@ -132,6 +134,7 @@ export default function TeamsView({
         recommendations,
         weatherHistoryData as WeatherHistoryFile,
         lastKickoffData as LastKickoffFile,
+        teamRosterData as TeamRosterFile,
       ),
     [slate, recommendations],
   )

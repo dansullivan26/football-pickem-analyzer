@@ -205,6 +205,56 @@ test('wonOutrightAsDog is a straight-up win as an ATS underdog', () => {
   )
 })
 
+test('a team off the new slate keeps its name, conference, and logo id', () => {
+  const kc = team('KC', 'Kansas City', 'AFC West')
+  const buf = team('BUF', 'Buffalo', 'AFC East')
+  const weekTwoSlate = slate([slateGame(9, kc, buf, -2.5)])
+  const twoWeeks = history([
+    rec({
+      cbsEventId: 1,
+      away: 'BC',
+      home: 'CINCY',
+      homeSpread: -7.5,
+      cover: 'home',
+    }),
+    rec({ cbsEventId: 9, away: 'KC', home: 'BUF', homeSpread: -2.5 }),
+  ])
+
+  const withoutRoster = buildTeamDirectory(weekTwoSlate, twoWeeks)
+  const strandedBefore = withoutRoster.teams.find((row) => row.abbrev === 'BC')
+  assert.equal(strandedBefore?.name, 'BC')
+  assert.equal(strandedBefore?.conference, null)
+
+  const directory = buildTeamDirectory(weekTwoSlate, twoWeeks, undefined, null, {
+    updatedAt: '2026-09-09T12:00:00Z',
+    teams: [
+      {
+        sport: 'NCAAF',
+        abbrev: 'BC',
+        name: 'Boston College',
+        location: 'Boston College',
+        nickname: 'Eagles',
+        conference: 'ACC',
+        teamId: 'id-BC',
+      },
+    ],
+  })
+
+  const stranded = directory.teams.find((row) => row.abbrev === 'BC')
+  assert.equal(stranded?.name, 'Boston College')
+  assert.equal(stranded?.conference, 'ACC')
+  assert.equal(stranded?.teamId, 'id-BC')
+  assert.equal(stranded?.slug, 'boston-college')
+  assert.equal(stranded?.overall.detail, '0-1 ATS')
+  assert.equal(
+    directory.teams.find((row) => row.abbrev === 'CINCY')?.appearances[0]
+      ?.opponent,
+    'Boston College',
+  )
+  // The live slate still supplies its own teams.
+  assert.equal(directory.teams.find((row) => row.abbrev === 'KC')?.name, 'Kansas City')
+})
+
 test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () => {
   const unc = team('UNC', 'North Carolina', 'ACC')
   const tcu = team('TCU', 'TCU', 'BIG12')

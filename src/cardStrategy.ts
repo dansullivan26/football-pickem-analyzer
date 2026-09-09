@@ -7,16 +7,16 @@ import {
   type CardPickSource,
   type PickStrength,
   type PublicSupport,
-} from './cardScoring'
-import type { GameTravelRest } from './travelRest'
-import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types'
+} from './cardScoring.ts'
+import type { GameTravelRest } from './travelRest.ts'
+import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types.ts'
 
 export {
   CARD_STRATEGY_NOTE,
   formatPoolSpread,
   PCT_PER_SPREAD_POINT,
   type PickStrength,
-} from './cardScoring'
+} from './cardScoring.ts'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
 export const CARD_STRATEGY_ID = 'v6-line-rest-travel'

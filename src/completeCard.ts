@@ -3,7 +3,7 @@ import {
   submittedPick,
   type ManualPickSelections,
   type SuggestedCard,
-} from './cardStrategy'
+} from './cardStrategy.ts'
 
 const REPO = 'dansullivan26/football-pickem-analyzer'
 const WORKFLOW = 'complete-card.yml'

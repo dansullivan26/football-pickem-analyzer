@@ -1,5 +1,5 @@
-import type { ConsensusGame, EdgeCategory } from './types'
-import type { GameTravelRest, SideRest, SideTravel } from './travelRest'
+import type { ConsensusGame, EdgeCategory } from './types.ts'
+import type { GameTravelRest, SideRest, SideTravel } from './travelRest.ts'
 
 export const PCT_PER_SPREAD_POINT = 3
 export const REST_POINTS_PER_DAY = 0.25

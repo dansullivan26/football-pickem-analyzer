@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T09:55:03.124Z",
+  "updatedAt": "2026-09-09T14:40:37.163Z",
   "weeks": [
     {
       "week": 1,
@@ -721,7 +721,7 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-09T09:55:03.124Z",
+      "capturedAt": "2026-09-09T14:40:37.163Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
@@ -840,15 +840,15 @@
           "away": "WAKE",
           "home": "PURDUE",
           "homeSpread": 3.5,
-          "liveHomeSpread": null,
-          "category": "pending",
-          "recommendedSide": null,
+          "liveHomeSpread": 3,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "public-consensus",
-          "pickedSide": "away",
-          "strength": "solid",
-          "score": 6.617647058823529,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 1.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

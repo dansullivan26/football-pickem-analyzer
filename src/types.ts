@@ -31,6 +31,7 @@ export type SlateGame = {
   id: string
   cbsEventId: number
   sport: 'NFL' | 'NCAAF'
+  /** That sport's own week. Use `Slate.week.order` for the pool week. */
   week: number
   status: string
   kickoff: string

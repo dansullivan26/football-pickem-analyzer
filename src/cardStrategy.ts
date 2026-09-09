@@ -2,6 +2,7 @@ import {
   CARD_STRATEGY_NOTE,
   compareRecommendationOrder,
   formatPoolSpread,
+  poolSpreadForSide,
   resolveCardPick,
   type CardPickSource,
   type PickStrength,
@@ -53,10 +54,15 @@ export type UnpickedGame = {
   gameId: string
   cbsEventId: number
   away: string
+  awayId: string
   home: string
+  homeId: string
+  homeSpread: number
   kickoffLabel: string
   reason: string
 }
+
+export type ManualPickSelections = ReadonlyMap<string, 'home' | 'away'>
 
 export type SuggestedCard = {
   strategyId: string
@@ -151,6 +157,9 @@ export function generateSuggestedCard(
 
     unpicked.push({
       ...base,
+      awayId: game.away.id,
+      homeId: game.home.id,
+      homeSpread: game.homeSpread,
       reason: cardPick.skipReason ?? unpickedReason(analysis),
     })
   }
@@ -206,6 +215,19 @@ export function submittedPick(pick: SuggestedPick, deviate: boolean) {
   }
 }
 
+export function submittedManualPick(
+  game: UnpickedGame,
+  side: 'home' | 'away',
+) {
+  return {
+    gameId: game.gameId,
+    pickedSide: side,
+    pickedTeamId: side === 'home' ? game.homeId : game.awayId,
+    pickedTeam: side === 'home' ? game.home : game.away,
+    poolSpread: poolSpreadForSide(game.homeSpread, side),
+  }
+}
+
 export function sortSuggestedPicks(
   picks: SuggestedPick[],
   sort: 'slate' | 'recommendation',
@@ -240,6 +262,7 @@ export function formatSuggestedCardText(
   picks: SuggestedPick[] = card.picks,
   deviations: ReadonlySet<string> = new Set(),
   tiebreakerAnswer: number | null = null,
+  manualSelections: ManualPickSelections = new Map(),
 ) {
   const when = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
@@ -259,9 +282,19 @@ export function formatSuggestedCardText(
           : 'public'
     return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${source}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${pick.publicSupport !== 'none' ? ` · public ${pick.publicSupport === 'agree' ? 'agrees' : 'fades'}` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
   })
-  const skipLines = card.unpicked.map(
+  const manualLines = card.unpicked.flatMap((game) => {
+    const side = manualSelections.get(game.gameId)
+    if (!side) return []
+    const sent = submittedManualPick(game, side)
+    return [
+      `• ${sent.pickedTeam} ${formatPoolSpread(sent.poolSpread)}  (${game.away} @ ${game.home}) — manual pick`,
+    ]
+  })
+  const skipLines = card.unpicked
+    .filter((game) => !manualSelections.has(game.gameId))
+    .map(
     (game) => `• ${game.away} @ ${game.home} — ${game.reason}`,
-  )
+    )
 
   return [
     `${card.weekLabel} suggested card`,
@@ -271,7 +304,10 @@ export function formatSuggestedCardText(
     `Picks (${picks.length})`,
     ...(pickLines.length ? pickLines : ['• none']),
     '',
-    `Left unpicked (${card.unpicked.length})`,
+    `Manual picks (${manualLines.length})`,
+    ...(manualLines.length ? manualLines : ['• none']),
+    '',
+    `Left unpicked (${skipLines.length})`,
     ...(skipLines.length ? skipLines : ['• none']),
     ...(card.tiebreaker
       ? [

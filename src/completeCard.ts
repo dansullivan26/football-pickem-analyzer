@@ -1,4 +1,9 @@
-import { submittedPick, type SuggestedCard } from './cardStrategy'
+import {
+  submittedManualPick,
+  submittedPick,
+  type ManualPickSelections,
+  type SuggestedCard,
+} from './cardStrategy'
 
 const REPO = 'dansullivan26/football-pickem-analyzer'
 const WORKFLOW = 'complete-card.yml'
@@ -11,32 +16,38 @@ export function completeCardPasswordMatches(value: string) {
   return value === COMPLETE_CARD_PASSWORD
 }
 
-// GrokBot's webhook rejects the browser's CORS preflight, so the card goes
-// through a GitHub Action that forwards it server-side.
-export async function sendCardToGrokBot(
+export function buildCompleteCardPayload(
   card: SuggestedCard,
   deviations: ReadonlySet<string> = new Set(),
   tiebreakerAnswer: number | null = null,
+  manualSelections: ManualPickSelections = new Map(),
 ) {
-  const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
-  if (!token) {
-    throw new Error(
-      'CBS completion is not configured on this deploy. Add a GH_DISPATCH_TOKEN secret and rebuild Pages.',
-    )
-  }
+  const recommended = card.picks.map((pick) => {
+    const sent = submittedPick(pick, deviations.has(pick.gameId))
+    return {
+      gameId: pick.gameId,
+      pickedTeamId: sent.pickedTeamId,
+      pickedSide: sent.pickedSide,
+      deviate: deviations.has(pick.gameId),
+    }
+  })
+  const manual = card.unpicked.flatMap((game) => {
+    const side = manualSelections.get(game.gameId)
+    if (!side) return []
+    const sent = submittedManualPick(game, side)
+    return [{
+      gameId: game.gameId,
+      pickedTeamId: sent.pickedTeamId,
+      pickedSide: sent.pickedSide,
+      deviate: false,
+      manual: true,
+    }]
+  })
 
-  const payload = JSON.stringify({
+  return {
     week: card.week,
     source: 'football-pickem-analyzer',
-    picks: card.picks.map((pick) => {
-      const sent = submittedPick(pick, deviations.has(pick.gameId))
-      return {
-        gameId: pick.gameId,
-        pickedTeamId: sent.pickedTeamId,
-        pickedSide: sent.pickedSide,
-        deviate: deviations.has(pick.gameId),
-      }
-    }),
+    picks: [...recommended, ...manual],
     ...(card.tiebreaker && tiebreakerAnswer != null
       ? {
           tiebreaker: {
@@ -46,7 +57,32 @@ export async function sendCardToGrokBot(
           },
         }
       : {}),
-  })
+  }
+}
+
+// GrokBot's webhook rejects the browser's CORS preflight, so the card goes
+// through a GitHub Action that forwards it server-side.
+export async function sendCardToGrokBot(
+  card: SuggestedCard,
+  deviations: ReadonlySet<string> = new Set(),
+  tiebreakerAnswer: number | null = null,
+  manualSelections: ManualPickSelections = new Map(),
+) {
+  const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
+  if (!token) {
+    throw new Error(
+      'CBS completion is not configured on this deploy. Add a GH_DISPATCH_TOKEN secret and rebuild Pages.',
+    )
+  }
+
+  const payload = JSON.stringify(
+    buildCompleteCardPayload(
+      card,
+      deviations,
+      tiebreakerAnswer,
+      manualSelections,
+    ),
+  )
 
   const response = await fetch(
     `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,

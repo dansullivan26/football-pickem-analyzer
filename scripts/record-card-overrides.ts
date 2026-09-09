@@ -20,7 +20,10 @@ try {
 }
 
 const previous = existing.weeks.find((week) => week.week === payload.week)
-const games = mergeOverrideGames(previous?.games, payload.picks)
+const games = mergeOverrideGames(
+  previous?.games,
+  payload.picks.filter((pick) => pick?.manual !== true),
+)
 const sentAt = new Date().toISOString()
 const next: CardOverrides = {
   updatedAt: sentAt,

@@ -27,6 +27,9 @@ export default function SuggestedCardPanel({
   const [askPassword, setAskPassword] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [manualSelections, setManualSelections] = useState<
+    Map<string, 'home' | 'away'>
+  >(() => new Map())
   const [deviations, setDeviations] = useState<Set<string>>(
     () =>
       new Set(
@@ -86,7 +89,13 @@ export default function SuggestedCardPanel({
     try {
       const answer = readTiebreakerAnswer()
       await navigator.clipboard.writeText(
-        formatSuggestedCardText(card, picks, deviations, answer),
+        formatSuggestedCardText(
+          card,
+          picks,
+          deviations,
+          answer,
+          manualSelections,
+        ),
       )
       setCopied(true)
       window.setTimeout(() => setCopied(false), 2000)
@@ -106,6 +115,15 @@ export default function SuggestedCardPanel({
       const next = new Set(current)
       if (next.has(gameId)) next.delete(gameId)
       else next.add(gameId)
+      return next
+    })
+  }
+
+  function toggleManualPick(gameId: string, side: 'home' | 'away') {
+    setManualSelections((current) => {
+      const next = new Map(current)
+      if (next.get(gameId) === side) next.delete(gameId)
+      else next.set(gameId, side)
       return next
     })
   }
@@ -134,7 +152,12 @@ export default function SuggestedCardPanel({
     setSubmitting(true)
     setSubmitResult(null)
     try {
-      await sendCardToGrokBot(card, deviations, readTiebreakerAnswer())
+      await sendCardToGrokBot(
+        card,
+        deviations,
+        readTiebreakerAnswer(),
+        manualSelections,
+      )
       storeDeviationIds(card.seasonYear, card.week, deviations)
       setSubmitResult({
         kind: 'success',
@@ -187,7 +210,7 @@ export default function SuggestedCardPanel({
           <div>
             <p className="eyebrow">Suggested card</p>
             <h2 id="suggested-card-title">
-              {card.weekLabel} · {card.picks.length} picks
+              {card.weekLabel} · {card.picks.length + manualSelections.size} picks
             </h2>
             <p className="suggested-card-meta">
               {generated} · {card.strategyId}
@@ -286,16 +309,41 @@ export default function SuggestedCardPanel({
 
         {card.unpicked.length > 0 && (
           <div className="suggested-unpicked">
-            <h3>Left unpicked ({card.unpicked.length})</h3>
+            <h3>Manual review ({card.unpicked.length})</h3>
             <ul>
-              {card.unpicked.map((game) => (
-                <li key={game.cbsEventId}>
+              {card.unpicked.map((game) => {
+                const selected = manualSelections.get(game.gameId)
+                return (
+                <li
+                  key={game.cbsEventId}
+                  className={selected ? 'manually-picked' : undefined}
+                >
                   <strong>
                     {game.away} @ {game.home}
                   </strong>
                   <span>{game.reason}</span>
+                  <div className="manual-pick-options">
+                    {(['away', 'home'] as const).map((side) => {
+                      const team = side === 'away' ? game.away : game.home
+                      const spread =
+                        game.homeSpread * (side === 'away' ? -1 : 1)
+                      return (
+                        <label key={side}>
+                          <input
+                            type="checkbox"
+                            checked={selected === side}
+                            onChange={() => toggleManualPick(game.gameId, side)}
+                          />
+                          <span>
+                            {team} {formatPoolSpread(spread)}
+                          </span>
+                        </label>
+                      )
+                    })}
+                  </div>
                 </li>
-              ))}
+                )
+              })}
             </ul>
           </div>
         )}
@@ -346,7 +394,10 @@ export default function SuggestedCardPanel({
         <div className="complete-card">
           <button
             type="button"
-            disabled={submitting || card.picks.length === 0}
+            disabled={
+              submitting ||
+              card.picks.length + manualSelections.size === 0
+            }
             onClick={openPasswordPrompt}
           >
             {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
@@ -355,6 +406,9 @@ export default function SuggestedCardPanel({
             Sends this exact card to GrokBot
             {deviations.size
               ? `, including ${deviations.size} deviation${deviations.size === 1 ? '' : 's'}`
+              : ''}
+            {manualSelections.size
+              ? `, plus ${manualSelections.size} manual pick${manualSelections.size === 1 ? '' : 's'}`
               : ''}
             . You will confirm in chat before it is saved on CBS. Delivery runs in
             a GitHub Action, so check its run if GrokBot never posts the card.
@@ -394,11 +448,14 @@ export default function SuggestedCardPanel({
             >
               <h3 id="card-password-title">Enter password</h3>
               <p>
-                Sends {card.picks.length} picks
+                Sends {card.picks.length + manualSelections.size} picks
                 {deviations.size
                   ? ` (${deviations.size} deviation${deviations.size === 1 ? '' : 's'})`
                   : ''}{' '}
                 to GrokBot for {card.weekLabel}
+                {manualSelections.size
+                  ? `, including ${manualSelections.size} manual pick${manualSelections.size === 1 ? '' : 's'}`
+                  : ''}
                 {card.tiebreaker && readTiebreakerAnswer() != null
                   ? ` with a ${readTiebreakerAnswer()}-point tiebreaker`
                   : ''}

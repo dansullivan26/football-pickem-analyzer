@@ -4,7 +4,10 @@ import { upsertSeasonWeek, weekSeason } from '../src/careerHistory.ts'
 import { coversFromPlayerHistory, lookupCover } from '../src/coverResults.ts'
 import { attachFrozenRanks } from '../src/teamRanks.ts'
 import { attachFrozenNeutralSite } from '../src/teamSite.ts'
-import { attachFrozenVenue } from '../src/travelRest.ts'
+import {
+  attachFrozenVenue,
+  buildTravelRestIndex,
+} from '../src/travelRest.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -93,6 +96,20 @@ try {
 }
 const covers = coversFromPlayerHistory(playerHistory)
 
+let lastKickoff = null
+try {
+  lastKickoff = JSON.parse(
+    await readFile(new URL('src/data/last-kickoff.json', ROOT), 'utf8'),
+  )
+} catch {
+  // Rest remains unavailable until the first schedule snapshot.
+}
+const travelRestByEvent = buildTravelRestIndex(
+  slate,
+  history,
+  lastKickoff,
+).byEvent
+
 const deviationIds = new Set(
   (overrides.weeks ?? [])
     .find((week) => week.week === slate.week.order)
@@ -142,6 +159,7 @@ const games = slate.games.map((game) => {
     homeSpread: game.homeSpread,
     liveHomeSpread: analysis.liveHomeSpread,
     consensus: consensusByEvent.get(game.cbsEventId),
+    travelRest: travelRestByEvent.get(game.cbsEventId),
   })
   const frozen = {
     cbsEventId: game.cbsEventId,

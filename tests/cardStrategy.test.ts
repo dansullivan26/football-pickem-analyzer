@@ -6,6 +6,8 @@ import {
   compareRecommendationOrder,
   favorableHook,
   keyNumberHook,
+  recommendationAdjustment,
+  resolveCardPick,
   unfavorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
@@ -14,7 +16,7 @@ import type { ConsensusGame } from '../src/types.ts'
 function pick(
   overrides: Partial<{
     gameId: string
-    source: 'line-value' | 'public-consensus'
+    source: 'line-value' | 'rest-travel' | 'public-consensus'
     strength: 'mild' | 'solid' | 'strong'
     publicSupport: 'agree' | 'none' | 'fade'
     publicPct: number | null
@@ -93,7 +95,7 @@ test('a mild line-value slight outranks a strong public-only pick', () => {
   )
 })
 
-test('public agreement lifts a line-value play only inside its own band', () => {
+test('public agreement does not reorder line-value plays', () => {
   assert.deepEqual(
     orderedIds([
       pick({
@@ -117,7 +119,7 @@ test('public agreement lifts a line-value play only inside its own band', () => 
         kickoff: '2026-09-05T15:00:00-04:00',
       }),
     ]),
-    ['fade-lean', 'agree-slight', 'fade-slight'],
+    ['fade-lean', 'fade-slight', 'agree-slight'],
   )
 })
 
@@ -128,7 +130,7 @@ test('publicSupportForSide agrees when the Covers bucket matches the pick', () =
   assert.equal(publicSupportForSide(undefined, -3, 'home'), 'none')
 })
 
-test('within a 1-point slight band, higher public % on the picked side ranks first', () => {
+test('within a 1-point slight band, public percentage does not rank picks', () => {
   const ids = [
     {
       category: 'slight' as const,
@@ -152,10 +154,10 @@ test('within a 1-point slight band, higher public % on the picked side ranks fir
     .sort(compareRecommendationOrder)
     .map((row) => row.id)
 
-  assert.deepEqual(ids, ['loud', 'quiet'])
+  assert.deepEqual(ids, ['quiet', 'loud'])
 })
 
-test('within neutrals, the higher near-pool public leader ranks first', () => {
+test('within neutrals, public percentage does not rank picks', () => {
   const ids = [
     {
       category: 'neutral' as const,
@@ -179,7 +181,92 @@ test('within neutrals, the higher near-pool public leader ranks first', () => {
     .sort(compareRecommendationOrder)
     .map((row) => row.id)
 
-  assert.deepEqual(ids, ['heavy', 'split'])
+  assert.deepEqual(ids, ['split', 'heavy'])
+})
+
+test('rest and travel are capped at one combined spread point', () => {
+  const result = recommendationAdjustment({
+    recommendedSide: null,
+    edge: 0,
+    travelRest: {
+      awayRest: { days: 4, kind: 'short', label: 'Short week (4d)' },
+      homeRest: { days: 14, kind: 'bye', label: 'Off a bye (14d)' },
+      awayTravel: { zones: 3, direction: 'east', label: '3 time zones east' },
+      homeTravel: null,
+    },
+  })
+
+  assert.equal(result.rest, 0.75)
+  assert.equal(result.travel, 0.75)
+  assert.equal(result.context, 1)
+  assert.equal(result.total, 1)
+  assert.equal(result.pickedSide, 'home')
+})
+
+test('farther travel receives a larger suppression than short travel', () => {
+  const oneZone = recommendationAdjustment({
+    recommendedSide: null,
+    edge: 0,
+    travelRest: {
+      awayRest: null,
+      homeRest: null,
+      awayTravel: null,
+      homeTravel: { zones: 1, direction: 'east', label: '1 time zone east' },
+    },
+  })
+  const threeZones = recommendationAdjustment({
+    recommendedSide: null,
+    edge: 0,
+    travelRest: {
+      awayRest: null,
+      homeRest: null,
+      awayTravel: null,
+      homeTravel: { zones: 3, direction: 'east', label: '3 time zones east' },
+    },
+  })
+
+  assert.equal(oneZone.travel, -0.25)
+  assert.equal(threeZones.travel, -0.75)
+})
+
+test('rest and travel can overturn only a thin line edge', () => {
+  const result = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'home',
+    edge: 0.5,
+    homeSpread: -3,
+    liveHomeSpread: -3.5,
+    consensus: consensus(10, 90),
+    travelRest: {
+      awayRest: null,
+      homeRest: null,
+      awayTravel: null,
+      homeTravel: { zones: 3, direction: 'west', label: '3 time zones west' },
+    },
+  })
+
+  assert.equal(result.pickedSide, 'away')
+  assert.equal(result.source, 'rest-travel')
+  assert.equal(result.compositeEdge, 0.25)
+  assert.equal(result.publicSupport, 'fade')
+})
+
+test('public consensus cannot fill a game with no modeled advantage', () => {
+  const result = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: -3,
+    liveHomeSpread: -3,
+    consensus: consensus(10, 90),
+  })
+
+  assert.equal(result.pickedSide, null)
+  assert.equal(result.source, null)
+  assert.equal(
+    result.skipReason,
+    'No line-value, rest, or travel advantage',
+  )
 })
 
 test('recommendation sort keeps a hook slight in its point band below a 1-point slight', () => {

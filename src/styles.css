@@ -751,6 +751,11 @@ h2 {
   background: var(--green-soft);
 }
 
+.pick-source.rest-travel {
+  color: var(--amber);
+  background: var(--amber-soft);
+}
+
 .pick-source.public-consensus {
   color: var(--blue);
   background: var(--blue-soft);
@@ -2477,6 +2482,10 @@ a.team-page-link:focus-visible .team-name {
 
 .history-selection .pick-source.line-value {
   color: var(--green-dark);
+}
+
+.history-selection .pick-source.rest-travel {
+  color: var(--amber);
 }
 
 .history-selection .pick-source.public-consensus {

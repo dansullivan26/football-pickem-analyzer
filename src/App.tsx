@@ -1006,6 +1006,7 @@ function App() {
             homeSpread: a.game.homeSpread,
             liveHomeSpread: a.liveHomeSpread,
             consensus: a.consensus,
+            travelRest: travelRestByEvent.get(a.game.cbsEventId),
             kickoff: a.game.kickoff,
           }),
           recommendationOrderKey({
@@ -1015,6 +1016,7 @@ function App() {
             homeSpread: b.game.homeSpread,
             liveHomeSpread: b.liveHomeSpread,
             consensus: b.consensus,
+            travelRest: travelRestByEvent.get(b.game.cbsEventId),
             kickoff: b.game.kickoff,
           }),
         ),
@@ -1326,6 +1328,8 @@ function App() {
                     slate.week.label,
                     slate.pool.seasonYear,
                     slate.tiebreaker,
+                    new Date(),
+                    travelRestByEvent,
                   ),
                 )
               }

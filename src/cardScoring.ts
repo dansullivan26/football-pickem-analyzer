@@ -1,12 +1,18 @@
 import type { ConsensusGame, EdgeCategory } from './types'
+import type { GameTravelRest, SideRest, SideTravel } from './travelRest'
 
 export const PCT_PER_SPREAD_POINT = 3
+export const REST_POINTS_PER_DAY = 0.25
+export const TRAVEL_POINTS_PER_ZONE = 0.25
+export const MAX_REST_ADJUSTMENT = 0.75
+export const MAX_TRAVEL_ADJUSTMENT = 0.75
+export const MAX_CONTEXT_ADJUSTMENT = 1
 export const MAX_PUBLIC_BUCKET_DISTANCE = 1
 export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Any line-value pick (lock / hammer / lean / slight) ranks above every public-only pick, including a strong Covers majority. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still line value and badges as solid; Recommendation sort keeps it in its point band, same as Lines. Inside the same edge, a TD hook ranks above an FG hook, and either ranks above no hook, then public is the modifier (higher near-pool % on the picked side floats up, fade sinks). Games with no line value can still fill from a meaningful Covers bucket within 1 point of the pool line, but those picks always sit below the slights. Strength is mild under 6, solid 6–11, strong 12+.'
+  'Line value is the primary signal. Rest and travel can adjust it by at most 1 spread point combined, so they can boost, suppress, or overturn only the thinnest line edges. Extra rest helps; short rest and farther travel hurt. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, rest, and travel produce no net advantage.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -24,7 +30,10 @@ export function classifyEdge(magnitude: number): EdgeCategory {
 }
 
 export type PickStrength = 'mild' | 'solid' | 'strong'
-export type CardPickSource = 'line-value' | 'public-consensus'
+export type CardPickSource =
+  | 'line-value'
+  | 'rest-travel'
+  | 'public-consensus'
 export type HookKind = 'fg' | 'td'
 export type PublicSupport = 'agree' | 'none' | 'fade'
 
@@ -60,6 +69,8 @@ export type ResolvedCardPick = {
   pickedSide: 'home' | 'away' | null
   strength: PickStrength | null
   score: number | null
+  /** Net edge in spread-point equivalents after rest and travel. */
+  compositeEdge: number | null
   poolSpread: number | null
   detail: string | null
   skipReason: string | null
@@ -67,6 +78,78 @@ export type ResolvedCardPick = {
   publicSupport: PublicSupport
   /** Near-pool bucket % on the picked side, or the leader % when there is no side. */
   publicPct: number | null
+}
+
+export type RecommendationAdjustment = {
+  /** Signed from the home side's perspective. */
+  line: number
+  /** Signed from the home side's perspective. */
+  rest: number
+  /** Signed from the home side's perspective. */
+  travel: number
+  /** Applied rest + travel adjustment after the combined cap. */
+  context: number
+  /** Signed composite score from the home side's perspective. */
+  total: number
+  pickedSide: 'home' | 'away' | null
+}
+
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.min(maximum, Math.max(minimum, value))
+}
+
+function restValue(rest: SideRest | null | undefined) {
+  if (!rest) return 0
+  return clamp(
+    (rest.days - 7) * REST_POINTS_PER_DAY,
+    -MAX_REST_ADJUSTMENT,
+    MAX_REST_ADJUSTMENT,
+  )
+}
+
+function travelPenalty(travel: SideTravel | null | undefined) {
+  if (!travel || travel.direction === 'same') return 0
+  return Math.min(
+    travel.zones * TRAVEL_POINTS_PER_ZONE,
+    MAX_TRAVEL_ADJUSTMENT,
+  )
+}
+
+export function recommendationAdjustment(input: {
+  recommendedSide: 'home' | 'away' | null
+  edge: number | null
+  travelRest?: GameTravelRest | null
+}): RecommendationAdjustment {
+  const line =
+    input.edge == null || !input.recommendedSide
+      ? 0
+      : input.edge * (input.recommendedSide === 'home' ? 1 : -1)
+  const rest = clamp(
+    restValue(input.travelRest?.homeRest) -
+      restValue(input.travelRest?.awayRest),
+    -MAX_REST_ADJUSTMENT,
+    MAX_REST_ADJUSTMENT,
+  )
+  const travel = clamp(
+    travelPenalty(input.travelRest?.awayTravel) -
+      travelPenalty(input.travelRest?.homeTravel),
+    -MAX_TRAVEL_ADJUSTMENT,
+    MAX_TRAVEL_ADJUSTMENT,
+  )
+  const context = clamp(
+    rest + travel,
+    -MAX_CONTEXT_ADJUSTMENT,
+    MAX_CONTEXT_ADJUSTMENT,
+  )
+  const total = line + context
+  return {
+    line,
+    rest,
+    travel,
+    context,
+    total,
+    pickedSide: total > 0 ? 'home' : total < 0 ? 'away' : null,
+  }
 }
 
 function formatPoints(value: number) {
@@ -287,16 +370,15 @@ export function compareCardPicks(
   },
 ) {
   if (left.source !== right.source) {
-    return left.source === 'line-value' ? -1 : 1
+    const sourceRank: Record<CardPickSource, number> = {
+      'line-value': 0,
+      'rest-travel': 1,
+      'public-consensus': 2,
+    }
+    return sourceRank[left.source] - sourceRank[right.source]
   }
   const strength = STRENGTH_RANK[right.strength] - STRENGTH_RANK[left.strength]
   if (strength) return strength
-  const publicSupport =
-    PUBLIC_SUPPORT_RANK[right.publicSupport] -
-    PUBLIC_SUPPORT_RANK[left.publicSupport]
-  if (publicSupport) return publicSupport
-  const publicPct = (right.publicPct ?? -1) - (left.publicPct ?? -1)
-  if (publicPct) return publicPct
   if (right.score !== left.score) return right.score - left.score
   return left.kickoff.localeCompare(right.kickoff)
 }
@@ -305,6 +387,7 @@ export type RecommendationOrderKey = {
   category: EdgeCategory
   edge: number | null
   hook: HookKind | null
+  compositeEdge?: number
   publicSupport: PublicSupport
   publicPct: number | null
   kickoff: string
@@ -317,8 +400,10 @@ export function recommendationOrderKey(input: {
   homeSpread: number
   liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
+  travelRest?: GameTravelRest | null
   kickoff: string
 }): RecommendationOrderKey {
+  const adjustment = recommendationAdjustment(input)
   return {
     category: input.category,
     edge: input.edge,
@@ -326,6 +411,7 @@ export function recommendationOrderKey(input: {
       input.liveHomeSpread == null
         ? null
         : favorableHook(input.homeSpread, input.liveHomeSpread),
+    compositeEdge: Math.abs(adjustment.total),
     publicSupport: publicSupportForSide(
       input.consensus,
       input.homeSpread,
@@ -351,12 +437,10 @@ export function compareRecommendationOrder(
   const hook =
     HOOK_RANK[right.hook ?? 'none'] - HOOK_RANK[left.hook ?? 'none']
   if (hook) return hook
-  const publicSupport =
-    PUBLIC_SUPPORT_RANK[right.publicSupport] -
-    PUBLIC_SUPPORT_RANK[left.publicSupport]
-  if (publicSupport) return publicSupport
-  const publicPct = (right.publicPct ?? -1) - (left.publicPct ?? -1)
-  if (publicPct) return publicPct
+  const compositeEdge =
+    (right.compositeEdge ?? right.edge ?? 0) -
+    (left.compositeEdge ?? left.edge ?? 0)
+  if (compositeEdge) return compositeEdge
   return left.kickoff.localeCompare(right.kickoff)
 }
 
@@ -367,12 +451,14 @@ export function resolveCardPick(input: {
   homeSpread: number
   liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
+  travelRest?: GameTravelRest | null
 }): ResolvedCardPick {
   const empty: ResolvedCardPick = {
     source: null,
     pickedSide: null,
     strength: null,
     score: null,
+    compositeEdge: null,
     poolSpread: null,
     detail: null,
     skipReason: null,
@@ -381,62 +467,72 @@ export function resolveCardPick(input: {
     publicPct: null,
   }
 
-  const hook =
+  const lineHook =
     input.liveHomeSpread == null
       ? null
       : favorableHook(input.homeSpread, input.liveHomeSpread)
-
-  if (LINE_VALUE_CATEGORIES.has(input.category) && input.recommendedSide) {
-    const edge = input.edge ?? 0
-    const hookNote = hook ? ` · favorable ${hook === 'fg' ? 'FG' : 'TD'} hook` : ''
-    return {
-      source: 'line-value',
-      pickedSide: input.recommendedSide,
-      strength: lineValueStrength(input.category, hook),
-      score: lineValueScore(input.category, edge, hook),
-      poolSpread: poolSpreadForSide(input.homeSpread, input.recommendedSide),
-      detail:
-        (input.edge == null
-          ? `${input.category} on the pool number`
-          : `${formatPoints(input.edge)}-point ${input.category} on the pool number`) +
-        hookNote,
-      skipReason: null,
-      hook,
-      publicSupport: publicSupportForSide(
-        input.consensus,
-        input.homeSpread,
-        input.recommendedSide,
-      ),
-      publicPct: publicPctForSort(
-        input.consensus,
-        input.homeSpread,
-        input.recommendedSide,
-      ),
-    }
+  const adjustment = recommendationAdjustment(input)
+  if (!adjustment.pickedSide) {
+    const hasLine = adjustment.line !== 0
+    const hasContext = adjustment.context !== 0
+    const skipReason =
+      hasLine && hasContext
+        ? 'Line value is exactly offset by rest and travel'
+        : input.category === 'pending'
+          ? 'No DraftKings line and no rest or travel advantage'
+          : 'No line-value, rest, or travel advantage'
+    return { ...empty, skipReason }
   }
 
-  if (input.consensus?.matchStatus === 'matched') {
-    const publicPick = evaluatePublicPick(input.consensus, input.homeSpread)
-    if (publicPick.ok) {
-      return {
-        source: 'public-consensus',
-        pickedSide: publicPick.side,
-        strength: publicPick.strength,
-        score: publicPick.score,
-        poolSpread: publicPick.poolSpread,
-        detail: publicPick.detail,
-        skipReason: null,
-        hook: null,
-        publicSupport: 'agree',
-        publicPct: publicPctForSort(
-          input.consensus,
-          input.homeSpread,
-          publicPick.side,
-        ),
-      }
-    }
-    return { ...empty, skipReason: publicPick.reason }
+  const pickedSide = adjustment.pickedSide
+  const followsLine =
+    LINE_VALUE_CATEGORIES.has(input.category) &&
+    input.recommendedSide === pickedSide
+  const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
+  const sideSign = pickedSide === 'home' ? 1 : -1
+  const pickedRest = adjustment.rest * sideSign
+  const pickedTravel = adjustment.travel * sideSign
+  const hook = followsLine ? lineHook : null
+  const parts: string[] = []
+  if (input.edge != null && input.edge > 0) {
+    parts.push(`${formatPoints(input.edge)}-point line value`)
   }
+  if (pickedRest !== 0) {
+    parts.push(`rest ${pickedRest > 0 ? '+' : ''}${formatPoints(pickedRest)}`)
+  }
+  if (pickedTravel !== 0) {
+    parts.push(`travel ${pickedTravel > 0 ? '+' : ''}${formatPoints(pickedTravel)}`)
+  }
+  parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
+  if (hook) parts.push(`favorable ${hook === 'fg' ? 'FG' : 'TD'} hook`)
 
-  return empty
+  return {
+    source,
+    pickedSide,
+    strength: followsLine
+      ? lineValueStrength(input.category, hook)
+      : 'mild',
+    score: followsLine
+      ? Math.max(
+          0,
+          lineValueScore(input.category, input.edge ?? 0, hook) +
+            adjustment.context * sideSign * PCT_PER_SPREAD_POINT,
+        )
+      : Math.abs(adjustment.total) * PCT_PER_SPREAD_POINT,
+    compositeEdge: Math.abs(adjustment.total),
+    poolSpread: poolSpreadForSide(input.homeSpread, pickedSide),
+    detail: parts.join(' · '),
+    skipReason: null,
+    hook,
+    publicSupport: publicSupportForSide(
+      input.consensus,
+      input.homeSpread,
+      pickedSide,
+    ),
+    publicPct: publicPctForSort(
+      input.consensus,
+      input.homeSpread,
+      pickedSide,
+    ),
+  }
 }

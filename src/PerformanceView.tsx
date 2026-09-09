@@ -21,7 +21,11 @@ const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
 ]
 
 const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
-const SOURCES: CardPickSource[] = ['line-value', 'public-consensus']
+const SOURCES: CardPickSource[] = [
+  'line-value',
+  'rest-travel',
+  'public-consensus',
+]
 
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
   lock: 'Locks',
@@ -39,6 +43,7 @@ const STRENGTH_LABELS: Record<PickStrength, string> = {
 
 const SOURCE_LABELS: Record<CardPickSource, string> = {
   'line-value': 'Line value',
+  'rest-travel': 'Rest / travel',
   'public-consensus': 'Public',
 }
 
@@ -297,6 +302,10 @@ export default function PerformanceView({
     () => summarizeSource(allGames, 'public-consensus'),
     [allGames],
   )
+  const restTravelStats = useMemo(
+    () => summarizeSource(allGames, 'rest-travel'),
+    [allGames],
+  )
   const deviationStats = useMemo(
     () => summarizeDeviations(allGames),
     [allGames],
@@ -311,9 +320,10 @@ export default function PerformanceView({
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
             The top tiles are overall ATS for the frozen Lines
-            recommendation, then every line-value card pick and every
-            public fill. Tiers and strength sit under that. Deviations
-            are games where the completed card sent the other side.
+            recommendation, then card picks by their frozen source. Week 1
+            retains its public fills; the current strategy uses line value
+            with capped rest and travel adjustments. Tiers and strength sit
+            under that. Deviations are games where the completed card sent the other side.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
           </p>
@@ -369,6 +379,14 @@ export default function PerformanceView({
           </small>
         </div>
         <div className="summary-card lean">
+          <span>Rest / travel</span>
+          <strong>{restTravelStats.rate}</strong>
+          <small>
+            {restTravelStats.count} rec
+            {restTravelStats.count === 1 ? '' : 's'} · {restTravelStats.detail}
+          </small>
+        </div>
+        <div className="summary-card slight">
           <span>Public</span>
           <strong>{publicStats.rate}</strong>
           <small>

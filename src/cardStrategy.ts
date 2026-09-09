@@ -3,9 +3,11 @@ import {
   compareRecommendationOrder,
   formatPoolSpread,
   resolveCardPick,
+  type CardPickSource,
   type PickStrength,
   type PublicSupport,
 } from './cardScoring'
+import type { GameTravelRest } from './travelRest'
 import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types'
 
 export {
@@ -16,7 +18,7 @@ export {
 } from './cardScoring'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v5-line-then-public-modifier'
+export const CARD_STRATEGY_ID = 'v6-line-rest-travel'
 
 export type SuggestedPick = {
   gameId: string
@@ -31,7 +33,7 @@ export type SuggestedPick = {
   pickedTeamId: string
   pickedTeam: string
   poolSpread: number
-  source: 'line-value' | 'public-consensus'
+  source: CardPickSource
   /** Visible Lines band; Recommendation sort uses this, not the strength badge. */
   category: EdgeCategory
   edge: number | null
@@ -42,6 +44,8 @@ export type SuggestedPick = {
   publicPct: number | null
   /** Comparable rank used to sort the modal. Higher is a stronger pick. */
   score: number
+  /** Net edge in spread-point equivalents after rest and travel. */
+  compositeEdge: number
   detail: string
 }
 
@@ -76,18 +80,11 @@ export type SuggestedTiebreaker = {
 }
 
 /**
- * v5 card rules:
- * 1. Lock / hammer / lean / slight → the line-value side. Public never outranks
- *    these, even a mild slight vs a strong Covers majority.
- * 2. A favorable FG (2.5/3.5) or TD (6.5/7.5) hook is still that line-value
- *    pick and badges as solid. Recommendation sort keeps it in its point
- *    band, matching the Lines page.
- * 3. Inside a line-value band, same edge: a favorable TD hook ranks
- *    above an FG hook, and either ranks above no hook. Then the higher
- *    near-pool public % on the picked side ranks first. Fade sinks.
- * 4. Otherwise, use a meaningful Covers Picks Per Line bucket within one
- *    point of the pool line. Those leftover fills always sit below slights.
- * 5. No line-value pick and no qualifying Covers majority → leave unpicked.
+ * v6 card rules:
+ * 1. Start with the signed line-value edge.
+ * 2. Add capped rest and travel adjustments (at most one point combined).
+ * 3. Covers remains informational and never selects or sorts a pick.
+ * 4. A zero composite edge stays unpicked.
  */
 export function generateSuggestedCard(
   analyses: GameAnalysis[],
@@ -95,6 +92,7 @@ export function generateSuggestedCard(
   seasonYear: number,
   tiebreaker: SlateTiebreaker | null | undefined,
   generatedAt = new Date(),
+  travelRestByEvent: ReadonlyMap<number, GameTravelRest> = new Map(),
 ): SuggestedCard {
   const picks: SuggestedPick[] = []
   const unpicked: UnpickedGame[] = []
@@ -117,6 +115,7 @@ export function generateSuggestedCard(
       homeSpread: game.homeSpread,
       liveHomeSpread: analysis.liveHomeSpread,
       consensus,
+      travelRest: travelRestByEvent.get(game.cbsEventId),
     })
 
     if (
@@ -124,6 +123,7 @@ export function generateSuggestedCard(
       cardPick.pickedSide &&
       cardPick.strength != null &&
       cardPick.score != null &&
+      cardPick.compositeEdge != null &&
       cardPick.poolSpread != null &&
       cardPick.detail
     ) {
@@ -143,6 +143,7 @@ export function generateSuggestedCard(
         publicSupport: cardPick.publicSupport,
         publicPct: cardPick.publicPct,
         score: cardPick.score,
+        compositeEdge: cardPick.compositeEdge,
         detail: cardPick.detail,
       })
       continue
@@ -184,19 +185,11 @@ export function generateSuggestedCard(
 }
 
 function unpickedReason(analysis: GameAnalysis) {
-  const { category, consensus } = analysis
-  if (consensus?.matchStatus === 'matched') {
-    if (consensus.away.pct != null && consensus.away.pct === consensus.home.pct) {
-      return 'No line-value edge; Covers public is split'
-    }
-  }
+  const { category } = analysis
   if (category === 'pending') {
-    return 'No DraftKings line and no Covers consensus yet'
+    return 'No DraftKings line and no rest or travel advantage'
   }
-  if (category === 'neutral') {
-    return 'Lines match and no Covers consensus yet'
-  }
-  return 'No line-value pick and no Covers consensus yet'
+  return 'No line-value, rest, or travel advantage'
 }
 
 export function oppositeSide(side: 'home' | 'away') {
@@ -224,6 +217,7 @@ export function sortSuggestedPicks(
         category: left.category,
         edge: left.edge,
         hook: left.hook,
+        compositeEdge: left.compositeEdge,
         publicSupport: left.publicSupport,
         publicPct: left.publicPct,
         kickoff: left.kickoff,
@@ -232,6 +226,7 @@ export function sortSuggestedPicks(
         category: right.category,
         edge: right.edge,
         hook: right.hook,
+        compositeEdge: right.compositeEdge,
         publicSupport: right.publicSupport,
         publicPct: right.publicPct,
         kickoff: right.kickoff,
@@ -256,7 +251,13 @@ export function formatSuggestedCardText(
     const sent = submittedPick(pick, deviate)
     const rec = `${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
     const choice = `${sent.pickedTeam} ${formatPoolSpread(sent.poolSpread)}`
-    return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${pick.source === 'line-value' ? 'line value' : 'public'}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${pick.source === 'line-value' && pick.publicSupport !== 'none' ? ` · public ${pick.publicSupport === 'agree' ? 'agrees' : 'fades'}` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
+    const source =
+      pick.source === 'line-value'
+        ? 'line value'
+        : pick.source === 'rest-travel'
+          ? 'rest/travel'
+          : 'public'
+    return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${source}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${pick.publicSupport !== 'none' ? ` · public ${pick.publicSupport === 'agree' ? 'agrees' : 'fades'}` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
   })
   const skipLines = card.unpicked.map(
     (game) => `• ${game.away} @ ${game.home} — ${game.reason}`,

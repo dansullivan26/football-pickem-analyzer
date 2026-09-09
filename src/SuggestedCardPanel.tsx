@@ -242,7 +242,11 @@ export default function SuggestedCardPanel({
                 </div>
                 <div className="suggested-pick-tags">
                   <span className={`pick-source ${pick.source}`}>
-                    {pick.source === 'line-value' ? 'Line value' : 'Public'}
+                    {pick.source === 'line-value'
+                      ? 'Line value'
+                      : pick.source === 'rest-travel'
+                        ? 'Rest / travel'
+                        : 'Public'}
                   </span>
                   <span className={`pick-strength ${pick.strength}`}>
                     {pick.strength}
@@ -257,8 +261,7 @@ export default function SuggestedCardPanel({
                       Unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
                     </span>
                   )}
-                  {pick.source === 'line-value' &&
-                    pick.publicSupport !== 'none' && (
+                  {pick.publicSupport !== 'none' && (
                       <span className={`pick-public ${pick.publicSupport}`}>
                         {pick.publicSupport === 'agree'
                           ? 'Public agrees'

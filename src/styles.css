@@ -2238,6 +2238,116 @@ a.team-page-link:focus-visible .team-name {
   font-size: 1.35rem;
 }
 
+.player-team-bias {
+  margin: 4px 0 22px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fbfcfb;
+}
+
+.player-team-bias-heading {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.player-team-bias-heading .eyebrow {
+  margin: 0 0 2px;
+}
+
+.player-team-bias-heading h3 {
+  font-size: 1rem;
+}
+
+.player-team-bias-heading > small {
+  max-width: 48ch;
+  color: var(--muted);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.team-bias-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.team-bias-groups > div > h4 {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.team-bias-groups ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-bias-card {
+  display: grid;
+  gap: 3px;
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.team-bias-card.signs {
+  border-color: #e4ca8b;
+}
+
+.team-bias-card.growing,
+.team-bias-card.established {
+  border-color: #9ac6ad;
+  background: var(--green-soft);
+}
+
+.team-bias-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team-bias-head span {
+  color: var(--amber);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.team-bias-card.growing .team-bias-head span,
+.team-bias-card.established .team-bias-head span {
+  color: var(--green-dark);
+}
+
+.team-bias-head strong {
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.team-bias-card h4 {
+  font-size: 0.84rem;
+}
+
+.team-bias-card p,
+.team-bias-card small {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.65rem;
+  line-height: 1.35;
+}
+
 /* clip rather than hidden: both round off the corners, but hidden would make
    this a scroll container and stop the frozen card header from sticking. */
 .week-card {
@@ -2897,6 +3007,18 @@ footer {
   .performance-summary,
   .player-tier-summary {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .player-team-bias-heading {
+    display: grid;
+  }
+
+  .player-team-bias-heading > small {
+    text-align: left;
+  }
+
+  .team-bias-groups {
+    grid-template-columns: 1fr;
   }
 
   .performance-strength {

@@ -14,6 +14,12 @@ import {
   type PredictionResidualReport,
   type ResidualCell,
 } from './playerPrediction'
+import {
+  summarizePlayerTeamBias,
+  TEAM_BIAS_WARMTH_LABELS,
+  teamBiasSentence,
+  type TeamBiasSignal,
+} from './playerTeamBias'
 import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory'
 import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
 import {
@@ -44,6 +50,7 @@ import {
   buildTravelRestIndex,
 } from './travelRest'
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
+import type { TeamRosterFile } from './teamRoster'
 
 function predictedPickLabel(game: PredictedGame) {
   if (!game.predictedSide || !game.predictedTeam) return 'No call'
@@ -168,6 +175,46 @@ function Metric({
   )
 }
 
+function TeamBiasCard({
+  signal,
+  teamName,
+  currentSeason,
+  career,
+}: {
+  signal: TeamBiasSignal
+  teamName: string
+  currentSeason: number
+  career: boolean
+}) {
+  const directionalPicks =
+    signal.direction === 'take'
+      ? signal.takes
+      : signal.appearances - signal.takes
+  const seasonDirectionalPicks =
+    signal.direction === 'take'
+      ? signal.seasonTakes
+      : signal.seasonAppearances - signal.seasonTakes
+  const action = signal.direction === 'take' ? 'Took' : 'Faded'
+  const careerDetail = `${action} ${directionalPicks} of ${signal.appearances}`
+  const seasonDetail = `${currentSeason}: ${seasonDirectionalPicks} of ${signal.seasonAppearances}`
+
+  return (
+    <li className={`team-bias-card ${signal.warmth}`}>
+      <div className="team-bias-head">
+        <span>{TEAM_BIAS_WARMTH_LABELS[signal.warmth]}</span>
+        <strong>{Math.round(signal.rate * 100)}%</strong>
+      </div>
+      <h4>{teamName}</h4>
+      <p>{teamBiasSentence(signal, teamName)}</p>
+      <small>
+        {career
+          ? `${careerDetail} career · ${seasonDetail}`
+          : `${careerDetail} this season`}
+      </small>
+    </li>
+  )
+}
+
 
 export default function PlayersView({
   slate,
@@ -175,6 +222,7 @@ export default function PlayersView({
   careerHistory = history,
   recommendations,
   forecasts,
+  teamRoster,
   selectedSlug,
   onSelectPlayer,
 }: {
@@ -183,6 +231,7 @@ export default function PlayersView({
   careerHistory?: PlayerHistory
   recommendations: RecommendationHistory
   forecasts: PredictionForecasts | null
+  teamRoster: TeamRosterFile
   selectedSlug: string | null
   onSelectPlayer: (slug: string) => void
 }) {
@@ -326,6 +375,25 @@ export default function PlayersView({
         travelRestByAppearance,
       )
     : null
+  const teamBias = selectedPlayer
+    ? summarizePlayerTeamBias(
+        selectedPlayer.entryId,
+        careerHistory,
+        history.pool.seasonYear,
+      )
+    : null
+  const teamNameByKey = useMemo(
+    () =>
+      new Map(
+        teamRoster.teams.map((team) => [
+          `${team.sport}:${team.abbrev}`,
+          team.name === team.abbrev
+            ? team.abbrev
+            : `${team.name} (${team.abbrev})`,
+        ]),
+      ),
+    [teamRoster.teams],
+  )
   const livePrediction =
     selectedPlayer && recommendationWeek
       ? predictPlayerWeek(
@@ -615,6 +683,63 @@ export default function PlayersView({
                   detail={summary.tiebreakerDetail}
                 />
               </div>
+
+              {teamBias &&
+                (teamBias.takes.length > 0 || teamBias.fades.length > 0) && (
+                  <section
+                    className="player-team-bias"
+                    aria-label="Team loyalty watch"
+                  >
+                    <div className="player-team-bias-heading">
+                      <div>
+                        <p className="eyebrow">Team loyalty watch</p>
+                        <h3>Teams they take or fade</h3>
+                      </div>
+                      <small>
+                        Early reads appear after 2 opportunities. Wording warms
+                        as the rate persists across more appearances.
+                      </small>
+                    </div>
+                    <div className="team-bias-groups">
+                      {teamBias.takes.length > 0 && (
+                        <div>
+                          <h4>Teams they take</h4>
+                          <ul>
+                            {teamBias.takes.map((signal) => (
+                              <TeamBiasCard
+                                key={signal.key}
+                                signal={signal}
+                                teamName={
+                                  teamNameByKey.get(signal.key) ?? signal.abbrev
+                                }
+                                currentSeason={history.pool.seasonYear}
+                                career={teamBias.seasons.length > 1}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {teamBias.fades.length > 0 && (
+                        <div>
+                          <h4>Teams they fade</h4>
+                          <ul>
+                            {teamBias.fades.map((signal) => (
+                              <TeamBiasCard
+                                key={signal.key}
+                                signal={signal}
+                                teamName={
+                                  teamNameByKey.get(signal.key) ?? signal.abbrev
+                                }
+                                currentSeason={history.pool.seasonYear}
+                                career={teamBias.seasons.length > 1}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                )}
 
               <div className="player-tier-block">
                 <h3 className="player-tier-heading">Pick % by Line Value Tiers</h3>

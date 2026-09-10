@@ -1407,6 +1407,7 @@ function App() {
           careerHistory={careerHistory}
           recommendations={recommendationHistory}
           forecasts={predictionForecasts}
+          teamRoster={teamRoster}
           selectedSlug={playerSlug}
           onSelectPlayer={(slug) => goTo('players', slug)}
         />

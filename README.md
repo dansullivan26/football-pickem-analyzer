@@ -96,6 +96,15 @@ travel, and rest go active at 6 chances, which is enough to drive a call but
 thin enough to mislead, so any row under 12 chances is tagged `thin`. Players
 under 20 graded picks get no rows at all.
 
+Player profiles also show a **Team loyalty watch** built from every available
+pick in current and archived seasons. A team enters the take/fade list after
+two appearances when the player chose one pole at least 75% of the time.
+Labels warm from `Early read` (2+) to `Showing signs` (4+ at 75%),
+`Pattern growing` (7+ at 80%), and `Established pattern` (12+ at 85%).
+NFL teams reach those samples more quickly because every club appears each
+week; college signals naturally take longer. These are display-only
+observations for now and do not drive the prediction model.
+
 ```bash
 npm run snapshot-predictions
 ```

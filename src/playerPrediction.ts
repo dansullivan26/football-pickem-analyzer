@@ -553,6 +553,30 @@ function habitDirectionalRate(habit: Habit) {
   return habit.rate == null ? 0 : Math.max(habit.rate, 1 - habit.rate)
 }
 
+/**
+ * The meter and the confidence tier answer different questions, so they are
+ * labeled separately: the meter is how far the habit sits from a coin flip
+ * after shrinking, the tier is how much evidence stands behind it.
+ */
+export function leanLabel(meter: number) {
+  if (meter >= 70) return 'Strong lean'
+  if (meter >= 40) return 'Clear lean'
+  if (meter >= 20) return 'Mild lean'
+  return 'Slight lean'
+}
+
+export const EVIDENCE_LABELS: Record<PredictionConfidence, string> = {
+  high: 'Deep sample',
+  medium: 'Fair sample',
+  low: 'Thin sample',
+}
+
+export const EVIDENCE_RULES: Record<PredictionConfidence, string> = {
+  high: '20+ prior chances and at least 75% on the preferred side.',
+  medium: '12+ prior chances, or at least 75% on a smaller sample.',
+  low: 'Under 12 prior chances and under 75%.',
+}
+
 function predictionConfidence(
   habit: Habit,
 ): PredictionConfidence {

@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   buildCurrentPlayerProfile,
+  EVIDENCE_LABELS,
+  EVIDENCE_RULES,
   frozenPlayerWeek,
+  leanLabel,
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
   predictionSeasonRecord,
   type PredictedGame,
+  type PredictionConfidence,
   type PredictionForecasts,
   type PredictionResidualReport,
   type ResidualCell,
@@ -65,16 +69,25 @@ function PredictionMeter({ game }: { game: PredictedGame }) {
       </div>
     )
   }
+  const confidence = game.confidence ?? 'low'
   return (
-    <div className={`prediction-meter ${game.confidence ?? 'low'}`}>
+    <div className={`prediction-meter ${confidence}`}>
       <div className="prediction-meter-head">
-        <strong>{meter}</strong>
-        <span>{game.confidence} confidence</span>
+        <strong title="How far this habit sits from a coin flip, after shrinking small samples.">
+          {meter}
+        </strong>
+        <span className="prediction-lean">{leanLabel(meter)}</span>
+        <span
+          className={`prediction-evidence ${confidence}`}
+          title={EVIDENCE_RULES[confidence]}
+        >
+          {EVIDENCE_LABELS[confidence]}
+        </span>
       </div>
       <div
         className="prediction-meter-track"
         role="meter"
-        aria-label="Prediction confidence"
+        aria-label="Lean strength"
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={meter}
@@ -121,7 +134,16 @@ function ResidualReport({ report }: { report: PredictionResidualReport }) {
           <ResidualMetric key={cell.key} cell={cell} />
         ))}
         {report.byConfidence.map((cell) => (
-          <ResidualMetric key={`conf-${cell.key}`} cell={cell} />
+          <ResidualMetric
+            key={`conf-${cell.key}`}
+            cell={{
+              ...cell,
+              key:
+                cell.key in EVIDENCE_LABELS
+                  ? EVIDENCE_LABELS[cell.key as PredictionConfidence]
+                  : cell.key,
+            }}
+          />
         ))}
       </div>
     </section>
@@ -715,6 +737,13 @@ export default function PlayersView({
                     </div>
                   ) : (
                     <div className="prediction-list">
+                      <p className="prediction-legend">
+                        The number is lean strength: how far the habit sits
+                        from a coin flip once small samples are shrunk. The
+                        chip beside it is how much evidence stands behind
+                        that lean, so a tall bar on a short history reads
+                        strong lean · thin sample.
+                      </p>
                       {prediction.games.map((game) => {
                         const score = formatWinningScore(
                           scoresByEvent.get(game.cbsEventId) ?? {},

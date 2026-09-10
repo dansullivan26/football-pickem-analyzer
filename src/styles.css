@@ -2411,6 +2411,36 @@ a.team-page-link:focus-visible .team-name {
   text-transform: uppercase;
 }
 
+.prediction-meter-head .prediction-evidence {
+  margin-left: auto;
+  padding: 2px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.prediction-meter-head .prediction-evidence.high {
+  border-color: var(--green);
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
+.prediction-meter-head .prediction-evidence.medium {
+  border-color: #e0b24a;
+  color: var(--amber);
+  background: var(--amber-soft);
+}
+
+.prediction-legend {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
 .prediction-meter-track {
   overflow: hidden;
   height: 7px;

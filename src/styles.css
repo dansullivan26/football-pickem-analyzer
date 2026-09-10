@@ -1087,33 +1087,48 @@ h2 {
 }
 
 .manual-pick-options {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 7px;
   margin-top: 2px;
 }
 
 .manual-pick-options label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 8px;
+  gap: 7px;
+  min-width: 0;
+  padding: 7px 10px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 10px;
   color: var(--ink);
   background: var(--surface);
   cursor: pointer;
+  font-size: 0.74rem;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .manual-pick-options label:has(input:checked) {
   border-color: var(--green);
   color: var(--green-dark);
+  background: var(--green-soft);
 }
 
+.manual-pick-options label span {
+  min-width: 0;
+}
+
+/* Opt out of the shared text-input sizing; without this the box grows to a
+   210px field and pushes the team name outside the control. */
 .manual-pick-options input {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  min-height: 0;
+  padding: 0;
   margin: 0;
-  accent-color: var(--green);
+  accent-color: var(--green-dark);
 }
 
 .card-tiebreaker {
@@ -3213,6 +3228,11 @@ footer {
   }
 
   .controls {
+    grid-template-columns: 1fr;
+  }
+
+  /* Long team names plus a spread do not fit two across at this width. */
+  .manual-pick-options {
     grid-template-columns: 1fr;
   }
 

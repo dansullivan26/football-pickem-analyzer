@@ -11,12 +11,15 @@ import {
   type TravelSplitKey,
 } from './travelRest.ts'
 import { recIsNeutralSite } from './teamSite.ts'
+import { keyNumberHook, unfavorableHook } from './cardScoring.ts'
 import type { PlayerWeek, RecommendationWeek } from './types'
 
 export const PLAYER_LINE_TIERS = ['lock', 'hammer', 'lean', 'slight'] as const
 export const PLAYER_TIER_KEYS = [...PLAYER_LINE_TIERS, 'neutral'] as const
+export const PLAYER_HOOK_KEYS = ['fg', 'td'] as const
 
 export type PlayerTierKey = (typeof PLAYER_TIER_KEYS)[number]
+export type PlayerHookKey = (typeof PLAYER_HOOK_KEYS)[number]
 
 export const PLAYER_TIER_LABELS: Record<PlayerTierKey, string> = {
   lock: 'Locks',
@@ -24,6 +27,11 @@ export const PLAYER_TIER_LABELS: Record<PlayerTierKey, string> = {
   lean: 'Leans',
   slight: 'Slights',
   neutral: 'Neutral',
+}
+
+export const PLAYER_HOOK_LABELS: Record<PlayerHookKey, string> = {
+  fg: 'FG hook',
+  td: 'TD hook',
 }
 
 export type PlayerRateStat = {
@@ -44,6 +52,7 @@ export type PlayerTendencySummary = {
   tiebreakerRate: string
   tiebreakerDetail: string
   tiers: Record<PlayerTierKey, PlayerRateStat>
+  hooks: Record<PlayerHookKey, PlayerRateStat>
   travel: Record<TravelSplitKey, PlayerRateStat>
   rest: Record<RestSplitKey, PlayerRateStat>
 }
@@ -137,6 +146,27 @@ function factorStat(
   }
 }
 
+function hookStat(
+  key: PlayerHookKey,
+  hits: number,
+  eligible: number,
+): PlayerRateStat {
+  if (!eligible) {
+    return {
+      hits,
+      eligible,
+      rate: '—',
+      detail: `No ${PLAYER_HOOK_LABELS[key]} picks yet`,
+    }
+  }
+  return {
+    hits,
+    eligible,
+    rate: formatRate(hits, eligible),
+    detail: `${hits} of ${eligible} on the favorable side`,
+  }
+}
+
 export function summarizePlayer(
   entryId: string,
   weeks: PlayerWeek[],
@@ -173,8 +203,18 @@ export function summarizePlayer(
   let tiebreakerEligible = 0
   let tiebreakerNear = 0
   const tierCounts = emptyTierCounts()
+  const hookCounts = emptyFactorCounts(PLAYER_HOOK_KEYS)
   const travelCounts = emptyFactorCounts(TRAVEL_SPLIT_KEYS)
   const restCounts = emptyFactorCounts(REST_SPLIT_KEYS)
+
+  for (const pick of made) {
+    const hook = keyNumberHook(pick.homeSpread)
+    if (!hook) continue
+    const pickedSpread =
+      pick.pickedSide === 'home' ? pick.homeSpread : pick.homeSpread * -1
+    hookCounts[hook].eligible += 1
+    if (!unfavorableHook(pickedSpread)) hookCounts[hook].hits += 1
+  }
 
   for (const recWeek of recWeeks) {
     const entry = weeks
@@ -253,6 +293,12 @@ export function summarizePlayer(
         tierStat(key, tierCounts[key].hits, tierCounts[key].eligible),
       ]),
     ) as Record<PlayerTierKey, PlayerRateStat>,
+    hooks: Object.fromEntries(
+      PLAYER_HOOK_KEYS.map((key) => [
+        key,
+        hookStat(key, hookCounts[key].hits, hookCounts[key].eligible),
+      ]),
+    ) as Record<PlayerHookKey, PlayerRateStat>,
     travel: Object.fromEntries(
       TRAVEL_SPLIT_KEYS.map((key) => [
         key,

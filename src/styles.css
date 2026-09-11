@@ -1846,6 +1846,18 @@ a.team-page-link:focus-visible .team-name {
   font-weight: 700;
 }
 
+.player-tier-explainer {
+  max-width: 760px;
+  margin: -2px 0 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.player-hook-summary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .player-tier-summary .summary-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

@@ -200,6 +200,46 @@ test('summarizePlayer keeps the overall line-value tile on card source', () => {
   assert.equal(summary.rest.short.detail, 'No overlapping short-week teams yet')
 })
 
+test('summarizePlayer profiles favorable FG and TD hook-side choices', () => {
+  const summary = summarizePlayer(
+    'dan',
+    [
+      playerWeek(1, [
+        pick(1, 'home', { homeSpread: -2.5 }),
+        pick(2, 'away', { homeSpread: -2.5 }),
+        pick(3, 'away', { homeSpread: -3.5 }),
+        pick(4, 'home', { homeSpread: -3.5 }),
+        pick(5, 'away', { homeSpread: 6.5 }),
+        pick(6, 'home', { homeSpread: 6.5 }),
+        pick(7, 'away', { homeSpread: -7.5 }),
+        pick(8, 'home', { homeSpread: -7.5 }),
+        pick(9, 'home', { homeSpread: -4 }),
+      ]),
+    ],
+    [],
+    2026,
+  )
+
+  assert.equal(summary.hooks.fg.rate, '50%')
+  assert.equal(summary.hooks.fg.detail, '2 of 4 on the favorable side')
+  assert.equal(summary.hooks.td.rate, '50%')
+  assert.equal(summary.hooks.td.detail, '2 of 4 on the favorable side')
+})
+
+test('summarizePlayer leaves hook splits blank without key-number picks', () => {
+  const summary = summarizePlayer(
+    'dan',
+    [playerWeek(1, [pick(1, 'home', { homeSpread: -4 })])],
+    [],
+    2026,
+  )
+
+  assert.equal(summary.hooks.fg.rate, '—')
+  assert.equal(summary.hooks.fg.detail, 'No FG hook picks yet')
+  assert.equal(summary.hooks.td.rate, '—')
+  assert.equal(summary.hooks.td.detail, 'No TD hook picks yet')
+})
+
 test('summarizePlayer pick rates follow the traveling and rested sides', () => {
   const travelRest = new Map<string, AppearanceTravelRest>([
     [

@@ -44,6 +44,8 @@ import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import type { LastKickoffFile } from './lastKickoff'
 import {
+  PLAYER_HOOK_KEYS,
+  PLAYER_HOOK_LABELS,
   PLAYER_TIER_KEYS,
   PLAYER_TIER_LABELS,
   summarizePlayer,
@@ -940,6 +942,36 @@ export default function PlayersView({
                     </div>
                   </section>
                 )}
+
+              <div className="player-tier-block">
+                <h3 className="player-tier-heading">
+                  Pick % on the Favorable Hook Side
+                </h3>
+                <p className="player-tier-explainer">
+                  Uses the locked CBS spread. The favorable side gets the
+                  better side of 3 or 7: a favorite below the key number or an
+                  underdog above it. This profiles the player&apos;s choice,
+                  not whether that pick won.
+                </p>
+                <div
+                  className="tendency-grid player-hook-summary"
+                  aria-label="Pick percentage on favorable field-goal and touchdown hook sides"
+                >
+                  {PLAYER_HOOK_KEYS.map((key) => {
+                    const stats = summary.hooks[key]
+                    return (
+                      <Metric
+                        key={key}
+                        label={`${PLAYER_HOOK_LABELS[key]} · ${
+                          key === 'fg' ? '2.5 / 3.5' : '6.5 / 7.5'
+                        }`}
+                        value={stats.rate}
+                        detail={stats.detail}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
 
               <div className="player-tier-block">
                 <h3 className="player-tier-heading">Pick % by Line Value Tiers</h3>

@@ -11,6 +11,7 @@ import {
   predictionMaturity,
   PREDICTION_MATURITY_MILESTONES,
   residualLabel,
+  residualSliceCopy,
   summarizePlayerPredictionResiduals,
   type PredictedGame,
   type PredictionForecasts,
@@ -118,28 +119,12 @@ function ResidualMetric({
   cell: ResidualCell
   group: ResidualGroup
 }) {
-  const noCallPct = Math.round((cell.noCallRate ?? 0) * 100)
+  const copy = residualSliceCopy(group, cell)
   return (
-    <div className="residual-card">
+    <div className="residual-card" title={copy.title}>
       <span>{residualLabel(group, cell.key)}</span>
-      <strong
-        title={
-          cell.graded
-            ? `Named the right side on ${cell.correct} of ${cell.graded} graded calls.`
-            : 'Nothing graded in this slice yet.'
-        }
-      >
-        {formatAccuracy(cell.accuracy)}
-      </strong>
-      <small>
-        {cell.graded
-          ? `${cell.correct} of ${cell.graded} graded`
-          : 'None graded yet'}
-        {' · '}
-        <span title={`The model made no guess on ${noCallPct}% of these games.`}>
-          {noCallPct}% no call
-        </span>
-      </small>
+      <strong>{formatAccuracy(cell.accuracy)}</strong>
+      <small>{copy.line}</small>
     </div>
   )
 }
@@ -181,31 +166,31 @@ const RESIDUAL_TABS: Array<{
     key: 'overall',
     tab: 'Overview',
     title: 'Everything together',
-    hint: 'All locked guesses in this view',
+    hint: 'Every locked player-game in this view, not unique matchups',
   },
   {
     key: 'league',
     tab: 'League',
     title: 'By league',
-    hint: 'Pro slates read differently than college',
+    hint: 'Counts are player-games, not unique matchups',
   },
   {
     key: 'market',
     tab: 'Guessed side',
     title: 'By the side we guessed',
-    hint: 'Where our guess landed on the spread',
+    hint: 'Whether our locked guess named the favorite or the underdog',
   },
   {
     key: 'habit',
     tab: 'Habit',
     title: 'By the habit behind the guess',
-    hint: 'Which tendency drove the call',
+    hint: 'Only the guesses that one tendency drove',
   },
   {
     key: 'confidence',
     tab: 'Evidence',
     title: 'By how much evidence backed it',
-    hint: 'Same sample depth shown on each player’s card',
+    hint: 'Same sample-depth labels shown on each player’s card',
   },
 ]
 
@@ -341,9 +326,14 @@ function ResidualReport({
           right, not whether their pick won.
         </p>
         <p className="residual-reading">
-          In every tile the big number is how often we named the right side.
-          Under it is how many guesses have been graded, plus how often the
-          model declined to guess at all.
+          In every tile the big number is how often we named the side they
+          actually picked, among player-games that are already graded. A
+          player-game is one person on one slate game, so a graded count is
+          not a count of unique matchups. Under the percentage is that graded
+          hit count, how many calls we made in the slice, and how often we
+          declined to guess. Hover a tile for the sentence-form reading. The
+          maturity label above is for the whole pool; it is not a claim that
+          any one slice already has a deep sample.
         </p>
         <p className="residual-meta">
           Strategy {report.strategyId} · updated {updated}
@@ -1051,10 +1041,20 @@ export default function PlayersView({
                         </strong>
                         <small>
                           {prediction?.correct ?? 0} of {prediction?.graded ?? 0}{' '}
-                          graded · {prediction?.calls ?? 0} calls
+                          graded player-games · {prediction?.calls ?? 0} calls
                         </small>
                       </div>
-                      <div className="week-score season-read">
+                      <div
+                        className="week-score season-read"
+                        title={
+                          playerResiduals
+                            ? residualSliceCopy(
+                                'overall',
+                                playerResiduals.overall,
+                              ).title
+                            : undefined
+                        }
+                      >
                         <span>Season model read</span>
                         <strong>
                           {formatAccuracy(
@@ -1062,12 +1062,12 @@ export default function PlayersView({
                           )}
                         </strong>
                         <small>
-                          {playerResiduals?.overall.correct ?? 0} of{' '}
-                          {playerResiduals?.overall.graded ?? 0} graded ·{' '}
-                          {Math.round(
-                            (playerResiduals?.overall.noCallRate ?? 0) * 100,
-                          )}
-                          % no call
+                          {playerResiduals
+                            ? residualSliceCopy(
+                                'overall',
+                                playerResiduals.overall,
+                              ).line
+                            : 'No locked guesses yet'}
                         </small>
                       </div>
                     </div>
@@ -1078,8 +1078,9 @@ export default function PlayersView({
                       <summary>Break down this player&apos;s season model read</summary>
                       <p>
                         Same measurement as the pool scorecard, filtered to
-                        this player. It grades whether we named their side, not
-                        whether that side won.
+                        this player. Counts are this person&apos;s player-games.
+                        It grades whether we named their side, not whether that
+                        side won.
                       </p>
                       <ResidualTabs
                         report={playerResiduals}

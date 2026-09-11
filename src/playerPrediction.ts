@@ -206,6 +206,61 @@ export function residualLabel(group: ResidualGroup, key: string) {
   return RESIDUAL_LABELS[group][key] ?? key
 }
 
+function residualSliceSubject(group: ResidualGroup, cell: ResidualCell) {
+  const label = residualLabel(group, cell.key)
+  if (group === 'overall') return 'player-games'
+  if (group === 'league') {
+    if (cell.key === 'NFL') return 'NFL player-games'
+    if (cell.key === 'NCAAF') return 'college player-games'
+    return `${label} player-games`
+  }
+  if (cell.key === 'no-call') return 'player-games'
+  if (group === 'market') {
+    if (cell.key === 'favorite') return 'player-games where we called the favorite'
+    if (cell.key === 'dog') return 'player-games where we called the underdog'
+    if (cell.key === 'pickem') return 'player-games that were pick’ems'
+    return `player-games labeled ${label}`
+  }
+  if (group === 'habit') {
+    return `player-games whose guess was driven by the ${label.toLowerCase()}`
+  }
+  return `player-games backed by a ${label.toLowerCase()}`
+}
+
+/**
+ * Sentence-form reading of a scorecard tile. Counts are player-games (one
+ * player on one slate game), not unique matchups. “Right” means we named the
+ * side they picked, not whether that pick covered.
+ */
+export function residualSliceCopy(group: ResidualGroup, cell: ResidualCell) {
+  const noCallPct = Math.round((cell.noCallRate ?? 0) * 100)
+  const subject = residualSliceSubject(group, cell)
+  const habitNote =
+    group === 'habit' && cell.key !== 'no-call'
+      ? ' This tile is only that one tendency, not every picker habit.'
+      : ''
+
+  if (cell.key === 'no-call') {
+    return {
+      line: `${cell.games} player-games with no guess`,
+      title: `The model declined to guess on ${cell.games} player-games in this slice. A player-game is one person on one slate game, not a unique matchup.`,
+    }
+  }
+
+  if (!cell.graded) {
+    return {
+      line: `${cell.calls} calls · none graded yet · ${noCallPct}% no call`,
+      title: `We named a side on ${cell.calls} of ${cell.games} ${subject}. None are graded yet — grading starts once that player submits a pick. Ungraded calls still count as guesses.${habitNote}`,
+    }
+  }
+
+  const pct = Math.round((cell.accuracy ?? 0) * 100)
+  return {
+    line: `${cell.correct} of ${cell.graded} graded player-games · ${cell.calls} calls · ${noCallPct}% no call`,
+    title: `Of the ${subject} that already have a submitted pick to check, we named the side they picked ${cell.correct} of ${cell.graded} times (${pct}%). We made ${cell.calls} calls in this slice; ${cell.graded} is only that graded subset, not unique matchups. Right means we read their pick, not whether it covered.${habitNote}`,
+  }
+}
+
 export type PredictionForecasts = {
   updatedAt: string
   weeks: PredictionForecastWeek[]

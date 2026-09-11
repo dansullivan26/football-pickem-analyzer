@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T18:39:40.084Z",
+  "updatedAt": "2026-09-11T20:02:04.640Z",
   "weeks": [
     {
       "week": 1,
@@ -721,7 +721,7 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-11T18:39:40.084Z",
+      "capturedAt": "2026-09-11T20:02:04.640Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
@@ -861,7 +861,8 @@
             "state": "IN",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "deviated": true
         },
         {
           "cbsEventId": 50027676,
@@ -887,7 +888,8 @@
             "state": "UT",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "deviated": true
         },
         {
           "cbsEventId": 50027606,
@@ -991,7 +993,8 @@
             "state": "TX",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "deviated": true
         },
         {
           "cbsEventId": 50027684,

@@ -8,11 +8,12 @@ import {
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
   predictionSeasonRecord,
+  residualLabel,
   type PredictedGame,
-  type PredictionConfidence,
   type PredictionForecasts,
   type PredictionResidualReport,
   type ResidualCell,
+  type ResidualGroup,
 } from './playerPrediction'
 import {
   summarizePlayerTeamBias,
@@ -106,53 +107,128 @@ function PredictionMeter({ game }: { game: PredictedGame }) {
   )
 }
 
-function ResidualMetric({ cell }: { cell: ResidualCell }) {
+function ResidualMetric({
+  cell,
+  group,
+}: {
+  cell: ResidualCell
+  group: ResidualGroup
+}) {
+  const noCallPct = Math.round((cell.noCallRate ?? 0) * 100)
   return (
     <div className="residual-card">
-      <span>{cell.key}</span>
-      <strong>{formatAccuracy(cell.accuracy)}</strong>
+      <span>{residualLabel(group, cell.key)}</span>
+      <strong
+        title={
+          cell.graded
+            ? `Named the right side on ${cell.correct} of ${cell.graded} graded calls.`
+            : 'Nothing graded in this slice yet.'
+        }
+      >
+        {formatAccuracy(cell.accuracy)}
+      </strong>
       <small>
-        {cell.correct}/{cell.graded} graded · {Math.round((cell.noCallRate ?? 0) * 100)}%
-        no-call
+        {cell.graded
+          ? `${cell.correct} of ${cell.graded} graded`
+          : 'None graded yet'}
+        {' · '}
+        <span title={`The model made no guess on ${noCallPct}% of these games.`}>
+          {noCallPct}% no call
+        </span>
       </small>
     </div>
   )
 }
 
-function ResidualReport({ report }: { report: PredictionResidualReport }) {
+function ResidualGroupBlock({
+  title,
+  hint,
+  group,
+  cells,
+}: {
+  title: string
+  hint: string
+  group: ResidualGroup
+  cells: ResidualCell[]
+}) {
+  if (cells.length === 0) return null
   return (
-    <section className="residual-report" aria-label="Prediction residuals">
+    <div className="residual-group">
+      <h3>
+        {title}
+        <span>{hint}</span>
+      </h3>
+      <div className="residual-grid">
+        {cells.map((cell) => (
+          <ResidualMetric key={`${group}-${cell.key}`} cell={cell} group={group} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ResidualReport({ report }: { report: PredictionResidualReport }) {
+  const updated = new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(new Date(report.updatedAt))
+
+  return (
+    <section
+      className="residual-report"
+      aria-label="Prediction model scorecard"
+    >
       <div className="residual-heading">
-        <p className="eyebrow">Frozen {report.strategyId} residuals</p>
+        <p className="eyebrow">Prediction model scorecard</p>
+        <h2>How often we guess each player&apos;s pick</h2>
         <p>
-          Pool-wide hit rate on locked forecasts, split so later reviews can
-          see which slider to add next.
+          Before each slate, the model guesses which side every player will
+          take, using only their earlier graded weeks. Those guesses lock at
+          the week&apos;s first kickoff, so later rule changes cannot rewrite
+          them. Once results land, each locked guess is compared with the pick
+          the player actually made — this scores whether we read the person
+          right, not whether their pick won.
+        </p>
+        <p className="residual-reading">
+          In every tile the big number is how often we named the right side.
+          Under it is how many guesses have been graded, plus how often the
+          model declined to guess at all.
+        </p>
+        <p className="residual-meta">
+          Strategy {report.strategyId} · updated {updated}
         </p>
       </div>
-      <div className="residual-grid">
-        <ResidualMetric cell={{ ...report.overall, key: 'Overall' }} />
-        {report.byLeague.map((cell) => (
-          <ResidualMetric key={cell.key} cell={cell} />
-        ))}
-        {report.byMarket.map((cell) => (
-          <ResidualMetric key={cell.key} cell={cell} />
-        ))}
-        {report.byHabit.map((cell) => (
-          <ResidualMetric key={cell.key} cell={cell} />
-        ))}
-        {report.byConfidence.map((cell) => (
-          <ResidualMetric
-            key={`conf-${cell.key}`}
-            cell={{
-              ...cell,
-              key:
-                cell.key in EVIDENCE_LABELS
-                  ? EVIDENCE_LABELS[cell.key as PredictionConfidence]
-                  : cell.key,
-            }}
-          />
-        ))}
-      </div>
+
+      <ResidualGroupBlock
+        title="Everything together"
+        hint="All locked guesses, all players"
+        group="overall"
+        cells={[report.overall]}
+      />
+      <ResidualGroupBlock
+        title="By league"
+        hint="Pro slates read differently than college"
+        group="league"
+        cells={report.byLeague}
+      />
+      <ResidualGroupBlock
+        title="By the side we guessed"
+        hint="Where our guess landed on the spread"
+        group="market"
+        cells={report.byMarket}
+      />
+      <ResidualGroupBlock
+        title="By the habit behind the guess"
+        hint="Which tendency drove the call"
+        group="habit"
+        cells={report.byHabit}
+      />
+      <ResidualGroupBlock
+        title="By how much evidence backed it"
+        hint="Same sample depth shown on each player's card"
+        group="confidence"
+        cells={report.byConfidence}
+      />
     </section>
   )
 }

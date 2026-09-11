@@ -144,6 +144,67 @@ export type PredictionResidualReport = {
   byConfidence: ResidualCell[]
 }
 
+/**
+ * The meter and the confidence tier answer different questions, so they are
+ * labeled separately: the meter is how far the habit sits from a coin flip
+ * after shrinking, the tier is how much evidence stands behind it.
+ */
+export function leanLabel(meter: number) {
+  if (meter >= 70) return 'Strong lean'
+  if (meter >= 40) return 'Clear lean'
+  if (meter >= 20) return 'Mild lean'
+  return 'Slight lean'
+}
+
+export const EVIDENCE_LABELS: Record<PredictionConfidence, string> = {
+  high: 'Deep sample',
+  medium: 'Fair sample',
+  low: 'Thin sample',
+}
+
+export const EVIDENCE_RULES: Record<PredictionConfidence, string> = {
+  high: '20+ prior chances and at least 75% on the preferred side.',
+  medium: '12+ prior chances, or at least 75% on a smaller sample.',
+  low: 'Under 12 prior chances and under 75%.',
+}
+
+export type ResidualGroup =
+  | 'overall'
+  | 'league'
+  | 'market'
+  | 'habit'
+  | 'confidence'
+
+/**
+ * Bucket keys are stored raw so the frozen file stays stable. `favorite` means
+ * different things in the market and habit groups, and `no-call` repeats in
+ * three groups, so labels have to be resolved per group.
+ */
+const RESIDUAL_LABELS: Record<ResidualGroup, Record<string, string>> = {
+  overall: { overall: 'Every locked call' },
+  league: { NFL: 'NFL', NCAAF: 'College' },
+  market: {
+    favorite: 'Called the favorite',
+    dog: 'Called the underdog',
+    pickem: 'Pick’em game',
+    'no-call': 'No call made',
+  },
+  habit: {
+    home: 'Home/road habit',
+    favorite: 'Favorite/dog habit',
+    'line-value': 'Line-value habit',
+    public: 'Public-side habit',
+    travel: 'Travel habit',
+    rest: 'Rest habit',
+    'no-call': 'No call made',
+  },
+  confidence: { ...EVIDENCE_LABELS, 'no-call': 'No call made' },
+}
+
+export function residualLabel(group: ResidualGroup, key: string) {
+  return RESIDUAL_LABELS[group][key] ?? key
+}
+
 export type PredictionForecasts = {
   updatedAt: string
   weeks: PredictionForecastWeek[]
@@ -551,30 +612,6 @@ export function buildCurrentPlayerProfile(
 
 function habitDirectionalRate(habit: Habit) {
   return habit.rate == null ? 0 : Math.max(habit.rate, 1 - habit.rate)
-}
-
-/**
- * The meter and the confidence tier answer different questions, so they are
- * labeled separately: the meter is how far the habit sits from a coin flip
- * after shrinking, the tier is how much evidence stands behind it.
- */
-export function leanLabel(meter: number) {
-  if (meter >= 70) return 'Strong lean'
-  if (meter >= 40) return 'Clear lean'
-  if (meter >= 20) return 'Mild lean'
-  return 'Slight lean'
-}
-
-export const EVIDENCE_LABELS: Record<PredictionConfidence, string> = {
-  high: 'Deep sample',
-  medium: 'Fair sample',
-  low: 'Thin sample',
-}
-
-export const EVIDENCE_RULES: Record<PredictionConfidence, string> = {
-  high: '20+ prior chances and at least 75% on the preferred side.',
-  medium: '12+ prior chances, or at least 75% on a smaller sample.',
-  low: 'Under 12 prior chances and under 75%.',
 }
 
 function predictionConfidence(

@@ -1087,8 +1087,18 @@ export function summarizePredictionResiduals(
   capturedAt: string,
 ): PredictionResidualReport | null {
   const games = weeks
-    .filter((week) => week.strategyId === PREDICTION_STRATEGY_ID)
+    .filter(
+      (week) =>
+        week.strategyId === PREDICTION_STRATEGY_ID && Boolean(week.frozenAt),
+    )
     .flatMap((week) => week.players.flatMap((player) => player.games))
+  return summarizeResidualGames(games, capturedAt)
+}
+
+function summarizeResidualGames(
+  games: PredictedGame[],
+  capturedAt: string,
+): PredictionResidualReport | null {
   if (games.length === 0) return null
 
   const by = (keyFor: (game: PredictedGame) => string) => {
@@ -1113,6 +1123,26 @@ export function summarizePredictionResiduals(
     byHabit: by((game) => game.habitKey ?? 'no-call'),
     byConfidence: by((game) => game.confidence ?? 'no-call'),
   }
+}
+
+export function summarizePlayerPredictionResiduals(
+  forecasts: PredictionForecasts | null | undefined,
+  entryId: string,
+  seasonYear: number,
+): PredictionResidualReport | null {
+  if (!forecasts) return null
+  const games = forecasts.weeks
+    .filter(
+      (week) =>
+        week.strategyId === PREDICTION_STRATEGY_ID &&
+        Boolean(week.frozenAt) &&
+        weekSeason(week, seasonYear) === seasonYear,
+    )
+    .flatMap(
+      (week) =>
+        week.players.find((player) => player.entryId === entryId)?.games ?? [],
+    )
+  return summarizeResidualGames(games, forecasts.updatedAt)
 }
 
 export function snapshotPlayerForecasts(

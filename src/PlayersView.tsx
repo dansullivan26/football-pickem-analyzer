@@ -8,10 +8,10 @@ import {
   leanLabel,
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
-  predictionSeasonRecord,
   predictionMaturity,
   PREDICTION_MATURITY_MILESTONES,
   residualLabel,
+  summarizePlayerPredictionResiduals,
   type PredictedGame,
   type PredictionForecasts,
   type PredictionMaturity,
@@ -171,6 +171,93 @@ function ResidualGroupBlock({
   )
 }
 
+const RESIDUAL_TABS: Array<{
+  key: ResidualGroup
+  tab: string
+  title: string
+  hint: string
+}> = [
+  {
+    key: 'overall',
+    tab: 'Overview',
+    title: 'Everything together',
+    hint: 'All locked guesses in this view',
+  },
+  {
+    key: 'league',
+    tab: 'League',
+    title: 'By league',
+    hint: 'Pro slates read differently than college',
+  },
+  {
+    key: 'market',
+    tab: 'Guessed side',
+    title: 'By the side we guessed',
+    hint: 'Where our guess landed on the spread',
+  },
+  {
+    key: 'habit',
+    tab: 'Habit',
+    title: 'By the habit behind the guess',
+    hint: 'Which tendency drove the call',
+  },
+  {
+    key: 'confidence',
+    tab: 'Evidence',
+    title: 'By how much evidence backed it',
+    hint: 'Same sample depth shown on each player’s card',
+  },
+]
+
+function residualCells(
+  report: PredictionResidualReport,
+  group: ResidualGroup,
+) {
+  if (group === 'overall') return [report.overall]
+  if (group === 'league') return report.byLeague
+  if (group === 'market') return report.byMarket
+  if (group === 'habit') return report.byHabit
+  return report.byConfidence
+}
+
+function ResidualTabs({
+  report,
+  label,
+}: {
+  report: PredictionResidualReport
+  label: string
+}) {
+  const [selected, setSelected] = useState<ResidualGroup>('overall')
+  const active = RESIDUAL_TABS.find((tab) => tab.key === selected)!
+
+  return (
+    <div className="residual-tabs">
+      <div className="residual-tab-list" role="tablist" aria-label={label}>
+        {RESIDUAL_TABS.map((tab) => (
+          <button
+            key={tab.key}
+            type="button"
+            role="tab"
+            aria-selected={selected === tab.key}
+            className={selected === tab.key ? 'active' : undefined}
+            onClick={() => setSelected(tab.key)}
+          >
+            {tab.tab}
+          </button>
+        ))}
+      </div>
+      <div role="tabpanel">
+        <ResidualGroupBlock
+          title={active.title}
+          hint={active.hint}
+          group={active.key}
+          cells={residualCells(report, active.key)}
+        />
+      </div>
+    </div>
+  )
+}
+
 function PredictionMaturityGuide({
   maturity,
 }: {
@@ -197,27 +284,30 @@ function PredictionMaturityGuide({
           as completed.
         </small>
       </div>
-      <ol aria-label="Prediction data maturity milestones">
-        {PREDICTION_MATURITY_MILESTONES.map((stage, index) => (
-          <li
-            key={stage.key}
-            className={
-              index === stageIndex
-                ? 'current'
-                : index < stageIndex
-                  ? 'reached'
-                  : undefined
-            }
-          >
-            <span>{stage.label}</span>
-            <small>
-              {stage.weeks === 0
-                ? 'Starting point'
-                : `${stage.weeks}+ weeks · ${stage.calls}+ calls`}
-            </small>
-          </li>
-        ))}
-      </ol>
+      <details>
+        <summary>How the maturity stages advance</summary>
+        <ol aria-label="Prediction data maturity milestones">
+          {PREDICTION_MATURITY_MILESTONES.map((stage, index) => (
+            <li
+              key={stage.key}
+              className={
+                index === stageIndex
+                  ? 'current'
+                  : index < stageIndex
+                    ? 'reached'
+                    : undefined
+              }
+            >
+              <span>{stage.label}</span>
+              <small>
+                {stage.weeks === 0
+                  ? 'Starting point'
+                  : `${stage.weeks}+ weeks · ${stage.calls}+ calls`}
+              </small>
+            </li>
+          ))}
+        </ol>
+      </details>
     </div>
   )
 }
@@ -262,36 +352,7 @@ function ResidualReport({
 
       <PredictionMaturityGuide maturity={maturity} />
 
-      <ResidualGroupBlock
-        title="Everything together"
-        hint="All locked guesses, all players"
-        group="overall"
-        cells={[report.overall]}
-      />
-      <ResidualGroupBlock
-        title="By league"
-        hint="Pro slates read differently than college"
-        group="league"
-        cells={report.byLeague}
-      />
-      <ResidualGroupBlock
-        title="By the side we guessed"
-        hint="Where our guess landed on the spread"
-        group="market"
-        cells={report.byMarket}
-      />
-      <ResidualGroupBlock
-        title="By the habit behind the guess"
-        hint="Which tendency drove the call"
-        group="habit"
-        cells={report.byHabit}
-      />
-      <ResidualGroupBlock
-        title="By how much evidence backed it"
-        hint="Same sample depth shown on each player's card"
-        group="confidence"
-        cells={report.byConfidence}
-      />
+      <ResidualTabs report={report} label="Pool-wide scorecard breakdown" />
     </section>
   )
 }
@@ -577,13 +638,11 @@ export default function PlayersView({
             : null,
         }
       : livePrediction
-  const predictionRecord = selectedPlayer
-    ? predictionSeasonRecord(
-        selectedPlayer.entryId,
-        history,
-        recommendations,
+  const playerResiduals = selectedPlayer
+    ? summarizePlayerPredictionResiduals(
         forecasts,
-        travelRestByAppearance,
+        selectedPlayer.entryId,
+        history.pool.seasonYear,
       )
     : null
   const scoredWeeks = history.weeks.filter(weekIsGraded).length
@@ -984,22 +1043,50 @@ export default function PlayersView({
                           : 'No earlier graded week to train on'}
                       </small>
                     </div>
-                    <div className="week-score">
-                      <span>
-                        {selectedWeek?.graded ? 'This week' : 'Season accuracy'}
-                      </span>
-                      <strong>
-                        {selectedWeek?.graded
-                          ? formatAccuracy(prediction?.accuracy ?? null)
-                          : formatAccuracy(predictionRecord?.accuracy ?? null)}
-                      </strong>
-                      <small>
-                        {selectedWeek?.graded
-                          ? `${prediction?.correct ?? 0} of ${prediction?.graded ?? 0} graded · ${prediction?.calls ?? 0} calls`
-                          : `${predictionRecord?.correct ?? 0} of ${predictionRecord?.calls ?? 0} graded`}
-                      </small>
+                    <div className="prediction-score-pair">
+                      <div className="week-score">
+                        <span>This card</span>
+                        <strong>
+                          {formatAccuracy(prediction?.accuracy ?? null)}
+                        </strong>
+                        <small>
+                          {prediction?.correct ?? 0} of {prediction?.graded ?? 0}{' '}
+                          graded · {prediction?.calls ?? 0} calls
+                        </small>
+                      </div>
+                      <div className="week-score season-read">
+                        <span>Season model read</span>
+                        <strong>
+                          {formatAccuracy(
+                            playerResiduals?.overall.accuracy ?? null,
+                          )}
+                        </strong>
+                        <small>
+                          {playerResiduals?.overall.correct ?? 0} of{' '}
+                          {playerResiduals?.overall.graded ?? 0} graded ·{' '}
+                          {Math.round(
+                            (playerResiduals?.overall.noCallRate ?? 0) * 100,
+                          )}
+                          % no call
+                        </small>
+                      </div>
                     </div>
                   </div>
+
+                  {playerResiduals && playerResiduals.overall.calls > 0 && (
+                    <details className="player-residual-breakdown">
+                      <summary>Break down this player&apos;s season model read</summary>
+                      <p>
+                        Same measurement as the pool scorecard, filtered to
+                        this player. It grades whether we named their side, not
+                        whether that side won.
+                      </p>
+                      <ResidualTabs
+                        report={playerResiduals}
+                        label="Player prediction hit-rate breakdown"
+                      />
+                    </details>
+                  )}
 
                   {!prediction || prediction.calls === 0 ? (
                     <div className="prediction-empty">

@@ -2270,6 +2270,21 @@ a.team-page-link:focus-visible .team-name {
   list-style: none;
 }
 
+.prediction-maturity details {
+  align-self: start;
+}
+
+.prediction-maturity summary {
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.prediction-maturity details[open] summary {
+  margin-bottom: 7px;
+}
+
 .prediction-maturity li {
   display: grid;
   gap: 1px;
@@ -2305,7 +2320,7 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .residual-group {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .residual-group h3 {
@@ -2327,6 +2342,37 @@ a.team-page-link:focus-visible .team-name {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
+}
+
+.residual-tab-list {
+  display: flex;
+  gap: 3px;
+  margin-top: 16px;
+  padding: 3px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--gray-soft);
+  scrollbar-width: thin;
+}
+
+.residual-tab-list button {
+  flex: 1 0 auto;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.67rem;
+  font-weight: 750;
+}
+
+.residual-tab-list button.active {
+  color: var(--green-dark);
+  background: var(--surface);
+  box-shadow: 0 1px 5px rgba(30, 53, 40, 0.1);
 }
 
 .residual-card {
@@ -2521,6 +2567,7 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .week-score {
+  display: grid;
   justify-items: end;
 }
 
@@ -2531,6 +2578,45 @@ a.team-page-link:focus-visible .team-name {
 
 .week-score strong {
   font-size: 1.35rem;
+}
+
+.prediction-score-pair {
+  display: flex !important;
+  gap: 18px;
+  align-items: start;
+}
+
+.prediction-score-pair .season-read {
+  padding-left: 18px;
+  border-left: 1px solid var(--border);
+}
+
+.player-residual-breakdown {
+  padding: 11px 18px 13px;
+  border-bottom: 1px solid var(--border);
+  background: #fcfdfc;
+}
+
+.player-residual-breakdown > summary {
+  color: var(--green-dark);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.player-residual-breakdown > p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.player-residual-breakdown .residual-tab-list {
+  margin-top: 10px;
+}
+
+.player-residual-breakdown .residual-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .player-view-toggle {
@@ -3129,6 +3215,24 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .prediction-card .week-card-heading {
+    display: grid;
+    align-items: start;
+  }
+
+  .prediction-score-pair {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .prediction-score-pair .week-score:first-child {
+    justify-items: start;
+  }
+
+  .player-residual-breakdown .residual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .hero-copy {
     font-size: 0.92rem;
   }
@@ -3367,6 +3471,18 @@ footer {
 
   /* Long team names plus a spread do not fit two across at this width. */
   .manual-pick-options {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-score-pair {
+    gap: 10px;
+  }
+
+  .prediction-score-pair .season-read {
+    padding-left: 10px;
+  }
+
+  .player-residual-breakdown .residual-grid {
     grid-template-columns: 1fr;
   }
 

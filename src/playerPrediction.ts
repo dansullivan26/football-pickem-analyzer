@@ -17,6 +17,7 @@ import type {
   FrozenRecommendation,
   PlayerHistory,
   PlayerPick,
+  PlayerWeek,
   RecommendationHistory,
   RecommendationWeek,
   Slate,
@@ -209,6 +210,102 @@ export type PredictionForecasts = {
   updatedAt: string
   weeks: PredictionForecastWeek[]
   residuals: PredictionResidualReport | null
+}
+
+export type PredictionMaturityKey =
+  | 'early'
+  | 'developing'
+  | 'established'
+  | 'deeper'
+
+export type PredictionMaturity = {
+  key: PredictionMaturityKey
+  label: string
+  detail: string
+  completedWeeks: number
+  gradedCalls: number
+}
+
+const MATURITY_STAGES: Array<{
+  key: PredictionMaturityKey
+  label: string
+  weeks: number
+  calls: number
+  detail: string
+}> = [
+  {
+    key: 'early',
+    label: 'Very early read',
+    weeks: 0,
+    calls: 0,
+    detail:
+      'Treat this as directional only. It may be beating a coin flip so far, but too little is settled to trust the exact percentage.',
+  },
+  {
+    key: 'developing',
+    label: 'Developing sample',
+    weeks: 2,
+    calls: 100,
+    detail:
+      'There is enough settled history to compare broad results with a coin flip, but exact percentages and narrow slices can still swing sharply.',
+  },
+  {
+    key: 'established',
+    label: 'More established',
+    weeks: 4,
+    calls: 300,
+    detail:
+      'Several complete forecast weeks support the broad patterns. League, habit, and player-specific slices may still be thin.',
+  },
+  {
+    key: 'deeper',
+    label: 'Deeper in-season sample',
+    weeks: 6,
+    calls: 500,
+    detail:
+      'Broad rates should be more stable than the early-season read. They remain descriptive evidence, never a guarantee.',
+  },
+]
+
+export const PREDICTION_MATURITY_MILESTONES = MATURITY_STAGES.map(
+  ({ key, label, weeks, calls }) => ({ key, label, weeks, calls }),
+)
+
+export function predictionMaturity(
+  completedWeeks: number,
+  gradedCalls: number,
+): PredictionMaturity {
+  const stage =
+    [...MATURITY_STAGES]
+      .reverse()
+      .find(
+        (candidate) =>
+          completedWeeks >= candidate.weeks && gradedCalls >= candidate.calls,
+      ) ?? MATURITY_STAGES[0]!
+  return {
+    key: stage.key,
+    label: stage.label,
+    detail: stage.detail,
+    completedWeeks,
+    gradedCalls,
+  }
+}
+
+export function completedForecastWeekCount(
+  forecastWeeks: PredictionForecastWeek[],
+  historyWeeks: PlayerWeek[],
+  fallbackSeason: number,
+) {
+  return forecastWeeks.filter(
+    (forecast) =>
+      forecast.strategyId === PREDICTION_STRATEGY_ID &&
+      forecast.frozenAt &&
+      forecast.players.some((player) => player.calls > 0) &&
+      historyWeeks.some(
+        (week) =>
+          week.scored && sameSeasonWeek(forecast, week, fallbackSeason),
+      ),
+  ).length
 }
 
 type HabitCounts = {

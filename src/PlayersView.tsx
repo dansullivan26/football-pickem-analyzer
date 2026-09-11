@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   buildCurrentPlayerProfile,
+  completedForecastWeekCount,
   EVIDENCE_LABELS,
   EVIDENCE_RULES,
   frozenPlayerWeek,
@@ -8,9 +9,12 @@ import {
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
   predictionSeasonRecord,
+  predictionMaturity,
+  PREDICTION_MATURITY_MILESTONES,
   residualLabel,
   type PredictedGame,
   type PredictionForecasts,
+  type PredictionMaturity,
   type PredictionResidualReport,
   type ResidualCell,
   type ResidualGroup,
@@ -167,7 +171,64 @@ function ResidualGroupBlock({
   )
 }
 
-function ResidualReport({ report }: { report: PredictionResidualReport }) {
+function PredictionMaturityGuide({
+  maturity,
+}: {
+  maturity: PredictionMaturity
+}) {
+  const stageIndex = PREDICTION_MATURITY_MILESTONES.findIndex(
+    (stage) => stage.key === maturity.key,
+  )
+  const weeks = `${maturity.completedWeeks} completed forecast ${
+    maturity.completedWeeks === 1 ? 'week' : 'weeks'
+  }`
+  const calls = `${maturity.gradedCalls} graded ${
+    maturity.gradedCalls === 1 ? 'call' : 'calls'
+  }`
+
+  return (
+    <div className={`prediction-maturity ${maturity.key}`}>
+      <div className="prediction-maturity-copy">
+        <span>Data maturity</span>
+        <strong>{maturity.label}</strong>
+        <p>{maturity.detail}</p>
+        <small>
+          {weeks} · {calls}. A partial week adds graded calls but does not count
+          as completed.
+        </small>
+      </div>
+      <ol aria-label="Prediction data maturity milestones">
+        {PREDICTION_MATURITY_MILESTONES.map((stage, index) => (
+          <li
+            key={stage.key}
+            className={
+              index === stageIndex
+                ? 'current'
+                : index < stageIndex
+                  ? 'reached'
+                  : undefined
+            }
+          >
+            <span>{stage.label}</span>
+            <small>
+              {stage.weeks === 0
+                ? 'Starting point'
+                : `${stage.weeks}+ weeks · ${stage.calls}+ calls`}
+            </small>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+function ResidualReport({
+  report,
+  maturity,
+}: {
+  report: PredictionResidualReport
+  maturity: PredictionMaturity
+}) {
   const updated = new Intl.DateTimeFormat(undefined, {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -198,6 +259,8 @@ function ResidualReport({ report }: { report: PredictionResidualReport }) {
           Strategy {report.strategyId} · updated {updated}
         </p>
       </div>
+
+      <PredictionMaturityGuide maturity={maturity} />
 
       <ResidualGroupBlock
         title="Everything together"
@@ -524,6 +587,16 @@ export default function PlayersView({
       )
     : null
   const scoredWeeks = history.weeks.filter(weekIsGraded).length
+  const maturity = forecasts?.residuals
+    ? predictionMaturity(
+        completedForecastWeekCount(
+          forecasts.weeks,
+          history.weeks,
+          history.pool.seasonYear,
+        ),
+        forecasts.residuals.overall.graded,
+      )
+    : null
   const habitYears = careerSeasonYears(careerHistory)
   const habitSeasonLabel =
     habitYears.length > 1
@@ -587,7 +660,9 @@ export default function PlayersView({
         </div>
       )}
 
-      {forecasts?.residuals && <ResidualReport report={forecasts.residuals} />}
+      {forecasts?.residuals && maturity && (
+        <ResidualReport report={forecasts.residuals} maturity={maturity} />
+      )}
 
       <section
         className={`players-layout${namesHidden ? ' names-hidden' : ''}`}

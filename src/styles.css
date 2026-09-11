@@ -2207,6 +2207,103 @@ a.team-page-link:focus-visible .team-name {
   letter-spacing: 0.01em;
 }
 
+.prediction-maturity {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #e4ca8b;
+  border-radius: 12px;
+  background: var(--amber-soft);
+}
+
+.prediction-maturity.established,
+.prediction-maturity.deeper {
+  border-color: #9ac6ad;
+  background: var(--green-soft);
+}
+
+.prediction-maturity-copy {
+  display: grid;
+  align-content: start;
+}
+
+.prediction-maturity-copy > span {
+  color: var(--amber);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.prediction-maturity.established .prediction-maturity-copy > span,
+.prediction-maturity.deeper .prediction-maturity-copy > span {
+  color: var(--green-dark);
+}
+
+.prediction-maturity-copy > strong {
+  margin-top: 2px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1rem;
+}
+
+.prediction-maturity-copy p,
+.prediction-maturity-copy small {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.prediction-maturity-copy small {
+  font-size: 0.64rem;
+}
+
+.prediction-maturity ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-content: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prediction-maturity li {
+  display: grid;
+  gap: 1px;
+  padding: 7px 8px;
+  border: 1px solid rgba(104, 115, 108, 0.22);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.prediction-maturity li.current {
+  border-color: var(--amber);
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.prediction-maturity.established li.current,
+.prediction-maturity.deeper li.current {
+  border-color: var(--green);
+}
+
+.prediction-maturity li.reached {
+  color: var(--green-dark);
+}
+
+.prediction-maturity li span {
+  font-size: 0.65rem;
+  font-weight: 750;
+}
+
+.prediction-maturity li small {
+  font-size: 0.57rem;
+}
+
 .residual-group {
   margin-top: 16px;
 }
@@ -3026,6 +3123,10 @@ footer {
   .players-hero {
     grid-template-columns: 1fr;
     gap: 22px;
+  }
+
+  .prediction-maturity {
+    grid-template-columns: 1fr;
   }
 
   .hero-copy {

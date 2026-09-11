@@ -257,7 +257,7 @@ export function residualSliceCopy(group: ResidualGroup, cell: ResidualCell) {
   const pct = Math.round((cell.accuracy ?? 0) * 100)
   return {
     line: `${cell.correct} of ${cell.graded} graded player-games · ${cell.calls} calls · ${noCallPct}% no call`,
-    title: `Of ${subject} where we named a side and that player later submitted a pick, we named that pick ${cell.correct} of ${cell.graded} times (${pct}%). We made ${cell.calls} calls in this slice; ${cell.graded} is only the graded subset, not unique games. Right means we read their pick, not whether it covered.${habitNote}`,
+    title: `Of the ${subject} that already have a submitted pick to check, we named the side they picked ${cell.correct} of ${cell.graded} times (${pct}%). We made ${cell.calls} calls in this slice; ${cell.graded} is only that graded subset, not unique matchups. Right means we read their pick, not whether it covered.${habitNote}`,
   }
 }
 

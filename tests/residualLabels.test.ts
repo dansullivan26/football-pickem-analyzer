@@ -57,9 +57,9 @@ test('scorecard tiles spell out player-games and graded vs calls', () => {
   )
   assert.match(nfl.line, /31 of 42 graded player-games/)
   assert.match(nfl.line, /312 calls/)
-  assert.match(nfl.title, /named that pick 31 of 42 times \(74%\)/)
+  assert.match(nfl.title, /named the side they picked 31 of 42 times \(74%\)/)
   assert.match(nfl.title, /312 calls/)
-  assert.match(nfl.title, /not unique games/)
+  assert.match(nfl.title, /not unique matchups/)
   assert.match(nfl.title, /not whether it covered/)
 
   const habit = residualSliceCopy(
@@ -77,5 +77,6 @@ test('scorecard tiles spell out player-games and graded vs calls', () => {
   )
   assert.match(habit.title, /favorite\/dog habit/)
   assert.match(habit.title, /21 of 31 times \(68%\)/)
+  assert.match(habit.title, /submitted pick to check/)
   assert.match(habit.title, /only that one tendency/)
 })

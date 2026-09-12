@@ -2631,10 +2631,28 @@ a.team-page-link:focus-visible .team-name {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.player-week-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.player-week-select {
+  min-width: 0;
+}
+
+.player-week-select select {
+  width: auto;
+  max-width: 100%;
+}
+
 .player-view-toggle {
   display: inline-flex;
   gap: 3px;
-  margin-bottom: 10px;
+  margin: 0;
   padding: 3px;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -3391,6 +3409,11 @@ footer {
 
   .player-detail-heading {
     align-items: flex-start;
+  }
+
+  .player-week-select,
+  .player-week-select select {
+    width: 100%;
   }
 
   .player-archetype span,

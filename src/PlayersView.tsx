@@ -836,21 +836,6 @@ export default function PlayersView({
                     </ol>
                   )}
                 </div>
-                <label>
-                  <span className="sr-only">Select week</span>
-                  <select
-                    value={selectedWeek?.week}
-                    onChange={(event) =>
-                      setSelectedWeekNumber(Number(event.target.value))
-                    }
-                  >
-                    {availableWeeks.map((week) => (
-                      <option key={week.week} value={week.week}>
-                        {week.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
               </div>
 
               <div className="tendency-grid" aria-label="Player tendencies">
@@ -1032,21 +1017,38 @@ export default function PlayersView({
                 </div>
               </div>
 
-              <div className="player-view-toggle" aria-label="Player week view">
-                <button
-                  className={detailView === 'prediction' ? 'active' : ''}
-                  type="button"
-                  onClick={() => setDetailView('prediction')}
-                >
-                  Prediction
-                </button>
-                <button
-                  className={detailView === 'actual' ? 'active' : ''}
-                  type="button"
-                  onClick={() => setDetailView('actual')}
-                >
-                  Actual picks
-                </button>
+              <div className="player-week-toolbar">
+                <div className="player-view-toggle" aria-label="Player week view">
+                  <button
+                    className={detailView === 'prediction' ? 'active' : ''}
+                    type="button"
+                    onClick={() => setDetailView('prediction')}
+                  >
+                    Prediction
+                  </button>
+                  <button
+                    className={detailView === 'actual' ? 'active' : ''}
+                    type="button"
+                    onClick={() => setDetailView('actual')}
+                  >
+                    Actual picks
+                  </button>
+                </div>
+                <label className="player-week-select">
+                  <span className="sr-only">Select week</span>
+                  <select
+                    value={selectedWeek?.week}
+                    onChange={(event) =>
+                      setSelectedWeekNumber(Number(event.target.value))
+                    }
+                  >
+                    {availableWeeks.map((week) => (
+                      <option key={week.week} value={week.week}>
+                        {week.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
 
               {detailView === 'prediction' ? (

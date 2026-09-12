@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T14:14:28.118Z",
+  "updatedAt": "2026-09-12T17:17:23.287Z",
   "weeks": [
     {
       "week": 1,
@@ -721,7 +721,7 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-12T14:14:28.118Z",
+      "capturedAt": "2026-09-12T17:17:23.287Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
@@ -809,7 +809,9 @@
             "state": "TX",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50027615,
@@ -835,7 +837,9 @@
             "state": "MI",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50027624,
@@ -862,7 +866,9 @@
             "indoor": false
           },
           "neutralSite": true,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 0,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50027676,
@@ -950,15 +956,15 @@
           "away": "TENN",
           "home": "GATECH",
           "homeSpread": 12.5,
-          "liveHomeSpread": 11.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 12.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
+          "source": "rest-travel",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 5.25,
+          "score": 2.25,
           "awayRank": 18,
           "homeRank": null,
           "venue": {

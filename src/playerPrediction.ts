@@ -727,6 +727,102 @@ export function buildPlayerPredictionProfile(
   }
 }
 
+export type PlayerReadability = {
+  score: number
+  solidSignals: number
+  thinSignals: number
+  picks: number
+  label: string
+  detail: string
+}
+
+function signalStrength(signal: ProfileSignal) {
+  const shrunk = (signal.rate - 0.5) * 2 * Math.min(1, signal.eligible / 20)
+  return signal.thin ? shrunk * 0.5 : shrunk
+}
+
+/**
+ * How described a player is: peaked, non-thin tendencies first, then volume.
+ * A coin-flip regular ranks below a loud habit even if they have more picks.
+ */
+export function playerReadability(
+  profile: PlayerPredictionProfile,
+): PlayerReadability {
+  const solidSignals = profile.signals.filter((signal) => !signal.thin).length
+  const thinSignals = profile.signals.filter((signal) => signal.thin).length
+  const strength = profile.signals.reduce(
+    (sum, signal) => sum + signalStrength(signal),
+    0,
+  )
+  const score = strength * 100 + Math.min(profile.picks, 200) / 100
+  const firstSolid = profile.signals.find((signal) => !signal.thin)
+
+  if (profile.picks < 20) {
+    return {
+      score,
+      solidSignals,
+      thinSignals,
+      picks: profile.picks,
+      label: 'Still building',
+      detail: `${profile.picks} graded ${profile.picks === 1 ? 'pick' : 'picks'}`,
+    }
+  }
+  if (solidSignals === 0 && thinSignals === 0) {
+    return {
+      score,
+      solidSignals,
+      thinSignals,
+      picks: profile.picks,
+      label: 'No pattern yet',
+      detail: `${profile.picks} graded picks, none loud enough`,
+    }
+  }
+  if (solidSignals === 0) {
+    return {
+      score,
+      solidSignals,
+      thinSignals,
+      picks: profile.picks,
+      label: 'Thin reads only',
+      detail: `${thinSignals} thin ${
+        thinSignals === 1 ? 'tendency' : 'tendencies'
+      } · ${profile.picks} picks`,
+    }
+  }
+  if (solidSignals === 1) {
+    return {
+      score,
+      solidSignals,
+      thinSignals,
+      picks: profile.picks,
+      label: 'One clear tendency',
+      detail: firstSolid
+        ? `${firstSolid.label} · ${profile.picks} picks`
+        : `${profile.picks} picks`,
+    }
+  }
+  return {
+    score,
+    solidSignals,
+    thinSignals,
+    picks: profile.picks,
+    label: 'Well described',
+    detail: `${solidSignals} solid tendencies · ${profile.picks} picks`,
+  }
+}
+
+export function comparePlayerReadability(
+  left: PlayerReadability,
+  right: PlayerReadability,
+) {
+  if (right.score !== left.score) return right.score - left.score
+  if (right.solidSignals !== left.solidSignals) {
+    return right.solidSignals - left.solidSignals
+  }
+  if (right.picks !== left.picks) return right.picks - left.picks
+  return 0
+}
+
 /**
  * Profile trained through every graded week, for the player header. Weekly
  * forecasts stay on the leak-free profile that only sees earlier weeks.

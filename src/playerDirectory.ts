@@ -1,7 +1,11 @@
 import { weekSeason } from './careerHistory.ts'
+import {
+  comparePlayerReadability,
+  type PlayerReadability,
+} from './playerPrediction.ts'
 import type { PlayerRosterEntry, PlayerWeek } from './types'
 
-export type PlayerRankingScope = 'season' | number
+export type PlayerRankingScope = 'season' | 'readability' | number
 
 export type PlayerWinRecord = {
   wins: number
@@ -12,6 +16,7 @@ export type RankedPlayer = {
   entry: PlayerRosterEntry
   record: PlayerWinRecord
   rank: number
+  readability?: PlayerReadability
 }
 
 export function playerSlug(name: string) {
@@ -76,10 +81,11 @@ export function playerRankingWeeks(
   scope: PlayerRankingScope,
   seasonYear: number,
 ) {
+  const weekScope = scope === 'readability' ? 'season' : scope
   return weeks.filter(
     (week) =>
       weekSeason(week, seasonYear) === seasonYear &&
-      (scope === 'season' || week.week === scope),
+      (weekScope === 'season' || week.week === weekScope),
   )
 }
 
@@ -134,4 +140,47 @@ export function sortPlayersByWins(
   weeks: PlayerWeek[],
 ) {
   return rankPlayersByWins(entries, weeks).map((row) => row.entry)
+}
+
+export function rankPlayersByReadability(
+  entries: PlayerRosterEntry[],
+  weeks: PlayerWeek[],
+  readability: Map<string, PlayerReadability>,
+): RankedPlayer[] {
+  const byWins = new Map(
+    rankPlayersByWins(entries, weeks).map((row) => [row.entry.entryId, row]),
+  )
+  const readFor = (entryId: string): PlayerReadability =>
+    readability.get(entryId) ?? {
+      score: 0,
+      solidSignals: 0,
+      thinSignals: 0,
+      picks: 0,
+      label: 'Still building',
+      detail: '0 graded picks',
+    }
+
+  const sorted = [...entries].sort((left, right) => {
+    return (
+      comparePlayerReadability(readFor(left.entryId), readFor(right.entryId)) ||
+      nameOrder(left.name, right.name)
+    )
+  })
+
+  let rank = 0
+  let previous: PlayerReadability | null = null
+  return sorted.map((entry, index) => {
+    const row = readFor(entry.entryId)
+    if (!previous || comparePlayerReadability(previous, row) !== 0) {
+      rank = index + 1
+    }
+    previous = row
+    const wins = byWins.get(entry.entryId)
+    return {
+      entry,
+      record: wins?.record ?? { wins: 0, scored: 0 },
+      rank,
+      readability: row,
+    }
+  })
 }

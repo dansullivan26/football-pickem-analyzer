@@ -3,8 +3,11 @@ import test from 'node:test'
 import {
   buildCurrentPlayerProfile,
   buildPlayerPredictionProfile,
+  comparePlayerReadability,
+  playerReadability,
   predictPlayerWeek,
   snapshotPlayerForecasts,
+  type PlayerPredictionProfile,
 } from '../src/playerPrediction.ts'
 import type { AppearanceTravelRest } from '../src/travelRest.ts'
 import type {
@@ -15,6 +18,19 @@ import type {
   RecommendationHistory,
   RecommendationWeek,
 } from '../src/types.ts'
+
+function unnamedProfile(
+  picks: number,
+  signals: PlayerPredictionProfile['signals'] = [],
+): PlayerPredictionProfile {
+  return {
+    archetype: picks < 20 ? 'Building profile' : 'No dominant pattern',
+    archetypeDetail: '',
+    signals,
+    picks,
+    habits: {} as PlayerPredictionProfile['habits'],
+  }
+}
 
 const entryId = 'player-1'
 
@@ -314,6 +330,37 @@ test('a building profile has no tendency rows to show', () => {
 
   assert.equal(profile.archetype, 'Building profile')
   assert.deepEqual(profile.signals, [])
+})
+
+test('playerReadability ranks a loud solid habit over a quiet high-volume card', () => {
+  const loud = playerReadability(
+    buildPlayerPredictionProfile(
+      entryId,
+      2,
+      history([
+        historyWeek(
+          1,
+          Array.from({ length: 20 }, (_, index) =>
+            pick(index + 1, 'home', -3),
+          ),
+        ),
+      ]),
+      recHistory([recWeek(1, [])]),
+    ),
+  )
+  const quiet = playerReadability(unnamedProfile(40))
+
+  assert.equal(loud.label, 'One clear tendency')
+  assert.equal(quiet.label, 'No pattern yet')
+  assert.ok(comparePlayerReadability(loud, quiet) < 0)
+})
+
+test('playerReadability puts a still-building card last', () => {
+  const building = playerReadability(unnamedProfile(5))
+  const quiet = playerReadability(unnamedProfile(25))
+
+  assert.equal(building.label, 'Still building')
+  assert.ok(comparePlayerReadability(quiet, building) < 0)
 })
 
 test('lists a second habit that is not a restatement of the archetype', () => {

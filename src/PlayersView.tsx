@@ -10,6 +10,7 @@ import {
   predictPlayerWeek,
   predictionMaturity,
   PREDICTION_MATURITY_MILESTONES,
+  playerReadability,
   residualLabel,
   residualSliceCopy,
   summarizePlayerPredictionResiduals,
@@ -37,6 +38,7 @@ import {
 import {
   playerRankingWeeks,
   playerSlugByEntryId,
+  rankPlayersByReadability,
   rankPlayersByWins,
   type PlayerRankingScope,
 } from './playerDirectory'
@@ -489,6 +491,15 @@ export default function PlayersView({
     history.weeks,
     recommendations.weeks,
   ])
+  const travelRestByAppearance = useMemo(
+    () =>
+      buildTravelRestIndex(
+        slate,
+        recommendations,
+        lastKickoffData as LastKickoffFile,
+      ).byAppearance,
+    [slate, recommendations],
+  )
   const rankingWeeks = useMemo(
     () =>
       playerRankingWeeks(
@@ -502,14 +513,47 @@ export default function PlayersView({
       rankingScope,
     ],
   )
+  const readabilityByEntry = useMemo(() => {
+    return new Map(
+      history.entries.map((entry) => [
+        entry.entryId,
+        playerReadability(
+          buildCurrentPlayerProfile(
+            entry.entryId,
+            careerHistory,
+            recommendations,
+            travelRestByAppearance,
+          ),
+        ),
+      ]),
+    )
+  }, [
+    careerHistory,
+    history.entries,
+    recommendations,
+    travelRestByAppearance,
+  ])
   const filteredPlayers = useMemo(() => {
     const normalized = query.trim().toLowerCase()
-    const ranked = rankPlayersByWins(history.entries, rankingWeeks)
+    const ranked =
+      rankingScope === 'readability'
+        ? rankPlayersByReadability(
+            history.entries,
+            rankingWeeks,
+            readabilityByEntry,
+          )
+        : rankPlayersByWins(history.entries, rankingWeeks)
     if (!normalized) return ranked
     return ranked.filter(({ entry }) =>
       entry.name.toLowerCase().includes(normalized),
     )
-  }, [history.entries, query, rankingWeeks])
+  }, [
+    history.entries,
+    query,
+    rankingScope,
+    rankingWeeks,
+    readabilityByEntry,
+  ])
 
   const selectedPlayer = selectedSlug
     ? (history.entries.find(
@@ -540,15 +584,6 @@ export default function PlayersView({
   ).find((week) => week.week === selectedWeek?.week)
   const weekEntry = selectedHistoryWeek?.entries.find(
     (entry) => entry.entryId === selectedPlayer?.entryId,
-  )
-  const travelRestByAppearance = useMemo(
-    () =>
-      buildTravelRestIndex(
-        slate,
-        recommendations,
-        lastKickoffData as LastKickoffFile,
-      ).byAppearance,
-    [slate, recommendations],
   )
   const summary = selectedPlayer
     ? summarizePlayer(
@@ -654,10 +689,12 @@ export default function PlayersView({
       ? `${habitYears[0]}–${habitYears[habitYears.length - 1]} career`
       : `${habitYears[0] ?? history.pool.seasonYear} season`
   const rankingLabel =
-    rankingScope === 'season'
-      ? 'Season'
-      : (availableWeeks.find((week) => week.week === rankingScope)?.label ??
-        `Week ${rankingScope}`)
+    rankingScope === 'readability'
+      ? 'How well we know them'
+      : rankingScope === 'season'
+        ? 'Season'
+        : (availableWeeks.find((week) => week.week === rankingScope)?.label ??
+          `Week ${rankingScope}`)
 
   return (
     <main>
@@ -722,7 +759,11 @@ export default function PlayersView({
         <aside className="player-directory" aria-label="Pool players">
           <div className="directory-heading">
             <div>
-              <p className="eyebrow">{rankingLabel} rankings</p>
+              <p className="eyebrow">
+                {rankingScope === 'readability'
+                  ? 'Most described first'
+                  : `${rankingLabel} rankings`}
+              </p>
               <h2>Players</h2>
             </div>
             <span>{filteredPlayers.length}</span>
@@ -732,18 +773,21 @@ export default function PlayersView({
             <select
               value={rankingScope}
               onChange={(event) => {
-                const next =
-                  event.target.value === 'season'
-                    ? 'season'
-                    : Number(event.target.value)
-                setRankingScope(next)
-                if (next !== 'season') setSelectedWeekNumber(next)
+                const value = event.target.value
+                if (value === 'season' || value === 'readability') {
+                  setRankingScope(value)
+                  return
+                }
+                const week = Number(value)
+                setRankingScope(week)
+                setSelectedWeekNumber(week)
               }}
             >
-              <option value="season">Season</option>
+              <option value="readability">How well we know them</option>
+              <option value="season">Season wins</option>
               {availableWeeks.map((week) => (
                 <option key={week.week} value={week.week}>
-                  {week.label}
+                  {week.label} wins
                   {week.week === slate.week.order ? ' (Current)' : ''}
                 </option>
               ))}
@@ -759,7 +803,7 @@ export default function PlayersView({
             />
           </label>
           <div className="player-list">
-            {filteredPlayers.map(({ entry, rank, record }) => {
+            {filteredPlayers.map(({ entry, rank, record, readability }) => {
               const slug = slugsByEntryId.get(entry.entryId)
               if (!slug) return null
               return (
@@ -785,9 +829,13 @@ export default function PlayersView({
                   </span>
                 </span>
                 <small>
-                  {record.scored
-                    ? `${record.wins} of ${record.scored} graded picks`
-                    : `No graded picks in ${rankingLabel.toLowerCase()}`}
+                  {rankingScope === 'readability'
+                    ? readability
+                      ? `${readability.label} · ${readability.detail}`
+                      : 'Still building'
+                    : record.scored
+                      ? `${record.wins} of ${record.scored} graded picks`
+                      : `No graded picks in ${rankingLabel.toLowerCase()}`}
                 </small>
               </a>
               )

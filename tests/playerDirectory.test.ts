@@ -6,6 +6,7 @@ import {
   entryWinRecord,
   playerRankingWeeks,
   playerSlug,
+  rankPlayersByReadability,
   rankPlayersByWins,
   sortPlayersByWins,
 } from '../src/playerDirectory.ts'
@@ -201,6 +202,81 @@ test('playerRankingWeeks supports one week or the current season rollup', () => 
       (row) => `${row.seasonYear}:${row.week}`,
     ),
     ['2026:1', '2026:2'],
+  )
+})
+
+test('playerRankingWeeks treats readability as the current-season rollup', () => {
+  const weeks = [
+    week([{ entryId: 'a', results: ['win'] }], 1, 2025),
+    week([{ entryId: 'a', results: ['loss'] }], 1, 2026),
+    week([{ entryId: 'a', results: ['win'] }], 2, 2026),
+  ]
+
+  assert.deepEqual(
+    playerRankingWeeks(weeks, 'readability', 2026).map(
+      (row) => `${row.seasonYear}:${row.week}`,
+    ),
+    ['2026:1', '2026:2'],
+  )
+})
+
+test('rankPlayersByReadability puts the most described player first', () => {
+  const entries = [
+    entry('quiet', 'Quiet Quinn'),
+    entry('loud', 'Loud Lou'),
+    entry('new', 'New Ned'),
+  ]
+  const ranked = rankPlayersByReadability(
+    entries,
+    [week([{ entryId: 'quiet', results: ['win'] }])],
+    new Map([
+      [
+        'quiet',
+        {
+          score: 0.4,
+          solidSignals: 0,
+          thinSignals: 0,
+          picks: 40,
+          label: 'No pattern yet',
+          detail: '40 graded picks, none loud enough',
+        },
+      ],
+      [
+        'loud',
+        {
+          score: 80,
+          solidSignals: 1,
+          thinSignals: 0,
+          picks: 20,
+          label: 'One clear tendency',
+          detail: 'Home-team lean · 20 picks',
+        },
+      ],
+      [
+        'new',
+        {
+          score: 0.05,
+          solidSignals: 0,
+          thinSignals: 0,
+          picks: 5,
+          label: 'Still building',
+          detail: '5 graded picks',
+        },
+      ],
+    ]),
+  )
+
+  assert.deepEqual(
+    ranked.map(({ entry: row, rank, readability }) => [
+      row.name,
+      rank,
+      readability?.label,
+    ]),
+    [
+      ['Loud Lou', 1, 'One clear tendency'],
+      ['Quiet Quinn', 2, 'No pattern yet'],
+      ['New Ned', 3, 'Still building'],
+    ],
   )
 })
 

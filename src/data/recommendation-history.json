@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T17:17:23.287Z",
+  "updatedAt": "2026-09-12T19:28:39.825Z",
   "weeks": [
     {
       "week": 1,
@@ -721,7 +721,7 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-12T17:17:23.287Z",
+      "capturedAt": "2026-09-12T19:28:39.825Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
@@ -810,8 +810,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 10,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027615,
@@ -839,7 +839,7 @@
           },
           "neutralSite": false,
           "awayScore": 0,
-          "homeScore": 0
+          "homeScore": 10
         },
         {
           "cbsEventId": 50027624,
@@ -867,8 +867,8 @@
           },
           "neutralSite": true,
           "deviated": true,
-          "awayScore": 0,
-          "homeScore": 7
+          "awayScore": 20,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50027676,
@@ -877,15 +877,15 @@
           "away": "ARIZ",
           "home": "BYU",
           "homeSpread": -7.5,
-          "liveHomeSpread": -7.5,
-          "category": "neutral",
-          "recommendedSide": null,
-          "hook": null,
+          "liveHomeSpread": -6.5,
+          "category": "slight",
+          "recommendedSide": "away",
+          "hook": "td",
           "cover": null,
-          "source": "rest-travel",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 0.75,
+          "source": "line-value",
+          "pickedSide": "away",
+          "strength": "solid",
+          "score": 5.25,
           "awayRank": null,
           "homeRank": 15,
           "venue": {
@@ -1269,15 +1269,15 @@
           "away": "GB",
           "home": "MIN",
           "homeSpread": -1.5,
-          "liveHomeSpread": -1.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -2.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 3,
           "awayRank": null,
           "homeRank": null,
           "venue": {

@@ -1,3 +1,4 @@
+import type { HabitKey } from './playerPrediction.ts'
 import type {
   PickChange,
   PickChangeSides,
@@ -148,7 +149,17 @@ export function pickChangeForGame(
 
 export type PredictedSideCall = {
   predictedSide: 'home' | 'away' | null
+  habitKey: HabitKey | null
   reason: string
+}
+
+const HABIT_READ_LABELS: Record<HabitKey, string> = {
+  home: 'home/road',
+  favorite: 'favorite/dog',
+  'line-value': 'line-value',
+  public: 'public-side',
+  travel: 'travel',
+  rest: 'rest',
 }
 
 export type PickChangeVsPredictionKind =
@@ -165,9 +176,18 @@ export type PickChangeVsPrediction = {
   copy: string
 }
 
-function habitReadLabel(reason: string) {
-  const trimmed = reason.trim().replace(/\s+habit$/i, '')
-  return trimmed || 'model'
+/**
+ * The stored reason carries a sample tail ("· 25 prior chances") and may name
+ * two agreeing habits, so prefer the habit key and fall back to the prose.
+ */
+function habitReadLabel(call: PredictedSideCall) {
+  const fromKey = call.habitKey ? HABIT_READ_LABELS[call.habitKey] : null
+  if (fromKey) return fromKey
+  const prose = (call.reason ?? '')
+    .split('·')[0]
+    ?.replace(/\s*habits?\b/gi, '')
+    .trim()
+  return prose ? prose.toLowerCase() : 'model'
 }
 
 /**
@@ -186,7 +206,7 @@ export function pickChangeVsPrediction(
   const side = predicted?.predictedSide
   if (!side) return null
 
-  const label = habitReadLabel(predicted?.reason ?? '')
+  const label = habitReadLabel(predicted)
   const from = change.from.pickedSide
   const to = change.to.pickedSide
 

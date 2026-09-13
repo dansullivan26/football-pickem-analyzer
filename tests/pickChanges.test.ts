@@ -118,16 +118,21 @@ test('formatPickChangeCopy states the coarse dump window', () => {
   )
 })
 
-const dogHunter = {
+const dogRead = {
   predictedSide: 'away' as const,
-  reason: 'Dog-hunter',
+  habitKey: 'favorite' as const,
+  reason: 'Favorite/dog habit · 25 prior chances',
 }
 
 test('pickChangeVsPrediction stays silent without a weekly call', () => {
   const row = sanitizePickChanges(dump, dump.fetchedAt)[0]
   assert.ok(row)
   assert.equal(
-    pickChangeVsPrediction(row, { predictedSide: null, reason: 'Unpicked' }),
+    pickChangeVsPrediction(row, {
+      predictedSide: null,
+      habitKey: null,
+      reason: 'Habits conflict or remain too close to 50/50',
+    }),
     null,
   )
   assert.equal(pickChangeVsPrediction(row, null), null)
@@ -141,7 +146,7 @@ test('pickChangeVsPrediction stays silent on a cleared pick', () => {
         from: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
         to: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
       },
-      dogHunter,
+      dogRead,
     ),
     null,
   )
@@ -155,12 +160,12 @@ test('pickChangeVsPrediction labels appear and flip against the weekly read', ()
         from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
         to: { pickedSide: 'away', pickedTeamId: 'ne', pickedTeam: 'NE' },
       },
-      dogHunter,
+      dogRead,
     ),
     {
       kind: 'appeared-on',
       aligned: true,
-      copy: 'Landed on their Dog-hunter read.',
+      copy: 'Landed on their favorite/dog read.',
     },
   )
   assert.equal(
@@ -170,42 +175,28 @@ test('pickChangeVsPrediction labels appear and flip against the weekly read', ()
         from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
         to: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
       },
-      dogHunter,
+      dogRead,
     )?.copy,
-    'Landed against their Dog-hunter read.',
+    'Landed against their favorite/dog read.',
   )
 
   const flip = sanitizePickChanges(dump, dump.fetchedAt)[0]
   assert.ok(flip)
-  assert.deepEqual(pickChangeVsPrediction(flip, dogHunter), {
+  assert.deepEqual(pickChangeVsPrediction(flip, dogRead), {
     kind: 'flipped-on',
     aligned: true,
-    copy: 'Flipped onto their Dog-hunter read.',
+    copy: 'Flipped onto their favorite/dog read.',
   })
   assert.deepEqual(
     pickChangeVsPrediction(flip, {
       predictedSide: 'home',
-      reason: 'Home-teamer',
+      habitKey: 'line-value',
+      reason: 'Line-value habit · 17 prior chances',
     }),
     {
       kind: 'flipped-off',
       aligned: false,
-      copy: 'Flipped off their Home-teamer read.',
-    },
-  )
-  assert.deepEqual(
-    pickChangeVsPrediction(
-      {
-        changeType: 'flipped',
-        from: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
-        to: { pickedSide: 'away', pickedTeamId: 'ne', pickedTeam: 'NE' },
-      },
-      { predictedSide: 'home', reason: 'Line-value habit' },
-    ),
-    {
-      kind: 'flipped-off',
-      aligned: false,
-      copy: 'Flipped off their Line-value read.',
+      copy: 'Flipped off their line-value read.',
     },
   )
   assert.deepEqual(
@@ -215,12 +206,25 @@ test('pickChangeVsPrediction labels appear and flip against the weekly read', ()
         from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
         to: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
       },
-      dogHunter,
+      dogRead,
     ),
     {
       kind: 'flipped-still-off',
       aligned: false,
-      copy: 'Moved, still against their Dog-hunter read.',
+      copy: 'Moved, still against their favorite/dog read.',
     },
+  )
+})
+
+test('pickChangeVsPrediction falls back to the reason when a habit key is missing', () => {
+  const flip = sanitizePickChanges(dump, dump.fetchedAt)[0]
+  assert.ok(flip)
+  assert.equal(
+    pickChangeVsPrediction(flip, {
+      predictedSide: 'away',
+      habitKey: null,
+      reason: 'Line-value habit + travel habit · 16 prior chances',
+    })?.copy,
+    'Flipped onto their line-value + travel read.',
   )
 })

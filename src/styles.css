@@ -697,6 +697,11 @@ h2 {
 .suggested-pick-teams {
   display: grid;
   gap: 2px;
+  min-width: 0;
+}
+
+.suggested-pick-teams strong {
+  overflow-wrap: anywhere;
 }
 
 .suggested-pick-teams span,
@@ -3474,8 +3479,15 @@ footer {
     align-items: center;
   }
 
+  /* Badges need their own row here: sharing one with the team name lets the
+     tag column grow until a long name spills underneath it. */
   .suggested-picks li {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .suggested-pick-tags {
+    grid-column: 1 / -1;
+    justify-content: start;
   }
 
   .suggested-pick-toggle {

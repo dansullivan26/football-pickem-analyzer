@@ -27,3 +27,23 @@ export function formatPicksSnapshotAt(
     }).format(date)
   }
 }
+
+export function formatPickChangeCopy(
+  change: {
+    changeType: 'appeared' | 'flipped' | 'cleared'
+    window: { after: string | null; atOrBefore: string }
+  },
+  timeZone?: string,
+) {
+  const verb =
+    change.changeType === 'flipped'
+      ? 'Flipped'
+      : change.changeType === 'cleared'
+        ? 'Cleared'
+        : 'Appeared'
+  const until = formatPicksSnapshotAt(change.window.atOrBefore, timeZone)
+  if (!change.window.after) {
+    return `${verb} in the ${until} dump`
+  }
+  return `${verb} between ${formatPicksSnapshotAt(change.window.after, timeZone)} and ${until}`
+}

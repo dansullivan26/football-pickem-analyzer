@@ -59,7 +59,11 @@ newer than the file already on disk, that prior season is copied to
 sample. Each weekly entry may include
 `tiebreaker.answer` as an integer (or null). The Players view can render
 unpicked weeks immediately; tendency metrics populate as scored Tuesday
-exports add selections, results, and tiebreaker totals. Graded pick
+exports add selections, results, and tiebreaker totals. Each current-week
+pick may include `firstSeenAt` (the dump time that side first appeared or
+last flipped). `pickChanges` is this dump's deltas; ingest appends those
+rows into a lasting log and drops GrokBot-only snapshot paths. The Actual
+picks list shows those coarse dump windows, not CBS submit times. Graded pick
 `result` values (`win` / `loss` / `push`) also stamp `cover` on the
 frozen recommendation snapshot so the Performance page can score those
 games. A later overwrite of the same dump updates covers again. Line-value agreement

@@ -2928,6 +2928,12 @@ a.team-page-link:focus-visible .team-name {
   font-size: 0.66rem;
 }
 
+.history-selection .pick-timing {
+  color: var(--muted);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
 .history-matchup .our-pool-pick.picked {
   color: var(--green-dark);
   font-weight: 800;

@@ -170,6 +170,41 @@ export type PlayerPick = {
   points: number | null
   pickStatus: 'NONE' | 'CORRECT' | 'INCORRECT' | null
   matchStatus: PickMatchStatus
+  /**
+   * Dump time when this side first appeared or last flipped. Null if still
+   * unpicked. Absent on history from before flip tracking.
+   */
+  firstSeenAt?: string | null
+}
+
+export type PickChangeType = 'appeared' | 'flipped' | 'cleared'
+
+export type PickChangeSides = {
+  pickedSide: 'home' | 'away' | null
+  pickedTeamId: string | null
+  pickedTeam: string | null
+}
+
+/** Coarse dump-to-dump window. Not a CBS submit time. */
+export type PickChange = {
+  week: number
+  periodId: string
+  entryId: string
+  name: string
+  gameId: string
+  cbsEventId: number
+  away: string
+  home: string
+  changeType: PickChangeType
+  from: PickChangeSides
+  to: PickChangeSides
+  firstSeenAt: string | null
+  previousFetchedAt: string | null
+  fetchedAt: string
+  window: {
+    after: string | null
+    atOrBefore: string
+  }
 }
 
 export type PlayerRosterEntry = {
@@ -222,6 +257,8 @@ export type PlayerHistory = {
   }
   entries: PlayerRosterEntry[]
   weeks: PlayerWeek[]
+  /** Accumulated dump-to-dump pick appearances, flips, and clears. */
+  pickChanges?: PickChange[]
 }
 
 export type ConsensusSide = {

@@ -10,7 +10,7 @@
     "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --test tests/*.test.ts",
     "preview": "vite preview",
     "prepare-slate": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/prepare-slate.mjs",
-    "prepare-players": "node scripts/prepare-players.mjs",
+    "prepare-players": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/prepare-players.ts",
     "prepare-consensus": "node scripts/prepare-consensus.mjs",
     "snapshot-recommendations": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts",
     "snapshot-predictions": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-predictions.ts",

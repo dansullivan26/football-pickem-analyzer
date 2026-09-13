@@ -45,7 +45,11 @@ import {
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import type { LastKickoffFile } from './lastKickoff'
-import { formatPicksSnapshotAt } from './playerSnapshot'
+import { pickChangeForGame } from './pickChanges'
+import {
+  formatPickChangeCopy,
+  formatPicksSnapshotAt,
+} from './playerSnapshot'
 import {
   PLAYER_HOOK_KEYS,
   PLAYER_HOOK_LABELS,
@@ -1289,6 +1293,24 @@ export default function PlayersView({
                         scoresByEvent.get(pick.cbsEventId) ?? {},
                       )
                       const isFinal = finalEvents.has(pick.cbsEventId)
+                      const change = selectedPlayer
+                        ? pickChangeForGame(
+                            history.pickChanges,
+                            selectedPlayer.entryId,
+                            pick.gameId,
+                          )
+                        : null
+                      const timing = change
+                        ? formatPickChangeCopy(
+                            change,
+                            history.source.timezone,
+                          )
+                        : pick.firstSeenAt
+                          ? `First seen in the ${formatPicksSnapshotAt(
+                              pick.firstSeenAt,
+                              history.source.timezone,
+                            )} dump`
+                          : null
                       return (
                       <div className="history-pick" key={pick.gameId}>
                         <div className="history-matchup">
@@ -1303,6 +1325,14 @@ export default function PlayersView({
                         <div className="history-selection">
                           <span>Selection</span>
                           <strong>{pickSelectionLabel(pick)}</strong>
+                          {timing && (
+                            <small
+                              className="pick-timing"
+                              title="Dump-to-dump window from GrokBot snapshots. CBS does not provide the time this player submitted or changed the pick."
+                            >
+                              {timing}
+                            </small>
+                          )}
                         </div>
                         <span
                           className={`pick-result ${pickResultState(pick, isFinal)}`}

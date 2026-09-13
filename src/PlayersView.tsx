@@ -45,6 +45,7 @@ import {
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import type { LastKickoffFile } from './lastKickoff'
+import { formatPicksSnapshotAt } from './playerSnapshot'
 import {
   PLAYER_HOOK_KEYS,
   PLAYER_HOOK_LABELS,
@@ -688,6 +689,10 @@ export default function PlayersView({
     habitYears.length > 1
       ? `${habitYears[0]}–${habitYears[habitYears.length - 1]} career`
       : `${habitYears[0] ?? history.pool.seasonYear} season`
+  const picksSnapshotAt = formatPicksSnapshotAt(
+    history.source.fetchedAt,
+    history.source.timezone,
+  )
   const rankingLabel =
     rankingScope === 'readability'
       ? 'How well we know them'
@@ -1082,21 +1087,32 @@ export default function PlayersView({
                     Actual picks
                   </button>
                 </div>
-                <label className="player-week-select">
-                  <span className="sr-only">Select week</span>
-                  <select
-                    value={selectedWeek?.week}
-                    onChange={(event) =>
-                      setSelectedWeekNumber(Number(event.target.value))
-                    }
+                <div className="player-week-context">
+                  <span
+                    className="player-picks-snapshot"
+                    title="When GrokBot pulled the pool file. CBS does not provide when this player submitted or changed a pick."
                   >
-                    {availableWeeks.map((week) => (
-                      <option key={week.week} value={week.week}>
-                        {week.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                    Pool picks as of{' '}
+                    <time dateTime={history.source.fetchedAt}>
+                      {picksSnapshotAt}
+                    </time>
+                  </span>
+                  <label className="player-week-select">
+                    <span className="sr-only">Select week</span>
+                    <select
+                      value={selectedWeek?.week}
+                      onChange={(event) =>
+                        setSelectedWeekNumber(Number(event.target.value))
+                      }
+                    >
+                      {availableWeeks.map((week) => (
+                        <option key={week.week} value={week.week}>
+                          {week.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
               </div>
 
               {detailView === 'prediction' ? (

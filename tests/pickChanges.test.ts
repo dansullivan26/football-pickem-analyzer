@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   mergePickChangeLog,
   pickChangeForGame,
+  pickChangeVsPrediction,
   readFirstSeenAt,
   sanitizePickChanges,
 } from '../src/pickChanges.ts'
@@ -114,5 +115,112 @@ test('formatPickChangeCopy states the coarse dump window', () => {
   assert.equal(
     formatPickChangeCopy(row, 'America/Indianapolis'),
     'Flipped between Sep 12, 10:10 PM EDT and Sep 13, 6:34 AM EDT',
+  )
+})
+
+const dogHunter = {
+  predictedSide: 'away' as const,
+  reason: 'Dog-hunter',
+}
+
+test('pickChangeVsPrediction stays silent without a weekly call', () => {
+  const row = sanitizePickChanges(dump, dump.fetchedAt)[0]
+  assert.ok(row)
+  assert.equal(
+    pickChangeVsPrediction(row, { predictedSide: null, reason: 'Unpicked' }),
+    null,
+  )
+  assert.equal(pickChangeVsPrediction(row, null), null)
+})
+
+test('pickChangeVsPrediction stays silent on a cleared pick', () => {
+  assert.equal(
+    pickChangeVsPrediction(
+      {
+        changeType: 'cleared',
+        from: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
+        to: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
+      },
+      dogHunter,
+    ),
+    null,
+  )
+})
+
+test('pickChangeVsPrediction labels appear and flip against the weekly read', () => {
+  assert.deepEqual(
+    pickChangeVsPrediction(
+      {
+        changeType: 'appeared',
+        from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
+        to: { pickedSide: 'away', pickedTeamId: 'ne', pickedTeam: 'NE' },
+      },
+      dogHunter,
+    ),
+    {
+      kind: 'appeared-on',
+      aligned: true,
+      copy: 'Landed on their Dog-hunter read.',
+    },
+  )
+  assert.equal(
+    pickChangeVsPrediction(
+      {
+        changeType: 'appeared',
+        from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
+        to: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
+      },
+      dogHunter,
+    )?.copy,
+    'Landed against their Dog-hunter read.',
+  )
+
+  const flip = sanitizePickChanges(dump, dump.fetchedAt)[0]
+  assert.ok(flip)
+  assert.deepEqual(pickChangeVsPrediction(flip, dogHunter), {
+    kind: 'flipped-on',
+    aligned: true,
+    copy: 'Flipped onto their Dog-hunter read.',
+  })
+  assert.deepEqual(
+    pickChangeVsPrediction(flip, {
+      predictedSide: 'home',
+      reason: 'Home-teamer',
+    }),
+    {
+      kind: 'flipped-off',
+      aligned: false,
+      copy: 'Flipped off their Home-teamer read.',
+    },
+  )
+  assert.deepEqual(
+    pickChangeVsPrediction(
+      {
+        changeType: 'flipped',
+        from: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
+        to: { pickedSide: 'away', pickedTeamId: 'ne', pickedTeam: 'NE' },
+      },
+      { predictedSide: 'home', reason: 'Line-value habit' },
+    ),
+    {
+      kind: 'flipped-off',
+      aligned: false,
+      copy: 'Flipped off their Line-value read.',
+    },
+  )
+  assert.deepEqual(
+    pickChangeVsPrediction(
+      {
+        changeType: 'flipped',
+        from: { pickedSide: null, pickedTeamId: null, pickedTeam: null },
+        to: { pickedSide: 'home', pickedTeamId: 'sea', pickedTeam: 'SEA' },
+      },
+      dogHunter,
+    ),
+    {
+      kind: 'flipped-still-off',
+      aligned: false,
+      copy: 'Moved, still against their Dog-hunter read.',
+    },
   )
 })

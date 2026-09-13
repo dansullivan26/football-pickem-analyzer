@@ -2934,6 +2934,20 @@ a.team-page-link:focus-visible .team-name {
   line-height: 1.35;
 }
 
+.history-selection .pick-read-vs {
+  font-size: 0.62rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.history-selection .pick-read-vs.on {
+  color: var(--green-dark);
+}
+
+.history-selection .pick-read-vs.off {
+  color: #8c302a;
+}
+
 .history-matchup .our-pool-pick.picked {
   color: var(--green-dark);
   font-weight: 800;

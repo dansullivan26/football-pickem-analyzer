@@ -145,3 +145,87 @@ export function pickChangeForGame(
   )
   return matches.at(-1) ?? null
 }
+
+export type PredictedSideCall = {
+  predictedSide: 'home' | 'away' | null
+  reason: string
+}
+
+export type PickChangeVsPredictionKind =
+  | 'appeared-on'
+  | 'appeared-off'
+  | 'flipped-on'
+  | 'flipped-off'
+  | 'flipped-still-off'
+
+export type PickChangeVsPrediction = {
+  kind: PickChangeVsPredictionKind
+  /** True when the new pick matches the leak-free weekly call. */
+  aligned: boolean
+  copy: string
+}
+
+function habitReadLabel(reason: string) {
+  const trimmed = reason.trim().replace(/\s+habit$/i, '')
+  return trimmed || 'model'
+}
+
+/**
+ * Compare a dump-to-dump pick change with the leak-free weekly prediction
+ * for that game. No call means we stay silent — we do not claim expected
+ * or unexpected. Cleared picks are also silent; there is no new side.
+ */
+export function pickChangeVsPrediction(
+  change: {
+    changeType: PickChangeType
+    from: PickChangeSides
+    to: PickChangeSides
+  },
+  predicted: PredictedSideCall | null | undefined,
+): PickChangeVsPrediction | null {
+  const side = predicted?.predictedSide
+  if (!side) return null
+
+  const label = habitReadLabel(predicted?.reason ?? '')
+  const from = change.from.pickedSide
+  const to = change.to.pickedSide
+
+  if (change.changeType === 'cleared') return null
+
+  if (change.changeType === 'appeared') {
+    if (!to) return null
+    if (to === side) {
+      return {
+        kind: 'appeared-on',
+        aligned: true,
+        copy: `Landed on their ${label} read.`,
+      }
+    }
+    return {
+      kind: 'appeared-off',
+      aligned: false,
+      copy: `Landed against their ${label} read.`,
+    }
+  }
+
+  if (!to) return null
+  if (to === side) {
+    return {
+      kind: 'flipped-on',
+      aligned: true,
+      copy: `Flipped onto their ${label} read.`,
+    }
+  }
+  if (from === side) {
+    return {
+      kind: 'flipped-off',
+      aligned: false,
+      copy: `Flipped off their ${label} read.`,
+    }
+  }
+  return {
+    kind: 'flipped-still-off',
+    aligned: false,
+    copy: `Moved, still against their ${label} read.`,
+  }
+}

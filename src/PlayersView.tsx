@@ -45,7 +45,7 @@ import {
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import type { LastKickoffFile } from './lastKickoff'
-import { pickChangeForGame } from './pickChanges'
+import { pickChangeForGame, pickChangeVsPrediction } from './pickChanges'
 import {
   formatPickChangeCopy,
   formatPicksSnapshotAt,
@@ -1311,6 +1311,13 @@ export default function PlayersView({
                               history.source.timezone,
                             )} dump`
                           : null
+                      const predictedGame = prediction?.games.find(
+                        (game) => game.cbsEventId === pick.cbsEventId,
+                      )
+                      const vsRead =
+                        change && predictedGame
+                          ? pickChangeVsPrediction(change, predictedGame)
+                          : null
                       return (
                       <div className="history-pick" key={pick.gameId}>
                         <div className="history-matchup">
@@ -1331,6 +1338,14 @@ export default function PlayersView({
                               title="Dump-to-dump window from GrokBot snapshots. CBS does not provide the time this player submitted or changed the pick."
                             >
                               {timing}
+                            </small>
+                          )}
+                          {vsRead && (
+                            <small
+                              className={`pick-read-vs ${vsRead.aligned ? 'on' : 'off'}`}
+                              title="Compared with this week's leak-free prediction for the game. That call never trains on this card. A match is not proof they watched the line, and a miss is not proof we knew they would flip."
+                            >
+                              {vsRead.copy}
                             </small>
                           )}
                         </div>

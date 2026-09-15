@@ -1940,6 +1940,33 @@ a.team-page-link:focus-visible .team-name {
   margin: 28px 0 52px;
 }
 
+.weekly-recap-tabs {
+  display: inline-flex;
+  gap: 3px;
+  margin-bottom: 8px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--gray-soft);
+}
+
+.weekly-recap-tabs button {
+  min-height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.weekly-recap-tabs button.active {
+  color: var(--green-dark);
+  background: var(--surface);
+  box-shadow: 0 1px 5px rgba(30, 53, 40, 0.1);
+}
+
 .weekly-recap {
   margin-bottom: 20px;
   padding: 22px;

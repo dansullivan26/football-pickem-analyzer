@@ -6,7 +6,10 @@ import type {
   PlayerWeek,
   RecommendationWeek,
 } from '../src/types.ts'
-import { buildWeeklyRecap } from '../src/weeklyRecap.ts'
+import {
+  buildSeasonRecap,
+  buildWeeklyRecap,
+} from '../src/weeklyRecap.ts'
 
 function game(
   cbsEventId: number,
@@ -160,13 +163,32 @@ test('weekly recap captions pool, players, leagues, teams, and card', () => {
   ])
   assert.deepEqual(recap.players, [
     'Favorite/dog calls were the clearest pool-wide read, naming 10 of 16 submitted sides (63%).',
-    'Alice most clearly played to the frozen favorite backer read: 8 of 8 called picks (100%).',
-    'Bob moved furthest away from the frozen underdog hunter read: only 2 of 8 called picks (25%).',
+    'Profile strengthened: Alice played to the frozen favorite backer read on 8 of 8 called picks (100%).',
+    'Profile weakened: Bob broke from the frozen underdog hunter read; it named only 2 of 8 picks (25%).',
   ])
   assert.deepEqual(recap.teamsAndLeagues, [
     'NFL favorites and underdogs split 1-1 ATS.',
     'College favorites and underdogs split 1-1 ATS.',
     'G +14 delivered the largest favorite fade, covering against H.',
+  ])
+  assert.deepEqual(recap.card, [
+    'The frozen recommendation card finished 3-1 ATS on 4 calls.',
+    'Hammer calls led the tiers at 2-0 ATS.',
+  ])
+})
+
+test('season recap combines officially scored weeks', () => {
+  const recap = buildSeasonRecap([playerWeek], [recWeek], [forecastWeek])
+  assert.ok(recap)
+  assert.equal(recap.label, 'Season to date')
+  assert.equal(
+    recap.pool[0],
+    'Alice and Carol share the lead through 1 scored week with 3 wins.',
+  )
+  assert.deepEqual(recap.players, [
+    'Favorite/dog calls were the clearest pool-wide read, naming 10 of 16 submitted sides (63%).',
+    "Strongest season read: Alice's frozen calls have named 8 of 8 picks (100%) across 1 forecast week.",
+    "Least settled season read: Bob's frozen calls have named 2 of 8 picks (25%) across 1 forecast week.",
   ])
   assert.deepEqual(recap.card, [
     'The frozen recommendation card finished 3-1 ATS on 4 calls.',

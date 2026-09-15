@@ -8,7 +8,11 @@ import {
   type PredictionForecasts,
 } from './playerPrediction'
 import { pathForView } from './routes'
-import { buildWeeklyRecap } from './weeklyRecap'
+import {
+  buildSeasonRecap,
+  buildWeeklyRecap,
+  type RecapScope,
+} from './weeklyRecap'
 import type {
   EdgeCategory,
   FrozenRecommendation,
@@ -276,6 +280,7 @@ export default function PerformanceView({
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
     seasonWeeks.at(-1)?.week ?? 1,
   )
+  const [recapScope, setRecapScope] = useState<RecapScope>('week')
   const selectedWeek: RecommendationWeek | undefined =
     seasonWeeks.find((week) => week.week === selectedWeekNumber) ??
     seasonWeeks.at(-1)
@@ -295,6 +300,32 @@ export default function PerformanceView({
     selectedWeek,
     selectedForecastWeek,
   )
+  const seasonPlayerWeeks = playerHistory.weeks.filter(
+    (week) =>
+      (week.seasonYear ?? playerHistory.pool.seasonYear) === seasonYear,
+  )
+  const seasonForecastWeeks = forecasts.weeks.filter(
+    (week) =>
+      (week.seasonYear ?? playerHistory.pool.seasonYear) === seasonYear &&
+      week.strategyId === PREDICTION_STRATEGY_ID,
+  )
+  const seasonRecap = buildSeasonRecap(
+    seasonPlayerWeeks,
+    seasonWeeks,
+    seasonForecastWeeks,
+  )
+  const activeRecap = recapScope === 'season' ? seasonRecap : recap
+  const recapSections = activeRecap
+    ? [
+        { label: 'Pool', bullets: activeRecap.pool },
+        { label: 'Players', bullets: activeRecap.players },
+        {
+          label: 'Teams & leagues',
+          bullets: activeRecap.teamsAndLeagues,
+        },
+        { label: 'Our card', bullets: activeRecap.card },
+      ]
+    : []
 
   const allGames = useMemo(
     () => seasonWeeks.flatMap((week) => week.games),
@@ -501,31 +532,62 @@ export default function PerformanceView({
           </label>
         </div>
 
-        {recap ? (
-          <section className="weekly-recap" aria-label={`${recap.label} recap`}>
+        <div
+          className="weekly-recap-tabs"
+          role="tablist"
+          aria-label="Recap scope"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={recapScope === 'week'}
+            className={recapScope === 'week' ? 'active' : ''}
+            onClick={() => setRecapScope('week')}
+          >
+            {selectedWeek?.label ?? 'Week'}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={recapScope === 'season'}
+            className={recapScope === 'season' ? 'active' : ''}
+            onClick={() => setRecapScope('season')}
+          >
+            Season
+          </button>
+        </div>
+
+        {activeRecap ? (
+          <section
+            className="weekly-recap"
+            aria-label={`${activeRecap.label} recap`}
+          >
             <div className="weekly-recap-heading">
               <div>
                 <p className="eyebrow">Official recap</p>
-                <h3>What {recap.label} showed us</h3>
+                <h3>
+                  {recapScope === 'season'
+                    ? 'What the season has shown us'
+                    : `What ${activeRecap.label} showed us`}
+                </h3>
               </div>
-              <span>Generated after CBS scored the week</span>
+              <span>
+                {recapScope === 'season'
+                  ? `${seasonPlayerWeeks.filter((week) => week.scored).length} officially scored weeks`
+                  : 'Generated after CBS scored the week'}
+              </span>
             </div>
             <p className="weekly-recap-note">
-              Observations from this slate, not new prediction rules. Player
-              reads compare submitted picks with the leak-free forecast frozen
-              before the week.
+              {recapScope === 'season'
+                ? 'Season totals include officially scored weeks only. Player-read results combine forecasts that were frozen before each week.'
+                : 'Observations from this slate, not new prediction rules. Player reads compare submitted picks with the leak-free forecast frozen before the week.'}
             </p>
             <div className="weekly-recap-grid">
-              {[
-                ['Pool', recap.pool],
-                ['Players', recap.players],
-                ['Teams & leagues', recap.teamsAndLeagues],
-                ['Our card', recap.card],
-              ].map(([label, bullets]) => (
-                <article key={label as string}>
-                  <h4>{label as string}</h4>
+              {recapSections.map(({ label, bullets }) => (
+                <article key={label}>
+                  <h4>{label}</h4>
                   <ul>
-                    {(bullets as string[]).map((bullet) => (
+                    {bullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>

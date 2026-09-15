@@ -17,6 +17,8 @@ export type WeeklyRecap = {
   card: string[]
 }
 
+export type RecapScope = 'week' | 'season'
+
 type Side = 'home' | 'away'
 
 type PoolGame = {
@@ -141,6 +143,7 @@ function forecastRows(forecastWeek: PredictionForecastWeek | undefined) {
       const graded = player.games.filter((game) => game.correct != null)
       const correct = graded.filter((game) => game.correct).length
       return {
+        entryId: player.entryId,
         name: player.name,
         archetype: player.archetype,
         graded: graded.length,
@@ -154,34 +157,41 @@ function forecastRows(forecastWeek: PredictionForecastWeek | undefined) {
     )
 }
 
-function playerStandoutCopy(
+function playerMovementCopies(
   rows: ReturnType<typeof forecastRows>,
-  kind: 'held' | 'broke',
+  kind: 'strengthened' | 'weakened',
 ) {
   const sorted = [...rows].sort((left, right) =>
-    kind === 'held'
+    kind === 'strengthened'
       ? right.rate - left.rate || right.graded - left.graded
       : left.rate - right.rate || right.graded - left.graded,
   )
-  const row = sorted[0]
-  if (!row) return null
-  if (kind === 'held' && row.rate < 0.7) return null
-  if (kind === 'broke' && row.rate >= 0.5) return null
-  const percent = Math.round(row.rate * 100)
-  return kind === 'held'
-    ? `${row.name} most clearly played to the frozen ${row.archetype.toLowerCase()} read: ${row.correct} of ${row.graded} called picks (${percent}%).`
-    : `${row.name} moved furthest away from the frozen ${row.archetype.toLowerCase()} read: only ${row.correct} of ${row.graded} called picks (${percent}%).`
+  return sorted
+    .filter((row) =>
+      kind === 'strengthened'
+        ? row.rate >= 0.7 && row.correct - (row.graded - row.correct) >= 3
+        : row.rate <= 0.4 && row.graded - row.correct - row.correct >= 3,
+    )
+    .slice(0, 2)
+    .map((row) => {
+      const percent = Math.round(row.rate * 100)
+      return kind === 'strengthened'
+        ? `Profile strengthened: ${row.name} played to the frozen ${row.archetype.toLowerCase()} read on ${row.correct} of ${row.graded} called picks (${percent}%).`
+        : `Profile weakened: ${row.name} broke from the frozen ${row.archetype.toLowerCase()} read; it named only ${row.correct} of ${row.graded} picks (${percent}%).`
+    })
 }
 
-function habitCopy(forecastWeek: PredictionForecastWeek | undefined) {
+function habitCopy(forecastWeeks: PredictionForecastWeek[]) {
   const counts = new Map<string, { correct: number; graded: number }>()
-  for (const player of forecastWeek?.players ?? []) {
-    for (const game of player.games) {
-      if (!game.habitKey || game.correct == null) continue
-      const count = counts.get(game.habitKey) ?? { correct: 0, graded: 0 }
-      count.graded += 1
-      if (game.correct) count.correct += 1
-      counts.set(game.habitKey, count)
+  for (const week of forecastWeeks) {
+    for (const player of week.players) {
+      for (const game of player.games) {
+        if (!game.habitKey || game.correct == null) continue
+        const count = counts.get(game.habitKey) ?? { correct: 0, graded: 0 }
+        count.graded += 1
+        if (game.correct) count.correct += 1
+        counts.set(game.habitKey, count)
+      }
     }
   }
   const labels: Record<string, string> = {
@@ -288,6 +298,126 @@ function compact(rows: Array<string | null>) {
   return rows.filter((row): row is string => row != null)
 }
 
+function seasonLeaderboardCopy(playerWeeks: PlayerWeek[]) {
+  const totals = new Map<string, { name: string; wins: number }>()
+  for (const week of playerWeeks) {
+    for (const entry of week.entries) {
+      if (entry.weekScore == null) continue
+      const row = totals.get(entry.entryId) ?? { name: entry.name, wins: 0 }
+      row.wins += entry.weekScore
+      totals.set(entry.entryId, row)
+    }
+  }
+  const ranked = [...totals.values()].sort(
+    (left, right) => right.wins - left.wins || left.name.localeCompare(right.name),
+  )
+  const high = ranked[0]?.wins
+  if (high == null) return null
+  const leaders = ranked.filter((row) => row.wins === high)
+  return `${leaders.map((row) => row.name).join(' and ')} ${leaders.length === 1 ? 'leads' : 'share the lead'} through ${plural(playerWeeks.length, 'scored week')} with ${high} wins.`
+}
+
+function seasonForecastRows(forecastWeeks: PredictionForecastWeek[]) {
+  const rows = new Map<
+    string,
+    {
+      entryId: string
+      name: string
+      archetype: string
+      correct: number
+      graded: number
+      weeks: number
+    }
+  >()
+  for (const week of forecastWeeks) {
+    for (const player of week.players) {
+      const graded = player.games.filter((game) => game.correct != null)
+      if (graded.length === 0) continue
+      const row = rows.get(player.entryId) ?? {
+        entryId: player.entryId,
+        name: player.name,
+        archetype: player.archetype,
+        correct: 0,
+        graded: 0,
+        weeks: 0,
+      }
+      row.name = player.name
+      row.archetype = player.archetype
+      row.correct += graded.filter((game) => game.correct).length
+      row.graded += graded.length
+      row.weeks += 1
+      rows.set(player.entryId, row)
+    }
+  }
+  return [...rows.values()]
+    .filter((row) => row.graded >= 8)
+    .map((row) => ({ ...row, rate: row.correct / row.graded }))
+}
+
+function seasonProfileCopy(
+  rows: ReturnType<typeof seasonForecastRows>,
+  kind: 'strongest' | 'weakest',
+) {
+  const row = [...rows].sort((left, right) =>
+    kind === 'strongest'
+      ? right.rate - left.rate || right.graded - left.graded
+      : left.rate - right.rate || right.graded - left.graded,
+  )[0]
+  if (!row) return null
+  const percent = Math.round(row.rate * 100)
+  return kind === 'strongest'
+    ? `Strongest season read: ${row.name}'s frozen calls have named ${row.correct} of ${row.graded} picks (${percent}%) across ${plural(row.weeks, 'forecast week')}.`
+    : `Least settled season read: ${row.name}'s frozen calls have named ${row.correct} of ${row.graded} picks (${percent}%) across ${plural(row.weeks, 'forecast week')}.`
+}
+
+function teamSeasonCopies(games: FrozenRecommendation[]) {
+  const records = new Map<
+    string,
+    { team: string; wins: number; losses: number; pushes: number }
+  >()
+  for (const game of games) {
+    if (!game.cover) continue
+    for (const side of ['away', 'home'] as const) {
+      const team = sideTeam(game, side)
+      const key = `${game.sport}:${team}`
+      const row = records.get(key) ?? {
+        team,
+        wins: 0,
+        losses: 0,
+        pushes: 0,
+      }
+      if (game.cover === 'push') row.pushes += 1
+      else if (game.cover === side) row.wins += 1
+      else row.losses += 1
+      records.set(key, row)
+    }
+  }
+  const eligible = [...records.values()].filter(
+    (row) => row.wins + row.losses + row.pushes >= 3,
+  )
+  if (eligible.length === 0) return []
+  const hottest = [...eligible].sort(
+    (left, right) =>
+      right.wins / Math.max(1, right.wins + right.losses) -
+        left.wins / Math.max(1, left.wins + left.losses) ||
+      right.wins + right.losses - (left.wins + left.losses),
+  )[0]
+  const coldest = [...eligible].sort(
+    (left, right) =>
+      left.wins / Math.max(1, left.wins + left.losses) -
+        right.wins / Math.max(1, right.wins + right.losses) ||
+      right.wins + right.losses - (left.wins + left.losses),
+  )[0]
+  return compact([
+    hottest
+      ? `${hottest.team} owns one of the strongest repeated team results at ${hottest.wins}-${hottest.losses}${hottest.pushes ? `-${hottest.pushes}` : ''} ATS.`
+      : null,
+    coldest && coldest.team !== hottest?.team
+      ? `${coldest.team} owns one of the weakest repeated team results at ${coldest.wins}-${coldest.losses}${coldest.pushes ? `-${coldest.pushes}` : ''} ATS.`
+      : null,
+  ])
+}
+
 /**
  * A deterministic caption over frozen/scored data. It deliberately returns
  * nothing until CBS marks the player week scored, so an in-progress slate
@@ -302,9 +432,9 @@ export function buildWeeklyRecap(
   const games = poolGames(playerWeek, recommendationWeek)
   const forecasts = forecastRows(forecastWeek)
   const playerBullets = compact([
-    habitCopy(forecastWeek),
-    playerStandoutCopy(forecasts, 'held'),
-    playerStandoutCopy(forecasts, 'broke'),
+    habitCopy(forecastWeek ? [forecastWeek] : []),
+    ...playerMovementCopies(forecasts, 'strengthened'),
+    ...playerMovementCopies(forecasts, 'weakened'),
   ])
   return {
     week: playerWeek.week,
@@ -329,5 +459,50 @@ export function buildWeeklyRecap(
       cardCopy(recommendationWeek.games),
       cardTierCopy(recommendationWeek.games),
     ]),
+  }
+}
+
+/** Season-to-date recap, restricted by the caller to officially scored weeks. */
+export function buildSeasonRecap(
+  playerWeeks: PlayerWeek[],
+  recommendationWeeks: RecommendationWeek[],
+  forecastWeeks: PredictionForecastWeek[],
+): WeeklyRecap | null {
+  const scoredPlayerWeeks = playerWeeks
+    .filter((week) => week.scored)
+    .sort((left, right) => left.week - right.week)
+  if (scoredPlayerWeeks.length === 0) return null
+  const scoredKeys = new Set(scoredPlayerWeeks.map((week) => week.week))
+  const recWeeks = recommendationWeeks.filter((week) => scoredKeys.has(week.week))
+  const forecasts = forecastWeeks.filter((week) => scoredKeys.has(week.week))
+  const allGames = recWeeks.flatMap((week) => week.games)
+  const allPoolGames = recWeeks.flatMap((week) => {
+    const playerWeek = scoredPlayerWeeks.find((row) => row.week === week.week)
+    return playerWeek ? poolGames(playerWeek, week) : []
+  })
+  const playerRows = seasonForecastRows(forecasts)
+  const teamBullets = teamSeasonCopies(allGames)
+  const latest = scoredPlayerWeeks.at(-1)!
+  return {
+    week: latest.week,
+    label: 'Season to date',
+    pool: compact([
+      seasonLeaderboardCopy(scoredPlayerWeeks),
+      poolMajorityCopy(allPoolGames),
+      poolExtremeCopy(allPoolGames, 'fade'),
+      poolExtremeCopy(allPoolGames, 'chalk'),
+    ]),
+    players: compact([
+      habitCopy(forecasts),
+      seasonProfileCopy(playerRows, 'strongest'),
+      seasonProfileCopy(playerRows, 'weakest'),
+    ]),
+    teamsAndLeagues: compact([
+      leagueCopy(allGames, 'NFL'),
+      leagueCopy(allGames, 'NCAAF'),
+      ...teamBullets,
+      largestFavoriteMiss(allGames),
+    ]),
+    card: compact([cardCopy(allGames), cardTierCopy(allGames)]),
   }
 }

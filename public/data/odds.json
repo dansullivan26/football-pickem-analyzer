@@ -1,7 +1,7 @@
 {
   "provider": "SharpAPI",
-  "updatedAt": "2026-09-15T18:18:07.045Z",
-  "comparedTo": "2026-09-15T13:41:38.277Z",
+  "updatedAt": "2026-09-15T21:03:29.914Z",
+  "comparedTo": "2026-09-15T18:18:07.045Z",
   "books": [
     {
       "key": "draftkings",
@@ -10,333 +10,307 @@
   ],
   "events": [
     {
-      "cbsEventId": 50029202,
+      "cbsEventId": 50029170,
       "sport": "NFL",
-      "kickoff": "2026-09-09T20:20:00-04:00",
-      "awayTeam": "New England",
-      "homeTeam": "Seattle",
+      "kickoff": "2026-09-17T20:15:00-04:00",
+      "awayTeam": "Detroit",
+      "homeTeam": "Buffalo",
       "lines": {
         "draftkings": {
-          "line": -3,
-          "retrievedAt": "2026-09-09T21:46:28.335Z"
+          "line": -4.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029162,
-      "sport": "NFL",
-      "kickoff": "2026-09-10T20:35:00-04:00",
-      "awayTeam": "San Francisco",
-      "homeTeam": "L.A. Rams",
+      "cbsEventId": 50027717,
+      "sport": "NCAAF",
+      "kickoff": "2026-09-19T12:00:00-04:00",
+      "awayTeam": "North Carolina",
+      "homeTeam": "Clemson",
       "lines": {
         "draftkings": {
           "line": -3.5,
-          "retrievedAt": "2026-09-11T00:16:24.227Z"
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50027667,
+      "cbsEventId": 50027759,
       "sport": "NCAAF",
-      "kickoff": "2026-09-12T12:00:00-04:00",
-      "awayTeam": "Arizona St.",
-      "homeTeam": "Texas A&M",
+      "kickoff": "2026-09-19T12:00:00-04:00",
+      "awayTeam": "Georgia",
+      "homeTeam": "Arkansas",
       "lines": {
         "draftkings": {
-          "line": -14.5,
-          "retrievedAt": "2026-09-12T14:14:27.908Z"
+          "line": 24.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50027615,
+      "cbsEventId": 50027801,
       "sport": "NCAAF",
-      "kickoff": "2026-09-12T12:00:00-04:00",
-      "awayTeam": "Oklahoma",
-      "homeTeam": "Michigan",
+      "kickoff": "2026-09-19T12:45:00-04:00",
+      "awayTeam": "NC State",
+      "homeTeam": "Vanderbilt",
       "lines": {
         "draftkings": {
-          "line": 5.5,
-          "retrievedAt": "2026-09-11T18:39:39.888Z"
+          "line": -3.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50027624,
+      "cbsEventId": 50027757,
       "sport": "NCAAF",
-      "kickoff": "2026-09-12T12:00:00-04:00",
-      "awayTeam": "Wake Forest",
-      "homeTeam": "Purdue",
+      "kickoff": "2026-09-19T15:30:00-04:00",
+      "awayTeam": "Florida State",
+      "homeTeam": "Alabama",
+      "lines": {
+        "draftkings": {
+          "line": -19.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50027742,
+      "sport": "NCAAF",
+      "kickoff": "2026-09-19T19:30:00-04:00",
+      "awayTeam": "Michigan St.",
+      "homeTeam": "Notre Dame",
+      "lines": {
+        "draftkings": {
+          "line": -29.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50027781,
+      "sport": "NCAAF",
+      "kickoff": "2026-09-19T19:30:00-04:00",
+      "awayTeam": "Colorado",
+      "homeTeam": "Northwestern",
+      "lines": {
+        "draftkings": {
+          "line": -3.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50027784,
+      "sport": "NCAAF",
+      "kickoff": "2026-09-19T19:30:00-04:00",
+      "awayTeam": "LSU",
+      "homeTeam": "Ole Miss",
       "lines": {
         "draftkings": {
           "line": 3,
-          "retrievedAt": "2026-09-11T21:47:34.435Z"
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50027676,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T15:30:00-04:00",
-      "awayTeam": "Arizona",
-      "homeTeam": "BYU",
-      "lines": {
-        "draftkings": {
-          "line": -6.5,
-          "retrievedAt": "2026-09-12T19:28:39.619Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50027606,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T15:30:00-04:00",
-      "awayTeam": "Alabama",
-      "homeTeam": "Kentucky",
-      "lines": {
-        "draftkings": {
-          "line": 10,
-          "retrievedAt": "2026-09-11T21:47:34.435Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50027623,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T15:30:00-04:00",
-      "awayTeam": "UCF",
-      "homeTeam": "Pittsburgh",
-      "lines": {
-        "draftkings": {
-          "line": -7,
-          "retrievedAt": "2026-09-09T09:55:02.987Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50027601,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T19:00:00-04:00",
-      "awayTeam": "Tennessee",
-      "homeTeam": "Georgia Tech",
-      "lines": {
-        "draftkings": {
-          "line": 12.5,
-          "retrievedAt": "2026-09-12T22:24:34.035Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50027666,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T19:30:00-04:00",
-      "awayTeam": "Ohio State",
-      "homeTeam": "Texas",
-      "lines": {
-        "draftkings": {
-          "line": -1.5,
-          "retrievedAt": "2026-09-12T22:24:34.035Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50027684,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-12T22:15:00-04:00",
-      "awayTeam": "Arkansas",
-      "homeTeam": "Utah",
-      "lines": {
-        "draftkings": {
-          "line": -12.5,
-          "retrievedAt": "2026-09-13T01:10:58.697Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029217,
+      "cbsEventId": 50029208,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "Atlanta",
-      "homeTeam": "Pittsburgh",
-      "lines": {
-        "draftkings": {
-          "line": -6.5,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029205,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "Baltimore",
-      "homeTeam": "Indianapolis",
-      "lines": {
-        "draftkings": {
-          "line": 3.5,
-          "retrievedAt": "2026-09-13T12:10:20.551Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029204,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "Buffalo",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Cincinnati",
       "homeTeam": "Houston",
       "lines": {
         "draftkings": {
-          "line": 1.5,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
+          "line": -2.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029214,
+      "cbsEventId": 50029209,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "Chicago",
-      "homeTeam": "Carolina",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Pittsburgh",
+      "homeTeam": "New England",
       "lines": {
         "draftkings": {
-          "line": 3,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
+          "line": -4.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029216,
+      "cbsEventId": 50029210,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
+      "kickoff": "2026-09-20T13:00:00-04:00",
       "awayTeam": "Cleveland",
-      "homeTeam": "Jacksonville",
+      "homeTeam": "Tampa Bay",
       "lines": {
         "draftkings": {
           "line": -8.5,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029215,
+      "cbsEventId": 50029221,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "New Orleans",
-      "homeTeam": "Detroit",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Carolina",
+      "homeTeam": "Atlanta",
       "lines": {
         "draftkings": {
-          "line": -7,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
+          "line": 2.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029218,
+      "cbsEventId": 50029222,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "N.Y. Jets",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "New Orleans",
+      "homeTeam": "Baltimore",
+      "lines": {
+        "draftkings": {
+          "line": -8.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029223,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Minnesota",
+      "homeTeam": "Chicago",
+      "lines": {
+        "draftkings": {
+          "line": -5.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029224,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Green Bay",
+      "homeTeam": "N.Y. Jets",
+      "lines": {
+        "draftkings": {
+          "line": 4.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029225,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T13:00:00-04:00",
+      "awayTeam": "Philadelphia",
       "homeTeam": "Tennessee",
       "lines": {
         "draftkings": {
-          "line": -1.5,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
+          "line": 7,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     },
     {
-      "cbsEventId": 50029203,
+      "cbsEventId": 50029226,
       "sport": "NFL",
-      "kickoff": "2026-09-13T13:00:00-04:00",
-      "awayTeam": "Tampa Bay",
-      "homeTeam": "Cincinnati",
-      "lines": {
-        "draftkings": {
-          "line": -3.5,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029220,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T16:25:00-04:00",
-      "awayTeam": "Arizona",
-      "homeTeam": "L.A. Chargers",
-      "lines": {
-        "draftkings": {
-          "line": -9.5,
-          "retrievedAt": "2026-09-13T12:10:20.551Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029206,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T16:25:00-04:00",
-      "awayTeam": "Green Bay",
-      "homeTeam": "Minnesota",
-      "lines": {
-        "draftkings": {
-          "line": -1.5,
-          "retrievedAt": "2026-09-13T19:33:57.576Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029219,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T16:25:00-04:00",
-      "awayTeam": "Miami",
-      "homeTeam": "Las Vegas",
-      "lines": {
-        "draftkings": {
-          "line": -3,
-          "retrievedAt": "2026-09-13T16:28:44.042Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029207,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T16:25:00-04:00",
-      "awayTeam": "Washington",
-      "homeTeam": "Philadelphia",
-      "lines": {
-        "draftkings": {
-          "line": -6,
-          "retrievedAt": "2026-09-13T19:33:57.576Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029159,
-      "sport": "NFL",
-      "kickoff": "2026-09-13T20:20:00-04:00",
-      "awayTeam": "Dallas",
-      "homeTeam": "N.Y. Giants",
-      "lines": {
-        "draftkings": {
-          "line": 3,
-          "retrievedAt": "2026-09-13T22:29:21.191Z"
-        }
-      }
-    },
-    {
-      "cbsEventId": 50029172,
-      "sport": "NFL",
-      "kickoff": "2026-09-14T20:15:00-04:00",
-      "awayTeam": "Denver",
-      "homeTeam": "Kansas City",
+      "kickoff": "2026-09-20T16:05:00-04:00",
+      "awayTeam": "Jacksonville",
+      "homeTeam": "Denver",
       "lines": {
         "draftkings": {
           "line": -2.5,
-          "retrievedAt": "2026-09-14T23:13:42.135Z"
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029227,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T16:05:00-04:00",
+      "awayTeam": "Las Vegas",
+      "homeTeam": "L.A. Chargers",
+      "lines": {
+        "draftkings": {
+          "line": -7,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029211,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T16:25:00-04:00",
+      "awayTeam": "Washington",
+      "homeTeam": "Dallas",
+      "lines": {
+        "draftkings": {
+          "line": -4.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029228,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T16:25:00-04:00",
+      "awayTeam": "Seattle",
+      "homeTeam": "Arizona",
+      "lines": {
+        "draftkings": {
+          "line": 4.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029229,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T16:25:00-04:00",
+      "awayTeam": "Miami",
+      "homeTeam": "San Francisco",
+      "lines": {
+        "draftkings": {
+          "line": -13.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029230,
+      "sport": "NFL",
+      "kickoff": "2026-09-20T20:20:00-04:00",
+      "awayTeam": "Indianapolis",
+      "homeTeam": "Kansas City",
+      "lines": {
+        "draftkings": {
+          "line": -6.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
+        }
+      }
+    },
+    {
+      "cbsEventId": 50029212,
+      "sport": "NFL",
+      "kickoff": "2026-09-21T20:15:00-04:00",
+      "awayTeam": "N.Y. Giants",
+      "homeTeam": "L.A. Rams",
+      "lines": {
+        "draftkings": {
+          "line": -7,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       },
       "totals": {
         "draftkings": {
-          "line": 42.5,
-          "retrievedAt": "2026-09-14T23:13:42.135Z"
+          "line": 48.5,
+          "retrievedAt": "2026-09-15T21:03:29.914Z"
         }
       }
     }

@@ -1940,6 +1940,88 @@ a.team-page-link:focus-visible .team-name {
   margin: 28px 0 52px;
 }
 
+.weekly-recap {
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid #cfe1d5;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #f8fcf9, #f1f8f4);
+}
+
+.weekly-recap-heading {
+  display: flex;
+  gap: 18px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.weekly-recap-heading h3 {
+  margin: 2px 0 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.12rem;
+}
+
+.weekly-recap-heading > span,
+.weekly-recap-note,
+.weekly-recap-pending span {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.weekly-recap-heading > span {
+  text-align: right;
+}
+
+.weekly-recap-note {
+  max-width: 760px;
+  margin: 8px 0 18px;
+  line-height: 1.45;
+}
+
+.weekly-recap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.weekly-recap-grid article {
+  padding: 15px 16px;
+  border: 1px solid rgba(13, 107, 69, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.weekly-recap-grid h4 {
+  margin: 0 0 8px;
+  color: var(--green-dark);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.weekly-recap-grid ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.weekly-recap-grid li {
+  color: #33443a;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.weekly-recap-pending {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border: 1px dashed #bec9c0;
+  border-radius: 12px;
+  background: var(--gray-soft);
+}
+
 .players-layout {
   display: grid;
   grid-template-columns: 270px minmax(0, 1fr);
@@ -3353,6 +3435,22 @@ footer {
   }
 
   .performance-deviations {
+    grid-template-columns: 1fr;
+  }
+
+  .weekly-recap {
+    padding: 17px;
+  }
+
+  .weekly-recap-heading {
+    display: grid;
+  }
+
+  .weekly-recap-heading > span {
+    text-align: left;
+  }
+
+  .weekly-recap-grid {
     grid-template-columns: 1fr;
   }
 

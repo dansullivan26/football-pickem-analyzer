@@ -3,10 +3,16 @@ import BadBeatMenu from './BadBeatMenu'
 import { type BadBeat } from './badBeats'
 import { keyNumberHook } from './cardScoring'
 import { weeksForSeason } from './careerHistory'
+import {
+  PREDICTION_STRATEGY_ID,
+  type PredictionForecasts,
+} from './playerPrediction'
 import { pathForView } from './routes'
+import { buildWeeklyRecap } from './weeklyRecap'
 import type {
   EdgeCategory,
   FrozenRecommendation,
+  PlayerHistory,
   RecommendationHistory,
   RecommendationWeek,
 } from './types'
@@ -244,6 +250,8 @@ function resultLabel(game: FrozenRecommendation) {
 
 export default function PerformanceView({
   history,
+  playerHistory,
+  forecasts,
   seasonYear,
   seasonBeats,
   teamName,
@@ -252,6 +260,8 @@ export default function PerformanceView({
   onOpenBadBeats,
 }: {
   history: RecommendationHistory
+  playerHistory: PlayerHistory
+  forecasts: PredictionForecasts
   seasonYear: number
   seasonBeats: BadBeat[]
   teamName: (sport: 'NFL' | 'NCAAF', abbrev: string) => string
@@ -269,6 +279,22 @@ export default function PerformanceView({
   const selectedWeek: RecommendationWeek | undefined =
     seasonWeeks.find((week) => week.week === selectedWeekNumber) ??
     seasonWeeks.at(-1)
+  const selectedPlayerWeek = playerHistory.weeks.find(
+    (week) =>
+      week.week === selectedWeek?.week &&
+      (week.seasonYear ?? playerHistory.pool.seasonYear) === seasonYear,
+  )
+  const selectedForecastWeek = forecasts.weeks.find(
+    (week) =>
+      week.week === selectedWeek?.week &&
+      (week.seasonYear ?? playerHistory.pool.seasonYear) === seasonYear &&
+      week.strategyId === PREDICTION_STRATEGY_ID,
+  )
+  const recap = buildWeeklyRecap(
+    selectedPlayerWeek,
+    selectedWeek,
+    selectedForecastWeek,
+  )
 
   const allGames = useMemo(
     () => seasonWeeks.flatMap((week) => week.games),
@@ -474,6 +500,45 @@ export default function PerformanceView({
             </select>
           </label>
         </div>
+
+        {recap ? (
+          <section className="weekly-recap" aria-label={`${recap.label} recap`}>
+            <div className="weekly-recap-heading">
+              <div>
+                <p className="eyebrow">Official recap</p>
+                <h3>What {recap.label} showed us</h3>
+              </div>
+              <span>Generated after CBS scored the week</span>
+            </div>
+            <p className="weekly-recap-note">
+              Observations from this slate, not new prediction rules. Player
+              reads compare submitted picks with the leak-free forecast frozen
+              before the week.
+            </p>
+            <div className="weekly-recap-grid">
+              {[
+                ['Pool', recap.pool],
+                ['Players', recap.players],
+                ['Teams & leagues', recap.teamsAndLeagues],
+                ['Our card', recap.card],
+              ].map(([label, bullets]) => (
+                <article key={label as string}>
+                  <h4>{label as string}</h4>
+                  <ul>
+                    {(bullets as string[]).map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : (
+          <div className="weekly-recap-pending">
+            <strong>{selectedWeek?.label} recap pending</strong>
+            <span>Appears after CBS officially scores the week.</span>
+          </div>
+        )}
 
         <div className="week-card">
           <div className="pick-history-list frozen-card-list">

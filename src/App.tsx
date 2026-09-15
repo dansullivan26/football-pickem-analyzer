@@ -1434,6 +1434,8 @@ function App() {
       ) : (
         <PerformanceView
           history={recommendationHistory}
+          playerHistory={playerHistory}
+          forecasts={predictionForecasts}
           seasonYear={slate.pool.seasonYear}
           seasonBeats={seasonBeats}
           teamName={slateTeamName}

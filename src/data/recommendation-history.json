@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-13T22:29:21.379Z",
+  "updatedAt": "2026-09-15T01:35:47.155Z",
   "weeks": [
     {
       "week": 1,
@@ -721,11 +721,11 @@
       "week": 2,
       "seasonYear": 2026,
       "label": "Week 2",
-      "capturedAt": "2026-09-13T22:29:21.379Z",
+      "capturedAt": "2026-09-15T01:35:47.155Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029172,
-        "draftKingsTotal": 43.5,
+        "draftKingsTotal": 42.5,
         "frozenAt": null
       },
       "games": [
@@ -1275,7 +1275,7 @@
           "category": "slight",
           "recommendedSide": "away",
           "hook": null,
-          "cover": null,
+          "cover": "away",
           "source": "line-value",
           "pickedSide": "away",
           "strength": "mild",
@@ -1289,8 +1289,8 @@
             "indoor": true
           },
           "neutralSite": true,
-          "awayScore": 10,
-          "homeScore": 7
+          "awayScore": 26,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50029206,
@@ -1303,7 +1303,7 @@
           "category": "neutral",
           "recommendedSide": null,
           "hook": null,
-          "cover": null,
+          "cover": "home",
           "source": null,
           "pickedSide": null,
           "strength": null,
@@ -1317,8 +1317,8 @@
             "indoor": true
           },
           "neutralSite": false,
-          "awayScore": 12,
-          "homeScore": 3
+          "awayScore": 22,
+          "homeScore": 39
         },
         {
           "cbsEventId": 50029219,
@@ -1331,7 +1331,7 @@
           "category": "slight",
           "recommendedSide": "away",
           "hook": null,
-          "cover": null,
+          "cover": "home",
           "source": "line-value",
           "pickedSide": "away",
           "strength": "mild",
@@ -1345,8 +1345,8 @@
             "indoor": true
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 10
+          "awayScore": 13,
+          "homeScore": 27
         },
         {
           "cbsEventId": 50029207,
@@ -1359,7 +1359,7 @@
           "category": "lean",
           "recommendedSide": "home",
           "hook": null,
-          "cover": null,
+          "cover": "away",
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
@@ -1373,8 +1373,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
-          "homeScore": 7
+          "awayScore": 22,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50029159,
@@ -1387,7 +1387,7 @@
           "category": "slight",
           "recommendedSide": "away",
           "hook": null,
-          "cover": null,
+          "cover": "home",
           "source": "line-value",
           "pickedSide": "away",
           "strength": "mild",
@@ -1400,7 +1400,9 @@
             "state": "NJ",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 20,
+          "homeScore": 28
         },
         {
           "cbsEventId": 50029172,

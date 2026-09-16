@@ -31,11 +31,11 @@ const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
 ]
 
 const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
-const SOURCES: CardPickSource[] = [
+const SOURCES = [
   'line-value',
   'rest-travel',
   'public-consensus',
-]
+] as const
 
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
   lock: 'Locks',
@@ -51,7 +51,7 @@ const STRENGTH_LABELS: Record<PickStrength, string> = {
   mild: 'Mild',
 }
 
-const SOURCE_LABELS: Record<CardPickSource, string> = {
+const SOURCE_LABELS: Record<(typeof SOURCES)[number], string> = {
   'line-value': 'Line value',
   'rest-travel': 'Rest / travel',
   'public-consensus': 'Public',

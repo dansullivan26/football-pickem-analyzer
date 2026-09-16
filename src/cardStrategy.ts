@@ -66,6 +66,8 @@ export type ManualPickSelections = ReadonlyMap<string, 'home' | 'away'>
 
 export type SuggestedCard = {
   strategyId: string
+  title: string
+  strategyNote: string
   generatedAt: string
   seasonYear: number
   week: number
@@ -176,6 +178,8 @@ export function generateSuggestedCard(
 
   return {
     strategyId: CARD_STRATEGY_ID,
+    title: 'ATS card',
+    strategyNote: CARD_STRATEGY_NOTE,
     generatedAt: generatedAt.toISOString(),
     seasonYear,
     week: week.order,
@@ -283,7 +287,11 @@ export function formatSuggestedCardText(
         ? 'line value'
         : pick.source === 'rest-travel'
           ? 'rest/travel'
-          : 'public'
+          : pick.source === 'season-results'
+            ? 'season results'
+            : pick.source === 'pool-aware'
+              ? 'pool leverage'
+              : 'public'
     return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${source}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${pick.publicSupport !== 'none' ? ` · public ${pick.publicSupport === 'agree' ? 'agrees' : 'fades'}` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
   })
   const manualLines = card.unpicked.flatMap((game) => {
@@ -301,9 +309,9 @@ export function formatSuggestedCardText(
     )
 
   return [
-    `${card.weekLabel} suggested card`,
+    `${card.title} · ${card.weekLabel}`,
     `Generated ${when} · ${card.strategyId}`,
-    CARD_STRATEGY_NOTE,
+    card.strategyNote,
     '',
     `Picks (${picks.length})`,
     ...(pickLines.length ? pickLines : ['• none']),

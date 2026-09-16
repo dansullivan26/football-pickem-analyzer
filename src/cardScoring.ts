@@ -34,6 +34,8 @@ export type CardPickSource =
   | 'line-value'
   | 'rest-travel'
   | 'public-consensus'
+  | 'season-results'
+  | 'pool-aware'
 export type HookKind = 'fg' | 'td'
 export type PublicSupport = 'agree' | 'none' | 'fade'
 
@@ -374,6 +376,8 @@ export function compareCardPicks(
       'line-value': 0,
       'rest-travel': 1,
       'public-consensus': 2,
+      'season-results': 3,
+      'pool-aware': 4,
     }
     return sourceRank[left.source] - sourceRank[right.source]
   }

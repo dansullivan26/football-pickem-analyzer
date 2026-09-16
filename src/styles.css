@@ -414,8 +414,15 @@ h2 {
   accent-color: var(--green-dark);
 }
 
-.generate-card-button {
+.generate-card-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-left: auto;
+  justify-content: flex-end;
+}
+
+.generate-card-button {
   min-height: 42px;
   padding: 0 14px;
   border: 0;
@@ -426,8 +433,14 @@ h2 {
   font-weight: 700;
 }
 
+.generate-card-button.secondary {
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
 .generate-card-button:hover {
   background: var(--green-dark);
+  color: white;
 }
 
 .suggested-card-overlay {
@@ -764,6 +777,16 @@ h2 {
 .pick-source.public-consensus {
   color: var(--blue);
   background: var(--blue-soft);
+}
+
+.pick-source.season-results {
+  color: #6b3f12;
+  background: #f7ead6;
+}
+
+.pick-source.pool-aware {
+  color: #4a2f73;
+  background: #f1e9fb;
 }
 
 .pick-strength {
@@ -3507,9 +3530,18 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
+  .generate-card-group,
   .generate-card-button {
     grid-column: 1 / -1;
     margin-left: 0;
+  }
+
+  .generate-card-group {
+    justify-content: stretch;
+  }
+
+  .generate-card-group .generate-card-button {
+    flex: 1 1 0;
   }
 
   .suggested-card-overlay {

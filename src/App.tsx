@@ -7,6 +7,7 @@ import predictionForecastsData from './data/prediction-forecasts.json'
 import lineHistoryData from './data/line-history.json'
 import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
+import weatherHistoryData from './data/weather-history.json'
 import cardOverridesData from './data/card-overrides.json'
 import teamRosterData from './data/team-roster.json'
 import PlayersView from './PlayersView'
@@ -19,6 +20,12 @@ import GameWeather from './GameWeather'
 import InjuryLink from './InjuryLink'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
+import { generateSeasonResultsCard } from './cardResults'
+import {
+  generatePoolAwareCard,
+  playerPredictedSidesForWeek,
+  projectPoolForGame,
+} from './cardPoolAware'
 import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
@@ -49,7 +56,7 @@ import {
   poolRecordIsGraded,
   poolRecordsForWeek,
 } from './poolRecord'
-import { formatRankedTeamName, teamKey, teamPageSlugs } from './teamPerformance'
+import { formatRankedTeamName, teamKey, teamPageSlugs, buildTeamDirectory } from './teamPerformance'
 import {
   formatGameRestLine,
   formatGameTravelLine,
@@ -58,6 +65,7 @@ import {
   buildTravelRestIndex,
 } from './travelRest'
 import type { LastKickoffFile } from './lastKickoff'
+import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
 import type { PredictionForecasts } from './playerPrediction'
 import type {
@@ -92,11 +100,12 @@ const cardOverrides = cardOverridesData as CardOverrides
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamRoster = teamRosterData as TeamRosterFile
 const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory, teamRoster)
-const travelRestByEvent = buildTravelRestIndex(
+const travelRestIndex = buildTravelRestIndex(
   slate,
   recommendationHistory,
   lastKickoffData as LastKickoffFile,
-).byEvent
+)
+const travelRestByEvent = travelRestIndex.byEvent
 const poolRecordsByEvent = poolRecordsForWeek(
   playerHistory,
   slate.week.order,
@@ -1316,26 +1325,101 @@ function App() {
               />
               Completed
             </label>
-            <button
-              className="generate-card-button"
-              type="button"
-              onClick={() =>
-                setSuggestedCard(
-                  generateSuggestedCard(
-                    analyses.filter(({ game }) =>
-                      gameIsUpcoming(game, Date.now()),
+            <div className="generate-card-group">
+              <button
+                className="generate-card-button"
+                type="button"
+                onClick={() => {
+                  const upcoming = analyses.filter(({ game }) =>
+                    gameIsUpcoming(game, Date.now()),
+                  )
+                  setSuggestedCard(
+                    generateSuggestedCard(
+                      upcoming,
+                      slate.week,
+                      slate.pool.seasonYear,
+                      slate.tiebreaker,
+                      new Date(),
+                      travelRestByEvent,
                     ),
-                    slate.week,
-                    slate.pool.seasonYear,
-                    slate.tiebreaker,
-                    new Date(),
-                    travelRestByEvent,
-                  ),
-                )
-              }
-            >
-              Generate card
-            </button>
+                  )
+                }}
+              >
+                ATS card
+              </button>
+              <button
+                className="generate-card-button secondary"
+                type="button"
+                onClick={() => {
+                  const upcoming = analyses.filter(({ game }) =>
+                    gameIsUpcoming(game, Date.now()),
+                  )
+                  const scoredWeeks = playerHistory.weeks.filter(
+                    (week) =>
+                      week.scored &&
+                      (week.seasonYear ?? playerHistory.pool.seasonYear) ===
+                        slate.pool.seasonYear,
+                  ).length
+                  setSuggestedCard(
+                    generateSeasonResultsCard(
+                      upcoming,
+                      slate.week,
+                      slate.pool.seasonYear,
+                      slate.tiebreaker,
+                      buildTeamDirectory(
+                        slate,
+                        recommendationHistory,
+                        weatherHistoryData as WeatherHistoryFile,
+                        lastKickoffData as LastKickoffFile,
+                        teamRoster,
+                      ),
+                      scoredWeeks,
+                      new Date(),
+                      travelRestByEvent,
+                    ),
+                  )
+                }}
+              >
+                Results card
+              </button>
+              <button
+                className="generate-card-button secondary"
+                type="button"
+                onClick={() => {
+                  const upcoming = analyses.filter(({ game }) =>
+                    gameIsUpcoming(game, Date.now()),
+                  )
+                  const projections = new Map(
+                    upcoming.map(({ game }) => [
+                      game.cbsEventId,
+                      projectPoolForGame(
+                        playerPredictedSidesForWeek(
+                          game.cbsEventId,
+                          careerHistory,
+                          recommendationHistory,
+                          predictionForecasts,
+                          slate.week.order,
+                          travelRestIndex.byAppearance,
+                        ),
+                      ),
+                    ]),
+                  )
+                  setSuggestedCard(
+                    generatePoolAwareCard(
+                      upcoming,
+                      slate.week,
+                      slate.pool.seasonYear,
+                      slate.tiebreaker,
+                      projections,
+                      new Date(),
+                      travelRestByEvent,
+                    ),
+                  )
+                }}
+              >
+                Pool-aware card
+              </button>
+            </div>
           </div>
 
           {suggestedCard && (

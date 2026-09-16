@@ -5,6 +5,8 @@ import type { SuggestedCard } from '../src/cardStrategy.ts'
 
 const card: SuggestedCard = {
   strategyId: 'v6-line-rest-travel',
+  title: 'ATS card',
+  strategyNote: 'Line value is the primary signal.',
   generatedAt: '2026-09-09T19:00:00.000Z',
   seasonYear: 2026,
   week: 2,

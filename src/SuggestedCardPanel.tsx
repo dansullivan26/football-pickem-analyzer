@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import {
-  CARD_STRATEGY_NOTE,
   formatPoolSpread,
   formatSuggestedCardText,
   sortSuggestedPicks,
@@ -208,7 +207,7 @@ export default function SuggestedCardPanel({
         <div className="suggested-card-body">
         <div className="suggested-card-header">
           <div>
-            <p className="eyebrow">Suggested card</p>
+            <p className="eyebrow">{card.title}</p>
             <h2 id="suggested-card-title">
               {card.weekLabel} · {card.picks.length + manualSelections.size} picks
             </h2>
@@ -235,7 +234,7 @@ export default function SuggestedCardPanel({
           </div>
         </div>
 
-        <p className="suggested-card-note">{CARD_STRATEGY_NOTE}</p>
+        <p className="suggested-card-note">{card.strategyNote}</p>
         {deviations.size > 0 && (
           <p className="suggested-card-kept">
             {deviations.size === 1
@@ -269,7 +268,11 @@ export default function SuggestedCardPanel({
                       ? 'Line value'
                       : pick.source === 'rest-travel'
                         ? 'Rest / travel'
-                        : 'Public'}
+                        : pick.source === 'season-results'
+                          ? 'Season results'
+                          : pick.source === 'pool-aware'
+                            ? 'Pool leverage'
+                            : 'Public'}
                   </span>
                   <span className={`pick-strength ${pick.strength}`}>
                     {pick.strength}

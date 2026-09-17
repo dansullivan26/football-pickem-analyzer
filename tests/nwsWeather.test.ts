@@ -2,11 +2,13 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   formatWeatherChip,
+  formatWeatherFetchedAt,
   hourlyPeriodForKickoff,
   periodsFromOpenMeteoHourly,
   usStateName,
   venueQuery,
   weatherCacheMs,
+  weatherFetchedAt,
   weatherForVenueKind,
   wmoShortForecast,
 } from '../src/nwsWeather.ts'
@@ -116,7 +118,27 @@ test('formatWeatherChip writes the card label', () => {
       unit: 'F',
       shortForecast: 'Sunny',
       windSpeed: '8 mph',
+      fetchedAt: Date.parse('2026-09-16T23:23:00-04:00'),
     }),
     '74° · Sunny · 8 mph',
+  )
+})
+
+test('formatWeatherFetchedAt stamps Indianapolis local time', () => {
+  assert.equal(
+    formatWeatherFetchedAt(Date.parse('2026-09-16T23:23:00-04:00')),
+    'Sep 16, 11:23 PM EDT',
+  )
+  assert.equal(weatherFetchedAt({ status: 'indoor' }), undefined)
+  assert.equal(
+    weatherFetchedAt({
+      status: 'ready',
+      temperature: 74,
+      unit: 'F',
+      shortForecast: 'Sunny',
+      windSpeed: '8 mph',
+      fetchedAt: Date.parse('2026-09-16T23:23:00-04:00'),
+    }),
+    Date.parse('2026-09-16T23:23:00-04:00'),
   )
 })

@@ -1421,8 +1421,24 @@ select:focus {
   line-height: 1.35;
 }
 
+.game-weather {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: baseline;
+}
+
 .game-weather.ready {
   color: var(--ink);
+}
+
+.game-weather small {
+  padding: 1px 6px;
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(21, 35, 28, 0.06);
+  font-size: 0.62rem;
+  font-weight: 700;
 }
 
 .game-weather.unavailable,

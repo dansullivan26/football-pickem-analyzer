@@ -780,8 +780,8 @@ h2 {
   min-width: 0;
 }
 
-.suggested-pick-teams strong {
-  overflow-wrap: anywhere;
+.suggested-pick-teams time {
+  font-variant-numeric: tabular-nums;
 }
 
 .suggested-pick-teams span,

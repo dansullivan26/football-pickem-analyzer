@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  formatCardKickoff,
   orderCardRows,
   type SuggestedPick,
   type UnpickedGame,
@@ -106,4 +107,10 @@ test('recommendation sort keeps manual-review games after ranked picks', () => {
     rows.map((row) => (row.kind === 'pick' ? row.pick.gameId : row.game.gameId)),
     ['lean', 'slight', 'noon'],
   )
+})
+
+test('formatCardKickoff writes a compact Eastern kickoff', () => {
+  assert.equal(formatCardKickoff('2026-09-17T20:15:00-04:00'), 'Thu 8:15pm')
+  assert.equal(formatCardKickoff('2026-09-20T13:00:00-04:00'), 'Sun 1:00pm')
+  assert.equal(formatCardKickoff('not a date'), null)
 })

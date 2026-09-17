@@ -69,6 +69,29 @@ export type CardListRow =
 
 export type ManualPickSelections = ReadonlyMap<string, 'home' | 'away'>
 
+export function formatCardKickoff(
+  kickoff: string,
+  timeZone = 'America/New_York',
+) {
+  const date = new Date(kickoff)
+  if (Number.isNaN(date.getTime())) return null
+  const weekday = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    weekday: 'short',
+  }).format(date)
+  const time = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
+    .format(date)
+    .replace(/\s+/g, '')
+    .replace('AM', 'am')
+    .replace('PM', 'pm')
+  return `${weekday} ${time}`
+}
+
 export type SuggestedCard = {
   strategyId: string
   title: string

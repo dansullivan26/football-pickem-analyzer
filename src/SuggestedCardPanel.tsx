@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import {
+  formatCardKickoff,
   formatPoolSpread,
   formatSuggestedCardText,
   orderCardRows,
@@ -450,6 +451,7 @@ function SuggestedPickRow({
 }) {
   const sent = submittedPick(pick, deviate)
   const badHook = pick.hook ? null : unfavorableHook(pick.poolSpread)
+  const kickoff = formatCardKickoff(pick.kickoff)
   return (
     <li className={deviate ? 'deviated' : undefined}>
       <div className="suggested-pick-teams">
@@ -458,6 +460,12 @@ function SuggestedPickRow({
         </strong>
         <span>
           {pick.away} @ {pick.home}
+          {kickoff ? (
+            <>
+              {' · '}
+              <time dateTime={pick.kickoff}>{kickoff}</time>
+            </>
+          ) : null}
           {deviate
             ? ` · rec was ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
             : ''}
@@ -519,11 +527,18 @@ function ManualReviewRow({
   selected: 'home' | 'away' | undefined
   onToggle: (gameId: string, side: 'home' | 'away') => void
 }) {
+  const kickoff = formatCardKickoff(game.kickoff)
   return (
     <li className={selected ? 'manual-review manually-picked' : 'manual-review'}>
       <div className="suggested-pick-teams">
         <strong>
           {game.away} @ {game.home}
+          {kickoff ? (
+            <>
+              {' · '}
+              <time dateTime={game.kickoff}>{kickoff}</time>
+            </>
+          ) : null}
         </strong>
         <span>{game.reason}</span>
       </div>

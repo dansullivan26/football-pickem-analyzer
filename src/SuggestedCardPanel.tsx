@@ -8,7 +8,7 @@ import {
   type SuggestedCard,
 } from './cardStrategy'
 import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
-import { unfavorableHook } from './cardScoring'
+import { COMPOSITE_EDGE_SCALE, unfavorableHook } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
@@ -235,6 +235,28 @@ export default function SuggestedCardPanel({
         </div>
 
         <p className="suggested-card-note">{card.strategyNote}</p>
+
+        <details className="suggested-card-scale">
+          <summary>Grading scale</summary>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Factor</th>
+                <th scope="col">Spread points</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMPOSITE_EDGE_SCALE.map((row) => (
+                <tr key={row.factor}>
+                  <th scope="row">{row.factor}</th>
+                  <td>{row.value}</td>
+                  <td>{row.detail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
         {deviations.size > 0 && (
           <p className="suggested-card-kept">
             {deviations.size === 1

@@ -4,6 +4,7 @@ import {
   classifyEdge,
   compareCardPicks,
   compareRecommendationOrder,
+  COMPOSITE_EDGE_SCALE,
   FG_HOOK_POINTS,
   favorableHook,
   hookAdjustment,
@@ -204,6 +205,14 @@ test('rest and travel are capped at one combined spread point', () => {
   assert.equal(result.context, 1)
   assert.equal(result.total, 1)
   assert.equal(result.pickedSide, 'home')
+})
+
+test('the grading scale quotes the same hook values the math uses', () => {
+  const row = (factor: string) =>
+    COMPOSITE_EDGE_SCALE.find((entry) => entry.factor === factor)?.value
+  assert.equal(row('FG hook (3)'), `±${FG_HOOK_POINTS.toFixed(2)}`)
+  assert.equal(row('TD hook (7)'), `±${TD_HOOK_POINTS.toFixed(2)}`)
+  assert.equal(row('Rest + travel cap'), '±1.00')
 })
 
 test('FG and TD hooks add or subtract spread-point value for home', () => {

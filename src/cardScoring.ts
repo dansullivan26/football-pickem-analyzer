@@ -270,6 +270,51 @@ export function favorableHookForSide(
   return unfavorableHook(poolSpreadForSide(homeSpread, side)) ? null : kind
 }
 
+export type CompositeScaleRow = {
+  factor: string
+  value: string
+  detail: string
+}
+
+/** Every factor that can move the composite edge, in spread points. */
+export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
+  {
+    factor: 'Line value',
+    value: '1.00 per point',
+    detail: `CBS number vs DraftKings. ${formatPoints(1.5)}+ lean, ${formatPoints(3)}+ hammer, ${formatPoints(4)}+ lock.`,
+  },
+  {
+    factor: 'FG hook (3)',
+    value: `±${FG_HOOK_POINTS.toFixed(2)}`,
+    detail: 'Favorable side of 2.5 / 3.5 adds; the bad side subtracts.',
+  },
+  {
+    factor: 'TD hook (7)',
+    value: `±${TD_HOOK_POINTS.toFixed(2)}`,
+    detail: 'Favorable side of 6.5 / 7.5 adds; the bad side subtracts.',
+  },
+  {
+    factor: 'Rest',
+    value: `±${REST_POINTS_PER_DAY.toFixed(2)} per day`,
+    detail: `Off a seven-day baseline, capped at ${formatPoints(MAX_REST_ADJUSTMENT)}.`,
+  },
+  {
+    factor: 'Travel',
+    value: `−${TRAVEL_POINTS_PER_ZONE.toFixed(2)} per zone`,
+    detail: `Crossed time zones, capped at ${formatPoints(MAX_TRAVEL_ADJUSTMENT)}.`,
+  },
+  {
+    factor: 'Rest + travel cap',
+    value: `±${MAX_CONTEXT_ADJUSTMENT.toFixed(2)}`,
+    detail: 'Combined context can overturn only a thin line edge.',
+  },
+  {
+    factor: 'Score',
+    value: `${PCT_PER_SPREAD_POINT}% per point`,
+    detail: 'Net edge converted to the win-rate score used inside a tier.',
+  },
+]
+
 const HOOK_SOLID_FLOOR = 6
 
 export function lineValueScore(

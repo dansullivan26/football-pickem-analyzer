@@ -95,3 +95,6 @@ cleanup.
   `src/data/injury-line-history.json`, written by **Refresh sportsbook
   lines** after `refresh-nfl-injuries`. Same-hour line movement is a
   coincidence, not a causal claim.
+- ESPN first-team depth changes for the current pool week live in
+  `src/data/nfl-depth-history.json`. The injury refresh uses earlier snapshots
+  to retain ruled-out starters after ESPN moves replacements above them.

@@ -9,11 +9,18 @@ import {
   type NflStarterInjuryFile,
   type NflStarterInjuryTeam,
 } from '../src/nflStarterInjuries.ts'
+import {
+  priorFirstTeamPlayers,
+  updateNflDepthHistory,
+  type DepthChartPull,
+  type NflDepthHistoryFile,
+} from '../src/nflDepthHistory.ts'
 import type { OddsFeed, Slate } from '../src/types.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/nfl-starter-injuries.json', ROOT)
 const HISTORY_OUTPUT = new URL('src/data/injury-line-history.json', ROOT)
+const DEPTH_HISTORY_OUTPUT = new URL('src/data/nfl-depth-history.json', ROOT)
 const ODDS = new URL('public/data/odds.json', ROOT)
 const ESPN =
   'https://site.api.espn.com/apis/site/v2/sports/football/nfl'
@@ -106,6 +113,14 @@ const espnByAbbrev = new Map(
 )
 const injuriesByTeam = injuriesByEspnTeam(injuryReportRaw)
 const reportUpdatedAt = text(row(injuryReportRaw).timestamp)
+const storedDepthHistory =
+  await readJson<NflDepthHistoryFile>(DEPTH_HISTORY_OUTPUT)
+const previousDepthHistory =
+  storedDepthHistory?.week === slate.week.order &&
+  storedDepthHistory.seasonYear === slate.pool.seasonYear
+    ? storedDepthHistory
+    : null
+const depthPulls: DepthChartPull[] = []
 
 const teams: NflStarterInjuryTeam[] = await Promise.all(
   [...nflTeams.values()]
@@ -127,6 +142,11 @@ const teams: NflStarterInjuryTeam[] = await Promise.all(
         const depthChart = await fetchJson(
           `${ESPN}/teams/${espn.id}/depthcharts`,
         )
+        depthPulls.push({
+          abbrev: team.abbrev,
+          name: team.name,
+          depthChart,
+        })
         return {
           abbrev: team.abbrev,
           name: team.name,
@@ -136,6 +156,7 @@ const teams: NflStarterInjuryTeam[] = await Promise.all(
           injuries: starterInjuriesForTeam(
             injuriesByTeam.get(espn.id) ?? [],
             depthChart,
+            priorFirstTeamPlayers(previousDepthHistory, team.abbrev),
           ),
         }
       } catch (error) {
@@ -162,7 +183,7 @@ const file: NflStarterInjuryFile = {
     fetchedAt: new Date().toISOString(),
     reportUpdatedAt,
     note:
-      'Starter means first team on ESPN’s current depth chart. ESPN is an unofficial availability source; verify final inactives before kickoff.',
+      'Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff.',
   },
   teams,
 }
@@ -173,6 +194,19 @@ const previousHistory = await readJson<InjuryLineHistory>(HISTORY_OUTPUT)
 const odds = await readJson<OddsFeed>(ODDS)
 
 await writeFile(OUTPUT, `${JSON.stringify(file, null, 2)}\n`)
+
+const depthHistory = updateNflDepthHistory({
+  previous: previousDepthHistory,
+  week: slate.week.order,
+  seasonYear: slate.pool.seasonYear,
+  label: slate.week.label,
+  pulledAt: file.source.fetchedAt,
+  pulls: depthPulls,
+})
+await writeFile(
+  DEPTH_HISTORY_OUTPUT,
+  `${JSON.stringify(depthHistory, null, 2)}\n`,
+)
 
 const history = updateInjuryLineHistory({
   previousHistory,
@@ -186,7 +220,8 @@ await writeFile(HISTORY_OUTPUT, `${JSON.stringify(history, null, 2)}\n`)
 
 const changeCount = history.games.reduce(
   (sum, game) =>
-    sum + game.events.filter((event) => event.at === history.updatedAt).length,
+    sum +
+    game.events.filter((event) => event.at === file.source.fetchedAt).length,
   0,
 )
 console.log(

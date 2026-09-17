@@ -2,7 +2,31 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-17T03:16:23.590Z",
+  "updatedAt": "2026-09-17T13:10:02.894Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
-  "games": []
+  "games": [
+    {
+      "cbsEventId": 50029222,
+      "events": [
+        {
+          "at": "2026-09-17T13:10:02.894Z",
+          "cbsEventId": 50029222,
+          "athleteId": "2575788",
+          "name": "Zach Wood",
+          "position": "LS",
+          "teamAbbrev": "NO",
+          "teamName": "New Orleans",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -8.5,
+          "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        }
+      ]
+    }
+  ]
 }

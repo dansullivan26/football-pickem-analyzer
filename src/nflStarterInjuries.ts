@@ -34,6 +34,12 @@ export type NflStarterInjuryFile = {
   teams: NflStarterInjuryTeam[]
 }
 
+export type FirstTeamPlayer = {
+  athleteId: string | null
+  name: string
+  position: string
+}
+
 export const NFL_AVAILABILITY_LABELS: Record<NflAvailabilityTier, string> = {
   out: 'Out',
   doubtful: 'Doubtful',
@@ -110,10 +116,7 @@ export function nflAvailabilityTier(
  */
 export function firstTeamPlayersFromDepthChart(raw: unknown) {
   const root = row(raw)
-  const starters = new Map<
-    string,
-    { athleteId: string | null; name: string; position: string }
-  >()
+  const starters = new Map<string, FirstTeamPlayer>()
   for (const formation of rows(root.depthchart)) {
     const positions = row(formation.positions)
     for (const positionValue of Object.values(positions)) {
@@ -145,8 +148,13 @@ export function firstTeamPlayersFromDepthChart(raw: unknown) {
 export function starterInjuriesForTeam(
   injuries: unknown[],
   depthChart: unknown,
+  priorFirstTeam: Iterable<FirstTeamPlayer> = [],
 ) {
   const starters = firstTeamPlayersFromDepthChart(depthChart)
+  for (const starter of priorFirstTeam) {
+    const key = athleteKey(starter.athleteId, starter.name)
+    if (!starters.has(key)) starters.set(key, starter)
+  }
   const starterNames = new Map(
     [...starters.values()].map((starter) => [
       starter.name.trim().toLowerCase(),

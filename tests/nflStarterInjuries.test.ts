@@ -75,6 +75,45 @@ test('starterInjuriesForTeam joins ESPN links and drops injured backups', () => 
   )
 })
 
+test('starterInjuriesForTeam retains a prior first-teamer after ESPN reorders him', () => {
+  const injuries = starterInjuriesForTeam(
+    [
+      injury('1', 'Starter Quarterback', 'Out', 'QB'),
+      injury('2', 'Backup Quarterback', 'Out', 'QB'),
+    ],
+    {
+      depthchart: [
+        {
+          positions: {
+            qb: {
+              position: { abbreviation: 'QB' },
+              athletes: [
+                { id: '2', displayName: 'Backup Quarterback' },
+                { id: '1', displayName: 'Starter Quarterback' },
+              ],
+            },
+          },
+        },
+      ],
+    },
+    [
+      {
+        athleteId: '1',
+        name: 'Starter Quarterback',
+        position: 'QB',
+      },
+    ],
+  )
+
+  assert.deepEqual(
+    injuries.map(({ name, tier }) => ({ name, tier })),
+    [
+      { name: 'Backup Quarterback', tier: 'out' },
+      { name: 'Starter Quarterback', tier: 'out' },
+    ],
+  )
+})
+
 test('availability tiers keep unavailable and reserve statuses distinct', () => {
   assert.equal(nflAvailabilityTier('Out'), 'out')
   assert.equal(nflAvailabilityTier('Doubtful'), 'doubtful')

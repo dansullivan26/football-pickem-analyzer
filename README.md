@@ -231,8 +231,12 @@ hourly pulls do not add a row; a new slate week starts a new file. Implausible
 jumps (the same bound used to drop a bad match vs the pool line) are ignored
 so a flipped snapshot cannot masquerade as movement.
 
-The same hourly job snapshots ESPN first-team NFL availability. When a
-starter’s status tier changes versus the last pull, that change is stored in
+The same hourly job snapshots ESPN first-team NFL availability and first-team
+depth charts. `src/data/nfl-depth-history.json` keeps only depth-chart changes
+for the current pool week. If ESPN moves a ruled-out starter behind his
+replacement, earlier snapshots keep that player eligible for the starter
+injury join; the file resets on a new slate week. When a starter’s status tier
+changes versus the last pull, that change is stored in
 `src/data/injury-line-history.json` next to the DraftKings home spread from
 **that same refresh** (`previousLine` → current print). The card reports the
 coincidence; it does not claim the injury caused the move. Comment-only ESPN

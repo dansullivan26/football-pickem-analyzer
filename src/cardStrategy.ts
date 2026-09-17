@@ -19,7 +19,7 @@ export {
 } from './cardScoring.ts'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v6-line-rest-travel'
+export const CARD_STRATEGY_ID = 'v7-line-hook-rest-travel'
 
 export type SuggestedPick = {
   gameId: string

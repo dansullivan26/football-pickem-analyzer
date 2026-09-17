@@ -328,23 +328,29 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 - **Neutral:** lines match (no edge)
 
 The comparison uses the current DraftKings home-team spread. Generated-card
-picks start with the team receiving the better number in the CBS pool. Rest
+picks start with the team receiving the better number in the CBS pool. The
+favorable side of a field-goal hook is worth 0.5 spread points; a touchdown
+hook is worth 0.75. Taking the unfavorable side subtracts that value. This can
+break a true-neutral CBS/DraftKings tie toward the favorable hook side. Rest
 adds or subtracts 0.25 spread points per day from the normal seven-day baseline,
 capped at 0.75 per matchup. Travel subtracts 0.25 per crossed time zone, also
 capped at 0.75. The combined rest/travel adjustment is capped at one spread
-point, so it can boost or suppress line value and overturn only a thin edge.
-If the composite is exactly tied, the game remains unpicked. Missing context
-is neutral rather than inferred. Covers percentages remain visible but never
-select or rank a recommendation.
+point, so it can boost or suppress line and hook value and overturn only a
+thin edge. If the composite is exactly tied, the game remains unpicked.
+Missing context is neutral rather than inferred. Covers percentages remain
+visible but never select or rank a recommendation.
 
 If the pool number is
 the good side of a field-goal (2.5 / 3.5) or touchdown (6.5 / 7.5) hook versus
 DraftKings, the Lines card shows a favorable hook badge and the generated card
-scores that pick as solid line value (not mild) with an FG/TD hook badge.
+adds the hook value to its net edge. Favorable-hook picks retain a solid
+line-value floor (not mild) with an FG/TD hook badge.
 If the recommended pool number sits on the bad side of 3 or 7 (favorite −3.5 /
 −7.5, dog +2.5 / +6.5), the card shows an unfavorable hook badge instead. That
-badge is display-only and does not change rank. Generated-card Recommendation
-sort matches the Lines page: lock, then hammer, then lean, then slight by edge
-size, then context-only picks. Inside the same edge, a favorable TD hook ranks
-above an FG hook, and either ranks above no hook; the composite edge is the next
-tie-break. A favorable hook still badges as solid but stays in its point band.
+badge now corresponds to a 0.5/0.75-point subtraction in generated-card math.
+Generated-card Recommendation
+sort matches the Lines page: lock, then hammer, then lean, then slight, then
+neutral/context-only picks. Inside a tier, the composite edge — line plus hook,
+rest, and travel — ranks first. Raw line edge and hook kind break remaining
+ties. A favorable hook still badges as solid but stays in its raw line-value
+tier.

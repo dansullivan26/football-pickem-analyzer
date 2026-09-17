@@ -4,10 +4,13 @@ import {
   classifyEdge,
   compareCardPicks,
   compareRecommendationOrder,
+  FG_HOOK_POINTS,
   favorableHook,
+  hookAdjustment,
   keyNumberHook,
   recommendationAdjustment,
   resolveCardPick,
+  TD_HOOK_POINTS,
   unfavorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
@@ -203,6 +206,88 @@ test('rest and travel are capped at one combined spread point', () => {
   assert.equal(result.pickedSide, 'home')
 })
 
+test('FG and TD hooks add or subtract spread-point value for home', () => {
+  assert.equal(FG_HOOK_POINTS, 0.5)
+  assert.equal(TD_HOOK_POINTS, 0.75)
+  assert.equal(hookAdjustment(-2.5), 0.5)
+  assert.equal(hookAdjustment(3.5), 0.5)
+  assert.equal(hookAdjustment(-3.5), -0.5)
+  assert.equal(hookAdjustment(2.5), -0.5)
+  assert.equal(hookAdjustment(-6.5), 0.75)
+  assert.equal(hookAdjustment(7.5), 0.75)
+  assert.equal(hookAdjustment(-7.5), -0.75)
+  assert.equal(hookAdjustment(6.5), -0.75)
+  assert.equal(hookAdjustment(-3), 0)
+})
+
+test('a true neutral FG hook picks its favorable side', () => {
+  const result = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: -3.5,
+    liveHomeSpread: -3.5,
+    consensus: undefined,
+  })
+
+  assert.equal(result.pickedSide, 'away')
+  assert.equal(result.poolSpread, 3.5)
+  assert.equal(result.source, 'line-value')
+  assert.equal(result.hook, 'fg')
+  assert.equal(result.compositeEdge, 0.5)
+  assert.equal(result.strength, 'solid')
+  assert.equal(result.score, 6)
+  assert.equal(result.detail, 'FG hook +0.5 · 0.5-point net edge')
+})
+
+test('a favorable hook boosts a slight and an unfavorable hook suppresses it', () => {
+  const favorable = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'home',
+    edge: 1,
+    homeSpread: -2.5,
+    liveHomeSpread: -3.5,
+    consensus: undefined,
+  })
+  const unfavorable = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'home',
+    edge: 1,
+    homeSpread: -3.5,
+    liveHomeSpread: -4.5,
+    consensus: undefined,
+  })
+
+  assert.equal(favorable.compositeEdge, 1.5)
+  assert.equal(favorable.score, 6)
+  assert.equal(favorable.hook, 'fg')
+  assert.equal(
+    favorable.detail,
+    '1-point line value · FG hook +0.5 · 1.5-point net edge',
+  )
+  assert.equal(unfavorable.compositeEdge, 0.5)
+  assert.equal(unfavorable.score, 1.5)
+  assert.equal(unfavorable.hook, null)
+  assert.equal(
+    unfavorable.detail,
+    '1-point line value · FG hook -0.5 · 0.5-point net edge',
+  )
+})
+
+test('hook value does not recommend a game before DraftKings is available', () => {
+  const result = resolveCardPick({
+    category: 'pending',
+    recommendedSide: null,
+    edge: null,
+    homeSpread: -3.5,
+    liveHomeSpread: null,
+    consensus: undefined,
+  })
+
+  assert.equal(result.pickedSide, null)
+  assert.equal(result.source, null)
+})
+
 test('farther travel receives a larger suppression than short travel', () => {
   const oneZone = recommendationAdjustment({
     recommendedSide: null,
@@ -265,7 +350,7 @@ test('public consensus cannot fill a game with no modeled advantage', () => {
   assert.equal(result.source, null)
   assert.equal(
     result.skipReason,
-    'No line-value, rest, or travel advantage',
+    'No line-value, hook, rest, or travel advantage',
   )
 })
 
@@ -316,6 +401,49 @@ test('recommendation sort keeps a hook slight in its point band below a 1-point 
     'one-point-slight',
     'hook-slight',
     'public-fill',
+  ])
+})
+
+test('hook points boost recommendation order inside the slight band', () => {
+  const ids = [
+    {
+      category: 'slight' as const,
+      edge: 1,
+      compositeEdge: 1,
+      hook: null,
+      publicSupport: 'none' as const,
+      publicPct: null,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'one-point',
+    },
+    {
+      category: 'slight' as const,
+      edge: 0.5,
+      compositeEdge: 1.25,
+      hook: 'td' as const,
+      publicSupport: 'none' as const,
+      publicPct: null,
+      kickoff: '2026-09-05T19:00:00-04:00',
+      id: 'half-plus-td-hook',
+    },
+    {
+      category: 'slight' as const,
+      edge: 1,
+      compositeEdge: 0.5,
+      hook: null,
+      publicSupport: 'none' as const,
+      publicPct: null,
+      kickoff: '2026-09-05T15:00:00-04:00',
+      id: 'one-minus-fg-hook',
+    },
+  ]
+    .sort(compareRecommendationOrder)
+    .map((row) => row.id)
+
+  assert.deepEqual(ids, [
+    'half-plus-td-hook',
+    'one-point',
+    'one-minus-fg-hook',
   ])
 })
 

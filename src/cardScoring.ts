@@ -7,12 +7,14 @@ export const TRAVEL_POINTS_PER_ZONE = 0.25
 export const MAX_REST_ADJUSTMENT = 0.75
 export const MAX_TRAVEL_ADJUSTMENT = 0.75
 export const MAX_CONTEXT_ADJUSTMENT = 1
+export const FG_HOOK_POINTS = 0.5
+export const TD_HOOK_POINTS = 0.75
 export const MAX_PUBLIC_BUCKET_DISTANCE = 1
 export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line value is the primary signal. Rest and travel can adjust it by at most 1 spread point combined, so they can boost, suppress, or overturn only the thinnest line edges. Extra rest helps; short rest and farther travel hurt. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, rest, and travel produce no net advantage.'
+  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. Rest and travel can adjust the result by at most 1 spread point combined. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, rest, and travel produce no net advantage.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -85,6 +87,8 @@ export type ResolvedCardPick = {
 export type RecommendationAdjustment = {
   /** Signed from the home side's perspective. */
   line: number
+  /** Signed key-number value from the home side's perspective. */
+  hook: number
   /** Signed from the home side's perspective. */
   rest: number
   /** Signed from the home side's perspective. */
@@ -120,12 +124,15 @@ function travelPenalty(travel: SideTravel | null | undefined) {
 export function recommendationAdjustment(input: {
   recommendedSide: 'home' | 'away' | null
   edge: number | null
+  homeSpread?: number
   travelRest?: GameTravelRest | null
 }): RecommendationAdjustment {
   const line =
     input.edge == null || !input.recommendedSide
       ? 0
       : input.edge * (input.recommendedSide === 'home' ? 1 : -1)
+  const hook =
+    input.homeSpread == null ? 0 : hookAdjustment(input.homeSpread)
   const rest = clamp(
     restValue(input.travelRest?.homeRest) -
       restValue(input.travelRest?.awayRest),
@@ -143,9 +150,10 @@ export function recommendationAdjustment(input: {
     -MAX_CONTEXT_ADJUSTMENT,
     MAX_CONTEXT_ADJUSTMENT,
   )
-  const total = line + context
+  const total = line + hook + context
   return {
     line,
+    hook,
     rest,
     travel,
     context,
@@ -235,6 +243,31 @@ export function keyNumberHook(spread: number): HookKind | null {
   if (points === 2.5 || points === 3.5) return 'fg'
   if (points === 6.5 || points === 7.5) return 'td'
   return null
+}
+
+export function hookPointValue(kind: HookKind) {
+  return kind === 'fg' ? FG_HOOK_POINTS : TD_HOOK_POINTS
+}
+
+/**
+ * Signed from the home side's perspective. Positive means the CBS number
+ * gives home the favorable side of 3 or 7; negative means away benefits.
+ */
+export function hookAdjustment(homeSpread: number) {
+  const kind = keyNumberHook(homeSpread)
+  if (!kind) return 0
+  const value = hookPointValue(kind)
+  return unfavorableHook(homeSpread) ? -value : value
+}
+
+export function favorableHookForSide(
+  homeSpread: number,
+  side: 'home' | 'away' | null,
+) {
+  if (!side) return null
+  const kind = keyNumberHook(homeSpread)
+  if (!kind) return null
+  return unfavorableHook(poolSpreadForSide(homeSpread, side)) ? null : kind
 }
 
 const HOOK_SOLID_FLOOR = 6
@@ -407,14 +440,15 @@ export function recommendationOrderKey(input: {
   travelRest?: GameTravelRest | null
   kickoff: string
 }): RecommendationOrderKey {
-  const adjustment = recommendationAdjustment(input)
+  const adjustment = recommendationAdjustment({
+    ...input,
+    homeSpread:
+      input.liveHomeSpread == null ? undefined : input.homeSpread,
+  })
   return {
     category: input.category,
     edge: input.edge,
-    hook:
-      input.liveHomeSpread == null
-        ? null
-        : favorableHook(input.homeSpread, input.liveHomeSpread),
+    hook: favorableHookForSide(input.homeSpread, adjustment.pickedSide),
     compositeEdge: Math.abs(adjustment.total),
     publicSupport: publicSupportForSide(
       input.consensus,
@@ -436,15 +470,15 @@ export function compareRecommendationOrder(
 ) {
   const category = CATEGORY_RANK[left.category] - CATEGORY_RANK[right.category]
   if (category) return category
+  const compositeEdge =
+    (right.compositeEdge ?? right.edge ?? 0) -
+    (left.compositeEdge ?? left.edge ?? 0)
+  if (compositeEdge) return compositeEdge
   const edge = (right.edge ?? -1) - (left.edge ?? -1)
   if (edge) return edge
   const hook =
     HOOK_RANK[right.hook ?? 'none'] - HOOK_RANK[left.hook ?? 'none']
   if (hook) return hook
-  const compositeEdge =
-    (right.compositeEdge ?? right.edge ?? 0) -
-    (left.compositeEdge ?? left.edge ?? 0)
-  if (compositeEdge) return compositeEdge
   return left.kickoff.localeCompare(right.kickoff)
 }
 
@@ -471,35 +505,44 @@ export function resolveCardPick(input: {
     publicPct: null,
   }
 
-  const lineHook =
-    input.liveHomeSpread == null
-      ? null
-      : favorableHook(input.homeSpread, input.liveHomeSpread)
-  const adjustment = recommendationAdjustment(input)
+  const adjustment = recommendationAdjustment({
+    ...input,
+    homeSpread:
+      input.liveHomeSpread == null ? undefined : input.homeSpread,
+  })
   if (!adjustment.pickedSide) {
     const hasLine = adjustment.line !== 0
+    const hasHook = adjustment.hook !== 0
     const hasContext = adjustment.context !== 0
     const skipReason =
-      hasLine && hasContext
-        ? 'Line value is exactly offset by rest and travel'
+      (hasLine || hasHook) && hasContext
+        ? 'Line and hook value are exactly offset by rest and travel'
         : input.category === 'pending'
           ? 'No DraftKings line and no rest or travel advantage'
-          : 'No line-value, rest, or travel advantage'
+          : 'No line-value, hook, rest, or travel advantage'
     return { ...empty, skipReason }
   }
 
   const pickedSide = adjustment.pickedSide
-  const followsLine =
-    LINE_VALUE_CATEGORIES.has(input.category) &&
-    input.recommendedSide === pickedSide
-  const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
   const sideSign = pickedSide === 'home' ? 1 : -1
+  const pickedHook = adjustment.hook * sideSign
+  const hookKind = keyNumberHook(input.homeSpread)
+  const hook = pickedHook > 0 ? hookKind : null
+  const followsLine =
+    (LINE_VALUE_CATEGORIES.has(input.category) &&
+      input.recommendedSide === pickedSide) ||
+    (pickedHook > 0 && Math.sign(adjustment.line + adjustment.hook) === sideSign)
+  const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
   const pickedRest = adjustment.rest * sideSign
   const pickedTravel = adjustment.travel * sideSign
-  const hook = followsLine ? lineHook : null
   const parts: string[] = []
   if (input.edge != null && input.edge > 0) {
     parts.push(`${formatPoints(input.edge)}-point line value`)
+  }
+  if (hookKind && pickedHook !== 0) {
+    parts.push(
+      `${hookKind === 'fg' ? 'FG' : 'TD'} hook ${pickedHook > 0 ? '+' : ''}${formatPoints(pickedHook)}`,
+    )
   }
   if (pickedRest !== 0) {
     parts.push(`rest ${pickedRest > 0 ? '+' : ''}${formatPoints(pickedRest)}`)
@@ -508,7 +551,6 @@ export function resolveCardPick(input: {
     parts.push(`travel ${pickedTravel > 0 ? '+' : ''}${formatPoints(pickedTravel)}`)
   }
   parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
-  if (hook) parts.push(`favorable ${hook === 'fg' ? 'FG' : 'TD'} hook`)
 
   return {
     source,
@@ -518,8 +560,9 @@ export function resolveCardPick(input: {
       : 'mild',
     score: followsLine
       ? Math.max(
-          0,
-          lineValueScore(input.category, input.edge ?? 0, hook) +
+          hook ? HOOK_SOLID_FLOOR : 0,
+          lineValueScore(input.category, input.edge ?? 0) +
+            pickedHook * PCT_PER_SPREAD_POINT +
             adjustment.context * sideSign * PCT_PER_SPREAD_POINT,
         )
       : Math.abs(adjustment.total) * PCT_PER_SPREAD_POINT,

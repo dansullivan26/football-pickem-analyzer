@@ -66,7 +66,7 @@ test('poolProjectionCopy keeps unknowns visible', () => {
   assert.match(poolProjectionCopy(projection), /3 unknown/)
 })
 
-test('pool-aware card keeps a hammer and fades chalk on a true no-edge game', () => {
+test('pool-aware card keeps favorable-hook value and a hammer ahead of leverage', () => {
   const sides = Array.from({ length: 20 }, (_, index) =>
     index < 16 ? ('home' as const) : ('away' as const),
   )
@@ -81,9 +81,10 @@ test('pool-aware card keeps a hammer and fades chalk on a true no-edge game', ()
     projections,
   )
   assert.equal(leverage.strategyId, 'v1-pool-aware')
-  assert.equal(leverage.picks[0]?.source, 'pool-aware')
-  assert.equal(leverage.picks[0]?.pickedSide, 'away')
-  assert.match(String(leverage.picks[0]?.detail), /Leverage fade/)
+  assert.equal(leverage.picks[0]?.source, 'line-value')
+  assert.equal(leverage.picks[0]?.pickedSide, 'home')
+  assert.equal(leverage.picks[0]?.hook, 'fg')
+  assert.match(String(leverage.picks[0]?.detail), /FG hook \+0.5/)
 
   const hammer = generatePoolAwareCard(
     [analysis(3.2, 'hammer')],

@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import {
   formatWeatherChip,
+  formatWeatherFetchedAt,
   peekWeatherChip,
+  weatherFetchedAt,
   weatherForGame,
 } from './nwsWeather'
 import type { SlateGame } from './types'
 
 export default function GameWeather({ game }: { game: SlateGame }) {
   const [chip, setChip] = useState(() => peekWeatherChip(game))
+  const fetchedAt = weatherFetchedAt(chip)
+  const updatedLabel = fetchedAt ? formatWeatherFetchedAt(fetchedAt) : null
 
   useEffect(() => {
     let cancelled = false
@@ -25,7 +29,8 @@ export default function GameWeather({ game }: { game: SlateGame }) {
 
   return (
     <span className={`game-weather ${chip.status}`}>
-      {formatWeatherChip(chip)}
+      <span>{formatWeatherChip(chip)}</span>
+      {updatedLabel && <small>Updated {updatedLabel}</small>}
     </span>
   )
 }

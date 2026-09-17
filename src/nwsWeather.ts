@@ -10,6 +10,7 @@ export type WeatherChip =
       unit: string
       shortForecast: string
       windSpeed: string
+      fetchedAt?: number
     }
 
 export type HourlyPeriod = {
@@ -196,6 +197,26 @@ export function formatWeatherChip(chip: WeatherChip) {
   return `${chip.temperature}° · ${chip.shortForecast} · ${chip.windSpeed}`
 }
 
+export function formatWeatherFetchedAt(
+  fetchedAt: number,
+  timeZone = 'America/Indianapolis',
+) {
+  const date = new Date(fetchedAt)
+  if (Number.isNaN(date.getTime())) return null
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZoneName: 'short',
+  }).format(date)
+}
+
+export function weatherFetchedAt(chip: WeatherChip) {
+  return chip.status === 'ready' ? chip.fetchedAt : undefined
+}
+
 export function venueQuery(venue: GameVenue | null | undefined) {
   const city = venue?.city?.trim() ?? ''
   const state = venue?.state?.trim() ?? ''
@@ -211,13 +232,14 @@ export function weatherForVenueKind(venue: GameVenue | null | undefined) {
   return 'fetch' as const
 }
 
-function chipFromPeriod(period: HourlyPeriod): WeatherChip {
+function chipFromPeriod(period: HourlyPeriod, fetchedAt: number): WeatherChip {
   return {
     status: 'ready',
     temperature: period.temperature,
     unit: period.temperatureUnit,
     shortForecast: period.shortForecast,
     windSpeed: period.windSpeed,
+    fetchedAt,
   }
 }
 
@@ -463,7 +485,7 @@ export async function weatherForGame(
     )
 
     if (!period) return { status: 'unavailable' }
-    const chip = chipFromPeriod(period)
+    const chip = chipFromPeriod(period, now)
     cache.chips[String(game.cbsEventId)] = { chip, expiresAt: now + ttl }
     writeCache(cache)
     return chip

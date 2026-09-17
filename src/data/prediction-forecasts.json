@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17T10:45:38.890Z",
+  "updatedAt": "2026-09-17T13:36:47.610Z",
   "weeks": [
     {
       "week": 1,
@@ -20962,7 +20962,7 @@
       "seasonYear": 2026,
       "label": "Week 3",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-09-17T10:45:38.890Z",
+      "capturedAt": "2026-09-17T13:36:47.610Z",
       "frozenAt": null,
       "trainingThroughWeek": 2,
       "players": [
@@ -21825,12 +21825,12 @@
               "homeSpread": -7.5,
               "predictedSide": "home",
               "predictedTeam": "LAR",
-              "confidence": "medium",
-              "meter": 40,
-              "meterWhy": "Travel habit. 83% fade over 6 prior chances. Sample is still thin (6 < 20), so the bar stays conservative.",
-              "habitKey": "travel",
-              "reason": "Travel habit · 6 prior chances",
-              "sampleSize": 6,
+              "confidence": "high",
+              "meter": 54,
+              "meterWhy": "Line-value habit. 76% fade over 33 prior chances. A second habit points the same way.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 33 prior chances",
+              "sampleSize": 33,
               "actualSide": null,
               "correct": null
             }
@@ -26611,11 +26611,11 @@
               "predictedSide": "away",
               "predictedTeam": "NYG",
               "confidence": "high",
-              "meter": 47,
-              "meterWhy": "Favorite/dog habit. 76% fade over 49 prior chances.",
-              "habitKey": "favorite",
-              "reason": "Favorite/dog habit · 49 prior chances",
-              "sampleSize": 49,
+              "meter": 56,
+              "meterWhy": "Line-value habit. 81% take over 32 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 32 prior chances",
+              "sampleSize": 32,
               "actualSide": null,
               "correct": null
             }
@@ -29655,12 +29655,12 @@
               "homeSpread": -7.5,
               "predictedSide": "away",
               "predictedTeam": "NYG",
-              "confidence": "medium",
-              "meter": 26,
-              "meterWhy": "Favorite/dog habit. 64% fade over 50 prior chances. The lean is 64%, not a 75% lock.",
-              "habitKey": "favorite",
-              "reason": "Favorite/dog habit · 50 prior chances",
-              "sampleSize": 50,
+              "confidence": "high",
+              "meter": 89,
+              "meterWhy": "Line-value habit. 100% take over 33 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 33 prior chances",
+              "sampleSize": 33,
               "actualSide": null,
               "correct": null
             }
@@ -30958,14 +30958,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "predictedSide": "home",
-              "predictedTeam": "LAR",
-              "confidence": "low",
-              "meter": 20,
-              "meterWhy": "Travel habit. 67% fade over 6 prior chances. Sample is still thin (6 < 20), so the bar stays conservative.",
-              "habitKey": "travel",
-              "reason": "Travel habit · 6 prior chances",
-              "sampleSize": 6,
+              "predictedSide": "away",
+              "predictedTeam": "NYG",
+              "confidence": "high",
+              "meter": 84,
+              "meterWhy": "Line-value habit. 97% take over 33 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 33 prior chances",
+              "sampleSize": 33,
               "actualSide": null,
               "correct": null
             }
@@ -32281,7 +32281,7 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-09-17T10:45:38.890Z",
+    "updatedAt": "2026-09-17T13:36:47.610Z",
     "overall": {
       "key": "overall",
       "games": 1275,

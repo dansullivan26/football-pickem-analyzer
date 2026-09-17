@@ -2,9 +2,155 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-17T13:10:02.894Z",
+  "updatedAt": "2026-09-17T21:35:24.726Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
+    {
+      "cbsEventId": 50029209,
+      "events": [
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029209,
+          "athleteId": "3129446",
+          "name": "Robert Spillane",
+          "position": "LB",
+          "teamAbbrev": "NE",
+          "teamName": "New England",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029210,
+      "events": [
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029210,
+          "athleteId": "4379397",
+          "name": "Tyson Campbell",
+          "position": "CB",
+          "teamAbbrev": "CLE",
+          "teamName": "Cleveland",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -8.5,
+          "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029211,
+      "events": [
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029211,
+          "athleteId": "3925354",
+          "name": "Daron Payne",
+          "position": "DT",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029221,
+      "events": [
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029221,
+          "athleteId": "4239995",
+          "name": "A.J. Terrell Jr.",
+          "position": "CB",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029221,
+          "athleteId": "4431194",
+          "name": "Billy Bowman Jr.",
+          "position": "CB",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029221,
+          "athleteId": "4595343",
+          "name": "Kendal Daniels",
+          "position": "LB",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029221,
+          "athleteId": "4034961",
+          "name": "Jawaan Taylor",
+          "position": "OT",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        }
+      ]
+    },
     {
       "cbsEventId": 50029222,
       "events": [
@@ -24,6 +170,47 @@
           "availability": "worse",
           "homeSpreadBefore": -8.5,
           "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029222,
+          "athleteId": "4361370",
+          "name": "Chris Olave",
+          "position": "WR",
+          "teamAbbrev": "NO",
+          "teamName": "New Orleans",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -8.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 1
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029230,
+      "events": [
+        {
+          "at": "2026-09-17T21:35:24.726Z",
+          "cbsEventId": 50029230,
+          "athleteId": "4360078",
+          "name": "Alec Pierce",
+          "position": "WR",
+          "teamAbbrev": "IND",
+          "teamName": "Indianapolis",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -6.5,
+          "homeSpreadAfter": -6.5,
           "towardTeam": 0
         }
       ]

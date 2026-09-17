@@ -12,7 +12,7 @@ import {
   type UnpickedGame,
 } from './cardStrategy'
 import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
-import { COMPOSITE_EDGE_SCALE, unfavorableHook } from './cardScoring'
+import { COMPOSITE_EDGE_SCALE } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 
 export default function SuggestedCardPanel({
@@ -450,7 +450,6 @@ function SuggestedPickRow({
   onToggleDeviate: (gameId: string) => void
 }) {
   const sent = submittedPick(pick, deviate)
-  const badHook = pick.hook ? null : unfavorableHook(pick.poolSpread)
   const kickoff = formatCardKickoff(pick.kickoff)
   return (
     <li className={deviate ? 'deviated' : undefined}>
@@ -472,38 +471,13 @@ function SuggestedPickRow({
         </span>
       </div>
       <div className="suggested-pick-tags">
-        <span className={`pick-source ${pick.source}`}>
-          {pick.source === 'line-value'
-            ? 'Line value'
-            : pick.source === 'rest-travel'
-              ? 'Rest / travel'
-              : pick.source === 'season-results'
-                ? 'Season results'
-                : pick.source === 'pool-aware'
-                  ? 'Pool leverage'
-                  : 'Public'}
-        </span>
-        <span className={`pick-strength ${pick.strength}`}>
-          {pick.strength}
-        </span>
-        {pick.hook && (
-          <span className="pick-hook">
-            {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
-          </span>
-        )}
-        {badHook && (
-          <span className="pick-hook unfavorable">
-            Unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
-          </span>
-        )}
-        {pick.publicSupport !== 'none' && (
+        {pick.publicSupport !== 'none' ? (
           <span className={`pick-public ${pick.publicSupport}`}>
             {pick.publicSupport === 'agree'
               ? 'Public agrees'
               : 'Public fades'}
           </span>
-        )}
-        {deviate && <span className="pick-deviate">Deviate</span>}
+        ) : null}
       </div>
       <label className="suggested-pick-toggle">
         <input

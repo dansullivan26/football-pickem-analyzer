@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  cachedChipUsable,
   formatWeatherChip,
   formatWeatherFetchedAt,
   hourlyPeriodForKickoff,
@@ -141,4 +142,29 @@ test('formatWeatherFetchedAt stamps Indianapolis local time', () => {
     }),
     Date.parse('2026-09-16T23:23:00-04:00'),
   )
+})
+
+test('a forecast cached without a fetch stamp is re-pulled, not reused', () => {
+  const now = Date.parse('2026-09-16T23:30:00-04:00')
+  const chip = {
+    status: 'ready' as const,
+    temperature: 74,
+    unit: 'F',
+    shortForecast: 'Sunny',
+    windSpeed: '8 mph',
+  }
+  assert.equal(cachedChipUsable({ chip, expiresAt: now + 60_000 }, now), false)
+  assert.equal(
+    cachedChipUsable(
+      { chip: { ...chip, fetchedAt: now - 60_000 }, expiresAt: now + 60_000 },
+      now,
+    ),
+    true,
+  )
+  assert.equal(
+    cachedChipUsable({ chip: { status: 'unavailable' }, expiresAt: now + 60_000 }, now),
+    true,
+  )
+  assert.equal(cachedChipUsable({ chip, expiresAt: now - 1 }, now), false)
+  assert.equal(cachedChipUsable(undefined, now), false)
 })

@@ -217,6 +217,18 @@ export function weatherFetchedAt(chip: WeatherChip) {
   return chip.status === 'ready' ? chip.fetchedAt : undefined
 }
 
+/**
+ * A forecast cached before chips carried a fetch stamp cannot show when it
+ * was pulled, so re-fetch instead of waiting out its TTL.
+ */
+export function cachedChipUsable(
+  entry: { chip: WeatherChip; expiresAt: number } | undefined,
+  now: number,
+) {
+  if (!entry || entry.expiresAt <= now) return false
+  return entry.chip.status !== 'ready' || typeof entry.chip.fetchedAt === 'number'
+}
+
 export function venueQuery(venue: GameVenue | null | undefined) {
   const city = venue?.city?.trim() ?? ''
   const state = venue?.state?.trim() ?? ''
@@ -416,7 +428,7 @@ export function peekWeatherChip(
   const kind = weatherForVenueKind(game.venue)
   if (kind !== 'fetch') return { status: kind }
   const cached = readCache().chips[String(game.cbsEventId)]
-  if (cached && cached.expiresAt > now) return cached.chip
+  if (cachedChipUsable(cached, now)) return cached.chip
   return { status: 'loading' }
 }
 
@@ -433,7 +445,7 @@ export async function weatherForGame(
 
   const cache = readCache()
   const cachedChip = cache.chips[String(game.cbsEventId)]
-  if (cachedChip && cachedChip.expiresAt > now) return cachedChip.chip
+  if (cachedChipUsable(cachedChip, now)) return cachedChip.chip
 
   try {
     const coords = await shared(`geo:${query.key}`, async () => {

@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-17T10:59:50-04:00",
+    "fetchedAt": "2026-09-17T17:25:18-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -25986,7 +25986,7 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 1,
+          "picksCount": 10,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 0,
@@ -26380,11 +26380,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -27956,11 +27956,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -42402,6 +42402,54 @@
       "window": {
         "after": "2026-09-17T06:44:53-04:00",
         "atOrBefore": "2026-09-17T10:59:50-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "changeType": "picksCount",
+      "from": 1,
+      "to": 10,
+      "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
+      "previousFetchedAt": "2026-09-17T10:59:50-04:00",
+      "fetchedAt": "2026-09-17T17:25:18-04:00",
+      "window": {
+        "after": "2026-09-17T10:59:50-04:00",
+        "atOrBefore": "2026-09-17T17:25:18-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
+      "previousFetchedAt": "2026-09-17T10:59:50-04:00",
+      "fetchedAt": "2026-09-17T17:25:18-04:00",
+      "window": {
+        "after": "2026-09-17T10:59:50-04:00",
+        "atOrBefore": "2026-09-17T17:25:18-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
+      "previousFetchedAt": "2026-09-17T10:59:50-04:00",
+      "fetchedAt": "2026-09-17T17:25:18-04:00",
+      "window": {
+        "after": "2026-09-17T10:59:50-04:00",
+        "atOrBefore": "2026-09-17T17:25:18-04:00"
       }
     }
   ]

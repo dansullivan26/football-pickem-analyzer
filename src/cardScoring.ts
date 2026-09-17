@@ -20,12 +20,14 @@ export const INJURY_TIER_POINTS: Record<NflAvailabilityTier, number> = {
   questionable: 0.05,
 }
 export const MAX_TEAM_INJURY_ADJUSTMENT = 0.5
+/** Thinner nets stay in manual review. One Out or one extra rest day clears it. */
+export const MIN_COMPOSITE_EDGE = 0.25
 export const MAX_PUBLIC_BUCKET_DISTANCE = 1
 export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05), capped at 0.5 per team so a long report cannot run the card. Rest and travel can adjust the result by at most 1 spread point combined. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
+  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05), capped at 0.5 per team so a long report cannot run the card. Rest and travel can adjust the result by at most 1 spread point combined. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -188,6 +190,7 @@ export function recommendationAdjustment(input: {
   )
   const injury = injuryAdjustment(input.injuries?.away, input.injuries?.home)
   const total = line + hook + injury + context
+  const clearsFloor = Math.abs(total) + 1e-9 >= MIN_COMPOSITE_EDGE
   return {
     line,
     hook,
@@ -196,7 +199,7 @@ export function recommendationAdjustment(input: {
     injury,
     context,
     total,
-    pickedSide: total > 0 ? 'home' : total < 0 ? 'away' : null,
+    pickedSide: !clearsFloor || total === 0 ? null : total > 0 ? 'home' : 'away',
   }
 }
 
@@ -359,6 +362,12 @@ export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
     factor: 'Rest + travel cap',
     value: `±${MAX_CONTEXT_ADJUSTMENT.toFixed(2)}`,
     detail: 'Combined context can overturn only a thin line edge.',
+  },
+  {
+    factor: 'Recommend floor',
+    value: `${MIN_COMPOSITE_EDGE.toFixed(2)}`,
+    detail:
+      'Thinner nets stay in manual review. One Out or one extra rest day clears it; a Q-count does not.',
   },
   {
     factor: 'Score',
@@ -621,7 +630,10 @@ export function resolveCardPick(input: {
     const hasInjury = adjustment.injury !== 0
     const hasContext = adjustment.context !== 0
     const skipReason =
-      (hasLine || hasHook || hasInjury) && hasContext
+      Math.abs(adjustment.total) > 0 &&
+      Math.abs(adjustment.total) + 1e-9 < MIN_COMPOSITE_EDGE
+        ? `Composite edge is below ${MIN_COMPOSITE_EDGE.toFixed(2)} points`
+        : (hasLine || hasHook || hasInjury) && hasContext
         ? 'Modeled edge is exactly offset by rest and travel'
         : input.category === 'pending'
           ? 'No DraftKings line and no rest or travel advantage'

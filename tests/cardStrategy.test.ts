@@ -10,6 +10,7 @@ import {
   hookAdjustment,
   INJURY_TIER_POINTS,
   MAX_TEAM_INJURY_ADJUSTMENT,
+  MIN_COMPOSITE_EDGE,
   injuryAdjustment,
   teamInjuryLoad,
   keyNumberHook,
@@ -219,6 +220,7 @@ test('the grading scale quotes the same hook values the math uses', () => {
   assert.equal(row('FG hook (3)'), `±${FG_HOOK_POINTS.toFixed(2)}`)
   assert.equal(row('TD hook (7)'), `±${TD_HOOK_POINTS.toFixed(2)}`)
   assert.equal(row('NFL first-team Out'), '−0.25 each')
+  assert.equal(row('Recommend floor'), '0.25')
   assert.equal(row('Rest + travel cap'), '±1.00')
 })
 
@@ -293,6 +295,27 @@ test('a first-team Out can break a true-neutral NFL game', () => {
   assert.equal(result.pickedSide, 'home')
   assert.equal(result.compositeEdge, 0.25)
   assert.equal(result.detail, 'injuries +0.25 · 0.25-point net edge')
+})
+
+test('a Questionable-count below the floor stays unpicked', () => {
+  const result = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: 4.5,
+    liveHomeSpread: 4.5,
+    consensus: undefined,
+    injuries: {
+      away: injuryTeam('DET', ['questionable']),
+      home: injuryTeam('BUF', ['questionable', 'questionable']),
+    },
+  })
+  assert.equal(result.pickedSide, null)
+  assert.equal(result.source, null)
+  assert.equal(
+    result.skipReason,
+    `Composite edge is below ${MIN_COMPOSITE_EDGE.toFixed(2)} points`,
+  )
 })
 
 test('FG and TD hooks add or subtract spread-point value for home', () => {

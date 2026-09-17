@@ -339,7 +339,9 @@ adds or subtracts 0.25 spread points per day from the normal seven-day baseline,
 capped at 0.75 per matchup. Travel subtracts 0.25 per crossed time zone, also
 capped at 0.75. The combined rest/travel adjustment is capped at one spread
 point, so it can boost or suppress line, hook, and injury value and overturn
-only a thin edge. If the composite is exactly tied, the game remains unpicked.
+only a thin edge. Nets below 0.25 spread points stay unpicked, so a
+Questionable-count cannot print a recommendation by itself. If the composite
+is exactly tied, the game also remains unpicked.
 Missing context is neutral rather than inferred. Covers percentages remain
 visible but never select or rank a recommendation.
 

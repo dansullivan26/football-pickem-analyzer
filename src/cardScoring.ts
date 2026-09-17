@@ -91,6 +91,8 @@ export type ResolvedCardPick = {
   poolSpread: number | null
   detail: string | null
   skipReason: string | null
+  /** Side the composite points at, including sub-floor nets that stay unpicked. */
+  leanSide: 'home' | 'away' | null
   hook: HookKind | null
   publicSupport: PublicSupport
   /** Near-pool bucket % on the picked side, or the leader % when there is no side. */
@@ -112,6 +114,8 @@ export type RecommendationAdjustment = {
   context: number
   /** Signed composite score from the home side's perspective. */
   total: number
+  /** Sign of `total`, even when it is below the recommend floor. */
+  leanSide: 'home' | 'away' | null
   pickedSide: 'home' | 'away' | null
 }
 
@@ -191,6 +195,8 @@ export function recommendationAdjustment(input: {
   )
   const injury = injuryAdjustment(input.injuries?.away, input.injuries?.home)
   const total = line + hook + injury + context
+  const leanSide: 'home' | 'away' | null =
+    total > 0 ? 'home' : total < 0 ? 'away' : null
   const clearsFloor = Math.abs(total) + 1e-9 >= MIN_COMPOSITE_EDGE
   return {
     line,
@@ -200,7 +206,8 @@ export function recommendationAdjustment(input: {
     injury,
     context,
     total,
-    pickedSide: !clearsFloor || total === 0 ? null : total > 0 ? 'home' : 'away',
+    leanSide,
+    pickedSide: clearsFloor ? leanSide : null,
   }
 }
 
@@ -593,6 +600,44 @@ export function compareRecommendationOrder(
   return left.kickoff.localeCompare(right.kickoff)
 }
 
+function compositeDetail(
+  adjustment: RecommendationAdjustment,
+  edge: number | null,
+  homeSpread: number,
+  side: 'home' | 'away',
+) {
+  const sideSign = side === 'home' ? 1 : -1
+  const pickedHook = adjustment.hook * sideSign
+  const hookKind = keyNumberHook(homeSpread)
+  const pickedRest = adjustment.rest * sideSign
+  const pickedTravel = adjustment.travel * sideSign
+  const pickedInjury = adjustment.injury * sideSign
+  const parts: string[] = []
+  if (edge != null && edge > 0) {
+    parts.push(`${formatPoints(edge)}-point line value`)
+  }
+  if (hookKind && pickedHook !== 0) {
+    parts.push(
+      `${hookKind === 'fg' ? 'FG' : 'TD'} hook ${pickedHook > 0 ? '+' : ''}${formatPoints(pickedHook)}`,
+    )
+  }
+  if (pickedInjury !== 0) {
+    parts.push(
+      `injuries ${pickedInjury > 0 ? '+' : ''}${formatPoints(pickedInjury)}`,
+    )
+  }
+  if (pickedRest !== 0) {
+    parts.push(`rest ${pickedRest > 0 ? '+' : ''}${formatPoints(pickedRest)}`)
+  }
+  if (pickedTravel !== 0) {
+    parts.push(
+      `travel ${pickedTravel > 0 ? '+' : ''}${formatPoints(pickedTravel)}`,
+    )
+  }
+  parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
+  return parts.join(' · ')
+}
+
 export function resolveCardPick(input: {
   category: EdgeCategory
   recommendedSide: 'home' | 'away' | null
@@ -615,6 +660,7 @@ export function resolveCardPick(input: {
     poolSpread: null,
     detail: null,
     skipReason: null,
+    leanSide: null,
     hook: null,
     publicSupport: 'none',
     publicPct: null,
@@ -639,7 +685,23 @@ export function resolveCardPick(input: {
         : input.category === 'pending'
           ? 'No DraftKings line and no rest or travel advantage'
           : 'No line-value, hook, injury, rest, or travel advantage'
-    return { ...empty, skipReason }
+    return {
+      ...empty,
+      skipReason,
+      leanSide: adjustment.leanSide,
+      compositeEdge: Math.abs(adjustment.total),
+      poolSpread: adjustment.leanSide
+        ? poolSpreadForSide(input.homeSpread, adjustment.leanSide)
+        : null,
+      detail: adjustment.leanSide
+        ? compositeDetail(
+            adjustment,
+            input.edge,
+            input.homeSpread,
+            adjustment.leanSide,
+          )
+        : null,
+    }
   }
 
   const pickedSide = adjustment.pickedSide
@@ -652,30 +714,7 @@ export function resolveCardPick(input: {
       input.recommendedSide === pickedSide) ||
     (pickedHook > 0 && Math.sign(adjustment.line + adjustment.hook) === sideSign)
   const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
-  const pickedRest = adjustment.rest * sideSign
-  const pickedTravel = adjustment.travel * sideSign
   const pickedInjury = adjustment.injury * sideSign
-  const parts: string[] = []
-  if (input.edge != null && input.edge > 0) {
-    parts.push(`${formatPoints(input.edge)}-point line value`)
-  }
-  if (hookKind && pickedHook !== 0) {
-    parts.push(
-      `${hookKind === 'fg' ? 'FG' : 'TD'} hook ${pickedHook > 0 ? '+' : ''}${formatPoints(pickedHook)}`,
-    )
-  }
-  if (pickedInjury !== 0) {
-    parts.push(
-      `injuries ${pickedInjury > 0 ? '+' : ''}${formatPoints(pickedInjury)}`,
-    )
-  }
-  if (pickedRest !== 0) {
-    parts.push(`rest ${pickedRest > 0 ? '+' : ''}${formatPoints(pickedRest)}`)
-  }
-  if (pickedTravel !== 0) {
-    parts.push(`travel ${pickedTravel > 0 ? '+' : ''}${formatPoints(pickedTravel)}`)
-  }
-  parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
 
   return {
     source,
@@ -694,8 +733,14 @@ export function resolveCardPick(input: {
       : Math.abs(adjustment.total) * PCT_PER_SPREAD_POINT,
     compositeEdge: Math.abs(adjustment.total),
     poolSpread: poolSpreadForSide(input.homeSpread, pickedSide),
-    detail: parts.join(' · '),
+    detail: compositeDetail(
+      adjustment,
+      input.edge,
+      input.homeSpread,
+      pickedSide,
+    ),
     skipReason: null,
+    leanSide: pickedSide,
     hook,
     publicSupport: publicSupportForSide(
       input.consensus,

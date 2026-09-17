@@ -317,6 +317,9 @@ test('a Questionable-count below the floor stays unpicked', () => {
   })
   assert.equal(result.pickedSide, null)
   assert.equal(result.source, null)
+  assert.equal(result.leanSide, 'away')
+  assert.equal(result.poolSpread, -4.5)
+  assert.equal(result.detail, 'injuries +0.05 · 0.05-point net edge')
   assert.equal(
     result.skipReason,
     `Composite edge is below ${MIN_COMPOSITE_EDGE.toFixed(2)} points`,

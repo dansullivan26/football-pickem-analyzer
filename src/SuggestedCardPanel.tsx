@@ -502,18 +502,22 @@ function ManualReviewRow({
   onToggle: (gameId: string, side: 'home' | 'away') => void
 }) {
   const kickoff = formatCardKickoff(game.kickoff)
+  const leanLabel =
+    game.leanTeam && game.leanSpread != null
+      ? `Lean ${game.leanTeam} ${formatPoolSpread(game.leanSpread)}`
+      : null
   return (
     <li className={selected ? 'manual-review manually-picked' : 'manual-review'}>
       <div className="suggested-pick-teams">
         <strong>
-          {game.away} @ {game.home}
-          {kickoff ? (
-            <>
-              {' · '}
-              <time dateTime={game.kickoff}>{kickoff}</time>
-            </>
-          ) : null}
+          {leanLabel ?? `${game.away} @ ${game.home}`}
         </strong>
+        <span>
+          {leanLabel ? `${game.away} @ ${game.home}` : null}
+          {leanLabel && kickoff ? ' · ' : null}
+          {kickoff ? <time dateTime={game.kickoff}>{kickoff}</time> : null}
+        </span>
+        {game.detail && <em>{game.detail}</em>}
         <span>{game.reason}</span>
       </div>
       <div className="suggested-pick-tags">

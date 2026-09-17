@@ -62,6 +62,10 @@ export type UnpickedGame = {
   kickoff: string
   kickoffLabel: string
   reason: string
+  leanSide?: 'home' | 'away' | null
+  leanTeam?: string | null
+  leanSpread?: number | null
+  detail?: string | null
 }
 
 export type CardListRow =
@@ -206,6 +210,10 @@ export function generateSuggestedCard(
       homeId: game.home.id,
       homeSpread: game.homeSpread,
       reason: cardPick.skipReason ?? unpickedReason(analysis),
+      leanSide: cardPick.leanSide,
+      leanTeam: cardPick.leanSide ? game[cardPick.leanSide].name : null,
+      leanSpread: cardPick.poolSpread,
+      detail: cardPick.detail,
     })
   }
 
@@ -381,9 +389,14 @@ export function formatSuggestedCardText(
   })
   const skipLines = card.unpicked
     .filter((game) => !manualSelections.has(game.gameId))
-    .map(
-    (game) => `• ${game.away} @ ${game.home} — ${game.reason}`,
-    )
+    .map((game) => {
+      const lean =
+        game.leanTeam && game.leanSpread != null
+          ? `lean ${game.leanTeam} ${formatPoolSpread(game.leanSpread)} · `
+          : ''
+      const detail = game.detail ? ` · ${game.detail}` : ''
+      return `• ${game.away} @ ${game.home} — ${lean}${game.reason}${detail}`
+    })
 
   return [
     `${card.title} · ${card.weekLabel}`,

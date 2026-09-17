@@ -333,8 +333,10 @@ favorable side of a field-goal hook is worth 0.5 spread points; a touchdown
 hook is worth 0.75. Taking the unfavorable side subtracts that value. This can
 break a true-neutral CBS/DraftKings tie toward the favorable hook side. NFL
 first-team availability (ESPN, unofficial) is a small signed term: Out 0.25,
-Doubtful 0.15, Reserve 0.20, Questionable 0.05, capped at 0.5 per team so a
-long Wednesday report cannot dominate. College games skip it. Rest
+Doubtful 0.15, Reserve 0.20, Questionable 0.05. Each side is summed, then
+the signed gap (visitor minus home) is capped at ±0.5. Two dinged teams
+keep their difference; a massacre versus a healthy roster cannot exceed
+half a point. College games skip it. Rest
 adds or subtracts 0.25 spread points per day from the normal seven-day baseline,
 capped at 0.75 per matchup. Travel subtracts 0.25 per crossed time zone, also
 capped at 0.75. The combined rest/travel adjustment is capped at one spread

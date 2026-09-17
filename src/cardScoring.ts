@@ -19,7 +19,7 @@ export const INJURY_TIER_POINTS: Record<NflAvailabilityTier, number> = {
   reserve: 0.2,
   questionable: 0.05,
 }
-export const MAX_TEAM_INJURY_ADJUSTMENT = 0.5
+export const MAX_INJURY_NET = 0.5
 /** Thinner nets stay in manual review. One Out or one extra rest day clears it. */
 export const MIN_COMPOSITE_EDGE = 0.25
 export const MAX_PUBLIC_BUCKET_DISTANCE = 1
@@ -27,7 +27,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05), capped at 0.5 per team so a long report cannot run the card. Rest and travel can adjust the result by at most 1 spread point combined. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
+  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05). Each team is summed, then visitor minus home is capped at ±0.5 so a massacre versus a healthy roster cannot dominate, while two dinged teams still keep their difference. Rest and travel can adjust the result by at most 1 spread point combined. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -144,7 +144,7 @@ export function teamInjuryLoad(
     (sum, row) => sum + INJURY_TIER_POINTS[row.tier],
     0,
   )
-  return Math.min(MAX_TEAM_INJURY_ADJUSTMENT, Math.round(raw * 100) / 100)
+  return Math.round(raw * 100) / 100
 }
 
 /** Positive means the visitor is more dinged than the home team. */
@@ -152,7 +152,8 @@ export function injuryAdjustment(
   away: NflStarterInjuryTeam | null | undefined,
   home: NflStarterInjuryTeam | null | undefined,
 ) {
-  return teamInjuryLoad(away) - teamInjuryLoad(home)
+  const net = teamInjuryLoad(away) - teamInjuryLoad(home)
+  return clamp(net, -MAX_INJURY_NET, MAX_INJURY_NET)
 }
 
 export function recommendationAdjustment(input: {
@@ -346,7 +347,7 @@ export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
   {
     factor: 'Doubtful / reserve / Q',
     value: `−${INJURY_TIER_POINTS.doubtful.toFixed(2)} / ${INJURY_TIER_POINTS.reserve.toFixed(2)} / ${INJURY_TIER_POINTS.questionable.toFixed(2)}`,
-    detail: `Questionable is a whisper. Each team's total is capped at ${MAX_TEAM_INJURY_ADJUSTMENT.toFixed(2)}.`,
+    detail: `Questionable is a whisper. Visitor minus home is capped at ±${MAX_INJURY_NET.toFixed(2)}.`,
   },
   {
     factor: 'Rest',

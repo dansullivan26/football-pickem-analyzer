@@ -9,7 +9,7 @@ import {
   favorableHook,
   hookAdjustment,
   INJURY_TIER_POINTS,
-  MAX_TEAM_INJURY_ADJUSTMENT,
+  MAX_INJURY_NET,
   MIN_COMPOSITE_EDGE,
   injuryAdjustment,
   teamInjuryLoad,
@@ -247,28 +247,12 @@ function injuryTeam(
   }
 }
 
-test('first-team injury load is small and capped per team', () => {
+test('first-team injury load is uncapped per team; the signed net is capped', () => {
   assert.equal(INJURY_TIER_POINTS.out, 0.25)
-  assert.equal(MAX_TEAM_INJURY_ADJUSTMENT, 0.5)
+  assert.equal(MAX_INJURY_NET, 0.5)
   assert.equal(teamInjuryLoad(injuryTeam('KC', ['out'])), 0.25)
   assert.equal(teamInjuryLoad(injuryTeam('KC', ['out', 'out'])), 0.5)
-  assert.equal(
-    teamInjuryLoad(
-      injuryTeam('KC', [
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-        'questionable',
-      ]),
-    ),
-    0.5,
-  )
+  assert.equal(teamInjuryLoad(injuryTeam('KC', ['out', 'out', 'out'])), 0.75)
   assert.equal(
     injuryAdjustment(injuryTeam('KC', ['out']), injuryTeam('BUF', [])),
     0.25,
@@ -276,6 +260,27 @@ test('first-team injury load is small and capped per team', () => {
   assert.equal(
     injuryAdjustment(injuryTeam('KC', []), injuryTeam('BUF', ['doubtful'])),
     -0.15,
+  )
+  assert.equal(
+    injuryAdjustment(
+      injuryTeam('KC', ['out', 'out', 'out', 'out']),
+      injuryTeam('BUF', []),
+    ),
+    0.5,
+  )
+  assert.equal(
+    injuryAdjustment(
+      injuryTeam('KC', ['out', 'out', 'out']),
+      injuryTeam('BUF', ['out', 'out']),
+    ),
+    0.25,
+  )
+  assert.equal(
+    injuryAdjustment(
+      injuryTeam('KC', ['out', 'out']),
+      injuryTeam('BUF', ['out', 'out']),
+    ),
+    0,
   )
 })
 

@@ -47,14 +47,14 @@ export type PlayerCardTimingSummary = {
   classifiedWeeks: number
 }
 
-export const LINE_WATCH_LABELS: Record<LineWatchRead, string> = {
-  unlikely: 'Unlikely watching lines',
-  possible: 'Might watch the lines',
-  likely: 'Looks like they watch the lines',
+export const PICK_TIMING_LABELS: Record<LineWatchRead, string> = {
+  unlikely: 'Locks picks early',
+  possible: 'Mixed pick timing',
+  likely: 'Holds picks until game day',
   unknown: 'Still building a timing read',
 }
 
-export const LINE_WATCH_WARMTH_LABELS: Record<LineWatchWarmth, string> = {
+export const PICK_TIMING_WARMTH_LABELS: Record<LineWatchWarmth, string> = {
   early: 'Early read',
   signs: 'Showing signs',
   growing: 'Pattern growing',
@@ -276,22 +276,22 @@ function seasonSentence(
   classifiedWeeks: number,
 ) {
   if (read === 'unknown') {
-    return 'Need a week where CBS reports the hidden submitted count. A Thursday 25/25 still means they locked weekend games early. Matching only that day’s slate (1 on Thursday, Saturday’s games on Saturday) looks like they wait on the live number. Flips after they lock are still invisible.'
+    return 'Need a week where CBS reports the hidden submitted count. A Thursday 25/25 is an early lock of weekend games. Matching only that day’s slate (1 on Thursday, Saturday’s games on Saturday) is game-day timing. Either one may hint at whether they wait on live numbers; it is not a line-value habit. Flips after they lock are still invisible.'
   }
   if (read === 'unlikely') {
     return classifiedWeeks === 1
-      ? 'Had the full card in by Thursday, including games that had not kicked off yet. Weekend line shopping looks unlikely. They can still flip; CBS will not show it.'
-      : `Locked a full card by Thursday in ${earlyFullWeeks} of ${classifiedWeeks} tracked weeks — weekend games included. Line shopping looks unlikely. They can still flip after that; CBS will not show it.`
+      ? 'Had the full card in by Thursday, including games that had not kicked off yet. That early timing can mean they are not waiting on weekend line moves. They can still flip; CBS will not show it.'
+      : `Locked a full card by Thursday in ${earlyFullWeeks} of ${classifiedWeeks} tracked weeks — weekend games included. That early timing can mean they are not waiting on weekend line moves. They can still flip after that; CBS will not show it.`
   }
   if (read === 'likely') {
     if (classifiedWeeks === 1 && dayOfWeeks === 1) {
-      return 'Submitted about as many picks as that day had games. That is the day-of / live-line tell, not a half-finished 25-count.'
+      return 'Submitted about as many picks as that day had games. Game-day timing can mean they are waiting on the live number vs CBS. It is not a half-finished 25-count.'
     }
     return classifiedWeeks === 1
-      ? 'Waited until Saturday or later to finish games that had not kicked off yet. That is the “I want the live number vs CBS” tell.'
-      : `Day-of or late fills in ${lateWeeks + dayOfWeeks} of ${classifiedWeeks} tracked weeks. They look like they wait on the live number vs CBS.`
+      ? 'Waited until Saturday or later to finish games that had not kicked off yet. That later timing can mean they want the live number vs CBS.'
+      : `Game-day or late fills in ${lateWeeks + dayOfWeeks} of ${classifiedWeeks} tracked weeks. That pattern can mean they wait on the live number vs CBS.`
   }
-  return 'Timing is mixed so far: some early lock-ins of future games, some day-of fills. Treat them as someone who might watch movement.'
+  return 'Timing is mixed so far: some early lock-ins of future games, some game-day fills. That mix can go either way on whether they wait on movement.'
 }
 
 export function classifyWeekCardTiming({
@@ -491,7 +491,7 @@ export function summarizePlayerCardTiming(
 
   return {
     read,
-    label: LINE_WATCH_LABELS[read],
+    label: PICK_TIMING_LABELS[read],
     warmth: lineWatchWarmth(Math.max(classifiedWeeks, thisWeek ? 1 : 0)),
     sentence: seasonSentence(
       read,

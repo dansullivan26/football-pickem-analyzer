@@ -28,7 +28,7 @@ import {
   type TeamBiasSignal,
 } from './playerTeamBias'
 import {
-  LINE_WATCH_WARMTH_LABELS,
+  PICK_TIMING_WARMTH_LABELS,
   summarizePlayerCardTiming,
 } from './playerCardTiming'
 import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory'
@@ -899,10 +899,10 @@ export default function PlayersView({
                     </div>
                   )}
                   {cardTiming && (
-                    <p className={`player-line-watch-tag ${cardTiming.read}`}>
+                    <p className={`player-pick-timing-tag ${cardTiming.read}`}>
                       <strong>{cardTiming.label}</strong>
                       <span>
-                        {LINE_WATCH_WARMTH_LABELS[cardTiming.warmth]}
+                        {PICK_TIMING_WARMTH_LABELS[cardTiming.warmth]}
                       </span>
                     </p>
                   )}
@@ -936,20 +936,20 @@ export default function PlayersView({
               {cardTiming && (
                 <section
                   className="player-card-timing"
-                  aria-label="Line watching"
+                  aria-label="Pick timing"
                 >
                   <div className="player-team-bias-heading">
                     <div>
-                      <p className="eyebrow">Line watching</p>
+                      <p className="eyebrow">Pick timing</p>
                       <h3>{cardTiming.label}</h3>
                     </div>
                     <small>
-                      Uses CBS&apos;s hidden submitted count against that
-                      week&apos;s kickoff calendar. Thursday 25/25 means
-                      weekend games were already locked. 1/25 on a 1-game
-                      Thursday is day-of picking, not a slow card. CBS does
-                      not say which games they chose. Flips after they lock
-                      stay invisible.
+                      When they submit vs that week&apos;s kickoff calendar,
+                      not the line-value habit below. An early full card can
+                      indicate they are not waiting on weekend moves; a
+                      game-day count can indicate they are. CBS does not say
+                      which games they chose. Flips after they lock stay
+                      invisible.
                     </small>
                   </div>
                   <p>{cardTiming.sentence}</p>

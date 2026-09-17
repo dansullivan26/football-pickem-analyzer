@@ -2853,7 +2853,7 @@ a.team-page-link:focus-visible .team-name {
   font-size: 1.35rem;
 }
 
-.player-line-watch-tag {
+.player-pick-timing-tag {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 10px;
@@ -2863,15 +2863,15 @@ a.team-page-link:focus-visible .team-name {
   font-size: 0.72rem;
 }
 
-.player-line-watch-tag strong {
+.player-pick-timing-tag strong {
   color: var(--ink);
 }
 
-.player-line-watch-tag.unlikely strong {
+.player-pick-timing-tag.unlikely strong {
   color: var(--green-dark);
 }
 
-.player-line-watch-tag.likely strong {
+.player-pick-timing-tag.likely strong {
   color: #8a4b12;
 }
 

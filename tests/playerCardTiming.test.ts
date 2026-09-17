@@ -168,7 +168,7 @@ const recs: RecommendationHistory = {
   ],
 }
 
-test('a Thursday 25/25 is unlikely watching lines', () => {
+test('a Thursday 25/25 is an early lock of leftover games', () => {
   const summary = summarizePlayerCardTiming(
     'bill',
     history('bill', 25, [change('bill', 0, 25, thursdayDump)]),
@@ -228,7 +228,7 @@ test('Saturday count matching Thursday plus Saturday games is day-of', () => {
   assert.equal(summary.read, 'likely')
 })
 
-test('finishing Saturday after a Thursday look is likely watching', () => {
+test('finishing Saturday after a Thursday look is later pick timing', () => {
   const summary = summarizePlayerCardTiming(
     'late',
     {

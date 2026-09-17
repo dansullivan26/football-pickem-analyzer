@@ -109,15 +109,15 @@ travel, and rest go active at 6 chances, which is enough to drive a call but
 thin enough to mislead, so any row under 12 chances is tagged `thin`. Players
 under 20 graded picks get no rows at all.
 
-Player profiles also show a **Line watching** read from CBS's hidden
+Player profiles also show a **Pick timing** read from CBS's hidden
 submitted count (`picksCount` / `maxPicksCount` and `picksCountChanges`)
-compared with that week's kickoff calendar. A full card by Thursday is
-treated as locking weekend games early. A count that matches that day's
-slate (1 on a 1-game Thursday, Saturday's games on Saturday) is treated as
-day-of picking — CBS still does not reveal *which* games. Extra picks beyond
-games that have already been played that week are a partial early lock.
-Filling remaining games Saturday or later, after a Thursday dump showed the
-card incomplete, is treated as waiting on the live number vs CBS. Display-only;
+compared with that week's kickoff calendar. A full card by Thursday is an
+early lock of weekend games and *can* indicate they are not waiting on
+weekend line moves. A count that matches that day's slate (1 on a 1-game
+Thursday, Saturday's games on Saturday) is game-day timing and *can*
+indicate they are waiting on the live number vs CBS. Extra picks beyond
+games already played that week are a partial early lock. This is not the
+line-value habit, and it does not label anyone a line watcher. Display-only;
 it does not steer the v1 habit forecast.
 
 Player profiles also show a **Team loyalty watch** built from every available

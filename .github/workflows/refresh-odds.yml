@@ -39,15 +39,17 @@ jobs:
         run: npm run snapshot-predictions
       - name: Freeze kickoff weather buckets
         run: npm run snapshot-weather
+      - name: Refresh NFL starter availability
+        run: npm run refresh-nfl-injuries
       - name: Commit changed lines
         run: |
-          if git diff --quiet -- public/data/odds.json src/data/line-history.json src/data/recommendation-history.json src/data/prediction-forecasts.json src/data/weather-history.json; then
+          if git diff --quiet -- public/data/odds.json src/data/line-history.json src/data/recommendation-history.json src/data/prediction-forecasts.json src/data/weather-history.json src/data/nfl-starter-injuries.json; then
             echo "No odds or recommendation snapshot changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/odds.json src/data/line-history.json src/data/recommendation-history.json src/data/prediction-forecasts.json src/data/weather-history.json
+          git add public/data/odds.json src/data/line-history.json src/data/recommendation-history.json src/data/prediction-forecasts.json src/data/weather-history.json src/data/nfl-starter-injuries.json
           git commit -m "data: refresh sportsbook lines"
           git pull --rebase origin main
           git push

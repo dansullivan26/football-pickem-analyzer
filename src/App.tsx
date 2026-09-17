@@ -8,6 +8,7 @@ import lineHistoryData from './data/line-history.json'
 import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
 import weatherHistoryData from './data/weather-history.json'
+import nflStarterInjuriesData from './data/nfl-starter-injuries.json'
 import cardOverridesData from './data/card-overrides.json'
 import teamRosterData from './data/team-roster.json'
 import PlayersView from './PlayersView'
@@ -18,6 +19,7 @@ import SuggestedCardPanel from './SuggestedCardPanel'
 import TeamLogo from './TeamLogo'
 import GameWeather from './GameWeather'
 import InjuryLink from './InjuryLink'
+import NflStarterAvailability from './NflStarterAvailability'
 import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, compareRecommendationOrder, recommendationOrderKey, classifyEdge } from './cardScoring'
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { generateSeasonResultsCard } from './cardResults'
@@ -68,6 +70,7 @@ import type { LastKickoffFile } from './lastKickoff'
 import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
 import type { PredictionForecasts } from './playerPrediction'
+import type { NflStarterInjuryFile } from './nflStarterInjuries'
 import type {
   BookKey,
   CardOverrides,
@@ -94,6 +97,8 @@ const playerHistory = playerHistoryData as PlayerHistory
 const careerHistory = careerPlayerHistory(playerHistory)
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
+const nflStarterInjuries =
+  nflStarterInjuriesData as NflStarterInjuryFile
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const cardOverrides = cardOverridesData as CardOverrides
@@ -530,16 +535,18 @@ function GameCard({
             {restLine}
           </span>
         )}
-        <span className="game-injuries">
-          <span>Injuries</span>
-          <InjuryLink team={{ sport: game.sport, ...game.away }}>
-            {game.away.name}
-          </InjuryLink>
-          <span aria-hidden="true">·</span>
-          <InjuryLink team={{ sport: game.sport, ...game.home }}>
-            {game.home.name}
-          </InjuryLink>
-        </span>
+        {game.sport === 'NCAAF' && (
+          <span className="game-injuries">
+            <span>Injuries</span>
+            <InjuryLink team={{ sport: game.sport, ...game.away }}>
+              {game.away.name}
+            </InjuryLink>
+            <span aria-hidden="true">·</span>
+            <InjuryLink team={{ sport: game.sport, ...game.home }}>
+              {game.home.name}
+            </InjuryLink>
+          </span>
+        )}
       </div>
 
       <div className="matchup">
@@ -622,6 +629,13 @@ function GameCard({
           <ConsensusNote consensus={analysis.consensus} now={now} />
         </div>
       </div>
+      {game.sport === 'NFL' && (
+        <NflStarterAvailability
+          away={game.away}
+          home={game.home}
+          file={nflStarterInjuries}
+        />
+      )}
     </article>
   )
 }

@@ -16,6 +16,7 @@
     "snapshot-predictions": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-predictions.ts",
     "snapshot-weather": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-weather.ts",
     "snapshot-last-kickoff": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-last-kickoff.ts",
+    "refresh-nfl-injuries": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/fetch-nfl-starter-injuries.ts",
     "apply-covers": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/apply-covers.ts",
     "record-card-overrides": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/record-card-overrides.ts"
   },

@@ -1439,6 +1439,145 @@ select:focus {
   line-height: 1.35;
 }
 
+.starter-availability {
+  grid-column: 1 / -1;
+  padding: 0 12px;
+  border: 1px solid rgba(21, 35, 28, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.starter-availability summary {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.starter-availability summary > span {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.starter-availability summary strong {
+  padding: 2px 6px;
+  border-radius: 999px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.starter-availability summary small,
+.starter-availability-note,
+.starter-availability-empty,
+.starter-availability-links {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.starter-availability-note {
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.starter-availability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.starter-availability-team {
+  padding: 12px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.starter-availability-team h4 {
+  margin: 0 0 9px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.8rem;
+}
+
+.starter-availability-empty {
+  margin: 0;
+}
+
+.starter-status + .starter-status {
+  margin-top: 11px;
+}
+
+.starter-status h5 {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 0.61rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.starter-status.out h5,
+.starter-status.reserve h5 {
+  color: #8c302a;
+}
+
+.starter-status.doubtful h5 {
+  color: #8a4c11;
+}
+
+.starter-status.questionable h5 {
+  color: var(--amber);
+}
+
+.starter-status ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.starter-status li {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  justify-content: space-between;
+  padding-top: 6px;
+  border-top: 1px solid rgba(21, 35, 28, 0.08);
+}
+
+.starter-status li > div {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.starter-status li strong {
+  font-size: 0.74rem;
+}
+
+.starter-status li span,
+.starter-status li small {
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+.starter-status li small {
+  flex: none;
+}
+
+.starter-availability-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 11px 0 12px;
+}
+
 .injury-link,
 .schedule-link,
 .team-injuries-link {
@@ -3634,6 +3773,20 @@ footer {
 
   .game-meta time {
     grid-column: auto;
+  }
+
+  .starter-availability {
+    padding: 0 10px;
+  }
+
+  .starter-availability summary {
+    display: grid;
+    gap: 2px;
+    padding: 7px 0;
+  }
+
+  .starter-availability-grid {
+    grid-template-columns: 1fr;
   }
 
   /* Left in the first column, a long stadium name widens that track and

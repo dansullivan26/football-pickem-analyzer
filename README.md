@@ -110,13 +110,15 @@ thin enough to mislead, so any row under 12 chances is tagged `thin`. Players
 under 20 graded picks get no rows at all.
 
 Player profiles also show a **Line watching** read from CBS's hidden
-submitted count (`picksCount` / `maxPicksCount` and `picksCountChanges`).
-A full card by Thursday is treated as unlikely to be shopping weekend line
-moves. Filling Saturday or later, after a Thursday dump still showed the
-card incomplete, is treated as waiting on the live number vs CBS. The first
-instrumented dump of a week only proves they were done *by* that dump, not
-the exact hour they submitted. This is display-only and does not steer the
-v1 habit forecast. Flips after they lock remain invisible.
+submitted count (`picksCount` / `maxPicksCount` and `picksCountChanges`)
+compared with that week's kickoff calendar. A full card by Thursday is
+treated as locking weekend games early. A count that matches that day's
+slate (1 on a 1-game Thursday, Saturday's games on Saturday) is treated as
+day-of picking — CBS still does not reveal *which* games. Extra picks beyond
+games that have already been played that week are a partial early lock.
+Filling remaining games Saturday or later, after a Thursday dump showed the
+card incomplete, is treated as waiting on the live number vs CBS. Display-only;
+it does not steer the v1 habit forecast.
 
 Player profiles also show a **Team loyalty watch** built from every available
 pick in current and archived seasons. A team enters the take/fade list after

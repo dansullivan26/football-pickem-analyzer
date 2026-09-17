@@ -944,11 +944,12 @@ export default function PlayersView({
                       <h3>{cardTiming.label}</h3>
                     </div>
                     <small>
-                      Uses CBS&apos;s hidden submitted count between GrokBot
-                      dumps, not exact submit times. A Thursday 25/25 is the
-                      strongest tell they are not shopping weekend moves.
-                      Saturday-or-later fills look like they want the live
-                      number. Flips after they lock stay invisible.
+                      Uses CBS&apos;s hidden submitted count against that
+                      week&apos;s kickoff calendar. Thursday 25/25 means
+                      weekend games were already locked. 1/25 on a 1-game
+                      Thursday is day-of picking, not a slow card. CBS does
+                      not say which games they chose. Flips after they lock
+                      stay invisible.
                     </small>
                   </div>
                   <p>{cardTiming.sentence}</p>

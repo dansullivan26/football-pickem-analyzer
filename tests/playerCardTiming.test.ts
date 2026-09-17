@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   classifyAgainstThursday,
+  slateProgressByDate,
   summarizePlayerCardTiming,
   weekThursdayDate,
 } from '../src/playerCardTiming.ts'
@@ -24,6 +25,25 @@ test('weekThursdayDate is the Thursday of the slate week', () => {
     weekThursdayDate('2026-09-19T12:00:00-04:00', timeZone),
     '2026-09-17',
   )
+})
+
+test('slateProgressByDate counts today vs leftover kickoffs', () => {
+  const progress = slateProgressByDate(
+    [
+      thursdayKickoff,
+      '2026-09-19T12:00:00-04:00',
+      '2026-09-19T19:30:00-04:00',
+      '2026-09-20T13:00:00-04:00',
+    ],
+    '2026-09-17',
+    timeZone,
+  )
+  assert.deepEqual(progress, {
+    today: 1,
+    through: 1,
+    remaining: 3,
+    total: 4,
+  })
 })
 
 test('classifyAgainstThursday splits Thu / Fri / weekend', () => {
@@ -103,6 +123,29 @@ function history(
   }
 }
 
+function recGame(
+  cbsEventId: number,
+  kickoff: string,
+): RecommendationHistory['weeks'][number]['games'][number] {
+  return {
+    cbsEventId,
+    sport: 'NFL',
+    kickoff,
+    away: 'AWAY',
+    home: 'HOME',
+    homeSpread: -3,
+    liveHomeSpread: -3,
+    category: 'neutral',
+    recommendedSide: null,
+    hook: null,
+    cover: null,
+    source: null,
+    pickedSide: null,
+    strength: null,
+    score: null,
+  }
+}
+
 const recs: RecommendationHistory = {
   updatedAt: thursdayDump,
   weeks: [
@@ -113,23 +156,13 @@ const recs: RecommendationHistory = {
       capturedAt: thursdayDump,
       scored: false,
       games: [
-        {
-          cbsEventId: 1,
-          sport: 'NFL',
-          kickoff: thursdayKickoff,
-          away: 'DET',
-          home: 'BUF',
-          homeSpread: -4.5,
-          liveHomeSpread: -4.5,
-          category: 'neutral',
-          recommendedSide: null,
-          hook: null,
-          cover: null,
-          source: null,
-          pickedSide: null,
-          strength: null,
-          score: null,
-        },
+        recGame(1, thursdayKickoff),
+        ...Array.from({ length: 9 }, (_, index) =>
+          recGame(10 + index, '2026-09-19T12:00:00-04:00'),
+        ),
+        ...Array.from({ length: 15 }, (_, index) =>
+          recGame(20 + index, '2026-09-20T13:00:00-04:00'),
+        ),
       ],
     },
   ],
@@ -149,7 +182,21 @@ test('a Thursday 25/25 is unlikely watching lines', () => {
   assert.match(summary.sentence, /full card in by Thursday/)
 })
 
-test('a Thursday partial is a maybe-watching building card', () => {
+test('a Thursday 1/25 on a 1-game Thursday is day-of picking', () => {
+  const summary = summarizePlayerCardTiming(
+    'one',
+    history('one', 1, [change('one', 0, 1, thursdayDump)]),
+    recs,
+    null,
+    thursdayDump,
+  )
+  assert.ok(summary)
+  assert.equal(summary.thisWeek?.bucket, 'day-of')
+  assert.equal(summary.read, 'likely')
+  assert.match(summary.sentence, /that day had games/)
+})
+
+test('a Thursday 10/25 with one Thursday game is a partial early lock', () => {
   const summary = summarizePlayerCardTiming(
     'alec',
     history('alec', 10, [change('alec', 0, 10, thursdayDump)]),
@@ -159,7 +206,26 @@ test('a Thursday partial is a maybe-watching building card', () => {
   )
   assert.ok(summary)
   assert.equal(summary.read, 'possible')
-  assert.equal(summary.thisWeek?.bucket, 'building')
+  assert.equal(summary.thisWeek?.bucket, 'ahead')
+})
+
+test('Saturday count matching Thursday plus Saturday games is day-of', () => {
+  const summary = summarizePlayerCardTiming(
+    'sat',
+    {
+      ...history('sat', 10, [
+        change('sat', 0, 1, thursdayDump),
+        change('sat', 1, 10, saturdayDump, thursdayDump),
+      ]),
+      source: { fetchedAt: saturdayDump, timezone: timeZone },
+    },
+    recs,
+    null,
+    saturdayDump,
+  )
+  assert.ok(summary)
+  assert.equal(summary.thisWeek?.bucket, 'day-of')
+  assert.equal(summary.read, 'likely')
 })
 
 test('finishing Saturday after a Thursday look is likely watching', () => {

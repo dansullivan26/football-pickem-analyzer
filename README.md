@@ -331,12 +331,15 @@ The comparison uses the current DraftKings home-team spread. Generated-card
 picks start with the team receiving the better number in the CBS pool. The
 favorable side of a field-goal hook is worth 0.5 spread points; a touchdown
 hook is worth 0.75. Taking the unfavorable side subtracts that value. This can
-break a true-neutral CBS/DraftKings tie toward the favorable hook side. Rest
+break a true-neutral CBS/DraftKings tie toward the favorable hook side. NFL
+first-team availability (ESPN, unofficial) is a small signed term: Out 0.25,
+Doubtful 0.15, Reserve 0.20, Questionable 0.05, capped at 0.5 per team so a
+long Wednesday report cannot dominate. College games skip it. Rest
 adds or subtracts 0.25 spread points per day from the normal seven-day baseline,
 capped at 0.75 per matchup. Travel subtracts 0.25 per crossed time zone, also
 capped at 0.75. The combined rest/travel adjustment is capped at one spread
-point, so it can boost or suppress line and hook value and overturn only a
-thin edge. If the composite is exactly tied, the game remains unpicked.
+point, so it can boost or suppress line, hook, and injury value and overturn
+only a thin edge. If the composite is exactly tied, the game remains unpicked.
 Missing context is neutral rather than inferred. Covers percentages remain
 visible but never select or rank a recommendation.
 
@@ -351,6 +354,6 @@ badge now corresponds to a 0.5/0.75-point subtraction in generated-card math.
 Generated-card Recommendation
 sort matches the Lines page: lock, then hammer, then lean, then slight, then
 neutral/context-only picks. Inside a tier, the composite edge — line plus hook,
-rest, and travel — ranks first. Raw line edge and hook kind break remaining
+injuries, rest, and travel — ranks first. Raw line edge and hook kind break remaining
 ties. A favorable hook still badges as solid but stays in its raw line-value
 tier.

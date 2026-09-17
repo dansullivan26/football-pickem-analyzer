@@ -9,6 +9,7 @@ import {
   type PublicSupport,
 } from './cardScoring.ts'
 import type { GameTravelRest } from './travelRest.ts'
+import type { NflStarterInjuryTeam } from './nflStarterInjuries.ts'
 import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types.ts'
 
 export {
@@ -19,7 +20,7 @@ export {
 } from './cardScoring.ts'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v7-line-hook-rest-travel'
+export const CARD_STRATEGY_ID = 'v8-line-hook-injury-rest-travel'
 
 export type SuggestedPick = {
   gameId: string
@@ -118,9 +119,11 @@ export type SuggestedTiebreaker = {
 /**
  * v6 card rules:
  * 1. Start with the signed line-value edge.
- * 2. Add capped rest and travel adjustments (at most one point combined).
- * 3. Covers remains informational and never selects or sorts a pick.
- * 4. A zero composite edge stays unpicked.
+ * 2. Add key-number hook value.
+ * 3. Add a capped NFL first-team injury term.
+ * 4. Add capped rest and travel adjustments (at most one point combined).
+ * 5. Covers remains informational and never selects or sorts a pick.
+ * 6. A zero composite edge stays unpicked.
  */
 export function generateSuggestedCard(
   analyses: GameAnalysis[],
@@ -133,6 +136,7 @@ export function generateSuggestedCard(
   tiebreaker: SlateTiebreaker | null | undefined,
   generatedAt = new Date(),
   travelRestByEvent: ReadonlyMap<number, GameTravelRest> = new Map(),
+  injuriesByAbbrev: ReadonlyMap<string, NflStarterInjuryTeam> = new Map(),
 ): SuggestedCard {
   const picks: SuggestedPick[] = []
   const unpicked: UnpickedGame[] = []
@@ -156,6 +160,13 @@ export function generateSuggestedCard(
       liveHomeSpread: analysis.liveHomeSpread,
       consensus,
       travelRest: travelRestByEvent.get(game.cbsEventId),
+      injuries:
+        game.sport === 'NFL'
+          ? {
+              away: injuriesByAbbrev.get(game.away.abbrev),
+              home: injuriesByAbbrev.get(game.home.abbrev),
+            }
+          : undefined,
     })
 
     if (
@@ -234,7 +245,7 @@ function unpickedReason(analysis: GameAnalysis) {
   if (category === 'pending') {
     return 'No DraftKings line and no rest or travel advantage'
   }
-  return 'No line-value, rest, or travel advantage'
+  return 'No line-value, hook, injury, rest, or travel advantage'
 }
 
 export function oppositeSide(side: 'home' | 'away') {

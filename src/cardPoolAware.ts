@@ -10,6 +10,7 @@ import {
   type PredictionForecasts,
 } from './playerPrediction.ts'
 import type { AppearanceTravelRest, GameTravelRest } from './travelRest.ts'
+import type { NflStarterInjuryTeam } from './nflStarterInjuries.ts'
 import type {
   GameAnalysis,
   PlayerHistory,
@@ -109,6 +110,7 @@ export function generatePoolAwareCard(
   projections: Map<number, PoolProjection>,
   generatedAt = new Date(),
   travelRestByEvent: ReadonlyMap<number, GameTravelRest> = new Map(),
+  injuriesByAbbrev: ReadonlyMap<string, NflStarterInjuryTeam> = new Map(),
 ): SuggestedCard {
   const ats = generateSuggestedCard(
     analyses,
@@ -117,6 +119,7 @@ export function generatePoolAwareCard(
     tiebreaker,
     generatedAt,
     travelRestByEvent,
+    injuriesByAbbrev,
   )
   const picks: SuggestedPick[] = []
   const unpicked: UnpickedGame[] = []

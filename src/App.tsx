@@ -105,6 +105,9 @@ const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const nflStarterInjuries =
   nflStarterInjuriesData as NflStarterInjuryFile
+const nflInjuriesByAbbrev = new Map(
+  nflStarterInjuries.teams.map((team) => [team.abbrev, team]),
+)
 const injuryLineHistory = injuryLineHistoryData as InjuryLineHistory
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
@@ -1418,6 +1421,7 @@ function App() {
                       slate.tiebreaker,
                       new Date(),
                       travelRestByEvent,
+                      nflInjuriesByAbbrev,
                     ),
                   )
                 }}
@@ -1490,6 +1494,7 @@ function App() {
                       projections,
                       new Date(),
                       travelRestByEvent,
+                      nflInjuriesByAbbrev,
                     ),
                   )
                 }}

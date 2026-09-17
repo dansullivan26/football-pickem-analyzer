@@ -1,5 +1,9 @@
 import type { ConsensusGame, EdgeCategory } from './types.ts'
 import type { GameTravelRest, SideRest, SideTravel } from './travelRest.ts'
+import type {
+  NflAvailabilityTier,
+  NflStarterInjuryTeam,
+} from './nflStarterInjuries.ts'
 
 export const PCT_PER_SPREAD_POINT = 3
 export const REST_POINTS_PER_DAY = 0.25
@@ -9,12 +13,19 @@ export const MAX_TRAVEL_ADJUSTMENT = 0.75
 export const MAX_CONTEXT_ADJUSTMENT = 1
 export const FG_HOOK_POINTS = 0.5
 export const TD_HOOK_POINTS = 0.75
+export const INJURY_TIER_POINTS: Record<NflAvailabilityTier, number> = {
+  out: 0.25,
+  doubtful: 0.15,
+  reserve: 0.2,
+  questionable: 0.05,
+}
+export const MAX_TEAM_INJURY_ADJUSTMENT = 0.5
 export const MAX_PUBLIC_BUCKET_DISTANCE = 1
 export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. Rest and travel can adjust the result by at most 1 spread point combined. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, rest, and travel produce no net advantage.'
+  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05), capped at 0.5 per team so a long report cannot run the card. Rest and travel can adjust the result by at most 1 spread point combined. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -93,6 +104,8 @@ export type RecommendationAdjustment = {
   rest: number
   /** Signed from the home side's perspective. */
   travel: number
+  /** Signed NFL starter-availability value from the home side's perspective. */
+  injury: number
   /** Applied rest + travel adjustment after the combined cap. */
   context: number
   /** Signed composite score from the home side's perspective. */
@@ -121,11 +134,34 @@ function travelPenalty(travel: SideTravel | null | undefined) {
   )
 }
 
+export function teamInjuryLoad(
+  team: NflStarterInjuryTeam | null | undefined,
+) {
+  if (!team || team.status !== 'ok') return 0
+  const raw = team.injuries.reduce(
+    (sum, row) => sum + INJURY_TIER_POINTS[row.tier],
+    0,
+  )
+  return Math.min(MAX_TEAM_INJURY_ADJUSTMENT, Math.round(raw * 100) / 100)
+}
+
+/** Positive means the visitor is more dinged than the home team. */
+export function injuryAdjustment(
+  away: NflStarterInjuryTeam | null | undefined,
+  home: NflStarterInjuryTeam | null | undefined,
+) {
+  return teamInjuryLoad(away) - teamInjuryLoad(home)
+}
+
 export function recommendationAdjustment(input: {
   recommendedSide: 'home' | 'away' | null
   edge: number | null
   homeSpread?: number
   travelRest?: GameTravelRest | null
+  injuries?: {
+    away?: NflStarterInjuryTeam | null
+    home?: NflStarterInjuryTeam | null
+  }
 }): RecommendationAdjustment {
   const line =
     input.edge == null || !input.recommendedSide
@@ -150,12 +186,14 @@ export function recommendationAdjustment(input: {
     -MAX_CONTEXT_ADJUSTMENT,
     MAX_CONTEXT_ADJUSTMENT,
   )
-  const total = line + hook + context
+  const injury = injuryAdjustment(input.injuries?.away, input.injuries?.home)
+  const total = line + hook + injury + context
   return {
     line,
     hook,
     rest,
     travel,
+    injury,
     context,
     total,
     pickedSide: total > 0 ? 'home' : total < 0 ? 'away' : null,
@@ -163,7 +201,11 @@ export function recommendationAdjustment(input: {
 }
 
 function formatPoints(value: number) {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1)
+  if (Number.isInteger(value)) return String(value)
+  const hundredths = Math.round(value * 100) / 100
+  const tenths = Math.round(value * 10) / 10
+  if (Math.abs(hundredths - tenths) < 1e-9) return tenths.toFixed(1)
+  return hundredths.toFixed(2)
 }
 
 export function formatPoolSpread(value: number) {
@@ -292,6 +334,16 @@ export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
     factor: 'TD hook (7)',
     value: `±${TD_HOOK_POINTS.toFixed(2)}`,
     detail: 'Favorable side of 6.5 / 7.5 adds; the bad side subtracts.',
+  },
+  {
+    factor: 'NFL first-team Out',
+    value: `−${INJURY_TIER_POINTS.out.toFixed(2)} each`,
+    detail: 'Charged to that team. Missing ESPN data is treated as zero.',
+  },
+  {
+    factor: 'Doubtful / reserve / Q',
+    value: `−${INJURY_TIER_POINTS.doubtful.toFixed(2)} / ${INJURY_TIER_POINTS.reserve.toFixed(2)} / ${INJURY_TIER_POINTS.questionable.toFixed(2)}`,
+    detail: `Questionable is a whisper. Each team's total is capped at ${MAX_TEAM_INJURY_ADJUSTMENT.toFixed(2)}.`,
   },
   {
     factor: 'Rest',
@@ -483,6 +535,10 @@ export function recommendationOrderKey(input: {
   liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
   travelRest?: GameTravelRest | null
+  injuries?: {
+    away?: NflStarterInjuryTeam | null
+    home?: NflStarterInjuryTeam | null
+  }
   kickoff: string
 }): RecommendationOrderKey {
   const adjustment = recommendationAdjustment({
@@ -535,6 +591,10 @@ export function resolveCardPick(input: {
   liveHomeSpread?: number | null
   consensus: ConsensusGame | undefined
   travelRest?: GameTravelRest | null
+  injuries?: {
+    away?: NflStarterInjuryTeam | null
+    home?: NflStarterInjuryTeam | null
+  }
 }): ResolvedCardPick {
   const empty: ResolvedCardPick = {
     source: null,
@@ -558,13 +618,14 @@ export function resolveCardPick(input: {
   if (!adjustment.pickedSide) {
     const hasLine = adjustment.line !== 0
     const hasHook = adjustment.hook !== 0
+    const hasInjury = adjustment.injury !== 0
     const hasContext = adjustment.context !== 0
     const skipReason =
-      (hasLine || hasHook) && hasContext
-        ? 'Line and hook value are exactly offset by rest and travel'
+      (hasLine || hasHook || hasInjury) && hasContext
+        ? 'Modeled edge is exactly offset by rest and travel'
         : input.category === 'pending'
           ? 'No DraftKings line and no rest or travel advantage'
-          : 'No line-value, hook, rest, or travel advantage'
+          : 'No line-value, hook, injury, rest, or travel advantage'
     return { ...empty, skipReason }
   }
 
@@ -580,6 +641,7 @@ export function resolveCardPick(input: {
   const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
   const pickedRest = adjustment.rest * sideSign
   const pickedTravel = adjustment.travel * sideSign
+  const pickedInjury = adjustment.injury * sideSign
   const parts: string[] = []
   if (input.edge != null && input.edge > 0) {
     parts.push(`${formatPoints(input.edge)}-point line value`)
@@ -587,6 +649,11 @@ export function resolveCardPick(input: {
   if (hookKind && pickedHook !== 0) {
     parts.push(
       `${hookKind === 'fg' ? 'FG' : 'TD'} hook ${pickedHook > 0 ? '+' : ''}${formatPoints(pickedHook)}`,
+    )
+  }
+  if (pickedInjury !== 0) {
+    parts.push(
+      `injuries ${pickedInjury > 0 ? '+' : ''}${formatPoints(pickedInjury)}`,
     )
   }
   if (pickedRest !== 0) {
@@ -608,6 +675,7 @@ export function resolveCardPick(input: {
           hook ? HOOK_SOLID_FLOOR : 0,
           lineValueScore(input.category, input.edge ?? 0) +
             pickedHook * PCT_PER_SPREAD_POINT +
+            pickedInjury * PCT_PER_SPREAD_POINT +
             adjustment.context * sideSign * PCT_PER_SPREAD_POINT,
         )
       : Math.abs(adjustment.total) * PCT_PER_SPREAD_POINT,

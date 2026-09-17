@@ -8,6 +8,10 @@ import {
   FG_HOOK_POINTS,
   favorableHook,
   hookAdjustment,
+  INJURY_TIER_POINTS,
+  MAX_TEAM_INJURY_ADJUSTMENT,
+  injuryAdjustment,
+  teamInjuryLoad,
   keyNumberHook,
   recommendationAdjustment,
   resolveCardPick,
@@ -15,6 +19,7 @@ import {
   unfavorableHook,
   publicSupportForSide,
 } from '../src/cardScoring.ts'
+import type { NflStarterInjuryTeam } from '../src/nflStarterInjuries.ts'
 import type { ConsensusGame } from '../src/types.ts'
 
 function pick(
@@ -203,6 +208,7 @@ test('rest and travel are capped at one combined spread point', () => {
   assert.equal(result.rest, 0.75)
   assert.equal(result.travel, 0.75)
   assert.equal(result.context, 1)
+  assert.equal(result.injury, 0)
   assert.equal(result.total, 1)
   assert.equal(result.pickedSide, 'home')
 })
@@ -212,7 +218,81 @@ test('the grading scale quotes the same hook values the math uses', () => {
     COMPOSITE_EDGE_SCALE.find((entry) => entry.factor === factor)?.value
   assert.equal(row('FG hook (3)'), `±${FG_HOOK_POINTS.toFixed(2)}`)
   assert.equal(row('TD hook (7)'), `±${TD_HOOK_POINTS.toFixed(2)}`)
+  assert.equal(row('NFL first-team Out'), '−0.25 each')
   assert.equal(row('Rest + travel cap'), '±1.00')
+})
+
+function injuryTeam(
+  abbrev: string,
+  tiers: Array<NflStarterInjuryTeam['injuries'][number]['tier']>,
+): NflStarterInjuryTeam {
+  return {
+    abbrev,
+    name: abbrev,
+    espnTeamId: '1',
+    depthChartAt: null,
+    status: 'ok',
+    injuries: tiers.map((tier, index) => ({
+      athleteId: String(index),
+      name: `Player ${index}`,
+      position: 'WR',
+      status: tier,
+      tier,
+      injury: 'Knee',
+      detail: null,
+      updatedAt: null,
+    })),
+  }
+}
+
+test('first-team injury load is small and capped per team', () => {
+  assert.equal(INJURY_TIER_POINTS.out, 0.25)
+  assert.equal(MAX_TEAM_INJURY_ADJUSTMENT, 0.5)
+  assert.equal(teamInjuryLoad(injuryTeam('KC', ['out'])), 0.25)
+  assert.equal(teamInjuryLoad(injuryTeam('KC', ['out', 'out'])), 0.5)
+  assert.equal(
+    teamInjuryLoad(
+      injuryTeam('KC', [
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+        'questionable',
+      ]),
+    ),
+    0.5,
+  )
+  assert.equal(
+    injuryAdjustment(injuryTeam('KC', ['out']), injuryTeam('BUF', [])),
+    0.25,
+  )
+  assert.equal(
+    injuryAdjustment(injuryTeam('KC', []), injuryTeam('BUF', ['doubtful'])),
+    -0.15,
+  )
+})
+
+test('a first-team Out can break a true-neutral NFL game', () => {
+  const result = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: -3,
+    liveHomeSpread: -3,
+    consensus: undefined,
+    injuries: {
+      away: injuryTeam('KC', ['out']),
+      home: injuryTeam('BUF', []),
+    },
+  })
+  assert.equal(result.pickedSide, 'home')
+  assert.equal(result.compositeEdge, 0.25)
+  assert.equal(result.detail, 'injuries +0.25 · 0.25-point net edge')
 })
 
 test('FG and TD hooks add or subtract spread-point value for home', () => {
@@ -359,7 +439,7 @@ test('public consensus cannot fill a game with no modeled advantage', () => {
   assert.equal(result.source, null)
   assert.equal(
     result.skipReason,
-    'No line-value, hook, rest, or travel advantage',
+    'No line-value, hook, injury, rest, or travel advantage',
   )
 })
 

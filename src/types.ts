@@ -207,6 +207,24 @@ export type PickChange = {
   }
 }
 
+/** Coarse dump-to-dump change in CBS's week-level submitted-pick count. */
+export type PicksCountChange = {
+  week: number
+  periodId: string
+  entryId: string
+  name: string
+  changeType: 'picksCount'
+  from: number | null
+  to: number
+  picksCountFirstSeenAt: string | null
+  previousFetchedAt: string | null
+  fetchedAt: string
+  window: {
+    after: string | null
+    atOrBefore: string
+  }
+}
+
 export type PlayerRosterEntry = {
   entryId: string
   name: string
@@ -226,6 +244,12 @@ export type PlayerWeekEntry = {
   weekRank: number | null
   correctPicks: number | null
   picksCount: number | null
+  maxPicksCount?: number | null
+  /** CBS week-entry status, distinct from each game's grading status. */
+  pickStatus?: string | null
+  revealedPicksCount?: number | null
+  /** First dump where CBS reported at least one submitted pick this week. */
+  picksCountFirstSeenAt?: string | null
   tiebreaker: {
     question: string | null
     answer: number | null
@@ -259,6 +283,8 @@ export type PlayerHistory = {
   weeks: PlayerWeek[]
   /** Accumulated dump-to-dump pick appearances, flips, and clears. */
   pickChanges?: PickChange[]
+  /** Accumulated changes in CBS's week-level submitted-pick count. */
+  picksCountChanges?: PicksCountChange[]
 }
 
 export type ConsensusSide = {

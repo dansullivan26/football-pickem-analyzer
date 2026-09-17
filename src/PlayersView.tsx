@@ -45,9 +45,14 @@ import {
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import type { LastKickoffFile } from './lastKickoff'
-import { pickChangeForGame, pickChangeVsPrediction } from './pickChanges'
+import {
+  pickChangeForGame,
+  pickChangeVsPrediction,
+  picksCountStartChange,
+} from './pickChanges'
 import {
   formatPickChangeCopy,
+  formatPicksCountStartCopy,
   formatPicksSnapshotAt,
 } from './playerSnapshot'
 import {
@@ -590,6 +595,19 @@ export default function PlayersView({
   const weekEntry = selectedHistoryWeek?.entries.find(
     (entry) => entry.entryId === selectedPlayer?.entryId,
   )
+  const countStart =
+    selectedPlayer && selectedWeek
+      ? picksCountStartChange(
+          history.picksCountChanges,
+          selectedWeek.week,
+          selectedPlayer.entryId,
+        )
+      : null
+  const countStartCopy = formatPicksCountStartCopy(
+    countStart,
+    weekEntry?.picksCountFirstSeenAt,
+    history.source.timezone,
+  )
   const summary = selectedPlayer
     ? summarizePlayer(
         selectedPlayer.entryId,
@@ -1094,13 +1112,26 @@ export default function PlayersView({
                 <div className="player-week-context">
                   <span
                     className="player-picks-snapshot"
-                    title="When GrokBot pulled the pool file. CBS does not provide when this player submitted or changed a pick."
+                    title="When GrokBot pulled the pool file."
                   >
                     Pool picks as of{' '}
                     <time dateTime={history.source.fetchedAt}>
                       {picksSnapshotAt}
                     </time>
                   </span>
+                  {weekEntry?.picksCount != null &&
+                    weekEntry.maxPicksCount != null && (
+                      <span
+                        className="player-card-progress"
+                        title="CBS week-level submitted count. The timing is a coarse window between GrokBot dumps, not an exact CBS submit time."
+                      >
+                        <strong>
+                          {weekEntry.picksCount}/{weekEntry.maxPicksCount}{' '}
+                          submitted
+                        </strong>
+                        {countStartCopy && <small>{countStartCopy}</small>}
+                      </span>
+                    )}
                   <label className="player-week-select">
                     <span className="sr-only">Select week</span>
                     <select

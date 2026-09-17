@@ -4,8 +4,10 @@ import {
   mergePickChangeLog,
   pickChangeForGame,
   pickChangeVsPrediction,
+  picksCountStartChange,
   readFirstSeenAt,
   sanitizePickChanges,
+  sanitizePicksCountChanges,
 } from '../src/pickChanges.ts'
 import { formatPickChangeCopy } from '../src/playerSnapshot.ts'
 
@@ -55,6 +57,53 @@ test('sanitizePickChanges accepts an empty change list', () => {
       dump.fetchedAt,
     ),
     [],
+  )
+})
+
+test('sanitizes and finds the first submitted-count change', () => {
+  const rows = sanitizePicksCountChanges(
+    {
+      ...dump,
+      picksCountChanges: [
+        {
+          entryId: 'dan',
+          name: 'Dan',
+          changeType: 'picksCount',
+          from: 0,
+          to: 1,
+          picksCountFirstSeenAt: dump.fetchedAt,
+          window: {
+            after: dump.previousFetchedAt,
+            atOrBefore: dump.fetchedAt,
+          },
+        },
+      ],
+    },
+    dump.fetchedAt,
+  )
+
+  assert.equal(rows.length, 1)
+  assert.equal(rows[0]?.to, 1)
+  assert.equal(picksCountStartChange(rows, 2, 'dan'), rows[0])
+  assert.equal(picksCountStartChange(rows, 2, 'missing'), null)
+})
+
+test('sanitizePicksCountChanges rejects invalid counts', () => {
+  assert.throws(() =>
+    sanitizePicksCountChanges(
+      {
+        ...dump,
+        picksCountChanges: [
+          {
+            entryId: 'dan',
+            changeType: 'picksCount',
+            from: 0,
+            to: -1,
+          },
+        ],
+      },
+      dump.fetchedAt,
+    ),
   )
 })
 

@@ -3,6 +3,7 @@ import type {
   PickChange,
   PickChangeSides,
   PickChangeType,
+  PicksCountChange,
 } from './types.ts'
 
 const CHANGE_TYPES = new Set<PickChangeType>(['appeared', 'flipped', 'cleared'])
@@ -20,6 +21,16 @@ function readIso(value: unknown, label: string) {
 function readIsoOrNull(value: unknown, label: string) {
   if (value == null) return null
   return readIso(value, label)
+}
+
+function readCount(value: unknown, label: string, nullable?: true): number | null
+function readCount(value: unknown, label: string, nullable: false): number
+function readCount(value: unknown, label: string, nullable = true) {
+  if (value == null && nullable) return null
+  if (!Number.isInteger(value) || (value as number) < 0) {
+    throw new Error(`${label} must be a non-negative integer${nullable ? ' or null' : ''}.`)
+  }
+  return value as number
 }
 
 function readSide(value: unknown, label: string): PickChangeSides {
@@ -121,11 +132,86 @@ export function sanitizePickChanges(
   })
 }
 
+export function sanitizePicksCountChanges(
+  raw: unknown,
+  fallbackFetchedAt: string | null,
+): PicksCountChange[] {
+  if (raw == null) return []
+  if (typeof raw !== 'object' || Array.isArray(raw)) {
+    throw new Error('pickChanges must be an object or omitted.')
+  }
+
+  const block = raw as {
+    week?: unknown
+    periodId?: unknown
+    previousFetchedAt?: unknown
+    fetchedAt?: unknown
+    picksCountChanges?: unknown
+  }
+  if (!Number.isInteger(block.week)) {
+    throw new Error('pickChanges.week must be an integer.')
+  }
+  const week = block.week as number
+  const periodId =
+    typeof block.periodId === 'string' && block.periodId.trim()
+      ? block.periodId.trim()
+      : ''
+  const fetchedAt = readIso(
+    block.fetchedAt ?? fallbackFetchedAt,
+    'pickChanges.fetchedAt',
+  )
+  const previousFetchedAt = readIsoOrNull(
+    block.previousFetchedAt,
+    'pickChanges.previousFetchedAt',
+  )
+  const rows = Array.isArray(block.picksCountChanges)
+    ? block.picksCountChanges
+    : []
+
+  return rows.map((row, index) => {
+    const change = row as Partial<PicksCountChange> & {
+      window?: Partial<PicksCountChange['window']>
+    }
+    const label = `pickChanges.picksCountChanges[${index}]`
+    if (typeof change.entryId !== 'string' || !change.entryId) {
+      throw new Error(`${label} is missing entryId.`)
+    }
+    if (change.changeType !== 'picksCount') {
+      throw new Error(`${label}.changeType must be picksCount.`)
+    }
+    return {
+      week,
+      periodId,
+      entryId: change.entryId,
+      name: typeof change.name === 'string' ? change.name : '',
+      changeType: 'picksCount',
+      from: readCount(change.from, `${label}.from`),
+      to: readCount(change.to, `${label}.to`, false),
+      picksCountFirstSeenAt: readIsoOrNull(
+        change.picksCountFirstSeenAt,
+        `${label}.picksCountFirstSeenAt`,
+      ),
+      previousFetchedAt,
+      fetchedAt,
+      window: {
+        after: readIsoOrNull(
+          change.window?.after ?? previousFetchedAt,
+          `${label}.window.after`,
+        ),
+        atOrBefore: readIso(
+          change.window?.atOrBefore ?? fetchedAt,
+          `${label}.window.atOrBefore`,
+        ),
+      },
+    }
+  })
+}
+
 /** Re-ingesting the same dump replaces that dump's slice instead of duplicating. */
-export function mergePickChangeLog(
-  existing: PickChange[] | undefined,
-  incoming: PickChange[],
-) {
+export function mergePickChangeLog<T extends PickChange | PicksCountChange>(
+  existing: T[] | undefined,
+  incoming: T[],
+): T[] {
   if (incoming.length === 0) return existing ?? []
   const dumpKeys = new Set(
     incoming.map((row) => `${row.week}|${row.fetchedAt}`),
@@ -134,6 +220,22 @@ export function mergePickChangeLog(
     (row) => !dumpKeys.has(`${row.week}|${row.fetchedAt}`),
   )
   return [...kept, ...incoming]
+}
+
+export function picksCountStartChange(
+  log: PicksCountChange[] | undefined,
+  week: number,
+  entryId: string,
+) {
+  return (
+    (log ?? []).find(
+      (row) =>
+        row.week === week &&
+        row.entryId === entryId &&
+        (row.from ?? 0) === 0 &&
+        row.to > 0,
+    ) ?? null
+  )
 }
 
 export function pickChangeForGame(

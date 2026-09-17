@@ -4,6 +4,7 @@ import {
   mergePickChangeLog,
   readFirstSeenAt,
   sanitizePickChanges,
+  sanitizePicksCountChanges,
 } from '../src/pickChanges.ts'
 import type { PlayerHistory } from '../src/types.ts'
 
@@ -26,6 +27,14 @@ if (!Array.isArray(raw.entries) || !Array.isArray(raw.weeks)) {
 }
 
 const rosterIds = new Set(raw.entries.map((entry: { entryId: string }) => entry.entryId))
+
+function readOptionalCount(value: unknown, label: string) {
+  if (value == null) return null
+  if (!Number.isInteger(value) || (value as number) < 0) {
+    throw new Error(`${label} must be a non-negative integer or null.`)
+  }
+  return value as number
+}
 
 function readPlayerTiebreaker(entry: {
   name?: string
@@ -79,6 +88,10 @@ const weeks = raw.weeks.map((week: {
     weekRank: number | null
     correctPicks: number | null
     picksCount: number | null
+    maxPicksCount?: unknown
+    pickStatus?: unknown
+    revealedPicksCount?: unknown
+    picksCountFirstSeenAt?: unknown
     tiebreaker?: unknown
     picks: Array<Record<string, unknown>>
   }>
@@ -152,6 +165,37 @@ const weeks = raw.weeks.map((week: {
         weekRank: entry.weekRank,
         correctPicks: entry.correctPicks,
         picksCount: entry.picksCount,
+        ...(entry.maxPicksCount !== undefined
+          ? {
+              maxPicksCount: readOptionalCount(
+                entry.maxPicksCount,
+                `${entry.name}.maxPicksCount`,
+              ),
+            }
+          : {}),
+        ...(entry.pickStatus !== undefined
+          ? {
+              pickStatus:
+                typeof entry.pickStatus === 'string'
+                  ? entry.pickStatus
+                  : null,
+            }
+          : {}),
+        ...(entry.revealedPicksCount !== undefined
+          ? {
+              revealedPicksCount: readOptionalCount(
+                entry.revealedPicksCount,
+                `${entry.name}.revealedPicksCount`,
+              ),
+            }
+          : {}),
+        ...(entry.picksCountFirstSeenAt !== undefined
+          ? {
+              picksCountFirstSeenAt: readFirstSeenAt(
+                entry.picksCountFirstSeenAt,
+              ),
+            }
+          : {}),
         tiebreaker: readPlayerTiebreaker(entry),
         picks: entry.picks.map((pick) => {
           const firstSeenAt = readFirstSeenAt(pick.firstSeenAt)
@@ -178,6 +222,10 @@ const weeks = raw.weeks.map((week: {
 })
 
 const incomingChanges = sanitizePickChanges(
+  raw.pickChanges,
+  raw.source?.fetchedAt ?? null,
+)
+const incomingPicksCountChanges = sanitizePicksCountChanges(
   raw.pickChanges,
   raw.source?.fetchedAt ?? null,
 )
@@ -208,6 +256,10 @@ const pickChanges = mergePickChangeLog(
   existing?.pickChanges,
   incomingChanges,
 )
+const picksCountChanges = mergePickChangeLog(
+  existing?.picksCountChanges,
+  incomingPicksCountChanges,
+)
 
 const history = {
   source: {
@@ -231,6 +283,7 @@ const history = {
   })),
   weeks,
   ...(pickChanges.length ? { pickChanges } : {}),
+  ...(picksCountChanges.length ? { picksCountChanges } : {}),
 }
 
 await mkdir(resolve('src/data'), { recursive: true })
@@ -252,5 +305,10 @@ console.log(
 if (incomingChanges.length) {
   console.log(
     `Recorded ${incomingChanges.length} pick change${incomingChanges.length === 1 ? '' : 's'} from this dump.`,
+  )
+}
+if (incomingPicksCountChanges.length) {
+  console.log(
+    `Recorded ${incomingPicksCountChanges.length} submitted-count change${incomingPicksCountChanges.length === 1 ? '' : 's'} from this dump.`,
   )
 }

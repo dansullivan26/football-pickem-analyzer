@@ -47,3 +47,15 @@ export function formatPickChangeCopy(
   }
   return `${verb} between ${formatPicksSnapshotAt(change.window.after, timeZone)} and ${until}`
 }
+
+export function formatPicksCountStartCopy(
+  change: { window: { after: string | null; atOrBefore: string } } | null,
+  firstSeenAt: string | null | undefined,
+  timeZone?: string,
+) {
+  const atOrBefore = change?.window.atOrBefore ?? firstSeenAt
+  if (!atOrBefore) return null
+  const until = formatPicksSnapshotAt(atOrBefore, timeZone)
+  if (!change?.window.after) return `Started by ${until}`
+  return `Started between ${formatPicksSnapshotAt(change.window.after, timeZone)} and ${until}`
+}

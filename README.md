@@ -69,6 +69,15 @@ frozen recommendation snapshot so the Performance page can score those
 games. A later overwrite of the same dump updates covers again. Line-value agreement
 and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
+Current week entries can also carry CBS's hidden-card progress:
+`picksCount`, `maxPicksCount`, entry-level `pickStatus`,
+`revealedPicksCount`, and `picksCountFirstSeenAt`. The Players view shows the
+submitted N/25 count even while team selections remain hidden. Ingest
+sanitizes and retains `pickChanges.picksCountChanges` as
+`picksCountChanges`, allowing the UI to describe the first submission as a
+coarse interval between GrokBot dumps. It is never presented as an exact CBS
+submit time.
+
 The Players view also builds a weekly prediction from that player's earlier
 graded weeks. A week counts as graded once any pick carries a `result`, so a
 still-`in_progress` CBS week feeds the habit math as soon as Saturday finals

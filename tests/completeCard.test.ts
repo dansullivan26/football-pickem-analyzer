@@ -46,6 +46,7 @@ const card: SuggestedCard = {
       home: 'Manual Home',
       homeId: 'manual-home-id',
       homeSpread: -1.5,
+      kickoff: '2026-09-13T13:00:00-04:00',
       kickoffLabel: 'Sun 1:00 PM',
       reason: 'No line-value, rest, or travel advantage',
     },

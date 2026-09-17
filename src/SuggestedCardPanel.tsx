@@ -3,9 +3,12 @@ import { createPortal } from 'react-dom'
 import {
   formatPoolSpread,
   formatSuggestedCardText,
+  orderCardRows,
   sortSuggestedPicks,
   submittedPick,
   type SuggestedCard,
+  type SuggestedPick,
+  type UnpickedGame,
 } from './cardStrategy'
 import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
 import { COMPOSITE_EDGE_SCALE, unfavorableHook } from './cardScoring'
@@ -55,6 +58,10 @@ export default function SuggestedCardPanel({
   const picks = useMemo(
     () => sortSuggestedPicks(card.picks, sort),
     [card.picks, sort],
+  )
+  const rows = useMemo(
+    () => orderCardRows(card.picks, card.unpicked, sort),
+    [card.picks, card.unpicked, sort],
   )
 
   useEffect(() => {
@@ -267,111 +274,24 @@ export default function SuggestedCardPanel({
         )}
 
         <ol className="suggested-picks">
-          {picks.map((pick) => {
-            const deviate = deviations.has(pick.gameId)
-            const sent = submittedPick(pick, deviate)
-            const badHook = pick.hook ? null : unfavorableHook(pick.poolSpread)
-            return (
-              <li key={pick.cbsEventId} className={deviate ? 'deviated' : undefined}>
-                <div className="suggested-pick-teams">
-                  <strong>
-                    {sent.pickedTeam} {formatPoolSpread(sent.poolSpread)}
-                  </strong>
-                  <span>
-                    {pick.away} @ {pick.home}
-                    {deviate
-                      ? ` · rec was ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
-                      : ''}
-                  </span>
-                </div>
-                <div className="suggested-pick-tags">
-                  <span className={`pick-source ${pick.source}`}>
-                    {pick.source === 'line-value'
-                      ? 'Line value'
-                      : pick.source === 'rest-travel'
-                        ? 'Rest / travel'
-                        : pick.source === 'season-results'
-                          ? 'Season results'
-                          : pick.source === 'pool-aware'
-                            ? 'Pool leverage'
-                            : 'Public'}
-                  </span>
-                  <span className={`pick-strength ${pick.strength}`}>
-                    {pick.strength}
-                  </span>
-                  {pick.hook && (
-                    <span className="pick-hook">
-                      {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
-                    </span>
-                  )}
-                  {badHook && (
-                    <span className="pick-hook unfavorable">
-                      Unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
-                    </span>
-                  )}
-                  {pick.publicSupport !== 'none' && (
-                      <span className={`pick-public ${pick.publicSupport}`}>
-                        {pick.publicSupport === 'agree'
-                          ? 'Public agrees'
-                          : 'Public fades'}
-                      </span>
-                    )}
-                  {deviate && <span className="pick-deviate">Deviate</span>}
-                </div>
-                <label className="suggested-pick-toggle">
-                  <input
-                    type="checkbox"
-                    checked={deviate}
-                    onChange={() => toggleDeviate(pick.gameId)}
-                  />
-                  Deviate
-                </label>
-                <em>{pick.detail}</em>
-              </li>
-            )
-          })}
+          {rows.map((row) =>
+            row.kind === 'pick' ? (
+              <SuggestedPickRow
+                key={row.pick.cbsEventId}
+                pick={row.pick}
+                deviate={deviations.has(row.pick.gameId)}
+                onToggleDeviate={toggleDeviate}
+              />
+            ) : (
+              <ManualReviewRow
+                key={row.game.cbsEventId}
+                game={row.game}
+                selected={manualSelections.get(row.game.gameId)}
+                onToggle={toggleManualPick}
+              />
+            ),
+          )}
         </ol>
-
-        {card.unpicked.length > 0 && (
-          <div className="suggested-unpicked">
-            <h3>Manual review ({card.unpicked.length})</h3>
-            <ul>
-              {card.unpicked.map((game) => {
-                const selected = manualSelections.get(game.gameId)
-                return (
-                <li
-                  key={game.cbsEventId}
-                  className={selected ? 'manually-picked' : undefined}
-                >
-                  <strong>
-                    {game.away} @ {game.home}
-                  </strong>
-                  <span>{game.reason}</span>
-                  <div className="manual-pick-options">
-                    {(['away', 'home'] as const).map((side) => {
-                      const team = side === 'away' ? game.away : game.home
-                      const spread =
-                        game.homeSpread * (side === 'away' ? -1 : 1)
-                      return (
-                        <label key={side}>
-                          <input
-                            type="checkbox"
-                            checked={selected === side}
-                            onChange={() => toggleManualPick(game.gameId, side)}
-                          />
-                          <span>
-                            {team} {formatPoolSpread(spread)}
-                          </span>
-                        </label>
-                      )
-                    })}
-                  </div>
-                </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
 
         {card.tiebreaker && (
           <section className="card-tiebreaker" aria-labelledby="card-tiebreaker-title">
@@ -516,5 +436,118 @@ export default function SuggestedCardPanel({
       </div>
     </div>,
     document.body,
+  )
+}
+
+function SuggestedPickRow({
+  pick,
+  deviate,
+  onToggleDeviate,
+}: {
+  pick: SuggestedPick
+  deviate: boolean
+  onToggleDeviate: (gameId: string) => void
+}) {
+  const sent = submittedPick(pick, deviate)
+  const badHook = pick.hook ? null : unfavorableHook(pick.poolSpread)
+  return (
+    <li className={deviate ? 'deviated' : undefined}>
+      <div className="suggested-pick-teams">
+        <strong>
+          {sent.pickedTeam} {formatPoolSpread(sent.poolSpread)}
+        </strong>
+        <span>
+          {pick.away} @ {pick.home}
+          {deviate
+            ? ` · rec was ${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
+            : ''}
+        </span>
+      </div>
+      <div className="suggested-pick-tags">
+        <span className={`pick-source ${pick.source}`}>
+          {pick.source === 'line-value'
+            ? 'Line value'
+            : pick.source === 'rest-travel'
+              ? 'Rest / travel'
+              : pick.source === 'season-results'
+                ? 'Season results'
+                : pick.source === 'pool-aware'
+                  ? 'Pool leverage'
+                  : 'Public'}
+        </span>
+        <span className={`pick-strength ${pick.strength}`}>
+          {pick.strength}
+        </span>
+        {pick.hook && (
+          <span className="pick-hook">
+            {pick.hook === 'fg' ? 'FG hook' : 'TD hook'}
+          </span>
+        )}
+        {badHook && (
+          <span className="pick-hook unfavorable">
+            Unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
+          </span>
+        )}
+        {pick.publicSupport !== 'none' && (
+          <span className={`pick-public ${pick.publicSupport}`}>
+            {pick.publicSupport === 'agree'
+              ? 'Public agrees'
+              : 'Public fades'}
+          </span>
+        )}
+        {deviate && <span className="pick-deviate">Deviate</span>}
+      </div>
+      <label className="suggested-pick-toggle">
+        <input
+          type="checkbox"
+          checked={deviate}
+          onChange={() => onToggleDeviate(pick.gameId)}
+        />
+        Deviate
+      </label>
+      <em>{pick.detail}</em>
+    </li>
+  )
+}
+
+function ManualReviewRow({
+  game,
+  selected,
+  onToggle,
+}: {
+  game: UnpickedGame
+  selected: 'home' | 'away' | undefined
+  onToggle: (gameId: string, side: 'home' | 'away') => void
+}) {
+  return (
+    <li className={selected ? 'manual-review manually-picked' : 'manual-review'}>
+      <div className="suggested-pick-teams">
+        <strong>
+          {game.away} @ {game.home}
+        </strong>
+        <span>{game.reason}</span>
+      </div>
+      <div className="suggested-pick-tags">
+        <span className="pick-source manual-review">Manual review</span>
+      </div>
+      <div className="manual-pick-options">
+        {(['away', 'home'] as const).map((side) => {
+          const team = side === 'away' ? game.away : game.home
+          const spread = game.homeSpread * (side === 'away' ? -1 : 1)
+          return (
+            <label key={side}>
+              <input
+                type="checkbox"
+                checked={selected === side}
+                onChange={() => onToggle(game.gameId, side)}
+              />
+              <span>
+                {team} {formatPoolSpread(spread)}
+              </span>
+            </label>
+          )
+        })}
+      </div>
+    </li>
   )
 }

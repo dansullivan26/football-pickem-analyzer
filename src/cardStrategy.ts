@@ -58,9 +58,14 @@ export type UnpickedGame = {
   home: string
   homeId: string
   homeSpread: number
+  kickoff: string
   kickoffLabel: string
   reason: string
 }
+
+export type CardListRow =
+  | { kind: 'pick'; pick: SuggestedPick }
+  | { kind: 'unpicked'; game: UnpickedGame }
 
 export type ManualPickSelections = ReadonlyMap<string, 'home' | 'away'>
 
@@ -240,7 +245,13 @@ export function sortSuggestedPicks(
   picks: SuggestedPick[],
   sort: 'slate' | 'recommendation',
 ) {
-  if (sort === 'slate') return picks
+  if (sort === 'slate') {
+    return [...picks].sort(
+      (left, right) =>
+        left.kickoff.localeCompare(right.kickoff) ||
+        left.cbsEventId - right.cbsEventId,
+    )
+  }
   return [...picks].sort((left, right) =>
     compareRecommendationOrder(
       {
@@ -262,6 +273,38 @@ export function sortSuggestedPicks(
         kickoff: right.kickoff,
       },
     ),
+  )
+}
+
+function rowKickoff(row: CardListRow) {
+  return row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff
+}
+
+function rowEventId(row: CardListRow) {
+  return row.kind === 'pick' ? row.pick.cbsEventId : row.game.cbsEventId
+}
+
+/** Kickoff sort feathers manual-review games into the slate. Recommendation sort keeps them last. */
+export function orderCardRows(
+  picks: SuggestedPick[],
+  unpicked: UnpickedGame[],
+  sort: 'slate' | 'recommendation',
+): CardListRow[] {
+  const pickRows: CardListRow[] = sortSuggestedPicks(picks, sort).map(
+    (pick) => ({ kind: 'pick', pick }),
+  )
+  const unpickedRows: CardListRow[] = [...unpicked]
+    .sort(
+      (left, right) =>
+        left.kickoff.localeCompare(right.kickoff) ||
+        left.cbsEventId - right.cbsEventId,
+    )
+    .map((game) => ({ kind: 'unpicked', game }))
+  if (sort === 'recommendation') return [...pickRows, ...unpickedRows]
+  return [...pickRows, ...unpickedRows].sort(
+    (left, right) =>
+      rowKickoff(left).localeCompare(rowKickoff(right)) ||
+      rowEventId(left) - rowEventId(right),
   )
 }
 

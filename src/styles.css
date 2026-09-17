@@ -764,6 +764,16 @@ h2 {
   background: #fff8e8;
 }
 
+.suggested-picks li.manual-review {
+  grid-template-columns: minmax(0, 1fr);
+  background: #f4f5f4;
+}
+
+.suggested-picks li.manual-review.manually-picked {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
 .suggested-pick-teams {
   display: grid;
   gap: 2px;
@@ -844,6 +854,15 @@ h2 {
 .pick-source.pool-aware {
   color: #4a2f73;
   background: #f1e9fb;
+}
+
+.pick-source.manual-review {
+  color: var(--muted);
+  background: rgba(21, 35, 28, 0.08);
+}
+
+.suggested-picks li.manual-review .manual-pick-options {
+  grid-column: 1 / -1;
 }
 
 .pick-strength {

@@ -160,6 +160,7 @@ export function generatePoolAwareCard(
           home: game.home.name,
           homeId: game.home.id,
           homeSpread: game.homeSpread,
+          kickoff: game.kickoff,
           kickoffLabel: game.kickoffLabel.replace(' ET', ''),
           reason: '',
         }),

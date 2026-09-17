@@ -1490,6 +1490,11 @@ select:focus {
   text-transform: uppercase;
 }
 
+.starter-availability summary strong.injury-line-tag {
+  color: var(--ink);
+  background: rgba(21, 35, 28, 0.08);
+}
+
 .starter-availability summary small,
 .starter-availability-note,
 .starter-availability-empty,
@@ -1501,6 +1506,45 @@ select:focus {
 .starter-availability-note {
   margin: 0 0 12px;
   line-height: 1.4;
+}
+
+.injury-line-moves {
+  margin: 0 0 12px;
+}
+
+.injury-line-moves h4 {
+  margin: 0 0 4px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.74rem;
+}
+
+.injury-line-moves p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.injury-line-moves ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.injury-line-moves li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.injury-line-moves small {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
 }
 
 .starter-availability-grid {

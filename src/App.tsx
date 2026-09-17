@@ -9,6 +9,7 @@ import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
 import weatherHistoryData from './data/weather-history.json'
 import nflStarterInjuriesData from './data/nfl-starter-injuries.json'
+import injuryLineHistoryData from './data/injury-line-history.json'
 import cardOverridesData from './data/card-overrides.json'
 import teamRosterData from './data/team-roster.json'
 import PlayersView from './PlayersView'
@@ -71,6 +72,11 @@ import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
 import type { PredictionForecasts } from './playerPrediction'
 import type { NflStarterInjuryFile } from './nflStarterInjuries'
+import {
+  formatInjuryLineEvent,
+  injuryLineEventsForGame,
+  type InjuryLineHistory,
+} from './injuryLineMoves'
 import type {
   BookKey,
   CardOverrides,
@@ -99,6 +105,7 @@ const recommendationHistory = recommendationHistoryData as RecommendationHistory
 const predictionForecasts = predictionForecastsData as PredictionForecasts
 const nflStarterInjuries =
   nflStarterInjuriesData as NflStarterInjuryFile
+const injuryLineHistory = injuryLineHistoryData as InjuryLineHistory
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const cardOverrides = cardOverridesData as CardOverrides
@@ -634,6 +641,12 @@ function GameCard({
           away={game.away}
           home={game.home}
           file={nflStarterInjuries}
+          lineEvents={injuryLineEventsForGame(
+            injuryLineHistory,
+            game.cbsEventId,
+            slate.week.order,
+            slate.pool.seasonYear,
+          )}
         />
       )}
     </article>
@@ -770,6 +783,56 @@ function LineHistoryNote({
               </strong>
               {ticks.length > 1 ? ` · ${formatSpreadPath(ticks)}` : ''}
               {totals.length > 1 ? ` · O/U ${formatTotalPath(totals)}` : ''}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </details>
+  )
+}
+
+function InjuryLineWeekNote({
+  history,
+}: {
+  history: InjuryLineHistory
+}) {
+  const games =
+    history.week === slate.week.order
+      ? history.games
+          .map((row) => {
+            const slateGame = slate.games.find(
+              (item) => item.cbsEventId === row.cbsEventId,
+            )
+            const coincidences = row.events.filter(
+              (event) => event.towardTeam != null && event.towardTeam !== 0,
+            )
+            return { row, slateGame, coincidences }
+          })
+          .filter(({ coincidences }) => coincidences.length > 0)
+      : []
+  if (games.length === 0) return null
+
+  return (
+    <details className="covers-report">
+      <summary className="list-meta">
+        {`${games.length} NFL game${games.length === 1 ? '' : 's'} had a starter-status change on a DraftKings move`}
+        <span className="covers-report-link">Injury-timed lines</span>
+      </summary>
+      <div className="covers-report-body">
+        <p>{history.note}</p>
+        <ul>
+          {games.map(({ row, slateGame, coincidences }) => (
+            <li key={row.cbsEventId}>
+              <strong>
+                {slateGame
+                  ? `${slateGame.away.abbrev} @ ${slateGame.home.abbrev}`
+                  : `Event ${row.cbsEventId}`}
+              </strong>
+              {coincidences.map((event) => (
+                <span key={`${event.athleteId ?? event.name}:${event.at}`}>
+                  {` · ${formatInjuryLineEvent(event)}`}
+                </span>
+              ))}
             </li>
           ))}
         </ul>
@@ -1459,6 +1522,7 @@ function App() {
             history={lineHistory}
             events={feed?.events}
           />
+          <InjuryLineWeekNote history={injuryLineHistory} />
 
           <div className="game-list">
             {visibleGames.map((analysis) => (

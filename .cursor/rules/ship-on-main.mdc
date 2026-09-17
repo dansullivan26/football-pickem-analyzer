@@ -9,3 +9,5 @@ alwaysApply: true
   feature branches or pull requests unless the user explicitly asks.
 - Move fast. Do not take screenshots or screen recordings to prove a
   fix or feature. Do not upload walkthrough artifacts unless asked.
+- Do not use computer-use / browser verification for UI changes in this
+  repo. `npm test` and `npm run build` are enough.

@@ -55,6 +55,8 @@ GitHub Pages serves these deep links via `404.html`. `vite.config.ts` sets a
   team/career/line history, predictions, card strategy, and route parsing.
 - Run `npm run build` to confirm types still pass before pushing to `main`.
 - Ship on `main` and skip demo recordings — see `.cursor/rules/ship-on-main.mdc`.
+- Do not use computer-use or a browser to verify UI. Tests and a typecheck
+  build are the verification for this repo.
 - There is no backend to run; do not add server infrastructure to test.
 
 ## Known lint state
@@ -89,3 +91,7 @@ cleanup.
 - Kickoff weather buckets live in `src/data/weather-history.json` and are
   frozen by **Refresh sportsbook lines** (`npm run snapshot-weather`). Do
   not reconstruct ATS from weather.
+- NFL starter-status vs DraftKings coincidences live in
+  `src/data/injury-line-history.json`, written by **Refresh sportsbook
+  lines** after `refresh-nfl-injuries`. Same-hour line movement is a
+  coincidence, not a causal claim.

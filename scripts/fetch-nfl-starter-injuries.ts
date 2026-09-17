@@ -1,14 +1,20 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import {
+  updateInjuryLineHistory,
+  type InjuryLineHistory,
+} from '../src/injuryLineMoves.ts'
+import {
   injuriesByEspnTeam,
   starterInjuriesForTeam,
   type NflStarterInjuryFile,
   type NflStarterInjuryTeam,
 } from '../src/nflStarterInjuries.ts'
-import type { Slate } from '../src/types.ts'
+import type { OddsFeed, Slate } from '../src/types.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/nfl-starter-injuries.json', ROOT)
+const HISTORY_OUTPUT = new URL('src/data/injury-line-history.json', ROOT)
+const ODDS = new URL('public/data/odds.json', ROOT)
 const ESPN =
   'https://site.api.espn.com/apis/site/v2/sports/football/nfl'
 
@@ -162,8 +168,35 @@ const file: NflStarterInjuryFile = {
 }
 
 await mkdir(new URL('src/data', ROOT), { recursive: true })
+const previousInjuries = await readJson<NflStarterInjuryFile>(OUTPUT)
+const previousHistory = await readJson<InjuryLineHistory>(HISTORY_OUTPUT)
+const odds = await readJson<OddsFeed>(ODDS)
+
 await writeFile(OUTPUT, `${JSON.stringify(file, null, 2)}\n`)
 
-console.log(
-  `Prepared ${teams.reduce((sum, team) => sum + team.injuries.length, 0)} starter availability rows across ${teams.length} NFL teams.`,
+const history = updateInjuryLineHistory({
+  previousHistory,
+  previousInjuries,
+  nextInjuries: file,
+  slate,
+  events: odds?.events ?? [],
+  runAt: file.source.fetchedAt,
+})
+await writeFile(HISTORY_OUTPUT, `${JSON.stringify(history, null, 2)}\n`)
+
+const changeCount = history.games.reduce(
+  (sum, game) =>
+    sum + game.events.filter((event) => event.at === history.updatedAt).length,
+  0,
 )
+console.log(
+  `Prepared ${teams.reduce((sum, team) => sum + team.injuries.length, 0)} starter availability rows across ${teams.length} NFL teams. ${changeCount} status change${changeCount === 1 ? '' : 's'} vs the last snapshot.`,
+)
+
+async function readJson<T>(url: URL): Promise<T | null> {
+  try {
+    return JSON.parse(await readFile(url, 'utf8')) as T
+  } catch {
+    return null
+  }
+}

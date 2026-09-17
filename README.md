@@ -109,6 +109,15 @@ travel, and rest go active at 6 chances, which is enough to drive a call but
 thin enough to mislead, so any row under 12 chances is tagged `thin`. Players
 under 20 graded picks get no rows at all.
 
+Player profiles also show a **Line watching** read from CBS's hidden
+submitted count (`picksCount` / `maxPicksCount` and `picksCountChanges`).
+A full card by Thursday is treated as unlikely to be shopping weekend line
+moves. Filling Saturday or later, after a Thursday dump still showed the
+card incomplete, is treated as waiting on the live number vs CBS. The first
+instrumented dump of a week only proves they were done *by* that dump, not
+the exact hour they submitted. This is display-only and does not steer the
+v1 habit forecast. Flips after they lock remain invisible.
+
 Player profiles also show a **Team loyalty watch** built from every available
 pick in current and archived seasons. A team enters the take/fade list after
 two appearances when the player chose one pole at least 75% of the time.

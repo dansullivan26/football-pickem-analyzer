@@ -238,6 +238,23 @@ export function picksCountStartChange(
   )
 }
 
+export function picksCountCompletionChange(
+  log: PicksCountChange[] | undefined,
+  week: number,
+  entryId: string,
+  maxPicksCount: number,
+) {
+  if (maxPicksCount <= 0) return null
+  return (
+    (log ?? []).find(
+      (row) =>
+        row.week === week &&
+        row.entryId === entryId &&
+        row.to >= maxPicksCount,
+    ) ?? null
+  )
+}
+
 export function pickChangeForGame(
   log: PickChange[] | undefined,
   entryId: string,

@@ -2853,6 +2853,48 @@ a.team-page-link:focus-visible .team-name {
   font-size: 1.35rem;
 }
 
+.player-line-watch-tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.player-line-watch-tag strong {
+  color: var(--ink);
+}
+
+.player-line-watch-tag.unlikely strong {
+  color: var(--green-dark);
+}
+
+.player-line-watch-tag.likely strong {
+  color: #8a4b12;
+}
+
+.player-card-timing {
+  margin: 4px 0 22px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fbfcfb;
+}
+
+.player-card-timing p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.player-card-timing-week {
+  margin-top: 8px !important;
+  color: var(--muted);
+  font-size: 0.72rem !important;
+}
+
 .player-team-bias {
   margin: 4px 0 22px;
   padding: 16px;

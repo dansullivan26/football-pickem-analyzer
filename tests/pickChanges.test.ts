@@ -5,6 +5,7 @@ import {
   pickChangeForGame,
   pickChangeVsPrediction,
   picksCountStartChange,
+  picksCountCompletionChange,
   readFirstSeenAt,
   sanitizePickChanges,
   sanitizePicksCountChanges,
@@ -86,6 +87,8 @@ test('sanitizes and finds the first submitted-count change', () => {
   assert.equal(rows[0]?.to, 1)
   assert.equal(picksCountStartChange(rows, 2, 'dan'), rows[0])
   assert.equal(picksCountStartChange(rows, 2, 'missing'), null)
+  assert.equal(picksCountCompletionChange(rows, 2, 'dan', 1), rows[0])
+  assert.equal(picksCountCompletionChange(rows, 2, 'dan', 25), null)
 })
 
 test('sanitizePicksCountChanges rejects invalid counts', () => {

@@ -27,6 +27,10 @@ import {
   teamBiasSentence,
   type TeamBiasSignal,
 } from './playerTeamBias'
+import {
+  LINE_WATCH_WARMTH_LABELS,
+  summarizePlayerCardTiming,
+} from './playerCardTiming'
 import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory'
 import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
 import {
@@ -632,6 +636,14 @@ export default function PlayersView({
         history.pool.seasonYear,
       )
     : null
+  const cardTiming = selectedPlayer
+    ? summarizePlayerCardTiming(
+        selectedPlayer.entryId,
+        history,
+        recommendations,
+        slate,
+      )
+    : null
   const teamNameByKey = useMemo(
     () =>
       new Map(
@@ -886,6 +898,14 @@ export default function PlayersView({
                       )}
                     </div>
                   )}
+                  {cardTiming && (
+                    <p className={`player-line-watch-tag ${cardTiming.read}`}>
+                      <strong>{cardTiming.label}</strong>
+                      <span>
+                        {LINE_WATCH_WARMTH_LABELS[cardTiming.warmth]}
+                      </span>
+                    </p>
+                  )}
                   {currentProfile && currentProfile.signals.length > 0 && (
                     <ol
                       className="player-signals"
@@ -912,6 +932,33 @@ export default function PlayersView({
                   )}
                 </div>
               </div>
+
+              {cardTiming && (
+                <section
+                  className="player-card-timing"
+                  aria-label="Line watching"
+                >
+                  <div className="player-team-bias-heading">
+                    <div>
+                      <p className="eyebrow">Line watching</p>
+                      <h3>{cardTiming.label}</h3>
+                    </div>
+                    <small>
+                      Uses CBS&apos;s hidden submitted count between GrokBot
+                      dumps, not exact submit times. A Thursday 25/25 is the
+                      strongest tell they are not shopping weekend moves.
+                      Saturday-or-later fills look like they want the live
+                      number. Flips after they lock stay invisible.
+                    </small>
+                  </div>
+                  <p>{cardTiming.sentence}</p>
+                  {cardTiming.thisWeekLine && (
+                    <p className="player-card-timing-week">
+                      {cardTiming.thisWeekLine}
+                    </p>
+                  )}
+                </section>
+              )}
 
               <div className="tendency-grid" aria-label="Player tendencies">
                 <Metric

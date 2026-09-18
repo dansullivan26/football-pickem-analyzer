@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T03:32:04.706Z",
+  "updatedAt": "2026-09-18T06:03:23.086Z",
   "weeks": [
     {
       "week": 1,
@@ -1438,7 +1438,7 @@
       "week": 3,
       "seasonYear": 2026,
       "label": "Week 3",
-      "capturedAt": "2026-09-18T00:29:48.687Z",
+      "capturedAt": "2026-09-18T06:03:23.086Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029212,
@@ -1470,7 +1470,9 @@
             "state": "New York",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 31,
+          "homeScore": 41
         },
         {
           "cbsEventId": 50027709,
@@ -1687,10 +1689,10 @@
           "away": "LSU",
           "home": "MISS",
           "homeSpread": 3.5,
-          "liveHomeSpread": 2.5,
+          "liveHomeSpread": 3,
           "category": "slight",
           "recommendedSide": "home",
-          "hook": "fg",
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",

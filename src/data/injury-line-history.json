@@ -2,9 +2,109 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-17T21:35:24.726Z",
+  "updatedAt": "2026-09-18T00:29:57.568Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
+    {
+      "cbsEventId": 50029170,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029170,
+          "athleteId": "4684527",
+          "name": "T.J. Sanders",
+          "position": "DT",
+          "teamAbbrev": "BUF",
+          "teamName": "Buffalo",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029170,
+          "athleteId": "4676004",
+          "name": "Cole Bishop",
+          "position": "S",
+          "teamAbbrev": "BUF",
+          "teamName": "Buffalo",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029170,
+          "athleteId": "3139387",
+          "name": "D.J. Reed",
+          "position": "CB",
+          "teamAbbrev": "DET",
+          "teamName": "Detroit",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029170,
+          "athleteId": "4039303",
+          "name": "Ed Oliver",
+          "position": "DT",
+          "teamAbbrev": "BUF",
+          "teamName": "Buffalo",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029208,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029208,
+          "athleteId": "4242227",
+          "name": "Ed Ingram",
+          "position": "G",
+          "teamAbbrev": "HOU",
+          "teamName": "Houston",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        }
+      ]
+    },
     {
       "cbsEventId": 50029209,
       "events": [
@@ -70,6 +170,101 @@
           "availability": "better",
           "homeSpreadBefore": -4.5,
           "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029212,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029212,
+          "athleteId": "4428328",
+          "name": "Deonte Banks",
+          "position": "CB",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7,
+          "homeSpreadAfter": -7,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029212,
+          "athleteId": "4361266",
+          "name": "Greg Newsome II",
+          "position": "CB",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7,
+          "homeSpreadAfter": -7,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029212,
+          "athleteId": "4036132",
+          "name": "Chauncey Golston",
+          "position": "DE",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7,
+          "homeSpreadAfter": -7,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029212,
+          "athleteId": "4259566",
+          "name": "Andrew Thomas",
+          "position": "OT",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7,
+          "homeSpreadAfter": -7,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029212,
+          "athleteId": "4870914",
+          "name": "Francis Mauigoa",
+          "position": "OT",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7,
+          "homeSpreadAfter": -7,
           "towardTeam": 0
         }
       ]
@@ -189,6 +384,134 @@
           "homeSpreadBefore": -8.5,
           "homeSpreadAfter": -7.5,
           "towardTeam": 1
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029222,
+          "athleteId": "4241986",
+          "name": "Chase Young",
+          "position": "DE",
+          "teamAbbrev": "NO",
+          "teamName": "New Orleans",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029223,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029223,
+          "athleteId": "3728281",
+          "name": "Blake Cashman",
+          "position": "LB",
+          "teamAbbrev": "MIN",
+          "teamName": "Minnesota",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029224,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029224,
+          "athleteId": "4361331",
+          "name": "Jamien Sherwood",
+          "position": "LB",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029224,
+          "athleteId": "4361767",
+          "name": "Will McDonald IV",
+          "position": "DE",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029225,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029225,
+          "athleteId": "4602197",
+          "name": "Andrew Mukuba",
+          "position": "S",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 7,
+          "homeSpreadAfter": 7,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029228,
+      "events": [
+        {
+          "at": "2026-09-18T00:29:57.568Z",
+          "cbsEventId": 50029228,
+          "athleteId": "2977187",
+          "name": "Cooper Kupp",
+          "position": "WR",
+          "teamAbbrev": "SEA",
+          "teamName": "Seattle",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
         }
       ]
     },

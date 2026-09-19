@@ -350,78 +350,26 @@ export function orderCardRows(
   )
 }
 
+function formatCopiedPick(team: string, spread: number) {
+  return `${team} ${formatPoolSpread(spread)}`
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
   deviations: ReadonlySet<string> = new Set(),
-  tiebreakerAnswer: number | null = null,
+  _tiebreakerAnswer: number | null = null,
   manualSelections: ManualPickSelections = new Map(),
+  sort: 'slate' | 'recommendation' = 'slate',
 ) {
-  const when = new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }).format(new Date(card.generatedAt))
-
-  const pickLines = picks.map((pick) => {
-    const deviate = deviations.has(pick.gameId)
-    const sent = submittedPick(pick, deviate)
-    const rec = `${pick.pickedTeam} ${formatPoolSpread(pick.poolSpread)}`
-    const choice = `${sent.pickedTeam} ${formatPoolSpread(sent.poolSpread)}`
-    const source =
-      pick.source === 'line-value'
-        ? 'line value'
-        : pick.source === 'rest-travel'
-          ? 'rest/travel'
-          : pick.source === 'season-results'
-            ? 'season results'
-            : pick.source === 'pool-aware'
-              ? 'pool leverage'
-              : 'public'
-    return `• ${choice}  (${pick.away} @ ${pick.home}) — ${pick.strength} ${source}${pick.hook ? ` · ${pick.hook === 'fg' ? 'FG' : 'TD'} hook` : ''}${pick.publicSupport !== 'none' ? ` · public ${pick.publicSupport === 'agree' ? 'agrees' : 'fades'}` : ''}${deviate ? ` · deviate from ${rec}` : ''} · ${pick.detail}`
-  })
-  const manualLines = card.unpicked.flatMap((game) => {
-    const side = manualSelections.get(game.gameId)
+  return orderCardRows(picks, card.unpicked, sort).flatMap((row) => {
+    if (row.kind === 'pick') {
+      const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
+      return [formatCopiedPick(sent.pickedTeam, sent.poolSpread)]
+    }
+    const side = manualSelections.get(row.game.gameId)
     if (!side) return []
-    const sent = submittedManualPick(game, side)
-    return [
-      `• ${sent.pickedTeam} ${formatPoolSpread(sent.poolSpread)}  (${game.away} @ ${game.home}) — manual pick`,
-    ]
-  })
-  const skipLines = card.unpicked
-    .filter((game) => !manualSelections.has(game.gameId))
-    .map((game) => {
-      const lean =
-        game.leanTeam && game.leanSpread != null
-          ? `lean ${game.leanTeam} ${formatPoolSpread(game.leanSpread)} · `
-          : ''
-      const detail = game.detail ? ` · ${game.detail}` : ''
-      return `• ${game.away} @ ${game.home} — ${lean}${game.reason}${detail}`
-    })
-
-  return [
-    `${card.title} · ${card.weekLabel}`,
-    `Generated ${when} · ${card.strategyId}`,
-    card.strategyNote,
-    '',
-    `Picks (${picks.length})`,
-    ...(pickLines.length ? pickLines : ['• none']),
-    '',
-    `Manual picks (${manualLines.length})`,
-    ...(manualLines.length ? manualLines : ['• none']),
-    '',
-    `Left unpicked (${skipLines.length})`,
-    ...(skipLines.length ? skipLines : ['• none']),
-    ...(card.tiebreaker
-      ? [
-          '',
-          `Tiebreaker: ${card.tiebreaker.away} @ ${card.tiebreaker.home} — ${
-            tiebreakerAnswer ?? 'blank'
-          }${
-            card.tiebreaker.draftKingsTotal != null
-              ? ` (DraftKings O/U ${card.tiebreaker.draftKingsTotal})`
-              : ''
-          }`,
-        ]
-      : []),
-  ].join('\n')
+    const sent = submittedManualPick(row.game, side)
+    return [formatCopiedPick(sent.pickedTeam, sent.poolSpread)]
+  }).join('\n')
 }

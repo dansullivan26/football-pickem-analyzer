@@ -102,6 +102,7 @@ export default function SuggestedCardPanel({
           deviations,
           answer,
           manualSelections,
+          sort,
         ),
       )
       setCopied(true)

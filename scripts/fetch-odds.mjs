@@ -52,16 +52,34 @@ function teamMatches(cbsTeam, bookTeam) {
   return teamAliases(cbsTeam).has(normalize(bookTeam))
 }
 
+function kickoffClose(game, row) {
+  return (
+    Math.abs(
+      new Date(game.kickoff).getTime() - new Date(row.event_start_time).getTime(),
+    ) <= 6 * 60 * 60 * 1000
+  )
+}
+
+function sidesAligned(game, row) {
+  return (
+    teamMatches(game.home, row.home_team) &&
+    teamMatches(game.away, row.away_team)
+  )
+}
+
+function sidesSwapped(game, row) {
+  return (
+    teamMatches(game.home, row.away_team) &&
+    teamMatches(game.away, row.home_team)
+  )
+}
+
 function matchGame(row) {
-  const kickoff = new Date(row.event_start_time).getTime()
-  return slate.games.find((game) => {
-    const kickoffDifference = Math.abs(new Date(game.kickoff).getTime() - kickoff)
-    return (
-      kickoffDifference <= 6 * 60 * 60 * 1000 &&
-      teamMatches(game.home, row.home_team) &&
-      teamMatches(game.away, row.away_team)
-    )
-  })
+  return slate.games.find(
+    (game) =>
+      kickoffClose(game, row) &&
+      (sidesAligned(game, row) || sidesSwapped(game, row)),
+  )
 }
 
 async function fetchLeague(league, market = 'point_spread', eventId) {
@@ -175,8 +193,11 @@ function rowSide(row, game) {
     if (teamMatches(game.home, row.selection)) return 'home'
     if (teamMatches(game.away, row.selection)) return 'away'
   }
-  if (row.team_side === 'home' || row.team_side === 'away') return row.team_side
-  return null
+  if (row.team_side !== 'home' && row.team_side !== 'away') return null
+  if (sidesSwapped(game, row)) {
+    return row.team_side === 'home' ? 'away' : 'home'
+  }
+  return row.team_side
 }
 
 // A true main line is priced near even money, which separates a real spread from

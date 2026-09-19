@@ -354,6 +354,35 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
+function formatCardWeekday(
+  kickoff: string,
+  timeZone = 'America/New_York',
+) {
+  const date = new Date(kickoff)
+  if (Number.isNaN(date.getTime())) return null
+  try {
+    const weekday = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      weekday: 'long',
+    }).format(date)
+    const year = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      year: 'numeric',
+    }).format(date)
+    const month = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      month: '2-digit',
+    }).format(date)
+    const day = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      day: '2-digit',
+    }).format(date)
+    return { weekday, dateKey: `${year}-${month}-${day}` }
+  } catch {
+    return null
+  }
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
@@ -362,14 +391,39 @@ export function formatSuggestedCardText(
   manualSelections: ManualPickSelections = new Map(),
   sort: 'slate' | 'recommendation' = 'slate',
 ) {
-  return orderCardRows(picks, card.unpicked, sort).flatMap((row) => {
+  const items = orderCardRows(picks, card.unpicked, sort).flatMap((row) => {
+    const kickoff = row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff
     if (row.kind === 'pick') {
       const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
-      return [formatCopiedPick(sent.pickedTeam, sent.poolSpread)]
+      return [{ kickoff, line: formatCopiedPick(sent.pickedTeam, sent.poolSpread) }]
     }
     const side = manualSelections.get(row.game.gameId)
     if (!side) return []
     const sent = submittedManualPick(row.game, side)
-    return [formatCopiedPick(sent.pickedTeam, sent.poolSpread)]
-  }).join('\n')
+    return [{ kickoff, line: formatCopiedPick(sent.pickedTeam, sent.poolSpread) }]
+  })
+
+  const groups = new Map<string, { weekday: string; lines: string[] }>()
+  const order: string[] = []
+  for (const item of items) {
+    const day = formatCardWeekday(item.kickoff)
+    const dateKey = day?.dateKey ?? 'unknown'
+    const weekday = day?.weekday ?? 'Unknown'
+    const group = groups.get(dateKey)
+    if (group) group.lines.push(item.line)
+    else {
+      groups.set(dateKey, { weekday, lines: [item.line] })
+      order.push(dateKey)
+    }
+  }
+
+  return order
+    .sort((left, right) => left.localeCompare(right))
+    .map((dateKey) => {
+      const group = groups.get(dateKey)
+      if (!group) return ''
+      return `${group.weekday}:\n\n${group.lines.join('\n')}`
+    })
+    .filter(Boolean)
+    .join('\n\n')
 }

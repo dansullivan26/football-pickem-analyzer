@@ -172,7 +172,7 @@ test('formatSuggestedCardText copies only team and spread', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'UNC +3.5\nKAN +5.5',
+    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKAN +5.5',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -183,6 +183,6 @@ test('formatSuggestedCardText copies only team and spread', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'UNC +3.5\nNYG -5.5\nDET +4.5',
+    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nNYG -5.5\n\nMonday:\n\nDET +4.5',
   )
 })

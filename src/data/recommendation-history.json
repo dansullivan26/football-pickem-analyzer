@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T11:13:37.779Z",
+  "updatedAt": "2026-09-19T12:21:59.858Z",
   "weeks": [
     {
       "week": 1,
@@ -1438,7 +1438,7 @@
       "week": 3,
       "seasonYear": 2026,
       "label": "Week 3",
-      "capturedAt": "2026-09-19T11:13:37.779Z",
+      "capturedAt": "2026-09-19T12:21:59.858Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029212,
@@ -1481,8 +1481,8 @@
           "away": "ARIZST",
           "home": "KANSAS",
           "homeSpread": 5.5,
-          "liveHomeSpread": null,
-          "category": "pending",
+          "liveHomeSpread": 5.5,
+          "category": "neutral",
           "recommendedSide": null,
           "hook": null,
           "cover": null,
@@ -1637,15 +1637,15 @@
           "away": "WVU",
           "home": "UVA",
           "homeSpread": -9.5,
-          "liveHomeSpread": null,
-          "category": "pending",
-          "recommendedSide": null,
+          "liveHomeSpread": -10.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
+          "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 0.75,
+          "score": 3.75,
           "awayRank": null,
           "homeRank": 25,
           "venue": {

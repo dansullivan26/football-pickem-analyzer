@@ -2,7 +2,7 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-18T22:41:12.033Z",
+  "updatedAt": "2026-09-19T01:18:28.054Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -111,6 +111,24 @@
           "toStatus": "Questionable",
           "fromTier": null,
           "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -5.5,
+          "homeSpreadAfter": -5.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-19T01:18:28.054Z",
+          "cbsEventId": 50029170,
+          "athleteId": "4427864",
+          "name": "Christian Mahogany",
+          "position": "G",
+          "teamAbbrev": "DET",
+          "teamName": "Detroit",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
           "availability": "worse",
           "homeSpreadBefore": -5.5,
           "homeSpreadAfter": -5.5,

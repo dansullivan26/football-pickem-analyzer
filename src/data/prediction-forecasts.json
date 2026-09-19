@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T01:18:15.338Z",
+  "updatedAt": "2026-09-19T11:13:38.120Z",
   "weeks": [
     {
       "week": 1,
@@ -30609,7 +30609,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": "away",
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -30796,8 +30796,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 33 prior chances",
               "sampleSize": 33,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029223,
@@ -32281,15 +32281,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-09-19T01:18:15.338Z",
+    "updatedAt": "2026-09-19T11:13:38.120Z",
     "overall": {
       "key": "overall",
       "games": 1925,
       "calls": 1027,
-      "graded": 512,
-      "correct": 352,
+      "graded": 513,
+      "correct": 353,
       "noCalls": 898,
-      "accuracy": 0.6875,
+      "accuracy": 0.6881091617933723,
       "noCallRate": 0.4664935064935065
     },
     "byLeague": [
@@ -32307,10 +32307,10 @@
         "key": "NFL",
         "games": 832,
         "calls": 663,
-        "graded": 336,
-        "correct": 227,
+        "graded": 337,
+        "correct": 228,
         "noCalls": 169,
-        "accuracy": 0.6755952380952381,
+        "accuracy": 0.6765578635014837,
         "noCallRate": 0.203125
       }
     ],
@@ -32319,10 +32319,10 @@
         "key": "dog",
         "games": 187,
         "calls": 187,
-        "graded": 134,
-        "correct": 65,
+        "graded": 135,
+        "correct": 66,
         "noCalls": 0,
-        "accuracy": 0.48507462686567165,
+        "accuracy": 0.4888888888888889,
         "noCallRate": 0
       },
       {
@@ -32371,10 +32371,10 @@
         "key": "line-value",
         "games": 110,
         "calls": 110,
-        "graded": 77,
-        "correct": 59,
+        "graded": 78,
+        "correct": 60,
         "noCalls": 0,
-        "accuracy": 0.7662337662337663,
+        "accuracy": 0.7692307692307693,
         "noCallRate": 0
       },
       {
@@ -32403,10 +32403,10 @@
         "key": "high",
         "games": 392,
         "calls": 392,
-        "graded": 231,
-        "correct": 177,
+        "graded": 232,
+        "correct": 178,
         "noCalls": 0,
-        "accuracy": 0.7662337662337663,
+        "accuracy": 0.7672413793103449,
         "noCallRate": 0
       },
       {

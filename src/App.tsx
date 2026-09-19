@@ -744,20 +744,17 @@ function LineHistoryNote({
             const slateGame = slate.games.find(
               (item) => item.cbsEventId === game.cbsEventId,
             )
-            const first = ticks[0]
-            const last = ticks[ticks.length - 1]
-            const delta =
-              first && last ? Math.abs(last.home - first.home) : 0
-            return { game, slateGame, ticks, totals, delta }
+            return { game, slateGame, ticks, totals }
           })
           .filter(
             ({ ticks, totals }) => ticks.length > 1 || totals.length > 1,
           )
           .sort((a, b) => {
-            if (b.delta !== a.delta) return b.delta - a.delta
-            return (a.slateGame?.kickoff ?? '').localeCompare(
+            const kickoff = (a.slateGame?.kickoff ?? '').localeCompare(
               b.slateGame?.kickoff ?? '',
             )
+            if (kickoff) return kickoff
+            return a.game.cbsEventId - b.game.cbsEventId
           })
       : []
 

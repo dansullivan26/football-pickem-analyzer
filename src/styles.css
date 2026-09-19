@@ -1390,8 +1390,25 @@ select:focus {
 }
 
 .covers-report-body p + p,
-.covers-report-body p + ul {
+.covers-report-body p + ul,
+.covers-report-body .line-history-toolbar + ul {
   margin-top: 8px;
+}
+
+.line-history-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.line-history-toolbar p {
+  flex: 1 1 12rem;
+}
+
+.line-history-toolbar select {
+  width: auto;
 }
 
 .covers-report-compared {

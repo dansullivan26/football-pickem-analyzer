@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  compareLineHistoryListItems,
   formatLinePath,
   lineHistoryByEvent,
+  spreadPathMove,
   ticksEndingAtLive,
   totalsEndingAtLive,
   updateLineHistory,
@@ -288,5 +290,37 @@ test('formatLinePath keeps three numbers on a tile and the full path otherwise',
   assert.equal(
     formatLinePath([-7.5, -8.5, -9.5, -10.5], format),
     '-7.5 → -8.5 → -9.5 → -10.5',
+  )
+})
+
+test('line history list sort defaults to kickoff and can rank biggest move', () => {
+  const lateSmall = {
+    kickoff: '2026-09-20T13:00:00-04:00',
+    cbsEventId: 2,
+    move: 0.5,
+  }
+  const earlyBig = {
+    kickoff: '2026-09-17T20:15:00-04:00',
+    cbsEventId: 1,
+    move: 2,
+  }
+  assert.deepEqual(
+    [lateSmall, earlyBig]
+      .sort((a, b) => compareLineHistoryListItems(a, b, 'kickoff'))
+      .map((row) => row.cbsEventId),
+    [1, 2],
+  )
+  assert.deepEqual(
+    [lateSmall, earlyBig]
+      .sort((a, b) => compareLineHistoryListItems(a, b, 'movement'))
+      .map((row) => row.cbsEventId),
+    [1, 2],
+  )
+  assert.equal(
+    spreadPathMove([
+      { at: 'a', home: -3 },
+      { at: 'b', home: -5.5 },
+    ]),
+    2.5,
   )
 })

@@ -177,6 +177,28 @@ export function totalsEndingAtLive(
 /** Card tiles keep three numbers; the week list and hover keep the rest. */
 export const LINE_PATH_TILE_MAX = 3
 
+export type LineHistoryListSort = 'kickoff' | 'movement'
+
+export function spreadPathMove(ticks: LineTick[]) {
+  const first = ticks[0]
+  const last = ticks[ticks.length - 1]
+  if (!first || !last) return 0
+  return Math.abs(last.home - first.home)
+}
+
+export function compareLineHistoryListItems(
+  left: { kickoff: string; cbsEventId: number; move: number },
+  right: { kickoff: string; cbsEventId: number; move: number },
+  sort: LineHistoryListSort,
+) {
+  if (sort === 'movement' && right.move !== left.move) {
+    return right.move - left.move
+  }
+  const kickoff = left.kickoff.localeCompare(right.kickoff)
+  if (kickoff) return kickoff
+  return left.cbsEventId - right.cbsEventId
+}
+
 export function formatLinePath(
   values: number[],
   formatValue: (value: number) => string,

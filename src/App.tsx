@@ -32,7 +32,7 @@ import {
 import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
-import { formatLinePath, lineHistoryByEvent, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
+import { compareLineHistoryListItems, formatLinePath, lineHistoryByEvent, spreadPathMove, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
 import {
   badBeatKey,
   beatsForSeason,
@@ -725,6 +725,7 @@ function LineHistoryNote({
   history: LineHistory
   events: OddsEvent[] | undefined
 }) {
+  const [sort, setSort] = useState<'kickoff' | 'movement'>('kickoff')
   const liveByEvent = new Map(
     (events ?? []).map((event) => [event.cbsEventId, event]),
   )
@@ -744,18 +745,33 @@ function LineHistoryNote({
             const slateGame = slate.games.find(
               (item) => item.cbsEventId === game.cbsEventId,
             )
-            return { game, slateGame, ticks, totals }
+            return {
+              game,
+              slateGame,
+              ticks,
+              totals,
+              kickoff: slateGame?.kickoff ?? '',
+              move: spreadPathMove(ticks),
+            }
           })
           .filter(
             ({ ticks, totals }) => ticks.length > 1 || totals.length > 1,
           )
-          .sort((a, b) => {
-            const kickoff = (a.slateGame?.kickoff ?? '').localeCompare(
-              b.slateGame?.kickoff ?? '',
-            )
-            if (kickoff) return kickoff
-            return a.game.cbsEventId - b.game.cbsEventId
-          })
+          .sort((a, b) =>
+            compareLineHistoryListItems(
+              {
+                kickoff: a.kickoff,
+                cbsEventId: a.game.cbsEventId,
+                move: a.move,
+              },
+              {
+                kickoff: b.kickoff,
+                cbsEventId: b.game.cbsEventId,
+                move: b.move,
+              },
+              sort,
+            ),
+          )
       : []
 
   if (movers.length === 0) return null
@@ -769,10 +785,24 @@ function LineHistoryNote({
         <span className="covers-report-link">Line history</span>
       </summary>
       <div className="covers-report-body">
-        <p>
-          Every DraftKings number since the game first appeared on this
-          slate. Unchanged pulls are skipped. Paths freeze at kickoff.
-        </p>
+        <div className="line-history-toolbar">
+          <p>
+            Every DraftKings number since the game first appeared on this
+            slate. Unchanged pulls are skipped. Paths freeze at kickoff.
+          </p>
+          <label>
+            <span className="sr-only">Sort line history</span>
+            <select
+              value={sort}
+              onChange={(event) =>
+                setSort(event.target.value as 'kickoff' | 'movement')
+              }
+            >
+              <option value="kickoff">Kickoff time</option>
+              <option value="movement">Biggest move</option>
+            </select>
+          </label>
+        </div>
         <ul>
           {movers.map(({ game, slateGame, ticks, totals }) => (
             <li key={game.cbsEventId}>

@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-19T14:07:17-04:00",
+    "fetchedAt": "2026-09-19T16:11:19-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -21255,13 +21255,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
-          "weekScore": 0,
+          "weekScore": 1,
           "weekRank": 23,
-          "correctPicks": 0,
+          "correctPicks": 1,
           "picksCount": 10,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -21295,9 +21295,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -21327,9 +21327,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -21356,13 +21356,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -21655,12 +21656,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
           "weekScore": 1,
-          "weekRank": 6,
+          "weekRank": 11,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -21694,9 +21695,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -21726,9 +21727,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -21755,13 +21756,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -22053,13 +22055,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
-          "weekScore": 1,
-          "weekRank": 6,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -22093,9 +22095,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22125,9 +22127,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22154,13 +22156,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -22453,12 +22456,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
           "weekScore": 1,
-          "weekRank": 6,
+          "weekRank": 23,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -22492,9 +22495,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22524,9 +22527,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22553,13 +22556,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -22852,12 +22856,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
           "weekScore": 1,
-          "weekRank": 13,
+          "weekRank": 23,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -22891,9 +22895,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22923,9 +22927,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -22952,13 +22956,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -23250,13 +23255,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -23290,9 +23295,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -23322,9 +23327,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -23351,13 +23356,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -23649,13 +23655,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
-          "weekScore": 0,
-          "weekRank": 13,
-          "correctPicks": 0,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -23689,9 +23695,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -23721,9 +23727,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -23750,13 +23756,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -24048,13 +24055,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -24088,9 +24095,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24120,9 +24127,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24149,13 +24156,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -24447,13 +24455,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 1,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -24487,9 +24495,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24519,9 +24527,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24548,13 +24556,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -24846,13 +24855,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -24886,9 +24895,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24918,9 +24927,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -24947,13 +24956,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -25245,13 +25255,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojs",
           "name": "rob bandelier",
-          "weekScore": 1,
-          "weekRank": 6,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -25285,9 +25295,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -25317,9 +25327,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -25346,13 +25356,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -25644,13 +25655,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -25684,9 +25695,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -25716,9 +25727,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -25745,13 +25756,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -26043,13 +26055,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
-          "weekScore": 1,
+          "weekScore": 2,
           "weekRank": 1,
-          "correctPicks": 1,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -26083,9 +26095,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26115,9 +26127,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26144,13 +26156,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -26442,13 +26455,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
-          "weekScore": 0,
-          "weekRank": 6,
-          "correctPicks": 0,
+          "weekScore": 1,
+          "weekRank": 23,
+          "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -26482,9 +26495,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26514,9 +26527,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26543,13 +26556,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -26841,13 +26855,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -26881,9 +26895,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26913,9 +26927,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -26942,13 +26956,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -27240,13 +27255,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
-          "weekScore": 1,
-          "weekRank": 23,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -27280,9 +27295,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -27312,9 +27327,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -27341,13 +27356,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -27639,13 +27655,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
-          "weekScore": 0,
-          "weekRank": 6,
-          "correctPicks": 0,
+          "weekScore": 2,
+          "weekRank": 1,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -27679,9 +27695,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -27711,9 +27727,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -27740,13 +27756,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -28038,13 +28055,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 1,
-          "weekRank": 2,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 1,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -28078,9 +28095,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28110,9 +28127,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28139,13 +28156,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -28437,13 +28455,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
-          "weekScore": 1,
-          "weekRank": 2,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -28477,9 +28495,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28509,9 +28527,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28538,13 +28556,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -28837,12 +28856,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
           "weekScore": 1,
-          "weekRank": 2,
+          "weekRank": 11,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -28876,9 +28895,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28908,9 +28927,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -28937,13 +28956,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4dg===",
+              "pickedTeam": "FSU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -29235,13 +29255,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T23:31:16-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -29275,9 +29295,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -29307,9 +29327,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -29336,13 +29356,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -29634,13 +29655,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
-          "weekScore": 1,
-          "weekRank": 6,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -29674,9 +29695,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -29706,9 +29727,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -29735,13 +29756,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -30034,7 +30056,7 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
           "weekScore": 1,
-          "weekRank": 2,
+          "weekRank": 11,
           "correctPicks": 1,
           "picksCount": 23,
           "maxPicksCount": 25,
@@ -30073,9 +30095,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-17T10:59:50-04:00"
             },
@@ -30105,9 +30127,9 @@
               "pickedTeamId": "krswc3j2gq3tc===",
               "pickedTeam": "ARK",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T06:46:21-04:00"
             },
@@ -30450,13 +30472,13 @@
         {
           "entryId": "ivxhi4tzhizdkmjrguydonbw",
           "name": "Austin Downum",
-          "weekScore": 1,
-          "weekRank": 13,
-          "correctPicks": 1,
+          "weekScore": 3,
+          "weekRank": 1,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -30490,9 +30512,9 @@
               "pickedTeamId": "krswc3j2gq3dq===",
               "pickedTeam": "ARIZST",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -30522,9 +30544,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -30551,13 +30573,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -30849,13 +30872,13 @@
         {
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
-          "weekScore": 1,
-          "weekRank": 23,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -30889,9 +30912,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -30921,9 +30944,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -30950,13 +30973,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -31248,13 +31272,13 @@
         {
           "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
           "name": "Adam Gannon",
-          "weekScore": 1,
-          "weekRank": 23,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 11,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 5,
+          "revealedPicksCount": 6,
           "picksCountFirstSeenAt": "2026-09-17T23:31:16-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -31288,9 +31312,9 @@
               "pickedTeamId": "krswc3j2gy2di===",
               "pickedTeam": "KANSAS",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -31320,9 +31344,9 @@
               "pickedTeamId": "krswc3j2gu4ts===",
               "pickedTeam": "UGA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-19T12:30:05-04:00"
             },
@@ -31349,13 +31373,14 @@
               "away": "FSU",
               "home": "BAMA",
               "homeSpread": -20.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-19T16:11:19-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
@@ -45730,6 +45755,706 @@
       "window": {
         "after": "2026-09-19T12:30:05-04:00",
         "atOrBefore": "2026-09-19T14:07:17-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojs",
+      "name": "rob bandelier",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4dg===",
+        "pickedTeam": "FSU"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjrguydonbw",
+      "name": "Austin Downum",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
+      "cbsEventId": 50027757,
+      "away": "FSU",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-09-19T16:11:19-04:00",
+      "previousFetchedAt": "2026-09-19T14:07:17-04:00",
+      "fetchedAt": "2026-09-19T16:11:19-04:00",
+      "window": {
+        "after": "2026-09-19T14:07:17-04:00",
+        "atOrBefore": "2026-09-19T16:11:19-04:00"
       }
     }
   ],

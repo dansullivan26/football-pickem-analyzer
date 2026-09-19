@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T22:10:39.249Z",
+  "updatedAt": "2026-09-19T23:15:41.766Z",
   "weeks": [
     {
       "week": 1,
@@ -1438,7 +1438,7 @@
       "week": 3,
       "seasonYear": 2026,
       "label": "Week 3",
-      "capturedAt": "2026-09-19T20:51:23.689Z",
+      "capturedAt": "2026-09-19T23:15:41.766Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029212,
@@ -1527,8 +1527,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 17,
-          "homeScore": 15
+          "awayScore": 20,
+          "homeScore": 28
         },
         {
           "cbsEventId": 50027759,
@@ -1610,7 +1610,9 @@
             "state": "AL",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 21,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50027742,
@@ -1619,15 +1621,15 @@
           "away": "MICHST",
           "home": "ND",
           "homeSpread": -28.5,
-          "liveHomeSpread": -29.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -28.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
+          "source": null,
+          "pickedSide": null,
+          "strength": null,
+          "score": null,
           "awayRank": null,
           "homeRank": 3,
           "venue": {
@@ -1931,9 +1933,9 @@
           "away": "JAC",
           "home": "DEN",
           "homeSpread": -2.5,
-          "liveHomeSpread": -2.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -3,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",

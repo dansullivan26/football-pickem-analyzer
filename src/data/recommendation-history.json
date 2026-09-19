@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T20:48:07.422Z",
+  "updatedAt": "2026-09-19T20:51:23.689Z",
   "weeks": [
     {
       "week": 1,
@@ -1438,11 +1438,11 @@
       "week": 3,
       "seasonYear": 2026,
       "label": "Week 3",
-      "capturedAt": "2026-09-19T18:07:25.063Z",
+      "capturedAt": "2026-09-19T20:51:23.689Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029212,
-        "draftKingsTotal": 48.5,
+        "draftKingsTotal": 47.5,
         "frozenAt": null
       },
       "games": [
@@ -1499,8 +1499,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 3,
-          "homeScore": 0
+          "awayScore": 24,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027717,
@@ -1527,8 +1527,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 3
+          "awayScore": 17,
+          "homeScore": 15
         },
         {
           "cbsEventId": 50027759,
@@ -1555,8 +1555,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 0
+          "awayScore": 45,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027801,
@@ -1582,7 +1582,9 @@
             "state": "TN",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 31,
+          "homeScore": 35
         },
         {
           "cbsEventId": 50027757,
@@ -1617,15 +1619,15 @@
           "away": "MICHST",
           "home": "ND",
           "homeSpread": -28.5,
-          "liveHomeSpread": -28.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -29.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 3,
           "awayRank": null,
           "homeRank": 3,
           "venue": {

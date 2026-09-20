@@ -2728,6 +2728,7 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .history-pace-chart {
+  position: relative;
   padding: 12px 12px 2px;
   border-radius: 12px;
   background: #f8faf8;
@@ -2785,6 +2786,99 @@ a.team-page-link:focus-visible .team-name {
   stroke: currentColor;
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
+}
+
+.history-chart-guide {
+  stroke: #b6c3b9;
+  stroke-dasharray: 3 3;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.history-chart-band {
+  fill: transparent;
+}
+
+.history-chart-tooltip {
+  position: absolute;
+  top: 34px;
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+  min-width: 168px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  transform: translateX(10px);
+}
+
+.history-chart-tooltip.flip {
+  transform: translateX(calc(-100% - 10px));
+}
+
+.history-chart-tooltip strong {
+  font-size: 0.76rem;
+}
+
+.history-chart-tooltip dl {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+}
+
+.history-chart-tooltip dl > div {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.history-chart-tooltip dt {
+  color: currentColor;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.history-chart-tooltip dt::before {
+  display: inline-block;
+  width: 9px;
+  height: 3px;
+  margin: 0 6px 3px 0;
+  border-radius: 99px;
+  background: currentColor;
+  content: '';
+}
+
+.history-chart-tooltip dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.history-chart-tooltip dd em {
+  margin-left: 7px;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.history-chart-tooltip dd em.ahead {
+  color: var(--green);
+}
+
+.history-chart-tooltip dd em.behind {
+  color: #a33b5d;
+}
+
+.history-chart-tooltip small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
 }
 
 .history-chart-legend .current,

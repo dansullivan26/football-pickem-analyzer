@@ -35,6 +35,7 @@ function middle(values: number[]) {
 }
 
 function PaceChart({ series }: { series: PaceSeries[] }) {
+  const [hoveredWeek, setHoveredWeek] = useState<number | null>(null)
   const width = 720
   const height = 270
   const left = 42
@@ -58,6 +59,27 @@ function PaceChart({ series }: { series: PaceSeries[] }) {
   const gridValues = [0, 0.25, 0.5, 0.75, 1].map((share) =>
     Math.round(maxScore * share),
   )
+  const weeks = Array.from({ length: maxWeek }, (_, index) => index + 1)
+  const bandWidth = (width - left - right) / Math.max(1, maxWeek - 1)
+  const baseline = series.find((row) => row.className === 'current')
+  const hovered = hoveredWeek
+    ? series
+        .map((row) => ({
+          series: row,
+          point: row.points.find(
+            (candidate) => candidate.activeWeek === hoveredWeek,
+          ),
+        }))
+        .filter(
+          (
+            row,
+          ): row is { series: PaceSeries; point: MoneyPacePoint } =>
+            row.point != null,
+        )
+    : []
+  const hoveredBaseline = hovered.find(
+    (row) => row.series.className === 'current',
+  )?.point
 
   return (
     <div className="history-pace-chart">
@@ -72,6 +94,7 @@ function PaceChart({ series }: { series: PaceSeries[] }) {
         viewBox={`0 0 ${width} ${height}`}
         role="img"
         aria-label="Third-place cumulative score by active pool week"
+        onMouseLeave={() => setHoveredWeek(null)}
       >
         {gridValues.map((score) => (
           <g key={score}>
@@ -103,6 +126,15 @@ function PaceChart({ series }: { series: PaceSeries[] }) {
               W{week}
             </text>
           ))}
+        {hoveredWeek != null && (
+          <line
+            className="history-chart-guide"
+            x1={x(hoveredWeek)}
+            x2={x(hoveredWeek)}
+            y1={top}
+            y2={height - bottom}
+          />
+        )}
         {series.map((row) => (
           <g className={row.className} key={row.label}>
             <polyline
@@ -120,17 +152,74 @@ function PaceChart({ series }: { series: PaceSeries[] }) {
                 key={point.activeWeek}
                 cx={x(point.activeWeek)}
                 cy={y(point.thirdPlaceScore)}
-                r={row.className === 'current' ? 4 : 2.4}
-              >
-                <title>
-                  {row.label} after active week {point.activeWeek}: third-place
-                  score {point.thirdPlaceScore}
-                </title>
-              </circle>
+                r={
+                  point.activeWeek === hoveredWeek
+                    ? 5
+                    : row.className === 'current'
+                      ? 4
+                      : 2.4
+                }
+              />
             ))}
           </g>
         ))}
+        {weeks.map((week) => (
+          <rect
+            className="history-chart-band"
+            key={week}
+            x={x(week) - bandWidth / 2}
+            y={top}
+            width={bandWidth}
+            height={height - top - bottom}
+            onMouseEnter={() => setHoveredWeek(week)}
+          />
+        ))}
       </svg>
+      {hoveredWeek != null && hovered.length > 0 && (
+        <div
+          className={`history-chart-tooltip${
+            x(hoveredWeek) > width / 2 ? ' flip' : ''
+          }`}
+          style={{ left: `${(x(hoveredWeek) / width) * 100}%` }}
+          role="status"
+        >
+          <strong>After active week {hoveredWeek}</strong>
+          <dl>
+            {hovered.map(({ series: row, point }) => {
+              const gap =
+                hoveredBaseline && row.className !== 'current'
+                  ? hoveredBaseline.thirdPlaceScore - point.thirdPlaceScore
+                  : null
+              return (
+                <div className={row.className} key={row.label}>
+                  <dt>
+                    {row.label}
+                    {row.className === 'current' ? ' (now)' : ''}
+                  </dt>
+                  <dd>
+                    {point.thirdPlaceScore}
+                    {gap != null && (
+                      <em className={gap >= 0 ? 'ahead' : 'behind'}>
+                        {gap === 0
+                          ? 'even'
+                          : `${gap > 0 ? '+' : ''}${gap}`}
+                      </em>
+                    )}
+                  </dd>
+                </div>
+              )
+            })}
+          </dl>
+          <small>
+            {hovered.length < series.length
+              ? 'Third-place score. Seasons without this week are not listed.'
+              : 'Third-place score'}
+            {baseline && hoveredBaseline
+              ? ` · ${baseline.label} leader ${hoveredBaseline.leaderScore}`
+              : ''}
+          </small>
+        </div>
+      )}
     </div>
   )
 }

@@ -291,7 +291,9 @@ export function generateSeasonResultsCard(
       gameId: game.id,
       cbsEventId: game.cbsEventId,
       away: game.away.name,
+      awayAbbrev: game.away.abbrev,
       home: game.home.name,
+      homeAbbrev: game.home.abbrev,
       kickoff: game.kickoff,
       kickoffLabel: game.kickoffLabel.replace(' ET', ''),
     }

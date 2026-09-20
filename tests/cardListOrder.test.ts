@@ -15,8 +15,10 @@ function pick(
   return {
     cbsEventId: Number(overrides.gameId.replace(/\D/g, '') || 1),
     away: 'Away',
+    awayAbbrev: 'AWAY',
     awayId: 'away',
     home: 'Home',
+    homeAbbrev: 'HOME',
     homeId: 'home',
     kickoffLabel: 'Sun 1:00 PM',
     pickedSide: 'home',
@@ -43,8 +45,10 @@ function unpicked(
   return {
     cbsEventId: Number(overrides.gameId.replace(/\D/g, '') || 9),
     away: 'Review Away',
+    awayAbbrev: 'RA',
     awayId: 'review-away',
     home: 'Review Home',
+    homeAbbrev: 'RH',
     homeId: 'review-home',
     homeSpread: -3,
     kickoffLabel: 'Sun 1:00 PM',
@@ -130,23 +134,27 @@ test('formatSuggestedCardText copies only team and spread', () => {
       pick({
         gameId: 'kan',
         kickoff: '2026-09-20T13:00:00-04:00',
-        away: 'KAN',
+        away: 'Kansas City',
+        awayAbbrev: 'KC',
         awayId: 'kan',
-        home: 'NYG',
+        home: 'New York Giants',
+        homeAbbrev: 'NYG',
         pickedSide: 'away',
         pickedTeamId: 'kan',
-        pickedTeam: 'KAN',
+        pickedTeam: 'Kansas City',
         poolSpread: 5.5,
       }),
       pick({
         gameId: 'unc',
         kickoff: '2026-09-19T12:00:00-04:00',
-        away: 'UNC',
+        away: 'North Carolina',
+        awayAbbrev: 'UNC',
         awayId: 'unc',
-        home: 'CLEM',
+        home: 'Clemson',
+        homeAbbrev: 'CLEM',
         pickedSide: 'away',
         pickedTeamId: 'unc',
-        pickedTeam: 'UNC',
+        pickedTeam: 'North Carolina',
         poolSpread: 3.5,
       }),
     ],
@@ -154,8 +162,10 @@ test('formatSuggestedCardText copies only team and spread', () => {
       unpicked({
         gameId: 'manual',
         kickoff: '2026-09-21T20:15:00-04:00',
-        away: 'DET',
-        home: 'BUF',
+        away: 'Detroit',
+        awayAbbrev: 'DET',
+        home: 'Buffalo',
+        homeAbbrev: 'BUF',
         homeSpread: -4.5,
       }),
     ],
@@ -172,7 +182,7 @@ test('formatSuggestedCardText copies only team and spread', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKAN +5.5\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKC +5.5\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -201,8 +211,10 @@ test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
       unpicked({
         gameId: 'lean',
         kickoff: '2026-09-19T12:00:00-04:00',
-        away: 'NCST',
-        home: 'VAN',
+        away: 'NC State',
+        awayAbbrev: 'NCST',
+        home: 'Vanderbilt',
+        homeAbbrev: 'VANDY',
         homeSpread: -3.5,
         leanSide: 'away',
         leanTeam: 'NCST',
@@ -211,8 +223,10 @@ test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
       unpicked({
         gameId: 'flat',
         kickoff: '2026-09-19T15:30:00-04:00',
-        away: 'ASU',
-        home: 'KAN',
+        away: 'Arizona State',
+        awayAbbrev: 'ARIZST',
+        home: 'Kansas',
+        homeAbbrev: 'KANSAS',
         homeSpread: -2.5,
       }),
     ],
@@ -221,6 +235,6 @@ test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Saturday:\n\nNCST +3.5 (lean only, no pick)\nASU @ KAN (manual review, no lean)',
+    'Saturday:\n\nNCST +3.5 (lean only, no pick)\nARIZST @ KANSAS (manual review, no lean)',
   )
 })

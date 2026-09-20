@@ -26,8 +26,10 @@ export type SuggestedPick = {
   gameId: string
   cbsEventId: number
   away: string
+  awayAbbrev: string
   awayId: string
   home: string
+  homeAbbrev: string
   homeId: string
   kickoff: string
   kickoffLabel: string
@@ -55,8 +57,10 @@ export type UnpickedGame = {
   gameId: string
   cbsEventId: number
   away: string
+  awayAbbrev: string
   awayId: string
   home: string
+  homeAbbrev: string
   homeId: string
   homeSpread: number
   kickoff: string
@@ -151,7 +155,9 @@ export function generateSuggestedCard(
       gameId: game.id,
       cbsEventId: game.cbsEventId,
       away: game.away.name,
+      awayAbbrev: game.away.abbrev,
       home: game.home.name,
+      homeAbbrev: game.home.abbrev,
       kickoff: game.kickoff,
       kickoffLabel: game.kickoffLabel.replace(' ET', ''),
     }
@@ -260,12 +266,20 @@ export function oppositeSide(side: 'home' | 'away') {
   return side === 'home' ? 'away' : 'home'
 }
 
+function sideAbbrev(
+  teams: { awayAbbrev: string; homeAbbrev: string },
+  side: 'home' | 'away',
+) {
+  return side === 'home' ? teams.homeAbbrev : teams.awayAbbrev
+}
+
 export function submittedPick(pick: SuggestedPick, deviate: boolean) {
   const side = deviate ? oppositeSide(pick.pickedSide) : pick.pickedSide
   return {
     pickedSide: side,
     pickedTeamId: side === 'home' ? pick.homeId : pick.awayId,
     pickedTeam: side === 'home' ? pick.home : pick.away,
+    pickedAbbrev: sideAbbrev(pick, side),
     poolSpread: deviate ? -pick.poolSpread : pick.poolSpread,
   }
 }
@@ -279,6 +293,7 @@ export function submittedManualPick(
     pickedSide: side,
     pickedTeamId: side === 'home' ? game.homeId : game.awayId,
     pickedTeam: side === 'home' ? game.home : game.away,
+    pickedAbbrev: sideAbbrev(game, side),
     poolSpread: poolSpreadForSide(game.homeSpread, side),
   }
 }
@@ -365,12 +380,12 @@ function formatCopiedManualLine(
 ) {
   if (side) {
     const sent = submittedManualPick(game, side)
-    return `${formatCopiedPick(sent.pickedTeam, sent.poolSpread)} (manual pick)`
+    return `${formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)} (manual pick)`
   }
-  if (game.leanTeam && game.leanSpread != null) {
-    return `${formatCopiedPick(game.leanTeam, game.leanSpread)} (lean only, no pick)`
+  if (game.leanSide && game.leanSpread != null) {
+    return `${formatCopiedPick(sideAbbrev(game, game.leanSide), game.leanSpread)} (lean only, no pick)`
   }
-  return `${game.away} @ ${game.home} (manual review, no lean)`
+  return `${game.awayAbbrev} @ ${game.homeAbbrev} (manual review, no lean)`
 }
 
 function formatCardWeekday(
@@ -414,7 +429,7 @@ export function formatSuggestedCardText(
     const kickoff = row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff
     if (row.kind === 'pick') {
       const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
-      return [{ kickoff, line: formatCopiedPick(sent.pickedTeam, sent.poolSpread) }]
+      return [{ kickoff, line: formatCopiedPick(sent.pickedAbbrev, sent.poolSpread) }]
     }
     const side = manualSelections.get(row.game.gameId)
     return [{ kickoff, line: formatCopiedManualLine(row.game, side) }]

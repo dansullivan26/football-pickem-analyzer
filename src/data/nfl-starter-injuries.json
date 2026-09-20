@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-09-20T19:33:36.077Z",
-    "reportUpdatedAt": "2026-09-20T19:33:30Z",
+    "fetchedAt": "2026-09-20T22:33:37.445Z",
+    "reportUpdatedAt": "2026-09-20T22:33:32Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": []
     },
@@ -18,7 +18,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -68,8 +68,18 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hand",
-          "detail": "questionable",
-          "updatedAt": "2026-09-20T19:23Z"
+          "detail": "Dorlus (hand) is questionable to return to Sunday's game against the Panthers, Josh Kendall of The Athletic reports.",
+          "updatedAt": "2026-09-20T19:29Z"
+        },
+        {
+          "athleteId": "4034961",
+          "name": "Jawaan Taylor",
+          "position": "OT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ribs",
+          "detail": "Taylor (ribs) is questionable to return to Sunday's game against the Browns, Tori McElhaney of the Falcons' official site reports.",
+          "updatedAt": "2026-09-20T19:50Z"
         }
       ]
     },
@@ -77,7 +87,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-09-20T19:33:17Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -117,8 +127,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Toe",
-          "detail": "Stanley (toe) is active for Sunday's game against the Saints.",
-          "updatedAt": "2026-09-20T16:49Z"
+          "detail": "Stanley (toe) is questionable to return to Sunday's game against the Saints.",
+          "updatedAt": "2026-09-20T19:28Z"
         }
       ]
     },
@@ -126,7 +136,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-09-20T19:33:18Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -165,7 +175,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-09-20T19:33:19Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -214,15 +224,36 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-09-20T19:33:20Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
-      "injuries": []
+      "injuries": [
+        {
+          "athleteId": "4426374",
+          "name": "Tyrique Stevenson Sr.",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "Stevenson suffered a hamstring injury during Sunday's 9-3 loss to the Vikings.",
+          "updatedAt": "2026-09-20T20:08Z"
+        },
+        {
+          "athleteId": "4431611",
+          "name": "Caleb Williams",
+          "position": "QB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "Williams will undergo imaging on his right hamstring Monday, Adam Schefter of ESPN reports.",
+          "updatedAt": "2026-09-20T20:54Z"
+        }
+      ]
     },
     {
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-09-20T19:33:21Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": []
     },
@@ -230,7 +261,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-09-20T19:33:22Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -259,7 +290,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-09-20T19:33:23Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -281,6 +312,16 @@
           "injury": "Forearm",
           "detail": "inactive",
           "updatedAt": "2026-09-20T18:59Z"
+        },
+        {
+          "athleteId": "4384549",
+          "name": "Cobie Durant",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "questionable",
+          "updatedAt": "2026-09-20T22:19Z"
         }
       ]
     },
@@ -288,7 +329,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -300,6 +341,16 @@
           "injury": "Foot",
           "detail": "inactive",
           "updatedAt": "2026-09-20T18:45Z"
+        },
+        {
+          "athleteId": "4241985",
+          "name": "J.K. Dobbins",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "Dobbins exited Sunday's game versus the Jaguars due to a hamstring injury, Sam Jane of The Denver Post reports.",
+          "updatedAt": "2026-09-20T22:26Z"
         }
       ]
     },
@@ -307,7 +358,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -336,7 +387,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -350,24 +401,14 @@
           "updatedAt": "2026-09-19T18:34Z"
         },
         {
-          "athleteId": "4362249",
-          "name": "Jayden Reed",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Neck",
-          "detail": "Reed has been ruled out of Sunday's game at the Jets due to a neck injury.",
-          "updatedAt": "2026-09-20T17:29Z"
-        },
-        {
           "athleteId": "4242390",
           "name": "Aaron Banks",
           "position": "G",
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Toe",
-          "detail": "Banks (toe) is questionable to return to Sunday's game against the Jets.",
-          "updatedAt": "2026-09-20T18:59Z"
+          "detail": "Banks (toe) has been ruled out for the remainder of Sunday's game against the Jets.",
+          "updatedAt": "2026-09-20T20:07Z"
         },
         {
           "athleteId": "4240435",
@@ -376,8 +417,28 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Bako-Bewele (knee) has been ruled out for the remainder of Sunday's game against the Jets.",
-          "updatedAt": "2026-09-20T17:32Z"
+          "detail": "Bako-Bewele (knee) likely suffered a long-term injury in Sunday's 20-13 win over the Jets, Rob Demovsky of ESPN.com reports.",
+          "updatedAt": "2026-09-20T21:21Z"
+        },
+        {
+          "athleteId": "4259305",
+          "name": "Bo Melton",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Neck",
+          "detail": "Melton (neck) is questionable to return to Sunday's game against the Jets.",
+          "updatedAt": "2026-09-20T19:48Z"
+        },
+        {
+          "athleteId": "4362249",
+          "name": "Jayden Reed",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Neck",
+          "detail": "Coach Matt LaFleur said Reed has movement in all of his extremities after he suffered a neck injury during Sunday's 20-17 overtime win at the Jets, Rob Demovsky of ESPN.com reports.",
+          "updatedAt": "2026-09-20T21:16Z"
         }
       ]
     },
@@ -385,7 +446,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -424,7 +485,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:21Z",
       "status": "ok",
       "injuries": [
         {
@@ -443,7 +504,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": []
     },
@@ -451,7 +512,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:21Z",
       "status": "ok",
       "injuries": [
         {
@@ -480,7 +541,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -492,6 +553,16 @@
           "injury": "Hamstring",
           "detail": "inactive",
           "updatedAt": "2026-09-20T18:39Z"
+        },
+        {
+          "athleteId": "3691739",
+          "name": "Derwin James Jr.",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hand",
+          "detail": "James (hand) is questionable to return to Sunday's contest against the Raiders.",
+          "updatedAt": "2026-09-20T20:42Z"
         }
       ]
     },
@@ -499,7 +570,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -538,7 +609,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -560,6 +631,16 @@
           "injury": "Knee - Meniscus",
           "detail": "Bowers (knee) is inactive for Sunday's game at the Chargers.",
           "updatedAt": "2026-09-20T18:43Z"
+        },
+        {
+          "athleteId": "4697757",
+          "name": "Treydan Stukes",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "Stukes suffered a concussion and has been ruled out for the remainder of Sunday's contest against the Chargers, Vincent Bonsignore of the California Post reports.",
+          "updatedAt": "2026-09-20T22:12Z"
         }
       ]
     },
@@ -567,7 +648,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-09-20T19:33:34Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -586,7 +667,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-09-20T19:33:35Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -615,7 +696,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -634,7 +715,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -678,6 +759,16 @@
           "updatedAt": "2026-09-20T19:26Z"
         },
         {
+          "athleteId": "4808766",
+          "name": "Mason Taylor",
+          "position": "TE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Thumb",
+          "detail": "Taylor (thumb) is questionable to return to Sunday's game against the Packers, Zack Rosenblatt of The Athletic reports.",
+          "updatedAt": "2026-09-20T20:36Z"
+        },
+        {
           "athleteId": "4723820",
           "name": "Omar Cooper Jr.",
           "position": "WR",
@@ -693,7 +784,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -733,8 +824,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Shoulder",
-          "detail": "questionable",
-          "updatedAt": "2026-09-20T19:18Z"
+          "detail": "Woodson (shoulder) has been ruled out for the rest of Sunday's game against the Steelers.",
+          "updatedAt": "2026-09-20T19:33Z"
         }
       ]
     },
@@ -742,7 +833,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -752,8 +843,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "questionable",
-          "updatedAt": "2026-09-20T19:13Z"
+          "detail": "Banks (ankle) has been ruled out for the remainder of Sunday's game against the Ravens, Luke Johnson of The New Orleans Times-Picayune reports.",
+          "updatedAt": "2026-09-20T19:25Z"
         },
         {
           "athleteId": "2575788",
@@ -771,7 +862,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -783,6 +874,16 @@
           "injury": "Pectoral",
           "detail": "inactive",
           "updatedAt": "2026-09-20T15:32Z"
+        },
+        {
+          "athleteId": "3929630",
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "Barkley said after Sunday's 24-20 win at Tennessee that he feels \"alright,\" but he'll undergo an MRI after missing a portion of the game due to a stinger, Cameron Wolfe of NFL Network reports.",
+          "updatedAt": "2026-09-20T21:27Z"
         },
         {
           "athleteId": "3121023",
@@ -800,7 +901,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -829,15 +930,26 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
-      "injuries": []
+      "injuries": [
+        {
+          "athleteId": "3043116",
+          "name": "Demarcus Robinson",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "Robinson (ankle) has been ruled out for the rest of Sunday's game against the Dolphins, Matt Barrows of The Athletic reports.",
+          "updatedAt": "2026-09-20T21:52Z"
+        }
+      ]
     },
     {
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -876,7 +988,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -895,7 +1007,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -917,6 +1029,16 @@
           "injury": "Elbow",
           "detail": "Williams (elbow) is inactive for Sunday's game against the Eagles.",
           "updatedAt": "2026-09-20T15:54Z"
+        },
+        {
+          "athleteId": "4710000",
+          "name": "Fernando Carmona",
+          "position": "G",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "Carmona suffered a shoulder injury during Sunday's 24-20 loss to the Eagles, Terry McCormick of TitanInsider.com reports.",
+          "updatedAt": "2026-09-20T20:21Z"
         }
       ]
     },
@@ -924,7 +1046,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-09-20T19:33:24Z",
+      "depthChartAt": "2026-09-20T22:33:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -946,6 +1068,16 @@
           "injury": "Hamstring",
           "detail": "inactive",
           "updatedAt": "2026-09-20T18:58Z"
+        },
+        {
+          "athleteId": "4426348",
+          "name": "Jayden Daniels",
+          "position": "QB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Elbow",
+          "detail": "Daniels has been ruled out for the rest of Sunday's game against the Cowboys due to a left elbow injury.",
+          "updatedAt": "2026-09-20T22:19Z"
         }
       ]
     }

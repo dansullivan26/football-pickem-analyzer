@@ -7,8 +7,8 @@ export type HistoricalPeriod = {
 export type HistoricalWeeklyWin = {
   poolPeriodId: string
   week: number
+  /** CBS periodScore: correct picks that week, not an official weekly winner. */
   wins: number
-  weeklyLeader: boolean
 }
 
 export type HistoricalStanding = {
@@ -143,19 +143,18 @@ function sanitizeWeeklyWins(
         `${seasonYear}.${name}.weeklyWins[${index}] week ${week} does not match period order ${period.order}.`,
       )
     }
-    if (typeof weekly.weeklyLeader !== 'boolean') {
-      throw new Error(
-        `${seasonYear}.${name}.weeklyWins[${index}].weeklyLeader must be a boolean.`,
-      )
-    }
+    // CBS weeklyLeader means "tied for the high pick-score," can be true for
+    // several people, is false on unfinished weeks, and is blank on 2024/2025
+    // archives. It is never the official weekly winner after tiebreakers, so
+    // we drop it. wins/periodScore is the useful field.
+    const score = weekly.periodScore ?? weekly.wins
     return {
       poolPeriodId,
       week,
       wins: integer(
-        weekly.wins,
+        score,
         `${seasonYear}.${name}.weeklyWins[${index}].wins`,
       ),
-      weeklyLeader: weekly.weeklyLeader,
     }
   })
   unique(

@@ -95,6 +95,14 @@ test('sanitizeSeasonHistory allowlists, sorts, and retains season-specific ids',
     [1, 2],
   )
   assert.equal(
+    'weeklyLeader' in
+      ((history.seasons[0]?.standings[1]?.weeklyWins[0] ?? {}) as Record<
+        string,
+        unknown
+      >),
+    false,
+  )
+  assert.equal(
     'privatePoolUrl' in (history.source as Record<string, unknown>),
     false,
   )
@@ -116,6 +124,19 @@ test('sanitizeSeasonHistory rejects weekly rows for unknown periods', () => {
   assert.throws(
     () => sanitizeSeasonHistory(raw),
     /references unknown period missing/,
+  )
+})
+
+test('sanitizeSeasonHistory reads periodScore and does not require weeklyLeader', () => {
+  const raw = dump()
+  raw.seasons[1]!.standings[0]!.weeklyWins = [
+    { poolPeriodId: 'w1', week: 1, periodScore: 9 },
+    { poolPeriodId: 'w2', week: 2, periodScore: 11 },
+  ]
+  const history = sanitizeSeasonHistory(raw)
+  assert.deepEqual(
+    history.seasons[0]?.standings[1]?.weeklyWins.map((week) => week.wins),
+    [9, 11],
   )
 })
 

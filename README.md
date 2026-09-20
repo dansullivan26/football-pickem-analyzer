@@ -83,8 +83,11 @@ Historical `entryId` values remain season-specific. Cross-season identity is
 the exact CBS display name. Weekly rows use each period's own score, so playoff
 weeks with two or three games do not need a fixed slate-size assumption. A
 season may contain totals only (for example, 2023) by omitting `weeklyWins`.
-When 2024 or 2025 is present, ingest also reconciles the top three against the
-hand-entered final money table.
+Weekly rows store CBS `periodScore` (as `wins`). `weeklyLeader` is ignored: it
+is a co-high pick-score flag, can be true for multiple people, and is blank on
+the 2024/2025 archive, so it is not the official weekly winner after
+tiebreakers. When 2024 or 2025 is present, ingest also reconciles the top three
+against the hand-entered final money table.
 
 Current week entries can also carry CBS's hidden-card progress:
 `picksCount`, `maxPicksCount`, entry-level `pickStatus`,

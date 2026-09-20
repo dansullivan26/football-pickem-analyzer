@@ -48,6 +48,14 @@ import {
 } from './playerDirectory'
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
+import moneyHistoryData from './data/money-history.json'
+import {
+  formatMoneyPlace,
+  linkMoneyHistory,
+  moneyFinishesForSlug,
+  type LinkedMoneySeason,
+  type MoneyHistoryFile,
+} from './moneyHistory'
 import type { LastKickoffFile } from './lastKickoff'
 import {
   pickChangeForGame,
@@ -455,6 +463,14 @@ export default function PlayersView({
     () => playerSlugByEntryId(history.entries),
     [history.entries],
   )
+  const moneySeasons = useMemo(
+    () =>
+      linkMoneyHistory(
+        moneyHistoryData as MoneyHistoryFile,
+        history.entries,
+      ),
+    [history.entries],
+  )
   const [selectedWeekNumber, setSelectedWeekNumber] = useState(
     slate.week.order,
   )
@@ -718,6 +734,12 @@ export default function PlayersView({
         forecasts.residuals.overall.graded,
       )
     : null
+  const playerMoneyFinishes = moneyFinishesForSlug(
+    moneySeasons,
+    selectedPlayer
+      ? slugsByEntryId.get(selectedPlayer.entryId)
+      : null,
+  )
   const habitYears = careerSeasonYears(careerHistory)
   const habitSeasonLabel =
     habitYears.length > 1
@@ -790,6 +812,13 @@ export default function PlayersView({
       {forecasts?.residuals && maturity && (
         <ResidualReport report={forecasts.residuals} maturity={maturity} />
       )}
+
+      <MoneyHistory
+        seasons={moneySeasons}
+        currentSeasonYear={history.pool.seasonYear}
+        namesHidden={namesHidden}
+        onSelectPlayer={onSelectPlayer}
+      />
 
       <section
         className={`players-layout${namesHidden ? ' names-hidden' : ''}`}
@@ -929,6 +958,16 @@ export default function PlayersView({
                         </li>
                       ))}
                     </ol>
+                  )}
+                  {playerMoneyFinishes.length > 0 && (
+                    <p className="player-money-finishes">
+                      {playerMoneyFinishes
+                        .map(
+                          (finish) =>
+                            `${finish.seasonYear} ${formatMoneyPlace(finish.place)} · ${finish.score}`,
+                        )
+                        .join(' · ')}
+                    </p>
                   )}
                 </div>
               </div>
@@ -1451,5 +1490,73 @@ export default function PlayersView({
         </section>
       </section>
     </main>
+  )
+}
+
+function MoneyHistory({
+  seasons,
+  currentSeasonYear,
+  namesHidden,
+  onSelectPlayer,
+}: {
+  seasons: LinkedMoneySeason[]
+  currentSeasonYear: number
+  namesHidden: boolean
+  onSelectPlayer: (slug: string) => void
+}) {
+  if (seasons.length === 0) return null
+  return (
+    <section className="money-history" aria-label="Past money finishes">
+      <div className="money-history-heading">
+        <div>
+          <p className="eyebrow">In the money</p>
+          <h2>Past top 3</h2>
+        </div>
+        <span>CBS season scores</span>
+      </div>
+      <p className="money-history-note">
+        Top 3 cashed. These are final CBS season scores, typed in by hand —
+        not rebuilt from weekly dumps. {currentSeasonYear} is still in
+        progress.
+      </p>
+      <div className="money-history-grid">
+        {seasons.map((season) => (
+          <article key={season.seasonYear}>
+            <h3>{season.seasonYear}</h3>
+            <ol>
+              {season.places.map((row) => {
+                const label = namesHidden ? 'Player' : row.name
+                const text = (
+                  <>
+                    <strong>
+                      {formatMoneyPlace(row.place)} · {row.score}
+                    </strong>
+                    <span>{label}</span>
+                  </>
+                )
+                if (!namesHidden && row.slug) {
+                  return (
+                    <li key={`${season.seasonYear}:${row.place}`}>
+                      <a
+                        href={pathForPlayer(row.slug)}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          onSelectPlayer(row.slug!)
+                        }}
+                      >
+                        {text}
+                      </a>
+                    </li>
+                  )
+                }
+                return (
+                  <li key={`${season.seasonYear}:${row.place}`}>{text}</li>
+                )
+              })}
+            </ol>
+          </article>
+        ))}
+      </div>
+    </section>
   )
 }

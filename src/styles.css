@@ -2541,6 +2541,95 @@ a.team-page-link:focus-visible .team-name {
   font-size: 0.68rem;
 }
 
+.player-money-finishes {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.money-history {
+  margin: 0 0 22px;
+  padding: 18px 20px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+}
+
+.money-history-heading {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.money-history-heading h2 {
+  font-size: 1.2rem;
+}
+
+.money-history-heading > span,
+.money-history-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.money-history-note {
+  margin: 8px 0 14px;
+  max-width: 62ch;
+  line-height: 1.45;
+}
+
+.money-history-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.money-history-grid article {
+  min-width: 0;
+  padding: 12px 14px 10px;
+  border-radius: 12px;
+  background: var(--gray-soft);
+}
+
+.money-history-grid h3 {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+}
+
+.money-history-grid ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.money-history-grid li,
+.money-history-grid a {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+  color: inherit;
+  text-decoration: none;
+}
+
+.money-history-grid a:hover span {
+  text-decoration: underline;
+}
+
+.money-history-grid strong {
+  font-size: 0.82rem;
+}
+
+.money-history-grid span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: right;
+}
+
 .player-insight {
   flex-basis: 100%;
   margin: 2px 0 0;
@@ -3854,6 +3943,10 @@ footer {
   }
 
   .weekly-recap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .money-history-grid {
     grid-template-columns: 1fr;
   }
 

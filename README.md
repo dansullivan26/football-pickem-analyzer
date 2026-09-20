@@ -69,6 +69,23 @@ frozen recommendation snapshot so the Performance page can score those
 games. A later overwrite of the same dump updates covers again. Line-value agreement
 and tiebreaker ±2 use the frozen recommendation snapshot, not live odds.
 
+To ingest GrokBot's one-time CBS `standings.overall` archive for prior pool
+editions:
+
+```bash
+npm run prepare-season-history -- \
+  --input path/to/football-fanatics-pool-season-history.json
+```
+
+This separate, allowlisted pipeline writes `src/data/season-history.json`; it
+never modifies current-season `player-history.json` or `player-seasons/`.
+Historical `entryId` values remain season-specific. Cross-season identity is
+the exact CBS display name. Weekly rows use each period's own score, so playoff
+weeks with two or three games do not need a fixed slate-size assumption. A
+season may contain totals only (for example, 2023) by omitting `weeklyWins`.
+When 2024 or 2025 is present, ingest also reconciles the top three against the
+hand-entered final money table.
+
 Current week entries can also carry CBS's hidden-card progress:
 `picksCount`, `maxPicksCount`, entry-level `pickStatus`,
 `revealedPicksCount`, and `picksCountFirstSeenAt`. The Players view shows the

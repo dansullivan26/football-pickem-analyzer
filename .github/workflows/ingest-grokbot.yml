@@ -11,6 +11,7 @@ on:
           - slate
           - players
           - consensus
+          - season-history
 
 permissions:
   contents: write
@@ -47,8 +48,11 @@ jobs:
             /tmp/grokbot-drops
 
           src="/tmp/grokbot-drops/incoming/${KIND}.json"
+          if [ "$KIND" = "season-history" ] && [ ! -f "$src" ]; then
+            src="/tmp/grokbot-drops/incoming/football-fanatics-pool-season-history.json"
+          fi
           if [ ! -f "$src" ]; then
-            echo "No incoming/${KIND}.json in ${DROPS_REPO}."
+            echo "No supported ${KIND} dump in ${DROPS_REPO}."
             exit 1
           fi
 
@@ -71,6 +75,9 @@ jobs:
             consensus)
               npm run prepare-consensus -- --input incoming/consensus.json
               ;;
+            season-history)
+              npm run prepare-season-history -- --input incoming/season-history.json
+              ;;
             *)
               echo "Unknown kind: ${{ inputs.kind }}"
               exit 1
@@ -86,6 +93,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/current-slate.json src/data/team-roster.json src/data/player-history.json src/data/player-seasons src/data/consensus.json src/data/prediction-forecasts.json src/data/recommendation-history.json
+          if [ -f src/data/season-history.json ]; then
+            git add src/data/season-history.json
+          fi
 
           if git diff --cached --quiet; then
             echo "Prepared ${KIND} data matches what is already on main."
@@ -97,6 +107,7 @@ jobs:
             slate) msg="data: ingest CBS slate" ;;
             players) msg="data: ingest player history" ;;
             consensus) msg="data: ingest Covers consensus" ;;
+            season-history) msg="data: ingest historical pool standings" ;;
           esac
 
           git commit -m "$msg"

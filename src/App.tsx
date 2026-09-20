@@ -36,6 +36,7 @@ import { compareLineHistoryListItems, formatLinePath, lineHistoryByEvent, spread
 import {
   badBeatKey,
   beatsForSeason,
+  clipBadBeatNote,
   mergeBadBeats,
   rememberBadBeatChange,
   unpublishedBadBeatChanges,
@@ -920,7 +921,7 @@ function App() {
   const markBadBeat = useCallback((draft: Omit<BadBeat, 'markedAt'>) => {
     const beat: BadBeat = {
       ...draft,
-      note: draft.note?.trim() || null,
+      note: clipBadBeatNote(draft.note),
       markedAt: new Date().toISOString(),
     }
     rememberBadBeatChange({ action: 'add', beat })
@@ -939,7 +940,7 @@ function App() {
   }, [persistBadBeat])
 
   const updateBadBeatNote = useCallback((beat: BadBeat, note: string | null) => {
-    const next = { ...beat, note: note?.trim() || null }
+    const next = { ...beat, note: clipBadBeatNote(note) }
     rememberBadBeatChange({ action: 'add', beat: next })
     setBeats(mergeBadBeats(badBeatsFile))
     void persistBadBeat({ action: 'add', beat: next })

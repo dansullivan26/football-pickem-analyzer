@@ -1131,6 +1131,8 @@ h2 {
 
 .bad-beat-note-count {
   justify-self: end;
+  color: var(--muted);
+  font-size: 0.68rem;
   font-variant-numeric: tabular-nums;
 }
 

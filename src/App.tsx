@@ -12,8 +12,10 @@ import nflStarterInjuriesData from './data/nfl-starter-injuries.json'
 import injuryLineHistoryData from './data/injury-line-history.json'
 import cardOverridesData from './data/card-overrides.json'
 import teamRosterData from './data/team-roster.json'
+import seasonHistoryData from './data/season-history.json'
 import PlayersView from './PlayersView'
 import TeamsView from './TeamsView'
+import LeagueHistoryView from './LeagueHistoryView'
 import PerformanceView from './PerformanceView'
 import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
@@ -70,6 +72,7 @@ import {
 import type { LastKickoffFile } from './lastKickoff'
 import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
+import type { SeasonHistoryFile } from './seasonHistory'
 import type { PredictionForecasts } from './playerPrediction'
 import type { NflStarterInjuryFile } from './nflStarterInjuries'
 import {
@@ -114,6 +117,7 @@ const lineHistory = lineHistoryData as LineHistory
 const cardOverrides = cardOverridesData as CardOverrides
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamRoster = teamRosterData as TeamRosterFile
+const seasonHistory = seasonHistoryData as SeasonHistoryFile
 const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory, teamRoster)
 const travelRestIndex = buildTravelRestIndex(
   slate,
@@ -1198,6 +1202,16 @@ function App() {
             Teams
           </a>
           <a
+            className={view === 'history' ? 'active' : ''}
+            href={pathForView('history')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('history')
+            }}
+          >
+            History
+          </a>
+          <a
             className={view === 'performance' ? 'active' : ''}
             href={pathForView('performance')}
             onClick={(event) => {
@@ -1617,6 +1631,12 @@ function App() {
           onClearBadBeat={clearBadBeat}
           onOpenBadBeats={(hash) => goTo('bad-beats', null, hash)}
         />
+      ) : view === 'history' ? (
+        <LeagueHistoryView
+          archive={seasonHistory}
+          current={playerHistory}
+          onSelectPlayer={(slug) => goTo('players', slug)}
+        />
       ) : view === 'bad-beats' ? (
         <BadBeatsView
           seasonYear={slate.pool.seasonYear}
@@ -1666,6 +1686,15 @@ function App() {
               dateStyle: 'medium',
               timeStyle: 'short',
             }).format(new Date(recommendationHistory.updatedAt))}
+            .
+          </>
+        ) : view === 'history' ? (
+          <>
+            CBS historical standings captured{' '}
+            {new Intl.DateTimeFormat(undefined, {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            }).format(new Date(seasonHistory.source.fetchedAt))}
             .
           </>
         ) : view === 'bad-beats' ? (

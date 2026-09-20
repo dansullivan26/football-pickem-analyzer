@@ -11,8 +11,9 @@ npm run dev
 ```
 
 Lines is `/`, Players is `/players`, Teams is `/teams`, a team profile is
-`/teams/alabama` (or `/teams/north-carolina`, and so on), and Performance is
-`/performance`, and Bad beats is `/bad-beats`. GitHub Pages serves the same SPA for those paths via `404.html`.
+`/teams/alabama` (or `/teams/north-carolina`, and so on), League History is
+`/history`, Performance is `/performance`, and Bad beats is `/bad-beats`.
+GitHub Pages serves the same SPA for those paths via `404.html`.
 Teams grades each side against the locked CBS line (home/away, favorite/dog)
 from the same covers Performance uses.
 

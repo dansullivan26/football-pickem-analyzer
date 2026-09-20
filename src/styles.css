@@ -2630,6 +2630,294 @@ a.team-page-link:focus-visible .team-name {
   text-align: right;
 }
 
+.history-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 22px;
+}
+
+.history-summary article,
+.history-benchmark-summary article {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding: 17px 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: white;
+}
+
+.history-summary article.history-summary-current {
+  border-color: #b8d9c7;
+  background: var(--green-soft);
+}
+
+.history-summary span,
+.history-benchmark-summary span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.history-summary strong,
+.history-benchmark-summary strong {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.65rem;
+}
+
+.history-summary small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.history-section {
+  margin: 0 0 24px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.history-section-heading {
+  display: flex;
+  gap: 24px;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.history-section-heading h2 {
+  font-size: 1.25rem;
+}
+
+.history-section-heading > p,
+.history-section-heading > span,
+.history-section-note {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.history-section-note {
+  margin: -6px 0 16px;
+  text-align: left;
+}
+
+.history-section-controls {
+  align-items: center;
+}
+
+.history-section-controls label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.history-section-controls select {
+  min-width: 120px;
+}
+
+.history-pace-chart {
+  padding: 12px 12px 2px;
+  border-radius: 12px;
+  background: #f8faf8;
+}
+
+.history-pace-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.history-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-end;
+  min-height: 22px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.history-chart-legend span::before {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  margin: 0 6px 2px 0;
+  border-radius: 99px;
+  background: currentColor;
+  content: '';
+}
+
+.history-chart-grid {
+  stroke: #dfe6df;
+  stroke-width: 1;
+}
+
+.history-chart-axis {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
+.history-chart-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.history-chart-point {
+  fill: white;
+  stroke: currentColor;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.history-chart-legend .current,
+.history-pace-chart g.current {
+  color: var(--green);
+}
+
+.history-chart-legend .prior-one,
+.history-pace-chart g.prior-one {
+  color: var(--blue);
+}
+
+.history-chart-legend .prior-two,
+.history-pace-chart g.prior-two {
+  color: var(--orange);
+}
+
+.history-detail-table {
+  margin-top: 14px;
+}
+
+.history-detail-table summary {
+  color: var(--green-dark);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.history-table-scroll {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.history-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.history-table-scroll th,
+.history-table-scroll td {
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.history-table-scroll th:first-child,
+.history-table-scroll td:first-child,
+.history-score-table th:first-child,
+.history-final-table th {
+  text-align: left;
+}
+
+.history-table-scroll thead th {
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.history-table-scroll td small,
+.history-score-table th small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.history-table-scroll td strong {
+  display: block;
+}
+
+.history-benchmark-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.history-benchmark-summary article {
+  padding: 13px 15px;
+  background: var(--gray-soft);
+}
+
+.history-benchmark-summary strong {
+  font-size: 1.3rem;
+}
+
+.history-alumni-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.history-alumni-grid a {
+  display: grid;
+  gap: 3px;
+  padding: 14px 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.history-alumni-grid a:hover {
+  border-color: #a7cdb8;
+  background: var(--green-soft);
+}
+
+.history-alumni-grid span {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.history-alumni-grid strong {
+  color: var(--green-dark);
+  font-size: 1.05rem;
+}
+
+.history-alumni-grid small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.history-final-table tr.money {
+  background: var(--amber-soft);
+}
+
+.history-final-table a {
+  color: var(--green-dark);
+}
+
 .player-insight {
   flex-basis: 100%;
   margin: 2px 0 0;
@@ -3950,6 +4238,24 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .history-summary,
+  .history-benchmark-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .history-section-heading {
+    display: grid;
+  }
+
+  .history-section-heading > p,
+  .history-section-heading > span {
+    text-align: left;
+  }
+
+  .history-alumni-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .slate-section {
     padding-top: 30px;
   }
@@ -4161,6 +4467,14 @@ footer {
 }
 
 @media (max-width: 420px) {
+  .history-section {
+    padding: 17px;
+  }
+
+  .history-alumni-grid {
+    grid-template-columns: 1fr;
+  }
+
   .refresh-button {
     padding: 0 11px;
   }

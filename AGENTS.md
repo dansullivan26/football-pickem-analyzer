@@ -43,6 +43,7 @@ Routing is path-based and served as an SPA (see `src/routes.ts`). In the browser
 - `/` — Lines
 - `/players` — Players
 - `/teams` and `/teams/<slug>` (e.g. `/teams/alabama`) — Teams / team profile
+- `/history` — Historical money pace and prior standings
 - `/performance` — Performance
 - `/bad-beats` — Bad beats
 

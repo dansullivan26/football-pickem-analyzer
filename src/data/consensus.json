@@ -3,445 +3,23 @@
     "site": "Covers",
     "product": "King of Covers contest consensus",
     "description": "contest ATS tickets; headline % is all lines; atsByLine is picks at each number; away.spread/home.spread are current Sides, which may not match any ticket bucket.",
-    "fetchedAt": "2026-09-19T08:33:17-04:00",
+    "fetchedAt": "2026-09-20T08:32:29-04:00",
     "timezone": "America/Indianapolis"
   },
   "week": {
     "order": 3,
     "label": "Week 3",
     "gamesOnSlate": 25,
-    "matched": 23,
-    "unmatched": 1
+    "matched": 15,
+    "unmatched": 0
   },
   "report": {
-    "summary": "17 of 24 games moved since yesterday 08:45 ET. Sides: FSU @ BAMA 18.5 → 19.5; MICHST @ ND 28.5 → 29.5; CIN @ HOU 2.5 → 1.5; CLE @ TB 7.5 → 8.5; NO @ BAL 7.5 → 8.5; MIN @ CHI 3.5 → 4.5; PHI @ TEN -6.5 → -7.5; SEA @ ARI -4.5 → -3.5. List Sides disagreed with tickets on NCST @ VANDY (5.5 vs ats 2.5/3/3.5/4.5).",
+    "summary": "13 of 15 games moved since yesterday 08:33 ET. Sides: CIN @ HOU 1.5 → 2.5; CLE @ TB 8.5 → 7.5; WAS @ DAL 4.5 → 3.5; IND @ KC 6.5 → 5.5. LV @ LAC public 53/47 → 50/50.",
     "details": null,
-    "comparedTo": "2026-09-18T08:45:20-04:00",
+    "comparedTo": "2026-09-19T08:33:17-04:00",
     "games": []
   },
   "games": [
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg4yds===",
-      "cbsEventId": 50027709,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T12:00:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/26ff6d43-fe82-4e1f-8d77-b4550111043c",
-      "cbsHomeSpread": 5.5,
-      "away": {
-        "name": "Arizona St.",
-        "abbrev": "ARIZST",
-        "coversName": "Arizona State",
-        "spread": -5.5,
-        "pct": 64,
-        "picks": 451
-      },
-      "home": {
-        "name": "Kansas",
-        "abbrev": "KANSAS",
-        "coversName": "Kansas",
-        "spread": 5.5,
-        "pct": 36,
-        "picks": 254
-      },
-      "atsByLine": [
-        {
-          "awaySpread": -2.5,
-          "awayPicks": 0,
-          "homePicks": 1
-        },
-        {
-          "awaySpread": -4.5,
-          "awayPicks": 82,
-          "homePicks": 59
-        },
-        {
-          "awaySpread": -5.5,
-          "awayPicks": 364,
-          "homePicks": 189
-        },
-        {
-          "awaySpread": -6.5,
-          "awayPicks": 5,
-          "homePicks": 5
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg4yto===",
-      "cbsEventId": 50027717,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T12:00:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/1d9eedda-83ea-4d47-ae41-b45500dfbc1a",
-      "cbsHomeSpread": -3.5,
-      "away": {
-        "name": "North Carolina",
-        "abbrev": "UNC",
-        "coversName": "North Carolina",
-        "spread": 3,
-        "pct": 66,
-        "picks": 581
-      },
-      "home": {
-        "name": "Clemson",
-        "abbrev": "CLEM",
-        "coversName": "Clemson",
-        "spread": -3,
-        "pct": 34,
-        "picks": 303
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 9.5,
-          "awayPicks": 45,
-          "homePicks": 20
-        },
-        {
-          "awaySpread": 8.5,
-          "awayPicks": 95,
-          "homePicks": 23
-        },
-        {
-          "awaySpread": 5.5,
-          "awayPicks": 13,
-          "homePicks": 4
-        },
-        {
-          "awaySpread": 4.5,
-          "awayPicks": 12,
-          "homePicks": 9
-        },
-        {
-          "awaySpread": 3.5,
-          "awayPicks": 407,
-          "homePicks": 244
-        },
-        {
-          "awaySpread": 3,
-          "awayPicks": 9,
-          "homePicks": 3
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42ts===",
-      "cbsEventId": 50027759,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T12:00:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/aa20b9f0-29e7-4312-8927-b45500df8753",
-      "cbsHomeSpread": 24.5,
-      "away": {
-        "name": "Georgia",
-        "abbrev": "UGA",
-        "coversName": "Georgia",
-        "spread": -24.5,
-        "pct": 69,
-        "picks": 559
-      },
-      "home": {
-        "name": "Arkansas",
-        "abbrev": "ARK",
-        "coversName": "Arkansas",
-        "spread": 24.5,
-        "pct": 31,
-        "picks": 251
-      },
-      "atsByLine": [
-        {
-          "awaySpread": -17.5,
-          "awayPicks": 172,
-          "homePicks": 56
-        },
-        {
-          "awaySpread": -24.5,
-          "awayPicks": 233,
-          "homePicks": 118
-        },
-        {
-          "awaySpread": -25.5,
-          "awayPicks": 154,
-          "homePicks": 77
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxhaydc===",
-      "cbsEventId": 50027801,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T12:45:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/bf408dac-4b87-45f2-b70c-b45500df9ef4",
-      "cbsHomeSpread": -3.5,
-      "away": {
-        "name": "NC State",
-        "abbrev": "NCST",
-        "coversName": "NC State",
-        "spread": 5.5,
-        "pct": 54,
-        "picks": 365
-      },
-      "home": {
-        "name": "Vanderbilt",
-        "abbrev": "VANDY",
-        "coversName": "Vanderbilt",
-        "spread": -5.5,
-        "pct": 46,
-        "picks": 314
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 4.5,
-          "awayPicks": 23,
-          "homePicks": 24
-        },
-        {
-          "awaySpread": 3.5,
-          "awayPicks": 339,
-          "homePicks": 285
-        },
-        {
-          "awaySpread": 3,
-          "awayPicks": 3,
-          "homePicks": 3
-        },
-        {
-          "awaySpread": 2.5,
-          "awayPicks": 0,
-          "homePicks": 2
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42to===",
-      "cbsEventId": 50027757,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T15:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/6dc76f22-1bc2-42d2-88ac-b45500dfa8f5",
-      "cbsHomeSpread": -20.5,
-      "away": {
-        "name": "Florida State",
-        "abbrev": "FSU",
-        "coversName": "Florida State",
-        "spread": 19.5,
-        "pct": 42,
-        "picks": 335
-      },
-      "home": {
-        "name": "Alabama",
-        "abbrev": "BAMA",
-        "coversName": "Alabama",
-        "spread": -19.5,
-        "pct": 58,
-        "picks": 469
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 20.5,
-          "awayPicks": 23,
-          "homePicks": 33
-        },
-        {
-          "awaySpread": 19.5,
-          "awayPicks": 144,
-          "homePicks": 252
-        },
-        {
-          "awaySpread": 18.5,
-          "awayPicks": 19,
-          "homePicks": 42
-        },
-        {
-          "awaySpread": 17.5,
-          "awayPicks": 57,
-          "homePicks": 52
-        },
-        {
-          "awaySpread": 16.5,
-          "awayPicks": 81,
-          "homePicks": 75
-        },
-        {
-          "awaySpread": 15.5,
-          "awayPicks": 11,
-          "homePicks": 15
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42de===",
-      "cbsEventId": 50027742,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T19:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/8b035c63-d72a-4b48-8248-b44300dbbeca",
-      "cbsHomeSpread": -28.5,
-      "away": {
-        "name": "Michigan St.",
-        "abbrev": "MICHST",
-        "coversName": "Michigan State",
-        "spread": 29.5,
-        "pct": 62,
-        "picks": 372
-      },
-      "home": {
-        "name": "Notre Dame",
-        "abbrev": "ND",
-        "coversName": "Notre Dame",
-        "spread": -29.5,
-        "pct": 38,
-        "picks": 226
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 30.5,
-          "awayPicks": 8,
-          "homePicks": 4
-        },
-        {
-          "awaySpread": 29.5,
-          "awayPicks": 225,
-          "homePicks": 141
-        },
-        {
-          "awaySpread": 28.5,
-          "awayPicks": 139,
-          "homePicks": 81
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg42tg===",
-      "cbsEventId": 50027753,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T19:30:00-04:00",
-      "matchStatus": "unmatched",
-      "coversDetailsUrl": null,
-      "cbsHomeSpread": -9.5,
-      "away": {
-        "name": "West Virginia",
-        "abbrev": "WVU",
-        "coversName": null,
-        "spread": null,
-        "pct": null,
-        "picks": null
-      },
-      "home": {
-        "name": "Virginia",
-        "abbrev": "UVA",
-        "coversName": null,
-        "spread": null,
-        "pct": null,
-        "picks": null
-      },
-      "atsByLine": []
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg44dc===",
-      "cbsEventId": 50027781,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T19:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/a8efad1c-d84b-4ac8-920c-b48301285077",
-      "cbsHomeSpread": -3.5,
-      "away": {
-        "name": "Colorado",
-        "abbrev": "COLO",
-        "coversName": "Colorado",
-        "spread": 3.5,
-        "pct": 55,
-        "picks": 329
-      },
-      "home": {
-        "name": "Northwestern",
-        "abbrev": "NWEST",
-        "coversName": "Northwestern",
-        "spread": -3.5,
-        "pct": 45,
-        "picks": 264
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 4.5,
-          "awayPicks": 12,
-          "homePicks": 5
-        },
-        {
-          "awaySpread": 3.5,
-          "awayPicks": 281,
-          "homePicks": 221
-        },
-        {
-          "awaySpread": 2.5,
-          "awayPicks": 36,
-          "homePicks": 38
-        }
-      ]
-    },
-    {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrxg44di===",
-      "cbsEventId": 50027784,
-      "sport": "NCAAF",
-      "kickoff": "2026-09-19T19:30:00-04:00",
-      "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/6232efdd-19f8-4e08-8d3f-b4480148a401",
-      "cbsHomeSpread": 3.5,
-      "away": {
-        "name": "LSU",
-        "abbrev": "LSU",
-        "coversName": "LSU",
-        "spread": -2.5,
-        "pct": 57,
-        "picks": 483
-      },
-      "home": {
-        "name": "Ole Miss",
-        "abbrev": "MISS",
-        "coversName": "Mississippi",
-        "spread": 2.5,
-        "pct": 43,
-        "picks": 358
-      },
-      "atsByLine": [
-        {
-          "awaySpread": 6.5,
-          "awayPicks": 3,
-          "homePicks": 2
-        },
-        {
-          "awaySpread": 2.5,
-          "awayPicks": 86,
-          "homePicks": 57
-        },
-        {
-          "awaySpread": 1.5,
-          "awayPicks": 26,
-          "homePicks": 15
-        },
-        {
-          "awaySpread": -3,
-          "awayPicks": 1,
-          "homePicks": 2
-        },
-        {
-          "awaySpread": -1.5,
-          "awayPicks": 59,
-          "homePicks": 11
-        },
-        {
-          "awaySpread": -2.5,
-          "awayPicks": 283,
-          "homePicks": 223
-        },
-        {
-          "awaySpread": -3.5,
-          "awayPicks": 25,
-          "homePicks": 48
-        }
-      ]
-    },
     {
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiydq===",
       "cbsEventId": 50029208,
@@ -454,28 +32,28 @@
         "name": "Cincinnati",
         "abbrev": "CIN",
         "coversName": "Cincinnati",
-        "spread": 1.5,
-        "pct": 39,
-        "picks": 362
+        "spread": 2.5,
+        "pct": 40,
+        "picks": 479
       },
       "home": {
         "name": "Houston",
         "abbrev": "HOU",
         "coversName": "Houston",
-        "spread": -1.5,
-        "pct": 61,
-        "picks": 559
+        "spread": -2.5,
+        "pct": 60,
+        "picks": 720
       },
       "atsByLine": [
         {
           "awaySpread": 3,
-          "awayPicks": 94,
+          "awayPicks": 95,
           "homePicks": 117
         },
         {
           "awaySpread": 2.5,
-          "awayPicks": 265,
-          "homePicks": 434
+          "awayPicks": 390,
+          "homePicks": 602
         },
         {
           "awaySpread": 1.5,
@@ -497,27 +75,27 @@
         "abbrev": "PIT",
         "coversName": "Pittsburgh",
         "spread": 5.5,
-        "pct": 46,
-        "picks": 417
+        "pct": 47,
+        "picks": 558
       },
       "home": {
         "name": "New England",
         "abbrev": "NE",
         "coversName": "New England",
         "spread": -5.5,
-        "pct": 54,
-        "picks": 486
+        "pct": 53,
+        "picks": 618
       },
       "atsByLine": [
         {
           "awaySpread": 5.5,
-          "awayPicks": 61,
-          "homePicks": 52
+          "awayPicks": 201,
+          "homePicks": 180
         },
         {
           "awaySpread": 4.5,
-          "awayPicks": 356,
-          "homePicks": 434
+          "awayPicks": 366,
+          "homePicks": 441
         }
       ]
     },
@@ -533,17 +111,17 @@
         "name": "Cleveland",
         "abbrev": "CLE",
         "coversName": "Cleveland",
-        "spread": 8.5,
+        "spread": 7.5,
         "pct": 27,
-        "picks": 252
+        "picks": 320
       },
       "home": {
         "name": "Tampa Bay",
         "abbrev": "TB",
         "coversName": "Tampa Bay",
-        "spread": -8.5,
+        "spread": -7.5,
         "pct": 73,
-        "picks": 681
+        "picks": 879
       },
       "atsByLine": [
         {
@@ -553,8 +131,13 @@
         },
         {
           "awaySpread": 8.5,
-          "awayPicks": 219,
-          "homePicks": 565
+          "awayPicks": 238,
+          "homePicks": 648
+        },
+        {
+          "awaySpread": 7.5,
+          "awayPicks": 51,
+          "homePicks": 124
         },
         {
           "awaySpread": 6.5,
@@ -581,16 +164,16 @@
         "abbrev": "CAR",
         "coversName": "Carolina",
         "spread": -2.5,
-        "pct": 63,
-        "picks": 567
+        "pct": 64,
+        "picks": 753
       },
       "home": {
         "name": "Atlanta",
         "abbrev": "ATL",
         "coversName": "Atlanta",
         "spread": 2.5,
-        "pct": 37,
-        "picks": 333
+        "pct": 36,
+        "picks": 426
       },
       "atsByLine": [
         {
@@ -605,8 +188,8 @@
         },
         {
           "awaySpread": -2.5,
-          "awayPicks": 313,
-          "homePicks": 189
+          "awayPicks": 508,
+          "homePicks": 288
         }
       ]
     },
@@ -624,7 +207,7 @@
         "coversName": "New Orleans",
         "spread": 8.5,
         "pct": 41,
-        "picks": 370
+        "picks": 477
       },
       "home": {
         "name": "Baltimore",
@@ -632,13 +215,13 @@
         "coversName": "Baltimore",
         "spread": -8.5,
         "pct": 59,
-        "picks": 528
+        "picks": 674
       },
       "atsByLine": [
         {
           "awaySpread": 8.5,
-          "awayPicks": 197,
-          "homePicks": 246
+          "awayPicks": 310,
+          "homePicks": 401
         },
         {
           "awaySpread": 7.5,
@@ -660,16 +243,16 @@
         "abbrev": "MIN",
         "coversName": "Minnesota",
         "spread": 4.5,
-        "pct": 42,
-        "picks": 375
+        "pct": 41,
+        "picks": 485
       },
       "home": {
         "name": "Chicago",
         "abbrev": "CHI",
         "coversName": "Chicago",
         "spread": -4.5,
-        "pct": 58,
-        "picks": 527
+        "pct": 59,
+        "picks": 691
       },
       "atsByLine": [
         {
@@ -679,13 +262,13 @@
         },
         {
           "awaySpread": 5.5,
-          "awayPicks": 147,
+          "awayPicks": 146,
           "homePicks": 232
         },
         {
           "awaySpread": 4.5,
-          "awayPicks": 156,
-          "homePicks": 219
+          "awayPicks": 273,
+          "homePicks": 393
         },
         {
           "awaySpread": 3.5,
@@ -713,7 +296,7 @@
         "coversName": "Green Bay",
         "spread": -3.5,
         "pct": 55,
-        "picks": 508
+        "picks": 667
       },
       "home": {
         "name": "N.Y. Jets",
@@ -721,13 +304,13 @@
         "coversName": "N.Y. Jets",
         "spread": 3.5,
         "pct": 45,
-        "picks": 411
+        "picks": 537
       },
       "atsByLine": [
         {
           "awaySpread": -3.5,
-          "awayPicks": 297,
-          "homePicks": 227
+          "awayPicks": 470,
+          "homePicks": 356
         },
         {
           "awaySpread": -4.5,
@@ -754,21 +337,21 @@
         "abbrev": "PHI",
         "coversName": "Philadelphia",
         "spread": -7.5,
-        "pct": 73,
-        "picks": 669
+        "pct": 72,
+        "picks": 858
       },
       "home": {
         "name": "Tennessee",
         "abbrev": "TEN",
         "coversName": "Tennessee",
         "spread": 7.5,
-        "pct": 27,
-        "picks": 245
+        "pct": 28,
+        "picks": 328
       },
       "atsByLine": [
         {
           "awaySpread": -4.5,
-          "awayPicks": 130,
+          "awayPicks": 126,
           "homePicks": 29
         },
         {
@@ -788,8 +371,8 @@
         },
         {
           "awaySpread": -7.5,
-          "awayPicks": 273,
-          "homePicks": 140
+          "awayPicks": 474,
+          "homePicks": 228
         }
       ]
     },
@@ -806,16 +389,16 @@
         "abbrev": "JAC",
         "coversName": "Jacksonville",
         "spread": 2.5,
-        "pct": 42,
-        "picks": 394
+        "pct": 43,
+        "picks": 513
       },
       "home": {
         "name": "Denver",
         "abbrev": "DEN",
         "coversName": "Denver",
         "spread": -2.5,
-        "pct": 58,
-        "picks": 536
+        "pct": 57,
+        "picks": 685
       },
       "atsByLine": [
         {
@@ -825,13 +408,13 @@
         },
         {
           "awaySpread": 2.5,
-          "awayPicks": 353,
-          "homePicks": 413
+          "awayPicks": 473,
+          "homePicks": 558
         },
         {
           "awaySpread": 1.5,
-          "awayPicks": 13,
-          "homePicks": 30
+          "awayPicks": 19,
+          "homePicks": 41
         },
         {
           "awaySpread": -11.5,
@@ -853,16 +436,16 @@
         "abbrev": "LV",
         "coversName": "Las Vegas",
         "spread": 6.5,
-        "pct": 53,
-        "picks": 457
+        "pct": 50,
+        "picks": 549
       },
       "home": {
         "name": "L.A. Chargers",
         "abbrev": "LAC",
         "coversName": "L.A. Chargers",
         "spread": -6.5,
-        "pct": 47,
-        "picks": 403
+        "pct": 50,
+        "picks": 556
       },
       "atsByLine": [
         {
@@ -882,8 +465,8 @@
         },
         {
           "awaySpread": 6.5,
-          "awayPicks": 223,
-          "homePicks": 213
+          "awayPicks": 320,
+          "homePicks": 375
         },
         {
           "awaySpread": 5.5,
@@ -904,28 +487,28 @@
         "name": "Washington",
         "abbrev": "WAS",
         "coversName": "Washington",
-        "spread": 4.5,
+        "spread": 3.5,
         "pct": 49,
-        "picks": 418
+        "picks": 541
       },
       "home": {
         "name": "Dallas",
         "abbrev": "DAL",
         "coversName": "Dallas",
-        "spread": -4.5,
+        "spread": -3.5,
         "pct": 51,
-        "picks": 435
+        "picks": 572
       },
       "atsByLine": [
         {
           "awaySpread": 4.5,
-          "awayPicks": 249,
-          "homePicks": 233
+          "awayPicks": 373,
+          "homePicks": 360
         },
         {
           "awaySpread": 3.5,
-          "awayPicks": 169,
-          "homePicks": 202
+          "awayPicks": 175,
+          "homePicks": 214
         }
       ]
     },
@@ -942,22 +525,22 @@
         "abbrev": "SEA",
         "coversName": "Seattle",
         "spread": -3.5,
-        "pct": 48,
-        "picks": 434
+        "pct": 49,
+        "picks": 567
       },
       "home": {
         "name": "Arizona",
         "abbrev": "ARI",
         "coversName": "Arizona",
         "spread": 3.5,
-        "pct": 52,
-        "picks": 468
+        "pct": 51,
+        "picks": 581
       },
       "atsByLine": [
         {
           "awaySpread": -4.5,
-          "awayPicks": 179,
-          "homePicks": 161
+          "awayPicks": 318,
+          "homePicks": 279
         },
         {
           "awaySpread": -3.5,
@@ -994,27 +577,27 @@
         "abbrev": "MIA",
         "coversName": "Miami",
         "spread": 13.5,
-        "pct": 28,
-        "picks": 249
+        "pct": 26,
+        "picks": 296
       },
       "home": {
         "name": "San Francisco",
         "abbrev": "SF",
         "coversName": "San Francisco",
         "spread": -13.5,
-        "pct": 72,
-        "picks": 650
+        "pct": 74,
+        "picks": 853
       },
       "atsByLine": [
         {
           "awaySpread": 13.5,
-          "awayPicks": 149,
-          "homePicks": 339
+          "awayPicks": 178,
+          "homePicks": 437
         },
         {
           "awaySpread": 12.5,
-          "awayPicks": 65,
-          "homePicks": 219
+          "awayPicks": 88,
+          "homePicks": 331
         },
         {
           "awaySpread": 10.5,
@@ -1035,28 +618,28 @@
         "name": "Indianapolis",
         "abbrev": "IND",
         "coversName": "Indianapolis",
-        "spread": 6.5,
-        "pct": 45,
-        "picks": 401
+        "spread": 5.5,
+        "pct": 43,
+        "picks": 493
       },
       "home": {
         "name": "Kansas City",
         "abbrev": "KC",
         "coversName": "Kansas City",
-        "spread": -6.5,
-        "pct": 55,
-        "picks": 483
+        "spread": -5.5,
+        "pct": 57,
+        "picks": 658
       },
       "atsByLine": [
         {
           "awaySpread": 5.5,
-          "awayPicks": 11,
-          "homePicks": 20
+          "awayPicks": 58,
+          "homePicks": 104
         },
         {
           "awaySpread": 6.5,
-          "awayPicks": 390,
-          "homePicks": 462
+          "awayPicks": 438,
+          "homePicks": 561
         },
         {
           "awaySpread": 7.5,
@@ -1078,16 +661,16 @@
         "abbrev": "NYG",
         "coversName": "N.Y. Giants",
         "spread": 7.5,
-        "pct": 66,
-        "picks": 500
+        "pct": 64,
+        "picks": 603
       },
       "home": {
         "name": "L.A. Rams",
         "abbrev": "LAR",
         "coversName": "L.A. Rams",
         "spread": -7.5,
-        "pct": 34,
-        "picks": 259
+        "pct": 36,
+        "picks": 336
       },
       "atsByLine": [
         {
@@ -1102,8 +685,8 @@
         },
         {
           "awaySpread": 7.5,
-          "awayPicks": 323,
-          "homePicks": 161
+          "awayPicks": 426,
+          "homePicks": 238
         },
         {
           "awaySpread": 7,

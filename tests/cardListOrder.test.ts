@@ -172,7 +172,7 @@ test('formatSuggestedCardText copies only team and spread', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKAN +5.5',
+    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKAN +5.5\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -183,6 +183,44 @@ test('formatSuggestedCardText copies only team and spread', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nNYG -5.5\n\nMonday:\n\nDET +4.5',
+    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nNYG -5.5\n\nMonday:\n\nDET +4.5 (manual pick)',
+  )
+})
+
+test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 3,
+    weekLabel: 'Week 3',
+    picks: [],
+    unpicked: [
+      unpicked({
+        gameId: 'lean',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        away: 'NCST',
+        home: 'VAN',
+        homeSpread: -3.5,
+        leanSide: 'away',
+        leanTeam: 'NCST',
+        leanSpread: 3.5,
+      }),
+      unpicked({
+        gameId: 'flat',
+        kickoff: '2026-09-19T15:30:00-04:00',
+        away: 'ASU',
+        home: 'KAN',
+        homeSpread: -2.5,
+      }),
+    ],
+    tiebreaker: null,
+  }
+
+  assert.equal(
+    formatSuggestedCardText(card),
+    'Saturday:\n\nNCST +3.5 (lean only, no pick)\nASU @ KAN (manual review, no lean)',
   )
 })

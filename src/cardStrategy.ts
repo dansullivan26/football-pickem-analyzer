@@ -354,6 +354,25 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
+/**
+ * Manual-review games still belong in the copied card so the whole slate is
+ * accounted for, but they are tagged so a picked side is never confused with a
+ * recommendation the card actually made.
+ */
+function formatCopiedManualLine(
+  game: UnpickedGame,
+  side: 'home' | 'away' | undefined,
+) {
+  if (side) {
+    const sent = submittedManualPick(game, side)
+    return `${formatCopiedPick(sent.pickedTeam, sent.poolSpread)} (manual pick)`
+  }
+  if (game.leanTeam && game.leanSpread != null) {
+    return `${formatCopiedPick(game.leanTeam, game.leanSpread)} (lean only, no pick)`
+  }
+  return `${game.away} @ ${game.home} (manual review, no lean)`
+}
+
 function formatCardWeekday(
   kickoff: string,
   timeZone = 'America/New_York',
@@ -398,9 +417,7 @@ export function formatSuggestedCardText(
       return [{ kickoff, line: formatCopiedPick(sent.pickedTeam, sent.poolSpread) }]
     }
     const side = manualSelections.get(row.game.gameId)
-    if (!side) return []
-    const sent = submittedManualPick(row.game, side)
-    return [{ kickoff, line: formatCopiedPick(sent.pickedTeam, sent.poolSpread) }]
+    return [{ kickoff, line: formatCopiedManualLine(row.game, side) }]
   })
 
   const groups = new Map<string, { weekday: string; lines: string[] }>()

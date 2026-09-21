@@ -2,7 +2,7 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-21T01:16:15.225Z",
+  "updatedAt": "2026-09-21T06:34:06.373Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3509,6 +3509,24 @@
           "athleteId": "4360078",
           "name": "Alec Pierce",
           "position": "WR",
+          "teamAbbrev": "IND",
+          "teamName": "Indianapolis",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -6,
+          "homeSpreadAfter": -6,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-21T06:34:06.373Z",
+          "cbsEventId": 50029230,
+          "athleteId": "4037361",
+          "name": "Charvarius Ward",
+          "position": "CB",
           "teamAbbrev": "IND",
           "teamName": "Indianapolis",
           "side": "away",

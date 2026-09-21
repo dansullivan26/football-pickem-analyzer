@@ -202,7 +202,15 @@ export default function TeamsView({
   const appearanceRanks = selected
     ? selected.appearances.map((row) => row.rank)
     : []
-  const rankTrail = selected ? formatRankTrail(appearanceRanks) : null
+  const rankTrail = selected
+    ? formatRankTrail(
+        selected.appearances.map((row) => ({
+          rank: row.rank,
+          week: row.week,
+          weekLabel: row.weekLabel,
+        })),
+      )
+    : null
   const showUnranked = teamWasRanked(appearanceRanks)
 
   useEffect(() => {

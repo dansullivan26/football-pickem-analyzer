@@ -5,6 +5,7 @@ import {
   cbsTeamRank,
   formatRankStamp,
   formatRankTrail,
+  formatRankWeek,
   frozenRanksCaptured,
 } from '../src/teamRanks.ts'
 
@@ -53,11 +54,48 @@ test('formatRankTrail skips weeks we never stamped', () => {
   assert.equal(formatRankStamp(null), null)
   assert.equal(formatRankStamp(null, true), 'unranked')
   assert.equal(formatRankStamp(undefined), null)
-  assert.equal(formatRankTrail([7, undefined, null, 5]), '#7 → unranked → #5')
-  assert.equal(formatRankTrail([undefined]), null)
+  assert.equal(
+    formatRankTrail([
+      { rank: 7 },
+      { rank: undefined },
+      { rank: null },
+      { rank: 5 },
+    ]),
+    '#7 → unranked → #5',
+  )
+  assert.equal(formatRankTrail([{ rank: undefined }]), null)
 })
 
 test('formatRankTrail omits unranked unless the team was ranked once', () => {
-  assert.equal(formatRankTrail([null, null]), null)
-  assert.equal(formatRankTrail([null, 7, null]), 'unranked → #7 → unranked')
+  assert.equal(formatRankTrail([{ rank: null }, { rank: null }]), null)
+  assert.equal(
+    formatRankTrail([{ rank: null }, { rank: 7 }, { rank: null }]),
+    'unranked → #7 → unranked',
+  )
+})
+
+test('formatRankWeek prefers the pool week number', () => {
+  assert.equal(formatRankWeek(3, 'Week 3'), 'W3')
+  assert.equal(formatRankWeek(undefined, 'Week 12'), 'W12')
+  assert.equal(formatRankWeek(undefined, 'Bowl'), 'Bowl')
+  assert.equal(formatRankWeek(), null)
+})
+
+test('formatRankTrail notes the week each rank was held', () => {
+  assert.equal(
+    formatRankTrail([
+      { rank: 13, week: 1, weekLabel: 'Week 1' },
+      { rank: 12, week: 2, weekLabel: 'Week 2' },
+      { rank: 10, week: 4, weekLabel: 'Week 4' },
+    ]),
+    '#13 (W1) → #12 (W2) → #10 (W4)',
+  )
+  assert.equal(
+    formatRankTrail([
+      { rank: null, week: 1 },
+      { rank: 7, week: 3 },
+      { rank: null, week: 8 },
+    ]),
+    'unranked (W1) → #7 (W3) → unranked (W8)',
+  )
 })

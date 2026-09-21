@@ -46,12 +46,33 @@ export function formatRankStamp(
   return null
 }
 
-export function formatRankTrail(
-  ranks: Array<number | null | undefined>,
+export type RankTrailStop = {
+  rank: number | null | undefined
+  week?: number
+  weekLabel?: string
+}
+
+/** Compact pool-week mark so slate gaps are visible on the rank trail. */
+export function formatRankWeek(
+  week?: number,
+  weekLabel?: string,
 ) {
-  const includeUnranked = teamWasRanked(ranks)
-  const stamps = ranks
-    .map((rank) => formatRankStamp(rank, includeUnranked))
+  if (typeof week === 'number' && Number.isFinite(week)) return `W${week}`
+  const fromLabel = weekLabel?.match(/week\s+(\d+)/i)
+  if (fromLabel?.[1]) return `W${fromLabel[1]}`
+  const trimmed = weekLabel?.trim()
+  return trimmed || null
+}
+
+export function formatRankTrail(stops: RankTrailStop[]) {
+  const includeUnranked = teamWasRanked(stops.map((stop) => stop.rank))
+  const stamps = stops
+    .map((stop) => {
+      const stamp = formatRankStamp(stop.rank, includeUnranked)
+      if (!stamp) return null
+      const week = formatRankWeek(stop.week, stop.weekLabel)
+      return week ? `${stamp} (${week})` : stamp
+    })
     .filter((stamp): stamp is string => stamp != null)
   if (stamps.length === 0) return null
   return stamps.join(' → ')

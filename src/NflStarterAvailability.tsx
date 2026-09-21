@@ -1,5 +1,6 @@
 import InjuryLink from './InjuryLink'
 import {
+  filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
   type InjuryLineEvent,
 } from './injuryLineMoves'
@@ -78,10 +79,15 @@ export default function NflStarterAvailability({
   const count =
     (awayReport?.injuries.length ?? 0) + (homeReport?.injuries.length ?? 0)
   const pulledAt = formatInjuryPulledAt(file.source.fetchedAt)
-  const coincidences = lineEvents.filter(
+  const visibleEvents = filterInjuryLineEventsToListedStarters(
+    lineEvents,
+    file,
+    [away.abbrev, home.abbrev],
+  )
+  const coincidences = visibleEvents.filter(
     (event) => event.towardTeam != null && event.towardTeam !== 0,
   )
-  const orderedEvents = [...lineEvents].sort((left, right) => {
+  const orderedEvents = [...visibleEvents].sort((left, right) => {
     const leftMove = Math.abs(left.towardTeam ?? 0)
     const rightMove = Math.abs(right.towardTeam ?? 0)
     if (rightMove !== leftMove) return rightMove - leftMove
@@ -109,9 +115,10 @@ export default function NflStarterAvailability({
         <div className="injury-line-moves">
           <h4>Same-hour DraftKings</h4>
           <p>
-            Status tier changes vs the last ESPN snapshot, next to the
-            DraftKings home spread from that same hourly pull. Coincidence,
-            not a causal claim.
+            Status tier changes vs the last ESPN snapshot for players still
+            on this first-team injury table, next to the DraftKings home
+            spread from that same hourly pull. Coincidence, not a causal
+            claim.
           </p>
           <ul>
             {orderedEvents.map((event) => (

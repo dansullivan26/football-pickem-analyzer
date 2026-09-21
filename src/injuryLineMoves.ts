@@ -146,6 +146,22 @@ export function injuryLineEventsForGame(
   return history.games.find((game) => game.cbsEventId === cbsEventId)?.events ?? []
 }
 
+/** Keep same-hour DK rows that still appear on the current first-team injury table. */
+export function filterInjuryLineEventsToListedStarters(
+  events: InjuryLineEvent[],
+  file: NflStarterInjuryFile | null | undefined,
+  teamAbbrevs?: string[],
+) {
+  const listed = listedStarters(file)
+  const teams = teamAbbrevs?.length
+    ? new Set(teamAbbrevs.map((abbrev) => abbrev.toUpperCase()))
+    : null
+  return events.filter((event) => {
+    if (teams && !teams.has(event.teamAbbrev.toUpperCase())) return false
+    return listed.has(athleteKey(event.athleteId, event.name))
+  })
+}
+
 function nflGameForTeam(slate: Slate, abbrev: string) {
   return slate.games.find(
     (game) =>

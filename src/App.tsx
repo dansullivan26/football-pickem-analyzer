@@ -76,6 +76,7 @@ import type { SeasonHistoryFile } from './seasonHistory'
 import type { PredictionForecasts } from './playerPrediction'
 import type { NflStarterInjuryFile } from './nflStarterInjuries'
 import {
+  filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
   injuryLineEventsForGame,
   type InjuryLineHistory,
@@ -837,7 +838,13 @@ function InjuryLineWeekNote({
             const slateGame = slate.games.find(
               (item) => item.cbsEventId === row.cbsEventId,
             )
-            const coincidences = row.events.filter(
+            const coincidences = filterInjuryLineEventsToListedStarters(
+              row.events,
+              nflStarterInjuries,
+              slateGame
+                ? [slateGame.away.abbrev, slateGame.home.abbrev]
+                : undefined,
+            ).filter(
               (event) => event.towardTeam != null && event.towardTeam !== 0,
             )
             return { row, slateGame, coincidences }

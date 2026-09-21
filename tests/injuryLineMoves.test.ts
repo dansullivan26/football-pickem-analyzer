@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   dkLineThisPull,
+  filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
   injuryLineEventsForGame,
   towardTeamDelta,
@@ -227,4 +228,54 @@ test('a new slate week drops last week’s coincidences', () => {
   assert.equal(history.week, 3)
   assert.equal(history.games.length, 0)
   assert.equal(injuryLineEventsForGame(previous, 99, 3, 2026).length, 0)
+})
+
+test('same-hour DK rows keep only names still on the first-team injury table', () => {
+  const events: InjuryLineHistory['games'][number]['events'] = [
+    {
+      at: '2026-09-17T03:16:23.590Z',
+      cbsEventId: 99,
+      athleteId: '3139477',
+      name: 'Patrick Mahomes',
+      position: 'QB',
+      teamAbbrev: 'KC',
+      teamName: 'Kansas City',
+      side: 'away',
+      fromStatus: 'Questionable',
+      toStatus: 'Doubtful',
+      fromTier: 'questionable',
+      toTier: 'doubtful',
+      availability: 'worse',
+      homeSpreadBefore: -3,
+      homeSpreadAfter: -7,
+      towardTeam: -4,
+    },
+    {
+      at: '2026-09-18T00:29:57.568Z',
+      cbsEventId: 99,
+      athleteId: '999',
+      name: 'Backup Safety',
+      position: 'S',
+      teamAbbrev: 'KC',
+      teamName: 'Kansas City',
+      side: 'away',
+      fromStatus: null,
+      toStatus: 'Questionable',
+      fromTier: null,
+      toTier: 'questionable',
+      availability: 'worse',
+      homeSpreadBefore: -3,
+      homeSpreadAfter: -3,
+      towardTeam: 0,
+    },
+  ]
+  const visible = filterInjuryLineEventsToListedStarters(
+    events,
+    injuries('Doubtful', 'doubtful'),
+    ['KC', 'BUF'],
+  )
+  assert.deepEqual(
+    visible.map((event) => event.name),
+    ['Patrick Mahomes'],
+  )
 })

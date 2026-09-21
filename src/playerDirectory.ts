@@ -9,12 +9,21 @@ export type PlayerRankingScope = 'season' | 'readability' | number
 
 export type PlayerWinRecord = {
   wins: number
+  losses: number
+  pushes: number
   scored: number
+}
+
+export type PlayerAtsSplits = {
+  all: PlayerWinRecord
+  nfl: PlayerWinRecord
+  ncaaf: PlayerWinRecord
 }
 
 export type RankedPlayer = {
   entry: PlayerRosterEntry
   record: PlayerWinRecord
+  ats: PlayerAtsSplits
   rank: number
   readability?: PlayerReadability
 }
@@ -51,16 +60,61 @@ export function playerSlugByEntryId(
   )
 }
 
-export function entryWinRecord(entryId: string, weeks: PlayerWeek[]) {
+export function emptyWinRecord(): PlayerWinRecord {
+  return { wins: 0, losses: 0, pushes: 0, scored: 0 }
+}
+
+export function emptyAtsSplits(): PlayerAtsSplits {
+  return {
+    all: emptyWinRecord(),
+    nfl: emptyWinRecord(),
+    ncaaf: emptyWinRecord(),
+  }
+}
+
+function tallyPick(record: PlayerWinRecord, result: 'win' | 'loss' | 'push') {
+  record.scored += 1
+  if (result === 'win') record.wins += 1
+  else if (result === 'loss') record.losses += 1
+  else record.pushes += 1
+}
+
+export function entryAtsSplits(
+  entryId: string,
+  weeks: PlayerWeek[],
+): PlayerAtsSplits {
+  const splits = emptyAtsSplits()
   const picks = weeks.flatMap(
     (week) =>
       week.entries.find((entry) => entry.entryId === entryId)?.picks ?? [],
   )
-  const scored = picks.filter((pick) => pick.pickedSide && pick.result)
-  return {
-    wins: scored.filter((pick) => pick.result === 'win').length,
-    scored: scored.length,
+  for (const pick of picks) {
+    if (!pick.pickedSide || !pick.result) continue
+    tallyPick(splits.all, pick.result)
+    if (pick.sport === 'NFL') tallyPick(splits.nfl, pick.result)
+    else if (pick.sport === 'NCAAF') tallyPick(splits.ncaaf, pick.result)
   }
+  return splits
+}
+
+export function entryWinRecord(entryId: string, weeks: PlayerWeek[]) {
+  return entryAtsSplits(entryId, weeks).all
+}
+
+/** Raw CBS ATS book: 12-8, or 12-8-1 when there is a push. */
+export function formatAtsRecord(record: PlayerWinRecord) {
+  if (!record.scored) return '—'
+  return record.pushes
+    ? `${record.wins}-${record.losses}-${record.pushes}`
+    : `${record.wins}-${record.losses}`
+}
+
+export function formatAtsSplitsLine(ats: PlayerAtsSplits) {
+  if (!ats.all.scored) return null
+  const parts = [`${formatAtsRecord(ats.all)} ATS`]
+  if (ats.nfl.scored) parts.push(`NFL ${formatAtsRecord(ats.nfl)}`)
+  if (ats.ncaaf.scored) parts.push(`NCAAF ${formatAtsRecord(ats.ncaaf)}`)
+  return parts.join(' · ')
 }
 
 function winRate(record: PlayerWinRecord) {
@@ -110,11 +164,11 @@ export function rankPlayersByWins(
   entries: PlayerRosterEntry[],
   weeks: PlayerWeek[],
 ): RankedPlayer[] {
-  const records = new Map(
-    entries.map((entry) => [entry.entryId, entryWinRecord(entry.entryId, weeks)]),
+  const splitsByEntry = new Map(
+    entries.map((entry) => [entry.entryId, entryAtsSplits(entry.entryId, weeks)]),
   )
   const recordFor = (entryId: string): PlayerWinRecord =>
-    records.get(entryId) ?? { wins: 0, scored: 0 }
+    splitsByEntry.get(entryId)?.all ?? emptyWinRecord()
 
   const sorted = [...entries].sort((left, right) => {
     const leftRecord = recordFor(left.entryId)
@@ -131,7 +185,12 @@ export function rankPlayersByWins(
     const record = recordFor(entry.entryId)
     if (!previous || compareRecords(previous, record) !== 0) rank = index + 1
     previous = record
-    return { entry, record, rank }
+    return {
+      entry,
+      record,
+      ats: splitsByEntry.get(entry.entryId) ?? emptyAtsSplits(),
+      rank,
+    }
   })
 }
 
@@ -178,7 +237,8 @@ export function rankPlayersByReadability(
     const wins = byWins.get(entry.entryId)
     return {
       entry,
-      record: wins?.record ?? { wins: 0, scored: 0 },
+      record: wins?.record ?? emptyWinRecord(),
+      ats: wins?.ats ?? emptyAtsSplits(),
       rank,
       readability: row,
     }

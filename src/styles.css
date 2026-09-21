@@ -2506,6 +2506,14 @@ a.team-page-link:focus-visible .team-name {
   color: var(--muted);
 }
 
+.player-ats-record {
+  font-variant-numeric: tabular-nums;
+}
+
+.player-ats-book {
+  margin: 0 0 16px;
+}
+
 .player-list button small,
 .player-list a small {
   color: var(--muted);

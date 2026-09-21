@@ -40,6 +40,9 @@ import {
   pickSelectionLabel,
 } from './pickLabels'
 import {
+  entryAtsSplits,
+  formatAtsRecord,
+  formatAtsSplitsLine,
   playerRankingWeeks,
   playerSlugByEntryId,
   rankPlayersByReadability,
@@ -637,6 +640,16 @@ export default function PlayersView({
         travelRestByAppearance,
       )
     : null
+  const seasonAts = selectedPlayer
+    ? entryAtsSplits(
+        selectedPlayer.entryId,
+        playerRankingWeeks(
+          history.weeks,
+          'season',
+          history.pool.seasonYear,
+        ),
+      )
+    : null
   const currentProfile = selectedPlayer
     ? buildCurrentPlayerProfile(
         selectedPlayer.entryId,
@@ -764,9 +777,10 @@ export default function PlayersView({
           <p className="eyebrow">Player history</p>
           <h1>Pool tendencies</h1>
           <p className="hero-copy">
-            Track every weekly card, then compare how each player approaches
-            favorites, underdogs, home teams (neutral sites excluded), our
-            line-value side, and the weekly tiebreaker. Line-value follow rates also split by the
+            Track every weekly card, then compare raw ATS records by league,
+            how each player approaches favorites, underdogs, home teams
+            (neutral sites excluded), our line-value side, and the weekly
+            tiebreaker. Line-value follow rates also split by the
             kickoff-frozen lock, hammer, lean, slight, and neutral tier.
             Pick rates on traveling and rested teams use the same
             time-zone hops and card-or-schedule rest as Lines.
@@ -871,9 +885,10 @@ export default function PlayersView({
             />
           </label>
           <div className="player-list">
-            {filteredPlayers.map(({ entry, rank, record, readability }) => {
+            {filteredPlayers.map(({ entry, rank, record, ats, readability }) => {
               const slug = slugsByEntryId.get(entry.entryId)
               if (!slug) return null
+              const atsLine = formatAtsSplitsLine(ats)
               return (
               <a
                 className={
@@ -905,6 +920,9 @@ export default function PlayersView({
                       ? `${record.wins} of ${record.scored} graded picks`
                       : `No graded picks in ${rankingLabel.toLowerCase()}`}
                 </small>
+                {atsLine && (
+                  <small className="player-ats-record">{atsLine}</small>
+                )}
               </a>
               )
             })}
@@ -997,6 +1015,53 @@ export default function PlayersView({
                       {cardTiming.thisWeekLine}
                     </p>
                   )}
+                </section>
+              )}
+
+              {seasonAts && (
+                <section
+                  className="player-ats-book"
+                  aria-label="ATS record"
+                >
+                  <div className="player-team-bias-heading">
+                    <div>
+                      <p className="eyebrow">ATS record</p>
+                      <h3>{history.pool.seasonYear} CBS cover</h3>
+                    </div>
+                    <small>
+                      Made picks with a CBS cover result this season. Pushes
+                      are the third number.
+                    </small>
+                  </div>
+                  <div className="tendency-grid" aria-label="Player ATS splits">
+                    <Metric
+                      label="All games"
+                      value={formatAtsRecord(seasonAts.all)}
+                      detail={
+                        seasonAts.all.scored
+                          ? `${seasonAts.all.scored} graded picks`
+                          : 'No graded picks yet'
+                      }
+                    />
+                    <Metric
+                      label="NFL"
+                      value={formatAtsRecord(seasonAts.nfl)}
+                      detail={
+                        seasonAts.nfl.scored
+                          ? `${seasonAts.nfl.scored} graded picks`
+                          : 'No graded NFL picks yet'
+                      }
+                    />
+                    <Metric
+                      label="NCAAF"
+                      value={formatAtsRecord(seasonAts.ncaaf)}
+                      detail={
+                        seasonAts.ncaaf.scored
+                          ? `${seasonAts.ncaaf.scored} graded picks`
+                          : 'No graded NCAAF picks yet'
+                      }
+                    />
+                  </div>
                 </section>
               )}
 

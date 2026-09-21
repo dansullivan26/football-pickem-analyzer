@@ -2,8 +2,11 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   assignPlayerSlugs,
+  entryAtsSplits,
   entryWinRate,
   entryWinRecord,
+  formatAtsRecord,
+  formatAtsSplitsLine,
   playerRankingWeeks,
   playerSlug,
   rankPlayersByReadability,
@@ -30,11 +33,14 @@ function entry(entryId: string, name: string): PlayerRosterEntry {
   }
 }
 
-function pick(result: PlayerPick['result']): PlayerPick {
+function pick(
+  result: PlayerPick['result'],
+  sport: PlayerPick['sport'] = 'NFL',
+): PlayerPick {
   return {
     gameId: 'g',
     cbsEventId: 1,
-    sport: 'NFL',
+    sport,
     away: 'Away',
     home: 'Home',
     homeSpread: -3,
@@ -80,9 +86,19 @@ test('entryWinRate is wins over scored picks and ignores ungraded rows', () => {
       { entryId: 'a', results: ['win', 'loss', 'push', null] },
     ]),
   ]
-  assert.deepEqual(entryWinRecord('a', weeks), { wins: 1, scored: 3 })
+  assert.deepEqual(entryWinRecord('a', weeks), {
+    wins: 1,
+    losses: 1,
+    pushes: 1,
+    scored: 3,
+  })
   assert.equal(entryWinRate('a', weeks), 1 / 3)
-  assert.deepEqual(entryWinRecord('missing', weeks), { wins: 0, scored: 0 })
+  assert.deepEqual(entryWinRecord('missing', weeks), {
+    wins: 0,
+    losses: 0,
+    pushes: 0,
+    scored: 0,
+  })
   assert.equal(entryWinRate('missing', weeks), null)
 })
 
@@ -118,7 +134,12 @@ test('a perfect short card does not outrank a bigger win count', () => {
     ]),
   ]
 
-  assert.deepEqual(entryWinRecord('trevor', weeks), { wins: 3, scored: 3 })
+  assert.deepEqual(entryWinRecord('trevor', weeks), {
+    wins: 3,
+    losses: 0,
+    pushes: 0,
+    scored: 3,
+  })
   assert.equal(entryWinRate('trevor', weeks), 1)
   assert.deepEqual(
     sortPlayersByWins(entries, weeks).map((row) => row.name),
@@ -182,6 +203,47 @@ test('rankPlayersByWins gives matching records the same displayed rank', () => {
       ['Last', 4, 0, 1],
     ],
   )
+})
+
+test('entryAtsSplits separates NFL and NCAAF cover records', () => {
+  const weeks: PlayerWeek[] = [
+    {
+      week: 1,
+      seasonYear: 2026,
+      periodId: '2026-1',
+      label: 'Week 1',
+      status: 'scored',
+      scored: true,
+      slateFile: '2026-1.json',
+      entries: [
+        {
+          entryId: 'a',
+          name: 'a',
+          weekScore: null,
+          weekRank: null,
+          correctPicks: null,
+          picksCount: null,
+          tiebreaker: { question: null, answer: null },
+          picks: [
+            pick('win', 'NFL'),
+            pick('loss', 'NFL'),
+            pick('push', 'NCAAF'),
+            pick('win', 'NCAAF'),
+            pick(null, 'NFL'),
+          ],
+        },
+      ],
+    },
+  ]
+
+  const ats = entryAtsSplits('a', weeks)
+  assert.deepEqual(ats.all, { wins: 2, losses: 1, pushes: 1, scored: 4 })
+  assert.deepEqual(ats.nfl, { wins: 1, losses: 1, pushes: 0, scored: 2 })
+  assert.deepEqual(ats.ncaaf, { wins: 1, losses: 0, pushes: 1, scored: 2 })
+  assert.equal(formatAtsRecord(ats.all), '2-1-1')
+  assert.equal(formatAtsRecord(ats.nfl), '1-1')
+  assert.equal(formatAtsSplitsLine(ats), '2-1-1 ATS · NFL 1-1 · NCAAF 1-0-1')
+  assert.equal(formatAtsSplitsLine(entryAtsSplits('missing', weeks)), null)
 })
 
 test('playerRankingWeeks supports one week or the current season rollup', () => {

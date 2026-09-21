@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T23:29:19.966Z",
+  "updatedAt": "2026-09-21T01:16:11.283Z",
   "weeks": [
     {
       "week": 1,
@@ -1438,7 +1438,7 @@
       "week": 3,
       "seasonYear": 2026,
       "label": "Week 3",
-      "capturedAt": "2026-09-20T22:33:35.036Z",
+      "capturedAt": "2026-09-21T01:16:11.283Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029212,
@@ -1751,8 +1751,8 @@
             "indoor": true
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 20,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50029209,
@@ -1779,8 +1779,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 7
+          "awayScore": 3,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50029210,
@@ -1807,8 +1807,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 3,
-          "homeScore": 6
+          "awayScore": 23,
+          "homeScore": 19
         },
         {
           "cbsEventId": 50029221,
@@ -1835,8 +1835,8 @@
             "indoor": true
           },
           "neutralSite": true,
-          "awayScore": 7,
-          "homeScore": 0
+          "awayScore": 34,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50029222,
@@ -1863,8 +1863,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 7
+          "awayScore": 24,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50029223,
@@ -1891,7 +1891,7 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
+          "awayScore": 9,
           "homeScore": 3
         },
         {
@@ -1919,8 +1919,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 20,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50029225,
@@ -1947,8 +1947,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 7,
-          "homeScore": 7
+          "awayScore": 24,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50029226,
@@ -1974,7 +1974,9 @@
             "state": "CO",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 13,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50029227,
@@ -2000,7 +2002,9 @@
             "state": "CA",
             "indoor": true
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 26,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50029211,
@@ -2026,7 +2030,9 @@
             "state": "TX",
             "indoor": true
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 20,
+          "homeScore": 37
         },
         {
           "cbsEventId": 50029228,
@@ -2052,7 +2058,9 @@
             "state": "AZ",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 31,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50029229,
@@ -2078,7 +2086,9 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 13,
+          "homeScore": 35
         },
         {
           "cbsEventId": 50029230,
@@ -2113,10 +2123,10 @@
           "away": "NYG",
           "home": "LAR",
           "homeSpread": -7.5,
-          "liveHomeSpread": -6.5,
+          "liveHomeSpread": -7,
           "category": "slight",
           "recommendedSide": "away",
-          "hook": "td",
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",

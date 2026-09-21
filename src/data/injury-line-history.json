@@ -2,7 +2,7 @@
   "week": 3,
   "seasonYear": 2026,
   "label": "Week 3",
-  "updatedAt": "2026-09-21T19:38:40.130Z",
+  "updatedAt": "2026-09-21T20:57:16.480Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3565,6 +3565,24 @@
           "toStatus": "Questionable",
           "fromTier": null,
           "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -13.5,
+          "homeSpreadAfter": -13.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-21T20:57:16.480Z",
+          "cbsEventId": 50029229,
+          "athleteId": "3043116",
+          "name": "Demarcus Robinson",
+          "position": "WR",
+          "teamAbbrev": "SF",
+          "teamName": "San Francisco",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
           "availability": "worse",
           "homeSpreadBefore": -13.5,
           "homeSpreadAfter": -13.5,

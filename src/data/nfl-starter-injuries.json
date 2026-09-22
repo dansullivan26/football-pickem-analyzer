@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-09-22T10:06:43.557Z",
-    "reportUpdatedAt": "2026-09-22T10:06:35Z",
+    "fetchedAt": "2026-09-22T15:02:44.127Z",
+    "reportUpdatedAt": "2026-09-22T15:02:33Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,15 +10,25 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-09-22T10:06:00Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4568506",
+          "name": "Garrett Williams",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Achilles",
+          "detail": "out",
+          "updatedAt": "2026-09-21T18:59Z"
+        },
         {
           "athleteId": "4685408",
           "name": "Will Johnson",
           "position": "CB",
-          "status": "Doubtful",
-          "tier": "doubtful",
+          "status": "Out",
+          "tier": "out",
           "injury": "Neck",
           "detail": "Johnson (neck) may be forced to miss the remainder of the 2026 season, Darren Urban of the Cardinals' official site reports.",
           "updatedAt": "2026-09-21T23:17Z"
@@ -39,7 +49,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-09-22T10:06:05Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -108,7 +118,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-09-22T10:06:00Z",
+      "depthChartAt": "2026-09-22T15:02:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -157,7 +167,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-09-22T10:06:05Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -196,7 +206,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-09-22T10:05:55Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -235,7 +245,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-09-22T10:05:56Z",
+      "depthChartAt": "2026-09-22T15:02:24Z",
       "status": "ok",
       "injuries": [
         {
@@ -264,7 +274,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-09-22T10:06:01Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": []
     },
@@ -272,7 +282,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-09-22T10:05:59Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -291,9 +301,19 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-09-22T10:06:01Z",
+      "depthChartAt": "2026-09-22T15:02:09Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4384549",
+          "name": "Cobie Durant",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Hamstring",
+          "detail": "Cowboys head coach Brian Schottenheimer said that Durant (hamstring) could miss \"a few weeks\" after sustaining a hamstring injury in Sunday's 37-20 win over the Commanders, Todd Archer of ESPN.com reports.",
+          "updatedAt": "2026-09-21T23:36Z"
+        },
         {
           "athleteId": "4362088",
           "name": "DeMarvion Overshown",
@@ -313,16 +333,6 @@
           "injury": "Forearm",
           "detail": "out",
           "updatedAt": "2026-09-21T19:04Z"
-        },
-        {
-          "athleteId": "4384549",
-          "name": "Cobie Durant",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Hamstring",
-          "detail": "Durant (hamstring) could miss a few weeks due to injury, Todd Archer of ESPN.com reports.",
-          "updatedAt": "2026-09-21T23:36Z"
         }
       ]
     },
@@ -330,7 +340,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-09-22T10:06:01Z",
+      "depthChartAt": "2026-09-22T15:02:39Z",
       "status": "ok",
       "injuries": [
         {
@@ -359,7 +369,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-09-22T10:06:05Z",
+      "depthChartAt": "2026-09-22T15:02:36Z",
       "status": "ok",
       "injuries": [
         {
@@ -388,7 +398,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-09-22T10:05:59Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -457,7 +467,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-09-22T10:06:01Z",
+      "depthChartAt": "2026-09-22T15:02:38Z",
       "status": "ok",
       "injuries": [
         {
@@ -496,7 +506,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -516,7 +526,7 @@
           "status": "Doubtful",
           "tier": "doubtful",
           "injury": "Heel",
-          "detail": "Pierce (heel) will try to rehab his injured left heel without surgery and could return around midseason if all goes well, Ian Rapoport of NFL Network reports.",
+          "detail": "Pierce will try to rehab his injured left heel without surgery and is expected to miss several weeks before potentially returning around midseason if all goes well, Ian Rapoport of NFL Network reports.",
           "updatedAt": "2026-09-22T01:03Z"
         },
         {
@@ -535,7 +545,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:02:37Z",
       "status": "ok",
       "injuries": [
         {
@@ -554,7 +564,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": []
     },
@@ -562,7 +572,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:02:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -621,14 +631,14 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:02:22Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4596363",
           "name": "Kamren Kinchens",
           "position": "S",
-          "status": "Out",
+          "status": "Inactive",
           "tier": "out",
           "injury": "Hamstring",
           "detail": "inactive",
@@ -648,7 +658,7 @@
           "athleteId": "4426515",
           "name": "Puka Nacua",
           "position": "WR",
-          "status": "Inactive",
+          "status": "Out",
           "tier": "out",
           "injury": "Hip",
           "detail": "Nacua (hip) is listed as inactive Monday against the Giants, Adam Schefter of ESPN reports.",
@@ -660,7 +670,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-09-22T10:06:02Z",
+      "depthChartAt": "2026-09-22T15:02:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -699,7 +709,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-09-22T10:06:03Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -728,7 +738,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-09-22T10:05:56Z",
+      "depthChartAt": "2026-09-22T15:02:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -747,7 +757,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-09-22T10:06:03Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -759,6 +769,16 @@
           "injury": "Calf",
           "detail": "Banks (calf) is inactive for Monday's game against the Rams, Dan Salomone of the Giants' official site reports.",
           "updatedAt": "2026-09-21T23:05Z"
+        },
+        {
+          "athleteId": "4689114",
+          "name": "Jaxson Dart",
+          "position": "QB",
+          "status": "Doubtful",
+          "tier": "doubtful",
+          "injury": "Knee - MCL",
+          "detail": "Dart is believed to have suffered a sprained MCL in his left knee during Monday's 28-6 loss to the Rams, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-09-22T03:19Z"
         },
         {
           "athleteId": "4035631",
@@ -781,23 +801,13 @@
           "updatedAt": "2026-09-22T03:12Z"
         },
         {
-          "athleteId": "4689114",
-          "name": "Jaxson Dart",
-          "position": "QB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Knee - MCL",
-          "detail": "Dart (knee) is officially questionable to return to Monday's matchup against the Rams.",
-          "updatedAt": "2026-09-22T00:49Z"
-        },
-        {
           "athleteId": "4595348",
           "name": "Malik Nabers",
           "position": "WR",
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Shoulder",
-          "detail": "Nabers brought in one of four targets for one yard in the Giants' 28-6 loss to the Rams on Monday night.",
+          "detail": "Nabers brought in one of four targets for one yard in the Giants' 28-6 loss to the Rams on Monday.",
           "updatedAt": "2026-09-22T03:46Z"
         }
       ]
@@ -806,7 +816,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-09-22T10:05:58Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -875,7 +885,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-09-22T10:05:57Z",
+      "depthChartAt": "2026-09-22T15:02:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -924,7 +934,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-09-22T10:06:00Z",
+      "depthChartAt": "2026-09-22T15:02:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -941,7 +951,7 @@
           "athleteId": "2575788",
           "name": "Zach Wood",
           "position": "LS",
-          "status": "IR",
+          "status": "Injured Reserve",
           "tier": "reserve",
           "injury": "Calf",
           "detail": "The Saints placed Wood (calf) on injured reserve Friday.",
@@ -953,7 +963,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-09-22T10:05:57Z",
+      "depthChartAt": "2026-09-22T15:02:24Z",
       "status": "ok",
       "injuries": [
         {
@@ -992,7 +1002,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-09-22T10:05:58Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -1021,7 +1031,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-09-22T10:06:04Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -1050,7 +1060,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-09-22T10:06:04Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -1099,7 +1109,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-09-22T10:05:59Z",
+      "depthChartAt": "2026-09-22T15:02:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1118,7 +1128,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-09-22T10:05:57Z",
+      "depthChartAt": "2026-09-22T15:01:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -1157,7 +1167,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-09-22T10:06:03Z",
+      "depthChartAt": "2026-09-22T15:01:55Z",
       "status": "ok",
       "injuries": [
         {

@@ -42,6 +42,34 @@ export type ReturningMoneyFinisher = {
   current: CurrentStanding | null
 }
 
+export type HistoricalMoneyPaceMatch = {
+  seasonYear: number
+  periodOrder: number
+  periodLabel: string
+  equivalentRank: number
+  thirdPlaceScore: number
+  gapToThird: number
+  cashers: Array<{
+    name: string
+    place: number
+    checkpointScore: number
+    finalScore: number
+    gap: number
+  }>
+}
+
+export type PlayerMoneyPaceComparison = {
+  current: CurrentStanding
+  activeWeek: number
+  currentMoneyLine: number
+  gapToCurrentMoneyLine: number
+  cashersAtOrBelow: number
+  cashersTotal: number
+  cashPaceMedian: number
+  gapToCashPaceMedian: number
+  seasons: HistoricalMoneyPaceMatch[]
+}
+
 function descending(values: number[]) {
   return [...values].sort((left, right) => right - left)
 }
@@ -197,6 +225,96 @@ export function currentMoneyPace(history: PlayerHistory): MoneyPacePoint[] {
       ),
     }
   })
+}
+
+function cumulativeHistoricalScores(
+  season: HistoricalSeason,
+  activeWeek: number,
+) {
+  const periods = activeHistoricalPeriods(season).slice(0, activeWeek)
+  return new Map(
+    season.standings.map((standing) => [
+      standing.entryId,
+      periods.reduce(
+        (total, period) =>
+          total + weeklyScore(season, standing.entryId, period.order),
+        0,
+      ),
+    ]),
+  )
+}
+
+/**
+ * Compare one current player with the same active-week checkpoint in prior
+ * fields and with the players who eventually finished in the money.
+ */
+export function playerMoneyPaceComparison(
+  archive: SeasonHistoryFile,
+  current: PlayerHistory,
+  entryId: string,
+): PlayerMoneyPaceComparison | null {
+  const activeWeek = completedCurrentWeeks(current).length
+  if (activeWeek === 0) return null
+  const currentRows = currentStandings(current)
+  const standing = currentRows.find((row) => row.entryId === entryId)
+  if (!standing) return null
+  const currentMoneyLine = scoreAtPlace(
+    currentRows.map((row) => row.score),
+    3,
+  )
+
+  const seasons = archive.seasons.flatMap<HistoricalMoneyPaceMatch>(
+    (season) => {
+      const periods = activeHistoricalPeriods(season)
+      const checkpoint = periods[activeWeek - 1]
+      if (!checkpoint) return []
+      const scoresByEntry = cumulativeHistoricalScores(season, activeWeek)
+      const fieldScores = [...scoresByEntry.values()]
+      const cashers = season.standings
+        .filter((row) => row.rank <= 3)
+        .sort((left, right) => left.rank - right.rank)
+        .map((row) => {
+          const checkpointScore = scoresByEntry.get(row.entryId) ?? 0
+          return {
+            name: row.name,
+            place: row.rank,
+            checkpointScore,
+            finalScore: row.seasonScore,
+            gap: standing.score - checkpointScore,
+          }
+        })
+      const thirdPlaceScore = scoreAtPlace(fieldScores, 3)
+      return [
+        {
+          seasonYear: season.seasonYear,
+          periodOrder: checkpoint.order,
+          periodLabel: checkpoint.description,
+          equivalentRank:
+            1 + fieldScores.filter((score) => score > standing.score).length,
+          thirdPlaceScore,
+          gapToThird: standing.score - thirdPlaceScore,
+          cashers,
+        },
+      ]
+    },
+  )
+  const casherScores = seasons.flatMap((season) =>
+    season.cashers.map((casher) => casher.checkpointScore),
+  )
+  const cashPaceMedian = median(casherScores)
+
+  return {
+    current: standing,
+    activeWeek,
+    currentMoneyLine,
+    gapToCurrentMoneyLine: standing.score - currentMoneyLine,
+    cashersAtOrBelow: casherScores.filter((score) => standing.score >= score)
+      .length,
+    cashersTotal: casherScores.length,
+    cashPaceMedian,
+    gapToCashPaceMedian: standing.score - cashPaceMedian,
+    seasons,
+  }
 }
 
 export function returningMoneyFinishers(

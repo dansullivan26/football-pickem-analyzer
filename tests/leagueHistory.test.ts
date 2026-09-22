@@ -7,6 +7,7 @@ import {
   finalMoneyLine,
   historicalWeeklyBenchmarks,
   moneyPaceForSeason,
+  playerMoneyPaceComparison,
   returningMoneyFinishers,
 } from '../src/leagueHistory.ts'
 import type {
@@ -202,6 +203,74 @@ test('current standings and pace include completed weeks only', () => {
   assert.deepEqual(
     currentMoneyPace(history).map((point) => point.thirdPlaceScore),
     [5, 10],
+  )
+})
+
+test('player money pace compares the same checkpoint with eventual cashers', () => {
+  const comparison = playerMoneyPaceComparison(
+    archive(),
+    currentHistory(),
+    'a-now',
+  )
+  assert.ok(comparison)
+  assert.deepEqual(
+    {
+      activeWeek: comparison.activeWeek,
+      current: comparison.current,
+      currentMoneyLine: comparison.currentMoneyLine,
+      gapToCurrentMoneyLine: comparison.gapToCurrentMoneyLine,
+      cashersAtOrBelow: comparison.cashersAtOrBelow,
+      cashersTotal: comparison.cashersTotal,
+      cashPaceMedian: comparison.cashPaceMedian,
+      gapToCashPaceMedian: comparison.gapToCashPaceMedian,
+    },
+    {
+      activeWeek: 2,
+      current: { entryId: 'a-now', name: 'Alpha', score: 11, rank: 1 },
+      currentMoneyLine: 10,
+      gapToCurrentMoneyLine: 1,
+      cashersAtOrBelow: 2,
+      cashersTotal: 3,
+      cashPaceMedian: 10,
+      gapToCashPaceMedian: 1,
+    },
+  )
+  assert.deepEqual(comparison.seasons, [
+    {
+      seasonYear: 2025,
+      periodOrder: 3,
+      periodLabel: 'Week 3',
+      equivalentRank: 2,
+      thirdPlaceScore: 8,
+      gapToThird: 3,
+      cashers: [
+        {
+          name: 'Alpha',
+          place: 1,
+          checkpointScore: 12,
+          finalScore: 12,
+          gap: -1,
+        },
+        {
+          name: 'Beta',
+          place: 2,
+          checkpointScore: 10,
+          finalScore: 10,
+          gap: 1,
+        },
+        {
+          name: 'Gamma',
+          place: 3,
+          checkpointScore: 8,
+          finalScore: 8,
+          gap: 3,
+        },
+      ],
+    },
+  ])
+  assert.equal(
+    playerMoneyPaceComparison(archive(), currentHistory(), 'missing'),
+    null,
   )
 })
 

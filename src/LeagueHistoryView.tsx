@@ -6,10 +6,12 @@ import {
   finalMoneyLine,
   historicalWeeklyBenchmarks,
   moneyPaceForSeason,
+  playerMoneyPaceComparison,
   returningMoneyFinishers,
   type MoneyPacePoint,
 } from './leagueHistory'
 import { formatMoneyPlace } from './moneyHistory'
+import { ourRosterEntry } from './ourEntry'
 import { playerSlug } from './playerDirectory'
 import { pathForPlayer } from './routes'
 import type { SeasonHistoryFile } from './seasonHistory'
@@ -23,6 +25,16 @@ type PaceSeries = {
 
 function formatScore(score: number) {
   return Number.isInteger(score) ? String(score) : score.toFixed(1)
+}
+
+function formatGap(gap: number) {
+  if (gap === 0) return 'even'
+  return `${gap > 0 ? '+' : ''}${formatScore(gap)}`
+}
+
+function moneyLineGap(gap: number) {
+  if (gap === 0) return 'at the money line'
+  return `${formatScore(Math.abs(gap))} ${gap > 0 ? 'above' : 'behind'} the money line`
 }
 
 function middle(values: number[]) {
@@ -246,6 +258,12 @@ export default function LeagueHistoryView({
   const selectedSeason =
     seasons.find((season) => season.seasonYear === selectedYear) ?? seasons[0]
   const currentPace = useMemo(() => currentMoneyPace(current), [current])
+  const playerPace = useMemo(() => {
+    const entry = ourRosterEntry(current)
+    return entry
+      ? playerMoneyPaceComparison(archive, current, entry.entryId)
+      : null
+  }, [archive, current])
   const completedWeeks = completedCurrentWeeks(current)
   const paceByYear = useMemo(
     () =>
@@ -308,6 +326,104 @@ export default function LeagueHistoryView({
           </div>
         </div>
       </section>
+
+      {playerPace && (
+        <section
+          className="history-section history-player-pace"
+          aria-label={`${playerPace.current.name} money pace`}
+        >
+          <div className="history-section-heading">
+            <div>
+              <p className="eyebrow">Your cash pace</p>
+              <h2>
+                {formatScore(playerPace.current.score)} after{' '}
+                {playerPace.activeWeek} scored{' '}
+                {playerPace.activeWeek === 1 ? 'week' : 'weeks'}
+              </h2>
+            </div>
+            <p>
+              This compares your current score with prior seasons at the same
+              active-week checkpoint. Eventual cashers are identified with
+              hindsight; matching their early pace is context, not a projected
+              finish.
+            </p>
+          </div>
+
+          <div className="history-benchmark-summary history-cash-summary">
+            <article>
+              <span>{current.pool.seasonYear} standing</span>
+              <strong>
+                #{playerPace.current.rank} ·{' '}
+                {formatScore(playerPace.current.score)}
+              </strong>
+              <small>
+                {moneyLineGap(playerPace.gapToCurrentMoneyLine)} (
+                {formatScore(playerPace.currentMoneyLine)})
+              </small>
+            </article>
+            <article>
+              <span>Prior cashers matched</span>
+              <strong>
+                {playerPace.cashersAtOrBelow} of {playerPace.cashersTotal}
+              </strong>
+              <small>
+                At or above eventual top-three finishers at this checkpoint
+              </small>
+            </article>
+            <article>
+              <span>Vs prior casher median</span>
+              <strong>{formatGap(playerPace.gapToCashPaceMedian)}</strong>
+              <small>
+                Your {formatScore(playerPace.current.score)} vs{' '}
+                {formatScore(playerPace.cashPaceMedian)}
+              </small>
+            </article>
+          </div>
+
+          <div className="history-cash-grid">
+            {playerPace.seasons.map((season) => (
+              <article key={season.seasonYear}>
+                <div className="history-cash-heading">
+                  <div>
+                    <span>
+                      {season.seasonYear} · {season.periodLabel}
+                    </span>
+                    <h3>
+                      Your score would rank #{season.equivalentRank}
+                    </h3>
+                  </div>
+                  <small>
+                    {moneyLineGap(season.gapToThird)} (
+                    {formatScore(season.thirdPlaceScore)})
+                  </small>
+                </div>
+                <ul>
+                  {season.cashers.map((casher) => (
+                    <li key={`${season.seasonYear}:${casher.place}`}>
+                      <span>
+                        {formatMoneyPlace(casher.place)} · {casher.name}
+                      </span>
+                      <strong>
+                        {formatScore(casher.checkpointScore)} then
+                      </strong>
+                      <small>
+                        You {formatGap(casher.gap)} ·{' '}
+                        {formatScore(casher.finalScore)} final
+                      </small>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <p className="history-cash-note">
+            “You +3” means your current score is three points ahead of that
+            eventual casher&apos;s score after the same number of active pool
+            weeks. Historical slate sizes change later in the season, so this
+            does not extrapolate a final score.
+          </p>
+        </section>
+      )}
 
       <section className="history-summary" aria-label="Money pace summary">
         <article className="history-summary-current">

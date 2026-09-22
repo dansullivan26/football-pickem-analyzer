@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-20T23:57:48-04:00",
+    "fetchedAt": "2026-09-22T06:41:09-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -21248,24 +21248,24 @@
       "seasonYear": 2026,
       "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
       "label": "Week 3",
-      "status": "in_progress",
-      "scored": false,
+      "status": "scored",
+      "scored": true,
       "slateFile": "football-fanatics-pool-week3.json",
       "entries": [
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
           "weekScore": 12,
-          "weekRank": 10,
+          "weekRank": 15,
           "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 49,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -21660,13 +21660,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -21674,16 +21675,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
           "weekScore": 11,
-          "weekRank": 13,
+          "weekRank": 17,
           "correctPicks": 11,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 41,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -22078,30 +22079,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
-          "weekScore": 11,
+          "weekScore": 12,
           "weekRank": 13,
-          "correctPicks": 11,
+          "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -22496,13 +22498,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -22510,16 +22513,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
           "weekScore": 10,
-          "weekRank": 20,
+          "weekRank": 22,
           "correctPicks": 10,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 51,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -22914,13 +22917,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -22933,11 +22937,11 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 44,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -23332,13 +23336,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -23346,16 +23351,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
           "weekScore": 13,
-          "weekRank": 7,
+          "weekRank": 8,
           "correctPicks": 13,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 38,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -23750,30 +23755,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
-          "weekScore": 14,
+          "weekScore": 15,
           "weekRank": 1,
           "correctPicks": 15,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 44,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -24168,30 +24174,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
-          "weekScore": 7,
-          "weekRank": 25,
-          "correctPicks": 7,
+          "weekScore": 8,
+          "weekRank": 26,
+          "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 51,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -24586,30 +24593,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
-          "weekScore": 9,
-          "weekRank": 22,
-          "correctPicks": 9,
+          "weekScore": 10,
+          "weekRank": 21,
+          "correctPicks": 10,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 47,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -25004,13 +25012,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -25018,16 +25027,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
           "weekScore": 12,
-          "weekRank": 10,
+          "weekRank": 13,
           "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -25422,30 +25431,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojs",
           "name": "rob bandelier",
-          "weekScore": 12,
+          "weekScore": 14,
           "weekRank": 7,
-          "correctPicks": 13,
+          "correctPicks": 14,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 50,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -25840,30 +25850,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
-          "weekScore": 8,
-          "weekRank": 24,
-          "correctPicks": 8,
+          "weekScore": 9,
+          "weekRank": 23,
+          "correctPicks": 9,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 44,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -26258,13 +26269,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -26272,16 +26284,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
           "weekScore": 15,
-          "weekRank": 1,
+          "weekRank": 3,
           "correctPicks": 15,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 47,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -26676,13 +26688,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -26690,16 +26703,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
           "weekScore": 13,
-          "weekRank": 7,
+          "weekRank": 9,
           "correctPicks": 13,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 46,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -27094,30 +27107,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
-          "weekScore": 14,
+          "weekScore": 15,
           "weekRank": 5,
-          "correctPicks": 14,
+          "correctPicks": 15,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -27512,30 +27526,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
-          "weekScore": 10,
-          "weekRank": 20,
-          "correctPicks": 10,
+          "weekScore": 11,
+          "weekRank": 19,
+          "correctPicks": 11,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 54,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -27930,30 +27945,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
-          "weekScore": 7,
+          "weekScore": 8,
           "weekRank": 25,
-          "correctPicks": 7,
+          "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -28348,30 +28364,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 10,
-          "weekRank": 13,
-          "correctPicks": 11,
+          "weekScore": 12,
+          "weekRank": 12,
+          "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T17:25:18-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 42,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -28766,13 +28783,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -28780,16 +28798,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
           "weekScore": 11,
-          "weekRank": 13,
+          "weekRank": 16,
           "correctPicks": 11,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 38,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -29184,13 +29202,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -29198,16 +29217,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
           "weekScore": 11,
-          "weekRank": 13,
+          "weekRank": 18,
           "correctPicks": 11,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -29602,13 +29621,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -29616,16 +29636,16 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
           "weekScore": 11,
-          "weekRank": 13,
+          "weekRank": 20,
           "correctPicks": 11,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T23:31:16-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 58,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -30020,30 +30040,31 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
-          "weekScore": 11,
-          "weekRank": 13,
-          "correctPicks": 11,
+          "weekScore": 12,
+          "weekRank": 10,
+          "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 34,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -30438,21 +30459,22 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
-          "weekScore": 14,
-          "weekRank": 1,
+          "weekScore": 15,
+          "weekRank": 3,
           "correctPicks": 15,
           "picksCount": 25,
           "maxPicksCount": 25,
@@ -30461,7 +30483,7 @@
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 47,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -30859,9 +30881,9 @@
               "pickedTeamId": "krswc3j2gqzde===",
               "pickedTeam": "NYG",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-09-17T10:59:50-04:00"
             }
@@ -30871,16 +30893,16 @@
           "entryId": "ivxhi4tzhizdkmjrguydonbw",
           "name": "Austin Downum",
           "weekScore": 12,
-          "weekRank": 10,
+          "weekRank": 11,
           "correctPicks": 12,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 41,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -31275,13 +31297,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -31289,16 +31312,16 @@
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
           "weekScore": 14,
-          "weekRank": 5,
+          "weekRank": 6,
           "correctPicks": 14,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T10:59:50-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 46,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -31693,13 +31716,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         },
@@ -31707,16 +31731,16 @@
           "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
           "name": "Adam Gannon",
           "weekScore": 9,
-          "weekRank": 22,
+          "weekRank": 24,
           "correctPicks": 9,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 24,
+          "revealedPicksCount": 25,
           "picksCountFirstSeenAt": "2026-09-17T23:31:16-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
-            "answer": null,
+            "answer": 48,
             "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte==="
           },
           "picks": [
@@ -32111,13 +32135,14 @@
               "away": "NYG",
               "home": "LAR",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "away",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-22T06:41:09-04:00"
             }
           ]
         }
@@ -59591,6 +59616,706 @@
       "window": {
         "after": "2026-09-20T19:28:40-04:00",
         "atOrBefore": "2026-09-20T23:57:48-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojs",
+      "name": "rob bandelier",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjrguydonbw",
+      "name": "Austin Downum",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
+      }
+    },
+    {
+      "week": 3,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dama=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2damb2guydamrzgiyte===",
+      "cbsEventId": 50029212,
+      "away": "NYG",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-09-22T06:41:09-04:00",
+      "previousFetchedAt": "2026-09-20T23:57:48-04:00",
+      "fetchedAt": "2026-09-22T06:41:09-04:00",
+      "window": {
+        "after": "2026-09-20T23:57:48-04:00",
+        "atOrBefore": "2026-09-22T06:41:09-04:00"
       }
     }
   ],

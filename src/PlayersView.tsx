@@ -87,6 +87,8 @@ import {
 import type { PlayerHistory, RecommendationHistory, Slate } from './types'
 import type { TeamRosterFile } from './teamRoster'
 
+type PlayerPageTab = 'how' | 'week' | 'pool'
+
 function predictedPickLabel(game: PredictedGame) {
   if (!game.predictedSide || !game.predictedTeam) return 'No call'
   const spread =
@@ -483,6 +485,7 @@ export default function PlayersView({
   const [detailView, setDetailView] = useState<'prediction' | 'actual'>(
     'prediction',
   )
+  const [pageTab, setPageTab] = useState<PlayerPageTab>('how')
   const scoresByEvent = useMemo(
     () =>
       mergeEventScores([
@@ -823,20 +826,59 @@ export default function PlayersView({
         </div>
       )}
 
-      {forecasts?.residuals && maturity && (
-        <ResidualReport report={forecasts.residuals} maturity={maturity} />
-      )}
-
-      <MoneyHistory
-        seasons={moneySeasons}
-        currentSeasonYear={history.pool.seasonYear}
-        namesHidden={namesHidden}
-        onSelectPlayer={onSelectPlayer}
-      />
-
-      <section
-        className={`players-layout${namesHidden ? ' names-hidden' : ''}`}
+      <div
+        className="weekly-recap-tabs player-main-tabs"
+        role="tablist"
+        aria-label="Players page section"
       >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={pageTab === 'how'}
+          className={pageTab === 'how' ? 'active' : ''}
+          onClick={() => setPageTab('how')}
+        >
+          How they pick
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={pageTab === 'week'}
+          className={pageTab === 'week' ? 'active' : ''}
+          onClick={() => setPageTab('week')}
+        >
+          This week
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={pageTab === 'pool'}
+          className={pageTab === 'pool' ? 'active' : ''}
+          onClick={() => setPageTab('pool')}
+        >
+          Pool-wide
+        </button>
+      </div>
+
+      {pageTab === 'pool' ? (
+        <div role="tabpanel" aria-label="Pool-wide">
+          {forecasts?.residuals && maturity && (
+            <ResidualReport report={forecasts.residuals} maturity={maturity} />
+          )}
+
+          <MoneyHistory
+            seasons={moneySeasons}
+            currentSeasonYear={history.pool.seasonYear}
+            namesHidden={namesHidden}
+            onSelectPlayer={onSelectPlayer}
+          />
+        </div>
+      ) : (
+        <section
+          className={`players-layout${namesHidden ? ' names-hidden' : ''}`}
+          role="tabpanel"
+          aria-label={pageTab === 'how' ? 'How they pick' : 'This week'}
+        >
         {!namesHidden && (
         <aside className="player-directory" aria-label="Pool players">
           <div className="directory-heading">
@@ -935,9 +977,11 @@ export default function PlayersView({
             <>
               <div className="player-detail-heading">
                 <div>
-                  <p className="eyebrow">Player profile</p>
+                  <p className="eyebrow">
+                    {pageTab === 'how' ? 'Player profile' : selectedWeek?.label}
+                  </p>
                   <h2>{namesHidden ? 'Player' : selectedPlayer.name}</h2>
-                  {currentProfile && (
+                  {pageTab === 'how' && currentProfile && (
                     <div className="player-archetype">
                       <strong>{currentProfile.archetype}</strong>
                       {currentProfile.signals.length === 0 && (
@@ -945,7 +989,7 @@ export default function PlayersView({
                       )}
                     </div>
                   )}
-                  {cardTiming && (
+                  {pageTab === 'how' && cardTiming && (
                     <p className={`player-pick-timing-tag ${cardTiming.read}`}>
                       <strong>{cardTiming.label}</strong>
                       <span>
@@ -953,7 +997,9 @@ export default function PlayersView({
                       </span>
                     </p>
                   )}
-                  {currentProfile && currentProfile.signals.length > 0 && (
+                  {pageTab === 'how' &&
+                    currentProfile &&
+                    currentProfile.signals.length > 0 && (
                     <ol
                       className="player-signals"
                       aria-label="Active tendencies, strongest first"
@@ -977,7 +1023,7 @@ export default function PlayersView({
                       ))}
                     </ol>
                   )}
-                  {playerMoneyFinishes.length > 0 && (
+                  {pageTab === 'how' && playerMoneyFinishes.length > 0 && (
                     <p className="player-money-finishes">
                       {playerMoneyFinishes
                         .map(
@@ -990,6 +1036,8 @@ export default function PlayersView({
                 </div>
               </div>
 
+              {pageTab === 'how' && (
+                <>
               {cardTiming && (
                 <section
                   className="player-card-timing"
@@ -1243,7 +1291,11 @@ export default function PlayersView({
                   })}
                 </div>
               </div>
+                </>
+              )}
 
+              {pageTab === 'week' && (
+                <>
               <div className="player-week-toolbar">
                 <div className="player-view-toggle" aria-label="Player week view">
                   <button
@@ -1544,6 +1596,8 @@ export default function PlayersView({
                   </div>
                 </div>
               )}
+                </>
+              )}
             </>
           ) : selectedSlug ? (
             <div className="empty-state">
@@ -1553,7 +1607,8 @@ export default function PlayersView({
             <div className="empty-state">No players match this filter.</div>
           )}
         </section>
-      </section>
+        </section>
+      )}
     </main>
   )
 }

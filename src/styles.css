@@ -2283,6 +2283,16 @@ a.team-page-link:focus-visible .team-name {
   box-shadow: 0 1px 5px rgba(30, 53, 40, 0.1);
 }
 
+.player-main-tabs {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.player-main-tabs button {
+  flex: 1;
+}
+
 .weekly-recap {
   margin-bottom: 20px;
   padding: 22px;

@@ -79,6 +79,7 @@ import {
   filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
   injuryLineEventsForGame,
+  injuryLineMoveAgrees,
   type InjuryLineHistory,
 } from './injuryLineMoves'
 import type {
@@ -844,9 +845,7 @@ function InjuryLineWeekNote({
               slateGame
                 ? [slateGame.away.abbrev, slateGame.home.abbrev]
                 : undefined,
-            ).filter(
-              (event) => event.towardTeam != null && event.towardTeam !== 0,
-            )
+            ).filter((event) => injuryLineMoveAgrees(event))
             return { row, slateGame, coincidences }
           })
           .filter(({ coincidences }) => coincidences.length > 0)

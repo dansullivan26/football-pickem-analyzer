@@ -35,7 +35,7 @@ export type InjuryLineHistory = {
 }
 
 export const INJURY_LINE_NOTE =
-  'Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.'
+  'Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.'
 
 type ListedStarter = {
   athleteId: string | null
@@ -95,6 +95,22 @@ export function towardTeamDelta(
   return side === 'home' ? -homeDelta : homeDelta
 }
 
+/** True when DK moved the way a causal injury story would: worse listing, against that team; better listing, toward it. */
+export function injuryLineMoveAgrees(event: InjuryLineEvent) {
+  if (
+    event.towardTeam == null ||
+    event.towardTeam === 0 ||
+    event.homeSpreadBefore == null ||
+    event.homeSpreadAfter == null ||
+    event.homeSpreadBefore === event.homeSpreadAfter
+  ) {
+    return false
+  }
+  return event.availability === 'worse'
+    ? event.towardTeam < 0
+    : event.towardTeam > 0
+}
+
 export function dkLineThisPull(event: OddsEvent | undefined) {
   const dk = event?.lines.draftkings
   if (!dk || typeof dk.line !== 'number') {
@@ -119,6 +135,9 @@ export function formatInjuryLineEvent(event: InjuryLineEvent) {
     event.homeSpreadBefore === event.homeSpreadAfter
   ) {
     return `${status}. DraftKings unchanged on that pull (${formatHomeSpread(event.homeSpreadAfter)} home).`
+  }
+  if (!injuryLineMoveAgrees(event)) {
+    return status
   }
   const other =
     event.side === 'home' ? 'the visitor' : 'the home team'

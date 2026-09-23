@@ -5,6 +5,7 @@ import {
   filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
   injuryLineEventsForGame,
+  injuryLineMoveAgrees,
   towardTeamDelta,
   updateInjuryLineHistory,
   type InjuryLineHistory,
@@ -111,6 +112,26 @@ test('Mahomes Q to D with a same-hour DK move against Kansas City', () => {
     formatInjuryLineEvent(event!),
     'Patrick Mahomes (KC QB) Questionable → Doubtful. DraftKings moved 4 toward the home team on the same hourly pull (-3 → -7 home).',
   )
+  assert.equal(injuryLineMoveAgrees(event!), true)
+})
+
+test('omits a same-hour DK move toward the team that just got worse', () => {
+  const history = updateInjuryLineHistory({
+    previousHistory: null,
+    previousInjuries: injuries('Questionable', 'questionable'),
+    nextInjuries: injuries('Out', 'out'),
+    slate,
+    events: odds(-1.5, -3),
+    runAt: '2026-09-17T03:16:23.590Z',
+  })
+  const event = history.games[0]?.events[0]
+  assert.equal(event?.availability, 'worse')
+  assert.equal(event?.towardTeam, 1.5)
+  assert.equal(injuryLineMoveAgrees(event!), false)
+  assert.equal(
+    formatInjuryLineEvent(event!),
+    'Patrick Mahomes (KC QB) Questionable → Out',
+  )
 })
 
 test('records a status change even when DraftKings did not move', () => {
@@ -149,6 +170,33 @@ test('cleared starters count as better availability', () => {
   assert.equal(event.toStatus, null)
   assert.equal(event.availability, 'better')
   assert.equal(event.towardTeam, 4)
+})
+
+test('omits a same-hour DK move away from a starter who just cleared', () => {
+  const history = updateInjuryLineHistory({
+    previousHistory: null,
+    previousInjuries: injuries('Out', 'out'),
+    nextInjuries: {
+      source: injuries('Out', 'out').source,
+      teams: [
+        {
+          ...injuries('Out', 'out').teams[0],
+          injuries: [],
+        },
+      ],
+    },
+    slate,
+    events: odds(-7, -3),
+    runAt: '2026-09-17T04:16:00.000Z',
+  })
+  const event = history.games[0].events[0]
+  assert.equal(event.availability, 'better')
+  assert.equal(event.towardTeam, -4)
+  assert.equal(injuryLineMoveAgrees(event), false)
+  assert.equal(
+    formatInjuryLineEvent(event),
+    'Patrick Mahomes (KC QB) Out → cleared',
+  )
 })
 
 test('ignores comment-only ESPN updates that keep the same tier', () => {

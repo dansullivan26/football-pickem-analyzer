@@ -2,6 +2,7 @@ import InjuryLink from './InjuryLink'
 import {
   filterInjuryLineEventsToListedStarters,
   formatInjuryLineEvent,
+  injuryLineMoveAgrees,
   type InjuryLineEvent,
 } from './injuryLineMoves'
 import {
@@ -84,8 +85,8 @@ export default function NflStarterAvailability({
     file,
     [away.abbrev, home.abbrev],
   )
-  const coincidences = visibleEvents.filter(
-    (event) => event.towardTeam != null && event.towardTeam !== 0,
+  const coincidences = visibleEvents.filter((event) =>
+    injuryLineMoveAgrees(event),
   )
   const orderedEvents = [...visibleEvents].sort((left, right) => {
     const leftMove = Math.abs(left.towardTeam ?? 0)
@@ -116,9 +117,9 @@ export default function NflStarterAvailability({
           <h4>Same-hour DraftKings</h4>
           <p>
             Status tier changes vs the last ESPN snapshot for players still
-            on this first-team injury table, next to the DraftKings home
-            spread from that same hourly pull. Coincidence, not a causal
-            claim.
+            on this first-team injury table. A DraftKings print is shown only
+            when it moved the way a causal injury story would; even then it
+            is coincidence, not a causal claim.
           </p>
           <ul>
             {orderedEvents.map((event) => (

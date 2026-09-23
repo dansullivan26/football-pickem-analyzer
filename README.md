@@ -284,12 +284,13 @@ coincidence; it does not claim the injury caused the move. Comment-only ESPN
 updates that stay in the same tier are ignored. A new slate week starts a
 new file.
 
-The browser's **Refresh data** button starts two GitHub Actions: **Refresh
-sportsbook lines** (DraftKings via SharpAPI) and **Ingest GrokBot dump**
-(`kind=consensus`, the latest Covers file already in the private drop repo).
-It does not scrape Covers itself. After the jobs finish and Pages deploys,
-reload the site. The toast is only an acknowledgement — data will not appear
-instantly.
+The browser's **Refresh data** button starts **Refresh review data**, which
+runs **Ingest GrokBot dump** (`kind=consensus`, the latest Covers file already
+in the private drop repo) and then **Refresh sportsbook lines** (DraftKings
+via SharpAPI). It does not scrape Covers itself. A stale or week-mismatched
+Covers dump fails the ingest, but DraftKings still refreshes and deploys.
+After the jobs finish and Pages deploys, reload the site. The toast is only
+an acknowledgement — data will not appear instantly.
 
 To enable the button on GitHub Pages, create a fine-grained personal access
 token with **Actions: Read and write** on this repository only. Add it as a

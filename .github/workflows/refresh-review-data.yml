@@ -13,8 +13,11 @@ jobs:
     steps:
       # Covers first, then DraftKings. Running them together races two pushes to
       # main, and the lines job would build Pages from a checkout taken before
-      # the consensus commit landed.
+      # the consensus commit landed. A failed Covers dump (stale week, empty
+      # drop) must not skip DraftKings.
       - name: Ingest the latest Covers dump
+        id: covers
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -47,4 +50,13 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          if [ "${{ steps.covers.outcome }}" != "success" ]; then
+            echo "Covers ingest did not succeed; still refreshing DraftKings."
+          fi
           gh workflow run "Refresh sportsbook lines" --ref "${GITHUB_REF_NAME}"
+
+      - name: Fail if Covers ingest failed
+        if: steps.covers.outcome == 'failure'
+        run: |
+          echo "DraftKings refresh was dispatched. Covers ingest failed; check the Ingest GrokBot dump run."
+          exit 1

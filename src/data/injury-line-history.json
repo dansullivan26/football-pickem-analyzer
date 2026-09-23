@@ -2,7 +2,7 @@
   "week": 4,
   "seasonYear": 2026,
   "label": "Week 4",
-  "updatedAt": "2026-09-23T02:54:15.523Z",
+  "updatedAt": "2026-09-23T17:16:45.072Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A move in the same pull is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -183,6 +183,29 @@
       ]
     },
     {
+      "cbsEventId": 50029235,
+      "events": [
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029235,
+          "athleteId": "4360078",
+          "name": "Alec Pierce",
+          "position": "WR",
+          "teamAbbrev": "IND",
+          "teamName": "Indianapolis",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 3,
+          "homeSpreadAfter": 3,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
       "cbsEventId": 50029236,
       "events": [
         {
@@ -224,6 +247,124 @@
           "availability": "better",
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029238,
+          "athleteId": "4710000",
+          "name": "Fernando Carmona",
+          "position": "G",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029238,
+          "athleteId": "4431613",
+          "name": "James Williams Sr.",
+          "position": "LB",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029238,
+          "athleteId": "3916148",
+          "name": "Tony Pollard",
+          "position": "RB",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029239,
+      "events": [
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029239,
+          "athleteId": "4569987",
+          "name": "Jaylen Warren",
+          "position": "RB",
+          "teamAbbrev": "PIT",
+          "teamName": "Pittsburgh",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029240,
+      "events": [
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029240,
+          "athleteId": "4426348",
+          "name": "Jayden Daniels",
+          "position": "QB",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 7,
+          "homeSpreadAfter": 7,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-23T17:16:45.072Z",
+          "cbsEventId": 50029240,
+          "athleteId": "4426403",
+          "name": "Nick Cross",
+          "position": "S",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 7,
+          "homeSpreadAfter": 7,
           "towardTeam": 0
         }
       ]

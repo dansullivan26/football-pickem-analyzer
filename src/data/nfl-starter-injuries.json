@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-09-23T00:46:21.131Z",
-    "reportUpdatedAt": "2026-09-23T00:46:16Z",
+    "fetchedAt": "2026-09-23T02:54:15.523Z",
+    "reportUpdatedAt": "2026-09-23T02:54:07Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,19 +10,9 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:00Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4685408",
-          "name": "Will Johnson",
-          "position": "CB",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Neck",
-          "detail": "Johnson (neck) may be forced to miss the remainder of the 2026 season, Darren Urban of the Cardinals' official site reports.",
-          "updatedAt": "2026-09-21T23:17Z"
-        },
         {
           "athleteId": "4568506",
           "name": "Garrett Williams",
@@ -49,7 +39,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -71,16 +61,6 @@
           "injury": "Hamstring",
           "detail": "Ebukam (hamstring) is questionable to return to Sunday's game against the Panthers, Marc Raimondi of ESPN.com reports.",
           "updatedAt": "2026-09-20T18:30Z"
-        },
-        {
-          "athleteId": "4239995",
-          "name": "A.J. Terrell Jr.",
-          "position": "CB",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Groin",
-          "detail": "The Falcons placed Terrell (groin) on injured reserve Tuesday, Tori McElhaney of the team's official site reports.",
-          "updatedAt": "2026-09-22T17:09Z"
         }
       ]
     },
@@ -88,7 +68,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:00Z",
       "status": "ok",
       "injuries": [
         {
@@ -137,7 +117,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:00Z",
       "status": "ok",
       "injuries": [
         {
@@ -176,7 +156,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": [
         {
@@ -215,7 +195,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": [
         {
@@ -244,7 +224,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": []
     },
@@ -252,7 +232,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": [
         {
@@ -281,7 +261,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": [
         {
@@ -320,7 +300,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:01Z",
       "status": "ok",
       "injuries": [
         {
@@ -349,7 +329,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -361,16 +341,6 @@
           "injury": "Hip",
           "detail": "questionable",
           "updatedAt": "2026-09-22T20:56Z"
-        },
-        {
-          "athleteId": "3123938",
-          "name": "Avonte Maddox",
-          "position": "CB",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Foot",
-          "detail": "ir",
-          "updatedAt": "2026-09-22T21:56Z"
         }
       ]
     },
@@ -378,19 +348,9 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:08Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4240435",
-          "name": "Zach Bako-Bewele",
-          "position": "OT",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Knee",
-          "detail": "Bako-Bewele said he sustained a complete tear of his right patellar tendon in Sunday's 20-17 overtime win over the Jets and will undergo season-ending surgery Thursday, Matt Schneidman of The Athletic reports.",
-          "updatedAt": "2026-09-22T18:32Z"
-        },
         {
           "athleteId": "4362249",
           "name": "Jayden Reed",
@@ -422,16 +382,6 @@
           "updatedAt": "2026-09-22T20:56Z"
         },
         {
-          "athleteId": "4242390",
-          "name": "Aaron Banks",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Toe",
-          "detail": "Banks (toe) has been ruled out for the remainder of Sunday's game against the Jets.",
-          "updatedAt": "2026-09-20T20:07Z"
-        },
-        {
           "athleteId": "4430438",
           "name": "Edgerrin Cooper",
           "position": "LB",
@@ -457,7 +407,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -496,7 +446,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -535,7 +485,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -554,7 +504,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:02Z",
       "status": "ok",
       "injuries": []
     },
@@ -562,19 +512,9 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4241263",
-          "name": "Charlie Kolar",
-          "position": "TE",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Forearm",
-          "detail": "Kolar plans to undergo surgery to repair a broken forearm and is hopeful to return from injured reserve when first eligible for the Chargers' No. 1 game against the Rams, Jeremy Fowler of ESPN.com reports.",
-          "updatedAt": "2026-09-22T21:50Z"
-        },
         {
           "athleteId": "2979860",
           "name": "Dalvin Tomlinson",
@@ -594,16 +534,6 @@
           "injury": "Hamstring",
           "detail": "questionable",
           "updatedAt": "2026-09-22T20:56Z"
-        },
-        {
-          "athleteId": "4040842",
-          "name": "Kayode Awosika",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Leg",
-          "detail": "Awosika is expected to miss time after injuring his fibula during Sunday's game versus the Raiders, Noah Furtado of The Athletic reports.",
-          "updatedAt": "2026-09-22T01:15Z"
         },
         {
           "athleteId": "4411189",
@@ -631,7 +561,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -670,7 +600,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -709,7 +639,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -738,7 +668,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -767,19 +697,9 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4689114",
-          "name": "Jaxson Dart",
-          "position": "QB",
-          "status": "Doubtful",
-          "tier": "doubtful",
-          "injury": "Knee - MCL",
-          "detail": "Dart is facing the possibility of season-ending surgery after further testing Tuesday revealed that the left knee injury he sustained in Monday's 28-6 loss to the Rams is worse than originally anticipated, Adam Schefter of ESPN reports.",
-          "updatedAt": "2026-09-22T18:50Z"
-        },
         {
           "athleteId": "4428328",
           "name": "Deonte Banks",
@@ -826,19 +746,9 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4808766",
-          "name": "Mason Taylor",
-          "position": "TE",
-          "status": "Doubtful",
-          "tier": "doubtful",
-          "injury": "Thumb",
-          "detail": "Taylor (thumb) is considered week-to-week and will likely miss Sunday's game against the Lions, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-09-22T22:08Z"
-        },
         {
           "athleteId": "4700136",
           "name": "Kiko Mauigoa",
@@ -868,26 +778,6 @@
           "injury": "Groin",
           "detail": "questionable",
           "updatedAt": "2026-09-22T20:56Z"
-        },
-        {
-          "athleteId": "4002046",
-          "name": "David Onyemata",
-          "position": "DT",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Groin",
-          "detail": "The Jets placed Onyemata (groin) on injured reserve Tuesday.",
-          "updatedAt": "2026-09-22T23:51Z"
-        },
-        {
-          "athleteId": "4723820",
-          "name": "Omar Cooper Jr.",
-          "position": "WR",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Ankle",
-          "detail": "The Jets are expected to place Cooper (ankle) on injured reserve, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-09-19T16:24Z"
         }
       ]
     },
@@ -895,7 +785,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -927,16 +817,6 @@
           "injury": "Shoulder",
           "detail": "Woodson (shoulder) has been ruled out for the rest of Sunday's game against the Steelers.",
           "updatedAt": "2026-09-20T19:33Z"
-        },
-        {
-          "athleteId": "4046545",
-          "name": "Mike Onwenu",
-          "position": "G",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Ankle",
-          "detail": "The Patriots placed Onwenu (ankle) on injured reserve Tuesday.",
-          "updatedAt": "2026-09-23T00:27Z"
         }
       ]
     },
@@ -944,36 +824,15 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:03Z",
       "status": "ok",
-      "injuries": [
-        {
-          "athleteId": "4685260",
-          "name": "Kelvin Banks Jr.",
-          "position": "OT",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Ankle",
-          "detail": "Banks is expected to undergo surgery for a high-ankle sprain and is out indefinitely, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-09-21T21:21Z"
-        },
-        {
-          "athleteId": "2575788",
-          "name": "Zach Wood",
-          "position": "LS",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Calf",
-          "detail": "The Saints placed Wood (calf) on injured reserve Friday.",
-          "updatedAt": "2026-09-19T03:01Z"
-        }
-      ]
+      "injuries": []
     },
     {
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1012,7 +871,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1041,7 +900,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1070,7 +929,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1119,7 +978,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1138,7 +997,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1177,7 +1036,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-09-23T00:46:15Z",
+      "depthChartAt": "2026-09-23T02:54:05Z",
       "status": "ok",
       "injuries": [
         {

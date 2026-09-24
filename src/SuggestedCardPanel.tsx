@@ -33,6 +33,9 @@ export default function SuggestedCardPanel({
   const [manualSelections, setManualSelections] = useState<
     Map<string, 'home' | 'away'>
   >(() => new Map())
+  const [selectedToSend, setSelectedToSend] = useState<Set<string>>(
+    () => new Set(),
+  )
   const [deviations, setDeviations] = useState<Set<string>>(
     () =>
       new Set(
@@ -64,6 +67,17 @@ export default function SuggestedCardPanel({
     () => orderCardRows(card.picks, card.unpicked, sort),
     [card.picks, card.unpicked, sort],
   )
+  const selectedRecommendedCount = card.picks.filter((pick) =>
+    selectedToSend.has(pick.gameId),
+  ).length
+  const selectedManualCount = [...manualSelections.keys()].filter((gameId) =>
+    selectedToSend.has(gameId),
+  ).length
+  const selectedCount = selectedRecommendedCount + selectedManualCount
+  const selectedDeviationCount = card.picks.filter(
+    (pick) =>
+      selectedToSend.has(pick.gameId) && deviations.has(pick.gameId),
+  ).length
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -127,11 +141,36 @@ export default function SuggestedCardPanel({
     })
   }
 
+  function toggleSend(gameId: string) {
+    setSelectedToSend((current) => {
+      const next = new Set(current)
+      if (next.has(gameId)) next.delete(gameId)
+      else next.add(gameId)
+      return next
+    })
+  }
+
+  function selectAllForSend() {
+    setSelectedToSend(
+      new Set([
+        ...card.picks.map((pick) => pick.gameId),
+        ...manualSelections.keys(),
+      ]),
+    )
+  }
+
   function toggleManualPick(gameId: string, side: 'home' | 'away') {
+    const clearing = manualSelections.get(gameId) === side
     setManualSelections((current) => {
       const next = new Map(current)
       if (next.get(gameId) === side) next.delete(gameId)
       else next.set(gameId, side)
+      return next
+    })
+    setSelectedToSend((current) => {
+      const next = new Set(current)
+      if (clearing) next.delete(gameId)
+      else next.add(gameId)
       return next
     })
   }
@@ -165,6 +204,7 @@ export default function SuggestedCardPanel({
         deviations,
         readTiebreakerAnswer(),
         manualSelections,
+        selectedToSend,
       )
       storeDeviationIds(card.seasonYear, card.week, deviations)
       setSubmitResult({
@@ -271,9 +311,35 @@ export default function SuggestedCardPanel({
             {deviations.size === 1
               ? '1 deviation from the last sent card is still marked.'
               : `${deviations.size} deviations from the last sent card are still marked.`}{' '}
-            Uncheck one to send the recommended side this time.
+            Uncheck one to use the recommended side the next time that game is
+            sent.
           </p>
         )}
+
+        <div className="card-send-selection">
+          <div>
+            <strong>
+              {selectedCount}{' '}
+              {selectedCount === 1 ? 'game' : 'games'} selected to send
+            </strong>
+            <small>
+              Select all includes every recommendation and any manual pick
+              with a side chosen.
+            </small>
+          </div>
+          <div>
+            <button type="button" onClick={selectAllForSend}>
+              Select all
+            </button>
+            <button
+              type="button"
+              disabled={selectedCount === 0}
+              onClick={() => setSelectedToSend(new Set())}
+            >
+              Deselect all
+            </button>
+          </div>
+        </div>
 
         <ol className="suggested-picks">
           {rows.map((row) =>
@@ -282,14 +348,18 @@ export default function SuggestedCardPanel({
                 key={row.pick.cbsEventId}
                 pick={row.pick}
                 deviate={deviations.has(row.pick.gameId)}
+                selectedToSend={selectedToSend.has(row.pick.gameId)}
                 onToggleDeviate={toggleDeviate}
+                onToggleSend={toggleSend}
               />
             ) : (
               <ManualReviewRow
                 key={row.game.cbsEventId}
                 game={row.game}
                 selected={manualSelections.get(row.game.gameId)}
+                selectedToSend={selectedToSend.has(row.game.gameId)}
                 onToggle={toggleManualPick}
+                onToggleSend={toggleSend}
               />
             ),
           )}
@@ -343,19 +413,20 @@ export default function SuggestedCardPanel({
             type="button"
             disabled={
               submitting ||
-              card.picks.length + manualSelections.size === 0
+              selectedCount === 0
             }
             onClick={openPasswordPrompt}
           >
             {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
           </button>
           <small>
-            Sends this exact card to GrokBot
-            {deviations.size
-              ? `, including ${deviations.size} deviation${deviations.size === 1 ? '' : 's'}`
+            Sends {selectedCount} selected{' '}
+            {selectedCount === 1 ? 'game' : 'games'} to GrokBot
+            {selectedDeviationCount
+              ? `, including ${selectedDeviationCount} deviation${selectedDeviationCount === 1 ? '' : 's'}`
               : ''}
-            {manualSelections.size
-              ? `, plus ${manualSelections.size} manual pick${manualSelections.size === 1 ? '' : 's'}`
+            {selectedManualCount
+              ? `, plus ${selectedManualCount} manual pick${selectedManualCount === 1 ? '' : 's'}`
               : ''}
             . You will confirm in chat before it is saved on CBS. Delivery runs in
             a GitHub Action, so check its run if GrokBot never posts the card.
@@ -395,13 +466,13 @@ export default function SuggestedCardPanel({
             >
               <h3 id="card-password-title">Enter password</h3>
               <p>
-                Sends {card.picks.length + manualSelections.size} picks
-                {deviations.size
-                  ? ` (${deviations.size} deviation${deviations.size === 1 ? '' : 's'})`
+                Sends {selectedCount} {selectedCount === 1 ? 'pick' : 'picks'}
+                {selectedDeviationCount
+                  ? ` (${selectedDeviationCount} deviation${selectedDeviationCount === 1 ? '' : 's'})`
                   : ''}{' '}
                 to GrokBot for {card.weekLabel}
-                {manualSelections.size
-                  ? `, including ${manualSelections.size} manual pick${manualSelections.size === 1 ? '' : 's'}`
+                {selectedManualCount
+                  ? `, including ${selectedManualCount} manual pick${selectedManualCount === 1 ? '' : 's'}`
                   : ''}
                 {card.tiebreaker && readTiebreakerAnswer() != null
                   ? ` with a ${readTiebreakerAnswer()}-point tiebreaker`
@@ -444,16 +515,25 @@ export default function SuggestedCardPanel({
 function SuggestedPickRow({
   pick,
   deviate,
+  selectedToSend,
   onToggleDeviate,
+  onToggleSend,
 }: {
   pick: SuggestedPick
   deviate: boolean
+  selectedToSend: boolean
   onToggleDeviate: (gameId: string) => void
+  onToggleSend: (gameId: string) => void
 }) {
   const sent = submittedPick(pick, deviate)
   const kickoff = formatCardKickoff(pick.kickoff)
   return (
-    <li className={deviate ? 'deviated' : undefined}>
+    <li
+      className={[
+        deviate ? 'deviated' : '',
+        selectedToSend ? 'selected-to-send' : '',
+      ].filter(Boolean).join(' ') || undefined}
+    >
       <div className="suggested-pick-teams">
         <strong>
           {sent.pickedTeam} {formatPoolSpread(sent.poolSpread)}
@@ -480,14 +560,24 @@ function SuggestedPickRow({
           </span>
         ) : null}
       </div>
-      <label className="suggested-pick-toggle">
-        <input
-          type="checkbox"
-          checked={deviate}
-          onChange={() => onToggleDeviate(pick.gameId)}
-        />
-        Deviate
-      </label>
+      <div className="suggested-pick-controls">
+        <label className="suggested-pick-toggle">
+          <input
+            type="checkbox"
+            checked={selectedToSend}
+            onChange={() => onToggleSend(pick.gameId)}
+          />
+          Send
+        </label>
+        <label className="suggested-pick-toggle">
+          <input
+            type="checkbox"
+            checked={deviate}
+            onChange={() => onToggleDeviate(pick.gameId)}
+          />
+          Deviate
+        </label>
+      </div>
       <em>{pick.detail}</em>
     </li>
   )
@@ -496,11 +586,15 @@ function SuggestedPickRow({
 function ManualReviewRow({
   game,
   selected,
+  selectedToSend,
   onToggle,
+  onToggleSend,
 }: {
   game: UnpickedGame
   selected: 'home' | 'away' | undefined
+  selectedToSend: boolean
   onToggle: (gameId: string, side: 'home' | 'away') => void
+  onToggleSend: (gameId: string) => void
 }) {
   const kickoff = formatCardKickoff(game.kickoff)
   const leanLabel =
@@ -508,7 +602,13 @@ function ManualReviewRow({
       ? `Lean ${game.leanTeam} ${formatPoolSpread(game.leanSpread)}`
       : null
   return (
-    <li className={selected ? 'manual-review manually-picked' : 'manual-review'}>
+    <li
+      className={[
+        'manual-review',
+        selected ? 'manually-picked' : '',
+        selectedToSend ? 'selected-to-send' : '',
+      ].filter(Boolean).join(' ')}
+    >
       <div className="suggested-pick-teams">
         <strong>
           {leanLabel ?? `${game.away} @ ${game.home}`}
@@ -524,6 +624,15 @@ function ManualReviewRow({
       <div className="suggested-pick-tags">
         <span className="pick-source manual-review">Manual review</span>
       </div>
+      <label className="suggested-pick-toggle manual-send-toggle">
+        <input
+          type="checkbox"
+          checked={selectedToSend && selected != null}
+          disabled={!selected}
+          onChange={() => onToggleSend(game.gameId)}
+        />
+        Send
+      </label>
       <div className="manual-pick-options">
         {(['away', 'home'] as const).map((side) => {
           const team = side === 'away' ? game.away : game.home

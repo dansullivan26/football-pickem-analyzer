@@ -331,7 +331,10 @@ The generated-card modal sends GrokBot this JSON:
 }
 ```
 
-Unpicked games are omitted; GrokBot validates against the live Week N slate.
+The modal starts with every game deselected. Only checked games are sent;
+**Select all** checks every recommended game plus manual-review games that
+already have a side chosen. Unselected and unpicked games are omitted; GrokBot
+validates against the live Week N slate.
 `pickedTeamId` / `pickedSide` are the team to save on CBS. If **Deviate** is
 checked on a pick, those fields are already the flipped side and `deviate` is
 `true`. GrokBot should save that team as-is and not flip it again.
@@ -342,9 +345,11 @@ from the webhook so CBS remains blank.
 The Complete card Action also writes `src/data/card-overrides.json` and
 re-runs the recommendation snapshot so Performance can score deviations
 against the opposite of the frozen card pick. Opening Generate card again
-in the same week pre-checks those flips. A later send keeps deviations for
-games that are no longer on the live card (already kicked off) and only
-drops a mark if you uncheck it on a game that is still listed.
+in the same week pre-checks those flips. Send selection is independent from
+the deviation checkbox: selecting or deselecting a game does not alter its
+flip. A partial send keeps prior deviations for omitted games, including
+future games still on the live card. A mark changes only when that game is
+sent again with a different deviation setting.
 
 The browser cannot POST that webhook directly. GrokBot's server answers the
 CORS preflight and will not allow the Pages origin, so the button dispatches

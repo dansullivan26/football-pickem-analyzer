@@ -21,17 +21,21 @@ export function buildCompleteCardPayload(
   deviations: ReadonlySet<string> = new Set(),
   tiebreakerAnswer: number | null = null,
   manualSelections: ManualPickSelections = new Map(),
+  selectedGameIds: ReadonlySet<string> = new Set(),
 ) {
-  const recommended = card.picks.map((pick) => {
-    const sent = submittedPick(pick, deviations.has(pick.gameId))
-    return {
-      gameId: pick.gameId,
-      pickedTeamId: sent.pickedTeamId,
-      pickedSide: sent.pickedSide,
-      deviate: deviations.has(pick.gameId),
-    }
-  })
+  const recommended = card.picks
+    .filter((pick) => selectedGameIds.has(pick.gameId))
+    .map((pick) => {
+      const sent = submittedPick(pick, deviations.has(pick.gameId))
+      return {
+        gameId: pick.gameId,
+        pickedTeamId: sent.pickedTeamId,
+        pickedSide: sent.pickedSide,
+        deviate: deviations.has(pick.gameId),
+      }
+    })
   const manual = card.unpicked.flatMap((game) => {
+    if (!selectedGameIds.has(game.gameId)) return []
     const side = manualSelections.get(game.gameId)
     if (!side) return []
     const sent = submittedManualPick(game, side)
@@ -67,6 +71,7 @@ export async function sendCardToGrokBot(
   deviations: ReadonlySet<string> = new Set(),
   tiebreakerAnswer: number | null = null,
   manualSelections: ManualPickSelections = new Map(),
+  selectedGameIds: ReadonlySet<string> = new Set(),
 ) {
   const token = import.meta.env.VITE_GH_DISPATCH_TOKEN
   if (!token) {
@@ -81,6 +86,7 @@ export async function sendCardToGrokBot(
       deviations,
       tiebreakerAnswer,
       manualSelections,
+      selectedGameIds,
     ),
   )
 

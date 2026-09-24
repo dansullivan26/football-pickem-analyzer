@@ -71,12 +71,13 @@ const card: SuggestedCard = {
   tiebreaker: null,
 }
 
-test('completion payload includes selected manual picks only', () => {
+test('completion payload includes selected recommended and manual picks', () => {
   const payload = buildCompleteCardPayload(
     card,
     new Set(),
     null,
     new Map([['manual', 'away']]),
+    new Set(['recommended', 'manual']),
   )
 
   assert.deepEqual(payload.picks, [
@@ -102,9 +103,41 @@ test('manual selection can choose the home side', () => {
     new Set(),
     null,
     new Map([['manual', 'home']]),
+    new Set(['manual']),
   )
 
   assert.equal(payload.picks[0]?.pickedTeamId, 'manual-home-id')
   assert.equal(payload.picks[0]?.pickedSide, 'home')
   assert.equal((payload.picks[0] as { manual?: boolean })?.manual, true)
+})
+
+test('completion payload only includes games selected to send', () => {
+  const payload = buildCompleteCardPayload(
+    card,
+    new Set(['recommended']),
+    null,
+    new Map([['manual', 'away']]),
+    new Set(['manual']),
+  )
+
+  assert.deepEqual(payload.picks, [
+    {
+      gameId: 'manual',
+      pickedTeamId: 'manual-away-id',
+      pickedSide: 'away',
+      deviate: false,
+      manual: true,
+    },
+  ])
+})
+
+test('completion payload defaults to no selected games', () => {
+  const payload = buildCompleteCardPayload(
+    card,
+    new Set(['recommended']),
+    null,
+    new Map([['manual', 'away']]),
+  )
+
+  assert.deepEqual(payload.picks, [])
 })

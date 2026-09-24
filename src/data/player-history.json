@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-24T06:51:13-04:00",
+    "fetchedAt": "2026-09-24T17:01:29-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -34921,11 +34921,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -36891,9 +36891,9 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 1,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
           "picksCountFirstSeenAt": "2026-09-24T06:51:13-04:00",
           "tiebreaker": {
@@ -37679,11 +37679,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -38861,11 +38861,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -40831,11 +40831,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 1,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "revealedPicksCount": 1,
+          "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -40849,13 +40849,14 @@
               "away": "ATL",
               "home": "GB",
               "homeSpread": -6.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydk===",
+              "pickedTeam": "ATL",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-09-24T17:01:29-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2danj2guydamrxha2tq===",
@@ -42013,11 +42014,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 3,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -70572,6 +70573,34 @@
         "after": "2026-09-20T23:57:48-04:00",
         "atOrBefore": "2026-09-22T06:41:09-04:00"
       }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2danj2guydamrzgiztc===",
+      "cbsEventId": 50029231,
+      "away": "ATL",
+      "home": "GB",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydk===",
+        "pickedTeam": "ATL"
+      },
+      "firstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -71149,6 +71178,102 @@
       "window": {
         "after": "2026-09-20T00:22:21-04:00",
         "atOrBefore": "2026-09-20T13:39:22-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "changeType": "picksCount",
+      "from": 1,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-24T06:51:13-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 1,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 3,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-24T06:51:13-04:00",
+      "fetchedAt": "2026-09-24T17:01:29-04:00",
+      "window": {
+        "after": "2026-09-24T06:51:13-04:00",
+        "atOrBefore": "2026-09-24T17:01:29-04:00"
       }
     }
   ]

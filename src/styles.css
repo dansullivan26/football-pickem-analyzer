@@ -4056,6 +4056,16 @@ a.team-page-link:focus-visible .team-name {
 }
 .history-matchup strong,
 .history-selection strong {
+  font-size: 0.92rem;
+}
+
+.history-matchup a.team-page-link:hover,
+.history-matchup a.team-page-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.history-selection strong {
   font-size: 0.84rem;
 }
 

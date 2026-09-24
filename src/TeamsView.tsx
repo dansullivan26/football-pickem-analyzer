@@ -13,6 +13,7 @@ import {
   conferenceFilterValue,
   formatRankedTeamName,
   summarizeTeamMarketSplits,
+  teamKey,
   wonOutrightAsDog,
   type TeamAppearance,
   type TeamRecord,
@@ -137,6 +138,10 @@ export default function TeamsView({
         teamRosterData as TeamRosterFile,
       ),
     [slate, recommendations],
+  )
+  const slugsByKey = useMemo(
+    () => new Map(directory.teams.map((team) => [team.key, team.slug])),
+    [directory.teams],
   )
   const [query, setQuery] = useState('')
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('NCAAF')
@@ -640,6 +645,14 @@ export default function TeamsView({
                         selected.sport === 'NFL'
                           ? null
                           : formatRankStamp(row.rank, showUnranked)
+                      const opponentSlug = slugsByKey.get(
+                        teamKey(row.sport, row.opponentAbbrev),
+                      )
+                      const opponentName = formatRankedTeamName(
+                        row.opponent,
+                        row.opponentRank,
+                        row.sport,
+                      )
                       return (
                       <div className="history-pick has-row-menu" key={row.cbsEventId}>
                         <div className="history-matchup">
@@ -658,7 +671,21 @@ export default function TeamsView({
                               </>
                             )}
                             {appearanceVenueWord(row.venue)}{' '}
-                            {formatRankedTeamName(row.opponent, row.opponentRank, row.sport)}
+                            {opponentSlug ? (
+                              <a
+                                className="team-page-link"
+                                href={pathForTeam(opponentSlug)}
+                                title={`${row.opponent} team page`}
+                                onClick={(event) => {
+                                  event.preventDefault()
+                                  onSelectTeam(opponentSlug)
+                                }}
+                              >
+                                {opponentName}
+                              </a>
+                            ) : (
+                              opponentName
+                            )}
                             {beat && beatMark && (
                               <a
                                 className="bad-beat-mark"

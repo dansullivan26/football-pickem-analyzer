@@ -13,6 +13,7 @@ function appearance(
     kickoff: '2026-09-05T12:00:00-04:00',
     sport: 'NCAAF',
     opponent: 'Rival',
+    opponentAbbrev: 'RIV',
     side: overrides.side ?? (overrides.venue === 'away' ? 'away' : 'home'),
     venue: 'home',
     market: 'favorite',

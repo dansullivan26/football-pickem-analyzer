@@ -251,6 +251,11 @@ test('a team off the new slate keeps its name, conference, and logo id', () => {
       ?.opponent,
     'Boston College',
   )
+  assert.equal(
+    directory.teams.find((row) => row.abbrev === 'CINCY')?.appearances[0]
+      ?.opponentAbbrev,
+    'BC',
+  )
   // The live slate still supplies its own teams.
   assert.equal(directory.teams.find((row) => row.abbrev === 'KC')?.name, 'Kansas City')
 })
@@ -290,6 +295,7 @@ test('buildTeamDirectory grades both sides and keeps ungraded slate teams', () =
   assert.equal(tcuRecord?.home.detail, '0-1 ATS')
   assert.equal(tcuRecord?.favorite.detail, '0-1 ATS')
   assert.equal(tcuRecord?.appearances[0]?.opponent, 'North Carolina')
+  assert.equal(tcuRecord?.appearances[0]?.opponentAbbrev, 'UNC')
   assert.equal(tcuRecord?.appearances[0]?.awayScore, 15)
   assert.equal(tcuRecord?.appearances[0]?.homeScore, 10)
   assert.equal(

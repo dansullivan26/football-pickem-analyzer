@@ -44,6 +44,7 @@ export type TeamAppearance = {
   cbsEventId: number
   sport: 'NFL' | 'NCAAF'
   opponent: string
+  opponentAbbrev: string
   /** CBS home/away designation — the line, not the site. */
   side: CbsSide
   /** Actual site: campus home, road, or a third-city / abroad neutral. */
@@ -645,6 +646,7 @@ export function buildTeamDirectory(
             cbsEventId: game.cbsEventId,
             sport: game.sport,
             opponent: rosterName(roster, game.sport, opponentAbbrev),
+            opponentAbbrev,
             side,
             venue: site,
             market: marketForSide(side, game.homeSpread),

@@ -57,6 +57,75 @@ export function poolProjectionCopy(projection: PoolProjection) {
   return `Projected pool among ${projection.called} calls: ${pct}% ${leader} (${projection.home} home / ${projection.away} away, ${projection.unknown} unknown)`
 }
 
+export type PoolExpectationView = {
+  line: string
+  detail: string
+  title: string
+  none: boolean
+  side: 'home' | 'away' | null
+  pct: number | null
+}
+
+/**
+ * Row-card copy for the leak-free pool forecast. Percent is among players
+ * with a call, not the whole field — unknowns stay visible in the detail.
+ */
+export function poolExpectationView(
+  projection: PoolProjection | null | undefined,
+  homeName: string,
+  awayName: string,
+): PoolExpectationView | null {
+  if (!projection) return null
+
+  if (projection.called === 0) {
+    return {
+      line: 'No calls yet',
+      detail: projection.unknown
+        ? `${projection.unknown} players unknown`
+        : 'No modeled sides',
+      title:
+        'The leak-free prediction model has not named a side for any player on this game. Unknowns are players with no responsible call.',
+      none: true,
+      side: null,
+      pct: null,
+    }
+  }
+
+  if (projection.home === projection.away) {
+    return {
+      line: 'Pool looks split',
+      detail: `${projection.home} home / ${projection.away} away${
+        projection.unknown ? ` · ${projection.unknown} unknown` : ''
+      }`,
+      title: `Based on our prediction model, called players are split ${projection.home}–${projection.away} on this game.${
+        projection.unknown
+          ? ` ${projection.unknown} players have no responsible call.`
+          : ''
+      } This is expected contest share, not a cover claim.`,
+      none: false,
+      side: null,
+      pct: 50,
+    }
+  }
+
+  const side = projection.home > projection.away ? 'home' : 'away'
+  const team = side === 'home' ? homeName : awayName
+  const count = side === 'home' ? projection.home : projection.away
+  const pct = Math.round((count / projection.called) * 100)
+  return {
+    line: `${team} ${pct}%`,
+    detail: `${count} of ${projection.called} calls${
+      projection.unknown ? ` · ${projection.unknown} unknown` : ''
+    }`,
+    title: `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${projection.called} players with a call${
+      projection.unknown ? `; ${projection.unknown} unknown` : ''
+    }). This is expected contest share, not a cover claim.`,
+    none: false,
+    side,
+    pct,
+  }
+}
+
 export function playerPredictedSidesForWeek(
   cbsEventId: number,
   history: PlayerHistory,
@@ -65,23 +134,74 @@ export function playerPredictedSidesForWeek(
   week: number,
   travelRestByAppearance?: Map<string, AppearanceTravelRest>,
 ) {
+  return (
+    playerPredictedSidesByEvent(
+      history,
+      recommendations,
+      forecasts,
+      week,
+      travelRestByAppearance,
+    ).get(cbsEventId) ?? history.entries.map(() => null)
+  )
+}
+
+function playerPredictedSidesByEvent(
+  history: PlayerHistory,
+  recommendations: RecommendationHistory,
+  forecasts: PredictionForecasts | null | undefined,
+  week: number,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+) {
   const recWeek = recommendations.weeks.find((row) => row.week === week)
-  if (!recWeek) {
-    return history.entries.map(() => null)
+  const sidesByEvent = new Map<number, Array<'home' | 'away' | null>>()
+  if (!recWeek) return sidesByEvent
+
+  for (const game of recWeek.games) {
+    sidesByEvent.set(game.cbsEventId, [])
   }
-  return history.entries.map((entry) => {
+
+  for (const entry of history.entries) {
     const frozen = frozenPlayerWeek(forecasts, entry.entryId, week)
-    const game =
-      frozen?.games.find((row) => row.cbsEventId === cbsEventId) ??
+    const games =
+      frozen?.games ??
       predictPlayerWeek(
         entry.entryId,
         recWeek,
         history,
         recommendations,
         travelRestByAppearance,
-      ).games.find((row) => row.cbsEventId === cbsEventId)
-    return game?.predictedSide ?? null
-  })
+      ).games
+    const byEvent = new Map(
+      games.map((game) => [game.cbsEventId, game.predictedSide ?? null]),
+    )
+    for (const [eventId, sides] of sidesByEvent) {
+      sides.push(byEvent.get(eventId) ?? null)
+    }
+  }
+
+  return sidesByEvent
+}
+
+export function poolProjectionsForWeek(
+  history: PlayerHistory,
+  recommendations: RecommendationHistory,
+  forecasts: PredictionForecasts | null | undefined,
+  week: number,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+) {
+  const sidesByEvent = playerPredictedSidesByEvent(
+    history,
+    recommendations,
+    forecasts,
+    week,
+    travelRestByAppearance,
+  )
+  return new Map(
+    [...sidesByEvent].map(([eventId, sides]) => [
+      eventId,
+      projectPoolForGame(sides),
+    ]),
+  )
 }
 
 function leverageSide(projection: PoolProjection): 'home' | 'away' | null {

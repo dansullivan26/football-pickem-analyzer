@@ -178,7 +178,10 @@ Top-level `report` is optional. When present it is allowlisted as
 dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
 `pct` prose diffs vs yesterday). The Lines page attaches that report to the
 "Covers.com data collected…" line and expands it on click. Dumps without
-`report` still ingest.
+`report` still ingest. Each game row also shows an **Expected pool** read from
+the leak-free player model: the side and percent among players with a call,
+plus how many are still unknown. That is expected contest share, not a cover
+claim. The Pool-aware generated card uses the same numbers for leverage fades.
 
 ## GrokBot ingest
 

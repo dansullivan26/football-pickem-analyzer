@@ -2,9 +2,13 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   generatePoolAwareCard,
+  poolExpectationView,
   poolProjectionCopy,
+  poolProjectionsForWeek,
   projectPoolForGame,
 } from '../src/cardPoolAware.ts'
+import { PREDICTION_STRATEGY_ID } from '../src/playerPrediction.ts'
+import type { PlayerHistory, RecommendationHistory } from '../src/types.ts'
 import type { GameAnalysis, SlateGame, Team } from '../src/types.ts'
 
 function team(abbrev: string): Team {
@@ -64,6 +68,109 @@ test('poolProjectionCopy keeps unknowns visible', () => {
     called: 3,
   })
   assert.match(poolProjectionCopy(projection), /3 unknown/)
+})
+
+test('poolExpectationView names the expected side among calls', () => {
+  const projection = projectPoolForGame([
+    ...Array.from({ length: 20 }, () => 'home' as const),
+    ...Array.from({ length: 2 }, () => 'away' as const),
+    null,
+    null,
+    null,
+    null,
+  ])
+  const view = poolExpectationView(projection, 'Indiana', 'Northwestern')
+  assert.equal(view?.line, 'Indiana 91%')
+  assert.equal(view?.detail, '20 of 22 calls · 4 unknown')
+  assert.match(view?.title ?? '', /expect 91% of the pool to take Indiana/)
+  assert.equal(view?.side, 'home')
+  assert.equal(view?.pct, 91)
+})
+
+test('poolExpectationView calls a split instead of a 50% side', () => {
+  const view = poolExpectationView(
+    projectPoolForGame(['home', 'away', null]),
+    'Indiana',
+    'Northwestern',
+  )
+  assert.equal(view?.line, 'Pool looks split')
+  assert.equal(view?.side, null)
+  assert.match(view?.detail ?? '', /1 home \/ 1 away/)
+})
+
+test('poolExpectationView reports no calls without inventing a leader', () => {
+  const view = poolExpectationView(
+    projectPoolForGame([null, null, undefined]),
+    'Indiana',
+    'Northwestern',
+  )
+  assert.equal(view?.line, 'No calls yet')
+  assert.equal(view?.none, true)
+  assert.equal(view?.detail, '3 players unknown')
+})
+
+test('poolProjectionsForWeek counts frozen predicted sides once per player', () => {
+  const history = {
+    entries: [
+      { entryId: 'a', name: 'A' },
+      { entryId: 'b', name: 'B' },
+      { entryId: 'c', name: 'C' },
+    ],
+    weeks: [],
+    pool: { seasonYear: 2026 },
+  } as unknown as PlayerHistory
+  const recommendations = {
+    weeks: [
+      {
+        week: 4,
+        label: 'Week 4',
+        games: [{ cbsEventId: 9, away: 'NWEST', home: 'IND' }],
+      },
+    ],
+  } as unknown as RecommendationHistory
+  const forecasts = {
+    updatedAt: '',
+    residuals: null,
+    weeks: [
+      {
+        week: 4,
+        label: 'Week 4',
+        strategyId: PREDICTION_STRATEGY_ID,
+        capturedAt: '',
+        frozenAt: null,
+        trainingThroughWeek: 3,
+        players: [
+          {
+            entryId: 'a',
+            name: 'A',
+            games: [{ cbsEventId: 9, predictedSide: 'home' }],
+          },
+          {
+            entryId: 'b',
+            name: 'B',
+            games: [{ cbsEventId: 9, predictedSide: 'home' }],
+          },
+          {
+            entryId: 'c',
+            name: 'C',
+            games: [{ cbsEventId: 9, predictedSide: null }],
+          },
+        ],
+      },
+    ],
+  }
+  const projections = poolProjectionsForWeek(
+    history,
+    recommendations,
+    forecasts as never,
+    4,
+  )
+  assert.deepEqual(projections.get(9), {
+    home: 2,
+    away: 0,
+    unknown: 1,
+    called: 2,
+  })
 })
 
 test('pool-aware card keeps favorable-hook value and a hammer ahead of leverage', () => {

@@ -28,8 +28,9 @@ import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { generateSeasonResultsCard } from './cardResults'
 import {
   generatePoolAwareCard,
-  playerPredictedSidesForWeek,
-  projectPoolForGame,
+  poolExpectationView,
+  poolProjectionsForWeek,
+  type PoolProjection,
 } from './cardPoolAware'
 import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
@@ -103,7 +104,7 @@ import type {
   TotalTick,
 } from './types'
 
-const slate = slateData as Slate
+const slate = slateData as unknown as Slate
 const playerHistory = playerHistoryData as PlayerHistory
 const careerHistory = careerPlayerHistory(playerHistory)
 const recommendationHistory = recommendationHistoryData as RecommendationHistory
@@ -131,6 +132,13 @@ const poolRecordsByEvent = poolRecordsForWeek(
   playerHistory,
   slate.week.order,
   slate.pool.seasonYear,
+)
+const poolProjectionsByEvent = poolProjectionsForWeek(
+  careerHistory,
+  recommendationHistory,
+  predictionForecasts,
+  slate.week.order,
+  travelRestIndex.byAppearance,
 )
 
 function slateTeamName(sport: 'NFL' | 'NCAAF', abbrev: string) {
@@ -448,6 +456,26 @@ function OurPickNote({
   )
 }
 
+function PoolExpectation({
+  projection,
+  homeName,
+  awayName,
+}: {
+  projection: PoolProjection | undefined
+  homeName: string
+  awayName: string
+}) {
+  const view = poolExpectationView(projection, homeName, awayName)
+  if (!view) return null
+  return (
+    <div className="pool-expectation" title={view.title}>
+      <div className="edge-label">Expected pool</div>
+      <div className={`edge-copy${view.none ? ' none' : ''}`}>{view.line}</div>
+      <small>{view.detail}</small>
+    </div>
+  )
+}
+
 function TeamMatchupSide({
   team,
   sport,
@@ -639,6 +667,11 @@ function GameCard({
 
       <div className="card-footer">
         <Recommendation analysis={analysis} />
+        <PoolExpectation
+          projection={poolProjectionsByEvent.get(game.cbsEventId)}
+          homeName={game.home.name}
+          awayName={game.away.name}
+        />
         {completed && <OurPickNote game={game} pick={ourPick} />}
         <div className="card-notes">
           <span className="spread-note">All lines shown for {game.home.name}</span>
@@ -1254,7 +1287,8 @@ function App() {
         <section className="hero players-hero">
           <div>
             <p className="eyebrow">
-              {slate.pool.seasonYear} season · {slate.pool.entriesCount} entries
+              {slate.pool.seasonYear} season ·{' '}
+              {slate.pool.entriesCount ?? playerHistory.entries.length} entries
             </p>
             <h1>{slate.pool.name}</h1>
             <p className="hero-copy">
@@ -1517,28 +1551,13 @@ function App() {
                   const upcoming = analyses.filter(({ game }) =>
                     gameIsUpcoming(game, Date.now()),
                   )
-                  const projections = new Map(
-                    upcoming.map(({ game }) => [
-                      game.cbsEventId,
-                      projectPoolForGame(
-                        playerPredictedSidesForWeek(
-                          game.cbsEventId,
-                          careerHistory,
-                          recommendationHistory,
-                          predictionForecasts,
-                          slate.week.order,
-                          travelRestIndex.byAppearance,
-                        ),
-                      ),
-                    ]),
-                  )
                   setSuggestedCard(
                     generatePoolAwareCard(
                       upcoming,
                       slate.week,
                       slate.pool.seasonYear,
                       slate.tiebreaker,
-                      projections,
+                      poolProjectionsByEvent,
                       new Date(),
                       travelRestByEvent,
                       nflInjuriesByAbbrev,

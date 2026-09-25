@@ -3862,6 +3862,15 @@ a.team-page-link:focus-visible .team-name {
   line-height: 1.55;
 }
 
+.prediction-empty.has-games {
+  padding: 16px 18px 4px;
+  text-align: left;
+}
+
+.prediction-empty.has-games p {
+  margin: 6px 0 12px;
+}
+
 .prediction-row {
   display: grid;
   grid-template-columns: minmax(140px, 1fr) minmax(150px, 1.1fr) minmax(160px, 1fr);

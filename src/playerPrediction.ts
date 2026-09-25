@@ -1120,6 +1120,84 @@ export function predictPlayerWeek(
   }
 }
 
+export type PredictionEmptyKey = 'building' | 'no-habit' | 'no-edge'
+
+export type PredictionEmptyReason = {
+  key: PredictionEmptyKey
+  title: string
+  detail: string
+  showGames: boolean
+}
+
+function activeHabits(profile: PlayerPredictionProfile) {
+  return (Object.values(profile.habits) as Habit[]).filter(
+    (habit) => habit.active,
+  )
+}
+
+function formatHabitList(labels: string[]) {
+  if (labels.length === 0) return ''
+  if (labels.length === 1) return labels[0] ?? ''
+  if (labels.length === 2) return `${labels[0]} and ${labels[1]}`
+  return `${labels.slice(0, -1).join(', ')}, and ${labels.at(-1)}`
+}
+
+function noEdgeDetail(habits: Habit[]) {
+  const keys = new Set(habits.map((habit) => habit.key))
+  if (keys.size === 1 && keys.has('travel')) {
+    return 'Their traveling-team habit is strong enough to call, but no game on this slate has a 2+ time-zone hop to apply it. Other habits remain too close to 50/50.'
+  }
+  if (keys.size === 1 && keys.has('rest')) {
+    return 'Their rest habit is strong enough to call, but no game on this slate has a rest gap to apply it. Other habits remain too close to 50/50.'
+  }
+  if (keys.size === 1 && keys.has('line-value')) {
+    return 'Their line-value habit is strong enough to call, but no game on this slate is a line-value recommendation. Other habits remain too close to 50/50.'
+  }
+  if (keys.size === 1 && keys.has('public')) {
+    return 'Their public-side habit is strong enough to call, but no game on this slate is a public-consensus recommendation. Other habits remain too close to 50/50.'
+  }
+  const labels = formatHabitList(habits.map((habit) => habit.label.toLowerCase()))
+  return `A ${labels} habit is strong enough to call, but no game on this slate presents that edge. Other habits remain too close to 50/50.`
+}
+
+/**
+ * Why a predicted card made zero calls. Twenty prior picks is the usual
+ * floor, not a guarantee — coin-flip habits still sit out, and a lone
+ * travel/rest/line-value habit only fires when this slate has that edge.
+ */
+export function predictionEmptyReason(
+  prediction: PlayerPrediction | null,
+): PredictionEmptyReason | null {
+  if (!prediction || prediction.calls > 0) return null
+
+  const active = activeHabits(prediction.profile)
+  if (prediction.profile.picks < 20 && active.length === 0) {
+    return {
+      key: 'building',
+      title: 'No responsible calls yet',
+      detail:
+        'The model waits for at least 20 picks from earlier weeks, or a smaller but decisive line-value, public, travel, or rest sample. A week never trains on itself, so calls start with the next slate.',
+      showGames: false,
+    }
+  }
+
+  if (active.length === 0) {
+    return {
+      key: 'no-habit',
+      title: 'No decisive habit yet',
+      detail: `${prediction.profile.picks} graded picks from earlier weeks, but home, favorite, line-value, public, travel, and rest all sit too close to a coin flip to name a side. Twenty picks is the floor, not a guarantee of calls.`,
+      showGames: true,
+    }
+  }
+
+  return {
+    key: 'no-edge',
+    title: 'No applicable edge this week',
+    detail: noEdgeDetail(active),
+    showGames: true,
+  }
+}
+
 export function predictionSeasonRecord(
   entryId: string,
   history: PlayerHistory,

@@ -6,7 +6,11 @@ import {
   comparePlayerReadability,
   playerReadability,
   predictPlayerWeek,
+  predictionEmptyReason,
   snapshotPlayerForecasts,
+  type Habit,
+  type HabitKey,
+  type PlayerPrediction,
   type PlayerPredictionProfile,
 } from '../src/playerPrediction.ts'
 import type { AppearanceTravelRest } from '../src/travelRest.ts'
@@ -690,4 +694,102 @@ test('skips Dublin games when training and applying a home-team lean', () => {
   assert.equal(report.profile.habits.home.eligible, 0)
   assert.equal(report.profile.habits.home.active, false)
   assert.equal(report.games[0].predictedSide, null)
+})
+
+function habit(
+  key: HabitKey,
+  label: string,
+  overrides: Partial<Habit> = {},
+): Habit {
+  return {
+    key,
+    label,
+    follows: 0,
+    eligible: 0,
+    rate: null,
+    preferred: null,
+    strength: 0,
+    active: false,
+    ...overrides,
+  }
+}
+
+function predictionStub({
+  picks,
+  calls,
+  habits,
+  ...overrides
+}: Partial<PlayerPrediction> & {
+  picks: number
+  calls: number
+  habits?: Partial<PlayerPrediction['profile']['habits']>
+}): PlayerPrediction {
+  return {
+    week: 4,
+    label: 'Week 4',
+    trainingThroughWeek: 3,
+    games: [],
+    graded: 0,
+    correct: 0,
+    accuracy: null,
+    calls,
+    ...overrides,
+    profile: {
+      archetype: picks < 20 ? 'Building profile' : 'No dominant pattern',
+      archetypeDetail: '',
+      signals: [],
+      picks,
+      habits: {
+        home: habit('home', 'Home teams'),
+        favorite: habit('favorite', 'Favorites'),
+        'line-value': habit('line-value', 'Line-value side'),
+        public: habit('public', 'Public side'),
+        travel: habit('travel', 'Traveling teams'),
+        rest: habit('rest', 'Rest edge'),
+        ...habits,
+      },
+    },
+  }
+}
+
+test('empty-state copy waits for 20 picks only while the profile is still building', () => {
+  assert.equal(predictionEmptyReason(null), null)
+  assert.equal(
+    predictionEmptyReason(predictionStub({ picks: 75, calls: 12 })),
+    null,
+  )
+
+  const building = predictionEmptyReason(
+    predictionStub({ picks: 18, calls: 0 }),
+  )
+  assert.equal(building?.key, 'building')
+  assert.match(building?.detail ?? '', /at least 20 picks/)
+  assert.equal(building?.showGames, false)
+
+  const noHabit = predictionEmptyReason(
+    predictionStub({ picks: 75, calls: 0 }),
+  )
+  assert.equal(noHabit?.key, 'no-habit')
+  assert.match(noHabit?.detail ?? '', /Twenty picks is the floor/)
+  assert.equal(noHabit?.showGames, true)
+
+  const noEdge = predictionEmptyReason(
+    predictionStub({
+      picks: 75,
+      calls: 0,
+      habits: {
+        travel: habit('travel', 'Traveling teams', {
+          follows: 2,
+          eligible: 8,
+          rate: 0.25,
+          preferred: 'fade',
+          strength: 0.33,
+          active: true,
+        }),
+      },
+    }),
+  )
+  assert.equal(noEdge?.key, 'no-edge')
+  assert.match(noEdge?.detail ?? '', /2\+ time-zone hop/)
+  assert.equal(noEdge?.showGames, true)
 })

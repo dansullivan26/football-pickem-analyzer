@@ -31,8 +31,11 @@ import {
   generatePoolAwareCard,
   poolExpectationView,
   poolProjectionsForWeek,
+  poolSupportView,
   type PoolExpectationView,
+  type PoolSupportView,
 } from './cardPoolAware'
+import { PoolSupportNote } from './PoolSupportNote'
 import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
@@ -285,7 +288,13 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined): GameAnalysis
   }
 }
 
-function Recommendation({ analysis }: { analysis: GameAnalysis }) {
+function Recommendation({
+  analysis,
+  poolSupport,
+}: {
+  analysis: GameAnalysis
+  poolSupport: PoolSupportView | null
+}) {
   const { game, category, recommendedSide, edge } = analysis
   const band =
     edge && category !== 'pending' && category !== 'neutral'
@@ -350,6 +359,7 @@ function Recommendation({ analysis }: { analysis: GameAnalysis }) {
           unfavorable {badHook === 'fg' ? 'FG' : 'TD'} hook
         </div>
       )}
+      <PoolSupportNote view={poolSupport} />
     </div>
   )
 }
@@ -570,6 +580,12 @@ function GameCard({
     game.home.name,
     game.away.name,
   )
+  const poolSupport = poolSupportView(
+    poolProjectionsByEvent.get(game.cbsEventId),
+    analysis.recommendedSide,
+    game.home.abbrev,
+    game.away.abbrev,
+  )
   const actualPool = poolRecordIsGraded(poolRecord)
     ? actualPoolView(
         poolSideSplitsByEvent.get(game.cbsEventId),
@@ -705,7 +721,7 @@ function GameCard({
       </div>
 
       <div className="card-footer">
-        <Recommendation analysis={analysis} />
+        <Recommendation analysis={analysis} poolSupport={poolSupport} />
         <PoolSharePair expected={expectedPool} actual={actualPool} />
         {completed && <OurPickNote game={game} pick={ourPick} />}
         <div className="card-notes">
@@ -1608,6 +1624,7 @@ function App() {
           {suggestedCard && (
             <SuggestedCardPanel
               card={suggestedCard}
+              poolProjections={poolProjectionsByEvent}
               savedDeviationIds={deviationIdsForWeek(
                 cardOverrides,
                 slate.week.order,

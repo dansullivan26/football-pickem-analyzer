@@ -14,13 +14,20 @@ import {
 import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
 import { COMPOSITE_EDGE_SCALE } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
+import {
+  poolSupportView,
+  type PoolProjection,
+} from './cardPoolAware'
+import { PoolSupportNote } from './PoolSupportNote'
 
 export default function SuggestedCardPanel({
   card,
+  poolProjections,
   savedDeviationIds = [],
   onClose,
 }: {
   card: SuggestedCard
+  poolProjections?: ReadonlyMap<number, PoolProjection>
   savedDeviationIds?: Iterable<string>
   onClose: () => void
 }) {
@@ -349,6 +356,7 @@ export default function SuggestedCardPanel({
                 pick={row.pick}
                 deviate={deviations.has(row.pick.gameId)}
                 selectedToSend={selectedToSend.has(row.pick.gameId)}
+                poolProjection={poolProjections?.get(row.pick.cbsEventId)}
                 onToggleDeviate={toggleDeviate}
                 onToggleSend={toggleSend}
               />
@@ -358,6 +366,7 @@ export default function SuggestedCardPanel({
                 game={row.game}
                 selected={manualSelections.get(row.game.gameId)}
                 selectedToSend={selectedToSend.has(row.game.gameId)}
+                poolProjection={poolProjections?.get(row.game.cbsEventId)}
                 onToggle={toggleManualPick}
                 onToggleSend={toggleSend}
               />
@@ -516,17 +525,25 @@ function SuggestedPickRow({
   pick,
   deviate,
   selectedToSend,
+  poolProjection,
   onToggleDeviate,
   onToggleSend,
 }: {
   pick: SuggestedPick
   deviate: boolean
   selectedToSend: boolean
+  poolProjection?: PoolProjection
   onToggleDeviate: (gameId: string) => void
   onToggleSend: (gameId: string) => void
 }) {
   const sent = submittedPick(pick, deviate)
   const kickoff = formatCardKickoff(pick.kickoff)
+  const poolSupport = poolSupportView(
+    poolProjection,
+    sent.pickedSide,
+    pick.homeAbbrev,
+    pick.awayAbbrev,
+  )
   return (
     <li
       className={[
@@ -559,6 +576,7 @@ function SuggestedPickRow({
               : 'Public fades'}
           </span>
         ) : null}
+        <PoolSupportNote view={poolSupport} />
       </div>
       <div className="suggested-pick-controls">
         <label className="suggested-pick-toggle">
@@ -587,12 +605,14 @@ function ManualReviewRow({
   game,
   selected,
   selectedToSend,
+  poolProjection,
   onToggle,
   onToggleSend,
 }: {
   game: UnpickedGame
   selected: 'home' | 'away' | undefined
   selectedToSend: boolean
+  poolProjection?: PoolProjection
   onToggle: (gameId: string, side: 'home' | 'away') => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -623,6 +643,14 @@ function ManualReviewRow({
       </div>
       <div className="suggested-pick-tags">
         <span className="pick-source manual-review">Manual review</span>
+        <PoolSupportNote
+          view={poolSupportView(
+            poolProjection,
+            selected,
+            game.homeAbbrev,
+            game.awayAbbrev,
+          )}
+        />
       </div>
       <label className="suggested-pick-toggle manual-send-toggle">
         <input

@@ -6,6 +6,7 @@ import {
   poolExpectationView,
   poolProjectionCopy,
   poolProjectionsForWeek,
+  poolSupportView,
   projectPoolForGame,
 } from '../src/cardPoolAware.ts'
 import { PREDICTION_STRATEGY_ID } from '../src/playerPrediction.ts'
@@ -255,4 +256,63 @@ test('pool-aware card keeps favorable-hook value and a hammer ahead of leverage'
   assert.equal(hammer.picks[0]?.source, 'line-value')
   assert.equal(hammer.picks[0]?.pickedSide, 'home')
   assert.match(String(hammer.picks[0]?.detail), /Projected pool/)
+})
+
+function sides(home: number, away: number, unknown = 0) {
+  return [
+    ...Array.from({ length: home }, () => 'home' as const),
+    ...Array.from({ length: away }, () => 'away' as const),
+    ...Array.from({ length: unknown }, () => null),
+  ]
+}
+
+test('poolSupportView stays quiet without a pick or a real majority', () => {
+  const projection = projectPoolForGame(sides(20, 2))
+  assert.equal(poolSupportView(projection, null, 'IU', 'NW'), null)
+  assert.equal(poolSupportView(projectPoolForGame(sides(5, 2)), 'home', 'IU', 'NW'), null)
+  assert.equal(poolSupportView(projectPoolForGame(sides(6, 6)), 'home', 'IU', 'NW'), null)
+})
+
+test('poolSupportView names expected agreement with a strength tier', () => {
+  const majority = poolSupportView(
+    projectPoolForGame(sides(5, 3)),
+    'home',
+    'IU',
+    'NW',
+  )
+  assert.equal(majority?.stance, 'agree')
+  assert.equal(majority?.tier, 'majority')
+  assert.equal(majority?.line, 'Majority of pool expected to agree · 63%')
+
+  const strong = poolSupportView(
+    projectPoolForGame(sides(15, 5)),
+    'home',
+    'IU',
+    'NW',
+  )
+  assert.equal(strong?.tier, 'strong')
+  assert.equal(strong?.line, 'Strong majority of pool expected to agree · 75%')
+
+  const heavy = poolSupportView(
+    projectPoolForGame(sides(20, 2)),
+    'home',
+    'IU',
+    'NW',
+  )
+  assert.equal(heavy?.tier, 'heavy')
+  assert.equal(heavy?.pct, 91)
+  assert.equal(heavy?.line, 'Heavy majority of pool expected to agree · 91%')
+})
+
+test('poolSupportView names the other side when the pool is expected against us', () => {
+  const view = poolSupportView(
+    projectPoolForGame(sides(20, 2)),
+    'away',
+    'IU',
+    'NW',
+  )
+  assert.equal(view?.stance, 'take')
+  assert.equal(view?.otherAbbrev, 'IU')
+  assert.equal(view?.line, 'Heavy majority of pool expected to take IU · 91%')
+  assert.match(view?.title ?? '', /take IU/)
 })

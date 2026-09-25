@@ -2097,6 +2097,38 @@ a.team-page-link:focus-visible .team-name {
   background: var(--blue-soft);
 }
 
+.pool-support {
+  margin-top: 5px;
+  max-width: 16.5rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: #eef1ee;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.pool-support.agree {
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
+.pool-support.take {
+  color: #5c5346;
+  background: #ece8e0;
+}
+
+.pool-support.heavy {
+  font-weight: 800;
+}
+
+.suggested-pick-tags .pool-support {
+  margin-top: 0;
+  text-align: left;
+}
+
 .card-notes {
   display: grid;
   gap: 3px;

@@ -316,13 +316,95 @@ export function poolProjectionsForWeek(
   )
 }
 
-function leverageSide(projection: PoolProjection): 'home' | 'away' | null {
+export type PoolSupportStance = 'agree' | 'take'
+export type PoolSupportTier = 'majority' | 'strong' | 'heavy'
+
+export type PoolSupportView = {
+  stance: PoolSupportStance
+  tier: PoolSupportTier
+  pct: number
+  side: 'home' | 'away'
+  otherAbbrev: string | null
+  line: string
+  title: string
+}
+
+type PoolMajority = {
+  side: 'home' | 'away'
+  share: number
+  count: number
+}
+
+function poolMajority(projection: PoolProjection): PoolMajority | null {
   if (projection.called < MIN_CALLED) return null
   const homeShare = projection.home / projection.called
   const awayShare = projection.away / projection.called
-  if (homeShare >= MAJORITY) return 'away'
-  if (awayShare >= MAJORITY) return 'home'
+  if (homeShare >= MAJORITY) {
+    return { side: 'home', share: homeShare, count: projection.home }
+  }
+  if (awayShare >= MAJORITY) {
+    return { side: 'away', share: awayShare, count: projection.away }
+  }
   return null
+}
+
+function poolSupportTier(share: number): PoolSupportTier {
+  if (share >= 0.85) return 'heavy'
+  if (share >= 0.75) return 'strong'
+  return 'majority'
+}
+
+function poolSupportTierLabel(tier: PoolSupportTier) {
+  if (tier === 'heavy') return 'Heavy majority'
+  if (tier === 'strong') return 'Strong majority'
+  return 'Majority'
+}
+
+/**
+ * How the leak-free pool forecast sits versus a pick we already like.
+ * Needs the same 8-call / 62.5% bar as the pool-aware fade. This is
+ * contest share next to our side, not a cover claim or a scoring input.
+ */
+export function poolSupportView(
+  projection: PoolProjection | null | undefined,
+  pickedSide: 'home' | 'away' | null | undefined,
+  homeAbbrev: string,
+  awayAbbrev: string,
+): PoolSupportView | null {
+  if (!projection || !pickedSide) return null
+  const majority = poolMajority(projection)
+  if (!majority) return null
+
+  const pct = Math.round((majority.count / projection.called) * 100)
+  const tier = poolSupportTier(majority.share)
+  const tierLabel = poolSupportTierLabel(tier)
+  const stance: PoolSupportStance =
+    majority.side === pickedSide ? 'agree' : 'take'
+  const chalkAbbrev = majority.side === 'home' ? homeAbbrev : awayAbbrev
+  const line =
+    stance === 'agree'
+      ? `${tierLabel} of pool expected to agree · ${pct}%`
+      : `${tierLabel} of pool expected to take ${chalkAbbrev} · ${pct}%`
+  const title =
+    stance === 'agree'
+      ? `Leak-free reads expect ${pct}% of called players to take the same side we like (${majority.count} of ${projection.called}). This is expected contest share, not a cover claim.`
+      : `Leak-free reads expect ${pct}% of called players to take ${chalkAbbrev} (${majority.count} of ${projection.called}). This is expected contest share, not a cover claim.`
+
+  return {
+    stance,
+    tier,
+    pct,
+    side: majority.side,
+    otherAbbrev: stance === 'take' ? chalkAbbrev : null,
+    line,
+    title,
+  }
+}
+
+function leverageSide(projection: PoolProjection): 'home' | 'away' | null {
+  const majority = poolMajority(projection)
+  if (!majority) return null
+  return majority.side === 'home' ? 'away' : 'home'
 }
 
 function keepAtsPick(pick: SuggestedPick) {

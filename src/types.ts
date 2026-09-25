@@ -378,6 +378,11 @@ export type FrozenRecommendation = {
   pickedSide: 'home' | 'away' | null
   strength: 'mild' | 'solid' | 'strong' | null
   score: number | null
+  /**
+   * Absolute composite edge at freeze (line, hook, injuries, rest, travel).
+   * Absent on snapshots from before we stored it.
+   */
+  compositeEdge?: number | null
   /** True when the completed card sent the opposite of pickedSide. */
   deviated?: boolean
   /** CBS score when the slate dump has one. Not the card-strategy `score`. */

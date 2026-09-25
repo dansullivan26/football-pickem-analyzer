@@ -1,6 +1,11 @@
 import type {
   PredictionForecastWeek,
 } from './playerPrediction.ts'
+import {
+  formatNetEdgePoints,
+  largestNetEdgePlay,
+  summarizeNetEdgeBuckets,
+} from './recommendationEdge.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -271,6 +276,34 @@ function cardCopy(games: FrozenRecommendation[]) {
   return `The frozen recommendation card finished ${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS on ${plural(called.length, 'call')}.`
 }
 
+function cardLargestNetCopy(games: FrozenRecommendation[]) {
+  const play = largestNetEdgePlay(games)
+  const side = play?.game.recommendedSide
+  if (!play || !side) return null
+  const game = play.game
+  const team = sideTeam(game, side)
+  const spread = formatSpread(pickedSpread(game, side))
+  const net = formatNetEdgePoints(play.net)
+  if (!decidedCover(game.cover)) {
+    return `Largest net on the card is ${team} ${spread} at ${net} points.`
+  }
+  const hit = game.cover === side
+  return `Largest net on the card was ${team} ${spread} (${net}-pt net) and it ${hit ? 'covered' : 'missed'}.`
+}
+
+function cardNetEdgeCopy(games: FrozenRecommendation[]) {
+  const best = summarizeNetEdgeBuckets(games)
+    .filter((row) => row.wins + row.losses >= 2)
+    .sort(
+      (left, right) =>
+        right.wins / (right.wins + right.losses) -
+          left.wins / (left.wins + left.losses) ||
+        right.wins + right.losses - (left.wins + left.losses),
+    )[0]
+  if (!best) return null
+  return `${best.label} nets led the card at ${best.wins}-${best.losses} ATS.`
+}
+
 function cardTierCopy(games: FrozenRecommendation[]) {
   const stats = new Map<string, { wins: number; losses: number }>()
   for (const game of games) {
@@ -457,6 +490,7 @@ export function buildWeeklyRecap(
     ]),
     card: compact([
       cardCopy(recommendationWeek.games),
+      cardLargestNetCopy(recommendationWeek.games),
       cardTierCopy(recommendationWeek.games),
     ]),
   }
@@ -503,6 +537,10 @@ export function buildSeasonRecap(
       ...teamBullets,
       largestFavoriteMiss(allGames),
     ]),
-    card: compact([cardCopy(allGames), cardTierCopy(allGames)]),
+    card: compact([
+      cardCopy(allGames),
+      cardNetEdgeCopy(allGames),
+      cardTierCopy(allGames),
+    ]),
   }
 }

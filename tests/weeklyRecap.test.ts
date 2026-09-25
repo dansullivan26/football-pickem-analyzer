@@ -20,6 +20,7 @@ function game(
   cover: 'home' | 'away',
   recommendedSide: 'home' | 'away',
   category: 'hammer' | 'slight',
+  compositeEdge = 1,
 ): FrozenRecommendation {
   return {
     cbsEventId,
@@ -37,6 +38,7 @@ function game(
     pickedSide: recommendedSide,
     strength: category === 'hammer' ? 'strong' : 'mild',
     score: 3,
+    compositeEdge,
   }
 }
 
@@ -47,10 +49,10 @@ const recWeek: RecommendationWeek = {
   capturedAt: '2026-09-15T00:00:00Z',
   scored: true,
   games: [
-    game(1, 'NFL', 'A', 'B', -7.5, 'away', 'away', 'hammer'),
-    game(2, 'NFL', 'C', 'D', -3, 'home', 'home', 'slight'),
-    game(3, 'NCAAF', 'E', 'F', 10.5, 'away', 'away', 'hammer'),
-    game(4, 'NCAAF', 'G', 'H', -14, 'away', 'home', 'slight'),
+    game(1, 'NFL', 'A', 'B', -7.5, 'away', 'away', 'hammer', 3.4),
+    game(2, 'NFL', 'C', 'D', -3, 'home', 'home', 'slight', 0.8),
+    game(3, 'NCAAF', 'E', 'F', 10.5, 'away', 'away', 'hammer', 3.1),
+    game(4, 'NCAAF', 'G', 'H', -14, 'away', 'home', 'slight', 1.2),
   ],
 }
 
@@ -173,6 +175,7 @@ test('weekly recap captions pool, players, leagues, teams, and card', () => {
   ])
   assert.deepEqual(recap.card, [
     'The frozen recommendation card finished 3-1 ATS on 4 calls.',
+    'Largest net on the card was A +7.5 (3.4-pt net) and it covered.',
     'Hammer calls led the tiers at 2-0 ATS.',
   ])
 })
@@ -192,6 +195,7 @@ test('season recap combines officially scored weeks', () => {
   ])
   assert.deepEqual(recap.card, [
     'The frozen recommendation card finished 3-1 ATS on 4 calls.',
+    '3–4 nets led the card at 2-0 ATS.',
     'Hammer calls led the tiers at 2-0 ATS.',
   ])
 })

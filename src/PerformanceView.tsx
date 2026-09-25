@@ -23,6 +23,7 @@ import type {
 import type { CardPickSource, PickStrength } from './cardScoring'
 import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
 import { AtsChip } from './AtsChip'
+import { summarizeNetEdgeBuckets } from './recommendationEdge'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'lock',
@@ -380,6 +381,10 @@ export default function PerformanceView({
     () => summarizeDeviations(allGames),
     [allGames],
   )
+  const netEdgeStats = useMemo(
+    () => summarizeNetEdgeBuckets(allGames),
+    [allGames],
+  )
   const graded = allGames.filter((game) => game.cover).length
 
   return (
@@ -392,8 +397,8 @@ export default function PerformanceView({
             The top tiles are overall ATS for the frozen Lines
             recommendation, then card picks by their frozen source. Week 1
             retains its public fills; the current strategy uses line value
-            with capped rest and travel adjustments. Tiers and strength sit
-            under that. Deviations are games where the completed card sent the other side.
+            with capped rest and travel adjustments. Tiers, net-edge size, and
+            strength sit under that. Deviations are games where the completed card sent the other side.
             Games lock at kickoff so a Saturday move cannot rewrite
             Friday&apos;s recommendation.
           </p>
@@ -479,6 +484,29 @@ export default function PerformanceView({
             </div>
           )
         })}
+      </section>
+
+      <section
+        className="performance-net-edge"
+        aria-label="Net-edge hit rates"
+      >
+        <p className="eyebrow">Net edge</p>
+        <p className="player-tier-explainer">
+          Same composite the card sorts by — line, hook, injuries, rest, and
+          travel. Older weeks reconstruct line value plus the hook when the
+          full net was not stored. Below 0.25 is the unpicked floor.
+        </p>
+        <div className="summary-grid performance-summary">
+          {netEdgeStats.map((stats) => (
+            <div className={`summary-card ${stats.cardClass}`} key={stats.id}>
+              <span>{stats.label}</span>
+              <strong>{stats.rate}</strong>
+              <small>
+                {stats.count} rec{stats.count === 1 ? '' : 's'} · {stats.detail}
+              </small>
+            </div>
+          ))}
+        </div>
       </section>
 
       <div

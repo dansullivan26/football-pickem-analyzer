@@ -177,6 +177,7 @@ const games = slate.games.map((game) => {
     pickedSide: cardPick.pickedSide,
     strength: cardPick.strength,
     score: cardPick.score,
+    compositeEdge: cardPick.compositeEdge,
   }
   const withScores = attachSlateScores(frozen, game)
   const withRanks = attachFrozenRanks(withScores, game, false)

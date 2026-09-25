@@ -2352,6 +2352,14 @@ a.team-page-link:focus-visible .team-name {
   transform: none;
 }
 
+.performance-net-edge {
+  margin-top: 16px;
+}
+
+.performance-net-edge .eyebrow {
+  margin-bottom: 6px;
+}
+
 .performance-strength-groups {
   display: grid;
   gap: 18px;

@@ -2110,14 +2110,15 @@ a.team-page-link:focus-visible .team-name {
   text-align: right;
 }
 
-.pool-support.agree {
+/* Leverage color: the field on the other side is the useful case. */
+.pool-support.take {
   color: var(--green-dark);
   background: var(--green-soft);
 }
 
-.pool-support.take {
-  color: #5c5346;
-  background: #ece8e0;
+.pool-support.agree {
+  color: var(--muted);
+  background: #eef1ee;
 }
 
 .pool-support.heavy {

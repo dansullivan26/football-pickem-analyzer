@@ -6,6 +6,7 @@ import {
   poolExpectationView,
   poolProjectionCopy,
   poolProjectionsForWeek,
+  poolSupportProjectionsForWeek,
   poolSupportView,
   projectPoolForGame,
 } from '../src/cardPoolAware.ts'
@@ -266,14 +267,18 @@ function sides(home: number, away: number, unknown = 0) {
   ]
 }
 
-test('poolSupportView stays quiet without a pick or a real majority', () => {
+test('poolSupportView stays quiet without a pick or a real field majority', () => {
   const projection = projectPoolForGame(sides(20, 2))
   assert.equal(poolSupportView(projection, null, 'IU', 'NW'), null)
   assert.equal(poolSupportView(projectPoolForGame(sides(5, 2)), 'home', 'IU', 'NW'), null)
   assert.equal(poolSupportView(projectPoolForGame(sides(6, 6)), 'home', 'IU', 'NW'), null)
+  assert.equal(
+    poolSupportView(projectPoolForGame(sides(8, 0, 17)), 'away', 'IU', 'NW'),
+    null,
+  )
 })
 
-test('poolSupportView names expected agreement with a strength tier', () => {
+test('poolSupportView names expected agreement against the field, not only calls', () => {
   const majority = poolSupportView(
     projectPoolForGame(sides(5, 3)),
     'home',
@@ -302,6 +307,17 @@ test('poolSupportView names expected agreement with a strength tier', () => {
   assert.equal(heavy?.tier, 'heavy')
   assert.equal(heavy?.pct, 91)
   assert.equal(heavy?.line, 'Heavy majority of pool expected to agree · 91%')
+
+  const diluted = poolSupportView(
+    projectPoolForGame(sides(20, 2, 4)),
+    'home',
+    'IU',
+    'NW',
+  )
+  assert.equal(diluted?.tier, 'strong')
+  assert.equal(diluted?.pct, 77)
+  assert.equal(diluted?.line, 'Strong majority of pool expected to agree · 77%')
+  assert.match(diluted?.title ?? '', /20 of 26 other players/)
 })
 
 test('poolSupportView names the other side when the pool is expected against us', () => {
@@ -315,4 +331,86 @@ test('poolSupportView names the other side when the pool is expected against us'
   assert.equal(view?.otherAbbrev, 'IU')
   assert.equal(view?.line, 'Heavy majority of pool expected to take IU · 91%')
   assert.match(view?.title ?? '', /take IU/)
+})
+
+test('poolSupportProjectionsForWeek leaves Dan Sullivan out of the field', () => {
+  const history = {
+    entries: [
+      { entryId: 'dan', name: 'Dan Sullivan' },
+      { entryId: 'a', name: 'A' },
+      { entryId: 'b', name: 'B' },
+      { entryId: 'c', name: 'C' },
+    ],
+    weeks: [],
+    pool: { seasonYear: 2026 },
+  } as unknown as PlayerHistory
+  const recommendations = {
+    weeks: [
+      {
+        week: 4,
+        label: 'Week 4',
+        games: [{ cbsEventId: 9, away: 'NWEST', home: 'IND' }],
+      },
+    ],
+  } as unknown as RecommendationHistory
+  const forecasts = {
+    updatedAt: '',
+    residuals: null,
+    weeks: [
+      {
+        week: 4,
+        label: 'Week 4',
+        strategyId: PREDICTION_STRATEGY_ID,
+        capturedAt: '',
+        frozenAt: null,
+        trainingThroughWeek: 3,
+        players: [
+          {
+            entryId: 'dan',
+            name: 'Dan Sullivan',
+            games: [{ cbsEventId: 9, predictedSide: 'home' }],
+          },
+          {
+            entryId: 'a',
+            name: 'A',
+            games: [{ cbsEventId: 9, predictedSide: 'home' }],
+          },
+          {
+            entryId: 'b',
+            name: 'B',
+            games: [{ cbsEventId: 9, predictedSide: 'home' }],
+          },
+          {
+            entryId: 'c',
+            name: 'C',
+            games: [{ cbsEventId: 9, predictedSide: null }],
+          },
+        ],
+      },
+    ],
+  }
+  const full = poolProjectionsForWeek(
+    history,
+    recommendations,
+    forecasts as never,
+    4,
+  )
+  const support = poolSupportProjectionsForWeek(
+    history,
+    recommendations,
+    forecasts as never,
+    4,
+  )
+  assert.deepEqual(full.get(9), {
+    home: 3,
+    away: 0,
+    unknown: 1,
+    called: 3,
+  })
+  assert.deepEqual(support.get(9), {
+    home: 2,
+    away: 0,
+    unknown: 1,
+    called: 2,
+  })
 })

@@ -24,6 +24,7 @@ import type {
   RecommendationHistory,
   SlateTiebreaker,
 } from './types.ts'
+import { ourRosterEntry } from './ourEntry.ts'
 
 export const POOL_AWARE_STRATEGY_ID = 'v1-pool-aware'
 
@@ -263,6 +264,7 @@ function playerPredictedSidesByEvent(
   forecasts: PredictionForecasts | null | undefined,
   week: number,
   travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+  excludeEntryId?: string | null,
 ) {
   const recWeek = recommendations.weeks.find((row) => row.week === week)
   const sidesByEvent = new Map<number, Array<'home' | 'away' | null>>()
@@ -273,6 +275,7 @@ function playerPredictedSidesByEvent(
   }
 
   for (const entry of history.entries) {
+    if (excludeEntryId && entry.entryId === excludeEntryId) continue
     const frozen = frozenPlayerWeek(forecasts, entry.entryId, week)
     const games =
       frozen?.games ??
@@ -300,6 +303,7 @@ export function poolProjectionsForWeek(
   forecasts: PredictionForecasts | null | undefined,
   week: number,
   travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+  excludeEntryId?: string | null,
 ) {
   const sidesByEvent = playerPredictedSidesByEvent(
     history,
@@ -307,12 +311,31 @@ export function poolProjectionsForWeek(
     forecasts,
     week,
     travelRestByAppearance,
+    excludeEntryId,
   )
   return new Map(
     [...sidesByEvent].map(([eventId, sides]) => [
       eventId,
       projectPoolForGame(sides),
     ]),
+  )
+}
+
+/** Badge field: current roster minus Dan Sullivan, when we can identify the card. */
+export function poolSupportProjectionsForWeek(
+  history: PlayerHistory,
+  recommendations: RecommendationHistory,
+  forecasts: PredictionForecasts | null | undefined,
+  week: number,
+  travelRestByAppearance?: Map<string, AppearanceTravelRest>,
+) {
+  return poolProjectionsForWeek(
+    history,
+    recommendations,
+    forecasts,
+    week,
+    travelRestByAppearance,
+    ourRosterEntry(history)?.entryId ?? null,
   )
 }
 
@@ -333,19 +356,31 @@ type PoolMajority = {
   side: 'home' | 'away'
   share: number
   count: number
+  field: number
 }
 
-function poolMajority(projection: PoolProjection): PoolMajority | null {
-  if (projection.called < MIN_CALLED) return null
-  const homeShare = projection.home / projection.called
-  const awayShare = projection.away / projection.called
+function leadingShare(
+  projection: PoolProjection,
+  field: number,
+): PoolMajority | null {
+  if (field < MIN_CALLED) return null
+  const homeShare = projection.home / field
+  const awayShare = projection.away / field
   if (homeShare >= MAJORITY) {
-    return { side: 'home', share: homeShare, count: projection.home }
+    return { side: 'home', share: homeShare, count: projection.home, field }
   }
   if (awayShare >= MAJORITY) {
-    return { side: 'away', share: awayShare, count: projection.away }
+    return { side: 'away', share: awayShare, count: projection.away, field }
   }
   return null
+}
+
+function calledMajority(projection: PoolProjection): PoolMajority | null {
+  return leadingShare(projection, projection.called)
+}
+
+function fieldMajority(projection: PoolProjection): PoolMajority | null {
+  return leadingShare(projection, projection.called + projection.unknown)
 }
 
 function poolSupportTier(share: number): PoolSupportTier {
@@ -362,8 +397,9 @@ function poolSupportTierLabel(tier: PoolSupportTier) {
 
 /**
  * How the leak-free pool forecast sits versus a pick we already like.
- * Needs the same 8-call / 62.5% bar as the pool-aware fade. This is
- * contest share next to our side, not a cover claim or a scoring input.
+ * Percent is of the field we have to beat — called and unknown, with
+ * Dan Sullivan left out of the projection — not of responsible calls
+ * only. Same 62.5% majority bar. Not a cover claim or a scoring input.
  */
 export function poolSupportView(
   projection: PoolProjection | null | undefined,
@@ -372,23 +408,27 @@ export function poolSupportView(
   awayAbbrev: string,
 ): PoolSupportView | null {
   if (!projection || !pickedSide) return null
-  const majority = poolMajority(projection)
+  const majority = fieldMajority(projection)
   if (!majority) return null
 
-  const pct = Math.round((majority.count / projection.called) * 100)
+  const pct = Math.round((majority.count / majority.field) * 100)
   const tier = poolSupportTier(majority.share)
   const tierLabel = poolSupportTierLabel(tier)
   const stance: PoolSupportStance =
     majority.side === pickedSide ? 'agree' : 'take'
   const chalkAbbrev = majority.side === 'home' ? homeAbbrev : awayAbbrev
+  const unknown =
+    projection.unknown > 0
+      ? ` ${projection.unknown} have no responsible call and count against the majority.`
+      : ''
   const line =
     stance === 'agree'
       ? `${tierLabel} of pool expected to agree · ${pct}%`
       : `${tierLabel} of pool expected to take ${chalkAbbrev} · ${pct}%`
   const title =
     stance === 'agree'
-      ? `Leak-free reads expect ${pct}% of called players to take the same side we like (${majority.count} of ${projection.called}). This is expected contest share, not a cover claim.`
-      : `Leak-free reads expect ${pct}% of called players to take ${chalkAbbrev} (${majority.count} of ${projection.called}). This is expected contest share, not a cover claim.`
+      ? `Leak-free reads expect ${majority.count} of ${majority.field} other players to take the same side we like (${pct}%).${unknown} Your card is left out. This is expected contest share, not a cover claim.`
+      : `Leak-free reads expect ${majority.count} of ${majority.field} other players to take ${chalkAbbrev} (${pct}%).${unknown} Your card is left out. This is expected contest share, not a cover claim.`
 
   return {
     stance,
@@ -402,7 +442,7 @@ export function poolSupportView(
 }
 
 function leverageSide(projection: PoolProjection): 'home' | 'away' | null {
-  const majority = poolMajority(projection)
+  const majority = calledMajority(projection)
   if (!majority) return null
   return majority.side === 'home' ? 'away' : 'home'
 }

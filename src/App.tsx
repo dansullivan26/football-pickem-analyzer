@@ -31,6 +31,7 @@ import {
   generatePoolAwareCard,
   poolExpectationView,
   poolProjectionsForWeek,
+  poolSupportProjectionsForWeek,
   poolSupportView,
   type PoolExpectationView,
   type PoolSupportView,
@@ -146,6 +147,13 @@ const poolSideSplitsByEvent = poolSideSplitsForWeek(
   slate.pool.seasonYear,
 )
 const poolProjectionsByEvent = poolProjectionsForWeek(
+  careerHistory,
+  recommendationHistory,
+  predictionForecasts,
+  slate.week.order,
+  travelRestIndex.byAppearance,
+)
+const poolSupportProjectionsByEvent = poolSupportProjectionsForWeek(
   careerHistory,
   recommendationHistory,
   predictionForecasts,
@@ -581,7 +589,7 @@ function GameCard({
     game.away.name,
   )
   const poolSupport = poolSupportView(
-    poolProjectionsByEvent.get(game.cbsEventId),
+    poolSupportProjectionsByEvent.get(game.cbsEventId),
     analysis.recommendedSide,
     game.home.abbrev,
     game.away.abbrev,
@@ -1624,7 +1632,7 @@ function App() {
           {suggestedCard && (
             <SuggestedCardPanel
               card={suggestedCard}
-              poolProjections={poolProjectionsByEvent}
+              poolProjections={poolSupportProjectionsByEvent}
               savedDeviationIds={deviationIdsForWeek(
                 cardOverrides,
                 slate.week.order,

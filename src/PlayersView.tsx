@@ -36,10 +36,10 @@ import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory
 import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
 import {
   formatSpread,
-  pickResultLabel,
-  pickResultState,
+  pickResultDisplay,
   pickSelectionLabel,
 } from './pickLabels'
+import { AtsChip } from './AtsChip'
 import {
   entryAtsSplits,
   formatAtsRecord,
@@ -1593,12 +1593,10 @@ export default function PlayersView({
                             </small>
                           )}
                         </div>
-                        <span
-                          className={`pick-result ${pickResultState(pick, isFinal)}`}
-                        >
-                          {pickResultLabel(pick, isFinal)}
-                          {score && <small>{score}</small>}
-                        </span>
+                        <AtsChip
+                          {...pickResultDisplay(pick, isFinal)}
+                          extra={score ? <small>{score}</small> : null}
+                        />
                       </div>
                       )
                     })}

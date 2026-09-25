@@ -57,6 +57,8 @@ import {
   slateKickoffDays,
 } from './gameStatus'
 import { ourPickForGame } from './ourEntry'
+import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
+import { AtsChip } from './AtsChip'
 import {
   formatPoolRecordDetail,
   formatPoolRecordLabel,
@@ -449,16 +451,17 @@ function OurPickNote({
   game: SlateGame
   pick: PlayerPick | null
 }) {
-  const result = pick?.result
+  const mark = atsOutcomeMark(pick?.result)
+  const label = atsOutcomeLabel(pick?.result)
   return (
     <div className="our-pick">
       <span>Our pick</span>
       <strong>{ourPickLabel(game, pick)}</strong>
-      {result && (
-        <small className={`pick-result ${result}`}>
-          {result === 'win' ? 'Win' : result === 'loss' ? 'Loss' : 'Push'}
-        </small>
-      )}
+      <AtsChip
+        mark={mark}
+        label={label}
+        state={pick?.result ?? 'pending'}
+      />
     </div>
   )
 }

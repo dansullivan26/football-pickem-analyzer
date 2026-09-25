@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  atsOutcomeLabel,
+  atsOutcomeMark,
   formatSpread,
+  pickResultDisplay,
   pickResultLabel,
   pickResultState,
   pickSelectionLabel,
@@ -72,6 +75,36 @@ test('graded picks keep their result label', () => {
   assert.equal(pickResultLabel(pick({ ...made, result: 'win' })), 'win')
   assert.equal(pickResultLabel(pick({ ...made, result: 'loss' })), 'loss')
   assert.equal(pickResultLabel(pick({ ...made, result: 'push' })), 'push')
+})
+
+test('ATS outcome chips use marks and ignore a push', () => {
+  assert.equal(atsOutcomeMark('win'), '✅')
+  assert.equal(atsOutcomeMark('loss'), '❌')
+  assert.equal(atsOutcomeMark('push'), null)
+  assert.equal(atsOutcomeMark(null), null)
+  assert.equal(atsOutcomeLabel('win'), 'ATS win')
+  assert.equal(atsOutcomeLabel('loss'), 'ATS loss')
+  const made = { pickedSide: 'away' as const, pickedTeam: 'UNC', matchStatus: 'matched' as const }
+  assert.deepEqual(pickResultDisplay(pick({ ...made, result: 'win' })), {
+    state: 'win',
+    mark: '✅',
+    label: 'ATS win',
+  })
+  assert.deepEqual(pickResultDisplay(pick({ ...made, result: 'loss' })), {
+    state: 'loss',
+    mark: '❌',
+    label: 'ATS loss',
+  })
+  assert.deepEqual(pickResultDisplay(pick({ ...made, result: 'push' })), {
+    state: 'push',
+    mark: null,
+    label: null,
+  })
+  assert.deepEqual(pickResultDisplay(pick()), {
+    state: 'awaiting',
+    mark: null,
+    label: 'Awaiting results',
+  })
 })
 
 test('match problems outrank grading state', () => {

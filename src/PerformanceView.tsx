@@ -21,6 +21,8 @@ import type {
   RecommendationWeek,
 } from './types'
 import type { CardPickSource, PickStrength } from './cardScoring'
+import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
+import { AtsChip } from './AtsChip'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'lock',
@@ -225,31 +227,42 @@ function summarizeDeviations(games: FrozenRecommendation[]) {
   }
 }
 
-function cardResult(game: FrozenRecommendation) {
-  if (game.deviated && game.pickedSide) return submittedResult(game)
-  if (game.pickedSide) return strengthResult(game)
-  return recResult(game)
-}
-
-function resultLabel(game: FrozenRecommendation) {
-  if (!game.cover) return 'Awaiting result'
+function resultDisplay(game: FrozenRecommendation) {
+  if (!game.cover) {
+    return { mark: null, label: 'Awaiting result', state: 'pending' as const }
+  }
   if (game.deviated && game.pickedSide) {
     const result = submittedResult(game)
-    if (result === 'push') return 'Push'
-    if (result === 'win') return 'Deviation hit'
-    if (result === 'loss') return 'Deviation missed'
+    return {
+      mark: atsOutcomeMark(result),
+      label: atsOutcomeLabel(result),
+      state: result ?? 'pending',
+    }
   }
   if (game.pickedSide) {
     const result = strengthResult(game)
-    if (result === 'push') return 'Push'
-    if (result === 'win') return 'Win'
-    if (result === 'loss') return 'Loss'
+    return {
+      mark: atsOutcomeMark(result),
+      label: atsOutcomeLabel(result),
+      state: result ?? 'pending',
+    }
   }
   if (game.category === 'neutral') {
-    if (game.cover === 'push') return 'Push'
-    return game.cover === 'home' ? 'Home covered' : 'Away covered'
+    if (game.cover === 'push') {
+      return { mark: null, label: null, state: 'push' as const }
+    }
+    return {
+      mark: null,
+      label: game.cover === 'home' ? 'Home covered' : 'Away covered',
+      state: game.cover,
+    }
   }
-  return recResult(game) ?? 'Awaiting result'
+  const result = recResult(game)
+  return {
+    mark: atsOutcomeMark(result),
+    label: atsOutcomeLabel(result),
+    state: result ?? 'pending',
+  }
 }
 
 export default function PerformanceView({
@@ -666,11 +679,7 @@ export default function PerformanceView({
                     </small>
                   ) : null}
                 </div>
-                <span
-                  className={`pick-result ${cardResult(game) ?? game.cover ?? 'pending'}`}
-                >
-                  {resultLabel(game)}
-                </span>
+                <AtsChip {...resultDisplay(game)} />
                 <BadBeatMenu
                   beat={seasonBeats.find(
                     (entry) =>

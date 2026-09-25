@@ -57,3 +57,39 @@ export function pickResultState(
 export function pickResultLabel(pick: PlayerPick, isFinal = false) {
   return RESULT_LABELS[pickResultState(pick, isFinal)]
 }
+
+/** CBS slates hook every number, so ATS chips are win/loss only. */
+export function atsOutcomeMark(
+  result: 'win' | 'loss' | 'push' | null | undefined,
+) {
+  if (result === 'win') return '✅'
+  if (result === 'loss') return '❌'
+  return null
+}
+
+export function atsOutcomeLabel(
+  result: 'win' | 'loss' | 'push' | null | undefined,
+) {
+  if (result === 'win') return 'ATS win'
+  if (result === 'loss') return 'ATS loss'
+  return null
+}
+
+export function pickResultDisplay(pick: PlayerPick, isFinal = false) {
+  const state = pickResultState(pick, isFinal)
+  if (state === 'win' || state === 'loss') {
+    return {
+      state,
+      mark: atsOutcomeMark(state),
+      label: atsOutcomeLabel(state),
+    }
+  }
+  if (state === 'push') {
+    return { state, mark: null, label: null }
+  }
+  return {
+    state,
+    mark: null,
+    label: RESULT_LABELS[state],
+  }
+}

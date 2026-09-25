@@ -27,6 +27,8 @@ import { formatWeatherBucket, type WeatherHistoryFile } from './weatherBuckets'
 import BadBeatMenu from './BadBeatMenu'
 import { badBeatAnchorId, type BadBeat } from './badBeats'
 import { formatWinningScore } from './gameStatus'
+import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
+import { AtsChip } from './AtsChip'
 import { badBeatSideMark, ourPoolPickOnSide } from './ourEntry'
 import {
   formatPoolRecordDetail,
@@ -63,11 +65,12 @@ function teamLine(row: TeamAppearance) {
   return formatSpread(number)
 }
 
-function resultLabel(result: TeamAppearance['result']) {
-  if (result === 'win') return 'ATS win'
-  if (result === 'loss') return 'ATS loss'
-  if (result === 'push') return 'Push'
-  return 'Awaiting result'
+function appearanceResult(result: TeamAppearance['result']) {
+  const mark = atsOutcomeMark(result)
+  const label = atsOutcomeLabel(result)
+  if (mark && label) return { mark, label, state: result ?? 'pending' }
+  if (!result) return { mark: null, label: 'Awaiting result', state: 'pending' }
+  return { mark: null, label: null, state: result }
 }
 
 function Metric({
@@ -747,17 +750,17 @@ export default function TeamsView({
                             )}
                           </small>
                         </div>
-                        <span
-                          className={`pick-result ${row.result ?? 'pending'}`}
-                        >
-                          {resultLabel(row.result)}
-                          {score && (
-                            <small>
-                              {score}
-                              {wonOutrightAsDog(row) ? ' · outright' : ''}
-                            </small>
-                          )}
-                        </span>
+                        <AtsChip
+                          {...appearanceResult(row.result)}
+                          extra={
+                            score ? (
+                              <small>
+                                {score}
+                                {wonOutrightAsDog(row) ? ' · outright' : ''}
+                              </small>
+                            ) : null
+                          }
+                        />
                         <BadBeatMenu
                           beat={beat}
                           onClear={onClearBadBeat}

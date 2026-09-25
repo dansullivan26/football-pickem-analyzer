@@ -2,7 +2,7 @@
   "week": 4,
   "seasonYear": 2026,
   "label": "Week 4",
-  "updatedAt": "2026-09-25T01:38:56.008Z",
+  "updatedAt": "2026-09-25T07:59:08.715Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -351,6 +351,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-25T07:59:08.715Z",
+          "cbsEventId": 50029231,
+          "athleteId": "4430438",
+          "name": "Edgerrin Cooper",
+          "position": "LB",
+          "teamAbbrev": "GB",
+          "teamName": "Green Bay",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": -4.5,
           "homeSpreadAfter": -4.5,
           "towardTeam": 0

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T22:34:21.915Z",
+  "updatedAt": "2026-09-25T01:38:44.076Z",
   "weeks": [
     {
       "week": 1,
@@ -32283,8 +32283,8 @@
       "seasonYear": 2026,
       "label": "Week 4",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-09-24T22:34:21.915Z",
-      "frozenAt": null,
+      "capturedAt": "2026-09-25T01:38:44.076Z",
+      "frozenAt": "2026-09-25T01:38:44.076Z",
       "trainingThroughWeek": 3,
       "players": [
         {
@@ -43602,54 +43602,54 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-09-24T22:34:21.915Z",
+    "updatedAt": "2026-09-25T01:38:44.076Z",
     "overall": {
       "key": "overall",
-      "games": 1925,
-      "calls": 1027,
-      "graded": 1023,
-      "correct": 698,
-      "noCalls": 898,
-      "accuracy": 0.6823069403714564,
-      "noCallRate": 0.4664935064935065
+      "games": 2575,
+      "calls": 1558,
+      "graded": 1024,
+      "correct": 699,
+      "noCalls": 1017,
+      "accuracy": 0.6826171875,
+      "noCallRate": 0.3949514563106796
     },
     "byLeague": [
       {
         "key": "NCAAF",
-        "games": 1093,
-        "calls": 364,
+        "games": 1327,
+        "calls": 562,
         "graded": 364,
         "correct": 238,
-        "noCalls": 729,
+        "noCalls": 765,
         "accuracy": 0.6538461538461539,
-        "noCallRate": 0.666971637694419
+        "noCallRate": 0.5764883195177091
       },
       {
         "key": "NFL",
-        "games": 832,
-        "calls": 663,
-        "graded": 659,
-        "correct": 460,
-        "noCalls": 169,
-        "accuracy": 0.6980273141122914,
-        "noCallRate": 0.203125
+        "games": 1248,
+        "calls": 996,
+        "graded": 660,
+        "correct": 461,
+        "noCalls": 252,
+        "accuracy": 0.6984848484848485,
+        "noCallRate": 0.20192307692307693
       }
     ],
     "byMarket": [
       {
         "key": "dog",
-        "games": 187,
-        "calls": 187,
-        "graded": 185,
-        "correct": 98,
+        "games": 269,
+        "calls": 269,
+        "graded": 186,
+        "correct": 99,
         "noCalls": 0,
-        "accuracy": 0.5297297297297298,
+        "accuracy": 0.532258064516129,
         "noCallRate": 0
       },
       {
         "key": "favorite",
-        "games": 840,
-        "calls": 840,
+        "games": 1289,
+        "calls": 1289,
         "graded": 838,
         "correct": 600,
         "noCalls": 0,
@@ -43658,11 +43658,11 @@
       },
       {
         "key": "no-call",
-        "games": 898,
+        "games": 1017,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 898,
+        "noCalls": 1017,
         "accuracy": null,
         "noCallRate": 1
       }
@@ -43670,8 +43670,8 @@
     "byHabit": [
       {
         "key": "favorite",
-        "games": 868,
-        "calls": 868,
+        "games": 1288,
+        "calls": 1288,
         "graded": 866,
         "correct": 586,
         "noCalls": 0,
@@ -43680,8 +43680,8 @@
       },
       {
         "key": "home",
-        "games": 25,
-        "calls": 25,
+        "games": 74,
+        "calls": 74,
         "graded": 25,
         "correct": 15,
         "noCalls": 0,
@@ -43690,23 +43690,33 @@
       },
       {
         "key": "line-value",
-        "games": 110,
-        "calls": 110,
-        "graded": 108,
-        "correct": 83,
+        "games": 162,
+        "calls": 162,
+        "graded": 109,
+        "correct": 84,
         "noCalls": 0,
-        "accuracy": 0.7685185185185185,
+        "accuracy": 0.7706422018348624,
         "noCallRate": 0
       },
       {
         "key": "no-call",
-        "games": 898,
+        "games": 1017,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 898,
+        "noCalls": 1017,
         "accuracy": null,
         "noCallRate": 1
+      },
+      {
+        "key": "rest",
+        "games": 10,
+        "calls": 10,
+        "graded": 0,
+        "correct": 0,
+        "noCalls": 0,
+        "accuracy": null,
+        "noCallRate": 0
       },
       {
         "key": "travel",
@@ -43722,18 +43732,18 @@
     "byConfidence": [
       {
         "key": "high",
-        "games": 392,
-        "calls": 392,
-        "graded": 391,
-        "correct": 295,
+        "games": 573,
+        "calls": 573,
+        "graded": 392,
+        "correct": 296,
         "noCalls": 0,
-        "accuracy": 0.7544757033248082,
+        "accuracy": 0.7551020408163265,
         "noCallRate": 0
       },
       {
         "key": "low",
-        "games": 10,
-        "calls": 10,
+        "games": 15,
+        "calls": 15,
         "graded": 10,
         "correct": 6,
         "noCalls": 0,
@@ -43742,8 +43752,8 @@
       },
       {
         "key": "medium",
-        "games": 625,
-        "calls": 625,
+        "games": 970,
+        "calls": 970,
         "graded": 622,
         "correct": 397,
         "noCalls": 0,
@@ -43752,11 +43762,11 @@
       },
       {
         "key": "no-call",
-        "games": 898,
+        "games": 1017,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 898,
+        "noCalls": 1017,
         "accuracy": null,
         "noCallRate": 1
       }

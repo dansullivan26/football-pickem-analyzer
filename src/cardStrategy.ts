@@ -11,6 +11,7 @@ import {
 import type { GameTravelRest } from './travelRest.ts'
 import type { NflStarterInjuryTeam } from './nflStarterInjuries.ts'
 import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types.ts'
+import { etDayKey } from './gameStatus.ts'
 
 export {
   CARD_STRATEGY_NOTE,
@@ -388,6 +389,13 @@ function formatCopiedManualLine(
   return `${game.awayAbbrev} @ ${game.homeAbbrev} (manual review, no lean)`
 }
 
+export type CardDayGroup = {
+  dateKey: string
+  weekday: string
+  label: string
+  rows: CardListRow[]
+}
+
 function formatCardWeekday(
   kickoff: string,
   timeZone = 'America/New_York',
@@ -417,6 +425,53 @@ function formatCardWeekday(
   }
 }
 
+function cardDayLabel(
+  kickoff: string,
+  dateKey: string,
+  weekday: string,
+  now = Date.now(),
+  timeZone = 'America/New_York',
+) {
+  const date = new Date(kickoff)
+  if (Number.isNaN(date.getTime())) return weekday
+  const monthDay = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    month: 'short',
+    day: 'numeric',
+  }).format(date)
+  return etDayKey(now) === dateKey
+    ? `Today · ${weekday} · ${monthDay}`
+    : `${weekday} · ${monthDay}`
+}
+
+/** Chronological day buckets. Row order inside a day is kept. */
+export function groupCardRowsByDay(
+  rows: CardListRow[],
+  now = Date.now(),
+  timeZone = 'America/New_York',
+): CardDayGroup[] {
+  const groups = new Map<string, CardDayGroup>()
+  for (const row of rows) {
+    const day = formatCardWeekday(rowKickoff(row), timeZone)
+    const dateKey = day?.dateKey ?? 'unknown'
+    const weekday = day?.weekday ?? 'Unknown'
+    const existing = groups.get(dateKey)
+    if (existing) {
+      existing.rows.push(row)
+      continue
+    }
+    groups.set(dateKey, {
+      dateKey,
+      weekday,
+      label: cardDayLabel(rowKickoff(row), dateKey, weekday, now, timeZone),
+      rows: [row],
+    })
+  }
+  return [...groups.values()].sort((left, right) =>
+    left.dateKey.localeCompare(right.dateKey),
+  )
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
@@ -425,36 +480,20 @@ export function formatSuggestedCardText(
   manualSelections: ManualPickSelections = new Map(),
   sort: 'slate' | 'recommendation' = 'slate',
 ) {
-  const items = orderCardRows(picks, card.unpicked, sort).flatMap((row) => {
-    const kickoff = row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff
-    if (row.kind === 'pick') {
-      const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
-      return [{ kickoff, line: formatCopiedPick(sent.pickedAbbrev, sent.poolSpread) }]
-    }
-    const side = manualSelections.get(row.game.gameId)
-    return [{ kickoff, line: formatCopiedManualLine(row.game, side) }]
-  })
-
-  const groups = new Map<string, { weekday: string; lines: string[] }>()
-  const order: string[] = []
-  for (const item of items) {
-    const day = formatCardWeekday(item.kickoff)
-    const dateKey = day?.dateKey ?? 'unknown'
-    const weekday = day?.weekday ?? 'Unknown'
-    const group = groups.get(dateKey)
-    if (group) group.lines.push(item.line)
-    else {
-      groups.set(dateKey, { weekday, lines: [item.line] })
-      order.push(dateKey)
-    }
-  }
-
-  return order
-    .sort((left, right) => left.localeCompare(right))
-    .map((dateKey) => {
-      const group = groups.get(dateKey)
-      if (!group) return ''
-      return `${group.weekday}:\n\n${group.lines.join('\n')}`
+  const groups = groupCardRowsByDay(orderCardRows(picks, card.unpicked, sort))
+  return groups
+    .map((group) => {
+      const lines = group.rows.map((row) => {
+        if (row.kind === 'pick') {
+          const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
+          return formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
+        }
+        return formatCopiedManualLine(
+          row.game,
+          manualSelections.get(row.game.gameId),
+        )
+      })
+      return `${group.weekday}:\n\n${lines.join('\n')}`
     })
     .filter(Boolean)
     .join('\n\n')

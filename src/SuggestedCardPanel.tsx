@@ -4,6 +4,7 @@ import {
   formatCardKickoff,
   formatPoolSpread,
   formatSuggestedCardText,
+  groupCardRowsByDay,
   orderCardRows,
   sortSuggestedPicks,
   submittedPick,
@@ -74,6 +75,7 @@ export default function SuggestedCardPanel({
     () => orderCardRows(card.picks, card.unpicked, sort),
     [card.picks, card.unpicked, sort],
   )
+  const dayGroups = useMemo(() => groupCardRowsByDay(rows), [rows])
   const selectedRecommendedCount = card.picks.filter((pick) =>
     selectedToSend.has(pick.gameId),
   ).length
@@ -348,31 +350,42 @@ export default function SuggestedCardPanel({
           </div>
         </div>
 
-        <ol className="suggested-picks">
-          {rows.map((row) =>
-            row.kind === 'pick' ? (
-              <SuggestedPickRow
-                key={row.pick.cbsEventId}
-                pick={row.pick}
-                deviate={deviations.has(row.pick.gameId)}
-                selectedToSend={selectedToSend.has(row.pick.gameId)}
-                poolProjection={poolProjections?.get(row.pick.cbsEventId)}
-                onToggleDeviate={toggleDeviate}
-                onToggleSend={toggleSend}
-              />
-            ) : (
-              <ManualReviewRow
-                key={row.game.cbsEventId}
-                game={row.game}
-                selected={manualSelections.get(row.game.gameId)}
-                selectedToSend={selectedToSend.has(row.game.gameId)}
-                poolProjection={poolProjections?.get(row.game.cbsEventId)}
-                onToggle={toggleManualPick}
-                onToggleSend={toggleSend}
-              />
-            ),
-          )}
-        </ol>
+        <div className="suggested-picks">
+          {dayGroups.map((group) => (
+            <section
+              key={group.dateKey}
+              className="suggested-pick-day"
+              aria-labelledby={`card-day-${group.dateKey}`}
+            >
+              <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
+              <ol>
+                {group.rows.map((row) =>
+                  row.kind === 'pick' ? (
+                    <SuggestedPickRow
+                      key={row.pick.cbsEventId}
+                      pick={row.pick}
+                      deviate={deviations.has(row.pick.gameId)}
+                      selectedToSend={selectedToSend.has(row.pick.gameId)}
+                      poolProjection={poolProjections?.get(row.pick.cbsEventId)}
+                      onToggleDeviate={toggleDeviate}
+                      onToggleSend={toggleSend}
+                    />
+                  ) : (
+                    <ManualReviewRow
+                      key={row.game.cbsEventId}
+                      game={row.game}
+                      selected={manualSelections.get(row.game.gameId)}
+                      selectedToSend={selectedToSend.has(row.game.gameId)}
+                      poolProjection={poolProjections?.get(row.game.cbsEventId)}
+                      onToggle={toggleManualPick}
+                      onToggleSend={toggleSend}
+                    />
+                  ),
+                )}
+              </ol>
+            </section>
+          ))}
+        </div>
 
         {card.tiebreaker && (
           <section className="card-tiebreaker" aria-labelledby="card-tiebreaker-title">

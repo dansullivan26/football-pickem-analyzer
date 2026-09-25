@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   formatCardKickoff,
   formatSuggestedCardText,
+  groupCardRowsByDay,
   orderCardRows,
   type SuggestedCard,
   type SuggestedPick,
@@ -112,6 +113,55 @@ test('recommendation sort keeps manual-review games after ranked picks', () => {
   assert.deepEqual(
     rows.map((row) => (row.kind === 'pick' ? row.pick.gameId : row.game.gameId)),
     ['lean', 'slight', 'noon'],
+  )
+})
+
+test('groupCardRowsByDay keeps days in kickoff order with a today label', () => {
+  const rows = orderCardRows(
+    [
+      pick({
+        gameId: 'sun',
+        kickoff: '2026-09-20T13:00:00-04:00',
+        cbsEventId: 2,
+        category: 'slight',
+        compositeEdge: 1,
+      }),
+      pick({
+        gameId: 'sat',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        cbsEventId: 1,
+        category: 'lean',
+        compositeEdge: 2,
+      }),
+    ],
+    [
+      unpicked({
+        gameId: 'sat-review',
+        kickoff: '2026-09-19T15:30:00-04:00',
+        cbsEventId: 3,
+      }),
+    ],
+    'recommendation',
+  )
+  const groups = groupCardRowsByDay(
+    rows,
+    Date.parse('2026-09-19T18:00:00-04:00'),
+  )
+
+  assert.deepEqual(
+    groups.map((group) => group.label),
+    ['Today · Saturday · Sep 19', 'Sunday · Sep 20'],
+  )
+  assert.deepEqual(
+    groups.map((group) =>
+      group.rows.map((row) =>
+        row.kind === 'pick' ? row.pick.gameId : row.game.gameId,
+      ),
+    ),
+    [
+      ['sat', 'sat-review'],
+      ['sun'],
+    ],
   )
 })
 

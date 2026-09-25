@@ -110,3 +110,69 @@ export function formatPoolRecordDetail(record: PoolGameRecord) {
   parts.push(`${record.unpicked} unpicked`)
   return parts.join(' · ')
 }
+
+export type PoolSideSplit = {
+  home: number
+  away: number
+  unpicked: number
+  picked: number
+}
+
+function emptySplit(): PoolSideSplit {
+  return { home: 0, away: 0, unpicked: 0, picked: 0 }
+}
+
+function tallySide(split: PoolSideSplit, pick: PlayerPick | undefined) {
+  if (!pick || pick.matchStatus === 'unpicked' || !pick.pickedSide) {
+    split.unpicked += 1
+    return
+  }
+  if (pick.pickedSide === 'home') split.home += 1
+  else split.away += 1
+  split.picked += 1
+}
+
+/** Actual home/away cards for one slate game, once GrokBot has sides. */
+export function poolSideSplitForGame(
+  history: PlayerHistory,
+  week: number,
+  cbsEventId: number,
+  seasonYear = history.pool.seasonYear,
+): PoolSideSplit | null {
+  const weekRow = weekForGame(history, week, seasonYear)
+  if (!weekRow) return null
+  const split = emptySplit()
+  for (const entry of weekRow.entries) {
+    tallySide(
+      split,
+      entry.picks.find((pick) => pick.cbsEventId === cbsEventId),
+    )
+  }
+  return split
+}
+
+export function poolSideSplitsForWeek(
+  history: PlayerHistory,
+  week: number,
+  seasonYear = history.pool.seasonYear,
+): Map<number, PoolSideSplit> {
+  const weekRow = weekForGame(history, week, seasonYear)
+  const splits = new Map<number, PoolSideSplit>()
+  if (!weekRow) return splits
+
+  const eventIds = new Set<number>()
+  for (const entry of weekRow.entries) {
+    for (const pick of entry.picks) eventIds.add(pick.cbsEventId)
+  }
+  for (const cbsEventId of eventIds) {
+    const split = emptySplit()
+    for (const entry of weekRow.entries) {
+      tallySide(
+        split,
+        entry.picks.find((pick) => pick.cbsEventId === cbsEventId),
+      )
+    }
+    splits.set(cbsEventId, split)
+  }
+  return splits
+}

@@ -182,6 +182,9 @@ dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
 the leak-free player model: the side and percent among players with a call,
 plus how many are still unknown. That is expected contest share, not a cover
 claim. The Pool-aware generated card uses the same numbers for leverage fades.
+After GrokBot ingests graded picks, the same footer adds **Actual pool** — the
+side and percent among submitted cards, with the old `Pool W–L–P` ATS book on
+that line instead of the meta chip. Hover copy compares the two.
 
 ## GrokBot ingest
 

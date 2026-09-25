@@ -1,5 +1,6 @@
 import {
   CARD_STRATEGY_NOTE,
+  classifyEdge,
   compareRecommendationOrder,
   formatPoolSpread,
   poolSpreadForSide,
@@ -370,6 +371,41 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
+/** #1 on Recommendation sort — the play a buddy should see first in a paste. */
+export function playOfTheWeek(picks: SuggestedPick[]) {
+  return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
+}
+
+/**
+ * Buddy-facing strength uses the same lock / hammer / lean / slight words as
+ * the Lines page, graded off the recommendation net so rest-only plays still
+ * get a readable band instead of point jargon.
+ */
+function copiedPickBand(pick: SuggestedPick) {
+  const band = classifyEdge(pick.compositeEdge)
+  return band === 'neutral' || band === 'pending' ? 'slight' : band
+}
+
+function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
+  const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
+  return `Play of the week: ${line} (${copiedPickBand(pick)})`
+}
+
+function formatCopiedRecommendedLine(
+  pick: SuggestedPick,
+  deviate: boolean,
+  potwGameId: string | null,
+) {
+  const sent = submittedPick(pick, deviate)
+  const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
+  if (deviate) return `${base} (deviated)`
+  const band = copiedPickBand(pick)
+  if (potwGameId === pick.gameId) {
+    return `${base} (${band} — play of the week)`
+  }
+  return `${base} (${band})`
+}
+
 /**
  * Manual-review games still belong in the copied card so the whole slate is
  * accounted for, but they are tagged so a picked side is never confused with a
@@ -480,13 +516,17 @@ export function formatSuggestedCardText(
   manualSelections: ManualPickSelections = new Map(),
   sort: 'slate' | 'recommendation' = 'slate',
 ) {
+  const potw = playOfTheWeek(picks)
   const groups = groupCardRowsByDay(orderCardRows(picks, card.unpicked, sort))
-  return groups
+  const body = groups
     .map((group) => {
       const lines = group.rows.map((row) => {
         if (row.kind === 'pick') {
-          const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
-          return formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
+          return formatCopiedRecommendedLine(
+            row.pick,
+            deviations.has(row.pick.gameId),
+            potw?.gameId ?? null,
+          )
         }
         return formatCopiedManualLine(
           row.game,
@@ -497,4 +537,7 @@ export function formatSuggestedCardText(
     })
     .filter(Boolean)
     .join('\n\n')
+  if (!potw) return body
+  const header = formatPlayOfTheWeekHeader(potw)
+  return body ? `${header}\n\n${body}` : header
 }

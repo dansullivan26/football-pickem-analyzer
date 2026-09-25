@@ -5,6 +5,7 @@ import {
   formatSuggestedCardText,
   groupCardRowsByDay,
   orderCardRows,
+  playOfTheWeek,
   type SuggestedCard,
   type SuggestedPick,
   type UnpickedGame,
@@ -171,7 +172,80 @@ test('formatCardKickoff writes a compact Eastern kickoff', () => {
   assert.equal(formatCardKickoff('not a date'), null)
 })
 
-test('formatSuggestedCardText copies only team and spread', () => {
+test('playOfTheWeek is the top Recommendation-sorted pick', () => {
+  const slight = pick({
+    gameId: 'slight',
+    kickoff: '2026-09-19T12:00:00-04:00',
+    category: 'slight',
+    compositeEdge: 1,
+  })
+  const lock = pick({
+    gameId: 'lock',
+    kickoff: '2026-09-20T13:00:00-04:00',
+    category: 'lock',
+    compositeEdge: 4.2,
+    pickedAbbrev: 'KC',
+    poolSpread: 5.5,
+  })
+
+  assert.equal(playOfTheWeek([slight, lock])?.gameId, 'lock')
+  assert.equal(playOfTheWeek([]), null)
+})
+
+test('formatSuggestedCardText grades rest-only picks with lock/hammer/lean/slight', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 3,
+    weekLabel: 'Week 3',
+    picks: [
+      pick({
+        gameId: 'ind',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        away: 'Indiana',
+        awayAbbrev: 'IND',
+        awayId: 'ind',
+        home: 'Home',
+        homeAbbrev: 'HOME',
+        pickedSide: 'away',
+        pickedTeamId: 'ind',
+        pickedTeam: 'Indiana',
+        poolSpread: -20.5,
+        category: 'neutral',
+        edge: null,
+        compositeEdge: 0.5,
+      }),
+      pick({
+        gameId: 'det',
+        kickoff: '2026-09-20T13:00:00-04:00',
+        away: 'Detroit',
+        awayAbbrev: 'DET',
+        awayId: 'det',
+        home: 'Home',
+        homeAbbrev: 'HOME',
+        pickedSide: 'away',
+        pickedTeamId: 'det',
+        pickedTeam: 'Detroit',
+        poolSpread: -6.5,
+        category: 'neutral',
+        edge: null,
+        compositeEdge: 1.95,
+      }),
+    ],
+    unpicked: [],
+    tiebreaker: null,
+  }
+
+  assert.equal(
+    formatSuggestedCardText(card),
+    'Play of the week: DET -6.5 (lean)\n\nSaturday:\n\nIND -20.5 (slight)\n\nSunday:\n\nDET -6.5 (lean — play of the week)',
+  )
+})
+
+test('formatSuggestedCardText names play of the week and pick strength', () => {
   const card: SuggestedCard = {
     strategyId: 'test',
     title: 'ATS Card',
@@ -193,6 +267,9 @@ test('formatSuggestedCardText copies only team and spread', () => {
         pickedTeamId: 'kan',
         pickedTeam: 'Kansas City',
         poolSpread: 5.5,
+        category: 'lock',
+        edge: 4.2,
+        compositeEdge: 4.2,
       }),
       pick({
         gameId: 'unc',
@@ -206,6 +283,9 @@ test('formatSuggestedCardText copies only team and spread', () => {
         pickedTeamId: 'unc',
         pickedTeam: 'North Carolina',
         poolSpread: 3.5,
+        category: 'slight',
+        edge: 1,
+        compositeEdge: 1,
       }),
     ],
     unpicked: [
@@ -232,7 +312,7 @@ test('formatSuggestedCardText copies only team and spread', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nKC +5.5\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nKC +5.5 (lock — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -243,7 +323,7 @@ test('formatSuggestedCardText copies only team and spread', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Saturday:\n\nUNC +3.5\n\nSunday:\n\nNYG -5.5\n\nMonday:\n\nDET +4.5 (manual pick)',
+    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
   )
 })
 

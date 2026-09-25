@@ -30,7 +30,6 @@ import {
   actualPoolView,
   generatePoolAwareCard,
   poolExpectationView,
-  poolProjectionsForWeek,
   poolSupportProjectionsForWeek,
   poolSupportView,
   type PoolExpectationView,
@@ -60,7 +59,7 @@ import {
   gameIsUpcoming,
   slateKickoffDays,
 } from './gameStatus'
-import { ourPickForGame } from './ourEntry'
+import { ourPickForGame, ourRosterEntry } from './ourEntry'
 import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
 import { AtsChip } from './AtsChip'
 import {
@@ -136,24 +135,20 @@ const travelRestIndex = buildTravelRestIndex(
   lastKickoffData as LastKickoffFile,
 )
 const travelRestByEvent = travelRestIndex.byEvent
+const fieldEntryId = ourRosterEntry(playerHistory)?.entryId ?? null
 const poolRecordsByEvent = poolRecordsForWeek(
   playerHistory,
   slate.week.order,
   slate.pool.seasonYear,
+  fieldEntryId,
 )
 const poolSideSplitsByEvent = poolSideSplitsForWeek(
   playerHistory,
   slate.week.order,
   slate.pool.seasonYear,
+  fieldEntryId,
 )
-const poolProjectionsByEvent = poolProjectionsForWeek(
-  careerHistory,
-  recommendationHistory,
-  predictionForecasts,
-  slate.week.order,
-  travelRestIndex.byAppearance,
-)
-const poolSupportProjectionsByEvent = poolSupportProjectionsForWeek(
+const poolFieldProjectionsByEvent = poolSupportProjectionsForWeek(
   careerHistory,
   recommendationHistory,
   predictionForecasts,
@@ -584,12 +579,12 @@ function GameCard({
   const completed = gameIsCompleted(game, now)
   const poolRecord = poolRecordsByEvent.get(game.cbsEventId)
   const expectedPool = poolExpectationView(
-    poolProjectionsByEvent.get(game.cbsEventId),
+    poolFieldProjectionsByEvent.get(game.cbsEventId),
     game.home.name,
     game.away.name,
   )
   const poolSupport = poolSupportView(
-    poolSupportProjectionsByEvent.get(game.cbsEventId),
+    poolFieldProjectionsByEvent.get(game.cbsEventId),
     analysis.recommendedSide,
     game.home.abbrev,
     game.away.abbrev,
@@ -1616,7 +1611,7 @@ function App() {
                       slate.week,
                       slate.pool.seasonYear,
                       slate.tiebreaker,
-                      poolProjectionsByEvent,
+                      poolFieldProjectionsByEvent,
                       new Date(),
                       travelRestByEvent,
                       nflInjuriesByAbbrev,
@@ -1632,7 +1627,7 @@ function App() {
           {suggestedCard && (
             <SuggestedCardPanel
               card={suggestedCard}
-              poolProjections={poolSupportProjectionsByEvent}
+              poolProjections={poolFieldProjectionsByEvent}
               savedDeviationIds={deviationIdsForWeek(
                 cardOverrides,
                 slate.week.order,

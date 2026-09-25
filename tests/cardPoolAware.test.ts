@@ -73,7 +73,7 @@ test('poolProjectionCopy keeps unknowns visible', () => {
   assert.match(poolProjectionCopy(projection), /3 unknown/)
 })
 
-test('poolExpectationView names the expected side among calls', () => {
+test('poolExpectationView names the expected side against the whole field', () => {
   const projection = projectPoolForGame([
     ...Array.from({ length: 20 }, () => 'home' as const),
     ...Array.from({ length: 2 }, () => 'away' as const),
@@ -83,11 +83,11 @@ test('poolExpectationView names the expected side among calls', () => {
     null,
   ])
   const view = poolExpectationView(projection, 'Indiana', 'Northwestern')
-  assert.equal(view?.line, 'Indiana 91%')
-  assert.equal(view?.detail, '20 of 22 calls · 4 unknown')
-  assert.match(view?.title ?? '', /expect 91% of the pool to take Indiana/)
+  assert.equal(view?.line, 'Indiana 77%')
+  assert.equal(view?.detail, '20 of 26 players · 4 no call')
+  assert.match(view?.title ?? '', /expect 77% of the pool to take Indiana/)
   assert.equal(view?.side, 'home')
-  assert.equal(view?.pct, 91)
+  assert.equal(view?.pct, 77)
 })
 
 test('poolExpectationView calls a split instead of a 50% side', () => {
@@ -109,7 +109,7 @@ test('poolExpectationView reports no calls without inventing a leader', () => {
   )
   assert.equal(view?.line, 'No calls yet')
   assert.equal(view?.none, true)
-  assert.equal(view?.detail, '3 players unknown')
+  assert.equal(view?.detail, '3 of 3 players unknown')
 })
 
 test('actualPoolView names submitted cards and keeps the ATS book', () => {
@@ -128,9 +128,9 @@ test('actualPoolView names submitted cards and keeps the ATS book', () => {
     'Atlanta',
     expected,
   )
-  assert.equal(view?.line, 'Green Bay 72%')
-  assert.equal(view?.detail, '18 of 25 picks · 1 unpicked · Pool 8–17–1')
-  assert.match(view?.title ?? '', /72% of submitted picks took Green Bay/)
+  assert.equal(view?.line, 'Green Bay 69%')
+  assert.equal(view?.detail, '18 of 26 players · 1 unpicked · Pool 8–17–1')
+  assert.match(view?.title ?? '', /69% of the pool took Green Bay/)
   assert.match(view?.title ?? '', /Forecast was Green Bay 91%/)
 })
 
@@ -257,6 +257,34 @@ test('pool-aware card keeps favorable-hook value and a hammer ahead of leverage'
   assert.equal(hammer.picks[0]?.source, 'line-value')
   assert.equal(hammer.picks[0]?.pickedSide, 'home')
   assert.match(String(hammer.picks[0]?.detail), /Projected pool/)
+})
+
+test('pool-aware leverage needs a majority of the field, not only of calls', () => {
+  const base = analysis(0, 'neutral')
+  const noHook: GameAnalysis = {
+    ...base,
+    liveHomeSpread: -1,
+    game: { ...base.game, homeSpread: -1, line: 'NYG -1' },
+  }
+
+  const thin = generatePoolAwareCard(
+    [noHook],
+    { order: 3, label: 'Week 3' },
+    2026,
+    null,
+    new Map([[9, projectPoolForGame(sides(8, 0, 17))]]),
+  )
+  assert.equal(thin.picks.length, 0)
+
+  const field = generatePoolAwareCard(
+    [noHook],
+    { order: 3, label: 'Week 3' },
+    2026,
+    null,
+    new Map([[9, projectPoolForGame(sides(16, 2, 7))]]),
+  )
+  assert.equal(field.picks[0]?.source, 'pool-aware')
+  assert.equal(field.picks[0]?.pickedSide, 'away')
 })
 
 function sides(home: number, away: number, unknown = 0) {

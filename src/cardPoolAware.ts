@@ -29,7 +29,7 @@ import { ourRosterEntry } from './ourEntry.ts'
 export const POOL_AWARE_STRATEGY_ID = 'v1-pool-aware'
 
 export const POOL_AWARE_STRATEGY_NOTE =
-  'Pool-aware card. Locks, hammers, and leans stay with the ATS algorithm. On games with no ATS edge, it fades the side our leak-free player reads expect the pool to take — only when enough players have a call. Unknowns stay visible. This is contest leverage, not a claim the faded side is more likely to cover.'
+  'Pool-aware card. Locks, hammers, and leans stay with the ATS algorithm. On games with no ATS edge, it fades the side our leak-free player reads expect the rest of the pool to take — only when that side is a majority of the field. Players with no call count against the majority. This is contest leverage, not a claim the faded side is more likely to cover.'
 
 export type PoolProjection = {
   home: number
@@ -55,14 +55,19 @@ export function projectPoolForGame(
   return { home, away, unknown, called: home + away }
 }
 
+function fieldSize(projection: PoolProjection) {
+  return projection.called + projection.unknown
+}
+
 export function poolProjectionCopy(projection: PoolProjection) {
+  const field = fieldSize(projection)
   if (projection.called === 0) {
-    return `No leak-free player calls (${projection.unknown} unknown)`
+    return `No leak-free player calls (${projection.unknown} of ${field} unknown)`
   }
   const leader = projection.home >= projection.away ? 'home' : 'away'
   const count = leader === 'home' ? projection.home : projection.away
-  const pct = Math.round((count / projection.called) * 100)
-  return `Projected pool among ${projection.called} calls: ${pct}% ${leader} (${projection.home} home / ${projection.away} away, ${projection.unknown} unknown)`
+  const pct = field ? Math.round((count / field) * 100) : 0
+  return `Projected pool: ${pct}% ${leader} (${count} of ${field}; ${projection.home} home / ${projection.away} away, ${projection.unknown} unknown)`
 }
 
 export type PoolExpectationView = {
@@ -75,8 +80,8 @@ export type PoolExpectationView = {
 }
 
 /**
- * Row-card copy for the leak-free pool forecast. Percent is among players
- * with a call, not the whole field — unknowns stay visible in the detail.
+ * Row-card copy for the leak-free pool forecast. Percent is of the field
+ * we have to beat — called and unknown — not of responsible calls only.
  */
 export function poolExpectationView(
   projection: PoolProjection | null | undefined,
@@ -84,15 +89,16 @@ export function poolExpectationView(
   awayName: string,
 ): PoolExpectationView | null {
   if (!projection) return null
+  const field = fieldSize(projection)
 
   if (projection.called === 0) {
     return {
       line: 'No calls yet',
       detail: projection.unknown
-        ? `${projection.unknown} players unknown`
+        ? `${projection.unknown} of ${field} players unknown`
         : 'No modeled sides',
       title:
-        'The leak-free prediction model has not named a side for any player on this game. Unknowns are players with no responsible call.',
+        'The leak-free prediction model has not named a side for any player on this game. Unknowns are the rest of the pool, not a hidden majority.',
       none: true,
       side: null,
       pct: null,
@@ -103,13 +109,13 @@ export function poolExpectationView(
     return {
       line: 'Pool looks split',
       detail: `${projection.home} home / ${projection.away} away${
-        projection.unknown ? ` · ${projection.unknown} unknown` : ''
+        projection.unknown ? ` · ${projection.unknown} no call` : ''
       }`,
-      title: `Based on our prediction model, called players are split ${projection.home}–${projection.away} on this game.${
+      title: `Based on our prediction model, the rest of the pool is split ${projection.home}–${projection.away} on this game.${
         projection.unknown
-          ? ` ${projection.unknown} players have no responsible call.`
+          ? ` ${projection.unknown} of ${field} players have no responsible call and count against either side.`
           : ''
-      } This is expected contest share, not a cover claim.`,
+      } This is expected contest share of the whole field, not of calls only, and not a cover claim.`,
       none: false,
       side: null,
       pct: 50,
@@ -119,15 +125,15 @@ export function poolExpectationView(
   const side = projection.home > projection.away ? 'home' : 'away'
   const team = side === 'home' ? homeName : awayName
   const count = side === 'home' ? projection.home : projection.away
-  const pct = Math.round((count / projection.called) * 100)
+  const pct = field ? Math.round((count / field) * 100) : 0
   return {
     line: `${team} ${pct}%`,
-    detail: `${count} of ${projection.called} calls${
-      projection.unknown ? ` · ${projection.unknown} unknown` : ''
+    detail: `${count} of ${field} players${
+      projection.unknown ? ` · ${projection.unknown} no call` : ''
     }`,
-    title: `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${projection.called} players with a call${
-      projection.unknown ? `; ${projection.unknown} unknown` : ''
-    }). This is expected contest share, not a cover claim.`,
+    title: `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${field} other players${
+      projection.unknown ? `; ${projection.unknown} have no responsible call` : ''
+    }). No-calls count against the share. Your card is left out. This is expected contest share, not a cover claim.`,
     none: false,
     side,
     pct,
@@ -148,8 +154,9 @@ function joinSentences(parts: Array<string | null | undefined>) {
 }
 
 /**
- * Submitted-card share after GrokBot ingest. Percent is among actual picks,
- * not modeled calls. The old Pool W–L–P book rides in the detail.
+ * Submitted-card share after GrokBot ingest. Percent is of the field
+ * (picks plus unpicked), not of submitted cards only. The old Pool
+ * W–L–P book rides in the detail.
  */
 export function actualPoolView(
   split: PoolSideSplit | null | undefined,
@@ -197,7 +204,9 @@ export function actualPoolView(
         ats,
       ]),
       title: joinSentences([
-        `After results, submitted cards were split ${split.home}–${split.away}.`,
+        `After results, the rest of the pool was split ${split.home}–${split.away}${
+          split.unpicked ? `; ${split.unpicked} unpicked` : ''
+        }.`,
         atsDetail,
         expectedNote,
       ]),
@@ -210,7 +219,8 @@ export function actualPoolView(
   const side = split.home > split.away ? 'home' : 'away'
   const team = side === 'home' ? homeName : awayName
   const count = side === 'home' ? split.home : split.away
-  const pct = Math.round((count / split.picked) * 100)
+  const field = split.picked + split.unpicked
+  const pct = field ? Math.round((count / field) * 100) : 0
   const sameSide = expected?.side != null && expected.side === side
   const compare =
     expected?.pct != null && !expected.none
@@ -222,12 +232,12 @@ export function actualPoolView(
   return {
     line: `${team} ${pct}%`,
     detail: joinParts([
-      `${count} of ${split.picked} picks`,
+      `${count} of ${field} players`,
       unpicked,
       ats,
     ]),
     title: joinSentences([
-      `After results, ${pct}% of submitted picks took ${team} (${count} of ${split.picked}${
+      `After results, ${pct}% of the pool took ${team} (${count} of ${field}${
         split.unpicked ? `; ${split.unpicked} unpicked` : ''
       }).`,
       atsDetail,
@@ -375,10 +385,6 @@ function leadingShare(
   return null
 }
 
-function calledMajority(projection: PoolProjection): PoolMajority | null {
-  return leadingShare(projection, projection.called)
-}
-
 function fieldMajority(projection: PoolProjection): PoolMajority | null {
   return leadingShare(projection, projection.called + projection.unknown)
 }
@@ -442,7 +448,7 @@ export function poolSupportView(
 }
 
 function leverageSide(projection: PoolProjection): 'home' | 'away' | null {
-  const majority = calledMajority(projection)
+  const majority = fieldMajority(projection)
   if (!majority) return null
   return majority.side === 'home' ? 'away' : 'home'
 }

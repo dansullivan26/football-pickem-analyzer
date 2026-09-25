@@ -183,3 +183,21 @@ test('poolRecordsForWeek stays quiet until a pick is graded', () => {
   assert.equal(record?.unpicked, 1)
   assert.equal(poolRecordIsGraded(record), false)
 })
+
+test('pool tallies can leave one entry out of the field', () => {
+  const record = poolRecordForGame(covered, 1, 46, 2026, 'a')
+  assert.deepEqual(record, {
+    correct: 0,
+    wrong: 2,
+    push: 0,
+    unpicked: 1,
+    pending: 0,
+  })
+  const split = poolSideSplitForGame(covered, 1, 46, 2026, 'a')
+  assert.deepEqual(split, {
+    home: 2,
+    away: 0,
+    unpicked: 1,
+    picked: 2,
+  })
+})

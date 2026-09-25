@@ -36,17 +36,26 @@ function weekForGame(
   )
 }
 
+function entriesForField(
+  entries: PlayerHistory['weeks'][number]['entries'],
+  excludeEntryId?: string | null,
+) {
+  if (!excludeEntryId) return entries
+  return entries.filter((entry) => entry.entryId !== excludeEntryId)
+}
+
 /** Pool ATS book for one slate game: correct, wrong, unpicked. */
 export function poolRecordForGame(
   history: PlayerHistory,
   week: number,
   cbsEventId: number,
   seasonYear = history.pool.seasonYear,
+  excludeEntryId?: string | null,
 ): PoolGameRecord | null {
   const weekRow = weekForGame(history, week, seasonYear)
   if (!weekRow) return null
   const record = emptyRecord()
-  for (const entry of weekRow.entries) {
+  for (const entry of entriesForField(weekRow.entries, excludeEntryId)) {
     tallyPick(
       record,
       entry.picks.find((pick) => pick.cbsEventId === cbsEventId),
@@ -59,18 +68,20 @@ export function poolRecordsForWeek(
   history: PlayerHistory,
   week: number,
   seasonYear = history.pool.seasonYear,
+  excludeEntryId?: string | null,
 ): Map<number, PoolGameRecord> {
   const weekRow = weekForGame(history, week, seasonYear)
   const records = new Map<number, PoolGameRecord>()
   if (!weekRow) return records
+  const entries = entriesForField(weekRow.entries, excludeEntryId)
 
   const eventIds = new Set<number>()
-  for (const entry of weekRow.entries) {
+  for (const entry of entries) {
     for (const pick of entry.picks) eventIds.add(pick.cbsEventId)
   }
   for (const cbsEventId of eventIds) {
     const record = emptyRecord()
-    for (const entry of weekRow.entries) {
+    for (const entry of entries) {
       tallyPick(
         record,
         entry.picks.find((pick) => pick.cbsEventId === cbsEventId),
@@ -138,11 +149,12 @@ export function poolSideSplitForGame(
   week: number,
   cbsEventId: number,
   seasonYear = history.pool.seasonYear,
+  excludeEntryId?: string | null,
 ): PoolSideSplit | null {
   const weekRow = weekForGame(history, week, seasonYear)
   if (!weekRow) return null
   const split = emptySplit()
-  for (const entry of weekRow.entries) {
+  for (const entry of entriesForField(weekRow.entries, excludeEntryId)) {
     tallySide(
       split,
       entry.picks.find((pick) => pick.cbsEventId === cbsEventId),
@@ -155,18 +167,20 @@ export function poolSideSplitsForWeek(
   history: PlayerHistory,
   week: number,
   seasonYear = history.pool.seasonYear,
+  excludeEntryId?: string | null,
 ): Map<number, PoolSideSplit> {
   const weekRow = weekForGame(history, week, seasonYear)
   const splits = new Map<number, PoolSideSplit>()
   if (!weekRow) return splits
+  const entries = entriesForField(weekRow.entries, excludeEntryId)
 
   const eventIds = new Set<number>()
-  for (const entry of weekRow.entries) {
+  for (const entry of entries) {
     for (const pick of entry.picks) eventIds.add(pick.cbsEventId)
   }
   for (const cbsEventId of eventIds) {
     const split = emptySplit()
-    for (const entry of weekRow.entries) {
+    for (const entry of entries) {
       tallySide(
         split,
         entry.picks.find((pick) => pick.cbsEventId === cbsEventId),

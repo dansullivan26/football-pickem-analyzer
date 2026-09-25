@@ -179,12 +179,14 @@ dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
 `pct` prose diffs vs yesterday). The Lines page attaches that report to the
 "Covers.com data collected…" line and expands it on click. Dumps without
 `report` still ingest. Each game row also shows an **Expected pool** read from
-the leak-free player model: the side and percent among players with a call,
-plus how many are still unknown. That is expected contest share, not a cover
-claim. The Pool-aware generated card uses the same numbers for leverage fades.
-After GrokBot ingests graded picks, the same footer adds **Actual pool** — the
-side and percent among submitted cards, with the old `Pool W–L–P` ATS book on
-that line instead of the meta chip. Hover copy compares the two.
+the leak-free player model: the side and percent of the rest of the pool
+(current roster minus the operator card). Players with no responsible call
+count against that share. That is expected contest share, not a cover
+claim. The Pool-aware generated card uses the same field numbers for
+leverage fades. After GrokBot ingests graded picks, the same footer adds
+**Actual pool** — the side and percent of that same field, with the old
+`Pool W–L–P` ATS book on that line instead of the meta chip. Hover copy
+compares the two.
 
 ## GrokBot ingest
 

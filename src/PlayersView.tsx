@@ -8,6 +8,7 @@ import {
   leanLabel,
   PREDICTION_STRATEGY_ID,
   predictPlayerWeek,
+  predictionEmptyReason,
   predictionMaturity,
   PREDICTION_MATURITY_MILESTONES,
   playerReadability,
@@ -732,6 +733,10 @@ export default function PlayersView({
             : null,
         }
       : livePrediction
+  const emptyPrediction = predictionEmptyReason(prediction)
+  const showPredictionGames = Boolean(
+    prediction && (!emptyPrediction || emptyPrediction.showGames),
+  )
   const playerResiduals = selectedPlayer
     ? summarizePlayerPredictionResiduals(
         forecasts,
@@ -1426,18 +1431,21 @@ export default function PlayersView({
                     </details>
                   )}
 
-                  {!prediction || prediction.calls === 0 ? (
-                    <div className="prediction-empty">
-                      <strong>No responsible calls yet</strong>
-                      <p>
-                        The model waits for at least 20 picks from earlier
-                        weeks, or a smaller but decisive line-value, public,
-                        travel, or rest sample. A week never trains on
-                        itself, so calls start with the next slate.
-                      </p>
+                  {emptyPrediction && (
+                    <div
+                      className={
+                        emptyPrediction.showGames
+                          ? 'prediction-empty has-games'
+                          : 'prediction-empty'
+                      }
+                    >
+                      <strong>{emptyPrediction.title}</strong>
+                      <p>{emptyPrediction.detail}</p>
                     </div>
-                  ) : (
+                  )}
+                  {showPredictionGames && prediction && (
                     <div className="prediction-list">
+                      {prediction.calls > 0 && (
                       <p className="prediction-legend">
                         The number is lean strength: how far the habit sits
                         from a coin flip once small samples are shrunk. The
@@ -1445,6 +1453,7 @@ export default function PlayersView({
                         that lean, so a tall bar on a short history reads
                         strong lean · thin sample.
                       </p>
+                      )}
                       {prediction.games.map((game) => {
                         const score = formatWinningScore(
                           scoresByEvent.get(game.cbsEventId) ?? {},

@@ -383,9 +383,24 @@ export function playOfTheWeek(picks: SuggestedPick[]) {
   return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
 }
 
+function copiedPickBand(pick: SuggestedPick) {
+  if (
+    pick.category === 'lock' ||
+    pick.category === 'hammer' ||
+    pick.category === 'lean' ||
+    pick.category === 'slight'
+  ) {
+    return pick.category
+  }
+  return `${formatCopiedNet(pick.compositeEdge)}-pt net`
+}
+
 function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
   const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
-  return `Play of the week: ${line} (${pick.category} · ${formatCopiedNet(pick.compositeEdge)}-pt net)`
+  const band = copiedPickBand(pick)
+  const net = `${formatCopiedNet(pick.compositeEdge)}-pt net`
+  const detail = band === net ? net : `${band} · ${net}`
+  return `Play of the week: ${line} (${detail})`
 }
 
 function formatCopiedRecommendedLine(
@@ -396,10 +411,11 @@ function formatCopiedRecommendedLine(
   const sent = submittedPick(pick, deviate)
   const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
   if (deviate) return `${base} (deviated)`
+  const band = copiedPickBand(pick)
   if (potwGameId === pick.gameId) {
-    return `${base} (${pick.category} — play of the week)`
+    return `${base} (${band} — play of the week)`
   }
-  return `${base} (${pick.category})`
+  return `${base} (${band})`
 }
 
 /**

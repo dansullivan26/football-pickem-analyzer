@@ -192,6 +192,43 @@ test('playOfTheWeek is the top Recommendation-sorted pick', () => {
   assert.equal(playOfTheWeek([]), null)
 })
 
+test('formatSuggestedCardText uses net instead of a neutral band', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 3,
+    weekLabel: 'Week 3',
+    picks: [
+      pick({
+        gameId: 'ind',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        away: 'Indiana',
+        awayAbbrev: 'IND',
+        awayId: 'ind',
+        home: 'Home',
+        homeAbbrev: 'HOME',
+        pickedSide: 'away',
+        pickedTeamId: 'ind',
+        pickedTeam: 'Indiana',
+        poolSpread: -20.5,
+        category: 'neutral',
+        edge: null,
+        compositeEdge: 0.5,
+      }),
+    ],
+    unpicked: [],
+    tiebreaker: null,
+  }
+
+  assert.equal(
+    formatSuggestedCardText(card),
+    'Play of the week: IND -20.5 (0.5-pt net)\n\nSaturday:\n\nIND -20.5 (0.5-pt net — play of the week)',
+  )
+})
+
 test('formatSuggestedCardText names play of the week and pick strength', () => {
   const card: SuggestedCard = {
     strategyId: 'test',

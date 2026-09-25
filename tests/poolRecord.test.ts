@@ -7,6 +7,8 @@ import {
   poolRecordForGame,
   poolRecordIsGraded,
   poolRecordsForWeek,
+  poolSideSplitForGame,
+  poolSideSplitsForWeek,
 } from '../src/poolRecord.ts'
 import type { PlayerHistory, PlayerPick, PlayerWeekEntry } from '../src/types.ts'
 
@@ -148,6 +150,18 @@ test('poolRecordForGame inserts pushes before unpicked', () => {
     formatPoolRecordDetail(record!),
     '1 correct · 0 wrong · 1 push · 1 unpicked',
   )
+})
+
+test('poolSideSplitForGame counts home, away, and unpicked cards', () => {
+  const split = poolSideSplitForGame(covered, 1, 46)
+  assert.deepEqual(split, {
+    home: 2,
+    away: 1,
+    unpicked: 1,
+    picked: 3,
+  })
+  const week = poolSideSplitsForWeek(covered, 1)
+  assert.deepEqual(week.get(46), split)
 })
 
 test('poolRecordsForWeek stays quiet until a pick is graded', () => {

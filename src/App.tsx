@@ -27,10 +27,11 @@ import { publicBucketForPool, favorableHook, unfavorableHook, keyNumberHook, com
 import { generateSuggestedCard, type SuggestedCard } from './cardStrategy'
 import { generateSeasonResultsCard } from './cardResults'
 import {
+  actualPoolView,
   generatePoolAwareCard,
   poolExpectationView,
   poolProjectionsForWeek,
-  type PoolProjection,
+  type PoolExpectationView,
 } from './cardPoolAware'
 import { deviationIdsForWeek } from './cardOverrides'
 import { dispatchReviewRefresh } from './dispatchRefresh'
@@ -61,6 +62,7 @@ import {
   formatPoolRecordLabel,
   poolRecordIsGraded,
   poolRecordsForWeek,
+  poolSideSplitsForWeek,
 } from './poolRecord'
 import { formatRankedTeamName, teamKey, teamPageSlugs, buildTeamDirectory } from './teamPerformance'
 import {
@@ -129,6 +131,11 @@ const travelRestIndex = buildTravelRestIndex(
 )
 const travelRestByEvent = travelRestIndex.byEvent
 const poolRecordsByEvent = poolRecordsForWeek(
+  playerHistory,
+  slate.week.order,
+  slate.pool.seasonYear,
+)
+const poolSideSplitsByEvent = poolSideSplitsForWeek(
   playerHistory,
   slate.week.order,
   slate.pool.seasonYear,
@@ -456,22 +463,35 @@ function OurPickNote({
   )
 }
 
-function PoolExpectation({
-  projection,
-  homeName,
-  awayName,
+function PoolShare({
+  label,
+  view,
 }: {
-  projection: PoolProjection | undefined
-  homeName: string
-  awayName: string
+  label: string
+  view: PoolExpectationView | null
 }) {
-  const view = poolExpectationView(projection, homeName, awayName)
   if (!view) return null
   return (
     <div className="pool-expectation" title={view.title}>
-      <div className="edge-label">Expected pool</div>
+      <div className="edge-label">{label}</div>
       <div className={`edge-copy${view.none ? ' none' : ''}`}>{view.line}</div>
       <small>{view.detail}</small>
+    </div>
+  )
+}
+
+function PoolSharePair({
+  expected,
+  actual,
+}: {
+  expected: PoolExpectationView | null
+  actual: PoolExpectationView | null
+}) {
+  if (!expected && !actual) return null
+  return (
+    <div className="pool-share-stack">
+      <PoolShare label="Expected pool" view={expected} />
+      <PoolShare label="Actual pool" view={actual} />
     </div>
   )
 }
@@ -542,12 +562,28 @@ function GameCard({
   const score = formatGameScore(game)
   const completed = gameIsCompleted(game, now)
   const poolRecord = poolRecordsByEvent.get(game.cbsEventId)
-  const poolLine = poolRecordIsGraded(poolRecord)
-    ? formatPoolRecordLabel(poolRecord)
+  const expectedPool = poolExpectationView(
+    poolProjectionsByEvent.get(game.cbsEventId),
+    game.home.name,
+    game.away.name,
+  )
+  const actualPool = poolRecordIsGraded(poolRecord)
+    ? actualPoolView(
+        poolSideSplitsByEvent.get(game.cbsEventId),
+        poolRecord,
+        game.home.name,
+        game.away.name,
+        expectedPool,
+      )
     : null
-  const poolDetail = poolRecordIsGraded(poolRecord)
-    ? formatPoolRecordDetail(poolRecord)
-    : null
+  const poolLine =
+    poolRecordIsGraded(poolRecord) && !actualPool
+      ? formatPoolRecordLabel(poolRecord)
+      : null
+  const poolDetail =
+    poolRecordIsGraded(poolRecord) && !actualPool
+      ? formatPoolRecordDetail(poolRecord)
+      : null
   return (
     <article className={`game-card ${category}`}>
       <div className="game-meta">
@@ -667,11 +703,7 @@ function GameCard({
 
       <div className="card-footer">
         <Recommendation analysis={analysis} />
-        <PoolExpectation
-          projection={poolProjectionsByEvent.get(game.cbsEventId)}
-          homeName={game.home.name}
-          awayName={game.away.name}
-        />
+        <PoolSharePair expected={expectedPool} actual={actualPool} />
         {completed && <OurPickNote game={game} pick={ourPick} />}
         <div className="card-notes">
           <span className="spread-note">All lines shown for {game.home.name}</span>

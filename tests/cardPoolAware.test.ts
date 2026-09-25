@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  actualPoolView,
   generatePoolAwareCard,
   poolExpectationView,
   poolProjectionCopy,
@@ -107,6 +108,57 @@ test('poolExpectationView reports no calls without inventing a leader', () => {
   assert.equal(view?.line, 'No calls yet')
   assert.equal(view?.none, true)
   assert.equal(view?.detail, '3 players unknown')
+})
+
+test('actualPoolView names submitted cards and keeps the ATS book', () => {
+  const expected = poolExpectationView(
+    projectPoolForGame([
+      ...Array.from({ length: 20 }, () => 'home' as const),
+      ...Array.from({ length: 2 }, () => 'away' as const),
+    ]),
+    'Green Bay',
+    'Atlanta',
+  )
+  const view = actualPoolView(
+    { home: 18, away: 7, unpicked: 1, picked: 25 },
+    { correct: 8, wrong: 17, push: 0, unpicked: 1, pending: 0 },
+    'Green Bay',
+    'Atlanta',
+    expected,
+  )
+  assert.equal(view?.line, 'Green Bay 72%')
+  assert.equal(view?.detail, '18 of 25 picks · 1 unpicked · Pool 8–17–1')
+  assert.match(view?.title ?? '', /72% of submitted picks took Green Bay/)
+  assert.match(view?.title ?? '', /Forecast was Green Bay 91%/)
+})
+
+test('actualPoolView notes when the field flipped the forecast', () => {
+  const expected = poolExpectationView(
+    projectPoolForGame(['home', 'home', 'away']),
+    'Green Bay',
+    'Atlanta',
+  )
+  const view = actualPoolView(
+    { home: 4, away: 12, unpicked: 0, picked: 16 },
+    { correct: 12, wrong: 4, push: 0, unpicked: 0, pending: 0 },
+    'Green Bay',
+    'Atlanta',
+    expected,
+  )
+  assert.equal(view?.line, 'Atlanta 75%')
+  assert.match(view?.title ?? '', /Forecast leaned the other way/)
+})
+
+test('actualPoolView stays hidden until a side or a graded book exists', () => {
+  assert.equal(
+    actualPoolView(
+      { home: 0, away: 0, unpicked: 4, picked: 0 },
+      { correct: 0, wrong: 0, push: 0, unpicked: 4, pending: 0 },
+      'Green Bay',
+      'Atlanta',
+    ),
+    null,
+  )
 })
 
 test('poolProjectionsForWeek counts frozen predicted sides once per player', () => {

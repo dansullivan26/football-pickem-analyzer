@@ -11,6 +11,13 @@ import {
 } from './playerPrediction.ts'
 import type { AppearanceTravelRest, GameTravelRest } from './travelRest.ts'
 import type { NflStarterInjuryTeam } from './nflStarterInjuries.ts'
+import {
+  formatPoolRecordDetail,
+  formatPoolRecordLabel,
+  poolRecordIsGraded,
+  type PoolGameRecord,
+  type PoolSideSplit,
+} from './poolRecord.ts'
 import type {
   GameAnalysis,
   PlayerHistory,
@@ -120,6 +127,111 @@ export function poolExpectationView(
     title: `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${projection.called} players with a call${
       projection.unknown ? `; ${projection.unknown} unknown` : ''
     }). This is expected contest share, not a cover claim.`,
+    none: false,
+    side,
+    pct,
+  }
+}
+
+function joinParts(parts: Array<string | null | undefined>) {
+  return parts.filter((part): part is string => Boolean(part)).join(' · ')
+}
+
+function joinSentences(parts: Array<string | null | undefined>) {
+  return parts
+    .filter((part): part is string => Boolean(part))
+    .map((part) =>
+      /[.!?]$/.test(part) ? part : `${part.replace(/[.;]$/, '')}.`,
+    )
+    .join(' ')
+}
+
+/**
+ * Submitted-card share after GrokBot ingest. Percent is among actual picks,
+ * not modeled calls. The old Pool W–L–P book rides in the detail.
+ */
+export function actualPoolView(
+  split: PoolSideSplit | null | undefined,
+  record: PoolGameRecord | null | undefined,
+  homeName: string,
+  awayName: string,
+  expected: Pick<PoolExpectationView, 'line' | 'side' | 'pct' | 'none'> | null = null,
+): PoolExpectationView | null {
+  if (!split) return null
+  const graded = poolRecordIsGraded(record)
+  if (split.picked === 0 && !graded) return null
+
+  const ats = graded ? formatPoolRecordLabel(record) : null
+  const atsDetail = graded ? formatPoolRecordDetail(record) : null
+  const unpicked =
+    split.unpicked > 0 ? `${split.unpicked} unpicked` : null
+  const expectedNote =
+    expected && !expected.none
+      ? `Forecast was ${expected.line}.`
+      : expected?.none
+        ? 'The model had no responsible calls to compare.'
+        : null
+
+  if (split.picked === 0) {
+    return {
+      line: ats ?? 'No picks yet',
+      detail: joinParts([unpicked]),
+      title: joinSentences([
+        'GrokBot has graded this game but no submitted sides were stored.',
+        atsDetail,
+        expectedNote,
+      ]),
+      none: true,
+      side: null,
+      pct: null,
+    }
+  }
+
+  if (split.home === split.away) {
+    return {
+      line: 'Pool was split',
+      detail: joinParts([
+        `${split.home} home / ${split.away} away`,
+        unpicked,
+        ats,
+      ]),
+      title: joinSentences([
+        `After results, submitted cards were split ${split.home}–${split.away}.`,
+        atsDetail,
+        expectedNote,
+      ]),
+      none: false,
+      side: null,
+      pct: 50,
+    }
+  }
+
+  const side = split.home > split.away ? 'home' : 'away'
+  const team = side === 'home' ? homeName : awayName
+  const count = side === 'home' ? split.home : split.away
+  const pct = Math.round((count / split.picked) * 100)
+  const sameSide = expected?.side != null && expected.side === side
+  const compare =
+    expected?.pct != null && !expected.none
+      ? sameSide
+        ? `Forecast was ${expected.line}.`
+        : `Forecast leaned the other way (${expected.line}).`
+      : expectedNote
+
+  return {
+    line: `${team} ${pct}%`,
+    detail: joinParts([
+      `${count} of ${split.picked} picks`,
+      unpicked,
+      ats,
+    ]),
+    title: joinSentences([
+      `After results, ${pct}% of submitted picks took ${team} (${count} of ${split.picked}${
+        split.unpicked ? `; ${split.unpicked} unpicked` : ''
+      }).`,
+      atsDetail,
+      compare,
+    ]),
     none: false,
     side,
     pct,

@@ -2056,6 +2056,12 @@ a.team-page-link:focus-visible .team-name {
   margin-top: 2px;
 }
 
+.pool-share-stack {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
 .pool-expectation {
   display: grid;
   justify-items: end;
@@ -4335,6 +4341,7 @@ footer {
     gap: 12px 24px;
   }
 
+  .pool-share-stack,
   .pool-expectation {
     justify-items: start;
   }
@@ -4768,6 +4775,7 @@ footer {
     align-items: center;
   }
 
+  .pool-share-stack,
   .pool-expectation {
     justify-items: end;
   }

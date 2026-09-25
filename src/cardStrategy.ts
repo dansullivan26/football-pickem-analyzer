@@ -370,6 +370,38 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
+function formatCopiedNet(value: number) {
+  if (Number.isInteger(value)) return String(value)
+  const hundredths = Math.round(value * 100) / 100
+  const tenths = Math.round(value * 10) / 10
+  if (Math.abs(hundredths - tenths) < 1e-9) return tenths.toFixed(1)
+  return hundredths.toFixed(2)
+}
+
+/** #1 on Recommendation sort — the play a buddy should see first in a paste. */
+export function playOfTheWeek(picks: SuggestedPick[]) {
+  return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
+}
+
+function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
+  const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
+  return `Play of the week: ${line} (${pick.category} · ${formatCopiedNet(pick.compositeEdge)}-pt net)`
+}
+
+function formatCopiedRecommendedLine(
+  pick: SuggestedPick,
+  deviate: boolean,
+  potwGameId: string | null,
+) {
+  const sent = submittedPick(pick, deviate)
+  const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
+  if (deviate) return `${base} (deviated)`
+  if (potwGameId === pick.gameId) {
+    return `${base} (${pick.category} — play of the week)`
+  }
+  return `${base} (${pick.category})`
+}
+
 /**
  * Manual-review games still belong in the copied card so the whole slate is
  * accounted for, but they are tagged so a picked side is never confused with a
@@ -480,13 +512,17 @@ export function formatSuggestedCardText(
   manualSelections: ManualPickSelections = new Map(),
   sort: 'slate' | 'recommendation' = 'slate',
 ) {
+  const potw = playOfTheWeek(picks)
   const groups = groupCardRowsByDay(orderCardRows(picks, card.unpicked, sort))
-  return groups
+  const body = groups
     .map((group) => {
       const lines = group.rows.map((row) => {
         if (row.kind === 'pick') {
-          const sent = submittedPick(row.pick, deviations.has(row.pick.gameId))
-          return formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
+          return formatCopiedRecommendedLine(
+            row.pick,
+            deviations.has(row.pick.gameId),
+            potw?.gameId ?? null,
+          )
         }
         return formatCopiedManualLine(
           row.game,
@@ -497,4 +533,7 @@ export function formatSuggestedCardText(
     })
     .filter(Boolean)
     .join('\n\n')
+  if (!potw) return body
+  const header = formatPlayOfTheWeekHeader(potw)
+  return body ? `${header}\n\n${body}` : header
 }

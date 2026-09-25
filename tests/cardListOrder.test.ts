@@ -192,7 +192,7 @@ test('playOfTheWeek is the top Recommendation-sorted pick', () => {
   assert.equal(playOfTheWeek([]), null)
 })
 
-test('formatSuggestedCardText uses net instead of a neutral band', () => {
+test('formatSuggestedCardText grades rest-only picks with lock/hammer/lean/slight', () => {
   const card: SuggestedCard = {
     strategyId: 'test',
     title: 'ATS Card',
@@ -218,6 +218,22 @@ test('formatSuggestedCardText uses net instead of a neutral band', () => {
         edge: null,
         compositeEdge: 0.5,
       }),
+      pick({
+        gameId: 'det',
+        kickoff: '2026-09-20T13:00:00-04:00',
+        away: 'Detroit',
+        awayAbbrev: 'DET',
+        awayId: 'det',
+        home: 'Home',
+        homeAbbrev: 'HOME',
+        pickedSide: 'away',
+        pickedTeamId: 'det',
+        pickedTeam: 'Detroit',
+        poolSpread: -6.5,
+        category: 'neutral',
+        edge: null,
+        compositeEdge: 1.95,
+      }),
     ],
     unpicked: [],
     tiebreaker: null,
@@ -225,7 +241,7 @@ test('formatSuggestedCardText uses net instead of a neutral band', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week: IND -20.5 (0.5-pt net)\n\nSaturday:\n\nIND -20.5 (0.5-pt net — play of the week)',
+    'Play of the week: DET -6.5 (lean)\n\nSaturday:\n\nIND -20.5 (slight)\n\nSunday:\n\nDET -6.5 (lean — play of the week)',
   )
 })
 
@@ -296,7 +312,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week: KC +5.5 (lock · 4.2-pt net)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nKC +5.5 (lock — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nKC +5.5 (lock — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -307,7 +323,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Play of the week: KC +5.5 (lock · 4.2-pt net)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
+    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
   )
 })
 

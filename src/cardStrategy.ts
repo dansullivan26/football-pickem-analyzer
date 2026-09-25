@@ -1,5 +1,6 @@
 import {
   CARD_STRATEGY_NOTE,
+  classifyEdge,
   compareRecommendationOrder,
   formatPoolSpread,
   poolSpreadForSide,
@@ -370,37 +371,24 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
-function formatCopiedNet(value: number) {
-  if (Number.isInteger(value)) return String(value)
-  const hundredths = Math.round(value * 100) / 100
-  const tenths = Math.round(value * 10) / 10
-  if (Math.abs(hundredths - tenths) < 1e-9) return tenths.toFixed(1)
-  return hundredths.toFixed(2)
-}
-
 /** #1 on Recommendation sort — the play a buddy should see first in a paste. */
 export function playOfTheWeek(picks: SuggestedPick[]) {
   return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
 }
 
+/**
+ * Buddy-facing strength uses the same lock / hammer / lean / slight words as
+ * the Lines page, graded off the recommendation net so rest-only plays still
+ * get a readable band instead of point jargon.
+ */
 function copiedPickBand(pick: SuggestedPick) {
-  if (
-    pick.category === 'lock' ||
-    pick.category === 'hammer' ||
-    pick.category === 'lean' ||
-    pick.category === 'slight'
-  ) {
-    return pick.category
-  }
-  return `${formatCopiedNet(pick.compositeEdge)}-pt net`
+  const band = classifyEdge(pick.compositeEdge)
+  return band === 'neutral' || band === 'pending' ? 'slight' : band
 }
 
 function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
   const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
-  const band = copiedPickBand(pick)
-  const net = `${formatCopiedNet(pick.compositeEdge)}-pt net`
-  const detail = band === net ? net : `${band} · ${net}`
-  return `Play of the week: ${line} (${detail})`
+  return `Play of the week: ${line} (${copiedPickBand(pick)})`
 }
 
 function formatCopiedRecommendedLine(

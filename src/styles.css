@@ -1587,7 +1587,8 @@ select:focus {
   font-weight: 600;
 }
 
-.game-final {
+.game-final,
+.game-live {
   color: var(--ink);
   font-weight: 700;
 }

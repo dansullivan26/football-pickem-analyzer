@@ -54,10 +54,11 @@ import { locationFromPath, pathForTeam, pathForView, TEAM_PROFILE_HASH, type App
 import {
   etDayKey,
   formatGameScore,
-  gameIsCompleted,
   gameIsOnEtDay,
   gameIsUpcoming,
+  gameKickoffPhase,
   slateKickoffDays,
+  statusIsFinal,
 } from './gameStatus'
 import { ourPickForGame, ourRosterEntry } from './ourEntry'
 import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
@@ -576,7 +577,8 @@ function GameCard({
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
-  const completed = gameIsCompleted(game, now)
+  const phase = gameKickoffPhase(game, now)
+  const final = statusIsFinal(game.status)
   const poolRecord = poolRecordsByEvent.get(game.cbsEventId)
   const expectedPool = poolExpectationView(
     poolFieldProjectionsByEvent.get(game.cbsEventId),
@@ -589,15 +591,13 @@ function GameCard({
     game.home.abbrev,
     game.away.abbrev,
   )
-  const actualPool = poolRecordIsGraded(poolRecord)
-    ? actualPoolView(
-        poolSideSplitsByEvent.get(game.cbsEventId),
-        poolRecord,
-        game.home.name,
-        game.away.name,
-        expectedPool,
-      )
-    : null
+  const actualPool = actualPoolView(
+    poolSideSplitsByEvent.get(game.cbsEventId),
+    poolRecord,
+    game.home.name,
+    game.away.name,
+    expectedPool,
+  )
   const poolLine =
     poolRecordIsGraded(poolRecord) && !actualPool
       ? formatPoolRecordLabel(poolRecord)
@@ -611,7 +611,11 @@ function GameCard({
       <div className="game-meta">
         <span className={`sport-tag ${game.sport.toLowerCase()}`}>{game.sport}</span>
         <time dateTime={game.kickoff}>{game.kickoffLabel.replace(' ET', '')}</time>
-        {score && <span className="game-final">Final {score}</span>}
+        {score && (
+          <span className={final ? 'game-final' : 'game-live'}>
+            {final ? `Final ${score}` : `Live ${score}`}
+          </span>
+        )}
         {poolLine && (
           <span className="game-pool-record" title={poolDetail ?? undefined}>
             {poolLine}
@@ -726,7 +730,7 @@ function GameCard({
       <div className="card-footer">
         <Recommendation analysis={analysis} poolSupport={poolSupport} />
         <PoolSharePair expected={expectedPool} actual={actualPool} />
-        {completed && <OurPickNote game={game} pick={ourPick} />}
+        {phase !== 'upcoming' && <OurPickNote game={game} pick={ourPick} />}
         <div className="card-notes">
           <span className="spread-note">All lines shown for {game.home.name}</span>
           <ConsensusNote consensus={analysis.consensus} now={now} />
@@ -985,8 +989,9 @@ function App() {
   const [travelMin, setTravelMin] = useState<0 | 1 | 2 | 3>(0)
   const [league, setLeague] = useState<'all' | 'NCAAF' | 'NFL'>('all')
   const [query, setQuery] = useState('')
-  const [upcomingOnly, setUpcomingOnly] = useState(true)
-  const [completedOnly, setCompletedOnly] = useState(false)
+  const [kickoffFilter, setKickoffFilter] = useState<
+    'all' | 'upcoming' | 'in-progress' | 'completed'
+  >('upcoming')
   const [dayFilter, setDayFilter] = useState<'all' | 'today' | string>('all')
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
@@ -1169,23 +1174,17 @@ function App() {
         [game.away.name, game.away.abbrev, game.home.name, game.home.abbrev].some(
           (value) => value.toLowerCase().includes(normalizedQuery),
         )
-      const matchesUpcoming = !upcomingOnly || gameIsUpcoming(game, now)
-      const matchesCompleted = !completedOnly || gameIsCompleted(game, now)
+      const matchesKickoff =
+        kickoffFilter === 'all' || gameKickoffPhase(game, now) === kickoffFilter
       const todayKey = etDayKey(now)
       const matchesDay =
         dayFilter === 'all' ||
         (dayFilter === 'today'
           ? todayKey != null && gameIsOnEtDay(game, todayKey)
           : gameIsOnEtDay(game, dayFilter))
-      return (
-        matchesLeague &&
-        matchesQuery &&
-        matchesUpcoming &&
-        matchesCompleted &&
-        matchesDay
-      )
+      return matchesLeague && matchesQuery && matchesKickoff && matchesDay
     })
-  }, [analyses, completedOnly, dayFilter, league, now, query, upcomingOnly])
+  }, [analyses, dayFilter, kickoffFilter, league, now, query])
 
   const counts = useMemo(
     () =>
@@ -1519,24 +1518,30 @@ function App() {
             <label className="upcoming-filter">
               <input
                 type="checkbox"
-                checked={upcomingOnly}
-                onChange={(event) => {
-                  const checked = event.target.checked
-                  setUpcomingOnly(checked)
-                  if (checked) setCompletedOnly(false)
-                }}
+                checked={kickoffFilter === 'upcoming'}
+                onChange={(event) =>
+                  setKickoffFilter(event.target.checked ? 'upcoming' : 'all')
+                }
               />
               Upcoming only
             </label>
             <label className="upcoming-filter">
               <input
                 type="checkbox"
-                checked={completedOnly}
-                onChange={(event) => {
-                  const checked = event.target.checked
-                  setCompletedOnly(checked)
-                  if (checked) setUpcomingOnly(false)
-                }}
+                checked={kickoffFilter === 'in-progress'}
+                onChange={(event) =>
+                  setKickoffFilter(event.target.checked ? 'in-progress' : 'all')
+                }
+              />
+              In progress
+            </label>
+            <label className="upcoming-filter">
+              <input
+                type="checkbox"
+                checked={kickoffFilter === 'completed'}
+                onChange={(event) =>
+                  setKickoffFilter(event.target.checked ? 'completed' : 'all')
+                }
               />
               Completed
             </label>
@@ -1677,8 +1682,7 @@ function App() {
                   setSort('kickoff')
                   setTravelMin(0)
                   setQuery('')
-                  setUpcomingOnly(false)
-                  setCompletedOnly(false)
+                  setKickoffFilter('all')
                   setDayFilter('all')
                 }}
               >

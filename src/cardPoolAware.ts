@@ -195,16 +195,18 @@ export function actualPoolView(
     }
   }
 
+  const after = graded ? 'After results' : 'After kickoff'
+
   if (split.home === split.away) {
     return {
-      line: 'Pool was split',
+      line: graded ? 'Pool was split' : 'Pool is split',
       detail: joinParts([
         `${split.home} home / ${split.away} away`,
         unpicked,
         ats,
       ]),
       title: joinSentences([
-        `After results, the rest of the pool was split ${split.home}–${split.away}${
+        `${after}, the rest of the pool ${graded ? 'was' : 'is'} split ${split.home}–${split.away}${
           split.unpicked ? `; ${split.unpicked} unpicked` : ''
         }.`,
         atsDetail,
@@ -237,7 +239,7 @@ export function actualPoolView(
       ats,
     ]),
     title: joinSentences([
-      `After results, ${pct}% of the pool took ${team} (${count} of ${field}${
+      `${after}, ${pct}% of the pool took ${team} (${count} of ${field}${
         split.unpicked ? `; ${split.unpicked} unpicked` : ''
       }).`,
       atsDetail,

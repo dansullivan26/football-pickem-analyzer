@@ -151,6 +151,19 @@ test('actualPoolView notes when the field flipped the forecast', () => {
   assert.match(view?.title ?? '', /Forecast leaned the other way/)
 })
 
+test('actualPoolView names live submitted cards before results', () => {
+  const view = actualPoolView(
+    { home: 18, away: 7, unpicked: 1, picked: 25 },
+    { correct: 0, wrong: 0, push: 0, unpicked: 1, pending: 25 },
+    'Green Bay',
+    'Atlanta',
+  )
+  assert.equal(view?.line, 'Green Bay 69%')
+  assert.equal(view?.detail, '18 of 26 players · 1 unpicked')
+  assert.match(view?.title ?? '', /After kickoff/)
+  assert.doesNotMatch(view?.title ?? '', /After results/)
+})
+
 test('actualPoolView stays hidden until a side or a graded book exists', () => {
   assert.equal(
     actualPoolView(

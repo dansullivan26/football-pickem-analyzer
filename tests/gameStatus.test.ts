@@ -7,8 +7,10 @@ import {
   formatWinningScore,
   gameIsCompleted,
   gameIsFinal,
+  gameIsInProgress,
   gameIsOnEtDay,
   gameIsUpcoming,
+  gameKickoffPhase,
   finalEventIds,
   mergeEventScores,
   slateKickoffDays,
@@ -55,13 +57,50 @@ test('finalEventIds collects only finished games', () => {
   assert.deepEqual([...ids].sort(), [1, 4])
 })
 
-test('gameIsCompleted includes kicked-off games and finals', () => {
+test('gameKickoffPhase splits upcoming, live, and final', () => {
   assert.equal(
-    gameIsCompleted({ status: 'SCHEDULED', kickoff: '2026-08-29T12:00:00-04:00' }, now),
+    gameKickoffPhase(
+      { status: 'SCHEDULED', kickoff: '2026-08-30T19:00:00-04:00' },
+      now,
+    ),
+    'upcoming',
+  )
+  assert.equal(
+    gameKickoffPhase(
+      { status: 'SCHEDULED', kickoff: '2026-08-29T12:00:00-04:00' },
+      now,
+    ),
+    'in-progress',
+  )
+  assert.equal(
+    gameKickoffPhase(
+      { status: 'IN_PROGRESS', kickoff: '2026-08-30T13:00:00-04:00' },
+      now,
+    ),
+    'in-progress',
+  )
+  assert.equal(
+    gameKickoffPhase(
+      {
+        status: 'FINAL',
+        kickoff: '2026-08-30T19:00:00-04:00',
+      },
+      now,
+    ),
+    'completed',
+  )
+  assert.equal(
+    gameIsInProgress(
+      { status: 'IN_PROGRESS', kickoff: '2026-08-30T13:00:00-04:00' },
+      now,
+    ),
     true,
   )
   assert.equal(
-    gameIsCompleted({ status: 'SCHEDULED', kickoff: '2026-08-30T19:00:00-04:00' }, now),
+    gameIsCompleted(
+      { status: 'SCHEDULED', kickoff: '2026-08-29T12:00:00-04:00' },
+      now,
+    ),
     false,
   )
   assert.equal(

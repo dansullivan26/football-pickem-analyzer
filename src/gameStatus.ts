@@ -71,6 +71,24 @@ export function gameIsUpcoming(game: Pick<SlateGame, 'kickoff'>, now: number) {
   return new Date(game.kickoff).getTime() > now
 }
 
+export type GameKickoffPhase = 'upcoming' | 'in-progress' | 'completed'
+
+/** Final status wins. Otherwise kickoff splits upcoming from live. */
+export function gameKickoffPhase(
+  game: Pick<SlateGame, 'kickoff' | 'status'>,
+  now: number,
+): GameKickoffPhase {
+  if (statusIsFinal(game.status)) return 'completed'
+  return gameIsUpcoming(game, now) ? 'upcoming' : 'in-progress'
+}
+
+export function gameIsInProgress(
+  game: Pick<SlateGame, 'kickoff' | 'status'>,
+  now: number,
+) {
+  return gameKickoffPhase(game, now) === 'in-progress'
+}
+
 /** Status only. `gameIsFinal` also trusts a score, which a live game already has. */
 export function statusIsFinal(status: string) {
   return FINAL_STATUSES.has(status.trim().toUpperCase())
@@ -99,7 +117,7 @@ export function gameIsCompleted(
   },
   now: number,
 ) {
-  return gameIsFinal(game) || !gameIsUpcoming(game, now)
+  return gameKickoffPhase(game, now) === 'completed'
 }
 
 export function etDayKey(value: string | number) {

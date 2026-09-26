@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T17:17:24.301Z",
+  "updatedAt": "2026-09-26T19:58:24.711Z",
   "weeks": [
     {
       "week": 1,
@@ -2152,7 +2152,7 @@
       "week": 4,
       "seasonYear": 2026,
       "label": "Week 4",
-      "capturedAt": "2026-09-26T17:17:24.301Z",
+      "capturedAt": "2026-09-26T19:58:24.711Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029245,
@@ -2243,8 +2243,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 3
+          "awayScore": 20,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50027851,
@@ -2326,7 +2326,9 @@
             "indoor": false
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50027897,
@@ -2335,16 +2337,16 @@
           "away": "VANDY",
           "home": "AUBURN",
           "homeSpread": -8.5,
-          "liveHomeSpread": -9.5,
-          "category": "slight",
+          "liveHomeSpread": -10,
+          "category": "lean",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "strength": "solid",
+          "score": 6,
+          "compositeEdge": 1.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -2740,16 +2742,16 @@
           "away": "BAL",
           "home": "DAL",
           "homeSpread": 2.5,
-          "liveHomeSpread": 3.5,
+          "liveHomeSpread": 3,
           "category": "slight",
           "recommendedSide": "away",
-          "hook": "fg",
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1.5,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": null,
           "venue": {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T22:32:42.599Z",
+  "updatedAt": "2026-09-26T01:42:47.497Z",
   "weeks": [
     {
       "week": 1,
@@ -2152,7 +2152,7 @@
       "week": 4,
       "seasonYear": 2026,
       "label": "Week 4",
-      "capturedAt": "2026-09-25T22:32:42.599Z",
+      "capturedAt": "2026-09-26T01:42:47.497Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029245,
@@ -2213,7 +2213,9 @@
             "state": "IN",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50027885,
@@ -2222,16 +2224,16 @@
           "away": "TEXAS",
           "home": "TENN",
           "homeSpread": 5.5,
-          "liveHomeSpread": 4.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 5.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "source": null,
+          "pickedSide": null,
+          "strength": null,
+          "score": null,
+          "compositeEdge": 0,
           "awayRank": 1,
           "homeRank": 14,
           "venue": {
@@ -2573,16 +2575,16 @@
           "away": "KC",
           "home": "MIA",
           "homeSpread": 11.5,
-          "liveHomeSpread": 10.5,
-          "category": "slight",
+          "liveHomeSpread": 10,
+          "category": "lean",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 3.75,
-          "compositeEdge": 1.25,
+          "strength": "solid",
+          "score": 6.75,
+          "compositeEdge": 1.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {

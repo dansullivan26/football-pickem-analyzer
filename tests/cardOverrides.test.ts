@@ -2,9 +2,13 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   cardDeviationStorageKey,
+  cardManualStorageKey,
+  cardSendStorageKey,
   deviationIdsForWeek,
   mergeOverrideGames,
   rememberedDeviationIds,
+  rememberedManualSelections,
+  rememberedSendIds,
 } from '../src/cardOverrides.ts'
 import type { CardOverrides } from '../src/types.ts'
 
@@ -90,6 +94,62 @@ test('mergeOverrideGames can unmark a game that is on the new card', () => {
       [{ gameId: 'keep-open', deviate: false }],
     ),
     [{ gameId: 'already-final', deviate: true }],
+  )
+})
+
+test('rememberedSendIds checks previously sent games still on the card', () => {
+  const storage = new Map<string, string>()
+  assert.deepEqual(
+    rememberedSendIds({
+      week: 4,
+      seasonYear: 2026,
+      savedIds: ['sat', 'sun', 'gone'],
+      cardIds: ['sat', 'sun', 'mon'],
+      storage: { getItem: () => null },
+    }).sort(),
+    ['sat', 'sun'],
+  )
+  storage.set(cardSendStorageKey(2026, 4), JSON.stringify(['sun', 'mon']))
+  assert.deepEqual(
+    rememberedSendIds({
+      week: 4,
+      seasonYear: 2026,
+      savedIds: ['sat', 'sun'],
+      cardIds: ['sat', 'sun', 'mon'],
+      storage: { getItem: (key) => storage.get(key) ?? null },
+    }).sort(),
+    ['mon', 'sun'],
+  )
+})
+
+test('rememberedManualSelections restores a sent side on a review game', () => {
+  const storage = new Map<string, string>()
+  storage.set(
+    cardManualStorageKey(2026, 4),
+    JSON.stringify({ review: 'home', leftover: 'away' }),
+  )
+  assert.deepEqual(
+    [...rememberedManualSelections({
+      week: 4,
+      seasonYear: 2026,
+      savedGames: [
+        { gameId: 'review', pickedSide: 'away', manual: true },
+        { gameId: 'rec', pickedSide: 'home' },
+      ],
+      unpickedIds: ['review'],
+      storage: { getItem: () => null },
+    })],
+    [['review', 'away']],
+  )
+  assert.deepEqual(
+    [...rememberedManualSelections({
+      week: 4,
+      seasonYear: 2026,
+      savedGames: [{ gameId: 'review', pickedSide: 'away', manual: true }],
+      unpickedIds: ['review'],
+      storage: { getItem: (key) => storage.get(key) ?? null },
+    })],
+    [['review', 'home']],
   )
 })
 

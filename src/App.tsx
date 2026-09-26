@@ -37,7 +37,7 @@ import {
   type PoolSupportView,
 } from './cardPoolAware'
 import { PoolSupportNote } from './PoolSupportNote'
-import { deviationIdsForWeek, sentGamesForWeek } from './cardOverrides'
+import { sentGamesForWeek } from './cardOverrides'
 import {
   dismissHeadsUpFlips,
   headsUpFlipsWereDismissed,
@@ -1680,7 +1680,7 @@ function App() {
             <SuggestedCardPanel
               card={suggestedCard}
               poolProjections={poolFieldProjectionsByEvent}
-              savedDeviationIds={deviationIdsForWeek(
+              savedSentGames={sentGamesForWeek(
                 cardOverrides,
                 slate.week.order,
               )}

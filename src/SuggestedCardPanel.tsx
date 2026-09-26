@@ -15,7 +15,15 @@ import {
   type SuggestedPick,
   type UnpickedGame,
 } from './cardStrategy'
-import { rememberedDeviationIds, storeDeviationIds } from './cardOverrides'
+import {
+  rememberedDeviationIds,
+  rememberedManualSelections,
+  rememberedSendIds,
+  storeDeviationIds,
+  storeManualSelections,
+  storeSendIds,
+} from './cardOverrides'
+import type { CardOverrideGame } from './types'
 import { COMPOSITE_EDGE_SCALE } from './cardScoring'
 import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
 import {
@@ -27,14 +35,22 @@ import { PoolSupportNote } from './PoolSupportNote'
 export default function SuggestedCardPanel({
   card,
   poolProjections,
-  savedDeviationIds = [],
+  savedSentGames = [],
   onClose,
 }: {
   card: SuggestedCard
   poolProjections?: ReadonlyMap<number, PoolProjection>
-  savedDeviationIds?: Iterable<string>
+  savedSentGames?: Iterable<CardOverrideGame>
   onClose: () => void
 }) {
+  const savedGames = [...savedSentGames]
+  const savedDeviationIds = savedGames
+    .filter((game) => game.deviate)
+    .map((game) => game.gameId)
+  const cardIds = [
+    ...card.picks.map((pick) => pick.gameId),
+    ...card.unpicked.map((game) => game.gameId),
+  ]
   const [copied, setCopied] = useState(false)
   const [sort, setSort] = useState<'recommendation' | 'slate'>('slate')
   const [submitting, setSubmitting] = useState(false)
@@ -43,9 +59,24 @@ export default function SuggestedCardPanel({
   const [passwordError, setPasswordError] = useState<string | null>(null)
   const [manualSelections, setManualSelections] = useState<
     Map<string, 'home' | 'away'>
-  >(() => new Map())
+  >(() =>
+    rememberedManualSelections({
+      week: card.week,
+      seasonYear: card.seasonYear,
+      savedGames,
+      unpickedIds: card.unpicked.map((game) => game.gameId),
+    }),
+  )
   const [selectedToSend, setSelectedToSend] = useState<Set<string>>(
-    () => new Set(),
+    () =>
+      new Set(
+        rememberedSendIds({
+          week: card.week,
+          seasonYear: card.seasonYear,
+          savedIds: savedGames.map((game) => game.gameId),
+          cardIds,
+        }),
+      ),
   )
   const [deviations, setDeviations] = useState<Set<string>>(
     () =>
@@ -223,6 +254,13 @@ export default function SuggestedCardPanel({
         selectedToSend,
       )
       storeDeviationIds(card.seasonYear, card.week, deviations)
+      storeSendIds(card.seasonYear, card.week, selectedToSend)
+      storeManualSelections(
+        card.seasonYear,
+        card.week,
+        manualSelections,
+        selectedToSend,
+      )
       setSubmitResult({
         kind: 'success',
         message:
@@ -339,8 +377,8 @@ export default function SuggestedCardPanel({
               {selectedCount === 1 ? 'game' : 'games'} selected to send
             </strong>
             <small>
-              Select all includes every recommendation and any manual pick
-              with a side chosen.
+              Previously sent games start checked. Select all includes every
+              recommendation and any manual pick with a side chosen.
             </small>
           </div>
           <div>

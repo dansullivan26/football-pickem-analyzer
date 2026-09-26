@@ -357,7 +357,8 @@ from the webhook so CBS remains blank.
 The Complete card Action also writes `src/data/card-overrides.json` (sent
 side, plus any deviation flag) and re-runs the recommendation snapshot so
 Performance can score deviations against the opposite of the frozen card
-pick. Opening Generate card again in the same week pre-checks those flips.
+pick. Opening Generate card again in the same week pre-checks those flips and
+the **Send** boxes for games already written to the override file.
 Send selection is independent from the deviation checkbox: selecting or
 deselecting a game does not alter its flip. A partial send keeps prior
 sent sides for omitted games, including future games still on the live

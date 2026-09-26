@@ -367,7 +367,9 @@ deviation setting.
 
 If a still-upcoming game’s live card pick flips to the other side after it
 was sent, Lines opens a **Heads up** modal listing what went to CBS and
-what the card wants now. Dismissing it stays quiet until a new flip
+what the card wants now. The comparison waits for DraftKings odds so a
+line-less first paint cannot flash rest/travel mismatches that disappear
+once the feed loads. Dismissing it stays quiet until a new flip
 appears. Older override rows that only stored `deviate: true` have no sent
 side and cannot raise that alert.
 

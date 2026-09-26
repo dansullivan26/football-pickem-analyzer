@@ -1182,22 +1182,24 @@ function App() {
       ),
     [analyses, now],
   )
-  const sentRecFlips = useMemo(
-    () =>
-      sentRecommendationFlips(
-        slate.games,
-        sentGamesForWeek(cardOverrides, slate.week.order),
-        liveCard.picks,
-        now,
-      ),
-    [liveCard, now],
-  )
+  const sentRecFlips = useMemo(() => {
+    // Odds start null; a line-less first card can invent rest/travel flips
+    // that vanish as soon as DraftKings loads. Wait for the feed.
+    if (!feed) return []
+    return sentRecommendationFlips(
+      slate.games,
+      sentGamesForWeek(cardOverrides, slate.week.order),
+      liveCard.picks,
+      now,
+    )
+  }, [feed, liveCard, now])
   const flipSignature = useMemo(
     () => sentRecFlipSignature(sentRecFlips),
     [sentRecFlips],
   )
   const headsUpOpen =
     view === 'lines' &&
+    feed != null &&
     sentRecFlips.length > 0 &&
     dismissedFlipSignature !== flipSignature &&
     !headsUpFlipsWereDismissed(

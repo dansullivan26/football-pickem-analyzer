@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-26T15:42:14-04:00",
+    "fetchedAt": "2026-09-26T16:04:35-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -110,7 +110,7 @@
       "cbsEventId": 50027885,
       "sport": "NCAAF",
       "week": 4,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-09-26T12:00:00-04:00",
       "kickoffLabel": "Sat Sep 26, 12:00 PM ET",
       "tv": "ABC",
@@ -155,7 +155,7 @@
       "cbsEventId": 50027851,
       "sport": "NCAAF",
       "week": 4,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-09-26T15:30:00-04:00",
       "kickoffLabel": "Sat Sep 26, 3:30 PM ET",
       "tv": "ABC",
@@ -185,8 +185,8 @@
       },
       "homeSpread": -3.5,
       "line": "FLA -3.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 7,
       "venue": {
         "stadium": "Florida Field at Ben Hill Griffin Stadium",
         "city": "Gainesville",
@@ -200,7 +200,7 @@
       "cbsEventId": 50027855,
       "sport": "NCAAF",
       "week": 4,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-09-26T15:30:00-04:00",
       "kickoffLabel": "Sat Sep 26, 3:30 PM ET",
       "tv": "ESPN",
@@ -230,8 +230,8 @@
       },
       "homeSpread": -13.5,
       "line": "UGA -13.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 6,
       "venue": {
         "stadium": "Sanford Stadium",
         "city": "Athens",

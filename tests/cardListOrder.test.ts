@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  copiedRecommendationStrength,
   formatCardKickoff,
   formatSuggestedCardText,
   groupCardRowsByDay,
@@ -192,7 +193,16 @@ test('playOfTheWeek is the top Recommendation-sorted pick', () => {
   assert.equal(playOfTheWeek([]), null)
 })
 
-test('formatSuggestedCardText grades rest-only picks with lock/hammer/lean/slight', () => {
+test('copiedRecommendationStrength is light, medium, or strong', () => {
+  assert.equal(copiedRecommendationStrength(0.25), 'light')
+  assert.equal(copiedRecommendationStrength(1.49), 'light')
+  assert.equal(copiedRecommendationStrength(1.5), 'medium')
+  assert.equal(copiedRecommendationStrength(2.9), 'medium')
+  assert.equal(copiedRecommendationStrength(3), 'strong')
+  assert.equal(copiedRecommendationStrength(4.2), 'strong')
+})
+
+test('formatSuggestedCardText grades rest-only picks light or medium', () => {
   const card: SuggestedCard = {
     strategyId: 'test',
     title: 'ATS Card',
@@ -241,7 +251,7 @@ test('formatSuggestedCardText grades rest-only picks with lock/hammer/lean/sligh
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week: DET -6.5 (lean)\n\nSaturday:\n\nIND -20.5 (slight)\n\nSunday:\n\nDET -6.5 (lean — play of the week)',
+    'Play of the week: DET -6.5 (medium)\n\nSaturday:\n\nIND -20.5 (light)\n\nSunday:\n\nDET -6.5 (medium — play of the week)',
   )
 })
 
@@ -312,7 +322,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nKC +5.5 (lock — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Play of the week: KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nKC +5.5 (strong — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -323,7 +333,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Play of the week: KC +5.5 (lock)\n\nSaturday:\n\nUNC +3.5 (slight)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
+    'Play of the week: KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
   )
 })
 

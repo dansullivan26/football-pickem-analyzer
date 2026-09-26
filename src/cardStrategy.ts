@@ -1,6 +1,5 @@
 import {
   CARD_STRATEGY_NOTE,
-  classifyEdge,
   compareRecommendationOrder,
   formatPoolSpread,
   poolSpreadForSide,
@@ -376,19 +375,22 @@ export function playOfTheWeek(picks: SuggestedPick[]) {
   return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
 }
 
+export type CopiedRecommendationStrength = 'light' | 'medium' | 'strong'
+
 /**
- * Buddy-facing strength uses the same lock / hammer / lean / slight words as
- * the Lines page, graded off the recommendation net so rest-only plays still
- * get a readable band instead of point jargon.
+ * Buddy-facing strength for the copied card. Separate words from the Lines
+ * lock / hammer / lean / slight rubric so the paste is about conviction,
+ * not line-value category.
  */
-function copiedPickBand(pick: SuggestedPick) {
-  const band = classifyEdge(pick.compositeEdge)
-  return band === 'neutral' || band === 'pending' ? 'slight' : band
+export function copiedRecommendationStrength(net: number) {
+  if (net >= 3) return 'strong'
+  if (net >= 1.5) return 'medium'
+  return 'light'
 }
 
 function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
   const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
-  return `Play of the week: ${line} (${copiedPickBand(pick)})`
+  return `Play of the week: ${line} (${copiedRecommendationStrength(pick.compositeEdge)})`
 }
 
 function formatCopiedRecommendedLine(
@@ -399,11 +401,11 @@ function formatCopiedRecommendedLine(
   const sent = submittedPick(pick, deviate)
   const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
   if (deviate) return `${base} (deviated)`
-  const band = copiedPickBand(pick)
+  const strength = copiedRecommendationStrength(pick.compositeEdge)
   if (potwGameId === pick.gameId) {
-    return `${base} (${band} — play of the week)`
+    return `${base} (${strength} — play of the week)`
   }
-  return `${base} (${band})`
+  return `${base} (${strength})`
 }
 
 /**

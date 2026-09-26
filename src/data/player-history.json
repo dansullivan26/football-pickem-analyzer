@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-25T23:44:15-04:00",
+    "fetchedAt": "2026-09-26T06:36:38-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -33351,9 +33351,9 @@
           "weekScore": 2,
           "weekRank": 1,
           "correctPicks": 2,
-          "picksCount": 10,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 2,
           "picksCountFirstSeenAt": "2026-09-24T06:51:13-04:00",
           "tiebreaker": {
@@ -40873,7 +40873,7 @@
           "weekScore": 1,
           "weekRank": 7,
           "correctPicks": 1,
-          "picksCount": 2,
+          "picksCount": 10,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 2,
@@ -72855,6 +72855,38 @@
       "window": {
         "after": "2026-09-25T20:16:23-04:00",
         "atOrBefore": "2026-09-25T23:44:15-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "changeType": "picksCount",
+      "from": 10,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-09-24T06:51:13-04:00",
+      "previousFetchedAt": "2026-09-25T23:44:15-04:00",
+      "fetchedAt": "2026-09-26T06:36:38-04:00",
+      "window": {
+        "after": "2026-09-25T23:44:15-04:00",
+        "atOrBefore": "2026-09-26T06:36:38-04:00"
+      }
+    },
+    {
+      "week": 4,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dani=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 2,
+      "to": 10,
+      "picksCountFirstSeenAt": "2026-09-24T17:01:29-04:00",
+      "previousFetchedAt": "2026-09-25T23:44:15-04:00",
+      "fetchedAt": "2026-09-26T06:36:38-04:00",
+      "window": {
+        "after": "2026-09-25T23:44:15-04:00",
+        "atOrBefore": "2026-09-26T06:36:38-04:00"
       }
     }
   ]

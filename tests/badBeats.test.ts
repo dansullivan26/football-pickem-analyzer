@@ -2,9 +2,11 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   applyBadBeatChange,
+  BAD_BEAT_NOTE_MAX_LENGTH,
   badBeatAnchorId,
   badBeatKey,
   cardSideLabel,
+  clipBadBeatNote,
   unpublishedBadBeatChanges,
   youtubeSearchUrl,
   type BadBeat,
@@ -87,6 +89,16 @@ test('unpublishedBadBeatChanges ignores stamps already in the committed file', (
   assert.equal(pending.adds.length, 1)
   assert.equal(pending.adds[0]?.cbsEventId, 99)
   assert.deepEqual(pending.removes, [badBeatKey(2026, 50027437)])
+})
+
+test('clipBadBeatNote trims and caps the published note', () => {
+  assert.equal(clipBadBeatNote('  Walk-off fumble  '), 'Walk-off fumble')
+  assert.equal(clipBadBeatNote('   '), null)
+  assert.equal(clipBadBeatNote(null), null)
+  assert.equal(
+    clipBadBeatNote('x'.repeat(BAD_BEAT_NOTE_MAX_LENGTH + 40))?.length,
+    BAD_BEAT_NOTE_MAX_LENGTH,
+  )
 })
 
 test('unpublishedBadBeatChanges treats a note edit as unpublished', () => {

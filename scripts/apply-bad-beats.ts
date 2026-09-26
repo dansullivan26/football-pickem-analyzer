@@ -1,5 +1,10 @@
 import { readFile, writeFile } from 'node:fs/promises'
-import { applyBadBeatChange, type BadBeat, type BadBeatsFile } from '../src/badBeats.ts'
+import {
+  applyBadBeatChange,
+  clipBadBeatNote,
+  type BadBeat,
+  type BadBeatsFile,
+} from '../src/badBeats.ts'
 
 const OUTPUT = new URL('../src/data/bad-beats.json', import.meta.url)
 
@@ -31,7 +36,7 @@ function readBeat(raw: unknown): BadBeat {
     away: beat.away as string,
     home: beat.home as string,
     homeSpread: beat.homeSpread as number,
-    note: typeof beat.note === 'string' ? beat.note : null,
+    note: clipBadBeatNote(typeof beat.note === 'string' ? beat.note : null),
     markedAt: beat.markedAt as string,
   }
 }

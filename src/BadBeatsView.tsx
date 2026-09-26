@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
+  BAD_BEAT_NOTE_MAX_LENGTH,
   badBeatAnchorId,
   cardSideLabel,
   formatBadBeatDate,
@@ -205,7 +206,7 @@ function BadBeatNote({
 }) {
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(note ?? '')
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (!editing) setDraft(note ?? '')
@@ -213,8 +214,10 @@ function BadBeatNote({
 
   useEffect(() => {
     if (!editing) return
-    inputRef.current?.focus()
-    inputRef.current?.select()
+    const field = inputRef.current
+    if (!field) return
+    field.focus()
+    field.setSelectionRange(field.value.length, field.value.length)
   }, [editing])
 
   const commit = (value: string) => {
@@ -239,22 +242,28 @@ function BadBeatNote({
   return (
     <label className="bad-beat-note-field">
       <span>Note</span>
-      <input
+      <textarea
         ref={inputRef}
-        type="text"
+        rows={4}
         value={draft}
-        maxLength={160}
+        maxLength={BAD_BEAT_NOTE_MAX_LENGTH}
         placeholder="What happened?"
         onChange={(event) => setDraft(event.target.value)}
         onBlur={(event) => commit(event.currentTarget.value)}
         onKeyDown={(event) => {
-          if (event.key === 'Enter') event.currentTarget.blur()
+          if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+            event.preventDefault()
+            event.currentTarget.blur()
+          }
           if (event.key === 'Escape') {
             setDraft(note ?? '')
             setEditing(false)
           }
         }}
       />
+      <span className="bad-beat-note-count">
+        {draft.length}/{BAD_BEAT_NOTE_MAX_LENGTH}
+      </span>
     </label>
   )
 }

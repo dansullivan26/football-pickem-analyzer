@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import {
+  applyDaySendSelection,
+  daySendState,
   formatCardKickoff,
   formatPoolSpread,
   formatSuggestedCardText,
   groupCardRowsByDay,
   orderCardRows,
+  recommendedGameIdsForDay,
   sortSuggestedPicks,
   submittedPick,
   type SuggestedCard,
@@ -166,6 +169,10 @@ export default function SuggestedCardPanel({
         ...manualSelections.keys(),
       ]),
     )
+  }
+
+  function toggleDaySend(dayIds: string[], send: boolean) {
+    setSelectedToSend((current) => applyDaySendSelection(current, dayIds, send))
   }
 
   function toggleManualPick(gameId: string, side: 'home' | 'away') {
@@ -357,7 +364,15 @@ export default function SuggestedCardPanel({
               className="suggested-pick-day"
               aria-labelledby={`card-day-${group.dateKey}`}
             >
-              <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
+              <div className="suggested-pick-day-heading">
+                <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
+                <DaySendToggle
+                  label={group.label}
+                  dayIds={recommendedGameIdsForDay(group)}
+                  selectedToSend={selectedToSend}
+                  onToggle={toggleDaySend}
+                />
+              </div>
               <ol>
                 {group.rows.map((row) =>
                   row.kind === 'pick' ? (
@@ -531,6 +546,35 @@ export default function SuggestedCardPanel({
       </div>
     </div>,
     document.body,
+  )
+}
+
+function DaySendToggle({
+  label,
+  dayIds,
+  selectedToSend,
+  onToggle,
+}: {
+  label: string
+  dayIds: string[]
+  selectedToSend: ReadonlySet<string>
+  onToggle: (dayIds: string[], send: boolean) => void
+}) {
+  if (dayIds.length === 0) return null
+  const state = daySendState(selectedToSend, dayIds)
+  return (
+    <label className="suggested-pick-toggle suggested-pick-day-send">
+      <input
+        type="checkbox"
+        checked={state === 'all'}
+        ref={(node) => {
+          if (node) node.indeterminate = state === 'some'
+        }}
+        aria-label={`Send ${label} recommendations`}
+        onChange={() => onToggle(dayIds, state !== 'all')}
+      />
+      Send
+    </label>
   )
 }
 

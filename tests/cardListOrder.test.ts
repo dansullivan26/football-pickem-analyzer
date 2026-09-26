@@ -1,12 +1,15 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  applyDaySendSelection,
   copiedRecommendationStrength,
+  daySendState,
   formatCardKickoff,
   formatSuggestedCardText,
   groupCardRowsByDay,
   orderCardRows,
   playOfTheWeek,
+  recommendedGameIdsForDay,
   type SuggestedCard,
   type SuggestedPick,
   type UnpickedGame,
@@ -165,6 +168,47 @@ test('groupCardRowsByDay keeps days in kickoff order with a today label', () => 
       ['sun'],
     ],
   )
+})
+
+test('day Send toggles only recommended games on that day', () => {
+  const rows = orderCardRows(
+    [
+      pick({
+        gameId: 'sat',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        cbsEventId: 1,
+      }),
+      pick({
+        gameId: 'sun',
+        kickoff: '2026-09-20T13:00:00-04:00',
+        cbsEventId: 2,
+      }),
+    ],
+    [
+      unpicked({
+        gameId: 'sat-review',
+        kickoff: '2026-09-19T15:30:00-04:00',
+        cbsEventId: 3,
+      }),
+    ],
+    'slate',
+  )
+  const saturday = groupCardRowsByDay(
+    rows,
+    Date.parse('2026-09-18T12:00:00-04:00'),
+  )[0]
+  assert.ok(saturday)
+  const dayIds = recommendedGameIdsForDay(saturday)
+  assert.deepEqual(dayIds, ['sat'])
+
+  const selected = applyDaySendSelection(new Set(['sun', 'sat-review']), dayIds, true)
+  assert.deepEqual([...selected].sort(), ['sat', 'sat-review', 'sun'])
+  assert.equal(daySendState(selected, dayIds), 'all')
+
+  const cleared = applyDaySendSelection(selected, dayIds, false)
+  assert.deepEqual([...cleared].sort(), ['sat-review', 'sun'])
+  assert.equal(daySendState(cleared, dayIds), 'none')
+  assert.equal(daySendState(new Set(['sat']), ['sat', 'other']), 'some')
 })
 
 test('formatCardKickoff writes a compact Eastern kickoff', () => {

@@ -341,8 +341,10 @@ The generated-card modal sends GrokBot this JSON:
 
 The modal starts with every game deselected. Only checked games are sent;
 **Select all** checks every recommended game plus manual-review games that
-already have a side chosen. Unselected and unpicked games are omitted; GrokBot
-validates against the live Week N slate.
+already have a side chosen. Each day heading has a **Send** box that checks
+or clears that day's recommended games only; manual-review sides stay as they
+are. Unselected and unpicked games are omitted; GrokBot validates against the
+live Week N slate.
 `pickedTeamId` / `pickedSide` are the team to save on CBS. If **Deviate** is
 checked on a pick, those fields are already the flipped side and `deviate` is
 `true`. GrokBot should save that team as-is and not flip it again.

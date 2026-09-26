@@ -510,6 +510,37 @@ export function groupCardRowsByDay(
   )
 }
 
+export function recommendedGameIdsForDay(group: CardDayGroup) {
+  return group.rows.flatMap((row) =>
+    row.kind === 'pick' ? [row.pick.gameId] : [],
+  )
+}
+
+export function daySendState(
+  selected: ReadonlySet<string>,
+  dayIds: readonly string[],
+): 'none' | 'some' | 'all' {
+  if (dayIds.length === 0) return 'none'
+  const count = dayIds.filter((id) => selected.has(id)).length
+  if (count === 0) return 'none'
+  if (count === dayIds.length) return 'all'
+  return 'some'
+}
+
+/** Day Send only toggles recommended picks. Manual-review sides stay as-is. */
+export function applyDaySendSelection(
+  selected: ReadonlySet<string>,
+  dayIds: readonly string[],
+  send: boolean,
+) {
+  const next = new Set(selected)
+  for (const id of dayIds) {
+    if (send) next.add(id)
+    else next.delete(id)
+  }
+  return next
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,

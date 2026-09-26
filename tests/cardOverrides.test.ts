@@ -92,3 +92,18 @@ test('mergeOverrideGames can unmark a game that is on the new card', () => {
     [{ gameId: 'already-final', deviate: true }],
   )
 })
+
+test('mergeOverrideGames stores the sent side for later flip checks', () => {
+  assert.deepEqual(
+    mergeOverrideGames([], [
+      { gameId: 'rec', pickedSide: 'home', deviate: false },
+      { gameId: 'manual', pickedSide: 'away', manual: true },
+      { gameId: 'flip', pickedSide: 'away', deviate: true },
+    ]),
+    [
+      { gameId: 'rec', pickedSide: 'home' },
+      { gameId: 'manual', pickedSide: 'away', manual: true },
+      { gameId: 'flip', pickedSide: 'away', deviate: true },
+    ],
+  )
+})

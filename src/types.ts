@@ -418,7 +418,9 @@ export type RecommendationHistory = {
 
 export type CardOverrideGame = {
   gameId: string
-  deviate: true
+  pickedSide?: 'home' | 'away'
+  deviate?: true
+  manual?: true
 }
 
 export type CardOverrideWeek = {

@@ -20,10 +20,7 @@ try {
 }
 
 const previous = existing.weeks.find((week) => week.week === payload.week)
-const games = mergeOverrideGames(
-  previous?.games,
-  payload.picks.filter((pick) => pick?.manual !== true),
-)
+const games = mergeOverrideGames(previous?.games, payload.picks)
 const sentAt = new Date().toISOString()
 const next: CardOverrides = {
   updatedAt: sentAt,
@@ -35,6 +32,7 @@ const next: CardOverrides = {
 
 await mkdir(new URL('../src/data', import.meta.url), { recursive: true })
 await writeFile(OUTPUT, `${JSON.stringify(next, null, 2)}\n`)
+const flips = games.filter((game) => game.deviate).length
 console.log(
-  `Recorded week ${payload.week}: ${games.length} deviation${games.length === 1 ? '' : 's'}.`,
+  `Recorded week ${payload.week}: ${games.length} sent game${games.length === 1 ? '' : 's'} (${flips} deviation${flips === 1 ? '' : 's'}).`,
 )

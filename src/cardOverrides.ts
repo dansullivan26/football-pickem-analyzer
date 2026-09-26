@@ -3,13 +3,20 @@ import type { CardOverrideGame, CardOverrides } from './types.ts'
 export const cardDeviationStorageKey = (seasonYear: number, week: number) =>
   `card-deviations:${seasonYear}:${week}`
 
+export function sentGamesForWeek(
+  overrides: CardOverrides | null | undefined,
+  week: number,
+) {
+  return overrides?.weeks.find((row) => row.week === week)?.games ?? []
+}
+
 export function deviationIdsForWeek(
   overrides: CardOverrides | null | undefined,
   week: number,
 ) {
-  const games =
-    overrides?.weeks.find((row) => row.week === week)?.games ?? []
-  return games.filter((game) => game.deviate).map((game) => game.gameId)
+  return sentGamesForWeek(overrides, week)
+    .filter((game) => game.deviate)
+    .map((game) => game.gameId)
 }
 
 export function rememberedDeviationIds({
@@ -58,22 +65,43 @@ export function storeDeviationIds(
   }
 }
 
+export type SentCardPick = {
+  gameId: string
+  pickedSide?: 'home' | 'away'
+  deviate?: boolean
+  manual?: boolean
+}
+
+function overrideFromPayload(pick: SentCardPick): CardOverrideGame | null {
+  if (!pick.gameId) return null
+  const pickedSide =
+    pick.pickedSide === 'home' || pick.pickedSide === 'away'
+      ? pick.pickedSide
+      : undefined
+  if (!pickedSide && pick.deviate !== true) return null
+  return {
+    gameId: pick.gameId,
+    ...(pickedSide ? { pickedSide } : {}),
+    ...(pick.deviate === true ? { deviate: true as const } : {}),
+    ...(pick.manual === true ? { manual: true as const } : {}),
+  }
+}
+
 /**
- * Later sends only list games still on that card. Keep prior flips for games
- * that were not in this payload (already kicked off, or dropped from the
- * live suggested set). Games in the payload take the new deviate flag.
+ * Later sends only list games still on that card. Keep prior sent sides and
+ * flips for games omitted from this payload. Games in the payload take the
+ * new side and deviate flag.
  */
 export function mergeOverrideGames(
   existing: CardOverrideGame[] | undefined,
-  payloadPicks: Array<{ gameId: string; deviate?: boolean }>,
+  payloadPicks: SentCardPick[],
 ): CardOverrideGame[] {
   const seen = new Set(payloadPicks.map((pick) => pick.gameId))
-  const kept = (existing ?? []).filter(
-    (game) => game.deviate && !seen.has(game.gameId),
-  )
-  const next = payloadPicks
-    .filter((pick) => pick.deviate === true && pick.gameId)
-    .map((pick) => ({ gameId: pick.gameId, deviate: true as const }))
+  const kept = (existing ?? []).filter((game) => !seen.has(game.gameId))
+  const next = payloadPicks.flatMap((pick) => {
+    const row = overrideFromPayload(pick)
+    return row ? [row] : []
+  })
   const byId = new Map<string, CardOverrideGame>()
   for (const game of [...kept, ...next]) byId.set(game.gameId, game)
   return [...byId.values()]

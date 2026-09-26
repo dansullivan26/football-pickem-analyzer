@@ -19,6 +19,7 @@ import LeagueHistoryView from './LeagueHistoryView'
 import PerformanceView from './PerformanceView'
 import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
+import HeadsUpFlipsModal from './HeadsUpFlipsModal'
 import TeamLogo from './TeamLogo'
 import GameWeather from './GameWeather'
 import InjuryLink from './InjuryLink'
@@ -36,7 +37,13 @@ import {
   type PoolSupportView,
 } from './cardPoolAware'
 import { PoolSupportNote } from './PoolSupportNote'
-import { deviationIdsForWeek } from './cardOverrides'
+import { deviationIdsForWeek, sentGamesForWeek } from './cardOverrides'
+import {
+  dismissHeadsUpFlips,
+  headsUpFlipsWereDismissed,
+  sentRecFlipSignature,
+  sentRecommendationFlips,
+} from './sentRecFlips'
 import { dispatchReviewRefresh } from './dispatchRefresh'
 import { dispatchBadBeatChange } from './dispatchBadBeat'
 import { compareLineHistoryListItems, formatLinePath, lineHistoryByEvent, spreadPathMove, ticksEndingAtLive, totalsEndingAtLive } from './lineHistory'
@@ -995,6 +1002,9 @@ function App() {
   const [dayFilter, setDayFilter] = useState<'all' | 'today' | string>('all')
   const [now, setNow] = useState(() => Date.now())
   const [suggestedCard, setSuggestedCard] = useState<SuggestedCard | null>(null)
+  const [dismissedFlipSignature, setDismissedFlipSignature] = useState<
+    string | null
+  >(null)
   const [dispatching, setDispatching] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
   const [beats, setBeats] = useState(() => mergeBadBeats(badBeatsFile))
@@ -1159,6 +1169,43 @@ function App() {
       ),
     [feed],
   )
+  const liveCard = useMemo(
+    () =>
+      generateSuggestedCard(
+        analyses.filter(({ game }) => gameIsUpcoming(game, now)),
+        slate.week,
+        slate.pool.seasonYear,
+        slate.tiebreaker,
+        new Date(now),
+        travelRestByEvent,
+        nflInjuriesByAbbrev,
+      ),
+    [analyses, now],
+  )
+  const sentRecFlips = useMemo(
+    () =>
+      sentRecommendationFlips(
+        slate.games,
+        sentGamesForWeek(cardOverrides, slate.week.order),
+        liveCard.picks,
+        now,
+      ),
+    [liveCard, now],
+  )
+  const flipSignature = useMemo(
+    () => sentRecFlipSignature(sentRecFlips),
+    [sentRecFlips],
+  )
+  const headsUpOpen =
+    view === 'lines' &&
+    sentRecFlips.length > 0 &&
+    dismissedFlipSignature !== flipSignature &&
+    !headsUpFlipsWereDismissed(
+      slate.pool.seasonYear,
+      slate.week.order,
+      sentRecFlips,
+    )
+
   const kickoffDays = useMemo(
     () => slateKickoffDays(slate.games, now),
     [now],
@@ -1638,6 +1685,20 @@ function App() {
                 slate.week.order,
               )}
               onClose={closeSuggestedCard}
+            />
+          )}
+          {headsUpOpen && sentRecFlips.length > 0 && (
+            <HeadsUpFlipsModal
+              weekLabel={slate.week.label}
+              flips={sentRecFlips}
+              onDismiss={() => {
+                dismissHeadsUpFlips(
+                  slate.pool.seasonYear,
+                  slate.week.order,
+                  sentRecFlips,
+                )
+                setDismissedFlipSignature(flipSignature)
+              }}
             />
           )}
 

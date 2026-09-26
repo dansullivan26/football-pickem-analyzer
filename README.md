@@ -354,14 +354,21 @@ The generated card shows the tiebreaker matchup and DraftKings O/U beside an
 optional whole-number answer. If the answer is blank, `tiebreaker` is omitted
 from the webhook so CBS remains blank.
 
-The Complete card Action also writes `src/data/card-overrides.json` and
-re-runs the recommendation snapshot so Performance can score deviations
-against the opposite of the frozen card pick. Opening Generate card again
-in the same week pre-checks those flips. Send selection is independent from
-the deviation checkbox: selecting or deselecting a game does not alter its
-flip. A partial send keeps prior deviations for omitted games, including
-future games still on the live card. A mark changes only when that game is
-sent again with a different deviation setting.
+The Complete card Action also writes `src/data/card-overrides.json` (sent
+side, plus any deviation flag) and re-runs the recommendation snapshot so
+Performance can score deviations against the opposite of the frozen card
+pick. Opening Generate card again in the same week pre-checks those flips.
+Send selection is independent from the deviation checkbox: selecting or
+deselecting a game does not alter its flip. A partial send keeps prior
+sent sides for omitted games, including future games still on the live
+card. A mark changes only when that game is sent again with a different
+deviation setting.
+
+If a still-upcoming game’s live card pick flips to the other side after it
+was sent, Lines opens a **Heads up** modal listing what went to CBS and
+what the card wants now. Dismissing it stays quiet until a new flip
+appears. Older override rows that only stored `deviate: true` have no sent
+side and cannot raise that alert.
 
 The browser cannot POST that webhook directly. GrokBot's server answers the
 CORS preflight and will not allow the Pages origin, so the button dispatches

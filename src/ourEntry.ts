@@ -1,4 +1,4 @@
-import type { PlayerHistory, PlayerPick } from './types'
+import type { PlayerHistory, PlayerPick, SlateGame } from './types'
 
 /** CBS pool display name for the operator of this app. */
 export const OUR_PLAYER_NAME = 'Dan Sullivan'
@@ -24,6 +24,36 @@ export function ourPickForGame(
       ?.entries.find((entry) => entry.entryId === owner.entryId)
       ?.picks.find((pick) => pick.cbsEventId === cbsEventId) ?? null
   )
+}
+
+/**
+ * CBS dump first. If that row is still hidden, use the side we already
+ * wrote through Complete Card.
+ */
+export function ourDisplayedPick(
+  history: PlayerHistory,
+  week: number,
+  game: SlateGame,
+  sent?: { pickedSide?: 'home' | 'away' | null } | null,
+): PlayerPick | null {
+  const pick = ourPickForGame(history, week, game.cbsEventId)
+  if (pick?.pickedSide) return pick
+  if (sent?.pickedSide !== 'home' && sent?.pickedSide !== 'away') return pick
+  return {
+    gameId: game.id,
+    cbsEventId: game.cbsEventId,
+    sport: game.sport,
+    away: game.away.abbrev,
+    home: game.home.abbrev,
+    homeSpread: game.homeSpread,
+    pickedTeamId: game[sent.pickedSide].id,
+    pickedTeam: game[sent.pickedSide].abbrev,
+    pickedSide: sent.pickedSide,
+    result: pick?.result ?? null,
+    points: pick?.points ?? null,
+    pickStatus: pick?.pickStatus ?? 'NONE',
+    matchStatus: 'matched',
+  }
 }
 
 /** Whether Dan Sullivan's CBS pool pick is this side. Null if no pick is unlocked. */

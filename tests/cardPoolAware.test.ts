@@ -176,6 +176,20 @@ test('actualPoolView stays hidden until a side or a graded book exists', () => {
   )
 })
 
+test('actualPoolView waits after kickoff when CBS sides are still hidden', () => {
+  const view = actualPoolView(
+    { home: 0, away: 0, unpicked: 4, picked: 0 },
+    { correct: 0, wrong: 0, push: 0, unpicked: 4, pending: 0 },
+    'Green Bay',
+    'Atlanta',
+    null,
+    true,
+  )
+  assert.equal(view?.line, 'No sides yet')
+  assert.match(view?.detail ?? '', /post-kickoff/)
+  assert.equal(view?.none, true)
+})
+
 test('poolProjectionsForWeek counts frozen predicted sides once per player', () => {
   const history = {
     entries: [

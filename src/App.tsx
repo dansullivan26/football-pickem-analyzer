@@ -67,7 +67,7 @@ import {
   slateKickoffDays,
   statusIsFinal,
 } from './gameStatus'
-import { ourPickForGame, ourRosterEntry } from './ourEntry'
+import { ourDisplayedPick, ourRosterEntry } from './ourEntry'
 import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
 import { AtsChip } from './AtsChip'
 import {
@@ -155,6 +155,12 @@ const poolSideSplitsByEvent = poolSideSplitsForWeek(
   slate.week.order,
   slate.pool.seasonYear,
   fieldEntryId,
+)
+const sentByGameId = new Map(
+  sentGamesForWeek(cardOverrides, slate.week.order).map((row) => [
+    row.gameId,
+    row,
+  ]),
 )
 const poolFieldProjectionsByEvent = poolSupportProjectionsForWeek(
   careerHistory,
@@ -604,6 +610,7 @@ function GameCard({
     game.home.name,
     game.away.name,
     expectedPool,
+    phase !== 'upcoming',
   )
   const poolLine =
     poolRecordIsGraded(poolRecord) && !actualPool
@@ -1724,10 +1731,11 @@ function App() {
                 key={analysis.game.cbsEventId}
                 analysis={analysis}
                 now={now}
-                ourPick={ourPickForGame(
+                ourPick={ourDisplayedPick(
                   playerHistory,
                   slate.week.order,
-                  analysis.game.cbsEventId,
+                  analysis.game,
+                  sentByGameId.get(analysis.game.id),
                 )}
                 onOpenTeam={(slug) => goTo('teams', slug, TEAM_PROFILE_HASH)}
               />

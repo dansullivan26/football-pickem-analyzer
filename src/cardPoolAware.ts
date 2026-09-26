@@ -164,10 +164,11 @@ export function actualPoolView(
   homeName: string,
   awayName: string,
   expected: Pick<PoolExpectationView, 'line' | 'side' | 'pct' | 'none'> | null = null,
+  afterKickoff = false,
 ): PoolExpectationView | null {
   if (!split) return null
   const graded = poolRecordIsGraded(record)
-  if (split.picked === 0 && !graded) return null
+  if (split.picked === 0 && !graded && !afterKickoff) return null
 
   const ats = graded ? formatPoolRecordLabel(record) : null
   const atsDetail = graded ? formatPoolRecordDetail(record) : null
@@ -181,6 +182,19 @@ export function actualPoolView(
         : null
 
   if (split.picked === 0) {
+    if (!graded) {
+      return {
+        line: 'No sides yet',
+        detail: 'Waiting on the post-kickoff CBS dump',
+        title: joinSentences([
+          'CBS still has this game hidden, or GrokBot has not ingested a players dump since kickoff.',
+          expectedNote,
+        ]),
+        none: true,
+        side: null,
+        pct: null,
+      }
+    }
     return {
       line: ats ?? 'No picks yet',
       detail: joinParts([unpicked]),

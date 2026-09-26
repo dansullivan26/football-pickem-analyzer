@@ -29,6 +29,9 @@ Lines shows **Final** or **Live** from that score. The kickoff filters are
 mutually exclusive: Upcoming only, In progress (kicked off, not final), and
 Completed (CBS final status). After GrokBot’s post-kickoff player dump,
 in-progress games can show Actual pool share and Our pick on the card.
+A dump taken before kickoff still has hidden CBS sides, so Actual pool
+waits on a later ingest. Our pick falls back to the side already written
+through Complete Card until that dump reveals the CBS row.
 
 To prepare a newly captured slate:
 

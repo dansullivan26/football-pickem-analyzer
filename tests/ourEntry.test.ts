@@ -2,11 +2,12 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   badBeatSideMark,
+  ourDisplayedPick,
   ourPickForGame,
   ourPoolPickOnSide,
   ourRosterEntry,
 } from '../src/ourEntry.ts'
-import type { PlayerHistory, PlayerPick } from '../src/types.ts'
+import type { PlayerHistory, PlayerPick, SlateGame } from '../src/types.ts'
 
 function pick(cbsEventId: number, side: 'home' | 'away'): PlayerPick {
   return {
@@ -75,6 +76,76 @@ test('ourPickForGame reads that entry’s pick for the slate week', () => {
   const row = ourPickForGame(history(['Dan Sullivan']), 1, 100)
   assert.equal(row?.pickedSide, 'home')
   assert.equal(ourPickForGame(history(['Dan Sullivan']), 1, 999), null)
+})
+
+function slateGame(cbsEventId: number): SlateGame {
+  return {
+    id: `g-${cbsEventId}`,
+    cbsEventId,
+    sport: 'NCAAF',
+    week: 1,
+    status: 'SCHEDULED',
+    kickoff: '2026-09-26T12:00:00-04:00',
+    kickoffLabel: 'Sat Sep 26, 12:00 PM ET',
+    tv: null,
+    away: {
+      id: 'away',
+      abbrev: 'AWAY',
+      name: 'Away',
+      nickname: 'Away',
+      location: 'Away',
+      conference: '',
+      record: '',
+      rank: null,
+      pickemPctStraightUp: 0,
+      pickemPctAgainstSpread: 0,
+    },
+    home: {
+      id: 'home',
+      abbrev: 'HOME',
+      name: 'Home',
+      nickname: 'Home',
+      location: 'Home',
+      conference: '',
+      record: '',
+      rank: null,
+      pickemPctStraightUp: 0,
+      pickemPctAgainstSpread: 0,
+    },
+    homeSpread: 5.5,
+    line: 'AWAY -5.5',
+  }
+}
+
+test('ourDisplayedPick uses the sent card when CBS still hides the side', () => {
+  const dump = history(['Dan Sullivan'])
+  dump.weeks[0]!.entries[0]!.picks = [
+    {
+      ...pick(100, 'home'),
+      pickedTeamId: null,
+      pickedTeam: null,
+      pickedSide: null,
+      result: null,
+      points: null,
+      pickStatus: 'NONE',
+      matchStatus: 'unpicked',
+    },
+  ]
+  const shown = ourDisplayedPick(dump, 1, slateGame(100), {
+    pickedSide: 'home',
+  })
+  assert.equal(shown?.pickedSide, 'home')
+  assert.equal(shown?.pickedTeam, 'HOME')
+})
+
+test('ourDisplayedPick keeps the CBS side once it is revealed', () => {
+  const shown = ourDisplayedPick(
+    history(['Dan Sullivan']),
+    1,
+    slateGame(100),
+    { pickedSide: 'away' },
+  )
+  assert.equal(shown?.pickedSide, 'home')
 })
 
 test('ourPoolPickOnSide marks the pool team we took, not the opponent', () => {

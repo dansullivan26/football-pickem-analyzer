@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T15:49:39.876Z",
+  "updatedAt": "2026-09-27T18:31:34.955Z",
   "weeks": [
     {
       "week": 1,
@@ -2152,11 +2152,11 @@
       "week": 4,
       "seasonYear": 2026,
       "label": "Week 4",
-      "capturedAt": "2026-09-27T15:49:39.876Z",
+      "capturedAt": "2026-09-27T18:31:34.955Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029245,
-        "draftKingsTotal": 42.5,
+        "draftKingsTotal": 41.5,
         "frozenAt": null
       },
       "games": [
@@ -2475,7 +2475,9 @@
             "state": "New York",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 10,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029233,
@@ -2502,7 +2504,9 @@
             "state": "OH",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029234,
@@ -2529,7 +2533,9 @@
             "state": "MI",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50029235,
@@ -2556,7 +2562,9 @@
             "state": "IN",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50029236,
@@ -2583,7 +2591,9 @@
             "state": "FL",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 3,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50029237,
@@ -2610,7 +2620,9 @@
             "state": "FL",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 14,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50029238,
@@ -2637,7 +2649,9 @@
             "state": "NJ",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50029239,
@@ -2664,7 +2678,9 @@
             "state": "PA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 10,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50029240,
@@ -2691,7 +2707,9 @@
             "state": "MD",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 7,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50029241,
@@ -2835,16 +2853,16 @@
           "away": "PHI",
           "home": "CHI",
           "homeSpread": 3.5,
-          "liveHomeSpread": 3.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 4.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "home",
-          "strength": "solid",
-          "score": 6,
-          "compositeEdge": 0.75,
+          "pickedSide": "away",
+          "strength": "mild",
+          "score": 0.75,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

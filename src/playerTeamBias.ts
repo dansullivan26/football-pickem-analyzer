@@ -183,3 +183,196 @@ export function teamBiasSentence(
   if (signal.warmth === 'signs') return `Showing signs of ${action}.`
   return `Early read toward ${action}.`
 }
+
+export const POOL_TEAM_BIAS_MIN_GAMES = 2
+export const POOL_TEAM_BIAS_LIST_SIZE = 6
+
+export type PoolTeamBiasSignal = {
+  key: string
+  sport: 'NFL' | 'NCAAF'
+  abbrev: string
+  direction: TeamBiasDirection
+  takes: number
+  appearances: number
+  games: number
+  rate: number
+  favoriteTakes: number
+  favoriteAppearances: number
+  dogTakes: number
+  dogAppearances: number
+}
+
+export type PoolTeamBiasSummary = {
+  takes: PoolTeamBiasSignal[]
+  fades: PoolTeamBiasSignal[]
+}
+
+type PoolTeamCount = TeamCount & {
+  events: Set<number>
+  favoriteTakes: number
+  favoriteAppearances: number
+  dogTakes: number
+  dogAppearances: number
+}
+
+function spreadRole(
+  homeSpread: number,
+  side: 'home' | 'away',
+): 'favorite' | 'dog' | 'pickem' {
+  if (homeSpread === 0) return 'pickem'
+  const homeFavorite = homeSpread < 0
+  if (side === 'home') return homeFavorite ? 'favorite' : 'dog'
+  return homeFavorite ? 'dog' : 'favorite'
+}
+
+function emptyPoolCount(
+  sport: 'NFL' | 'NCAAF',
+  abbrev: string,
+): PoolTeamCount {
+  return {
+    sport,
+    abbrev,
+    takes: 0,
+    appearances: 0,
+    events: new Set(),
+    favoriteTakes: 0,
+    favoriteAppearances: 0,
+    dogTakes: 0,
+    dogAppearances: 0,
+  }
+}
+
+function addPoolAppearance(
+  counts: Map<string, PoolTeamCount>,
+  sport: 'NFL' | 'NCAAF',
+  abbrev: string,
+  cbsEventId: number,
+  taken: boolean,
+  role: 'favorite' | 'dog' | 'pickem',
+) {
+  const key = `${sport}:${abbrev}`
+  const current = counts.get(key) ?? emptyPoolCount(sport, abbrev)
+  current.appearances += 1
+  if (taken) current.takes += 1
+  current.events.add(cbsEventId)
+  if (role === 'favorite') {
+    current.favoriteAppearances += 1
+    if (taken) current.favoriteTakes += 1
+  } else if (role === 'dog') {
+    current.dogAppearances += 1
+    if (taken) current.dogTakes += 1
+  }
+  counts.set(key, current)
+}
+
+function comparePoolSignals(
+  left: PoolTeamBiasSignal,
+  right: PoolTeamBiasSignal,
+) {
+  return (
+    right.rate - left.rate ||
+    right.games - left.games ||
+    right.appearances - left.appearances ||
+    left.abbrev.localeCompare(right.abbrev)
+  )
+}
+
+function toPoolSignal(
+  key: string,
+  count: PoolTeamCount,
+): PoolTeamBiasSignal | null {
+  if (count.events.size < POOL_TEAM_BIAS_MIN_GAMES || count.appearances === 0) {
+    return null
+  }
+  const takeRate = count.takes / count.appearances
+  if (takeRate === 0.5) return null
+  const direction: TeamBiasDirection = takeRate > 0.5 ? 'take' : 'fade'
+  return {
+    key,
+    sport: count.sport,
+    abbrev: count.abbrev,
+    direction,
+    takes: count.takes,
+    appearances: count.appearances,
+    games: count.events.size,
+    rate: direction === 'take' ? takeRate : 1 - takeRate,
+    favoriteTakes: count.favoriteTakes,
+    favoriteAppearances: count.favoriteAppearances,
+    dogTakes: count.dogTakes,
+    dogAppearances: count.dogAppearances,
+  }
+}
+
+/** Ranked clubs this pool takes or fades, after at least two distinct games. */
+export function summarizePoolTeamBias(
+  history: PlayerHistory,
+  seasonYear = history.pool.seasonYear,
+  limit = POOL_TEAM_BIAS_LIST_SIZE,
+): PoolTeamBiasSummary {
+  const counts = new Map<string, PoolTeamCount>()
+  for (const week of history.weeks) {
+    if (weekSeason(week, history.pool.seasonYear) !== seasonYear) continue
+    for (const entry of week.entries) {
+      for (const pick of entry.picks) {
+        if (pick.pickedSide !== 'home' && pick.pickedSide !== 'away') continue
+        addPoolAppearance(
+          counts,
+          pick.sport,
+          pick.away,
+          pick.cbsEventId,
+          pick.pickedSide === 'away',
+          spreadRole(pick.homeSpread, 'away'),
+        )
+        addPoolAppearance(
+          counts,
+          pick.sport,
+          pick.home,
+          pick.cbsEventId,
+          pick.pickedSide === 'home',
+          spreadRole(pick.homeSpread, 'home'),
+        )
+      }
+    }
+  }
+
+  const signals: PoolTeamBiasSignal[] = []
+  for (const [key, count] of counts) {
+    const signal = toPoolSignal(key, count)
+    if (signal) signals.push(signal)
+  }
+
+  return {
+    takes: signals
+      .filter((signal) => signal.direction === 'take')
+      .sort(comparePoolSignals)
+      .slice(0, limit),
+    fades: signals
+      .filter((signal) => signal.direction === 'fade')
+      .sort(comparePoolSignals)
+      .slice(0, limit),
+  }
+}
+
+export function poolTeamBiasSentence(
+  signal: PoolTeamBiasSignal,
+  teamName: string,
+) {
+  const pct = Math.round(signal.rate * 100)
+  const games = `${signal.games} game${signal.games === 1 ? '' : 's'}`
+  return signal.direction === 'take'
+    ? `The pool took ${teamName} on ${pct}% of submitted cards (${games}).`
+    : `The pool faded ${teamName} on ${pct}% of submitted cards (${games}).`
+}
+
+export function poolTeamBiasRoleLine(signal: PoolTeamBiasSignal) {
+  const parts: string[] = []
+  if (signal.favoriteAppearances > 0) {
+    parts.push(
+      `as favorite ${signal.favoriteTakes} of ${signal.favoriteAppearances}`,
+    )
+  }
+  if (signal.dogAppearances > 0) {
+    parts.push(`as dog ${signal.dogTakes} of ${signal.dogAppearances}`)
+  }
+  return parts.join(' · ')
+}

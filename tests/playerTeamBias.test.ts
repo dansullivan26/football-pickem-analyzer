@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  poolTeamBiasRoleLine,
+  poolTeamBiasSentence,
   summarizePlayerTeamBias,
+  summarizePoolTeamBias,
   teamBiasSentence,
   teamBiasWarmth,
 } from '../src/playerTeamBias.ts'
@@ -171,4 +174,137 @@ test('warmth advances only when sample and extremity clear each bar', () => {
   assert.equal(teamBiasWarmth(7, 0.8), 'growing')
   assert.equal(teamBiasWarmth(12, 0.85), 'established')
   assert.equal(teamBiasWarmth(12, 0.8), 'growing')
+})
+
+function poolPick(
+  id: number,
+  sport: 'NFL' | 'NCAAF',
+  away: string,
+  home: string,
+  pickedSide: 'home' | 'away',
+  homeSpread: number,
+): PlayerPick {
+  return { ...pick(id, sport, away, home, pickedSide), homeSpread }
+}
+
+function poolWeek(
+  order: number,
+  cards: Array<{ entryId: string; picks: PlayerPick[] }>,
+  seasonYear = 2026,
+): PlayerWeek {
+  return {
+    week: order,
+    seasonYear,
+    periodId: `${seasonYear}-${order}`,
+    label: `Week ${order}`,
+    status: 'in_progress',
+    scored: false,
+    slateFile: `${seasonYear}-${order}.json`,
+    entries: cards.map((card) => ({
+      entryId: card.entryId,
+      name: card.entryId,
+      weekScore: null,
+      weekRank: null,
+      correctPicks: null,
+      picksCount: card.picks.length,
+      tiebreaker: { question: null, answer: null },
+      picks: card.picks,
+    })),
+  }
+}
+
+test('pool team bias ranks clubs after two distinct games', () => {
+  const dump = history([
+    poolWeek(1, [
+      {
+        entryId: 'a',
+        picks: [poolPick(1, 'NFL', 'CHI', 'CLE', 'away', 7.5)],
+      },
+      {
+        entryId: 'b',
+        picks: [poolPick(1, 'NFL', 'CHI', 'CLE', 'away', 7.5)],
+      },
+    ]),
+    poolWeek(2, [
+      {
+        entryId: 'a',
+        picks: [
+          poolPick(2, 'NFL', 'CHI', 'GB', 'away', 3.5),
+          poolPick(3, 'NFL', 'CLE', 'BAL', 'home', 10.5),
+        ],
+      },
+      {
+        entryId: 'b',
+        picks: [
+          poolPick(2, 'NFL', 'CHI', 'GB', 'home', 3.5),
+          poolPick(3, 'NFL', 'CLE', 'BAL', 'home', 10.5),
+        ],
+      },
+    ]),
+  ])
+  const summary = summarizePoolTeamBias(dump)
+
+  assert.equal(summary.takes[0]?.key, 'NFL:CHI')
+  assert.equal(summary.takes[0]?.takes, 3)
+  assert.equal(summary.takes[0]?.appearances, 4)
+  assert.equal(summary.takes[0]?.games, 2)
+  assert.equal(summary.takes[0]?.favoriteTakes, 3)
+  assert.equal(summary.takes[0]?.favoriteAppearances, 4)
+  assert.equal(summary.fades[0]?.key, 'NFL:CLE')
+  assert.equal(summary.fades[0]?.games, 2)
+  assert.equal(summary.fades[0]?.takes, 0)
+  assert.equal(
+    poolTeamBiasSentence(summary.takes[0]!, 'Chicago'),
+    'The pool took Chicago on 75% of submitted cards (2 games).',
+  )
+  assert.equal(
+    poolTeamBiasRoleLine(summary.takes[0]!),
+    'as favorite 3 of 4',
+  )
+})
+
+test('a one-game pile-up does not make the pool take/fade list', () => {
+  const dump = history([
+    poolWeek(1, [
+      {
+        entryId: 'a',
+        picks: [poolPick(1, 'NCAAF', 'UCLA', 'UNLV', 'away', 10.5)],
+      },
+      {
+        entryId: 'b',
+        picks: [poolPick(1, 'NCAAF', 'UCLA', 'UNLV', 'away', 10.5)],
+      },
+    ]),
+  ])
+  const summary = summarizePoolTeamBias(dump)
+  assert.equal(summary.takes.length, 0)
+  assert.equal(summary.fades.length, 0)
+})
+
+test('pool team bias keeps favorite and dog rates on the same club', () => {
+  const dump = history([
+    poolWeek(1, [
+      {
+        entryId: 'a',
+        picks: [poolPick(1, 'NFL', 'BUF', 'NYJ', 'away', 6.5)],
+      },
+    ]),
+    poolWeek(2, [
+      {
+        entryId: 'a',
+        picks: [poolPick(2, 'NFL', 'MIA', 'BUF', 'home', 3)],
+      },
+    ]),
+  ])
+  const bills = summarizePoolTeamBias(dump).takes.find(
+    (signal) => signal.key === 'NFL:BUF',
+  )
+  assert.equal(bills?.favoriteTakes, 1)
+  assert.equal(bills?.favoriteAppearances, 1)
+  assert.equal(bills?.dogTakes, 1)
+  assert.equal(bills?.dogAppearances, 1)
+  assert.equal(
+    poolTeamBiasRoleLine(bills!),
+    'as favorite 1 of 1 · as dog 1 of 1',
+  )
 })

@@ -155,6 +155,13 @@ NFL teams reach those samples more quickly because every club appears each
 week; college signals naturally take longer. These are display-only
 observations for now and do not drive the prediction model.
 
+The Players **Pool-wide** tab lists the same take/fade idea for the whole
+field: clubs ranked by how often submitted cards took or faded them, after
+at least two distinct slate games. A favorite-heavy pool will mostly surface
+stronger teams on the take side and weaker teams on the fade side; each card
+also shows the take rate as a favorite and as a dog so that chalk story is
+visible. Display-only; it does not change expected pool or the habit model.
+
 ```bash
 npm run snapshot-predictions
 ```

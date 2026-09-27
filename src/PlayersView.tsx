@@ -23,9 +23,13 @@ import {
   type ResidualGroup,
 } from './playerPrediction'
 import {
+  poolTeamBiasRoleLine,
+  poolTeamBiasSentence,
   summarizePlayerTeamBias,
+  summarizePoolTeamBias,
   TEAM_BIAS_WARMTH_LABELS,
   teamBiasSentence,
+  type PoolTeamBiasSignal,
   type TeamBiasSignal,
 } from './playerTeamBias'
 import {
@@ -397,6 +401,37 @@ function Metric({
   )
 }
 
+function PoolTeamBiasCard({
+  signal,
+  teamName,
+}: {
+  signal: PoolTeamBiasSignal
+  teamName: string
+}) {
+  const directionalPicks =
+    signal.direction === 'take'
+      ? signal.takes
+      : signal.appearances - signal.takes
+  const action = signal.direction === 'take' ? 'Took' : 'Faded'
+  const roleLine = poolTeamBiasRoleLine(signal)
+
+  return (
+    <li className="team-bias-card">
+      <div className="team-bias-head">
+        <span>{signal.sport}</span>
+        <strong>{Math.round(signal.rate * 100)}%</strong>
+      </div>
+      <h4>{teamName}</h4>
+      <p>{poolTeamBiasSentence(signal, teamName)}</p>
+      <small>
+        {action} {directionalPicks} of {signal.appearances} cards ·{' '}
+        {signal.games} games
+        {roleLine ? ` · ${roleLine}` : ''}
+      </small>
+    </li>
+  )
+}
+
 function TeamBiasCard({
   signal,
   teamName,
@@ -689,6 +724,10 @@ export default function PlayersView({
       ),
     [teamRoster.teams],
   )
+  const poolTeamBias = useMemo(
+    () => summarizePoolTeamBias(history, history.pool.seasonYear),
+    [history],
+  )
   const livePrediction =
     selectedPlayer && recommendationWeek
       ? predictPlayerWeek(
@@ -867,6 +906,60 @@ export default function PlayersView({
 
       {pageTab === 'pool' ? (
         <div role="tabpanel" aria-label="Pool-wide">
+          {(poolTeamBias.takes.length > 0 || poolTeamBias.fades.length > 0) && (
+            <section
+              className="player-team-bias pool-team-bias"
+              aria-label="Teams this pool takes or fades"
+            >
+              <div className="player-team-bias-heading">
+                <div>
+                  <p className="eyebrow">Team loyalty watch</p>
+                  <h3>Teams this pool takes or fades</h3>
+                </div>
+                <small>
+                  Ranked by submitted-card share after a club appears in two
+                  distinct slate games. This pool leans favorites, so the take
+                  list often looks like the better teams and the fade list like
+                  the worse ones. Favorite vs dog rates sit on each card.
+                </small>
+              </div>
+              <div className="team-bias-groups">
+                {poolTeamBias.takes.length > 0 && (
+                  <div>
+                    <h4>Teams the pool takes</h4>
+                    <ul>
+                      {poolTeamBias.takes.map((signal) => (
+                        <PoolTeamBiasCard
+                          key={signal.key}
+                          signal={signal}
+                          teamName={
+                            teamNameByKey.get(signal.key) ?? signal.abbrev
+                          }
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {poolTeamBias.fades.length > 0 && (
+                  <div>
+                    <h4>Teams the pool fades</h4>
+                    <ul>
+                      {poolTeamBias.fades.map((signal) => (
+                        <PoolTeamBiasCard
+                          key={signal.key}
+                          signal={signal}
+                          teamName={
+                            teamNameByKey.get(signal.key) ?? signal.abbrev
+                          }
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
           {forecasts?.residuals && maturity && (
             <ResidualReport report={forecasts.residuals} maturity={maturity} />
           )}

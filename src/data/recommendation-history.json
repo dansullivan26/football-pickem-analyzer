@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T00:11:29.795Z",
+  "updatedAt": "2026-09-27T01:34:54.881Z",
   "weeks": [
     {
       "week": 1,
@@ -2152,7 +2152,7 @@
       "week": 4,
       "seasonYear": 2026,
       "label": "Week 4",
-      "capturedAt": "2026-09-26T22:59:26.613Z",
+      "capturedAt": "2026-09-27T01:34:54.881Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029245,
@@ -2272,8 +2272,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 14,
-          "homeScore": 24
+          "awayScore": 28,
+          "homeScore": 52
         },
         {
           "cbsEventId": 50027855,
@@ -2301,8 +2301,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 6,
-          "homeScore": 31
+          "awayScore": 13,
+          "homeScore": 41
         },
         {
           "cbsEventId": 50027870,
@@ -2331,8 +2331,8 @@
           },
           "neutralSite": false,
           "deviated": true,
-          "awayScore": 7,
-          "homeScore": 13
+          "awayScore": 20,
+          "homeScore": 19
         },
         {
           "cbsEventId": 50027897,
@@ -2360,8 +2360,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
-          "homeScore": 14
+          "awayScore": 15,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50027890,
@@ -2388,7 +2388,9 @@
             "state": "WV",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 6,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50027905,
@@ -2415,7 +2417,9 @@
             "state": "LA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50027940,
@@ -2442,7 +2446,9 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 3,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029232,
@@ -2478,15 +2484,15 @@
           "away": "CAR",
           "home": "CLE",
           "homeSpread": 2.5,
-          "liveHomeSpread": 2.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 1.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "away",
-          "strength": "solid",
-          "score": 6,
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 1.5,
           "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
@@ -2694,16 +2700,16 @@
           "away": "ARI",
           "home": "SF",
           "homeSpread": -8.5,
-          "liveHomeSpread": -8.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -7.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
-          "compositeEdge": 0,
+          "source": "line-value",
+          "pickedSide": "away",
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -2775,16 +2781,16 @@
           "away": "LV",
           "home": "NO",
           "homeSpread": -3.5,
-          "liveHomeSpread": -3,
-          "category": "slight",
-          "recommendedSide": "away",
+          "liveHomeSpread": -3.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-09-28T07:04:44.230Z",
-    "reportUpdatedAt": "2026-09-28T07:04:39Z",
+    "fetchedAt": "2026-09-28T15:39:45.351Z",
+    "reportUpdatedAt": "2026-09-28T15:39:34Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": []
     },
@@ -18,7 +18,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -37,7 +37,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -56,7 +56,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -85,7 +85,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -119,6 +119,16 @@
           "updatedAt": "2026-09-27T15:45Z"
         },
         {
+          "athleteId": "4362847",
+          "name": "Jaycee Horn",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Quadriceps",
+          "detail": "questionable",
+          "updatedAt": "2026-09-28T15:32Z"
+        },
+        {
           "athleteId": "3917853",
           "name": "Mike Jackson",
           "position": "CB",
@@ -145,8 +155,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Quadriceps",
-          "detail": "Coker (quadriceps) does not think his injury is serious, Joe Person of The Athletic reports.",
-          "updatedAt": "2026-09-27T21:06Z"
+          "detail": "Coker has been diagnosed with a minor quadriceps strain and could be available to play in next Sunday's game against the Lions, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-09-28T15:16Z"
         }
       ]
     },
@@ -154,7 +164,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -173,7 +183,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -212,7 +222,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -241,7 +251,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -290,7 +300,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -309,7 +319,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -338,7 +348,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -387,7 +397,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -426,7 +436,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -465,7 +475,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-09-28T07:04:39Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": []
     },
@@ -473,7 +483,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -502,7 +512,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -561,7 +571,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -600,7 +610,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -639,9 +649,29 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4429160",
+          "name": "De'Von Achane",
+          "position": "RB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Knee - ACL",
+          "detail": "Achane (knee) was diagnosed Monday with a torn ACL and will miss the remainder of the season, Ian Rapoport and Adam Schefter of ESPN report.",
+          "updatedAt": "2026-09-28T14:40Z"
+        },
+        {
+          "athleteId": "4682745",
+          "name": "Jaylen Wright",
+          "position": "RB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Foot",
+          "detail": "Wright (foot) is inactive for Sunday's game against the Chiefs.",
+          "updatedAt": "2026-09-27T16:21Z"
+        },
         {
           "athleteId": "4869645",
           "name": "Caleb Douglas",
@@ -651,16 +681,6 @@
           "injury": "Ankle",
           "detail": "inactive",
           "updatedAt": "2026-09-27T15:36Z"
-        },
-        {
-          "athleteId": "4429160",
-          "name": "De'Von Achane",
-          "position": "RB",
-          "status": "Doubtful",
-          "tier": "doubtful",
-          "injury": "Knee",
-          "detail": "Head coach Jeff Hafley said after Sunday's 24-10 loss to the Chiefs that Achane's knee injury \"does not sound very optimistic,\" but the running back will undergo additional testing to determine the extent of the issue, Cameron Wolfe of NFL Network reports.",
-          "updatedAt": "2026-09-27T20:53Z"
         }
       ]
     },
@@ -668,7 +688,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -707,7 +727,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:34Z",
       "status": "ok",
       "injuries": [
         {
@@ -737,8 +757,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Burns will undergo an MRI for a right knee injury that he sustained during the Giants' 12-7 win over the Titans on Sunday, Pat Leonard of the New York Daily News reports.",
-          "updatedAt": "2026-09-27T20:50Z"
+          "detail": "The Giants fear that Burns sustained a torn ACL in his right knee during Sunday's 12-7 win over the Titans, Jeff Howe and Jonathan Jones of The Athletic report.",
+          "updatedAt": "2026-09-28T13:14Z"
         }
       ]
     },
@@ -746,7 +766,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:34Z",
       "status": "ok",
       "injuries": [
         {
@@ -816,8 +836,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Thigh",
-          "detail": "Hall (thigh) outlined that he \"felt something\" when running before departing Sunday's 31-24 loss to the Lions, Brian Costello of the New York Post reports.",
-          "updatedAt": "2026-09-27T20:40Z"
+          "detail": "Jets head coach Aaron Glenn said that he won't have an update on Hall's (thigh) status until Wednesday, Zack Rosenblatt of The Athletic reports.",
+          "updatedAt": "2026-09-28T13:48Z"
         }
       ]
     },
@@ -825,7 +845,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:34Z",
       "status": "ok",
       "injuries": [
         {
@@ -874,7 +894,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:34Z",
       "status": "ok",
       "injuries": [
         {
@@ -904,7 +924,7 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "Etienne exited Sunday's 35-27 loss to the Raiders due to an injury to the same hamstring which bothered him in practice leading up to the game, head coach Kellen Moore revealed after the loss, John Hendrix of NewOrleans.Football reports.",
+          "detail": "Etienne exited Sunday's 35-27 loss to the Raiders due to an injury to the same hamstring that bothered him in practice leading up to the game, head coach Kellen Moore revealed after the loss, John Hendrix of NewOrleans.Football reports.",
           "updatedAt": "2026-09-28T00:16Z"
         }
       ]
@@ -913,7 +933,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-09-28T07:04:36Z",
+      "depthChartAt": "2026-09-28T15:39:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -942,7 +962,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:25Z",
       "status": "ok",
       "injuries": [
         {
@@ -961,7 +981,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:25Z",
       "status": "ok",
       "injuries": [
         {
@@ -1030,7 +1050,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:26Z",
       "status": "ok",
       "injuries": [
         {
@@ -1069,7 +1089,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:26Z",
       "status": "ok",
       "injuries": [
         {
@@ -1109,8 +1129,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "McMillan (knee) has been ruled out for the rest of Sunday's game against the Vikings, PewterReport.com reports.",
-          "updatedAt": "2026-09-27T20:55Z"
+          "detail": "McMillan is slated to undergo an MRI on his left knee Monday, Jenna Laine of ESPN.com reports.",
+          "updatedAt": "2026-09-28T15:01Z"
         }
       ]
     },
@@ -1118,7 +1138,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:27Z",
       "status": "ok",
       "injuries": [
         {
@@ -1137,7 +1157,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-09-28T07:04:40Z",
+      "depthChartAt": "2026-09-28T15:39:27Z",
       "status": "ok",
       "injuries": [
         {
@@ -1167,8 +1187,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Elbow",
-          "detail": "inactive",
-          "updatedAt": "2026-09-27T15:35Z"
+          "detail": "Head coach Dan Quinn said that Daniels (elbow) is likely to travel with the Commanders to London on Tuesday, though the quarterback remains uncertain to play Sunday against the Colts, Albert Breer of Sports Illustrated reports.",
+          "updatedAt": "2026-09-28T15:24Z"
         },
         {
           "athleteId": "4426403",

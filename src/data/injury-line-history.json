@@ -2,7 +2,7 @@
   "week": 4,
   "seasonYear": 2026,
   "label": "Week 4",
-  "updatedAt": "2026-09-28T01:00:46.970Z",
+  "updatedAt": "2026-09-28T07:04:44.230Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -273,6 +273,24 @@
           "toStatus": null,
           "fromTier": "questionable",
           "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 3,
+          "homeSpreadAfter": 3,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029160,
+          "athleteId": "4043089",
+          "name": "Jalen Thompson",
+          "position": "S",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Questionable",
+          "fromTier": "out",
+          "toTier": "questionable",
           "availability": "better",
           "homeSpreadBefore": 3,
           "homeSpreadAfter": 3,
@@ -1737,6 +1755,24 @@
           "homeSpreadBefore": -6.5,
           "homeSpreadAfter": -6.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029234,
+          "athleteId": "4243375",
+          "name": "Dylan Parham",
+          "position": "G",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Questionable",
+          "fromTier": "out",
+          "toTier": "questionable",
+          "availability": "better",
+          "homeSpreadBefore": -6.5,
+          "homeSpreadAfter": -6.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -3086,6 +3122,24 @@
           "fromTier": null,
           "toTier": "questionable",
           "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029238,
+          "athleteId": "4710000",
+          "name": "Fernando Carmona",
+          "position": "G",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Questionable",
+          "fromTier": "out",
+          "toTier": "questionable",
+          "availability": "better",
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
           "towardTeam": 0
@@ -4477,6 +4531,24 @@
           "homeSpreadBefore": 1.5,
           "homeSpreadAfter": 1.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029242,
+          "athleteId": "5091793",
+          "name": "Charles Demmings",
+          "position": "CB",
+          "teamAbbrev": "MIN",
+          "teamName": "Minnesota",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Questionable",
+          "fromTier": "out",
+          "toTier": "questionable",
+          "availability": "better",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 1.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4896,6 +4968,24 @@
           "homeSpreadBefore": -3.5,
           "homeSpreadAfter": -3.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029243,
+          "athleteId": "4603186",
+          "name": "Jack Bech",
+          "position": "WR",
+          "teamAbbrev": "LV",
+          "teamName": "Las Vegas",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Doubtful",
+          "fromTier": "out",
+          "toTier": "doubtful",
+          "availability": "better",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -5132,6 +5222,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 1.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-28T07:04:44.230Z",
+          "cbsEventId": 50029244,
+          "athleteId": "4697639",
+          "name": "Jaylen Watson",
+          "position": "CB",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": 1.5,
           "homeSpreadAfter": 1.5,
           "towardTeam": 0

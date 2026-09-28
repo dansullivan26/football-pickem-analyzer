@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { buildCompleteCardPayload } from '../src/completeCard.ts'
+import {
+  buildCompleteCardPayload,
+  completeCardCanSubmit,
+} from '../src/completeCard.ts'
 import type { SuggestedCard } from '../src/cardStrategy.ts'
 
 const card: SuggestedCard = {
@@ -140,4 +143,10 @@ test('completion payload defaults to no selected games', () => {
   )
 
   assert.deepEqual(payload.picks, [])
+})
+
+test('complete card can submit a tiebreaker with no selected games', () => {
+  assert.equal(completeCardCanSubmit(0, null), false)
+  assert.equal(completeCardCanSubmit(0, 42), true)
+  assert.equal(completeCardCanSubmit(1, null), true)
 })

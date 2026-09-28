@@ -359,18 +359,21 @@ are. Unselected and unpicked games are omitted; GrokBot validates against the
 live Week N slate.
 `pickedTeamId` / `pickedSide` are the team to save on CBS. If **Deviate** is
 checked on a pick, those fields are already the flipped side and `deviate` is
-`true`. GrokBot should save that team as-is and not flip it again.
+`true`. Checking Deviate also checks **Send** so the flipped side is in the
+payload. GrokBot should save that team as-is and not flip it again.
 The generated card shows the tiebreaker matchup and DraftKings O/U beside an
 optional whole-number answer. If the answer is blank, `tiebreaker` is omitted
-from the webhook so CBS remains blank.
+from the webhook so CBS remains blank. A valid total is enough to enable
+**Complete Card on CBS** even when no game is marked Send.
 
 The Complete card Action also writes `src/data/card-overrides.json` (sent
 side, plus any deviation flag) and re-runs the recommendation snapshot so
 Performance can score deviations against the opposite of the frozen card
 pick. Opening Generate card again in the same week pre-checks those flips and
 the **Send** boxes for games already written to the override file.
-Send selection is independent from the deviation checkbox: selecting or
-deselecting a game does not alter its flip. A partial send keeps prior
+Send selection is independent from the deviation checkbox except that
+turning Deviate on also turns Send on. Unchecking Send does not clear the
+flip. A partial send keeps prior
 sent sides for omitted games, including future games still on the live
 card. A mark changes only when that game is sent again with a different
 deviation setting.

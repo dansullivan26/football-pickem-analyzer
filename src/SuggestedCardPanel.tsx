@@ -25,7 +25,11 @@ import {
 } from './cardOverrides'
 import type { CardOverrideGame } from './types'
 import { COMPOSITE_EDGE_SCALE } from './cardScoring'
-import { completeCardPasswordMatches, sendCardToGrokBot } from './completeCard'
+import {
+  completeCardCanSubmit,
+  completeCardPasswordMatches,
+  sendCardToGrokBot,
+} from './completeCard'
 import {
   poolSupportView,
   type PoolProjection,
@@ -67,17 +71,6 @@ export default function SuggestedCardPanel({
       unpickedIds: card.unpicked.map((game) => game.gameId),
     }),
   )
-  const [selectedToSend, setSelectedToSend] = useState<Set<string>>(
-    () =>
-      new Set(
-        rememberedSendIds({
-          week: card.week,
-          seasonYear: card.seasonYear,
-          savedIds: savedGames.map((game) => game.gameId),
-          cardIds,
-        }),
-      ),
-  )
   const [deviations, setDeviations] = useState<Set<string>>(
     () =>
       new Set(
@@ -89,6 +82,21 @@ export default function SuggestedCardPanel({
         }),
       ),
   )
+  const [selectedToSend, setSelectedToSend] = useState<Set<string>>(() => {
+    const remembered = rememberedSendIds({
+      week: card.week,
+      seasonYear: card.seasonYear,
+      savedIds: savedGames.map((game) => game.gameId),
+      cardIds,
+    })
+    const marked = rememberedDeviationIds({
+      week: card.week,
+      seasonYear: card.seasonYear,
+      savedIds: savedDeviationIds,
+      pickIds: card.picks.map((pick) => pick.gameId),
+    })
+    return new Set([...remembered, ...marked])
+  })
   const [tiebreakerAnswer, setTiebreakerAnswer] = useState('')
   const [tiebreakerError, setTiebreakerError] = useState<string | null>(null)
   const [submitResult, setSubmitResult] = useState<{
@@ -121,6 +129,8 @@ export default function SuggestedCardPanel({
     (pick) =>
       selectedToSend.has(pick.gameId) && deviations.has(pick.gameId),
   ).length
+  const tiebreakerReady = readTiebreakerAnswer()
+  const canComplete = completeCardCanSubmit(selectedCount, tiebreakerReady)
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -176,12 +186,20 @@ export default function SuggestedCardPanel({
   }
 
   function toggleDeviate(gameId: string) {
+    const turningOn = !deviations.has(gameId)
     setDeviations((current) => {
       const next = new Set(current)
       if (next.has(gameId)) next.delete(gameId)
       else next.add(gameId)
       return next
     })
+    if (turningOn) {
+      setSelectedToSend((current) => {
+        const next = new Set(current)
+        next.add(gameId)
+        return next
+      })
+    }
   }
 
   function toggleSend(gameId: string) {
@@ -377,8 +395,9 @@ export default function SuggestedCardPanel({
               {selectedCount === 1 ? 'game' : 'games'} selected to send
             </strong>
             <small>
-              Previously sent games start checked. Select all includes every
-              recommendation and any manual pick with a side chosen.
+              Previously sent games start checked. Checking Deviate also
+              checks Send. Select all includes every recommendation and any
+              manual pick with a side chosen.
             </small>
           </div>
           <div>
@@ -486,22 +505,25 @@ export default function SuggestedCardPanel({
         <div className="complete-card">
           <button
             type="button"
-            disabled={
-              submitting ||
-              selectedCount === 0
-            }
+            disabled={submitting || !canComplete}
             onClick={openPasswordPrompt}
           >
             {submitting ? 'Sending to GrokBot…' : 'Complete Card on CBS'}
           </button>
           <small>
-            Sends {selectedCount} selected{' '}
-            {selectedCount === 1 ? 'game' : 'games'} to GrokBot
-            {selectedDeviationCount
+            {selectedCount === 0 && tiebreakerReady != null
+              ? `Sends the ${tiebreakerReady}-point tiebreaker to GrokBot`
+              : `Sends ${selectedCount} selected ${
+                  selectedCount === 1 ? 'game' : 'games'
+                } to GrokBot`}
+            {selectedCount > 0 && selectedDeviationCount
               ? `, including ${selectedDeviationCount} deviation${selectedDeviationCount === 1 ? '' : 's'}`
               : ''}
-            {selectedManualCount
+            {selectedCount > 0 && selectedManualCount
               ? `, plus ${selectedManualCount} manual pick${selectedManualCount === 1 ? '' : 's'}`
+              : ''}
+            {selectedCount > 0 && tiebreakerReady != null
+              ? ` with a ${tiebreakerReady}-point tiebreaker`
               : ''}
             . You will confirm in chat before it is saved on CBS. Delivery runs in
             a GitHub Action, so check its run if GrokBot never posts the card.

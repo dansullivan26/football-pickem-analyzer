@@ -16,6 +16,14 @@ export function completeCardPasswordMatches(value: string) {
   return value === COMPLETE_CARD_PASSWORD
 }
 
+/** Games marked Send, or a valid weekly total with nothing else to post. */
+export function completeCardCanSubmit(
+  selectedCount: number,
+  tiebreakerAnswer: number | null,
+) {
+  return selectedCount > 0 || tiebreakerAnswer != null
+}
+
 export function buildCompleteCardPayload(
   card: SuggestedCard,
   deviations: ReadonlySet<string> = new Set(),

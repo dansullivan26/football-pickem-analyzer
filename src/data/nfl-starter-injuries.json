@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-09-29T20:55:08.822Z",
-    "reportUpdatedAt": "2026-09-29T20:54:59Z",
+    "fetchedAt": "2026-09-29T22:41:39.788Z",
+    "reportUpdatedAt": "2026-09-29T22:41:32Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-09-29T20:50:15Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": []
     },
@@ -18,7 +18,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-09-29T20:49:44Z",
+      "depthChartAt": "2026-09-29T22:40:48Z",
       "status": "ok",
       "injuries": [
         {
@@ -37,19 +37,9 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-09-29T20:54:01Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4362845",
-          "name": "Jovaughn Gwyn",
-          "position": "G",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Ankle",
-          "detail": "Gwyn (ankle) is set to miss significant time, Clifton Brown of the Ravens' official site reports.",
-          "updatedAt": "2026-09-29T00:53Z"
-        },
         {
           "athleteId": "2980153",
           "name": "Ronnie Stanley",
@@ -66,7 +56,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-09-29T20:50:14Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -105,19 +95,9 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-09-29T20:51:05Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4362847",
-          "name": "Jaycee Horn",
-          "position": "CB",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Quadriceps",
-          "detail": "Horn sustained a torn quadriceps during the fourth quarter of Sunday's 21-18 loss to the Browns and is expected to miss 6-to-12 weeks, Mike Kaye and Jeremy Fowler of ESPN.com report.",
-          "updatedAt": "2026-09-28T17:24Z"
-        },
         {
           "athleteId": "4362647",
           "name": "Damien Lewis",
@@ -184,7 +164,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-09-29T20:55:04Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -223,7 +203,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-09-29T20:54:01Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -235,26 +215,6 @@
           "injury": "Knee",
           "detail": "Young (knee) is not expected to play in Week 4 against the Jaguars, Jay Morrison of SI.com reports.",
           "updatedAt": "2026-09-28T23:37Z"
-        },
-        {
-          "athleteId": "3125356",
-          "name": "Jalen Davis",
-          "position": "CB",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Hamstring",
-          "detail": "ir",
-          "updatedAt": "2026-09-29T19:13Z"
-        },
-        {
-          "athleteId": "4368003",
-          "name": "Andrei Iosivas",
-          "position": "WR",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Thumb",
-          "detail": "The Bengals placed Iosivas (thumb) on injured reserve Saturday.",
-          "updatedAt": "2026-09-26T20:26Z"
         }
       ]
     },
@@ -262,7 +222,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-09-29T20:54:02Z",
+      "depthChartAt": "2026-09-29T22:41:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -321,19 +281,9 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-09-29T20:54:02Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4043089",
-          "name": "Jalen Thompson",
-          "position": "S",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Hamstring",
-          "detail": "Cowboys executive vice president Stephen Jones said Monday that Thompson (hamstring) is expected to miss four-plus weeks, Patrik Walker of the team's official site reports.",
-          "updatedAt": "2026-09-28T23:13Z"
-        },
         {
           "athleteId": "4384549",
           "name": "Cobie Durant",
@@ -370,7 +320,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-09-29T20:54:02Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -389,26 +339,15 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-09-29T20:54:03Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
-      "injuries": [
-        {
-          "athleteId": "4569323",
-          "name": "Thomas Harper",
-          "position": "S",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Ankle",
-          "detail": "The Lions placed Harper (ankle) on injured reserve Saturday.",
-          "updatedAt": "2026-09-26T21:03Z"
-        }
-      ]
+      "injuries": []
     },
     {
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-09-29T20:54:03Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -457,19 +396,9 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-09-29T20:54:01Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4242227",
-          "name": "Ed Ingram",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Groin",
-          "detail": "questionable",
-          "updatedAt": "2026-09-29T16:45Z"
-        },
         {
           "athleteId": "4258173",
           "name": "Nico Collins",
@@ -479,16 +408,6 @@
           "injury": "Hamstring",
           "detail": "Head coach DeMeco Ryans said Monday that he's \"hopeful\" to have Collins available for the Texans' Week 4 game against the Cowboys, Aaron Wilson of KPRC 2 Houston reports.",
           "updatedAt": "2026-09-28T17:13Z"
-        },
-        {
-          "athleteId": "4241250",
-          "name": "Jake Hummel",
-          "position": "LB",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Groin",
-          "detail": "The Texans placed Hummel (groin) on injured reserve Saturday, Aaron Wilson of KPRC 2 Houston reports.",
-          "updatedAt": "2026-09-26T17:52Z"
         }
       ]
     },
@@ -496,7 +415,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-09-29T20:50:14Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -508,16 +427,6 @@
           "injury": "Ankle",
           "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "4360078",
-          "name": "Alec Pierce",
-          "position": "WR",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Heel",
-          "detail": "Colts head coach Shane Steichen reiterated Monday that Pierce didn't undergo surgery on his left heel and is continuing to rehab the injury, James Boyd of The Athletic reports.",
-          "updatedAt": "2026-09-28T18:38Z"
         }
       ]
     },
@@ -525,7 +434,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-09-29T20:51:06Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": []
     },
@@ -533,7 +442,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-09-29T20:50:46Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -562,7 +471,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-09-29T20:51:01Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -594,26 +503,6 @@
           "injury": "Hamstring",
           "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "2979860",
-          "name": "Dalvin Tomlinson",
-          "position": "DT",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Hamstring",
-          "detail": "questionable",
-          "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "4411189",
-          "name": "Trey Pipkins III",
-          "position": "OT",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Knee",
-          "detail": "The Chargers placed Pipkins (knee) on injured reserve Saturday.",
-          "updatedAt": "2026-09-26T21:25Z"
         }
       ]
     },
@@ -621,7 +510,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-09-29T20:50:46Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -670,7 +559,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-09-29T20:49:46Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -692,16 +581,6 @@
           "injury": "Concussion",
           "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "4603186",
-          "name": "Jack Bech",
-          "position": "WR",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Forearm",
-          "detail": "Raiders head coach Klint Kubiak confirmed Monday that Bech (forearm) is slated to be placed on injured reserve, Paul Gutierrez of the team's official site reports.",
-          "updatedAt": "2026-09-28T20:36Z"
         }
       ]
     },
@@ -709,7 +588,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-09-29T20:50:15Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -731,16 +610,6 @@
           "injury": "Ankle",
           "detail": "Dolphins head coach Jeff Hafley said Douglas (ankle) is day-to-day and could practice Wednesday, Travis Wingfield of the team's official site reports.",
           "updatedAt": "2026-09-28T19:24Z"
-        },
-        {
-          "athleteId": "4429160",
-          "name": "De'Von Achane",
-          "position": "RB",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Knee - ACL",
-          "detail": "The Dolphins placed Achane (knee) on injured reserve Monday.",
-          "updatedAt": "2026-09-28T20:10Z"
         }
       ]
     },
@@ -748,19 +617,9 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-09-29T20:50:15Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "5091793",
-          "name": "Charles Demmings",
-          "position": "CB",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Hamstring",
-          "detail": "Head coach Kevin O'Connell said Demmings will miss some time due to a hamstring injury, Ben Goessling of The Minnesota Star Tribune reports.",
-          "updatedAt": "2026-09-29T00:35Z"
-        },
         {
           "athleteId": "4799994",
           "name": "Brett Thorson",
@@ -787,19 +646,9 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-09-29T20:50:15Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4035631",
-          "name": "Brian Burns",
-          "position": "LB",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Knee - ACL",
-          "detail": "Head coach John Harbaugh confirmed that Burns sustained a torn ACL in his right knee during Sunday's 12-7 win over the Titans and will require season-ending surgery, Dan Salomone of the Giants' official site reports.",
-          "updatedAt": "2026-09-28T19:57Z"
-        },
         {
           "athleteId": "4428328",
           "name": "Deonte Banks",
@@ -826,7 +675,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-09-29T20:50:46Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -895,7 +744,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-09-29T20:50:12Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -927,16 +776,6 @@
           "injury": "Shoulder",
           "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "15718",
-          "name": "Greg Van Roten",
-          "position": "G",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Thigh",
-          "detail": "ir",
-          "updatedAt": "2026-09-29T20:21Z"
         }
       ]
     },
@@ -944,7 +783,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-09-29T20:49:47Z",
+      "depthChartAt": "2026-09-29T22:40:48Z",
       "status": "ok",
       "injuries": [
         {
@@ -983,7 +822,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-09-29T20:55:03Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1002,7 +841,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-09-29T20:50:12Z",
+      "depthChartAt": "2026-09-29T22:41:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -1021,7 +860,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-09-29T20:51:02Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1073,16 +912,6 @@
           "injury": "Ribs",
           "detail": "Evans is considered day-to-day after sustaining a rib strain during Sunday's 36-30 win over the Cardinals, Ian Rapoport of NFL Network reports.",
           "updatedAt": "2026-09-28T20:31Z"
-        },
-        {
-          "athleteId": "3043116",
-          "name": "Demarcus Robinson",
-          "position": "WR",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Ankle",
-          "detail": "The 49ers placed Robinson (ankle) on injured reserve Saturday.",
-          "updatedAt": "2026-09-26T21:17Z"
         }
       ]
     },
@@ -1090,7 +919,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-09-29T20:51:02Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1112,16 +941,6 @@
           "injury": "Hamstring",
           "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "4429211",
-          "name": "Anthony Bradford",
-          "position": "G",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Knee",
-          "detail": "The Seahawks placed Bradford (knee) on injured reserve Wednesday, John Boyle of the team's official site reports.",
-          "updatedAt": "2026-09-24T00:52Z"
         }
       ]
     },
@@ -1129,7 +948,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-09-29T20:51:03Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1141,16 +960,6 @@
           "injury": "Thumb",
           "detail": "Buccaneers head coach Todd Bowles said Monday that Mayfield (thumb) is expected to miss three weeks, Adam Schefter of ESPN reports.",
           "updatedAt": "2026-09-28T16:41Z"
-        },
-        {
-          "athleteId": "4430834",
-          "name": "Jalen McMillan",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Knee - PCL",
-          "detail": "McMillan has been diagnosed with a PCL sprain in his left knee, Jenna Laine of ESPN.com reports.",
-          "updatedAt": "2026-09-29T00:03Z"
         },
         {
           "athleteId": "4870998",
@@ -1178,26 +987,15 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-09-29T20:50:15Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
-      "injuries": [
-        {
-          "athleteId": "4710000",
-          "name": "Fernando Carmona",
-          "position": "G",
-          "status": "Injured Reserve",
-          "tier": "reserve",
-          "injury": "Ankle",
-          "detail": "Carmona (ankle) is expected to miss a few weeks, NFL reporter Jordan Schultz reports.",
-          "updatedAt": "2026-09-29T00:40Z"
-        }
-      ]
+      "injuries": []
     },
     {
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-09-29T20:51:04Z",
+      "depthChartAt": "2026-09-29T22:41:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1208,16 +1006,6 @@
           "tier": "doubtful",
           "injury": "Illness",
           "detail": "doubtful",
-          "updatedAt": "2026-09-29T16:45Z"
-        },
-        {
-          "athleteId": "4262199",
-          "name": "Sam Cosmi",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Concussion",
-          "detail": "questionable",
           "updatedAt": "2026-09-29T16:45Z"
         },
         {

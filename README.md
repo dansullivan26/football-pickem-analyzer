@@ -308,7 +308,10 @@ The browser's **Refresh data** button starts **Refresh review data**, which
 runs **Ingest GrokBot dump** (`kind=consensus`, the latest Covers file already
 in the private drop repo) and then **Refresh sportsbook lines** (DraftKings
 via SharpAPI). It does not scrape Covers itself. A stale or week-mismatched
-Covers dump fails the ingest, but DraftKings still refreshes and deploys.
+Covers dump (typical right after a new slate lands) leaves `consensus.json`
+unchanged and warns; it does not fail **Refresh review data**. DraftKings
+still refreshes and deploys. The ingest run itself stays green on a week
+mismatch and only fails on a broken dump.
 After the jobs finish and Pages deploys, reload the site. The toast is only
 an acknowledgement — data will not appear instantly.
 

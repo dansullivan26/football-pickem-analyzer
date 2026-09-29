@@ -14,7 +14,7 @@ jobs:
       # Covers first, then DraftKings. Running them together races two pushes to
       # main, and the lines job would build Pages from a checkout taken before
       # the consensus commit landed. A failed Covers dump (stale week, empty
-      # drop) must not skip DraftKings.
+      # drop) warns and still refreshes DraftKings; this job stays green.
       - name: Ingest the latest Covers dump
         id: covers
         continue-on-error: true
@@ -42,7 +42,10 @@ jobs:
             exit 1
           fi
 
-          gh run watch "$run_id" --exit-status --interval 10
+          if ! gh run watch "$run_id" --exit-status --interval 10; then
+            echo "::warning::Covers ingest failed (often a stale week dump after a new slate). DraftKings will still refresh. Check run $run_id."
+            exit 1
+          fi
 
       - name: Refresh DraftKings lines and deploy
         env:
@@ -54,9 +57,3 @@ jobs:
             echo "Covers ingest did not succeed; still refreshing DraftKings."
           fi
           gh workflow run "Refresh sportsbook lines" --ref "${GITHUB_REF_NAME}"
-
-      - name: Fail if Covers ingest failed
-        if: steps.covers.outcome == 'failure'
-        run: |
-          echo "DraftKings refresh was dispatched. Covers ingest failed; check the Ingest GrokBot dump run."
-          exit 1

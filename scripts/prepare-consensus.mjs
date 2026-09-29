@@ -25,9 +25,10 @@ if (!raw.source?.fetchedAt) {
   throw new Error('Consensus export must include source.fetchedAt.')
 }
 if (raw.week?.order !== slate.week.order) {
-  throw new Error(
-    `Consensus export is for week ${raw.week?.order}, but the prepared slate is week ${slate.week.order}.`,
-  )
+  const message = `Consensus export is for week ${raw.week?.order}, but the prepared slate is week ${slate.week.order}. Left consensus.json unchanged.`
+  console.log(`::warning title=Stale Covers dump::${message}`)
+  console.warn(message)
+  process.exit(0)
 }
 
 const slateGames = new Map(slate.games.map((game) => [game.cbsEventId, game]))

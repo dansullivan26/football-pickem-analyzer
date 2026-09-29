@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-09-28T06:33:49-04:00",
+    "fetchedAt": "2026-09-28T20:31:00-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -1100,7 +1100,7 @@
       "cbsEventId": 50029245,
       "sport": "NFL",
       "week": 3,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-09-28T20:15:00-04:00",
       "kickoffLabel": "Mon Sep 28, 8:15 PM ET",
       "tv": "ABC",
@@ -1130,8 +1130,8 @@
       },
       "homeSpread": 3.5,
       "line": "PHI -3.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 7,
       "venue": {
         "stadium": "Soldier Field",
         "city": "Chicago",

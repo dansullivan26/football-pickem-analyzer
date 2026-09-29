@@ -2,7 +2,7 @@
   "week": 4,
   "seasonYear": 2026,
   "label": "Week 4",
-  "updatedAt": "2026-09-28T23:24:14.372Z",
+  "updatedAt": "2026-09-29T02:04:58.850Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -4916,6 +4916,24 @@
           "athleteId": "3052587",
           "name": "Baker Mayfield",
           "position": "QB",
+          "teamAbbrev": "TB",
+          "teamName": "Tampa Bay",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 1.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-29T02:04:58.850Z",
+          "cbsEventId": 50029242,
+          "athleteId": "4430834",
+          "name": "Jalen McMillan",
+          "position": "WR",
           "teamAbbrev": "TB",
           "teamName": "Tampa Bay",
           "side": "home",

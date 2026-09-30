@@ -2,7 +2,7 @@
   "week": 5,
   "seasonYear": 2026,
   "label": "Week 5",
-  "updatedAt": "2026-09-30T00:35:32.406Z",
+  "updatedAt": "2026-09-30T19:30:23.581Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -88,6 +88,29 @@
       ]
     },
     {
+      "cbsEventId": 50029246,
+      "events": [
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029246,
+          "athleteId": "4426506",
+          "name": "Joey Porter Jr.",
+          "position": "CB",
+          "teamAbbrev": "PIT",
+          "teamName": "Pittsburgh",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
       "cbsEventId": 50029247,
       "events": [
         {
@@ -124,6 +147,101 @@
           "availability": "better",
           "homeSpreadBefore": -11.5,
           "homeSpreadAfter": -11.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029247,
+          "athleteId": "3916148",
+          "name": "Tony Pollard",
+          "position": "RB",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -11.5,
+          "homeSpreadAfter": -11.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029248,
+      "events": [
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029248,
+          "athleteId": "4243375",
+          "name": "Dylan Parham",
+          "position": "G",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029248,
+          "athleteId": "4427366",
+          "name": "Breece Hall",
+          "position": "RB",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029248,
+          "athleteId": "4597500",
+          "name": "Adonai Mitchell",
+          "position": "WR",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029248,
+          "athleteId": "5083315",
+          "name": "Kenyon Sadiq",
+          "position": "TE",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
           "towardTeam": 0
         }
       ]
@@ -268,6 +386,24 @@
           "fromTier": "out",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029253,
+          "athleteId": "4362249",
+          "name": "Jayden Reed",
+          "position": "WR",
+          "teamAbbrev": "GB",
+          "teamName": "Green Bay",
+          "side": "away",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,
           "towardTeam": 0
@@ -472,6 +608,42 @@
           "toStatus": null,
           "fromTier": "reserve",
           "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029258,
+          "athleteId": "4362647",
+          "name": "Damien Lewis",
+          "position": "G",
+          "teamAbbrev": "CAR",
+          "teamName": "Carolina",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-09-30T19:30:23.581Z",
+          "cbsEventId": 50029258,
+          "athleteId": "3917853",
+          "name": "Mike Jackson",
+          "position": "CB",
+          "teamAbbrev": "CAR",
+          "teamName": "Carolina",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Injured Reserve",
+          "fromTier": "questionable",
+          "toTier": "reserve",
           "availability": "better",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,

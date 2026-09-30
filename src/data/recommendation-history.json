@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T00:35:22.228Z",
+  "updatedAt": "2026-09-30T06:52:24.274Z",
   "weeks": [
     {
       "week": 1,
@@ -2892,7 +2892,7 @@
       "week": 5,
       "seasonYear": 2026,
       "label": "Week 5",
-      "capturedAt": "2026-09-30T00:35:22.228Z",
+      "capturedAt": "2026-09-30T06:52:24.274Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029259,
@@ -3069,16 +3069,16 @@
           "away": "AUBURN",
           "home": "TENN",
           "homeSpread": -6.5,
-          "liveHomeSpread": null,
-          "category": "pending",
-          "recommendedSide": null,
+          "liveHomeSpread": -7,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
-          "compositeEdge": 0,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "solid",
+          "score": 6,
+          "compositeEdge": 1.25,
           "awayRank": null,
           "homeRank": 17,
           "venue": {

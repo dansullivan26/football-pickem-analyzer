@@ -1,7 +1,13 @@
 {
-  "updatedAt": "2026-09-29T16:32:30.646Z",
+  "updatedAt": "2026-09-30T16:25:46.421Z",
   "seasonYear": 2026,
   "teams": [
+    {
+      "key": "NCAAF:AF",
+      "lastKickoff": "2026-09-27T02:30:00.000Z",
+      "source": "cfbd",
+      "label": "Air Force"
+    },
     {
       "key": "NCAAF:AUBURN",
       "lastKickoff": "2026-09-26T20:15:00.000Z",
@@ -9,16 +15,22 @@
       "label": "Auburn"
     },
     {
-      "key": "NCAAF:FLA",
-      "lastKickoff": "2026-09-26T19:30:00.000Z",
+      "key": "NCAAF:BAMA",
+      "lastKickoff": "2026-09-26T23:00:00.000Z",
       "source": "cfbd",
-      "label": "Florida"
+      "label": "Alabama"
     },
     {
-      "key": "NCAAF:IND",
-      "lastKickoff": "2026-09-26T00:00:00.000Z",
+      "key": "NCAAF:FSU",
+      "lastKickoff": "2026-09-26T19:00:00.000Z",
       "source": "cfbd",
-      "label": "Indiana"
+      "label": "Florida State"
+    },
+    {
+      "key": "NCAAF:ILL",
+      "lastKickoff": "2026-09-26T16:00:00.000Z",
+      "source": "cfbd",
+      "label": "Illinois"
     },
     {
       "key": "NCAAF:IOWA",
@@ -27,10 +39,16 @@
       "label": "Iowa"
     },
     {
-      "key": "NCAAF:LSU",
-      "lastKickoff": "2026-09-26T23:30:00.000Z",
+      "key": "NCAAF:IOWAST",
+      "lastKickoff": "2026-09-26T19:30:00.000Z",
       "source": "cfbd",
-      "label": "LSU"
+      "label": "Iowa State"
+    },
+    {
+      "key": "NCAAF:MD",
+      "lastKickoff": "2026-09-26T17:30:00.000Z",
+      "source": "cfbd",
+      "label": "Maryland"
     },
     {
       "key": "NCAAF:MICH",
@@ -39,34 +57,40 @@
       "label": "Michigan"
     },
     {
-      "key": "NCAAF:MISS",
-      "lastKickoff": "2026-09-26T19:30:00.000Z",
+      "key": "NCAAF:MINN",
+      "lastKickoff": "2026-09-27T03:00:00.000Z",
       "source": "cfbd",
-      "label": "Ole Miss"
+      "label": "Minnesota"
     },
     {
-      "key": "NCAAF:NWEST",
-      "lastKickoff": "2026-09-26T00:00:00.000Z",
+      "key": "NCAAF:MISSST",
+      "lastKickoff": "2026-09-26T23:45:00.000Z",
       "source": "cfbd",
-      "label": "Northwestern"
+      "label": "Mississippi State"
     },
     {
-      "key": "NCAAF:OKLA",
-      "lastKickoff": "2026-09-26T19:30:00.000Z",
+      "key": "NCAAF:NAVY",
+      "lastKickoff": "2026-09-25T23:00:00.000Z",
       "source": "cfbd",
-      "label": "Oklahoma"
+      "label": "Navy"
     },
     {
-      "key": "NCAAF:OKLAST",
-      "lastKickoff": "2026-09-26T23:00:00.000Z",
+      "key": "NCAAF:NEB",
+      "lastKickoff": "2026-09-26T21:00:00.000Z",
       "source": "cfbd",
-      "label": "Oklahoma State"
+      "label": "Nebraska"
     },
     {
-      "key": "NCAAF:OREG",
-      "lastKickoff": "2026-09-26T23:30:00.000Z",
+      "key": "NCAAF:OHIOST",
+      "lastKickoff": "2026-09-26T16:00:00.000Z",
       "source": "cfbd",
-      "label": "Oregon"
+      "label": "Ohio State"
+    },
+    {
+      "key": "NCAAF:PURDUE",
+      "lastKickoff": "2026-09-26T18:00:00.000Z",
+      "source": "cfbd",
+      "label": "Purdue"
     },
     {
       "key": "NCAAF:TENN",
@@ -75,34 +99,10 @@
       "label": "Tennessee"
     },
     {
-      "key": "NCAAF:TEXAS",
-      "lastKickoff": "2026-09-26T16:00:00.000Z",
+      "key": "NCAAF:UVA",
+      "lastKickoff": "2026-09-26T22:00:00.000Z",
       "source": "cfbd",
-      "label": "Texas"
-    },
-    {
-      "key": "NCAAF:TXAM",
-      "lastKickoff": "2026-09-26T23:30:00.000Z",
-      "source": "cfbd",
-      "label": "Texas A&M"
-    },
-    {
-      "key": "NCAAF:UGA",
-      "lastKickoff": "2026-09-26T19:30:00.000Z",
-      "source": "cfbd",
-      "label": "Georgia"
-    },
-    {
-      "key": "NCAAF:USC",
-      "lastKickoff": "2026-09-26T23:30:00.000Z",
-      "source": "cfbd",
-      "label": "USC"
-    },
-    {
-      "key": "NCAAF:VANDY",
-      "lastKickoff": "2026-09-26T20:15:00.000Z",
-      "source": "cfbd",
-      "label": "Vanderbilt"
+      "label": "Virginia"
     },
     {
       "key": "NCAAF:WVU",

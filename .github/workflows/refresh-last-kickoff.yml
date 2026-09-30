@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: last-kickoff
@@ -28,9 +29,11 @@ jobs:
         env:
           CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
       - name: Commit last-kickoff file
+        id: commit
         run: |
           if git diff --quiet -- src/data/last-kickoff.json; then
             echo "No last-kickoff changes to commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -39,3 +42,12 @@ jobs:
           git commit -m "data: refresh last kickoffs"
           git pull --rebase origin main
           git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      # GITHUB_TOKEN pushes do not trigger on: push, so Pages would keep
+      # slate-gap rest for teams that just landed on the card.
+      - name: Deploy GitHub Pages
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run "Deploy to GitHub Pages" --ref main

@@ -8,6 +8,7 @@ import {
   mergePreviousKickoff,
   nflverseKickoff,
   normalizeScheduleName,
+  rosterForLastKickoff,
   scheduleKickoffBefore,
 } from '../src/lastKickoff.ts'
 
@@ -111,6 +112,55 @@ test('lastKickoffsFromCfbdGames keeps the latest past kickoff per CBS team', () 
   assert.equal(rows[0]?.key, 'NCAAF:HAWAII')
   assert.equal(rows[0]?.lastKickoff, '2026-08-30T16:00:00.000Z')
   assert.equal(rows[0]?.source, 'cfbd')
+})
+
+test('rosterForLastKickoff keeps off-slate card teams for schedule rest', () => {
+  const roster = rosterForLastKickoff(
+    {
+      pool: { seasonYear: 2026 },
+      games: [
+        {
+          sport: 'NCAAF',
+          away: { abbrev: 'MISSST', location: 'Mississippi State', name: 'Miss. State' },
+          home: { abbrev: 'UGA', location: 'Georgia', name: 'Georgia' },
+        },
+      ],
+    } as never,
+    {
+      weeks: [
+        {
+          seasonYear: 2026,
+          games: [
+            { sport: 'NCAAF', away: 'BAMA', home: 'UK' },
+            { sport: 'NCAAF', away: 'FSU', home: 'BAMA' },
+          ],
+        },
+      ],
+    },
+    {
+      updatedAt: null,
+      seasonYear: 2026,
+      teams: [
+        {
+          key: 'NCAAF:TENN',
+          lastKickoff: '2026-09-26T16:00:00.000Z',
+          source: 'cfbd',
+          label: 'Tennessee',
+        },
+      ],
+    },
+  )
+  const keys = roster.map((team) => `${team.sport}:${team.abbrev}`).sort()
+  assert.deepEqual(keys, [
+    'NCAAF:BAMA',
+    'NCAAF:FSU',
+    'NCAAF:MISSST',
+    'NCAAF:TENN',
+    'NCAAF:UGA',
+    'NCAAF:UK',
+  ])
+  assert.equal(roster.find((team) => team.abbrev === 'BAMA')?.name, undefined)
+  assert.equal(roster.find((team) => team.abbrev === 'TENN')?.name, 'Tennessee')
 })
 
 test('lastKickoffsFromNflverseCsv skips preseason and future regular-season games', () => {

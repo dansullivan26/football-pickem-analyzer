@@ -4,11 +4,12 @@ import {
   lastKickoffsFromCfbdGames,
   lastKickoffsFromNflverseCsv,
   mergeLastKickoffFiles,
-  rosterFromSlate,
+  rosterForLastKickoff,
   type LastKickoffFile,
   type LastKickoffRow,
+  type ScheduleRosterTeam,
 } from '../src/lastKickoff.ts'
-import type { Slate } from '../src/types.ts'
+import type { RecommendationHistory, Slate } from '../src/types.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/last-kickoff.json', ROOT)
@@ -31,7 +32,16 @@ try {
   // First snapshot.
 }
 
-const roster = rosterFromSlate(slate)
+let history: RecommendationHistory | null = null
+try {
+  history = JSON.parse(
+    await readFile(new URL('src/data/recommendation-history.json', ROOT), 'utf8'),
+  ) as RecommendationHistory
+} catch {
+  // First season snapshot.
+}
+
+const roster = rosterForLastKickoff(slate, history, previous)
 const nowMs = Date.now()
 const seasonYear = slate.pool.seasonYear
 const apiKey = process.env.CFBD_API_KEY?.trim() ?? ''
@@ -90,7 +100,7 @@ function keepSource(
 
 async function fetchNflverse(
   year: number,
-  teams: ReturnType<typeof rosterFromSlate>,
+  teams: ScheduleRosterTeam[],
   now: number,
 ) {
   const response = await fetch(NFLVERSE_URL, {
@@ -106,7 +116,7 @@ async function fetchNflverse(
 async function fetchCfbd(
   key: string,
   year: number,
-  teams: ReturnType<typeof rosterFromSlate>,
+  teams: ScheduleRosterTeam[],
   now: number,
 ) {
   const games = await cfbdGames(key, year)

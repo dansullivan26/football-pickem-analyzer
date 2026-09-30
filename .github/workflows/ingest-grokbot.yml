@@ -121,3 +121,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run "Deploy to GitHub Pages" --ref main
+
+      # New slate teams were often missing from last-kickoff.json until the
+      # next daily CFBD pull, so rest fell back to the last CBS-card game.
+      - name: Refresh last kickoffs after a new slate
+        if: inputs.kind == 'slate' && steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run "Refresh last kickoff" --ref main

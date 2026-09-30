@@ -1,4 +1,4 @@
-import type { Slate, Team } from './types'
+import type { RecommendationHistory, Slate, Team } from './types'
 
 export type LastKickoffSource = 'cfbd' | 'nflverse'
 
@@ -107,6 +107,74 @@ export function rosterFromSlate(slate: Slate): ScheduleRosterTeam[] {
         name: side.name,
       })
     }
+  }
+  return [...seen.values()]
+}
+
+function putRosterTeam(
+  seen: Map<string, ScheduleRosterTeam>,
+  team: ScheduleRosterTeam,
+) {
+  const key = `${team.sport}:${team.abbrev}`
+  const existing = seen.get(key)
+  if (!existing) {
+    seen.set(key, team)
+    return
+  }
+  seen.set(key, {
+    sport: existing.sport,
+    abbrev: existing.abbrev,
+    location: existing.location ?? team.location,
+    name: existing.name ?? team.name,
+  })
+}
+
+export function rosterFromLastKickoffFile(
+  file: LastKickoffFile | null | undefined,
+): ScheduleRosterTeam[] {
+  return (file?.teams ?? []).flatMap((row) => {
+    const [sport, abbrev] = row.key.split(':')
+    if ((sport !== 'NFL' && sport !== 'NCAAF') || !abbrev) return []
+    return [
+      {
+        sport,
+        abbrev,
+        location: row.label,
+        name: row.label,
+      },
+    ]
+  })
+}
+
+export function rosterFromRecommendationHistory(
+  history: Pick<RecommendationHistory, 'weeks'> | null | undefined,
+  seasonYear: number,
+): ScheduleRosterTeam[] {
+  const seen = new Map<string, ScheduleRosterTeam>()
+  for (const week of history?.weeks ?? []) {
+    if ((week.seasonYear ?? seasonYear) !== seasonYear) continue
+    for (const game of week.games) {
+      for (const abbrev of [game.away, game.home]) {
+        putRosterTeam(seen, { sport: game.sport, abbrev })
+      }
+    }
+  }
+  return [...seen.values()]
+}
+
+/** Current slate first, then earlier card teams and leftover schedule rows. */
+export function rosterForLastKickoff(
+  slate: Slate,
+  history?: Pick<RecommendationHistory, 'weeks'> | null,
+  previous?: LastKickoffFile | null,
+): ScheduleRosterTeam[] {
+  const seen = new Map<string, ScheduleRosterTeam>()
+  for (const team of [
+    ...rosterFromSlate(slate),
+    ...rosterFromRecommendationHistory(history, slate.pool.seasonYear),
+    ...rosterFromLastKickoffFile(previous),
+  ]) {
+    putRosterTeam(seen, team)
   }
   return [...seen.values()]
 }

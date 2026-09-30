@@ -269,8 +269,12 @@ come from player-dump agreement, never from these schedules.
    no credit card).
 2. Add it as the GitHub Actions secret `CFBD_API_KEY`.
 3. Run **Refresh last kickoff**, or wait for its daily schedule
-   (`17 10 * * *` UTC). Without the key, NFL rows still refresh and any
-   previous college rows are kept.
+   (`17 10 * * *` UTC). A new CBS slate ingest also dispatches that
+   refresh so teams that were off the card last week still get their
+   real last game, not the last pool appearance. Without the key, NFL
+   rows still refresh and any previous college rows are kept. A change
+   to `last-kickoff.json` deploys Pages; a GITHUB_TOKEN push alone would
+   leave the site on slate-gap rest.
 
 A 13+ day college gap is a bye only when that schedule row exists. A card
 gap alone stays a long week. NFL byes were already schedule-honest on the

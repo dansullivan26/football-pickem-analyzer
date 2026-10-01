@@ -2,7 +2,7 @@
   "week": 5,
   "seasonYear": 2026,
   "label": "Week 5",
-  "updatedAt": "2026-10-01T06:11:05.897Z",
+  "updatedAt": "2026-10-01T13:34:34.425Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -426,6 +426,24 @@
           "fromStatus": "Questionable",
           "toStatus": null,
           "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-01T13:34:34.425Z",
+          "cbsEventId": 50029246,
+          "athleteId": "4426506",
+          "name": "Joey Porter Jr.",
+          "position": "CB",
+          "teamAbbrev": "PIT",
+          "teamName": "Pittsburgh",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": null,
+          "fromTier": "out",
           "toTier": null,
           "availability": "better",
           "homeSpreadBefore": 2.5,

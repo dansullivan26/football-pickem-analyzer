@@ -290,10 +290,9 @@ with `--force`.
 
 The browser never calls Gemini. Add a free [Google AI Studio](https://aistudio.google.com/apikey)
 key as the repository secret `GEMINI_API_KEY`, then run **Refresh leftover notes**.
-The default model is `gemini-2.5-flash`. New AI Studio projects sometimes
-need a newer free Flash (`gemini-2.5-flash-lite`, `gemini-3.5-flash-lite`,
-or `gemini-3.8-flash`) — set the repository variable `GEMINI_MODEL` if the
-Action 404s the default. The same command is:
+The default model is `gemini-3.8-flash` (the current free Flash for new
+AI Studio keys). Override it with the repository variable `GEMINI_MODEL`
+if Google moves the free model again. The same command is:
 
 ```bash
 GEMINI_API_KEY=... npm run snapshot-neutral-briefs

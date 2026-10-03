@@ -141,7 +141,7 @@ function brief(overrides: Partial<NeutralBrief> = {}): NeutralBrief {
     side: 'away',
     confidence: 'medium',
     why: 'Tennessee is 4-0 ATS on the road in the packet.',
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.8-flash',
     frozenAt: '2026-09-26T12:00:00.000Z',
     ...overrides,
   }

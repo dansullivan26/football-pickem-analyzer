@@ -15,8 +15,8 @@ import {
 import type { GameAnalysis, SlateGame } from './types.ts'
 import type { UnpickedGame } from './cardStrategy.ts'
 
-/** Documented free-tier Flash. New AI Studio projects may need GEMINI_MODEL. */
-export const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash'
+/** Free-tier Flash for new AI Studio keys. Override with GEMINI_MODEL. */
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash'
 export const NEUTRAL_BRIEF_RECENT_COVERS = 4
 export const NEUTRAL_BRIEF_MAX_WHY = 480
 

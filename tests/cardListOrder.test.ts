@@ -6,6 +6,7 @@ import {
   daySendState,
   formatCardKickoff,
   formatSuggestedCardText,
+  formatSuggestedDayCardText,
   groupCardRowsByDay,
   orderCardRows,
   playOfTheWeek,
@@ -420,5 +421,69 @@ test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
   assert.equal(
     formatSuggestedCardText(card),
     'Saturday:\n\nNCST +3.5 (lean only, no pick)\nARIZST @ KANSAS (manual review, no lean)',
+  )
+})
+
+test('formatSuggestedDayCardText copies one day without a weekday heading', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 3,
+    weekLabel: 'Week 3',
+    picks: [
+      pick({
+        gameId: 'unc',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        away: 'North Carolina',
+        awayAbbrev: 'UNC',
+        awayId: 'unc',
+        home: 'Clemson',
+        homeAbbrev: 'CLEM',
+        pickedSide: 'away',
+        pickedTeamId: 'unc',
+        pickedTeam: 'North Carolina',
+        poolSpread: 3.5,
+        category: 'slight',
+        edge: 1,
+        compositeEdge: 1,
+      }),
+      pick({
+        gameId: 'kan',
+        kickoff: '2026-09-20T13:00:00-04:00',
+        away: 'Kansas City',
+        awayAbbrev: 'KC',
+        awayId: 'kan',
+        home: 'New York Giants',
+        homeAbbrev: 'NYG',
+        pickedSide: 'away',
+        pickedTeamId: 'kan',
+        pickedTeam: 'Kansas City',
+        poolSpread: 5.5,
+        category: 'lock',
+        edge: 4.2,
+        compositeEdge: 4.2,
+      }),
+    ],
+    unpicked: [],
+    tiebreaker: null,
+  }
+  const sunday = groupCardRowsByDay(
+    orderCardRows(card.picks, card.unpicked, 'slate'),
+  ).find((group) => group.weekday === 'Sunday')
+  assert.ok(sunday)
+  assert.equal(
+    formatSuggestedDayCardText(sunday, card.picks),
+    'KC +5.5 (strong — play of the week)',
+  )
+  const saturday = groupCardRowsByDay(
+    orderCardRows(card.picks, card.unpicked, 'slate'),
+  ).find((group) => group.weekday === 'Saturday')
+  assert.ok(saturday)
+  assert.equal(
+    formatSuggestedDayCardText(saturday, card.picks),
+    'UNC +3.5 (light)',
   )
 })

@@ -874,6 +874,24 @@ h2 {
   text-transform: uppercase;
 }
 
+.suggested-pick-day-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.suggested-pick-day-copy {
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
 .suggested-pick-day-send {
   color: var(--muted);
   text-transform: none;

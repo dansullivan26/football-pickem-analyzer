@@ -541,6 +541,27 @@ export function applyDaySendSelection(
   return next
 }
 
+function formatCopiedCardLines(
+  rows: CardListRow[],
+  deviations: ReadonlySet<string>,
+  manualSelections: ManualPickSelections,
+  potwGameId: string | null,
+) {
+  return rows.map((row) => {
+    if (row.kind === 'pick') {
+      return formatCopiedRecommendedLine(
+        row.pick,
+        deviations.has(row.pick.gameId),
+        potwGameId,
+      )
+    }
+    return formatCopiedManualLine(
+      row.game,
+      manualSelections.get(row.game.gameId),
+    )
+  })
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
@@ -553,19 +574,12 @@ export function formatSuggestedCardText(
   const groups = groupCardRowsByDay(orderCardRows(picks, card.unpicked, sort))
   const body = groups
     .map((group) => {
-      const lines = group.rows.map((row) => {
-        if (row.kind === 'pick') {
-          return formatCopiedRecommendedLine(
-            row.pick,
-            deviations.has(row.pick.gameId),
-            potw?.gameId ?? null,
-          )
-        }
-        return formatCopiedManualLine(
-          row.game,
-          manualSelections.get(row.game.gameId),
-        )
-      })
+      const lines = formatCopiedCardLines(
+        group.rows,
+        deviations,
+        manualSelections,
+        potw?.gameId ?? null,
+      )
       return `${group.weekday}:\n\n${lines.join('\n')}`
     })
     .filter(Boolean)
@@ -573,4 +587,20 @@ export function formatSuggestedCardText(
   if (!potw) return body
   const header = formatPlayOfTheWeekHeader(potw)
   return body ? `${header}\n\n${body}` : header
+}
+
+/** One day's picks only — no weekday heading. */
+export function formatSuggestedDayCardText(
+  group: CardDayGroup,
+  picks: SuggestedPick[],
+  deviations: ReadonlySet<string> = new Set(),
+  manualSelections: ManualPickSelections = new Map(),
+) {
+  const potw = playOfTheWeek(picks)
+  return formatCopiedCardLines(
+    group.rows,
+    deviations,
+    manualSelections,
+    potw?.gameId ?? null,
+  ).join('\n')
 }

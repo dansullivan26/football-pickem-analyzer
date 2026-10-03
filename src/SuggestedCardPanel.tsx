@@ -6,7 +6,9 @@ import {
   formatCardKickoff,
   formatPoolSpread,
   formatSuggestedCardText,
+  formatSuggestedDayCardText,
   groupCardRowsByDay,
+  type CardDayGroup,
   orderCardRows,
   recommendedGameIdsForDay,
   sortSuggestedPicks,
@@ -66,7 +68,7 @@ export default function SuggestedCardPanel({
     ...card.picks.map((pick) => pick.gameId),
     ...card.unpicked.map((game) => game.gameId),
   ]
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<'all' | string | null>(null)
   const [sort, setSort] = useState<'recommendation' | 'slate'>('slate')
   const [submitting, setSubmitting] = useState(false)
   const [askPassword, setAskPassword] = useState(false)
@@ -183,10 +185,27 @@ export default function SuggestedCardPanel({
           sort,
         ),
       )
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2000)
+      setCopied('all')
+      window.setTimeout(() => setCopied(null), 2000)
     } catch {
-      setCopied(false)
+      setCopied(null)
+    }
+  }
+
+  async function copyDay(group: CardDayGroup) {
+    try {
+      await navigator.clipboard.writeText(
+        formatSuggestedDayCardText(
+          group,
+          picks,
+          deviations,
+          manualSelections,
+        ),
+      )
+      setCopied(group.dateKey)
+      window.setTimeout(() => setCopied(null), 2000)
+    } catch {
+      setCopied(null)
     }
   }
 
@@ -361,7 +380,7 @@ export default function SuggestedCardPanel({
               </select>
             </label>
             <button type="button" onClick={() => void copyCard()}>
-              {copied ? 'Copied' : 'Copy card'}
+              {copied === 'all' ? 'Copied' : 'Copy card'}
             </button>
           </div>
         </div>
@@ -434,12 +453,21 @@ export default function SuggestedCardPanel({
             >
               <div className="suggested-pick-day-heading">
                 <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
-                <DaySendToggle
-                  label={group.label}
-                  dayIds={recommendedGameIdsForDay(group)}
-                  selectedToSend={selectedToSend}
-                  onToggle={toggleDaySend}
-                />
+                <div className="suggested-pick-day-actions">
+                  <button
+                    type="button"
+                    className="suggested-pick-day-copy"
+                    onClick={() => void copyDay(group)}
+                  >
+                    {copied === group.dateKey ? 'Copied' : 'Copy day'}
+                  </button>
+                  <DaySendToggle
+                    label={group.label}
+                    dayIds={recommendedGameIdsForDay(group)}
+                    selectedToSend={selectedToSend}
+                    onToggle={toggleDaySend}
+                  />
+                </div>
               </div>
               <ol>
                 {group.rows.map((row) =>

@@ -1019,6 +1019,36 @@ h2 {
   background: rgba(21, 35, 28, 0.08);
 }
 
+.pick-source.gemini {
+  color: #1f4b8f;
+  background: #e4eefb;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.pick-source.gemini.light {
+  color: #5c5346;
+  background: #eeeae2;
+}
+
+.pick-source.gemini.medium {
+  color: #1f4b8f;
+  background: #e4eefb;
+}
+
+.pick-source.gemini.strong {
+  color: var(--green-dark);
+  background: var(--green-soft);
+}
+
+.gemini-brief-why {
+  display: block;
+  margin: 4px 0 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 .suggested-picks li.manual-review .manual-pick-options {
   grid-column: 1 / -1;
 }

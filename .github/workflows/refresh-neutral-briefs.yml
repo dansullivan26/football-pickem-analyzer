@@ -1,0 +1,49 @@
+name: Refresh leftover notes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: neutral-briefs
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Snapshot leftover Gemini notes
+        run: npm run snapshot-neutral-briefs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      - name: Commit leftover notes
+        id: commit
+        run: |
+          if git diff --quiet -- src/data/neutral-briefs.json; then
+            echo "No leftover-note changes to commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/neutral-briefs.json
+          git commit -m "data: freeze leftover Gemini notes"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy GitHub Pages
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run "Deploy to GitHub Pages" --ref "${GITHUB_REF_NAME}"

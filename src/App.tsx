@@ -11,6 +11,7 @@ import weatherHistoryData from './data/weather-history.json'
 import nflStarterInjuriesData from './data/nfl-starter-injuries.json'
 import injuryLineHistoryData from './data/injury-line-history.json'
 import cardOverridesData from './data/card-overrides.json'
+import neutralBriefsData from './data/neutral-briefs.json'
 import teamRosterData from './data/team-roster.json'
 import seasonHistoryData from './data/season-history.json'
 import PlayersView from './PlayersView'
@@ -86,6 +87,7 @@ import {
   buildTravelRestIndex,
 } from './travelRest'
 import type { LastKickoffFile } from './lastKickoff'
+import type { NeutralBriefsFile } from './neutralBrief'
 import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
 import type { SeasonHistoryFile } from './seasonHistory'
@@ -133,6 +135,7 @@ const injuryLineHistory = injuryLineHistoryData as InjuryLineHistory
 const consensusFeed = consensusData as ConsensusFeed
 const lineHistory = lineHistoryData as LineHistory
 const cardOverrides = cardOverridesData as CardOverrides
+const neutralBriefs = neutralBriefsData as NeutralBriefsFile
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamRoster = teamRosterData as TeamRosterFile
 const seasonHistory = seasonHistoryData as SeasonHistoryFile
@@ -1693,6 +1696,7 @@ function App() {
                 cardOverrides,
                 slate.week.order,
               )}
+              neutralBriefs={neutralBriefs}
               onClose={closeSuggestedCard}
             />
           )}

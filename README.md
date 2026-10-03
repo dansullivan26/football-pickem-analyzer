@@ -280,6 +280,29 @@ A 13+ day college gap is a bye only when that schedule row exists. A card
 gap alone stays a long week. NFL byes were already schedule-honest on the
 card; nflverse covers a Thursday/London game the pool slate might skip.
 
+## Leftover Gemini notes
+
+Manual-review leftovers (nets below 0.25) can carry a frozen Gemini note:
+a side or no-call, light / medium / strong, and a short why. The note never
+checks Send and does not change the v8 card. First write per game + week
+wins; later line or profile changes do not rewrite it unless you re-run
+with `--force`.
+
+The browser never calls Gemini. Add a free [Google AI Studio](https://aistudio.google.com/apikey)
+key as the repository secret `GEMINI_API_KEY`, then run **Refresh leftover notes**.
+The default model is `gemini-2.5-flash`. New AI Studio projects sometimes
+need a newer free Flash (`gemini-2.5-flash-lite`, `gemini-3.5-flash-lite`,
+or `gemini-3.8-flash`) — set the repository variable `GEMINI_MODEL` if the
+Action 404s the default. The same command is:
+
+```bash
+GEMINI_API_KEY=... npm run snapshot-neutral-briefs
+```
+
+That writes `src/data/neutral-briefs.json`. A GITHUB_TOKEN push does not
+deploy Pages, so the Action dispatches **Deploy to GitHub Pages** when it
+commits.
+
 ## Refresh sportsbook lines
 
 1. Create a free SharpAPI account.
@@ -359,6 +382,8 @@ The generated-card modal sends GrokBot this JSON:
 ```
 
 The modal starts with every game deselected. Only checked games are sent;
+Manual-review leftovers can show a frozen Gemini note (side or no-call,
+light / medium / strong, and why). That note does not check Send.
 **Select all** checks every recommended game plus manual-review games that
 already have a side chosen. Each day heading has a **Send** box that checks
 or clears that day's recommended games only; manual-review sides stay as they

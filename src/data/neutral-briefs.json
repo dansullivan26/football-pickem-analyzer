@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T16:05:59.488Z",
+  "updatedAt": "2026-10-03T19:12:40.108Z",
   "games": [
     {
       "status": "ok",
@@ -194,6 +194,54 @@
       "error": "503 high demand",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-03T16:05:59.488Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2te===",
+      "cbsEventId": 50029252,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "L.A. Rams",
+      "home": "Philadelphia",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T19:11:07.563Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tg===",
+      "cbsEventId": 50029253,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Green Bay",
+      "home": "Tampa Bay",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T19:11:39.911Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2ti===",
+      "cbsEventId": 50029254,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Miami",
+      "home": "Minnesota",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T19:12:10.012Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tk===",
+      "cbsEventId": 50029255,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Kansas City",
+      "home": "Las Vegas",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T19:12:40.108Z"
     },
     {
       "status": "ok",

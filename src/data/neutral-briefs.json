@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T06:16:03.600Z",
+  "updatedAt": "2026-10-03T11:52:19.725Z",
   "games": [
     {
       "status": "ok",
@@ -50,6 +50,60 @@
       "error": "429 rate limit",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-03T06:16:03.600Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygayte===",
+      "cbsEventId": 50028012,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "West Virginia",
+      "home": "Iowa St.",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T11:50:05.348Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygayts===",
+      "cbsEventId": 50028019,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Michigan",
+      "home": "Minnesota",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick leans toward Michigan at -5.5 based on a 0.5-point line value against DraftKings (+6) and a 0.25-point net edge despite traveling one time zone west. Both teams enter on normal seven-day rest, while conditions at Huntington Bank Stadium feature adverse weather with 15 mph winds and a slight chance of showers.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-03T11:50:41.705Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygazda===",
+      "cbsEventId": 50028020,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Alabama",
+      "home": "Miss. State",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick backs Miss. State at +6.5, capitalizing on a 1-point line value over the DraftKings 5.5 spread with a 0.25-point net edge. Both squads enter on normal 7-day rest under comfortable Starkville weather conditions (83°F, mostly cloudy). Mississippi State has zero graded profile games (0-0 ATS), while Alabama is 2-1 ATS across three graded games, keeping confidence light due to the thin sample sizes.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-03T11:51:22.481Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygazdi===",
+      "cbsEventId": 50028024,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Maryland",
+      "home": "Nebraska",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick leans toward Nebraska laying -14.5 based on a minor travel edge, as Maryland travels one time zone west. Both programs enter with 0-0 ATS records and building profiles with zero decided games on record. Weather in Lincoln looks ideal at 70°F and sunny with 12 mph winds, but with no substantial profile data yet available, conviction remains light.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-03T11:52:19.725Z"
     },
     {
       "status": "ok",

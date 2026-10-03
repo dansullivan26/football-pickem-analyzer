@@ -1,6 +1,56 @@
 {
-  "updatedAt": "2026-10-03T06:03:30.294Z",
+  "updatedAt": "2026-10-03T06:16:03.600Z",
   "games": [
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrxhe3tc===",
+      "cbsEventId": 50027971,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Virginia",
+      "home": "Florida State",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick leans to Florida State (+2.5) on a 1-point line value edge against DraftKings (+1.5), providing a key 0.5-point net edge. Both teams enter on normal 7-day rest, but profiles are thin with Virginia at 0-1 ATS over one graded game and Florida State at 1-1 ATS across two. With adverse weather in Tallahassee featuring an 84-degree forecast and a 69% chance of showers and thunderstorms, catching +2.5 points at home offers light value.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-03T06:14:20.644Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrxhe4to===",
+      "cbsEventId": 50027997,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Auburn",
+      "home": "Tennessee",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T06:14:58.738Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygayds===",
+      "cbsEventId": 50028009,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Purdue",
+      "home": "Illinois",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T06:15:33.480Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrygaytc===",
+      "cbsEventId": 50028011,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Ohio State",
+      "home": "Iowa",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T06:16:03.600Z"
+    },
     {
       "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2do===",

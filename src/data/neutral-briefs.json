@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T11:52:19.725Z",
+  "updatedAt": "2026-10-03T16:05:59.488Z",
   "games": [
     {
       "status": "ok",
@@ -106,6 +106,30 @@
       "frozenAt": "2026-10-03T11:52:19.725Z"
     },
     {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzge4da===",
+      "cbsEventId": 50029180,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Indianapolis",
+      "home": "Washington",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T16:04:44.571Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgiytg===",
+      "cbsEventId": 50029213,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "New England",
+      "home": "Buffalo",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T16:05:21.161Z"
+    },
+    {
       "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2do===",
       "cbsEventId": 50029247,
@@ -144,6 +168,32 @@
       "why": "Cincinnati carries a slight edge holding the sub-field-goal hook at -2.5, though the line matches DraftKings with 0 line edge. Both squads are 2-1 ATS on normal 7-day rest, while Cincinnati has more injury baggage with Colbie Young ruled out and two starters questionable compared to Jacksonville's single questionable defender. With both profiles in the building stage at just 3 decided games, support for the home side remains strictly light.",
       "model": "gemini-3.8-flash",
       "frozenAt": "2026-10-03T05:45:39.326Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2ta===",
+      "cbsEventId": 50029250,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Dallas",
+      "home": "Houston",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick targets Houston at -2.5, capturing a 0.5-point line edge and the field goal hook against the DraftKings spread of -3. Both teams enter on normal seven-day rest inside Reliant Stadium's indoor venue. Dallas is 1-2 ATS with Cobie Durant and DeMarvion Overshown ruled out, while Houston is 0-3 ATS with Azeez Al-Shaair out. Confidence is light because both teams have building profiles with only three decided games.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-03T16:05:25.535Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tc===",
+      "cbsEventId": 50029251,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Arizona",
+      "home": "N.Y. Giants",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T16:05:59.488Z"
     },
     {
       "status": "ok",

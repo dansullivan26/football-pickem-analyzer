@@ -23,19 +23,31 @@ export const NEUTRAL_BRIEF_MAX_WHY = 480
 export type NeutralBriefSide = 'home' | 'away' | 'no-call'
 export type NeutralBriefConfidence = 'light' | 'medium' | 'strong'
 
-export type NeutralBrief = {
+export type NeutralBriefBase = {
   gameId: string
   cbsEventId: number
   week: number
   seasonYear: number
   away: string
   home: string
+  model: string
+}
+
+export type NeutralBriefOk = NeutralBriefBase & {
+  status?: 'ok'
   side: NeutralBriefSide
   confidence: NeutralBriefConfidence
   why: string
-  model: string
   frozenAt: string
 }
+
+export type NeutralBriefFailed = NeutralBriefBase & {
+  status: 'failed'
+  error: string
+  attemptedAt: string
+}
+
+export type NeutralBrief = NeutralBriefOk | NeutralBriefFailed
 
 export type NeutralBriefsFile = {
   updatedAt: string | null
@@ -117,6 +129,18 @@ export function briefKey(
   return `${seasonYear}:${week}:${gameId}`
 }
 
+export function isNeutralBriefFailed(
+  brief: NeutralBrief | null | undefined,
+): brief is NeutralBriefFailed {
+  return brief?.status === 'failed'
+}
+
+export function isNeutralBriefOk(
+  brief: NeutralBrief | null | undefined,
+): brief is NeutralBriefOk {
+  return brief != null && brief.status !== 'failed'
+}
+
 export function lookupNeutralBrief(
   file: NeutralBriefsFile | null | undefined,
   game: { gameId: string; week?: number },
@@ -135,6 +159,25 @@ export function lookupNeutralBrief(
   )
 }
 
+export function summarizeGeminiError(message: string) {
+  const status = /Gemini (\d+)/.exec(message)?.[1]
+  if (status === '503') return '503 high demand'
+  if (status === '429') return '429 rate limit'
+  if (status === '404') return '404 model not found'
+  const compact = message.replace(/\s+/g, ' ').trim()
+  return compact.slice(0, 120) || 'Gemini request failed'
+}
+
+export function formatNeutralBriefFailure(brief: NeutralBriefFailed) {
+  if (brief.error.startsWith('503')) {
+    return 'Gemini was busy (503). Run Refresh leftover notes to try this leftover again.'
+  }
+  if (brief.error.startsWith('429')) {
+    return 'Gemini hit a rate limit. Run Refresh leftover notes to try this leftover again.'
+  }
+  return `Gemini failed (${brief.error}). Run Refresh leftover notes to try this leftover again.`
+}
+
 export function freezeNeutralBrief(
   file: NeutralBriefsFile,
   next: NeutralBrief,
@@ -146,7 +189,7 @@ export function freezeNeutralBrief(
       row.week === next.week &&
       row.seasonYear === next.seasonYear,
   )
-  if (existing && !force) {
+  if (existing && isNeutralBriefOk(existing) && !force) {
     return { file, wrote: false }
   }
   const games = [
@@ -166,9 +209,13 @@ export function freezeNeutralBrief(
       left.cbsEventId - right.cbsEventId,
   )
   return {
-    file: { updatedAt: next.frozenAt, games },
+    file: { updatedAt: briefStamp(next), games },
     wrote: true,
   }
+}
+
+function briefStamp(brief: NeutralBrief) {
+  return isNeutralBriefFailed(brief) ? brief.attemptedAt : brief.frozenAt
 }
 
 export function parseGeminiBrief(raw: unknown): {
@@ -277,6 +324,7 @@ export function formatNeutralBriefTag(
   brief: NeutralBrief,
   game: Pick<UnpickedGame, 'away' | 'home' | 'homeSpread'>,
 ) {
+  if (isNeutralBriefFailed(brief)) return 'Gemini failed · try again'
   if (brief.side === 'no-call') {
     return `Gemini · no call · ${brief.confidence}`
   }

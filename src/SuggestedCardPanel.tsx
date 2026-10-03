@@ -36,7 +36,9 @@ import {
 } from './cardPoolAware'
 import { PoolSupportNote } from './PoolSupportNote'
 import {
+  formatNeutralBriefFailure,
   formatNeutralBriefTag,
+  isNeutralBriefFailed,
   lookupNeutralBrief,
   type NeutralBrief,
   type NeutralBriefsFile,
@@ -773,12 +775,24 @@ function ManualReviewRow({
         </span>
         {game.detail && <em>{game.detail}</em>}
         <span>{game.reason}</span>
-        {brief ? <em className="gemini-brief-why">{brief.why}</em> : null}
+        {brief && isNeutralBriefFailed(brief) ? (
+          <em className="gemini-brief-why failed">
+            {formatNeutralBriefFailure(brief)}
+          </em>
+        ) : brief && !isNeutralBriefFailed(brief) ? (
+          <em className="gemini-brief-why">{brief.why}</em>
+        ) : null}
       </div>
       <div className="suggested-pick-tags">
         <span className="pick-source manual-review">Manual review</span>
         {brief ? (
-          <span className={`pick-source gemini ${brief.confidence}`}>
+          <span
+            className={[
+              'pick-source',
+              'gemini',
+              isNeutralBriefFailed(brief) ? 'failed' : brief.confidence,
+            ].join(' ')}
+          >
             {formatNeutralBriefTag(brief, game)}
           </span>
         ) : null}

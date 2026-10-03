@@ -2,6 +2,18 @@
   "updatedAt": "2026-10-03T05:50:38.793Z",
   "games": [
     {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2do===",
+      "cbsEventId": 50029247,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Tennessee",
+      "home": "Baltimore",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T05:50:38.793Z"
+    },
+    {
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2dq===",
       "cbsEventId": 50029248,
       "week": 5,
@@ -26,6 +38,18 @@
       "why": "Cincinnati carries a slight edge holding the sub-field-goal hook at -2.5, though the line matches DraftKings with 0 line edge. Both squads are 2-1 ATS on normal 7-day rest, while Cincinnati has more injury baggage with Colbie Young ruled out and two starters questionable compared to Jacksonville's single questionable defender. With both profiles in the building stage at just 3 decided games, support for the home side remains strictly light.",
       "model": "gemini-3.8-flash",
       "frozenAt": "2026-10-03T05:45:39.326Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tq===",
+      "cbsEventId": 50029258,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Detroit",
+      "home": "Carolina",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T05:50:38.793Z"
     }
   ]
 }

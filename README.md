@@ -284,9 +284,10 @@ card; nflverse covers a Thursday/London game the pool slate might skip.
 
 Manual-review leftovers (nets below 0.25) can carry a frozen Gemini note:
 a side or no-call, light / medium / strong, and a short why. The note never
-checks Send and does not change the v8 card. First write per game + week
-wins; later line or profile changes do not rewrite it unless you re-run
-with `--force`.
+checks Send and does not change the v8 card. First successful write per
+game + week wins; later line or profile changes do not rewrite it unless
+you re-run with `--force`. A 503 / 429 is stored as a retry note on that
+row, not a freeze, so the next Action run asks that leftover again.
 
 The browser never calls Gemini. Add a free [Google AI Studio](https://aistudio.google.com/apikey)
 key as the repository secret `GEMINI_API_KEY`, then run **Refresh leftover notes**.

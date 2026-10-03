@@ -36,6 +36,7 @@ import {
 } from './cardPoolAware'
 import { PoolSupportNote } from './PoolSupportNote'
 import {
+  formatGeminiPickTag,
   formatNeutralBriefFailure,
   formatNeutralBriefTag,
   isNeutralBriefFailed,
@@ -449,6 +450,12 @@ export default function SuggestedCardPanel({
                       deviate={deviations.has(row.pick.gameId)}
                       selectedToSend={selectedToSend.has(row.pick.gameId)}
                       poolProjection={poolProjections?.get(row.pick.cbsEventId)}
+                      brief={lookupNeutralBrief(
+                        neutralBriefs,
+                        row.pick,
+                        card.week,
+                        card.seasonYear,
+                      )}
                       onToggleDeviate={toggleDeviate}
                       onToggleSend={toggleSend}
                     />
@@ -659,6 +666,7 @@ function SuggestedPickRow({
   deviate,
   selectedToSend,
   poolProjection,
+  brief,
   onToggleDeviate,
   onToggleSend,
 }: {
@@ -666,6 +674,7 @@ function SuggestedPickRow({
   deviate: boolean
   selectedToSend: boolean
   poolProjection?: PoolProjection
+  brief: NeutralBrief | null
   onToggleDeviate: (gameId: string) => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -710,6 +719,17 @@ function SuggestedPickRow({
           </span>
         ) : null}
         <PoolSupportNote view={poolSupport} />
+        {brief ? (
+          <span
+            className={[
+              'pick-source',
+              'gemini',
+              isNeutralBriefFailed(brief) ? 'failed' : brief.confidence,
+            ].join(' ')}
+          >
+            {formatGeminiPickTag(brief, pick)}
+          </span>
+        ) : null}
       </div>
       <div className="suggested-pick-controls">
         <label className="suggested-pick-toggle">
@@ -730,6 +750,13 @@ function SuggestedPickRow({
         </label>
       </div>
       <em>{pick.detail}</em>
+      {brief && isNeutralBriefFailed(brief) ? (
+        <em className="gemini-brief-why failed">
+          {formatNeutralBriefFailure(brief)}
+        </em>
+      ) : brief && !isNeutralBriefFailed(brief) ? (
+        <em className="gemini-brief-why">{brief.why}</em>
+      ) : null}
     </li>
   )
 }

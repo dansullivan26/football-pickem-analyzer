@@ -280,19 +280,23 @@ A 13+ day college gap is a bye only when that schedule row exists. A card
 gap alone stays a long week. NFL byes were already schedule-honest on the
 card; nflverse covers a Thursday/London game the pool slate might skip.
 
-## Leftover Gemini notes
+## Gemini notes
 
-Manual-review leftovers (nets below 0.25) can carry a frozen Gemini note:
-a side or no-call, light / medium / strong, and a short why. The note never
-checks Send and does not change the v8 card. First successful write per
-game + week wins; later line or profile changes do not rewrite it unless
-you re-run with `--force`. A 503 / 429 is stored as a retry note on that
-row, not a freeze, so the next Action run asks that leftover again.
+Every upcoming ATS-card game can carry a Gemini paragraph next to the
+algorithm rec. The paragraph is context only: it never checks Send, never
+flips Deviate, and does not change v8. Gemini may lean the other way; that
+is fine. A later successful run overwrites the paragraph. A 503 / 429 is
+stored as a retry note, not a freeze.
+
+**Refresh Gemini notes** asks four games per run (missing or failed first,
+then the oldest paragraph) so the free tier is not blasted. It runs about
+every 20 minutes (`7,27,47 * * * *` UTC) and can still be started by hand.
+`--all` asks every upcoming game with a DraftKings number in one go.
+`GEMINI_ASK_LIMIT` overrides the budget.
 
 The browser never calls Gemini. Add a free [Google AI Studio](https://aistudio.google.com/apikey)
-key as the repository secret `GEMINI_API_KEY`, then run **Refresh leftover notes**.
-The default model is `gemini-3.8-flash` (the current free Flash for new
-AI Studio keys). Override it with the repository variable `GEMINI_MODEL`
+key as the repository secret `GEMINI_API_KEY`. The default model is
+`gemini-3.8-flash`. Override it with the repository variable `GEMINI_MODEL`
 if Google moves the free model again. The same command is:
 
 ```bash
@@ -382,8 +386,8 @@ The generated-card modal sends GrokBot this JSON:
 ```
 
 The modal starts with every game deselected. Only checked games are sent;
-Manual-review leftovers can show a frozen Gemini note (side or no-call,
-light / medium / strong, and why). That note does not check Send.
+ATS-card rows can show a Gemini paragraph next to the algorithm rec.
+That note does not check Send.
 **Select all** checks every recommended game plus manual-review games that
 already have a side chosen. Each day heading has a **Send** box that checks
 or clears that day's recommended games only; manual-review sides stay as they

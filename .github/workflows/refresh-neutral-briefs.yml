@@ -1,6 +1,9 @@
-name: Refresh leftover notes
+name: Refresh Gemini notes
 
 on:
+  schedule:
+    # Small budget per run; missing/failed first, then oldest paragraph.
+    - cron: '7,27,47 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -8,7 +11,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: neutral-briefs
+  group: gemini-notes
   cancel-in-progress: false
 
 jobs:
@@ -21,23 +24,23 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Snapshot leftover Gemini notes
+      - name: Snapshot Gemini notes
         run: npm run snapshot-neutral-briefs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-      - name: Commit leftover notes
+      - name: Commit Gemini notes
         id: commit
         run: |
           if git diff --quiet -- src/data/neutral-briefs.json; then
-            echo "No leftover-note changes to commit."
+            echo "No Gemini-note changes to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/neutral-briefs.json
-          git commit -m "data: freeze leftover Gemini notes"
+          git commit -m "data: refresh Gemini notes"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
           echo "committed=true" >> "$GITHUB_OUTPUT"

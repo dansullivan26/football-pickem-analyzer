@@ -13,12 +13,14 @@ import {
   type NflStarterInjuryTeam,
 } from './nflStarterInjuries.ts'
 import type { GameAnalysis, SlateGame } from './types.ts'
-import type { UnpickedGame } from './cardStrategy.ts'
+import type { SuggestedPick, UnpickedGame } from './cardStrategy.ts'
 
 /** Free-tier Flash for new AI Studio keys. Override with GEMINI_MODEL. */
 export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash'
 export const NEUTRAL_BRIEF_RECENT_COVERS = 4
 export const NEUTRAL_BRIEF_MAX_WHY = 480
+/** Free-tier budget: missing/failed first, then the oldest paragraph. */
+export const GEMINI_ASK_BUDGET = 4
 
 export type NeutralBriefSide = 'home' | 'away' | 'no-call'
 export type NeutralBriefConfidence = 'light' | 'medium' | 'strong'
@@ -95,12 +97,27 @@ export type NeutralPacket = {
   cbsHomeSpread: number
   dkHomeSpread: number | null
   lineEdge: number | null
-  skipReason: string
+  skipReason: string | null
   lean: { side: 'home' | 'away'; team: string; spread: number } | null
+  cardPick: NeutralCardPick | null
   cardDetail: string | null
   weather: string | null
   public: { awayPct: number | null; homePct: number | null } | null
   teams: NeutralPacketTeam[]
+}
+
+export type NeutralCardPick = {
+  side: 'home' | 'away'
+  team: string
+  spread: number
+  detail: string | null
+  source: string
+}
+
+export type GeminiAskCandidate = {
+  gameId: string
+  cbsEventId: number
+  brief: NeutralBrief | null
 }
 
 export type NeutralTeamSource = Pick<
@@ -170,12 +187,12 @@ export function summarizeGeminiError(message: string) {
 
 export function formatNeutralBriefFailure(brief: NeutralBriefFailed) {
   if (brief.error.startsWith('503')) {
-    return 'Gemini was busy (503). Run Refresh leftover notes to try this leftover again.'
+    return 'Gemini was busy (503). The next Refresh Gemini notes run will try this game again.'
   }
   if (brief.error.startsWith('429')) {
-    return 'Gemini hit a rate limit. Run Refresh leftover notes to try this leftover again.'
+    return 'Gemini hit a rate limit. The next Refresh Gemini notes run will try this game again.'
   }
-  return `Gemini failed (${brief.error}). Run Refresh leftover notes to try this leftover again.`
+  return `Gemini failed (${brief.error}). The next Refresh Gemini notes run will try this game again.`
 }
 
 export function freezeNeutralBrief(
@@ -189,7 +206,7 @@ export function freezeNeutralBrief(
       row.week === next.week &&
       row.seasonYear === next.seasonYear,
   )
-  if (existing && isNeutralBriefOk(existing) && !force) {
+  if (existing && isNeutralBriefOk(existing) && isNeutralBriefFailed(next) && !force) {
     return { file, wrote: false }
   }
   const games = [
@@ -235,7 +252,7 @@ export function parseGeminiBrief(raw: unknown): {
   return { side, confidence, why }
 }
 
-export const NEUTRAL_BRIEF_SYSTEM_PROMPT = `You are reviewing one leftover CBS Football Pick'em game. The card already left it unpicked because line, hook, injury, rest, and travel produced no net of 0.25 or more. You do not replace that card and you do not send picks.
+export const NEUTRAL_BRIEF_SYSTEM_PROMPT = `You are writing a short scouting note for one CBS Football Pick'em game. The card already has its own algorithm pick when the packet includes cardPick. You do not replace that card and you do not send picks.
 
 Use only the packet. Do not invent injuries, weather, records, or lines. If a fact is missing, treat it as unknown.
 
@@ -243,16 +260,17 @@ Return JSON only:
 {"side":"home"|"away"|"no-call","confidence":"light"|"medium"|"strong","why":"..."}
 
 Rules:
-- side is the CBS pool side you would take, or no-call if the packet does not support a lean.
+- why is the product: 2-5 readable sentences quoting packet facts (ATS line, rest, travel, weather, profile, injuries, and the card pick if present).
+- side is your own lean for context, even if it disagrees with cardPick. Use no-call if the packet does not support a lean.
 - light if decided < 4 on the profiles you cite, or if you only have one thin fact.
 - medium if two packet facts point the same way.
 - strong only if multiple packet facts agree and samples are not thin.
-- why: 2-4 sentences quoting packet facts (ATS line, rest, travel, weather, profile, injuries). No fluff.
 - If the packet is empty of directional facts, return no-call with light.`
 
 export function buildNeutralPacket(input: {
   analysis: GameAnalysis
-  unpicked: UnpickedGame
+  unpicked?: UnpickedGame | null
+  cardPick?: NeutralCardPick | null
   week: { order: number; label: string }
   seasonYear: number
   awayTeam: NeutralTeamSource | null
@@ -268,14 +286,17 @@ export function buildNeutralPacket(input: {
   const game = analysis.game
   const names = { away: game.away.name, home: game.home.name }
   const restTravel = input.travelRest
+  const cardPick = input.cardPick ?? null
   const lean =
-    unpicked.leanSide && unpicked.leanTeam && unpicked.leanSpread != null
+    unpicked?.leanSide && unpicked.leanTeam && unpicked.leanSpread != null
       ? {
           side: unpicked.leanSide,
           team: unpicked.leanTeam,
           spread: unpicked.leanSpread,
         }
-      : null
+      : cardPick
+        ? { side: cardPick.side, team: cardPick.team, spread: cardPick.spread }
+        : null
 
   return {
     week: week.order,
@@ -294,9 +315,10 @@ export function buildNeutralPacket(input: {
       analysis.liveHomeSpread != null
         ? roundToHundredth(game.homeSpread - analysis.liveHomeSpread)
         : null,
-    skipReason: unpicked.reason,
+    skipReason: unpicked?.reason ?? null,
     lean,
-    cardDetail: unpicked.detail ?? null,
+    cardPick,
+    cardDetail: cardPick?.detail ?? unpicked?.detail ?? null,
     weather: weatherLine(input.weather ?? null),
     public: publicLine(analysis),
     teams: [
@@ -331,6 +353,51 @@ export function formatNeutralBriefTag(
   const team = brief.side === 'home' ? game.home : game.away
   const spread = poolSpreadForSide(game.homeSpread, brief.side)
   return `Gemini · ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
+}
+
+export function formatGeminiPickTag(
+  brief: NeutralBrief,
+  pick: Pick<SuggestedPick, 'away' | 'home' | 'pickedSide' | 'poolSpread'>,
+) {
+  if (isNeutralBriefFailed(brief)) return 'Gemini failed · try again'
+  if (brief.side === 'no-call') {
+    return `Gemini · no call · ${brief.confidence}`
+  }
+  const team = brief.side === 'home' ? pick.home : pick.away
+  const homeSpread =
+    pick.pickedSide === 'home' ? pick.poolSpread : -pick.poolSpread
+  const spread = poolSpreadForSide(homeSpread, brief.side)
+  if (brief.side === pick.pickedSide) {
+    return `Gemini agrees · ${brief.confidence}`
+  }
+  return `Gemini leans ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
+}
+
+export function selectGamesToAsk(
+  candidates: GeminiAskCandidate[],
+  budget = GEMINI_ASK_BUDGET,
+) {
+  return [...candidates]
+    .sort((left, right) => {
+      const rank = askRank(left) - askRank(right)
+      if (rank) return rank
+      const stamp = askStamp(left) - askStamp(right)
+      if (stamp) return stamp
+      return left.cbsEventId - right.cbsEventId
+    })
+    .slice(0, Math.max(0, budget))
+}
+
+function askRank(row: GeminiAskCandidate) {
+  if (!row.brief) return 0
+  if (isNeutralBriefFailed(row.brief)) return 1
+  return 2
+}
+
+function askStamp(row: GeminiAskCandidate) {
+  if (!row.brief) return 0
+  if (isNeutralBriefFailed(row.brief)) return Date.parse(row.brief.attemptedAt) || 0
+  return Date.parse(row.brief.frozenAt) || 0
 }
 
 function packetTeam(input: {

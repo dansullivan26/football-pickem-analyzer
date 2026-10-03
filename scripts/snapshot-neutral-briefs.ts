@@ -19,23 +19,29 @@ import type {
 } from '../src/types.ts'
 import {
   DEFAULT_GEMINI_MODEL,
+  GEMINI_ASK_BUDGET,
   NEUTRAL_BRIEF_SYSTEM_PROMPT,
   buildNeutralPacket,
   emptyNeutralBriefs,
   freezeNeutralBrief,
-  isNeutralBriefOk,
   lookupNeutralBrief,
   parseGeminiBrief,
+  selectGamesToAsk,
   summarizeGeminiError,
   type NeutralBriefsFile,
+  type NeutralCardPick,
   type NeutralPacket,
 } from '../src/neutralBrief.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/neutral-briefs.json', ROOT)
 const FORCE = process.argv.includes('--force')
+const ASK_ALL = process.argv.includes('--all')
 const MODEL = process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
 const API_KEY = process.env.GEMINI_API_KEY?.trim() ?? ''
+const ASK_LIMIT = ASK_ALL
+  ? Number.POSITIVE_INFINITY
+  : Number(process.env.GEMINI_ASK_LIMIT) || GEMINI_ASK_BUDGET
 
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
@@ -249,43 +255,52 @@ const card = generateSuggestedCard(
   injuriesByAbbrev,
 )
 
-const leftovers = card.unpicked.filter((game) => {
-  const analysis = upcoming.find((row) => row.game.id === game.gameId)
-  return analysis?.category !== 'pending'
-})
+const pickById = new Map(card.picks.map((pick) => [pick.gameId, pick]))
+const unpickedById = new Map(card.unpicked.map((game) => [game.gameId, game]))
+const eligible = upcoming.filter((row) => row.category !== 'pending')
+const queue = selectGamesToAsk(
+  eligible.map((row) => ({
+    gameId: row.game.id,
+    cbsEventId: row.game.cbsEventId,
+    brief: lookupNeutralBrief(
+      file,
+      { gameId: row.game.id },
+      slate.week.order,
+      slate.pool.seasonYear,
+    ),
+  })),
+  ASK_LIMIT,
+)
 
 let wrote = 0
-let skipped = 0
 let failed = 0
 
-for (const unpicked of leftovers) {
-  const existing = lookupNeutralBrief(
-    file,
-    unpicked,
-    slate.week.order,
-    slate.pool.seasonYear,
+if (queue.length > 0 && !API_KEY) {
+  console.log(
+    '::error title=Missing GEMINI_API_KEY::Add the GitHub Actions secret GEMINI_API_KEY from https://aistudio.google.com/apikey',
   )
-  if (existing && isNeutralBriefOk(existing) && !FORCE) {
-    skipped += 1
-    continue
-  }
+  process.exit(1)
+}
 
-  if (!API_KEY) {
-    console.log(
-      '::error title=Missing GEMINI_API_KEY::Add the GitHub Actions secret GEMINI_API_KEY from https://aistudio.google.com/apikey',
-    )
-    process.exit(1)
-  }
-
-  const analysis = upcoming.find((row) => row.game.id === unpicked.gameId)
-  if (!analysis) {
-    skipped += 1
-    continue
-  }
+for (const item of queue) {
+  const analysis = eligible.find((row) => row.game.id === item.gameId)
+  if (!analysis) continue
+  const pick = pickById.get(item.gameId)
+  const unpicked = unpickedById.get(item.gameId)
+  const cardPick: NeutralCardPick | null = pick
+    ? {
+        side: pick.pickedSide,
+        team: pick.pickedTeam,
+        spread: pick.poolSpread,
+        detail: pick.detail,
+        source: pick.source,
+      }
+    : null
 
   const packet = buildNeutralPacket({
     analysis,
     unpicked,
+    cardPick,
     week: slate.week,
     seasonYear: slate.pool.seasonYear,
     awayTeam: teamsByKey.get(teamKey(analysis.game.sport, analysis.game.away.abbrev)) ?? null,
@@ -308,12 +323,12 @@ for (const unpicked of leftovers) {
       file,
       {
         status: 'ok',
-        gameId: unpicked.gameId,
-        cbsEventId: unpicked.cbsEventId,
+        gameId: analysis.game.id,
+        cbsEventId: analysis.game.cbsEventId,
         week: slate.week.order,
         seasonYear: slate.pool.seasonYear,
-        away: unpicked.away,
-        home: unpicked.home,
+        away: analysis.game.away.name,
+        home: analysis.game.home.name,
         side: answer.side,
         confidence: answer.confidence,
         why: answer.why,
@@ -324,31 +339,32 @@ for (const unpicked of leftovers) {
     )
     file = result.file
     if (result.wrote) wrote += 1
-    else skipped += 1
     console.log(
-      `froze ${unpicked.away} @ ${unpicked.home}: ${answer.side} ${answer.confidence}`,
+      `wrote ${analysis.game.away.name} @ ${analysis.game.home.name}: ${answer.side} ${answer.confidence}`,
     )
-    if (leftovers.indexOf(unpicked) < leftovers.length - 1) {
-      await sleep(1500)
-    }
   } catch (error) {
     failed += 1
     const message = error instanceof Error ? error.message : String(error)
-    console.log(`::warning title=Gemini brief failed::${unpicked.away} @ ${unpicked.home}: ${message}`)
+    console.log(
+      `::warning title=Gemini brief failed::${analysis.game.away.name} @ ${analysis.game.home.name}: ${message}`,
+    )
     const result = freezeNeutralBrief(file, {
       status: 'failed',
-      gameId: unpicked.gameId,
-      cbsEventId: unpicked.cbsEventId,
+      gameId: analysis.game.id,
+      cbsEventId: analysis.game.cbsEventId,
       week: slate.week.order,
       seasonYear: slate.pool.seasonYear,
-      away: unpicked.away,
-      home: unpicked.home,
+      away: analysis.game.away.name,
+      home: analysis.game.home.name,
       error: summarizeGeminiError(message),
       model: MODEL,
       attemptedAt: new Date().toISOString(),
     })
     file = result.file
     if (result.wrote) wrote += 1
+  }
+  if (queue.indexOf(item) < queue.length - 1) {
+    await sleep(1500)
   }
 }
 
@@ -357,5 +373,5 @@ if (wrote > 0) {
 }
 
 console.log(
-  `Neutral briefs: ${wrote} wrote, ${skipped} already frozen, ${failed} failed, ${leftovers.length} leftovers (${card.unpicked.length} unpicked).`,
+  `Gemini notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} upcoming (${card.picks.length} picks, ${card.unpicked.length} leftovers).`,
 )

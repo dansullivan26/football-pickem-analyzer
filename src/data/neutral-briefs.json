@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T19:12:40.108Z",
+  "updatedAt": "2026-10-03T22:14:58.004Z",
   "games": [
     {
       "status": "ok",
@@ -113,9 +113,9 @@
       "seasonYear": 2026,
       "away": "Indianapolis",
       "home": "Washington",
-      "error": "503 high demand",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T16:04:44.571Z"
+      "attemptedAt": "2026-10-03T22:14:58.004Z"
     },
     {
       "status": "failed",
@@ -244,6 +244,30 @@
       "attemptedAt": "2026-10-03T19:12:40.108Z"
     },
     {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tm===",
+      "cbsEventId": 50029256,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Denver",
+      "home": "San Francisco",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T22:13:27.441Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2to===",
+      "cbsEventId": 50029257,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "L.A. Chargers",
+      "home": "Seattle",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T22:13:58.014Z"
+    },
+    {
       "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tq===",
       "cbsEventId": 50029258,
@@ -256,6 +280,18 @@
       "why": "Detroit holds a noticeable injury advantage, facing a Carolina squad missing guard Damien Lewis and wide receiver Xavier Legette, with four additional contributors listed as questionable or on reserve. Both teams enter at 1-2 ATS on normal 7-day rest, with incomplete profiles at just 3 decided games apiece. Given the rainy conditions and line sitting at Detroit -3.5, this injury lean remains light.",
       "model": "gemini-3.8-flash",
       "frozenAt": "2026-10-03T06:03:30.294Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2ts===",
+      "cbsEventId": 50029259,
+      "week": 5,
+      "seasonYear": 2026,
+      "away": "Atlanta",
+      "home": "New Orleans",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-03T22:14:28.018Z"
     }
   ]
 }

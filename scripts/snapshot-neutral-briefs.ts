@@ -75,7 +75,10 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined, consensus: Ga
   }
 }
 
-async function askGemini(packet: NeutralPacket) {
+const GEMINI_RETRY_STATUSES = new Set([429, 503])
+const GEMINI_ATTEMPTS = 4
+
+async function askGeminiOnce(packet: NeutralPacket) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent?key=${encodeURIComponent(API_KEY)}`
   const response = await fetch(url, {
     method: 'POST',
@@ -125,6 +128,27 @@ async function askGemini(packet: NeutralPacket) {
     throw new Error(`Gemini returned an unreadable brief: ${text?.slice(0, 240) ?? body.slice(0, 240)}`)
   }
   return parsed
+}
+
+async function askGemini(packet: NeutralPacket) {
+  let lastError: Error | null = null
+  for (let attempt = 1; attempt <= GEMINI_ATTEMPTS; attempt += 1) {
+    try {
+      return await askGeminiOnce(packet)
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error))
+      const status = Number(/Gemini (\d+)/.exec(lastError.message)?.[1])
+      if (!GEMINI_RETRY_STATUSES.has(status) || attempt === GEMINI_ATTEMPTS) {
+        throw lastError
+      }
+      const waitMs = 4000 * 2 ** (attempt - 1)
+      console.log(
+        `::warning title=Gemini busy::retry ${attempt}/${GEMINI_ATTEMPTS} in ${waitMs / 1000}s — ${lastError.message.slice(0, 160)}`,
+      )
+      await sleep(waitMs)
+    }
+  }
+  throw lastError ?? new Error('Gemini failed')
 }
 
 function sleep(ms: number) {

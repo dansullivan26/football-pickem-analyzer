@@ -32,9 +32,9 @@ refreshes happen through GitHub Actions, not a running service.
 
 Data-preparation scripts (`prepare-slate`, `prepare-players`,
 `prepare-consensus`, `snapshot-recommendations`, `snapshot-predictions`,
-`apply-covers`, ...) are documented in `README.md`. They ingest private CBS/
-Covers dumps and are normally run by the **Ingest GrokBot dump** workflow, not
-by hand.
+`snapshot-neutral-briefs`, `apply-covers`, ...) are documented in `README.md`.
+They ingest private CBS/Covers dumps and are normally run by GitHub Actions,
+not by hand. `snapshot-neutral-briefs` needs the `GEMINI_API_KEY` secret.
 
 ## Routing
 

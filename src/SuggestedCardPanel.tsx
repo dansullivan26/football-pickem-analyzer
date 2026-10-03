@@ -35,16 +35,24 @@ import {
   type PoolProjection,
 } from './cardPoolAware'
 import { PoolSupportNote } from './PoolSupportNote'
+import {
+  formatNeutralBriefTag,
+  lookupNeutralBrief,
+  type NeutralBrief,
+  type NeutralBriefsFile,
+} from './neutralBrief'
 
 export default function SuggestedCardPanel({
   card,
   poolProjections,
   savedSentGames = [],
+  neutralBriefs,
   onClose,
 }: {
   card: SuggestedCard
   poolProjections?: ReadonlyMap<number, PoolProjection>
   savedSentGames?: Iterable<CardOverrideGame>
+  neutralBriefs?: NeutralBriefsFile | null
   onClose: () => void
 }) {
   const savedGames = [...savedSentGames]
@@ -449,6 +457,12 @@ export default function SuggestedCardPanel({
                       selected={manualSelections.get(row.game.gameId)}
                       selectedToSend={selectedToSend.has(row.game.gameId)}
                       poolProjection={poolProjections?.get(row.game.cbsEventId)}
+                      brief={lookupNeutralBrief(
+                        neutralBriefs,
+                        row.game,
+                        card.week,
+                        card.seasonYear,
+                      )}
                       onToggle={toggleManualPick}
                       onToggleSend={toggleSend}
                     />
@@ -723,6 +737,7 @@ function ManualReviewRow({
   selected,
   selectedToSend,
   poolProjection,
+  brief,
   onToggle,
   onToggleSend,
 }: {
@@ -730,6 +745,7 @@ function ManualReviewRow({
   selected: 'home' | 'away' | undefined
   selectedToSend: boolean
   poolProjection?: PoolProjection
+  brief: NeutralBrief | null
   onToggle: (gameId: string, side: 'home' | 'away') => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -757,9 +773,15 @@ function ManualReviewRow({
         </span>
         {game.detail && <em>{game.detail}</em>}
         <span>{game.reason}</span>
+        {brief ? <em className="gemini-brief-why">{brief.why}</em> : null}
       </div>
       <div className="suggested-pick-tags">
         <span className="pick-source manual-review">Manual review</span>
+        {brief ? (
+          <span className={`pick-source gemini ${brief.confidence}`}>
+            {formatNeutralBriefTag(brief, game)}
+          </span>
+        ) : null}
         <PoolSupportNote
           view={poolSupportView(
             poolProjection,

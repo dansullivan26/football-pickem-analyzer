@@ -8,12 +8,14 @@ import {
   buildNeutralPacket,
   emptyNeutralBriefs,
   formatNeutralBriefFailure,
+  formatGeminiPickTag,
   formatNeutralBriefTag,
   freezeNeutralBrief,
   isNeutralBriefFailed,
   isNeutralBriefOk,
   lookupNeutralBrief,
   parseGeminiBrief,
+  selectGamesToAsk,
   summarizeGeminiError,
   type NeutralBrief,
   type NeutralBriefFailed,
@@ -213,6 +215,25 @@ test('packet quotes profiles, rest, recent covers, and this week’s number', ()
   assert.equal(packet.teams[1]?.travel, null)
   assert.equal(packet.teams[1]?.profile.archetype, 'Building profile')
   assert.deepEqual(packet.teams[0]?.injuries, [])
+  assert.equal(packet.cardPick, null)
+
+  const withCard = buildNeutralPacket({
+    analysis: analysis(),
+    unpicked: unpicked(),
+    cardPick: {
+      side: 'home',
+      team: 'Texas',
+      spread: -5.5,
+      detail: '0.10-point net edge',
+      source: 'line-value',
+    },
+    week: { order: 5, label: 'Week 5' },
+    seasonYear: 2026,
+    awayTeam: { name: 'Tennessee', abbrev: 'TENN', appearances: [] },
+    homeTeam: { name: 'Texas', abbrev: 'TEX', appearances: [] },
+  })
+  assert.equal(withCard.cardPick?.team, 'Texas')
+  assert.equal(withCard.cardDetail, '0.10-point net edge')
 })
 
 test('packet lists NFL injuries from the dump and does not invent weather', () => {
@@ -256,7 +277,7 @@ test('packet lists NFL injuries from the dump and does not invent weather', () =
   assert.deepEqual(packet.teams[1]?.injuries, [])
 })
 
-test('first freeze wins unless force is set', () => {
+test('a later successful note overwrites the paragraph', () => {
   const first = brief()
   const second = brief({
     side: 'home',
@@ -266,13 +287,12 @@ test('first freeze wins unless force is set', () => {
   })
   const once = freezeNeutralBrief(emptyNeutralBriefs(), first)
   assert.equal(once.wrote, true)
-  const kept = freezeNeutralBrief(once.file, second)
-  assert.equal(kept.wrote, false)
-  assert.equal(kept.file.games[0]?.side, 'away')
-  const forced = freezeNeutralBrief(once.file, second, true)
-  assert.equal(forced.wrote, true)
-  assert.equal(forced.file.games[0]?.side, 'home')
-  assert.equal(forced.file.games.length, 1)
+  const next = freezeNeutralBrief(once.file, second)
+  assert.equal(next.wrote, true)
+  assert.equal(next.file.games[0] && isNeutralBriefOk(next.file.games[0])
+    ? next.file.games[0].side
+    : null, 'home')
+  assert.equal(next.file.games.length, 1)
 })
 
 test('lookup is keyed by game, week, and season', () => {
@@ -363,14 +383,67 @@ test('a successful freeze is not replaced by a later 503', () => {
   assert.equal(isNeutralBriefOk(blocked.file.games[0]), true)
 })
 
-test('failure copy tells the operator to rerun leftover notes', () => {
+test('failure copy tells the operator the next run will retry', () => {
   assert.equal(summarizeGeminiError('Gemini 503: high demand'), '503 high demand')
   assert.equal(
     formatNeutralBriefFailure(failed()),
-    'Gemini was busy (503). Run Refresh leftover notes to try this leftover again.',
+    'Gemini was busy (503). The next Refresh Gemini notes run will try this game again.',
   )
   assert.equal(
     formatNeutralBriefTag(failed(), unpicked()),
     'Gemini failed · try again',
+  )
+})
+
+test('ask queue prefers missing, then failed, then the oldest paragraph', () => {
+  const asked = selectGamesToAsk(
+    [
+      {
+        gameId: 'old-ok',
+        cbsEventId: 3,
+        brief: brief({
+          gameId: 'old-ok',
+          cbsEventId: 3,
+          frozenAt: '2026-10-01T12:00:00.000Z',
+        }),
+      },
+      {
+        gameId: 'failed',
+        cbsEventId: 2,
+        brief: failed({ gameId: 'failed', cbsEventId: 2 }),
+      },
+      { gameId: 'missing', cbsEventId: 1, brief: null },
+      {
+        gameId: 'new-ok',
+        cbsEventId: 4,
+        brief: brief({
+          gameId: 'new-ok',
+          cbsEventId: 4,
+          frozenAt: '2026-10-03T12:00:00.000Z',
+        }),
+      },
+    ],
+    3,
+  )
+  assert.deepEqual(
+    asked.map((row) => row.gameId),
+    ['missing', 'failed', 'old-ok'],
+  )
+})
+
+test('pick-row tag marks agreement or a Gemini lean', () => {
+  const pick = {
+    away: 'Tennessee',
+    home: 'Texas',
+    pickedSide: 'home' as const,
+    poolSpread: -5.5,
+  }
+  assert.equal(
+    formatGeminiPickTag(brief({ side: 'home', confidence: 'light' }), pick),
+    'Gemini agrees · light',
+  )
+  assert.equal(
+    formatGeminiPickTag(brief({ side: 'away', confidence: 'medium' }), pick),
+    'Gemini leans Tennessee +5.5 · medium',
   )
 })

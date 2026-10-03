@@ -1,17 +1,19 @@
 {
-  "updatedAt": "2026-10-03T05:50:38.793Z",
+  "updatedAt": "2026-10-03T06:03:30.294Z",
   "games": [
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2do===",
       "cbsEventId": 50029247,
       "week": 5,
       "seasonYear": 2026,
       "away": "Tennessee",
       "home": "Baltimore",
-      "error": "503 high demand",
+      "side": "away",
+      "confidence": "light",
+      "why": "Tennessee catches +11.5 in adverse wet conditions with an 81% chance of rain showers that could suppress scoring. Baltimore carries notable injury concerns with Trey Hendrickson ruled out plus Ronnie Stanley and Zay Flowers listed as questionable, whereas Tennessee only lists Kevin Winston Jr. questionable. Confidence remains light because both teams hold building profiles with only 3 decided games.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T05:50:38.793Z"
+      "frozenAt": "2026-10-03T06:03:08.771Z"
     },
     {
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2dq===",
@@ -40,16 +42,18 @@
       "frozenAt": "2026-10-03T05:45:39.326Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tq===",
       "cbsEventId": 50029258,
       "week": 5,
       "seasonYear": 2026,
       "away": "Detroit",
       "home": "Carolina",
-      "error": "503 high demand",
+      "side": "away",
+      "confidence": "light",
+      "why": "Detroit holds a noticeable injury advantage, facing a Carolina squad missing guard Damien Lewis and wide receiver Xavier Legette, with four additional contributors listed as questionable or on reserve. Both teams enter at 1-2 ATS on normal 7-day rest, with incomplete profiles at just 3 decided games apiece. Given the rainy conditions and line sitting at Detroit -3.5, this injury lean remains light.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T05:50:38.793Z"
+      "frozenAt": "2026-10-03T06:03:30.294Z"
     }
   ]
 }

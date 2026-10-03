@@ -2,7 +2,7 @@
   "week": 5,
   "seasonYear": 2026,
   "label": "Week 5",
-  "updatedAt": "2026-10-02T23:05:35.563Z",
+  "updatedAt": "2026-10-03T18:02:07.075Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -349,6 +349,42 @@
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 4.5,
           "towardTeam": -1
+        },
+        {
+          "at": "2026-10-03T18:02:07.075Z",
+          "cbsEventId": 50029180,
+          "athleteId": "15818",
+          "name": "Keenan Allen",
+          "position": "WR",
+          "teamAbbrev": "IND",
+          "teamName": "Indianapolis",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-03T18:02:07.075Z",
+          "cbsEventId": 50029180,
+          "athleteId": "3121422",
+          "name": "Terry McLaurin",
+          "position": "WR",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4219,6 +4255,24 @@
           "fromTier": null,
           "toTier": "questionable",
           "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-03T18:02:07.075Z",
+          "cbsEventId": 50029259,
+          "athleteId": "4595343",
+          "name": "Kendal Daniels",
+          "position": "LB",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
           "towardTeam": 0

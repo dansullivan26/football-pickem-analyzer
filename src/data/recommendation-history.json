@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T13:33:45.443Z",
+  "updatedAt": "2026-10-03T18:01:57.481Z",
   "weeks": [
     {
       "week": 1,
@@ -2892,7 +2892,7 @@
       "week": 5,
       "seasonYear": 2026,
       "label": "Week 5",
-      "capturedAt": "2026-10-03T13:33:45.443Z",
+      "capturedAt": "2026-10-03T18:01:57.481Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029259,
@@ -2954,7 +2954,9 @@
             "state": "IA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50028019,
@@ -2981,7 +2983,9 @@
             "state": "MN",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50028020,
@@ -3008,7 +3012,9 @@
             "state": "MS",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50028040,
@@ -3035,7 +3041,9 @@
             "state": "CO",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50027971,
@@ -3125,16 +3133,16 @@
           "away": "MD",
           "home": "NEB",
           "homeSpread": -14.5,
-          "liveHomeSpread": -14.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -15.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
+          "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 0.75,
-          "compositeEdge": 0.25,
+          "score": 3.75,
+          "compositeEdge": 1.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -3152,16 +3160,16 @@
           "away": "PURDUE",
           "home": "ILL",
           "homeSpread": -9.5,
-          "liveHomeSpread": -10.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -9.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
+          "source": "rest-travel",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3.75,
-          "compositeEdge": 1.25,
+          "score": 0.75,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

@@ -23,8 +23,10 @@ import {
   buildNeutralPacket,
   emptyNeutralBriefs,
   freezeNeutralBrief,
+  isNeutralBriefOk,
   lookupNeutralBrief,
   parseGeminiBrief,
+  summarizeGeminiError,
   type NeutralBriefsFile,
   type NeutralPacket,
 } from '../src/neutralBrief.ts'
@@ -263,7 +265,7 @@ for (const unpicked of leftovers) {
     slate.week.order,
     slate.pool.seasonYear,
   )
-  if (existing && !FORCE) {
+  if (existing && isNeutralBriefOk(existing) && !FORCE) {
     skipped += 1
     continue
   }
@@ -305,6 +307,7 @@ for (const unpicked of leftovers) {
     const result = freezeNeutralBrief(
       file,
       {
+        status: 'ok',
         gameId: unpicked.gameId,
         cbsEventId: unpicked.cbsEventId,
         week: slate.week.order,
@@ -332,6 +335,20 @@ for (const unpicked of leftovers) {
     failed += 1
     const message = error instanceof Error ? error.message : String(error)
     console.log(`::warning title=Gemini brief failed::${unpicked.away} @ ${unpicked.home}: ${message}`)
+    const result = freezeNeutralBrief(file, {
+      status: 'failed',
+      gameId: unpicked.gameId,
+      cbsEventId: unpicked.cbsEventId,
+      week: slate.week.order,
+      seasonYear: slate.pool.seasonYear,
+      away: unpicked.away,
+      home: unpicked.home,
+      error: summarizeGeminiError(message),
+      model: MODEL,
+      attemptedAt: new Date().toISOString(),
+    })
+    file = result.file
+    if (result.wrote) wrote += 1
   }
 }
 
@@ -342,7 +359,3 @@ if (wrote > 0) {
 console.log(
   `Neutral briefs: ${wrote} wrote, ${skipped} already frozen, ${failed} failed, ${leftovers.length} leftovers (${card.unpicked.length} unpicked).`,
 )
-
-if (failed > 0 && wrote === 0 && skipped === 0) {
-  process.exit(1)
-}

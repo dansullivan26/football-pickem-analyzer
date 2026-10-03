@@ -7,11 +7,16 @@ import type { NflStarterInjuryTeam } from '../src/nflStarterInjuries.ts'
 import {
   buildNeutralPacket,
   emptyNeutralBriefs,
+  formatNeutralBriefFailure,
   formatNeutralBriefTag,
   freezeNeutralBrief,
+  isNeutralBriefFailed,
+  isNeutralBriefOk,
   lookupNeutralBrief,
   parseGeminiBrief,
+  summarizeGeminiError,
   type NeutralBrief,
+  type NeutralBriefFailed,
 } from '../src/neutralBrief.ts'
 
 function team(overrides: Partial<SlateGame['away']> & Pick<SlateGame['away'], 'id' | 'abbrev' | 'name'>): SlateGame['away'] {
@@ -312,5 +317,60 @@ test('brief tag names the CBS side and confidence', () => {
   assert.equal(
     formatNeutralBriefTag(brief({ side: 'no-call', confidence: 'light' }), game),
     'Gemini · no call · light',
+  )
+})
+
+function failed(overrides: Partial<NeutralBriefFailed> = {}): NeutralBriefFailed {
+  return {
+    status: 'failed',
+    gameId: 'tenn-tex',
+    cbsEventId: 50027885,
+    week: 5,
+    seasonYear: 2026,
+    away: 'Tennessee',
+    home: 'Texas',
+    error: '503 high demand',
+    model: 'gemini-3.8-flash',
+    attemptedAt: '2026-10-03T05:50:38.793Z',
+    ...overrides,
+  }
+}
+
+test('a 503 is stored and can be overwritten by a later freeze', () => {
+  const once = freezeNeutralBrief(emptyNeutralBriefs(), failed())
+  assert.equal(once.wrote, true)
+  assert.equal(isNeutralBriefFailed(once.file.games[0]), true)
+  const kept = freezeNeutralBrief(
+    once.file,
+    failed({ error: '503 high demand', attemptedAt: '2026-10-03T06:00:00.000Z' }),
+  )
+  assert.equal(kept.wrote, true)
+  assert.equal(kept.file.games[0] && isNeutralBriefFailed(kept.file.games[0])
+    ? kept.file.games[0].attemptedAt
+    : null, '2026-10-03T06:00:00.000Z')
+  const frozen = freezeNeutralBrief(kept.file, brief())
+  assert.equal(frozen.wrote, true)
+  assert.equal(isNeutralBriefOk(frozen.file.games[0]), true)
+  assert.equal(frozen.file.games[0] && isNeutralBriefOk(frozen.file.games[0])
+    ? frozen.file.games[0].side
+    : null, 'away')
+})
+
+test('a successful freeze is not replaced by a later 503', () => {
+  const once = freezeNeutralBrief(emptyNeutralBriefs(), brief())
+  const blocked = freezeNeutralBrief(once.file, failed())
+  assert.equal(blocked.wrote, false)
+  assert.equal(isNeutralBriefOk(blocked.file.games[0]), true)
+})
+
+test('failure copy tells the operator to rerun leftover notes', () => {
+  assert.equal(summarizeGeminiError('Gemini 503: high demand'), '503 high demand')
+  assert.equal(
+    formatNeutralBriefFailure(failed()),
+    'Gemini was busy (503). Run Refresh leftover notes to try this leftover again.',
+  )
+  assert.equal(
+    formatNeutralBriefTag(failed(), unpicked()),
+    'Gemini failed · try again',
   )
 })

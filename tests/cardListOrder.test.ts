@@ -6,6 +6,7 @@ import {
   daySendState,
   formatCardKickoff,
   formatSuggestedCardText,
+  formatCopiedKickoffHeading,
   formatSuggestedDayCardText,
   groupCardRowsByDay,
   orderCardRows,
@@ -476,7 +477,7 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(sunday)
   assert.equal(
     formatSuggestedDayCardText(sunday, card.picks),
-    'Play of the day (as of Sun 8:00 AM ET): KC +5.5 (strong)\n\nKC +5.5 (strong — play of the day)',
+    'Play of the day (as of Sun 8:00 AM ET): KC +5.5 (strong)\n\n1:00 PM\n\nKC +5.5 (strong — play of the day)',
   )
   const saturday = groupCardRowsByDay(
     orderCardRows(card.picks, card.unpicked, 'slate'),
@@ -484,6 +485,59 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(saturday)
   assert.equal(
     formatSuggestedDayCardText(saturday, card.picks),
-    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\nUNC +3.5 (light — play of the day)',
+    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)',
+  )
+})
+
+test('formatSuggestedDayCardText groups a day by kickoff window', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-10-04T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 5,
+    weekLabel: 'Week 5',
+    picks: [
+      pick({
+        gameId: 'buf',
+        kickoff: '2026-10-04T13:00:00-04:00',
+        awayAbbrev: 'BUF',
+        pickedSide: 'away',
+        pickedTeam: 'Buffalo',
+        poolSpread: -3,
+        compositeEdge: 1,
+      }),
+      pick({
+        gameId: 'sf',
+        kickoff: '2026-10-04T16:25:00-04:00',
+        awayAbbrev: 'SF',
+        pickedSide: 'away',
+        pickedTeam: 'San Francisco',
+        poolSpread: -7,
+        compositeEdge: 2,
+      }),
+      pick({
+        gameId: 'kc',
+        kickoff: '2026-10-04T13:00:00-04:00',
+        awayAbbrev: 'KC',
+        pickedSide: 'away',
+        pickedTeam: 'Kansas City',
+        poolSpread: 3.5,
+        compositeEdge: 0.5,
+      }),
+    ],
+    unpicked: [],
+    tiebreaker: null,
+  }
+  const sunday = groupCardRowsByDay(
+    orderCardRows(card.picks, card.unpicked, 'slate'),
+  )[0]
+  assert.ok(sunday)
+  assert.equal(formatCopiedKickoffHeading('2026-10-04T13:00:00-04:00'), '1:00 PM')
+  assert.equal(formatCopiedKickoffHeading('2026-10-04T16:25:00-04:00'), '4:25 PM')
+  assert.equal(
+    formatSuggestedDayCardText(sunday, card.picks),
+    'Play of the day (as of Sun 8:00 AM ET): SF -7 (medium)\n\n1:00 PM\n\nBUF -3 (light)\nKC +3.5 (light)\n\n4:25 PM\n\nSF -7 (medium — play of the day)',
   )
 })

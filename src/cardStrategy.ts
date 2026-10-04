@@ -637,7 +637,74 @@ export function formatSuggestedCardText(
   return body ? `${header}\n\n${body}` : header
 }
 
-/** One day's picks only — no weekday heading. */
+function copiedKickoffMinutes(
+  kickoff: string,
+  timeZone = 'America/New_York',
+) {
+  const date = new Date(kickoff)
+  if (Number.isNaN(date.getTime())) return Number.POSITIVE_INFINITY
+  try {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      hour: 'numeric',
+      minute: 'numeric',
+      hourCycle: 'h23',
+    }).formatToParts(date)
+    const hour = Number(parts.find((part) => part.type === 'hour')?.value)
+    const minute = Number(parts.find((part) => part.type === 'minute')?.value)
+    if (!Number.isFinite(hour) || !Number.isFinite(minute)) {
+      return date.getTime()
+    }
+    return hour * 60 + minute
+  } catch {
+    return date.getTime()
+  }
+}
+
+/** Clock time only, for a day paste that already dropped the weekday. */
+export function formatCopiedKickoffHeading(
+  kickoff: string,
+  timeZone = 'America/New_York',
+) {
+  const date = new Date(kickoff)
+  if (Number.isNaN(date.getTime())) return 'Kickoff TBD'
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      hour: 'numeric',
+      minute: '2-digit',
+    }).format(date)
+  } catch {
+    return 'Kickoff TBD'
+  }
+}
+
+export function groupCardRowsByKickoff(
+  rows: CardListRow[],
+  timeZone = 'America/New_York',
+) {
+  const groups = new Map<
+    number,
+    { minutes: number; heading: string; rows: CardListRow[] }
+  >()
+  for (const row of rows) {
+    const kickoff = rowKickoff(row)
+    const minutes = copiedKickoffMinutes(kickoff, timeZone)
+    const existing = groups.get(minutes)
+    if (existing) {
+      existing.rows.push(row)
+      continue
+    }
+    groups.set(minutes, {
+      minutes,
+      heading: formatCopiedKickoffHeading(kickoff, timeZone),
+      rows: [row],
+    })
+  }
+  return [...groups.values()].sort((left, right) => left.minutes - right.minutes)
+}
+
+/** One day's picks only — kickoff-window headings, no weekday. */
 export function formatSuggestedDayCardText(
   group: CardDayGroup,
   picks: SuggestedPick[],
@@ -650,13 +717,18 @@ export function formatSuggestedDayCardText(
     group.dateKey,
     namedPlays,
   )
-  const body = formatCopiedCardLines(
-    group.rows,
-    deviations,
-    manualSelections,
-    null,
-    dayPlay?.pick ?? null,
-  ).join('\n')
+  const body = groupCardRowsByKickoff(group.rows)
+    .map((window) => {
+      const lines = formatCopiedCardLines(
+        window.rows,
+        deviations,
+        manualSelections,
+        null,
+        dayPlay?.pick ?? null,
+      )
+      return `${window.heading}\n\n${lines.join('\n')}`
+    })
+    .join('\n\n')
   if (!dayPlay) return body
   const header = formatNamedPlayHeader('day', dayPlay.pick, dayPlay.frozenAt)
   return body ? `${header}\n\n${body}` : header

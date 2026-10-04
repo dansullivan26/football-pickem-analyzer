@@ -235,7 +235,7 @@ test('copy day names that day even when play of the week is elsewhere', () => {
       },
       now: sundayMorning,
     }),
-    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\nUNC +3.5 (light — play of the day)',
+    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)',
   )
 })
 

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T12:35:23.480Z",
+  "updatedAt": "2026-10-04T17:04:32.309Z",
   "games": [
     {
       "status": "ok",
@@ -237,45 +237,51 @@
       "seasonYear": 2026,
       "away": "Miami",
       "home": "Minnesota",
-      "error": "429 rate limit",
+      "error": "503 high demand",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T06:23:45.140Z"
+      "attemptedAt": "2026-10-04T17:02:48.153Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tk===",
       "cbsEventId": 50029255,
       "week": 5,
       "seasonYear": 2026,
       "away": "Kansas City",
       "home": "Las Vegas",
-      "error": "429 rate limit",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick takes Las Vegas at +4.5, crediting a 0.5-point net edge as Kansas City travels two time zones west to play indoors. Las Vegas enters at 3-0 ATS while Kansas City sits at 2-1 ATS, though both squads are still building profiles with just 3 decided games each. Both teams have normal seven-day rest and report offensive line absences, with Josh Simmons out for the Chiefs and Jackson Powers-Johnson out for the Raiders.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T06:24:15.308Z"
+      "frozenAt": "2026-10-04T17:03:23.816Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tm===",
       "cbsEventId": 50029256,
       "week": 5,
       "seasonYear": 2026,
       "away": "Denver",
       "home": "San Francisco",
-      "error": "429 rate limit",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick backs San Francisco at -2.5, capturing a key 0.5-point line edge beneath the market consensus of -3. Denver travels one time zone west with both squads entering at 2-1 ATS on equal seven days of rest. However, San Francisco faces defensive cluster injuries including Nick Bosa ruled out, and both teams remain in building profile status with only three decided games, keeping confidence light.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T06:24:45.493Z"
+      "frozenAt": "2026-10-04T17:04:14.943Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2to===",
       "cbsEventId": 50029257,
       "week": 5,
       "seasonYear": 2026,
       "away": "L.A. Chargers",
       "home": "Seattle",
-      "error": "429 rate limit",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick leans to the L.A. Chargers at +7.5, capitalizing on a half-point line edge over the DraftKings -7 market and landing on the critical touchdown hook. Both teams enter on standard seven-day rest and bring building profile archetypes with only three decided games apiece. With clear weather forecasted in Seattle (67°F, sunny), grabbing the +7.5 points offers solid value despite Los Angeles dealing with multiple questionable designations in their secondary.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T06:25:15.566Z"
+      "frozenAt": "2026-10-04T17:04:32.309Z"
     },
     {
       "status": "ok",

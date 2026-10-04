@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T06:25:15.566Z",
+  "updatedAt": "2026-10-04T12:35:23.480Z",
   "games": [
     {
       "status": "ok",
@@ -106,16 +106,18 @@
       "frozenAt": "2026-10-03T11:52:19.725Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzge4da===",
       "cbsEventId": 50029180,
       "week": 5,
       "seasonYear": 2026,
       "away": "Indianapolis",
       "home": "Washington",
-      "error": "429 rate limit",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick lands on Indianapolis at -3.5, securing a 1-point line value compared to DraftKings at 4.5 for this London matchup. Washington faces critical health concerns with quarterback Jayden Daniels and safety Nick Cross both ruled out, whereas the Colts only list receiver Keenan Allen out. With both clubs sitting at 2-1 ATS and holding building profiles through only three decided games, the edge sits lightly with Indianapolis.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T22:14:58.004Z"
+      "frozenAt": "2026-10-04T12:34:55.708Z"
     },
     {
       "status": "ok",
@@ -200,28 +202,32 @@
       "frozenAt": "2026-10-04T00:47:06.818Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2te===",
       "cbsEventId": 50029252,
       "week": 5,
       "seasonYear": 2026,
       "away": "L.A. Rams",
       "home": "Philadelphia",
-      "error": "429 rate limit",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick leans to the L.A. Rams at -2.5, securing a 1-point line value against the DraftKings spread of -3.5. Philadelphia enters at 0-3 ATS on a short 6-day week following travel from Chicago, burdened by key injuries to Dallas Goedert, DeVonta Smith, Zack Baun, and Marcus Epps. The Rams hold a rest advantage on a normal 7-day week heading into adverse wet weather (64°F, 38% rain chance), although Aaron Donald and Jaylen Watson are out.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T00:47:37.036Z"
+      "frozenAt": "2026-10-04T12:35:17.355Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tg===",
       "cbsEventId": 50029253,
       "week": 5,
       "seasonYear": 2026,
       "away": "Green Bay",
       "home": "Tampa Bay",
-      "error": "429 rate limit",
+      "side": "away",
+      "confidence": "light",
+      "why": "Green Bay enters with a significant 10-day rest advantage against a Tampa Bay squad missing starting quarterback Baker Mayfield due to a thumb injury. While the Buccaneers get a half-point edge with the CBS spread at +3.5 against the +3 market line, both teams are 0-3 ATS and still carry building profiles through just 3 decided games. Tampa Bay's quarterback absence gives Green Bay a slight tilt, but the small sample size keeps confidence light.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T00:48:07.148Z"
+      "frozenAt": "2026-10-04T12:35:23.480Z"
     },
     {
       "status": "failed",
@@ -293,9 +299,9 @@
       "seasonYear": 2026,
       "away": "Atlanta",
       "home": "New Orleans",
-      "error": "429 rate limit",
+      "error": "503 high demand",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T22:14:28.018Z"
+      "attemptedAt": "2026-10-04T12:34:50.679Z"
     }
   ]
 }

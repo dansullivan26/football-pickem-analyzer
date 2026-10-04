@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-03T20:10:05-04:00",
+    "fetchedAt": "2026-10-04T06:28:38-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -50338,9 +50338,9 @@
           "weekScore": 6,
           "weekRank": 6,
           "correctPicks": 6,
-          "picksCount": 24,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 10,
           "picksCountFirstSeenAt": "2026-10-01T06:34:24-04:00",
           "tiebreaker": {
@@ -51954,10 +51954,10 @@
           "weekScore": 6,
           "weekRank": 6,
           "correctPicks": 6,
-          "picksCount": 10,
+          "picksCount": 11,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 10,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-01T06:34:24-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -52132,13 +52132,14 @@
               "away": "IND",
               "home": "WAS",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqztg===",
+              "pickedTeam": "WAS",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-04T06:28:38-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgiytg===",
@@ -107131,6 +107132,34 @@
         "after": "2026-10-03T16:11:33-04:00",
         "atOrBefore": "2026-10-03T16:29:41-04:00"
       }
+    },
+    {
+      "week": 5,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcmq=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzge4da===",
+      "cbsEventId": 50029180,
+      "away": "IND",
+      "home": "WAS",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqztg===",
+        "pickedTeam": "WAS"
+      },
+      "firstSeenAt": "2026-10-04T06:28:38-04:00",
+      "previousFetchedAt": "2026-10-03T20:10:05-04:00",
+      "fetchedAt": "2026-10-04T06:28:38-04:00",
+      "window": {
+        "after": "2026-10-03T20:10:05-04:00",
+        "atOrBefore": "2026-10-04T06:28:38-04:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -108380,6 +108409,38 @@
       "window": {
         "after": "2026-10-03T18:06:06-04:00",
         "atOrBefore": "2026-10-03T20:10:05-04:00"
+      }
+    },
+    {
+      "week": 5,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcmq=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "changeType": "picksCount",
+      "from": 24,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-10-01T06:34:24-04:00",
+      "previousFetchedAt": "2026-10-03T20:10:05-04:00",
+      "fetchedAt": "2026-10-04T06:28:38-04:00",
+      "window": {
+        "after": "2026-10-03T20:10:05-04:00",
+        "atOrBefore": "2026-10-04T06:28:38-04:00"
+      }
+    },
+    {
+      "week": 5,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcmq=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 10,
+      "to": 11,
+      "picksCountFirstSeenAt": "2026-10-01T06:34:24-04:00",
+      "previousFetchedAt": "2026-10-03T20:10:05-04:00",
+      "fetchedAt": "2026-10-04T06:28:38-04:00",
+      "window": {
+        "after": "2026-10-03T20:10:05-04:00",
+        "atOrBefore": "2026-10-04T06:28:38-04:00"
       }
     }
   ]

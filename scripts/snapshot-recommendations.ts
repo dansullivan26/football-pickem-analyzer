@@ -8,7 +8,10 @@ import {
   attachFrozenVenue,
   buildTravelRestIndex,
 } from '../src/travelRest.ts'
-import { freezeNamedPlays } from '../src/namedPlays.ts'
+import {
+  backfillNamedPlaysOnWeeks,
+  freezeNamedPlays,
+} from '../src/namedPlays.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -229,7 +232,9 @@ const week = {
   games,
 }
 
-const weeks = upsertSeasonWeek(history.weeks, week, seasonYear)
+const weeks = backfillNamedPlaysOnWeeks(
+  upsertSeasonWeek(history.weeks, week, seasonYear),
+)
 
 const next = { updatedAt: capturedAt, weeks }
 

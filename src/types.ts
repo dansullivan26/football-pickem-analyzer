@@ -405,6 +405,8 @@ export type FrozenTiebreaker = {
 export type FrozenNamedPlay = {
   cbsEventId: number
   frozenAt: string
+  /** True when reconstructed from the kickoff-frozen card, not locked live. */
+  backfilled?: boolean
 }
 
 export type RecommendationWeek = {

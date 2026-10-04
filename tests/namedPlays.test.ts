@@ -9,6 +9,7 @@ import {
   type SuggestedPick,
 } from '../src/cardStrategy.ts'
 import {
+  backfillNamedPlays,
   dayPlayReady,
   firstCardKickoff,
   formatNamedPlayAsOf,
@@ -342,4 +343,66 @@ test('named play performance helpers read the stamps', () => {
   assert.equal(namedPlayGames([week], 'week').length, 1)
   assert.equal(namedPlayGames([week], 'day').length, 2)
   assert.equal(topFrozenNamedPlay(week.games)?.cbsEventId, 11)
+})
+
+test('backfillNamedPlays reconstructs missing stamps from the frozen card', () => {
+  const week: RecommendationWeek = {
+    week: 3,
+    seasonYear: 2026,
+    label: 'Week 3',
+    capturedAt: '2026-09-20T12:00:00.000Z',
+    scored: true,
+    games: [
+      frozen({
+        cbsEventId: 11,
+        kickoff: saturdayNoon,
+        compositeEdge: 1,
+      }),
+      frozen({
+        cbsEventId: 22,
+        kickoff: sundayOne,
+        category: 'lock',
+        compositeEdge: 4.2,
+      }),
+    ],
+  }
+  const filled = backfillNamedPlays(week, sundayMorning)
+  const saturdayFreeze = namedPlayFreezeAt(saturdayNoon)
+  const sundayFreeze = namedPlayFreezeAt(sundayOne)
+  assert.ok(saturdayFreeze)
+  assert.ok(sundayFreeze)
+  assert.deepEqual(filled.playOfTheWeek, {
+    cbsEventId: 22,
+    frozenAt: saturdayFreeze.toISOString(),
+    backfilled: true,
+  })
+  assert.deepEqual(filled.playsOfTheDay, [
+    {
+      cbsEventId: 11,
+      frozenAt: saturdayFreeze.toISOString(),
+      backfilled: true,
+    },
+    {
+      cbsEventId: 22,
+      frozenAt: sundayFreeze.toISOString(),
+      backfilled: true,
+    },
+  ])
+
+  const live: RecommendationWeek = {
+    ...week,
+    playOfTheWeek: {
+      cbsEventId: 11,
+      frozenAt: '2026-09-19T12:05:00.000Z',
+    },
+    playsOfTheDay: [
+      { cbsEventId: 11, frozenAt: '2026-09-19T12:05:00.000Z' },
+    ],
+  }
+  const kept = backfillNamedPlays(live, sundayMorning)
+  assert.equal(kept.playOfTheWeek?.cbsEventId, 11)
+  assert.equal(kept.playOfTheWeek?.backfilled, undefined)
+  assert.equal(kept.playsOfTheDay?.[0]?.cbsEventId, 11)
+  assert.equal(kept.playsOfTheDay?.[1]?.cbsEventId, 22)
+  assert.equal(kept.playsOfTheDay?.[1]?.backfilled, true)
 })

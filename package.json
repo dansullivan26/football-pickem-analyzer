@@ -14,6 +14,7 @@
     "prepare-season-history": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/prepare-season-history.ts",
     "prepare-consensus": "node scripts/prepare-consensus.mjs",
     "snapshot-recommendations": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-recommendations.ts",
+    "backfill-named-plays": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/backfill-named-plays.ts",
     "snapshot-predictions": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-predictions.ts",
     "snapshot-weather": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-weather.ts",
     "snapshot-last-kickoff": "node --experimental-strip-types --no-warnings=ExperimentalWarning scripts/snapshot-last-kickoff.ts",

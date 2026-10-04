@@ -224,8 +224,57 @@ export function topFrozenNamedPlay(games: FrozenRecommendation[]) {
 function stampNamedPlay(
   game: FrozenRecommendation | null,
   frozenAt: string,
+  backfilled = false,
 ): FrozenNamedPlay | null {
-  return game ? { cbsEventId: game.cbsEventId, frozenAt } : null
+  if (!game) return null
+  return backfilled
+    ? { cbsEventId: game.cbsEventId, frozenAt, backfilled: true }
+    : { cbsEventId: game.cbsEventId, frozenAt }
+}
+
+function stampMissingNamedPlays(
+  games: FrozenRecommendation[],
+  existing: {
+    playOfTheWeek?: FrozenNamedPlay | null
+    playsOfTheDay?: FrozenNamedPlay[] | null
+  } | null,
+  now: number,
+  resolveFrozenAt: (dateKeyOrKickoff: string) => string | null,
+  backfilled: boolean,
+) {
+  const playOfTheWeek =
+    existing?.playOfTheWeek ??
+    (() => {
+      if (!weekPlayReady(games, now)) return null
+      const first = firstCardKickoff(games)
+      const frozenAt = first ? resolveFrozenAt(first) : null
+      return frozenAt
+        ? stampNamedPlay(topFrozenNamedPlay(games), frozenAt, backfilled)
+        : null
+    })()
+
+  const existingDayPlays = existing?.playsOfTheDay ?? []
+  const playsOfTheDay: FrozenNamedPlay[] = []
+  for (const [dateKey, dayGames] of groupFrozenByEtDay(games)) {
+    const kept = existingDayPlays.find((play) =>
+      dayGames.some((game) => game.cbsEventId === play.cbsEventId),
+    )
+    if (kept) {
+      playsOfTheDay.push(kept)
+      continue
+    }
+    if (!dayPlayReady(dateKey, now)) continue
+    const frozenAt = resolveFrozenAt(dateKey)
+    if (!frozenAt) continue
+    const stamped = stampNamedPlay(
+      topFrozenNamedPlay(dayGames),
+      frozenAt,
+      backfilled,
+    )
+    if (stamped) playsOfTheDay.push(stamped)
+  }
+
+  return { playOfTheWeek, playsOfTheDay }
 }
 
 function groupFrozenByEtDay(games: FrozenRecommendation[]) {
@@ -253,28 +302,58 @@ export function freezeNamedPlays(
   capturedAt: string,
   now = Date.parse(capturedAt) || Date.now(),
 ) {
-  const playOfTheWeek =
-    existing?.playOfTheWeek ??
-    (weekPlayReady(games, now)
-      ? stampNamedPlay(topFrozenNamedPlay(games), capturedAt)
-      : null)
+  return stampMissingNamedPlays(
+    games,
+    existing,
+    now,
+    () => capturedAt,
+    false,
+  )
+}
 
-  const existingDayPlays = existing?.playsOfTheDay ?? []
-  const playsOfTheDay: FrozenNamedPlay[] = []
-  for (const [dateKey, dayGames] of groupFrozenByEtDay(games)) {
-    const kept = existingDayPlays.find((play) =>
-      dayGames.some((game) => game.cbsEventId === play.cbsEventId),
+/**
+ * Fill missing named-play stamps from the kickoff-frozen card. Uses 8:00 AM ET
+ * that morning as the as-of time and marks the stamp backfilled. Existing live
+ * locks are left alone.
+ */
+export function backfillNamedPlays(
+  week: RecommendationWeek,
+  now = Date.now(),
+): RecommendationWeek {
+  const next = stampMissingNamedPlays(
+    week.games,
+    week,
+    now,
+    (dateKeyOrKickoff) =>
+      namedPlayFreezeAt(dateKeyOrKickoff)?.toISOString() ?? null,
+    true,
+  )
+  const sameWeek =
+    next.playOfTheWeek?.cbsEventId === week.playOfTheWeek?.cbsEventId &&
+    next.playOfTheWeek?.frozenAt === week.playOfTheWeek?.frozenAt &&
+    next.playOfTheWeek?.backfilled === week.playOfTheWeek?.backfilled
+  const existingDays = week.playsOfTheDay ?? []
+  const sameDays =
+    next.playsOfTheDay.length === existingDays.length &&
+    next.playsOfTheDay.every(
+      (play, index) =>
+        play.cbsEventId === existingDays[index]?.cbsEventId &&
+        play.frozenAt === existingDays[index]?.frozenAt &&
+        play.backfilled === existingDays[index]?.backfilled,
     )
-    if (kept) {
-      playsOfTheDay.push(kept)
-      continue
-    }
-    if (!dayPlayReady(dateKey, now)) continue
-    const stamped = stampNamedPlay(topFrozenNamedPlay(dayGames), capturedAt)
-    if (stamped) playsOfTheDay.push(stamped)
+  if (sameWeek && sameDays) return week
+  return {
+    ...week,
+    playOfTheWeek: next.playOfTheWeek,
+    playsOfTheDay: next.playsOfTheDay,
   }
+}
 
-  return { playOfTheWeek, playsOfTheDay }
+export function backfillNamedPlaysOnWeeks(
+  weeks: RecommendationWeek[],
+  now = Date.now(),
+) {
+  return weeks.map((week) => backfillNamedPlays(week, now))
 }
 
 export function namedPlayGames(

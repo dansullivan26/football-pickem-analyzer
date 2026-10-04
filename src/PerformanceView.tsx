@@ -423,8 +423,9 @@ export default function PerformanceView({
             The top tiles are overall ATS for the frozen Lines
             recommendation, then card picks by their frozen source. Play of
             the week locks at 8:00 AM ET the morning of the first kickoff;
-            play of the day locks that morning. Weeks without those stamps
-            are not backfilled. Week 1 retains its public fills; the current
+            play of the day locks that morning. Weeks from before those
+            stamps existed are reconstructed from the kickoff-frozen card.
+            Week 1 retains its public fills; the current
             strategy uses line value with capped rest and travel adjustments.
             Tiers, net-edge size, and strength sit under that. Deviations are
             games where the completed card sent the other side. Games lock at

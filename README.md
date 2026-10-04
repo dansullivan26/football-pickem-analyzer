@@ -257,9 +257,10 @@ frozen Lines recommendation (the side we liked), then each card-pick source.
 Play of the week and play of the day lock at 8:00 AM ET — the morning of the
 week's first kickoff, and the morning of each card day. Copy card prints the
 week play with that as-of time; Copy day prints that day's play. Performance
-tracks those named sides once a snapshot has stamped them. Historical public
-fills remain attributed to the strategy that produced them. Strength buckets
-still sit under those.
+tracks those named sides. Weeks from before the stamps existed are
+reconstructed from the kickoff-frozen card (`backfilled: true`); later weeks
+lock live. Historical public fills remain attributed to the strategy that
+produced them. Strength buckets still sit under those.
 
 ## Last kickoff (rest)
 

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T22:14:58.004Z",
+  "updatedAt": "2026-10-04T00:48:07.148Z",
   "games": [
     {
       "status": "ok",
@@ -118,16 +118,18 @@
       "attemptedAt": "2026-10-03T22:14:58.004Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgiytg===",
       "cbsEventId": 50029213,
       "week": 5,
       "seasonYear": 2026,
       "away": "New England",
       "home": "Buffalo",
-      "error": "503 high demand",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick backs Buffalo at -6.5, capitalizing on a half-point line value against the DraftKings -7 line. Buffalo enters a perfect 3-0 ATS, while New England sits at 2-1 ATS and faces significant defensive absences with Christian Gonzalez and Christian Barmore ruled out. With both squads having just three decided games on building profiles, confidence remains light despite the injury and line edge.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T16:05:21.161Z"
+      "frozenAt": "2026-10-04T00:46:33.988Z"
     },
     {
       "status": "ok",
@@ -184,16 +186,18 @@
       "frozenAt": "2026-10-03T16:05:25.535Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2tc===",
       "cbsEventId": 50029251,
       "week": 5,
       "seasonYear": 2026,
       "away": "Arizona",
       "home": "N.Y. Giants",
-      "error": "503 high demand",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card selects Arizona at -0.5, finding 2 points of line value compared to the DraftKings spread of N.Y. Giants +2.5. Offsetting that edge, Arizona is traveling three time zones east and lists linebacker Josh Sweat as questionable with a groin issue. Because both teams are 2-1 ATS with building profiles based on just three decided games, the sample remains thin and warrants light confidence.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T16:05:59.488Z"
+      "frozenAt": "2026-10-04T00:47:06.818Z"
     },
     {
       "status": "failed",
@@ -205,7 +209,7 @@
       "home": "Philadelphia",
       "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T19:11:07.563Z"
+      "attemptedAt": "2026-10-04T00:47:37.036Z"
     },
     {
       "status": "failed",
@@ -217,7 +221,7 @@
       "home": "Tampa Bay",
       "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-03T19:11:39.911Z"
+      "attemptedAt": "2026-10-04T00:48:07.148Z"
     },
     {
       "status": "failed",

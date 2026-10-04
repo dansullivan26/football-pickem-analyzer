@@ -3902,9 +3902,15 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .team-bias-card.growing,
-.team-bias-card.established {
+.team-bias-card.established,
+.team-bias-card.won {
   border-color: #9ac6ad;
   background: var(--green-soft);
+}
+
+.team-bias-card.lost {
+  border-color: #e4bcbc;
+  background: #fdf6f6;
 }
 
 .team-bias-head {
@@ -3922,8 +3928,13 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .team-bias-card.growing .team-bias-head span,
-.team-bias-card.established .team-bias-head span {
+.team-bias-card.established .team-bias-head span,
+.team-bias-card.won .team-bias-head span {
   color: var(--green-dark);
+}
+
+.team-bias-card.lost .team-bias-head span {
+  color: #9b2c2c;
 }
 
 .team-bias-head strong {

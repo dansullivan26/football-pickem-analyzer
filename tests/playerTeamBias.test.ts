@@ -4,9 +4,12 @@ import {
   poolTeamBiasRoleLine,
   poolTeamBiasSentence,
   summarizePlayerTeamBias,
+  summarizePlayerTeamResults,
   summarizePoolTeamBias,
   teamBiasSentence,
   teamBiasWarmth,
+  teamResultAtsLine,
+  teamResultSentence,
 } from '../src/playerTeamBias.ts'
 import type {
   PlayerHistory,
@@ -22,6 +25,7 @@ function pick(
   away: string,
   home: string,
   pickedSide: 'home' | 'away' | null,
+  result: PlayerPick['result'] = null,
 ): PlayerPick {
   return {
     gameId: `game-${id}`,
@@ -34,9 +38,10 @@ function pick(
     pickedTeam:
       pickedSide === 'away' ? away : pickedSide === 'home' ? home : null,
     pickedSide,
-    result: null,
+    result,
     points: null,
-    pickStatus: null,
+    pickStatus:
+      result === 'win' ? 'CORRECT' : result === 'loss' ? 'INCORRECT' : null,
     matchStatus: pickedSide ? 'matched' : 'unpicked',
   }
 }
@@ -307,4 +312,80 @@ test('pool team bias keeps favorite and dog rates on the same club', () => {
     poolTeamBiasRoleLine(bills!),
     'as favorite 1 of 1 · as dog 1 of 1',
   )
+})
+
+test('player team results count only the club they picked', () => {
+  const summary = summarizePlayerTeamResults(
+    entryId,
+    history([
+      week(2026, 1, [
+        pick(1, 'NFL', 'KC', 'NYJ', 'away', 'win'),
+        pick(2, 'NFL', 'BUF', 'MIA', 'home', 'loss'),
+        pick(3, 'NFL', 'KC', 'NE', 'away', 'win'),
+        pick(4, 'NFL', 'DAL', 'NYJ', 'home', 'loss'),
+        pick(5, 'NFL', 'KC', 'LV', 'home', 'loss'),
+      ]),
+      week(2026, 2, [
+        pick(6, 'NFL', 'NYJ', 'BUF', 'away', 'loss'),
+        pick(7, 'NFL', 'KC', 'DEN', 'away', 'push'),
+        pick(8, 'NFL', 'NYJ', 'NE', null, 'win'),
+      ]),
+    ]),
+  )
+
+  assert.equal(summary.wins[0]?.key, 'NFL:KC')
+  assert.equal(summary.wins[0]?.wins, 2)
+  assert.equal(summary.wins[0]?.losses, 0)
+  assert.equal(summary.wins[0]?.pushes, 1)
+  assert.equal(summary.losses[0]?.key, 'NFL:NYJ')
+  assert.equal(summary.losses[0]?.losses, 2)
+  assert.equal(summary.losses[0]?.wins, 0)
+  assert.ok(!summary.wins.some((signal) => signal.key === 'NFL:NYG'))
+  assert.ok(!summary.wins.some((signal) => signal.key === 'NFL:NE'))
+  assert.equal(
+    teamResultSentence(summary.wins[0]!, 'Kansas City', 'win'),
+    'Won 2 times picking Kansas City.',
+  )
+  assert.equal(
+    teamResultSentence(summary.losses[0]!, 'the Jets', 'loss'),
+    'Lost 2 times picking the Jets.',
+  )
+  assert.equal(teamResultAtsLine(2, 0, 1), '2-0-1 ATS')
+})
+
+test('player team results keep a current-season split on career ranks', () => {
+  const weeks = [
+    week(2025, 1, [
+      pick(1, 'NFL', 'KC', 'LV', 'away', 'win'),
+      pick(2, 'NFL', 'KC', 'DEN', 'away', 'win'),
+    ]),
+    week(2026, 1, [
+      pick(3, 'NFL', 'KC', 'NYJ', 'away', 'win'),
+      pick(4, 'NFL', 'BUF', 'MIA', 'away', 'loss'),
+    ]),
+  ]
+  const summary = summarizePlayerTeamResults(entryId, history(weeks), 2026)
+  const chiefs = summary.wins.find((signal) => signal.key === 'NFL:KC')
+
+  assert.equal(chiefs?.wins, 3)
+  assert.equal(chiefs?.seasonWins, 1)
+  assert.equal(chiefs?.seasonLosses, 0)
+  assert.deepEqual(summary.seasons, [2025, 2026])
+  assert.equal(summary.losses[0]?.key, 'NFL:BUF')
+})
+
+test('a faded cover does not count as winning with that team', () => {
+  const summary = summarizePlayerTeamResults(
+    entryId,
+    history([
+      week(2026, 1, [
+        pick(1, 'NFL', 'NE', 'NYJ', 'home', 'win'),
+        pick(2, 'NFL', 'MIA', 'NYJ', 'home', 'win'),
+      ]),
+    ]),
+  )
+
+  assert.equal(summary.wins[0]?.key, 'NFL:NYJ')
+  assert.ok(!summary.wins.some((signal) => signal.key === 'NFL:NE'))
+  assert.equal(summary.losses.length, 0)
 })

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T20:33:21.646Z",
+  "updatedAt": "2026-10-04T22:23:05.164Z",
   "weeks": [
     {
       "week": 1,
@@ -3010,13 +3010,35 @@
       "week": 5,
       "seasonYear": 2026,
       "label": "Week 5",
-      "capturedAt": "2026-10-04T18:41:09.389Z",
+      "capturedAt": "2026-10-04T22:23:05.164Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029259,
         "draftKingsTotal": 47.5,
         "frozenAt": null
       },
+      "playOfTheWeek": {
+        "cbsEventId": 50029251,
+        "frozenAt": "2026-10-01T12:00:00.000Z",
+        "backfilled": true
+      },
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50029246,
+          "frozenAt": "2026-10-01T12:00:00.000Z",
+          "backfilled": true
+        },
+        {
+          "cbsEventId": 50028024,
+          "frozenAt": "2026-10-03T12:00:00.000Z",
+          "backfilled": true
+        },
+        {
+          "cbsEventId": 50029251,
+          "frozenAt": "2026-10-04T12:00:00.000Z",
+          "backfilled": true
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029246,
@@ -3364,8 +3386,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 29,
+          "homeScore": 26
         },
         {
           "cbsEventId": 50029247,
@@ -3393,8 +3415,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 18,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50029248,
@@ -3422,8 +3444,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 12,
+          "homeScore": 23
         },
         {
           "cbsEventId": 50029249,
@@ -3451,8 +3473,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 22,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50029250,
@@ -3480,8 +3502,8 @@
             "indoor": true
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 34,
+          "homeScore": 30
         },
         {
           "cbsEventId": 50029251,
@@ -3509,8 +3531,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 24,
+          "homeScore": 36
         },
         {
           "cbsEventId": 50029252,
@@ -3538,8 +3560,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 24,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50029253,
@@ -3567,8 +3589,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 17,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50029254,
@@ -3595,7 +3617,9 @@
             "state": "MN",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50029255,
@@ -3622,7 +3646,9 @@
             "state": "NV",
             "indoor": true
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029256,
@@ -3649,7 +3675,9 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029257,
@@ -3676,7 +3704,9 @@
             "state": "WA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029258,
@@ -3731,28 +3761,6 @@
             "indoor": true
           },
           "neutralSite": false
-        }
-      ],
-      "playOfTheWeek": {
-        "cbsEventId": 50029251,
-        "frozenAt": "2026-10-01T12:00:00.000Z",
-        "backfilled": true
-      },
-      "playsOfTheDay": [
-        {
-          "cbsEventId": 50029246,
-          "frozenAt": "2026-10-01T12:00:00.000Z",
-          "backfilled": true
-        },
-        {
-          "cbsEventId": 50028024,
-          "frozenAt": "2026-10-03T12:00:00.000Z",
-          "backfilled": true
-        },
-        {
-          "cbsEventId": 50029251,
-          "frozenAt": "2026-10-04T12:00:00.000Z",
-          "backfilled": true
         }
       ]
     }

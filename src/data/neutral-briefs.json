@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T17:04:32.309Z",
+  "updatedAt": "2026-10-04T20:01:21.544Z",
   "games": [
     {
       "status": "ok",
@@ -230,16 +230,18 @@
       "frozenAt": "2026-10-04T12:35:23.480Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2ti===",
       "cbsEventId": 50029254,
       "week": 5,
       "seasonYear": 2026,
       "away": "Miami",
       "home": "Minnesota",
-      "error": "503 high demand",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick backs Miami at +11.5, capturing a 1.5-point line edge against the DraftKings spread of +10. Minnesota enters 3-0 ATS indoors but faces significant absences with wide receiver Justin Jefferson and punter Brett Thorson ruled out. Miami is traveling one time zone west on standard seven-day rest and looking to rebound from an 0-3 ATS start. With both squads still holding building profiles across only three decided games, the points offer value on the underdog.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T17:02:48.153Z"
+      "frozenAt": "2026-10-04T20:01:21.544Z"
     },
     {
       "status": "ok",
@@ -298,16 +300,18 @@
       "frozenAt": "2026-10-03T06:03:30.294Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcmr2guydamrzgi2ts===",
       "cbsEventId": 50029259,
       "week": 5,
       "seasonYear": 2026,
       "away": "Atlanta",
       "home": "New Orleans",
-      "error": "503 high demand",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card backs Atlanta at +2.5, capturing a full point of line value over the DraftKings -1.5 spread alongside a rest edge on an 11-day break versus New Orleans' 8 days. New Orleans enters indoor play with key absences, ruling out Carl Granderson and Kaden Elliss while placing Travis Etienne Jr. on reserve. Because both squads are classified as 'Building profile' with only 3 decided games apiece, the sample remains thin and warrants light confidence.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-04T12:34:50.679Z"
+      "frozenAt": "2026-10-04T20:00:56.173Z"
     }
   ]
 }

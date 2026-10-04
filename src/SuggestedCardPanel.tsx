@@ -46,18 +46,27 @@ import {
   type NeutralBrief,
   type NeutralBriefsFile,
 } from './neutralBrief'
+import {
+  formatNamedPlayAsOf,
+  resolveDayNamedPlay,
+  resolveWeekNamedPlay,
+  weekPlayReady,
+  type NamedPlayOptions,
+} from './namedPlays'
 
 export default function SuggestedCardPanel({
   card,
   poolProjections,
   savedSentGames = [],
   neutralBriefs,
+  namedPlays,
   onClose,
 }: {
   card: SuggestedCard
   poolProjections?: ReadonlyMap<number, PoolProjection>
   savedSentGames?: Iterable<CardOverrideGame>
   neutralBriefs?: NeutralBriefsFile | null
+  namedPlays?: NamedPlayOptions
   onClose: () => void
 }) {
   const savedGames = [...savedSentGames]
@@ -131,6 +140,19 @@ export default function SuggestedCardPanel({
     [card.picks, card.unpicked, sort],
   )
   const dayGroups = useMemo(() => groupCardRowsByDay(rows), [rows])
+  const weekNamedPlay = useMemo(
+    () =>
+      resolveWeekNamedPlay(
+        card.picks,
+        [...card.picks, ...card.unpicked],
+        namedPlays,
+      ),
+    [card.picks, card.unpicked, namedPlays],
+  )
+  const weekPlayPending = !weekPlayReady(
+    [...card.picks, ...card.unpicked],
+    namedPlays?.now,
+  )
   const selectedRecommendedCount = card.picks.filter((pick) =>
     selectedToSend.has(pick.gameId),
   ).length
@@ -183,6 +205,7 @@ export default function SuggestedCardPanel({
           answer,
           manualSelections,
           sort,
+          namedPlays,
         ),
       )
       setCopied('all')
@@ -200,6 +223,7 @@ export default function SuggestedCardPanel({
           picks,
           deviations,
           manualSelections,
+          namedPlays,
         ),
       )
       setCopied(group.dateKey)
@@ -365,6 +389,23 @@ export default function SuggestedCardPanel({
             <p className="suggested-card-meta">
               {generated} · {card.strategyId}
             </p>
+            {weekNamedPlay ? (
+              <p className="suggested-card-named-play">
+                Play of the week ·{' '}
+                {weekNamedPlay.pick.pickedSide === 'away'
+                  ? weekNamedPlay.pick.awayAbbrev
+                  : weekNamedPlay.pick.homeAbbrev}{' '}
+                {formatPoolSpread(weekNamedPlay.pick.poolSpread)}
+                {formatNamedPlayAsOf(weekNamedPlay.frozenAt)
+                  ? ` (as of ${formatNamedPlayAsOf(weekNamedPlay.frozenAt)})`
+                  : ''}
+              </p>
+            ) : weekPlayPending ? (
+              <p className="suggested-card-named-play pending">
+                Play of the week locks at 8:00 AM ET the morning of the first
+                kickoff.
+              </p>
+            ) : null}
           </div>
           <div className="suggested-card-actions">
             <label>
@@ -452,7 +493,10 @@ export default function SuggestedCardPanel({
               aria-labelledby={`card-day-${group.dateKey}`}
             >
               <div className="suggested-pick-day-heading">
-                <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
+                <div className="suggested-pick-day-title">
+                  <h3 id={`card-day-${group.dateKey}`}>{group.label}</h3>
+                  <DayPlayCaption group={group} namedPlays={namedPlays} />
+                </div>
                 <div className="suggested-pick-day-actions">
                   <button
                     type="button"
@@ -475,6 +519,7 @@ export default function SuggestedCardPanel({
                     <SuggestedPickRow
                       key={row.pick.cbsEventId}
                       pick={row.pick}
+                      namedKind={namedKindForRow(row.pick, group, namedPlays, weekNamedPlay)}
                       deviate={deviations.has(row.pick.gameId)}
                       selectedToSend={selectedToSend.has(row.pick.gameId)}
                       poolProjection={poolProjections?.get(row.pick.cbsEventId)}
@@ -660,6 +705,48 @@ export default function SuggestedCardPanel({
   )
 }
 
+function DayPlayCaption({
+  group,
+  namedPlays,
+}: {
+  group: CardDayGroup
+  namedPlays?: NamedPlayOptions
+}) {
+  const dayPlay = resolveDayNamedPlay(
+    group.rows.flatMap((row) => (row.kind === 'pick' ? [row.pick] : [])),
+    group.dateKey,
+    namedPlays,
+  )
+  if (!dayPlay) return null
+  const asOf = formatNamedPlayAsOf(dayPlay.frozenAt)
+  const abbrev =
+    dayPlay.pick.pickedSide === 'away'
+      ? dayPlay.pick.awayAbbrev
+      : dayPlay.pick.homeAbbrev
+  return (
+    <p className="suggested-pick-day-play">
+      Play of the day · {abbrev} {formatPoolSpread(dayPlay.pick.poolSpread)}
+      {asOf ? ` (as of ${asOf})` : ''}
+    </p>
+  )
+}
+
+function namedKindForRow(
+  pick: SuggestedPick,
+  group: CardDayGroup,
+  namedPlays: NamedPlayOptions | undefined,
+  weekPlay: ReturnType<typeof resolveWeekNamedPlay>,
+): 'week' | 'day' | null {
+  if (weekPlay && pick.gameId === weekPlay.pick.gameId) return 'week'
+  const dayPlay = resolveDayNamedPlay(
+    group.rows.flatMap((row) => (row.kind === 'pick' ? [row.pick] : [])),
+    group.dateKey,
+    namedPlays,
+  )
+  if (dayPlay && pick.gameId === dayPlay.pick.gameId) return 'day'
+  return null
+}
+
 function DaySendToggle({
   label,
   dayIds,
@@ -691,6 +778,7 @@ function DaySendToggle({
 
 function SuggestedPickRow({
   pick,
+  namedKind,
   deviate,
   selectedToSend,
   poolProjection,
@@ -699,6 +787,7 @@ function SuggestedPickRow({
   onToggleSend,
 }: {
   pick: SuggestedPick
+  namedKind: 'week' | 'day' | null
   deviate: boolean
   selectedToSend: boolean
   poolProjection?: PoolProjection
@@ -739,6 +828,11 @@ function SuggestedPickRow({
         </span>
       </div>
       <div className="suggested-pick-tags">
+        {namedKind ? (
+          <span className={`pick-named-play ${namedKind}`}>
+            {namedKind === 'week' ? 'Play of the week' : 'Play of the day'}
+          </span>
+        ) : null}
         {pick.publicSupport !== 'none' ? (
           <span className={`pick-public ${pick.publicSupport}`}>
             {pick.publicSupport === 'agree'

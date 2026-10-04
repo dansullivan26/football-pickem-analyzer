@@ -6,6 +6,7 @@ import {
   largestNetEdgePlay,
   summarizeNetEdgeBuckets,
 } from './recommendationEdge.ts'
+import { namedPlayGames } from './namedPlays.ts'
 import type {
   CoverResult,
   FrozenRecommendation,
@@ -260,6 +261,40 @@ function largestFavoriteMiss(games: FrozenRecommendation[]) {
   return `${sideTeam(game, dog)} ${formatSpread(pickedSpread(game, dog))} delivered the largest favorite fade, covering against ${sideTeam(game, favoriteSide(game) as Side)}.`
 }
 
+function namedPlayCopy(
+  weeks: RecommendationWeek[],
+  kind: 'week' | 'day',
+) {
+  const games = namedPlayGames(weeks, kind)
+  const called = games.filter(
+    (game) => game.pickedSide && game.cover != null,
+  )
+  let wins = 0
+  let losses = 0
+  let pushes = 0
+  for (const game of called) {
+    if (game.cover === 'push') pushes += 1
+    else if (game.cover === game.pickedSide) wins += 1
+    else losses += 1
+  }
+  if (called.length === 0) return null
+  if (called.length === 1) {
+    const game = called[0]
+    const side = game.pickedSide
+    if (!side) return null
+    const result =
+      game.cover === 'push'
+        ? 'pushed'
+        : game.cover === side
+          ? 'covered'
+          : 'missed'
+    const label = kind === 'week' ? 'Play of the week' : 'Play of the day'
+    return `${label} ${sideTeam(game, side)} ${formatSpread(pickedSpread(game, side))} ${result}.`
+  }
+  const label = kind === 'week' ? 'Plays of the week' : 'Plays of the day'
+  return `${label} finished ${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS.`
+}
+
 function cardCopy(games: FrozenRecommendation[]) {
   const called = games.filter(
     (game) => game.recommendedSide && game.cover != null,
@@ -490,6 +525,8 @@ export function buildWeeklyRecap(
     ]),
     card: compact([
       cardCopy(recommendationWeek.games),
+      namedPlayCopy([recommendationWeek], 'week'),
+      namedPlayCopy([recommendationWeek], 'day'),
       cardLargestNetCopy(recommendationWeek.games),
       cardTierCopy(recommendationWeek.games),
     ]),
@@ -539,6 +576,8 @@ export function buildSeasonRecap(
     ]),
     card: compact([
       cardCopy(allGames),
+      namedPlayCopy(recWeeks, 'week'),
+      namedPlayCopy(recWeeks, 'day'),
       cardNetEdgeCopy(allGames),
       cardTierCopy(allGames),
     ]),

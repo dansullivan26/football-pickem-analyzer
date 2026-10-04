@@ -8,6 +8,7 @@ import {
   attachFrozenVenue,
   buildTravelRestIndex,
 } from '../src/travelRest.ts'
+import { freezeNamedPlays } from '../src/namedPlays.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/recommendation-history.json', ROOT)
@@ -210,6 +211,12 @@ const tiebreaker =
           frozenAt: tiebreakerKickedOff ? capturedAt : null,
         }
 
+const namedPlays = freezeNamedPlays(
+  games,
+  existingWeek ?? null,
+  capturedAt,
+)
+
 const week = {
   week: slate.week.order,
   seasonYear,
@@ -217,6 +224,8 @@ const week = {
   capturedAt,
   scored: existingWeek?.scored ?? false,
   tiebreaker,
+  playOfTheWeek: namedPlays.playOfTheWeek,
+  playsOfTheDay: namedPlays.playsOfTheDay,
   games,
 }
 
@@ -235,5 +244,11 @@ console.log(
       ? ` Tiebreaker O/U ${tiebreaker.draftKingsTotal}${
           tiebreaker.frozenAt ? ' (frozen)' : ''
         }.`
+      : '') +
+    (namedPlays.playOfTheWeek
+      ? ` Play of the week event ${namedPlays.playOfTheWeek.cbsEventId}.`
+      : ' Play of the week not frozen yet.') +
+    (namedPlays.playsOfTheDay.length
+      ? ` ${namedPlays.playsOfTheDay.length} play(s) of the day.`
       : ''),
 )

@@ -1697,6 +1697,12 @@ function App() {
                 slate.week.order,
               )}
               neutralBriefs={neutralBriefs}
+              namedPlays={recommendationHistory.weeks.find(
+                (week) =>
+                  week.week === slate.week.order &&
+                  (week.seasonYear ?? slate.pool.seasonYear) ===
+                    slate.pool.seasonYear,
+              )}
               onClose={closeSuggestedCard}
             />
           )}

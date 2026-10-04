@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T04:24:54.422Z",
+  "updatedAt": "2026-10-04T08:34:28.011Z",
   "weeks": [
     {
       "week": 1,
@@ -2892,7 +2892,7 @@
       "week": 5,
       "seasonYear": 2026,
       "label": "Week 5",
-      "capturedAt": "2026-10-04T04:24:54.422Z",
+      "capturedAt": "2026-10-04T08:34:28.011Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029259,
@@ -3576,16 +3576,16 @@
           "away": "ATL",
           "home": "NO",
           "homeSpread": -2.5,
-          "liveHomeSpread": -2.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -1.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
-          "compositeEdge": 0,
+          "source": "line-value",
+          "pickedSide": "away",
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": null,
           "venue": {

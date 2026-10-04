@@ -26,11 +26,15 @@ import {
   poolTeamBiasRoleLine,
   poolTeamBiasSentence,
   summarizePlayerTeamBias,
+  summarizePlayerTeamResults,
   summarizePoolTeamBias,
   TEAM_BIAS_WARMTH_LABELS,
   teamBiasSentence,
+  teamResultAtsLine,
+  teamResultSentence,
   type PoolTeamBiasSignal,
   type TeamBiasSignal,
+  type TeamResultSignal,
 } from './playerTeamBias'
 import {
   PICK_TIMING_WARMTH_LABELS,
@@ -432,6 +436,58 @@ function PoolTeamBiasCard({
   )
 }
 
+function TeamResultCard({
+  signal,
+  teamName,
+  kind,
+  currentSeason,
+  career,
+}: {
+  signal: TeamResultSignal
+  teamName: string
+  kind: 'win' | 'loss'
+  currentSeason: number
+  career: boolean
+}) {
+  const count = kind === 'win' ? signal.wins : signal.losses
+  const countLabel =
+    kind === 'win'
+      ? count === 1
+        ? 'win'
+        : 'wins'
+      : count === 1
+        ? 'loss'
+        : 'losses'
+  const careerDetail = teamResultAtsLine(
+    signal.wins,
+    signal.losses,
+    signal.pushes,
+  )
+  const seasonDetail = `${currentSeason}: ${teamResultAtsLine(
+    signal.seasonWins,
+    signal.seasonLosses,
+    signal.seasonPushes,
+  )}`
+
+  return (
+    <li className={`team-bias-card ${kind === 'win' ? 'won' : 'lost'}`}>
+      <div className="team-bias-head">
+        <span>{signal.sport}</span>
+        <strong>
+          {count} {countLabel}
+        </strong>
+      </div>
+      <h4>{teamName}</h4>
+      <p>{teamResultSentence(signal, teamName, kind)}</p>
+      <small>
+        {career
+          ? `${careerDetail} career · ${seasonDetail}`
+          : `${careerDetail} this season`}
+      </small>
+    </li>
+  )
+}
+
 function TeamBiasCard({
   signal,
   teamName,
@@ -699,6 +755,13 @@ export default function PlayersView({
     : null
   const teamBias = selectedPlayer
     ? summarizePlayerTeamBias(
+        selectedPlayer.entryId,
+        careerHistory,
+        history.pool.seasonYear,
+      )
+    : null
+  const teamResults = selectedPlayer
+    ? summarizePlayerTeamResults(
         selectedPlayer.entryId,
         careerHistory,
         history.pool.seasonYear,
@@ -1292,6 +1355,67 @@ export default function PlayersView({
                                 }
                                 currentSeason={history.pool.seasonYear}
                                 career={teamBias.seasons.length > 1}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                )}
+
+              {teamResults &&
+                (teamResults.wins.length > 0 ||
+                  teamResults.losses.length > 0) && (
+                  <section
+                    className="player-team-bias player-team-results"
+                    aria-label="Teams they have won or lost with"
+                  >
+                    <div className="player-team-bias-heading">
+                      <div>
+                        <p className="eyebrow">Team results</p>
+                        <h3>Teams they have won or lost with</h3>
+                      </div>
+                      <small>
+                        Counted only when they picked that club. Ranked by
+                        wins or losses, not how often they take the team.
+                        Pushes sit in the ATS line.
+                      </small>
+                    </div>
+                    <div className="team-bias-groups">
+                      {teamResults.wins.length > 0 && (
+                        <div>
+                          <h4>Won with</h4>
+                          <ul>
+                            {teamResults.wins.map((signal) => (
+                              <TeamResultCard
+                                key={signal.key}
+                                signal={signal}
+                                teamName={
+                                  teamNameByKey.get(signal.key) ?? signal.abbrev
+                                }
+                                kind="win"
+                                currentSeason={history.pool.seasonYear}
+                                career={teamResults.seasons.length > 1}
+                              />
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {teamResults.losses.length > 0 && (
+                        <div>
+                          <h4>Lost with</h4>
+                          <ul>
+                            {teamResults.losses.map((signal) => (
+                              <TeamResultCard
+                                key={signal.key}
+                                signal={signal}
+                                teamName={
+                                  teamNameByKey.get(signal.key) ?? signal.abbrev
+                                }
+                                kind="loss"
+                                currentSeason={history.pool.seasonYear}
+                                career={teamResults.seasons.length > 1}
                               />
                             ))}
                           </ul>

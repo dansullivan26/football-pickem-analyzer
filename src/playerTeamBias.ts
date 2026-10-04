@@ -1,5 +1,5 @@
 import { weekSeason } from './careerHistory.ts'
-import type { PlayerHistory } from './types.ts'
+import type { PlayerHistory, PlayerPick } from './types.ts'
 
 export type TeamBiasDirection = 'take' | 'fade'
 export type TeamBiasWarmth = 'early' | 'signs' | 'growing' | 'established'
@@ -362,6 +362,159 @@ export function poolTeamBiasSentence(
   return signal.direction === 'take'
     ? `The pool took ${teamName} on ${pct}% of submitted cards (${games}).`
     : `The pool faded ${teamName} on ${pct}% of submitted cards (${games}).`
+}
+
+export const TEAM_RESULT_LIST_SIZE = 3
+
+export type TeamResultSignal = {
+  key: string
+  sport: 'NFL' | 'NCAAF'
+  abbrev: string
+  wins: number
+  losses: number
+  pushes: number
+  seasonWins: number
+  seasonLosses: number
+  seasonPushes: number
+}
+
+export type PlayerTeamResultSummary = {
+  wins: TeamResultSignal[]
+  losses: TeamResultSignal[]
+  seasons: number[]
+}
+
+type TeamResultCount = {
+  sport: 'NFL' | 'NCAAF'
+  abbrev: string
+  wins: number
+  losses: number
+  pushes: number
+}
+
+function emptyResultCount(
+  sport: 'NFL' | 'NCAAF',
+  abbrev: string,
+): TeamResultCount {
+  return { sport, abbrev, wins: 0, losses: 0, pushes: 0 }
+}
+
+function addPickedResult(
+  counts: Map<string, TeamResultCount>,
+  pick: PlayerPick,
+) {
+  if (pick.pickedSide !== 'home' && pick.pickedSide !== 'away') return
+  if (pick.result !== 'win' && pick.result !== 'loss' && pick.result !== 'push') {
+    return
+  }
+  const abbrev = pick.pickedSide === 'away' ? pick.away : pick.home
+  const key = `${pick.sport}:${abbrev}`
+  const current = counts.get(key) ?? emptyResultCount(pick.sport, abbrev)
+  if (pick.result === 'win') current.wins += 1
+  else if (pick.result === 'loss') current.losses += 1
+  else current.pushes += 1
+  counts.set(key, current)
+}
+
+function resultCountsForPlayer(
+  entryId: string,
+  history: PlayerHistory,
+  seasonYear?: number,
+) {
+  const counts = new Map<string, TeamResultCount>()
+  for (const week of history.weeks) {
+    if (
+      seasonYear != null &&
+      weekSeason(week, history.pool.seasonYear) !== seasonYear
+    ) {
+      continue
+    }
+    const picks =
+      week.entries.find((entry) => entry.entryId === entryId)?.picks ?? []
+    for (const pick of picks) addPickedResult(counts, pick)
+  }
+  return counts
+}
+
+function toResultSignal(
+  key: string,
+  career: TeamResultCount,
+  season?: TeamResultCount,
+): TeamResultSignal {
+  return {
+    key,
+    sport: career.sport,
+    abbrev: career.abbrev,
+    wins: career.wins,
+    losses: career.losses,
+    pushes: career.pushes,
+    seasonWins: season?.wins ?? 0,
+    seasonLosses: season?.losses ?? 0,
+    seasonPushes: season?.pushes ?? 0,
+  }
+}
+
+function formatAtsLine(wins: number, losses: number, pushes: number) {
+  return `${wins}-${losses}${pushes ? `-${pushes}` : ''}`
+}
+
+/**
+ * Clubs this player picked and covered, or picked and missed. Ranked by raw
+ * wins or losses, not take rate. The faded side is ignored.
+ */
+export function summarizePlayerTeamResults(
+  entryId: string,
+  history: PlayerHistory,
+  currentSeason = history.pool.seasonYear,
+  limit = TEAM_RESULT_LIST_SIZE,
+): PlayerTeamResultSummary {
+  const career = resultCountsForPlayer(entryId, history)
+  const season = resultCountsForPlayer(entryId, history, currentSeason)
+  const signals = [...career.entries()].map(([key, count]) =>
+    toResultSignal(key, count, season.get(key)),
+  )
+  const seasons = [
+    ...new Set(
+      history.weeks.map((week) => weekSeason(week, history.pool.seasonYear)),
+    ),
+  ].sort((left, right) => left - right)
+
+  return {
+    wins: signals
+      .filter((signal) => signal.wins > 0)
+      .sort(
+        (left, right) =>
+          right.wins - left.wins ||
+          left.losses - right.losses ||
+          left.abbrev.localeCompare(right.abbrev),
+      )
+      .slice(0, limit),
+    losses: signals
+      .filter((signal) => signal.losses > 0)
+      .sort(
+        (left, right) =>
+          right.losses - left.losses ||
+          left.wins - right.wins ||
+          left.abbrev.localeCompare(right.abbrev),
+      )
+      .slice(0, limit),
+    seasons,
+  }
+}
+
+export function teamResultSentence(
+  signal: TeamResultSignal,
+  teamName: string,
+  kind: 'win' | 'loss',
+) {
+  if (kind === 'win') {
+    return `Won ${signal.wins} time${signal.wins === 1 ? '' : 's'} picking ${teamName}.`
+  }
+  return `Lost ${signal.losses} time${signal.losses === 1 ? '' : 's'} picking ${teamName}.`
+}
+
+export function teamResultAtsLine(wins: number, losses: number, pushes: number) {
+  return `${formatAtsLine(wins, losses, pushes)} ATS`
 }
 
 export function poolTeamBiasRoleLine(signal: PoolTeamBiasSignal) {

@@ -12,6 +12,12 @@ import type { GameTravelRest } from './travelRest.ts'
 import type { NflStarterInjuryTeam } from './nflStarterInjuries.ts'
 import type { EdgeCategory, GameAnalysis, SlateTiebreaker } from './types.ts'
 import { etDayKey } from './gameStatus.ts'
+import {
+  formatNamedPlayAsOf,
+  resolveDayNamedPlay,
+  resolveWeekNamedPlay,
+  type NamedPlayOptions,
+} from './namedPlays.ts'
 
 export {
   CARD_STRATEGY_NOTE,
@@ -370,7 +376,7 @@ function formatCopiedPick(team: string, spread: number) {
   return `${team} ${formatPoolSpread(spread)}`
 }
 
-/** #1 on Recommendation sort — the play a buddy should see first in a paste. */
+/** Live #1 on Recommendation sort. Named-play freeze wraps this. */
 export function playOfTheWeek(picks: SuggestedPick[]) {
   return sortSuggestedPicks(picks, 'recommendation')[0] ?? null
 }
@@ -388,22 +394,34 @@ export function copiedRecommendationStrength(net: number) {
   return 'light'
 }
 
-function formatPlayOfTheWeekHeader(pick: SuggestedPick) {
+function formatNamedPlayHeader(
+  kind: 'week' | 'day',
+  pick: SuggestedPick,
+  frozenAt: string,
+) {
   const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
-  return `Play of the week: ${line} (${copiedRecommendationStrength(pick.compositeEdge)})`
+  const strength = copiedRecommendationStrength(pick.compositeEdge)
+  const asOf = formatNamedPlayAsOf(frozenAt)
+  const label = kind === 'week' ? 'Play of the week' : 'Play of the day'
+  return asOf
+    ? `${label} (as of ${asOf}): ${line} (${strength})`
+    : `${label}: ${line} (${strength})`
 }
 
 function formatCopiedRecommendedLine(
   pick: SuggestedPick,
   deviate: boolean,
-  potwGameId: string | null,
+  namedKind: 'week' | 'day' | null,
 ) {
   const sent = submittedPick(pick, deviate)
   const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
   if (deviate) return `${base} (deviated)`
   const strength = copiedRecommendationStrength(pick.compositeEdge)
-  if (potwGameId === pick.gameId) {
+  if (namedKind === 'week') {
     return `${base} (${strength} — play of the week)`
+  }
+  if (namedKind === 'day') {
+    return `${base} (${strength} — play of the day)`
   }
   return `${base} (${strength})`
 }
@@ -541,18 +559,29 @@ export function applyDaySendSelection(
   return next
 }
 
+function namedKindForPick(
+  pick: SuggestedPick,
+  weekPlay: SuggestedPick | null,
+  dayPlay: SuggestedPick | null,
+): 'week' | 'day' | null {
+  if (weekPlay && pick.gameId === weekPlay.gameId) return 'week'
+  if (dayPlay && pick.gameId === dayPlay.gameId) return 'day'
+  return null
+}
+
 function formatCopiedCardLines(
   rows: CardListRow[],
   deviations: ReadonlySet<string>,
   manualSelections: ManualPickSelections,
-  potwGameId: string | null,
+  weekPlay: SuggestedPick | null,
+  dayPlay: SuggestedPick | null,
 ) {
   return rows.map((row) => {
     if (row.kind === 'pick') {
       return formatCopiedRecommendedLine(
         row.pick,
         deviations.has(row.pick.gameId),
-        potwGameId,
+        namedKindForPick(row.pick, weekPlay, dayPlay),
       )
     }
     return formatCopiedManualLine(
@@ -562,6 +591,14 @@ function formatCopiedCardLines(
   })
 }
 
+function cardKickoffs(card: SuggestedCard, picks: SuggestedPick[]) {
+  return [...picks, ...card.unpicked]
+}
+
+function dayPicksFromRows(rows: CardListRow[]) {
+  return rows.flatMap((row) => (row.kind === 'pick' ? [row.pick] : []))
+}
+
 export function formatSuggestedCardText(
   card: SuggestedCard,
   picks: SuggestedPick[] = card.picks,
@@ -569,23 +606,34 @@ export function formatSuggestedCardText(
   _tiebreakerAnswer: number | null = null,
   manualSelections: ManualPickSelections = new Map(),
   sort: 'slate' | 'recommendation' = 'slate',
+  namedPlays: NamedPlayOptions = {},
 ) {
-  const potw = playOfTheWeek(picks)
+  const weekPlay = resolveWeekNamedPlay(
+    picks,
+    cardKickoffs(card, picks),
+    namedPlays,
+  )
   const groups = groupCardRowsByDay(orderCardRows(picks, card.unpicked, sort))
   const body = groups
     .map((group) => {
+      const dayPlay = resolveDayNamedPlay(
+        dayPicksFromRows(group.rows),
+        group.dateKey,
+        namedPlays,
+      )
       const lines = formatCopiedCardLines(
         group.rows,
         deviations,
         manualSelections,
-        potw?.gameId ?? null,
+        weekPlay?.pick ?? null,
+        dayPlay?.pick ?? null,
       )
       return `${group.weekday}:\n\n${lines.join('\n')}`
     })
     .filter(Boolean)
     .join('\n\n')
-  if (!potw) return body
-  const header = formatPlayOfTheWeekHeader(potw)
+  if (!weekPlay) return body
+  const header = formatNamedPlayHeader('week', weekPlay.pick, weekPlay.frozenAt)
   return body ? `${header}\n\n${body}` : header
 }
 
@@ -595,12 +643,21 @@ export function formatSuggestedDayCardText(
   picks: SuggestedPick[],
   deviations: ReadonlySet<string> = new Set(),
   manualSelections: ManualPickSelections = new Map(),
+  namedPlays: NamedPlayOptions = {},
 ) {
-  const potw = playOfTheWeek(picks)
-  return formatCopiedCardLines(
+  const dayPlay = resolveDayNamedPlay(
+    dayPicksFromRows(group.rows),
+    group.dateKey,
+    namedPlays,
+  )
+  const body = formatCopiedCardLines(
     group.rows,
     deviations,
     manualSelections,
-    potw?.gameId ?? null,
+    null,
+    dayPlay?.pick ?? null,
   ).join('\n')
+  if (!dayPlay) return body
+  const header = formatNamedPlayHeader('day', dayPlay.pick, dayPlay.frozenAt)
+  return body ? `${header}\n\n${body}` : header
 }

@@ -254,8 +254,12 @@ legacy public; mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×
 strength bucket separately. The top tiles are the combined ATS record of every
 frozen Lines recommendation (the side we liked), then each card-pick source.
-Historical public fills remain attributed to the strategy that produced them.
-Strength buckets still sit under those.
+Play of the week and play of the day lock at 8:00 AM ET — the morning of the
+week's first kickoff, and the morning of each card day. Copy card prints the
+week play with that as-of time; Copy day prints that day's play. Performance
+tracks those named sides once a snapshot has stamped them. Historical public
+fills remain attributed to the strategy that produced them. Strength buckets
+still sit under those.
 
 ## Last kickoff (rest)
 

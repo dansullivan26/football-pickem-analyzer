@@ -401,6 +401,12 @@ export type FrozenTiebreaker = {
   frozenAt: string | null
 }
 
+/** Named card play locked at 8:00 AM ET the morning of that kickoff day. */
+export type FrozenNamedPlay = {
+  cbsEventId: number
+  frozenAt: string
+}
+
 export type RecommendationWeek = {
   week: number
   seasonYear?: number
@@ -408,6 +414,10 @@ export type RecommendationWeek = {
   capturedAt: string
   scored: boolean
   tiebreaker?: FrozenTiebreaker | null
+  /** Top recommendation as of 8:00 AM ET the morning of the week's first kickoff. */
+  playOfTheWeek?: FrozenNamedPlay | null
+  /** Top recommendation that day, locked at 8:00 AM ET that morning. */
+  playsOfTheDay?: FrozenNamedPlay[]
   games: FrozenRecommendation[]
 }
 

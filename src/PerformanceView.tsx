@@ -24,6 +24,7 @@ import type { CardPickSource, PickStrength } from './cardScoring'
 import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
 import { AtsChip } from './AtsChip'
 import { summarizeNetEdgeBuckets } from './recommendationEdge'
+import { namedPlayGames, namedPlayKindForGame } from './namedPlays'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'lock',
@@ -211,6 +212,23 @@ function summarizeSource(games: FrozenRecommendation[], source: CardPickSource) 
   }
 }
 
+function summarizeNamedSides(games: FrozenRecommendation[]) {
+  const rows = games.filter((game) => game.pickedSide)
+  const results = rows.map(strengthResult)
+  const wins = results.filter((result) => result === 'win').length
+  const losses = results.filter((result) => result === 'loss').length
+  const pushes = results.filter((result) => result === 'push').length
+  return {
+    count: rows.length,
+    wins,
+    losses,
+    pushes,
+    pending: results.filter((result) => result == null).length,
+    rate: formatRate(wins, losses),
+    detail: `${wins}-${losses}${pushes ? `-${pushes}` : ''} ATS`,
+  }
+}
+
 function summarizeDeviations(games: FrozenRecommendation[]) {
   const rows = games.filter((game) => game.deviated && game.pickedSide)
   const results = rows.map(submittedResult)
@@ -381,6 +399,14 @@ export default function PerformanceView({
     () => summarizeDeviations(allGames),
     [allGames],
   )
+  const playOfTheWeekStats = useMemo(
+    () => summarizeNamedSides(namedPlayGames(seasonWeeks, 'week')),
+    [seasonWeeks],
+  )
+  const playOfTheDayStats = useMemo(
+    () => summarizeNamedSides(namedPlayGames(seasonWeeks, 'day')),
+    [seasonWeeks],
+  )
   const netEdgeStats = useMemo(
     () => summarizeNetEdgeBuckets(allGames),
     [allGames],
@@ -395,12 +421,15 @@ export default function PerformanceView({
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
             The top tiles are overall ATS for the frozen Lines
-            recommendation, then card picks by their frozen source. Week 1
-            retains its public fills; the current strategy uses line value
-            with capped rest and travel adjustments. Tiers, net-edge size, and
-            strength sit under that. Deviations are games where the completed card sent the other side.
-            Games lock at kickoff so a Saturday move cannot rewrite
-            Friday&apos;s recommendation.
+            recommendation, then card picks by their frozen source. Play of
+            the week locks at 8:00 AM ET the morning of the first kickoff;
+            play of the day locks that morning. Weeks without those stamps
+            are not backfilled. Week 1 retains its public fills; the current
+            strategy uses line value with capped rest and travel adjustments.
+            Tiers, net-edge size, and strength sit under that. Deviations are
+            games where the completed card sent the other side. Games lock at
+            kickoff so a Saturday move cannot rewrite Friday&apos;s
+            recommendation.
           </p>
         </div>
         <div className="hero-aside">
@@ -467,6 +496,30 @@ export default function PerformanceView({
           <small>
             {publicStats.count} rec
             {publicStats.count === 1 ? '' : 's'} · {publicStats.detail}
+          </small>
+        </div>
+      </section>
+
+      <section
+        className="summary-grid performance-named-plays"
+        aria-label="Named play hit rates"
+      >
+        <div className="summary-card lock">
+          <span>Play of the week</span>
+          <strong>{playOfTheWeekStats.rate}</strong>
+          <small>
+            {playOfTheWeekStats.count} rec
+            {playOfTheWeekStats.count === 1 ? '' : 's'} ·{' '}
+            {playOfTheWeekStats.detail}
+          </small>
+        </div>
+        <div className="summary-card hammer">
+          <span>Play of the day</span>
+          <strong>{playOfTheDayStats.rate}</strong>
+          <small>
+            {playOfTheDayStats.count} rec
+            {playOfTheDayStats.count === 1 ? '' : 's'} ·{' '}
+            {playOfTheDayStats.detail}
           </small>
         </div>
       </section>
@@ -695,6 +748,13 @@ export default function PerformanceView({
                 </div>
                 <div className="frozen-cell frozen-pick">
                   <strong>{sentLabel(game) ?? recLabel(game)}</strong>
+                  {namedPlayKindForGame(selectedWeek, game.cbsEventId) ===
+                  'week' ? (
+                    <span className="pick-named-play week">Play of the week</span>
+                  ) : namedPlayKindForGame(selectedWeek, game.cbsEventId) ===
+                    'day' ? (
+                    <span className="pick-named-play day">Play of the day</span>
+                  ) : null}
                   {game.deviated && <span className="pick-deviate">Deviate</span>}
                   {game.deviated && <small>rec was {recLabel(game)}</small>}
                   {game.hook ? (

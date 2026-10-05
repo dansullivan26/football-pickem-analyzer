@@ -10,6 +10,20 @@ import {
   viewFromPath,
 } from '../src/routes.ts'
 
+test('locationFromPath reads the Bowl Pick\'em view', () => {
+  assert.deepEqual(locationFromPath('/bowl-pickem', ''), {
+    view: 'bowl-pickem',
+    teamSlug: null,
+    playerSlug: null,
+  })
+  assert.deepEqual(locationFromPath('/bowl-pickem/', ''), {
+    view: 'bowl-pickem',
+    teamSlug: null,
+    playerSlug: null,
+  })
+  assert.equal(viewFromPath('/bowl-pickem', ''), 'bowl-pickem')
+})
+
 test('locationFromPath reads team slugs and keeps the Teams view', () => {
   assert.deepEqual(locationFromPath('/teams', ''), {
     view: 'teams',
@@ -29,6 +43,7 @@ test('locationFromPath reads team slugs and keeps the Teams view', () => {
   assert.equal(viewFromPath('/teams/alabama', ''), 'teams')
   assert.equal(viewFromPath('/players', ''), 'players')
   assert.equal(viewFromPath('/history', ''), 'history')
+  assert.equal(viewFromPath('/bowl-pickem', ''), 'bowl-pickem')
   assert.equal(viewFromPath('/bad-beats', ''), 'bad-beats')
 })
 
@@ -56,6 +71,7 @@ test('pathForView writes a team deep link', () => {
   assert.equal(pathForView('teams', 'alabama'), '/teams/alabama')
   assert.equal(pathForView('teams', null), '/teams')
   assert.equal(pathForView('history'), '/history')
+  assert.equal(pathForView('bowl-pickem'), '/bowl-pickem')
   assert.equal(pathForView('bad-beats'), '/bad-beats')
   assert.equal(pathForBadBeat(2026, 50027437), '/bad-beats#bad-beat-2026-50027437')
 })

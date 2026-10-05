@@ -14,10 +14,12 @@ import cardOverridesData from './data/card-overrides.json'
 import neutralBriefsData from './data/neutral-briefs.json'
 import teamRosterData from './data/team-roster.json'
 import seasonHistoryData from './data/season-history.json'
+import bowlPickemData from './data/bowl-pickem.json'
 import PlayersView from './PlayersView'
 import TeamsView from './TeamsView'
 import LeagueHistoryView from './LeagueHistoryView'
 import PerformanceView from './PerformanceView'
+import BowlPickemView from './BowlPickemView'
 import BadBeatsView from './BadBeatsView'
 import SuggestedCardPanel from './SuggestedCardPanel'
 import HeadsUpFlipsModal from './HeadsUpFlipsModal'
@@ -91,6 +93,7 @@ import type { NeutralBriefsFile } from './neutralBrief'
 import type { WeatherHistoryFile } from './weatherBuckets'
 import type { TeamRosterFile } from './teamRoster'
 import type { SeasonHistoryFile } from './seasonHistory'
+import type { BowlPickemFile } from './bowlPickem'
 import type { PredictionForecasts } from './playerPrediction'
 import type { NflStarterInjuryFile } from './nflStarterInjuries'
 import {
@@ -139,6 +142,7 @@ const neutralBriefs = neutralBriefsData as NeutralBriefsFile
 const badBeatsFile = badBeatsData as BadBeatsFile
 const teamRoster = teamRosterData as TeamRosterFile
 const seasonHistory = seasonHistoryData as SeasonHistoryFile
+const bowlPickem = bowlPickemData as BowlPickemFile
 const teamSlugsByKey = teamPageSlugs(slate, recommendationHistory, teamRoster)
 const travelRestIndex = buildTravelRestIndex(
   slate,
@@ -1373,6 +1377,16 @@ function App() {
             Performance
           </a>
           <a
+            className={view === 'bowl-pickem' ? 'active' : ''}
+            href={pathForView('bowl-pickem')}
+            onClick={(event) => {
+              event.preventDefault()
+              goTo('bowl-pickem')
+            }}
+          >
+            Bowl Pick&apos;em
+          </a>
+          <a
             className={view === 'bad-beats' ? 'active' : ''}
             href={pathForView('bad-beats')}
             onClick={(event) => {
@@ -1802,6 +1816,12 @@ function App() {
           current={playerHistory}
           onSelectPlayer={(slug) => goTo('players', slug)}
         />
+      ) : view === 'bowl-pickem' ? (
+        <BowlPickemView
+          file={bowlPickem}
+          seasonYear={slate.pool.seasonYear}
+          teamRoster={teamRoster}
+        />
       ) : view === 'bad-beats' ? (
         <BadBeatsView
           seasonYear={slate.pool.seasonYear}
@@ -1861,6 +1881,17 @@ function App() {
               timeStyle: 'short',
             }).format(new Date(seasonHistory.source.fetchedAt))}
             .
+          </>
+        ) : view === 'bowl-pickem' ? (
+          <>
+            Straight-up confidence card from DraftKings, not the weekly ATS
+            pool.
+            {bowlPickem.oddsUpdatedAt
+              ? ` Lines pulled ${new Intl.DateTimeFormat(undefined, {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                }).format(new Date(bowlPickem.oddsUpdatedAt))}.`
+              : ' Matchups appear when books price December and January NCAAF games.'}
           </>
         ) : view === 'bad-beats' ? (
           <>

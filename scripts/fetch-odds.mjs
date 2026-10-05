@@ -1,4 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { bowlGamesFromBookRows, mergeBowlOdds } from '../src/bowlOdds.ts'
+import { emptyBowlPickem } from '../src/bowlPickem.ts'
 import { updateLineHistory } from '../src/lineHistory.ts'
 
 const API_URL = 'https://api.sharpapi.io/api/v1/odds'
@@ -117,9 +119,11 @@ async function fetchLeague(league, market = 'point_spread', eventId) {
   return rows
 }
 
-const rawRows = (
-  await Promise.all([fetchLeague('nfl'), fetchLeague('ncaaf')])
-).flat()
+const [nflRows, ncaafRows] = await Promise.all([
+  fetchLeague('nfl'),
+  fetchLeague('ncaaf'),
+])
+const rawRows = [...nflRows, ...ncaafRows]
 
 const tiebreakerGame = slate.tiebreaker
   ? slate.games.find((game) => game.id === slate.tiebreaker.gameId)
@@ -429,6 +433,15 @@ const feed = {
 
 await writeFile(OUTPUT, `${JSON.stringify(feed, null, 2)}\n`)
 
+try {
+  await harvestBowlPickem(ncaafRows, slate.pool?.seasonYear, runAt)
+} catch (error) {
+  console.warn(
+    "Bowl pick'em harvest failed:",
+    error instanceof Error ? error.message : error,
+  )
+}
+
 const HISTORY_OUTPUT = new URL('src/data/line-history.json', ROOT)
 let previousHistory = null
 try {
@@ -514,4 +527,30 @@ if (unmatched.size) {
   )) {
     console.log(`  - ${name} (${start})`)
   }
+}
+
+async function harvestBowlPickem(rows, seasonYear, harvestedAt) {
+  if (!seasonYear) return
+  const BOWL_OUTPUT = new URL('src/data/bowl-pickem.json', ROOT)
+  let previous = emptyBowlPickem(seasonYear)
+  try {
+    previous = JSON.parse(await readFile(BOWL_OUTPUT, 'utf8'))
+  } catch {
+    // First bowl file.
+  }
+  const games = bowlGamesFromBookRows(rows, seasonYear)
+  const { file, changed } = mergeBowlOdds({
+    previous,
+    seasonYear,
+    games,
+    runAt: harvestedAt,
+  })
+  if (!changed) {
+    console.log(`\nBowl pick'em: ${file.games.length} game(s) — unchanged.`)
+    return
+  }
+  await writeFile(BOWL_OUTPUT, `${JSON.stringify(file, null, 2)}\n`)
+  console.log(
+    `\nBowl pick'em: ${file.status}, ${file.games.length} game(s) in the Dec–Jan window.`,
+  )
 }

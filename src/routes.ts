@@ -4,6 +4,7 @@ export type AppView =
   | 'teams'
   | 'history'
   | 'performance'
+  | 'bowl-pickem'
   | 'bad-beats'
 
 export type AppLocation = {
@@ -18,6 +19,7 @@ const VIEW_PATHS: Record<AppView, string> = {
   teams: '/teams',
   history: '/history',
   performance: '/performance',
+  'bowl-pickem': '/bowl-pickem',
   'bad-beats': '/bad-beats',
 }
 
@@ -76,6 +78,7 @@ export function locationFromPath(
   }
   if (clean === '/history') return at('history')
   if (clean === '/performance') return at('performance')
+  if (clean === '/bowl-pickem') return at('bowl-pickem')
   if (clean === '/bad-beats') return at('bad-beats')
   if (clean === '/teams') return at('teams')
   if (clean.startsWith('/teams/')) {

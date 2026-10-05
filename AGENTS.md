@@ -45,6 +45,7 @@ Routing is path-based and served as an SPA (see `src/routes.ts`). In the browser
 - `/teams` and `/teams/<slug>` (e.g. `/teams/alabama`) — Teams / team profile
 - `/history` — Historical money pace and prior standings
 - `/performance` — Performance
+- `/bowl-pickem` — Bowl Pick'em (straight-up confidence card)
 - `/bad-beats` — Bad beats
 
 GitHub Pages serves these deep links via `404.html`. `vite.config.ts` sets a
@@ -53,7 +54,8 @@ GitHub Pages serves these deep links via `404.html`. `vite.config.ts` sets a
 ## Testing expectations
 
 - Run `npm test` for logic changes; the suite covers scoring, cover results,
-  team/career/line history, predictions, card strategy, and route parsing.
+  team/career/line history, predictions, card strategy, bowl confidence,
+  and route parsing.
 - Run `npm run build` to confirm types still pass before pushing to `main`.
 - Ship on `main` and skip demo recordings — see `.cursor/rules/ship-on-main.mdc`.
 - Do not use computer-use or a browser to verify UI. Tests and a typecheck
@@ -99,3 +101,14 @@ cleanup.
 - ESPN first-team depth changes for the current pool week live in
   `src/data/nfl-depth-history.json`. The injury refresh uses earlier snapshots
   to retain ruled-out starters after ESPN moves replacements above them.
+- Bowl Pick'em is a separate straight-up confidence pool. The admin sheet
+  is A/H plus unique 1–N points in schedule order (`src/data/bowl-sheet-2025.json`
+  is last year's 41-game workbook). Live matchups and DraftKings numbers
+  live in `src/data/bowl-pickem.json`; the hourly odds job harvests NCAAF
+  rows in the Dec 16–Jan 21 window. CFP “winner of” / TBA slots are a
+  what-if: pick the team you think lands there and the card re-ranks from
+  pair lines. The 2025 demo uses sandbox CFP lines in
+  `src/data/bowl-cfp-sandbox-2025.json`, not closing numbers. Head-coach
+  snapshots live in `src/data/coaching-snapshot.json`
+  (`npm run snapshot-bowl-context`). Opt-outs are recorded in the bowl
+  file, not inferred from the spread.

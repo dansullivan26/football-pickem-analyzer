@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react'
 import {
-  activeHistoricalPeriods,
+  compareSeasonWinRates,
   completedCurrentWeeks,
   currentMoneyPace,
   finalMoneyLine,
+  formatWinPercent,
+  historicalStandingWinRecord,
   historicalWeeklyBenchmarks,
+  moneyFinisherWinRates,
   moneyPaceForSeason,
   playerMoneyPaceComparison,
   returningMoneyFinishers,
@@ -286,6 +289,36 @@ export default function LeagueHistoryView({
     () => returningMoneyFinishers(archive, current),
     [archive, current],
   )
+  const casherWinRates = useMemo(
+    () => moneyFinisherWinRates(archive),
+    [archive],
+  )
+  const playerWinRates = useMemo(() => {
+    const entry = ourRosterEntry(current)
+    return entry
+      ? compareSeasonWinRates(archive, current, entry.entryId)
+      : null
+  }, [archive, current])
+  const selectedWinRecords = useMemo(() => {
+    if (!selectedSeason) return new Map()
+    return new Map(
+      selectedSeason.standings.map((standing) => [
+        standing.entryId,
+        historicalStandingWinRecord(selectedSeason, standing),
+      ]),
+    )
+  }, [selectedSeason])
+  const casherWinByKey = useMemo(() => {
+    const rows = new Map<string, string>()
+    for (const row of casherWinRates) {
+      if (row.rate == null) continue
+      rows.set(
+        `${row.seasonYear}:${playerSlug(row.name)}`,
+        formatWinPercent(row.rate),
+      )
+    }
+    return rows
+  }, [casherWinRates])
   const currentRosterSlugs = new Set(
     current.entries.map((entry) => playerSlug(entry.name)),
   )
@@ -312,8 +345,9 @@ export default function LeagueHistoryView({
           <p className="hero-copy">
             Compare this season&apos;s money pace with CBS&apos;s weekly
             standings from prior pool editions. Top three finish in the money.
-            Historical weekly highs are score leaders before any tiebreaker,
-            not official weekly winners.
+            Win rates show what eventual cashers finished the year at, next
+            to your current ATS. Historical weekly highs are score leaders
+            before any tiebreaker, not official weekly winners.
           </p>
         </div>
         <div className="hero-aside">
@@ -421,6 +455,126 @@ export default function LeagueHistoryView({
             eventual casher&apos;s score after the same number of active pool
             weeks. Historical slate sizes change later in the season, so this
             does not extrapolate a final score.
+          </p>
+        </section>
+      )}
+
+      {casherWinRates.length > 0 && (
+        <section
+          className="history-section history-win-rates"
+          aria-label="Win rates that cashed"
+        >
+          <div className="history-section-heading">
+            <div>
+              <p className="eyebrow">Win rates that cashed</p>
+              <h2>What the money finished at</h2>
+            </div>
+            <p>
+              Prior years are final CBS correct-pick rates over the estimated
+              weekly card: 25 when the field reached 12, and that week&apos;s
+              high score on short playoff slates. Your {current.pool.seasonYear}{' '}
+              number is live ATS so far, pushes out.
+            </p>
+          </div>
+
+          <div className="history-benchmark-summary history-win-summary">
+            {playerWinRates && (
+              <article>
+                <span>Your {current.pool.seasonYear} so far</span>
+                <strong>{formatWinPercent(playerWinRates.current.rate)}</strong>
+                <small>
+                  {playerWinRates.current.recordLabel} ATS ·{' '}
+                  {playerWinRates.current.games} graded
+                </small>
+              </article>
+            )}
+            <article>
+              <span>Lowest casher finish</span>
+              <strong>
+                {formatWinPercent(
+                  playerWinRates?.casherLow?.rate ??
+                    casherWinRates
+                      .filter((row) => row.rate != null)
+                      .sort((left, right) => (left.rate ?? 0) - (right.rate ?? 0))[0]
+                      ?.rate ??
+                    null,
+                )}
+              </strong>
+              <small>
+                {playerWinRates?.casherLow
+                  ? `${playerWinRates.casherLow.seasonYear} ${formatMoneyPlace(playerWinRates.casherLow.place)} · ${playerWinRates.casherLow.name}`
+                  : 'Final top-three win rate'}
+              </small>
+            </article>
+            <article>
+              <span>Casher median</span>
+              <strong>
+                {formatWinPercent(playerWinRates?.casherMedian ?? null)}
+              </strong>
+              <small>
+                {casherWinRates.length} money finishes across{' '}
+                {seasons.length} {seasons.length === 1 ? 'season' : 'seasons'}
+              </small>
+            </article>
+            {playerWinRates && (
+              <article>
+                <span>Casher rates you match</span>
+                <strong>
+                  {playerWinRates.cashersAtOrBelow} of{' '}
+                  {playerWinRates.cashers.length}
+                </strong>
+                <small>
+                  At or above that finisher&apos;s final win rate
+                </small>
+              </article>
+            )}
+          </div>
+
+          <div className="history-table-scroll">
+            <table className="history-score-table history-win-table">
+              <thead>
+                <tr>
+                  <th scope="col">Season</th>
+                  <th scope="col">Place</th>
+                  <th scope="col">Player</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Win %</th>
+                  <th scope="col">Card</th>
+                </tr>
+              </thead>
+              <tbody>
+                {casherWinRates.map((row) => {
+                  const atOrAbove =
+                    playerWinRates?.current.rate != null &&
+                    row.rate != null &&
+                    playerWinRates.current.rate >= row.rate
+                  return (
+                    <tr
+                      className={atOrAbove ? 'matched' : undefined}
+                      key={`${row.seasonYear}:${row.place}`}
+                    >
+                      <th scope="row">{row.seasonYear}</th>
+                      <td>{formatMoneyPlace(row.place)}</td>
+                      <td>{row.name}</td>
+                      <td>{row.score}</td>
+                      <td>
+                        <strong>{formatWinPercent(row.rate)}</strong>
+                      </td>
+                      <td>
+                        {row.games
+                          ? `${row.wins} of ${row.games}`
+                          : '—'}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="history-cash-note">
+            A highlighted row means your current ATS is already at or above
+            that casher&apos;s final win rate. It is not a projected finish —
+            they had a full season of games you have not played yet.
           </p>
         </section>
       )}
@@ -633,10 +787,14 @@ export default function LeagueHistoryView({
               </strong>
               <small>
                 {player.finishes
-                  .map(
-                    (finish) =>
-                      `${finish.seasonYear} ${formatMoneyPlace(finish.place)} (${finish.score})`,
-                  )
+                  .map((finish) => {
+                    const rate = casherWinByKey.get(
+                      `${finish.seasonYear}:${player.slug}`,
+                    )
+                    return `${finish.seasonYear} ${formatMoneyPlace(finish.place)} (${finish.score}${
+                      rate ? ` · ${rate}` : ''
+                    })`
+                  })
                   .join(' · ')}
               </small>
             </a>
@@ -663,12 +821,14 @@ export default function LeagueHistoryView({
                   <th scope="col">Place</th>
                   <th scope="col">Player</th>
                   <th scope="col">Score</th>
+                  <th scope="col">Win %</th>
                 </tr>
               </thead>
               <tbody>
                 {selectedSeason.standings.map((standing) => {
                   const slug = playerSlug(standing.name)
                   const linked = currentRosterSlugs.has(slug)
+                  const win = selectedWinRecords.get(standing.entryId)
                   return (
                     <tr
                       className={standing.rank <= 3 ? 'money' : undefined}
@@ -691,6 +851,14 @@ export default function LeagueHistoryView({
                         )}
                       </th>
                       <td>{standing.seasonScore}</td>
+                      <td>
+                        {formatWinPercent(win?.rate ?? null)}
+                        {win?.games ? (
+                          <small>
+                            {win.wins} of {win.games}
+                          </small>
+                        ) : null}
+                      </td>
                     </tr>
                   )
                 })}

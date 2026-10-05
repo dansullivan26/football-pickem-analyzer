@@ -2,10 +2,14 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   activeHistoricalPeriods,
+  compareSeasonWinRates,
   currentMoneyPace,
   currentStandings,
+  estimatedWeeklyCardSize,
   finalMoneyLine,
+  historicalStandingWinRecord,
   historicalWeeklyBenchmarks,
+  moneyFinisherWinRates,
   moneyPaceForSeason,
   playerMoneyPaceComparison,
   returningMoneyFinishers,
@@ -272,6 +276,53 @@ test('player money pace compares the same checkpoint with eventual cashers', () 
     playerMoneyPaceComparison(archive(), currentHistory(), 'missing'),
     null,
   )
+})
+
+test('estimated weekly card is 25 unless the field never reached 12', () => {
+  assert.equal(estimatedWeeklyCardSize(21), 25)
+  assert.equal(estimatedWeeklyCardSize(12), 25)
+  assert.equal(estimatedWeeklyCardSize(11), 11)
+  assert.equal(estimatedWeeklyCardSize(2), 2)
+})
+
+test('historical casher win rate uses the estimated weekly card', () => {
+  const historical = season()
+  const alpha = historical.standings[0]!
+  const record = historicalStandingWinRecord(historical, alpha)
+  assert.deepEqual(record, { wins: 12, games: 12, rate: 1 })
+  assert.deepEqual(
+    moneyFinisherWinRates(archive()).map((row) => ({
+      name: row.name,
+      place: row.place,
+      rate: row.rate,
+      games: row.games,
+    })),
+    [
+      { name: 'Alpha', place: 1, rate: 1, games: 12 },
+      { name: 'Beta', place: 2, rate: 10 / 12, games: 12 },
+      { name: 'Gamma', place: 3, rate: 8 / 12, games: 12 },
+    ],
+  )
+})
+
+test('current win rate compares graded ATS with prior casher finals', () => {
+  const history = currentHistory()
+  history.weeks[0]!.entries[0]!.picks = [
+    { result: 'win', pickedSide: 'home' },
+    { result: 'win', pickedSide: 'away' },
+    { result: 'loss', pickedSide: 'home' },
+  ] as PlayerWeekEntry['picks']
+  history.weeks[1]!.entries[0]!.picks = [
+    { result: 'win', pickedSide: 'home' },
+    { result: 'loss', pickedSide: 'away' },
+  ] as PlayerWeekEntry['picks']
+  const comparison = compareSeasonWinRates(archive(), history, 'a-now')
+  assert.ok(comparison)
+  assert.equal(comparison.current.rate, 0.6)
+  assert.equal(comparison.current.recordLabel, '3-2')
+  assert.equal(comparison.casherLow?.name, 'Gamma')
+  assert.equal(comparison.casherHigh?.name, 'Alpha')
+  assert.equal(comparison.cashersAtOrBelow, 0)
 })
 
 test('returning money finishers join by normalized display name', () => {

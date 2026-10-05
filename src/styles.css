@@ -3355,6 +3355,14 @@ a.team-page-link:focus-visible .team-name {
   margin-bottom: 16px;
 }
 
+.history-win-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.history-win-table tr.matched {
+  background: var(--green-soft);
+}
+
 .history-cash-summary small,
 .history-cash-heading small,
 .history-cash-grid li small,
@@ -4621,6 +4629,10 @@ footer {
 }
 
 @media (max-width: 960px) {
+  .history-win-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .summary-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -4870,7 +4882,8 @@ footer {
   }
 
   .history-summary,
-  .history-benchmark-summary {
+  .history-benchmark-summary,
+  .history-win-summary {
     grid-template-columns: 1fr;
   }
 

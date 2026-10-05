@@ -93,7 +93,10 @@ Weekly rows store CBS `periodScore` (as `wins`). `weeklyLeader` is ignored: it
 is a co-high pick-score flag, can be true for multiple people, and is blank on
 the 2024/2025 archive, so it is not the official weekly winner after
 tiebreakers. When 2024 or 2025 is present, ingest also reconciles the top three
-against the hand-entered final money table.
+against the hand-entered final money table. History shows those cashers'
+estimated final win rates (correct picks over a 25-game card when the weekly
+high reached 12, otherwise that week's high) next to the operator's current
+ATS so a live season can be compared with what actually cashed.
 
 Current week entries can also carry CBS's hidden-card progress:
 `picksCount`, `maxPicksCount`, entry-level `pickStatus`,

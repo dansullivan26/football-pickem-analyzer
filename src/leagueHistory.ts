@@ -1,9 +1,23 @@
-import { playerSlug } from './playerDirectory.ts'
+import {
+  entryWinRecord,
+  formatAtsRecord,
+  playerSlug,
+} from './playerDirectory.ts'
 import type {
   HistoricalSeason,
+  HistoricalStanding,
   SeasonHistoryFile,
 } from './seasonHistory.ts'
 import type { PlayerHistory, PlayerWeek, PlayerWeekEntry } from './types.ts'
+
+/** This pool's full CBS card. Late playoff weeks shrink below this. */
+export const FULL_CARD_PICKS = 25
+/**
+ * Weekly highs at or above this look like a full 25-game card (current
+ * season highs sit in the mid-teens). Below it, treat the week's high as
+ * the card size so a 2-pick playoff slate is not scored as 2/25.
+ */
+export const FULL_CARD_HIGH_FLOOR = 12
 
 export type MoneyPacePoint = {
   activeWeek: number
@@ -97,6 +111,145 @@ function weeklyScore(
       .find((standing) => standing.entryId === entryId)
       ?.weeklyWins.find((week) => week.week === periodOrder)?.wins ?? 0
   )
+}
+
+function weeklyHighScore(season: HistoricalSeason, periodOrder: number) {
+  return season.standings.reduce(
+    (high, standing) =>
+      Math.max(high, weeklyScore(season, standing.entryId, periodOrder)),
+    0,
+  )
+}
+
+export function estimatedWeeklyCardSize(weeklyHigh: number) {
+  if (weeklyHigh >= FULL_CARD_HIGH_FLOOR) return FULL_CARD_PICKS
+  return Math.max(weeklyHigh, 0)
+}
+
+export function formatWinPercent(rate: number | null) {
+  if (rate == null) return '—'
+  return `${Math.round(rate * 100)}%`
+}
+
+export type HistoricalWinRecord = {
+  wins: number
+  games: number
+  rate: number | null
+}
+
+export function historicalStandingWinRecord(
+  season: HistoricalSeason,
+  standing: HistoricalStanding,
+): HistoricalWinRecord {
+  const periods = activeHistoricalPeriods(season)
+  if (periods.length === 0 || standing.weeklyWins.length === 0) {
+    return { wins: standing.seasonScore, games: 0, rate: null }
+  }
+  let wins = 0
+  let games = 0
+  for (const period of periods) {
+    wins += weeklyScore(season, standing.entryId, period.order)
+    games += estimatedWeeklyCardSize(weeklyHighScore(season, period.order))
+  }
+  return {
+    wins,
+    games,
+    rate: games > 0 ? wins / games : null,
+  }
+}
+
+export type MoneyWinRateRow = {
+  seasonYear: number
+  place: number
+  name: string
+  score: number
+  wins: number
+  games: number
+  rate: number | null
+}
+
+export function moneyFinisherWinRates(
+  archive: SeasonHistoryFile,
+): MoneyWinRateRow[] {
+  return [...archive.seasons]
+    .sort((left, right) => right.seasonYear - left.seasonYear)
+    .flatMap((season) =>
+      season.standings
+        .filter((standing) => standing.rank <= 3)
+        .sort((left, right) => left.rank - right.rank)
+        .map((standing) => {
+          const record = historicalStandingWinRecord(season, standing)
+          return {
+            seasonYear: season.seasonYear,
+            place: standing.rank,
+            name: standing.name,
+            score: standing.seasonScore,
+            ...record,
+          }
+        }),
+    )
+}
+
+export type CurrentWinRate = {
+  name: string
+  wins: number
+  losses: number
+  pushes: number
+  games: number
+  rate: number | null
+  recordLabel: string
+}
+
+export function currentEntryWinRate(
+  history: PlayerHistory,
+  entryId: string,
+): CurrentWinRate | null {
+  const entry = history.entries.find((row) => row.entryId === entryId)
+  if (!entry) return null
+  const record = entryWinRecord(entryId, history.weeks)
+  const games = record.wins + record.losses
+  return {
+    name: entry.name,
+    wins: record.wins,
+    losses: record.losses,
+    pushes: record.pushes,
+    games: record.scored,
+    rate: games > 0 ? record.wins / games : null,
+    recordLabel: formatAtsRecord(record),
+  }
+}
+
+export type WinRateComparison = {
+  current: CurrentWinRate
+  cashers: MoneyWinRateRow[]
+  casherMedian: number | null
+  casherLow: MoneyWinRateRow | null
+  casherHigh: MoneyWinRateRow | null
+  cashersAtOrBelow: number
+}
+
+export function compareSeasonWinRates(
+  archive: SeasonHistoryFile,
+  current: PlayerHistory,
+  entryId: string,
+): WinRateComparison | null {
+  const you = currentEntryWinRate(current, entryId)
+  if (!you) return null
+  const cashers = moneyFinisherWinRates(archive)
+  const rated = cashers.filter(
+    (row): row is MoneyWinRateRow & { rate: number } => row.rate != null,
+  )
+  const sorted = [...rated].sort((left, right) => left.rate - right.rate)
+  return {
+    current: you,
+    cashers,
+    casherMedian: rated.length
+      ? median(rated.map((row) => row.rate))
+      : null,
+    casherLow: sorted[0] ?? null,
+    casherHigh: sorted.at(-1) ?? null,
+    cashersAtOrBelow: rated.filter((row) => (you.rate ?? 0) >= row.rate).length,
+  }
 }
 
 /**

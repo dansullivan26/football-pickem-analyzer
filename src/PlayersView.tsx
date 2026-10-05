@@ -58,6 +58,16 @@ import {
   rankPlayersByWins,
   type PlayerRankingScope,
 } from './playerDirectory'
+import {
+  kickoffByEventId,
+  NFL_WINDOW_DETAILS,
+  NFL_WINDOW_KEYS,
+  NFL_WINDOW_LABELS,
+  nflWindowDetail,
+  summarizeEntryNflWindows,
+  summarizePoolNflWindows,
+  type NflWindowRecords,
+} from './nflWindows'
 import lastKickoffData from './data/last-kickoff.json'
 import { pathForPlayer } from './routes'
 import moneyHistoryData from './data/money-history.json'
@@ -405,6 +415,27 @@ function Metric({
   )
 }
 
+function NflWindowsGrid({
+  records,
+  label,
+}: {
+  records: NflWindowRecords
+  label: string
+}) {
+  return (
+    <div className="tendency-grid nfl-windows" aria-label={label}>
+      {NFL_WINDOW_KEYS.map((key) => (
+        <Metric
+          key={key}
+          label={NFL_WINDOW_LABELS[key]}
+          value={formatAtsRecord(records[key])}
+          detail={nflWindowDetail(records[key], NFL_WINDOW_DETAILS[key])}
+        />
+      ))}
+    </div>
+  )
+}
+
 function PoolTeamBiasCard({
   signal,
   teamName,
@@ -735,16 +766,33 @@ export default function PlayersView({
         travelRestByAppearance,
       )
     : null
+  const seasonWeeks = useMemo(
+    () =>
+      playerRankingWeeks(history.weeks, 'season', history.pool.seasonYear),
+    [history.weeks, history.pool.seasonYear],
+  )
+  const nflKickoffs = useMemo(
+    () =>
+      kickoffByEventId([
+        recommendations.weeks.flatMap((week) => week.games),
+        slate.games,
+      ]),
+    [recommendations.weeks, slate.games],
+  )
   const seasonAts = selectedPlayer
-    ? entryAtsSplits(
+    ? entryAtsSplits(selectedPlayer.entryId, seasonWeeks)
+    : null
+  const playerNflWindows = selectedPlayer
+    ? summarizeEntryNflWindows(
         selectedPlayer.entryId,
-        playerRankingWeeks(
-          history.weeks,
-          'season',
-          history.pool.seasonYear,
-        ),
+        seasonWeeks,
+        nflKickoffs,
       )
     : null
+  const poolNflWindows = useMemo(
+    () => summarizePoolNflWindows(seasonWeeks, nflKickoffs),
+    [seasonWeeks, nflKickoffs],
+  )
   const currentProfile = selectedPlayer
     ? buildCurrentPlayerProfile(
         selectedPlayer.entryId,
@@ -887,8 +935,9 @@ export default function PlayersView({
           <p className="eyebrow">Player history</p>
           <h1>Pool tendencies</h1>
           <p className="hero-copy">
-            Track every weekly card, then compare raw ATS records by league,
-            how each player approaches favorites, underdogs, home teams
+            Track every weekly card, then compare raw ATS records by league
+            and by NFL TV window (TNF, Sunday 1:00, Sunday 4:00, SNF, MNF).
+            See how each player approaches favorites, underdogs, home teams
             (neutral sites excluded), our line-value side, and the weekly
             tiebreaker. Line-value follow rates also split by the
             kickoff-frozen lock, hammer, lean, slight, and neutral tier.
@@ -969,6 +1018,26 @@ export default function PlayersView({
 
       {pageTab === 'pool' ? (
         <div role="tabpanel" aria-label="Pool-wide">
+          <section
+            className="player-ats-book"
+            aria-label="Pool NFL windows"
+          >
+            <div className="player-team-bias-heading">
+              <div>
+                <p className="eyebrow">NFL windows</p>
+                <h3>{history.pool.seasonYear} pool by kickoff</h3>
+              </div>
+              <small>
+                Every submitted NFL pick with a CBS cover, grouped by Eastern
+                TV window. London mornings and odd midweek games stay out.
+              </small>
+            </div>
+            <NflWindowsGrid
+              records={poolNflWindows}
+              label="Pool NFL window ATS"
+            />
+          </section>
+
           {(poolTeamBias.takes.length > 0 || poolTeamBias.fades.length > 0) && (
             <section
               className="player-team-bias pool-team-bias"
@@ -1271,6 +1340,28 @@ export default function PlayersView({
                       }
                     />
                   </div>
+                </section>
+              )}
+
+              {playerNflWindows && (
+                <section
+                  className="player-ats-book"
+                  aria-label="NFL windows"
+                >
+                  <div className="player-team-bias-heading">
+                    <div>
+                      <p className="eyebrow">NFL windows</p>
+                      <h3>{history.pool.seasonYear} by kickoff</h3>
+                    </div>
+                    <small>
+                      Their submitted NFL picks with a CBS cover. Sunday 4:00
+                      groups 4:05 and 4:25. London mornings stay out.
+                    </small>
+                  </div>
+                  <NflWindowsGrid
+                    records={playerNflWindows}
+                    label="Player NFL window ATS"
+                  />
                 </section>
               )}
 

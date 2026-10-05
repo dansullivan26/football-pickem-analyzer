@@ -254,6 +254,9 @@ legacy public; mild / solid / strong); those values freeze at kickoff
 with the rest of the pick. Performance tracks hit rates for each source ×
 strength bucket separately. The top tiles are the combined ATS record of every
 frozen Lines recommendation (the side we liked), then each card-pick source.
+NFL recs also split by TV window: TNF, Sunday 1:00, Sunday 4:00 (4:05/4:25),
+SNF, and MNF. Players shows the same windows for each entry and for the
+pool. London mornings and odd midweek games are left out.
 Play of the week and play of the day lock at 8:00 AM ET — the morning of the
 week's first kickoff, and the morning of each card day. Copy card prints the
 week play with that as-of time; Copy day prints that day's play. Performance

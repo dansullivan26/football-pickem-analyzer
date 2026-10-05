@@ -2390,6 +2390,23 @@ a.team-page-link:focus-visible .team-name {
   margin-bottom: 16px;
 }
 
+.performance-nfl-windows {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.performance-nfl-windows .summary-card {
+  cursor: default;
+}
+
+.performance-nfl-windows .summary-card:hover {
+  transform: none;
+}
+
+.tendency-grid.nfl-windows {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .performance-named-plays .summary-card {
   cursor: default;
 }
@@ -4629,6 +4646,7 @@ footer {
   }
 
   .tendency-grid,
+  .tendency-grid.nfl-windows,
   .residual-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4787,7 +4805,8 @@ footer {
   }
 
   .performance-overall,
-  .performance-named-plays {
+  .performance-named-plays,
+  .performance-nfl-windows {
     grid-template-columns: 1fr;
   }
 

@@ -25,6 +25,14 @@ import { atsOutcomeLabel, atsOutcomeMark } from './pickLabels'
 import { AtsChip } from './AtsChip'
 import { summarizeNetEdgeBuckets } from './recommendationEdge'
 import { namedPlayGames, namedPlayKindForGame } from './namedPlays'
+import {
+  NFL_WINDOW_DETAILS,
+  NFL_WINDOW_KEYS,
+  NFL_WINDOW_LABELS,
+  nflWindowDetail,
+  summarizeCardNflWindows,
+} from './nflWindows'
+import { formatAtsRecord } from './playerDirectory'
 
 const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
   'lock',
@@ -407,6 +415,10 @@ export default function PerformanceView({
     () => summarizeNamedSides(namedPlayGames(seasonWeeks, 'day')),
     [seasonWeeks],
   )
+  const nflWindowStats = useMemo(
+    () => summarizeCardNflWindows(allGames),
+    [allGames],
+  )
   const netEdgeStats = useMemo(
     () => summarizeNetEdgeBuckets(allGames),
     [allGames],
@@ -428,9 +440,10 @@ export default function PerformanceView({
             Week 1 retains its public fills; the current
             strategy uses line value with capped rest and travel adjustments.
             Tiers, net-edge size, and strength sit under that. Deviations are
-            games where the completed card sent the other side. Games lock at
-            kickoff so a Saturday move cannot rewrite Friday&apos;s
-            recommendation.
+            games where the completed card sent the other side. NFL recs
+            also split by TV window (TNF, Sunday 1:00, Sunday 4:00, SNF,
+            MNF). Games lock at kickoff so a Saturday move cannot rewrite
+            Friday&apos;s recommendation.
           </p>
         </div>
         <div className="hero-aside">
@@ -523,6 +536,24 @@ export default function PerformanceView({
             {playOfTheDayStats.detail}
           </small>
         </div>
+      </section>
+
+      <section
+        className="summary-grid performance-nfl-windows"
+        aria-label="NFL window hit rates"
+      >
+        {NFL_WINDOW_KEYS.map((key) => {
+          const record = nflWindowStats[key]
+          return (
+            <div className="summary-card lean" key={key}>
+              <span>{NFL_WINDOW_LABELS[key]}</span>
+              <strong>
+                {record.scored ? formatAtsRecord(record) : '—'}
+              </strong>
+              <small>{nflWindowDetail(record, NFL_WINDOW_DETAILS[key])}</small>
+            </div>
+          )
+        })}
       </section>
 
       <section className="summary-grid performance-summary" aria-label="Season hit rates">

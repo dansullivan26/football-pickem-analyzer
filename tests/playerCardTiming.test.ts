@@ -4,10 +4,12 @@ import {
   classifyAgainstThursday,
   slateProgressByDate,
   summarizePlayerCardTiming,
+  summarizePoolCardTiming,
   weekThursdayDate,
 } from '../src/playerCardTiming.ts'
 import type {
   PlayerHistory,
+  PlayerRosterEntry,
   PlayerWeek,
   PicksCountChange,
   RecommendationHistory,
@@ -251,6 +253,55 @@ test('finishing Saturday after a Thursday look is later pick timing', () => {
   assert.ok(summary)
   assert.equal(summary.thisWeek?.bucket, 'late-full')
   assert.equal(summary.read, 'likely')
+})
+
+function roster(...ids: string[]): PlayerRosterEntry[] {
+  return ids.map((entryId) => ({
+    entryId,
+    name: entryId,
+    hasMadeAPick: true,
+    season: {
+      score: null,
+      rank: null,
+      correctPicks: null,
+      picksMadeCount: null,
+    },
+  }))
+}
+
+test('summarizePoolCardTiming counts season reads and this-week buckets', () => {
+  const bill = history('bill', 25, [change('bill', 0, 25, thursdayDump)])
+  const one = history('one', 1, [change('one', 0, 1, thursdayDump)])
+  const combined: PlayerHistory = {
+    ...bill,
+    entries: roster('bill', 'one', 'ghost'),
+    weeks: [
+      {
+        ...bill.weeks[0],
+        entries: [...bill.weeks[0].entries, ...one.weeks[0].entries],
+      },
+    ],
+    picksCountChanges: [
+      ...(bill.picksCountChanges ?? []),
+      ...(one.picksCountChanges ?? []),
+    ],
+  }
+  const pool = summarizePoolCardTiming(combined, recs, null, thursdayDump)
+  const byRead = Object.fromEntries(
+    pool.byRead.map((row) => [row.read, row.count]),
+  )
+  const byBucket = Object.fromEntries(
+    pool.thisWeek.byBucket.map((row) => [row.bucket, row.count]),
+  )
+  assert.equal(pool.tracked, 2)
+  assert.equal(pool.classified, 2)
+  assert.equal(byRead.unlikely, 1)
+  assert.equal(byRead.likely, 1)
+  assert.equal(byRead.unknown, 0)
+  assert.equal(pool.thisWeek.week, 3)
+  assert.equal(pool.thisWeek.tracked, 2)
+  assert.equal(byBucket['early-full'], 1)
+  assert.equal(byBucket['day-of'], 1)
 })
 
 test('skips weeks from before submitted-count tracking', () => {

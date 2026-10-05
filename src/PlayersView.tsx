@@ -39,6 +39,7 @@ import {
 import {
   PICK_TIMING_WARMTH_LABELS,
   summarizePlayerCardTiming,
+  summarizePoolCardTiming,
 } from './playerCardTiming'
 import { careerSeasonYears, weekIsGraded, weeksForSeason } from './careerHistory'
 import { finalEventIds, formatWinningScore, mergeEventScores } from './gameStatus'
@@ -839,6 +840,10 @@ export default function PlayersView({
     () => summarizePoolTeamBias(history, history.pool.seasonYear),
     [history],
   )
+  const poolCardTiming = useMemo(
+    () => summarizePoolCardTiming(history, recommendations, slate),
+    [history, recommendations, slate],
+  )
   const livePrediction =
     selectedPlayer && recommendationWeek
       ? predictPlayerWeek(
@@ -1018,6 +1023,80 @@ export default function PlayersView({
 
       {pageTab === 'pool' ? (
         <div role="tabpanel" aria-label="Pool-wide">
+          {poolCardTiming.tracked > 0 && (
+            <section
+              className="player-ats-book"
+              aria-label="Pool pick timing"
+            >
+              <div className="player-team-bias-heading">
+                <div>
+                  <p className="eyebrow">Pick timing</p>
+                  <h3>{history.pool.seasonYear} pool by submit window</h3>
+                </div>
+                <small>
+                  Same Thursday / Friday / game-day read as each player
+                  card, counted across the field. CBS only shows a
+                  submitted count, not which games they chose. Flips after
+                  they lock stay invisible.
+                </small>
+              </div>
+              <div
+                className="tendency-grid pick-timing"
+                aria-label="Pool pick timing reads"
+              >
+                {poolCardTiming.byRead.map((row) => (
+                  <Metric
+                    key={row.read}
+                    label={row.label}
+                    value={
+                      row.share == null
+                        ? '—'
+                        : `${Math.round(row.share * 100)}%`
+                    }
+                    detail={`${row.count} of ${poolCardTiming.tracked} player${
+                      poolCardTiming.tracked === 1 ? '' : 's'
+                    }`}
+                  />
+                ))}
+              </div>
+              {poolCardTiming.thisWeek.tracked > 0 && (
+                <>
+                  <p className="eyebrow pool-timing-week-label">
+                    {poolCardTiming.thisWeek.label ?? 'This week'}
+                  </p>
+                  <div
+                    className="tendency-grid pick-timing-week"
+                    aria-label="This week pick timing"
+                  >
+                    {poolCardTiming.thisWeek.byBucket
+                      .filter(
+                        (row) =>
+                          row.count > 0 ||
+                          row.bucket === 'early-full' ||
+                          row.bucket === 'friday-full' ||
+                          row.bucket === 'late-full' ||
+                          row.bucket === 'day-of',
+                      )
+                      .map((row) => (
+                        <Metric
+                          key={row.bucket}
+                          label={row.label}
+                          value={String(row.count)}
+                          detail={
+                            row.share == null
+                              ? 'No cards yet'
+                              : `${Math.round(row.share * 100)}% of ${
+                                  poolCardTiming.thisWeek.tracked
+                                }`
+                          }
+                        />
+                      ))}
+                  </div>
+                </>
+              )}
+            </section>
+          )}
+
           <section
             className="player-ats-book"
             aria-label="Pool NFL windows"

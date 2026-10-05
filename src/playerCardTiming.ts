@@ -61,6 +61,59 @@ export const PICK_TIMING_WARMTH_LABELS: Record<LineWatchWarmth, string> = {
   established: 'Established pattern',
 }
 
+export const LINE_WATCH_READS: LineWatchRead[] = [
+  'unlikely',
+  'possible',
+  'likely',
+  'unknown',
+]
+
+export const WEEK_BUCKET_LABELS: Record<CardTimingBucket, string> = {
+  'early-full': 'Full by Thursday',
+  'friday-full': 'Full on Friday',
+  'late-full': 'Full Saturday+',
+  'day-of': 'Game-day count',
+  ahead: 'Ahead of the slate',
+  waiting: 'Behind the slate',
+  unknown: 'Unclassified',
+}
+
+const WEEK_BUCKETS: CardTimingBucket[] = [
+  'early-full',
+  'friday-full',
+  'late-full',
+  'day-of',
+  'ahead',
+  'waiting',
+  'unknown',
+]
+
+export type PoolTimingReadRow = {
+  read: LineWatchRead
+  label: string
+  count: number
+  share: number | null
+}
+
+export type PoolTimingBucketRow = {
+  bucket: CardTimingBucket
+  label: string
+  count: number
+  share: number | null
+}
+
+export type PoolCardTimingSummary = {
+  tracked: number
+  classified: number
+  byRead: PoolTimingReadRow[]
+  thisWeek: {
+    week: number | null
+    label: string | null
+    tracked: number
+    byBucket: PoolTimingBucketRow[]
+  }
+}
+
 const WEEKDAY_INDEX: Record<string, number> = {
   Sun: 0,
   Mon: 1,
@@ -506,5 +559,68 @@ export function summarizePlayerCardTiming(
     lateWeeks,
     dayOfWeeks,
     classifiedWeeks,
+  }
+}
+
+function emptyCounts<T extends string>(keys: readonly T[]) {
+  return Object.fromEntries(keys.map((key) => [key, 0])) as Record<T, number>
+}
+
+export function summarizePoolCardTiming(
+  history: PlayerHistory,
+  recommendations?: RecommendationHistory | null,
+  slate?: Slate | null,
+  nowIso?: string,
+): PoolCardTimingSummary {
+  const readCounts = emptyCounts(LINE_WATCH_READS)
+  const weekCounts = emptyCounts(WEEK_BUCKETS)
+  const currentWeek = slate?.week.order ?? null
+  let thisWeekLabel: string | null = null
+  let thisWeekNumber: number | null = currentWeek
+  let thisWeekTracked = 0
+  let tracked = 0
+
+  for (const entry of history.entries) {
+    const summary = summarizePlayerCardTiming(
+      entry.entryId,
+      history,
+      recommendations,
+      slate,
+      nowIso,
+    )
+    if (!summary) continue
+    tracked += 1
+    readCounts[summary.read] += 1
+    if (
+      summary.thisWeek &&
+      (currentWeek == null || summary.thisWeek.week === currentWeek)
+    ) {
+      if (thisWeekNumber == null) thisWeekNumber = summary.thisWeek.week
+      thisWeekLabel = summary.thisWeek.label
+      weekCounts[summary.thisWeek.bucket] += 1
+      thisWeekTracked += 1
+    }
+  }
+
+  return {
+    tracked,
+    classified: tracked - readCounts.unknown,
+    byRead: LINE_WATCH_READS.map((read) => ({
+      read,
+      label: PICK_TIMING_LABELS[read],
+      count: readCounts[read],
+      share: tracked ? readCounts[read] / tracked : null,
+    })),
+    thisWeek: {
+      week: thisWeekNumber,
+      label: thisWeekLabel,
+      tracked: thisWeekTracked,
+      byBucket: WEEK_BUCKETS.map((bucket) => ({
+        bucket,
+        label: WEEK_BUCKET_LABELS[bucket],
+        count: weekCounts[bucket],
+        share: thisWeekTracked ? weekCounts[bucket] / thisWeekTracked : null,
+      })),
+    },
   }
 }

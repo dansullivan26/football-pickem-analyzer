@@ -43,11 +43,6 @@ const TRACKED: Array<Exclude<EdgeCategory, 'pending'>> = [
 ]
 
 const STRENGTHS: PickStrength[] = ['strong', 'solid', 'mild']
-const SOURCES = [
-  'line-value',
-  'rest-travel',
-  'public-consensus',
-] as const
 
 const TIER_LABELS: Record<(typeof TRACKED)[number], string> = {
   lock: 'Locks',
@@ -63,10 +58,12 @@ const STRENGTH_LABELS: Record<PickStrength, string> = {
   mild: 'Mild',
 }
 
-const SOURCE_LABELS: Record<(typeof SOURCES)[number], string> = {
+const SOURCE_LABELS: Record<CardPickSource, string> = {
   'line-value': 'Line value',
   'rest-travel': 'Rest / travel',
   'public-consensus': 'Public',
+  'season-results': 'Season results',
+  'pool-aware': 'Pool-aware',
 }
 
 function formatSpread(value: number | null | undefined) {
@@ -378,12 +375,10 @@ export default function PerformanceView({
   const strengthStats = useMemo(
     () =>
       Object.fromEntries(
-        SOURCES.flatMap((source) =>
-          STRENGTHS.map((strength) => [
-            `${source}:${strength}`,
-            summarizeStrength(allGames, strength, source),
-          ]),
-        ),
+        STRENGTHS.map((strength) => [
+          strength,
+          summarizeStrength(allGames, strength, 'line-value'),
+        ]),
       ),
     [allGames],
   )
@@ -393,14 +388,6 @@ export default function PerformanceView({
   )
   const lineValueStats = useMemo(
     () => summarizeSource(allGames, 'line-value'),
-    [allGames],
-  )
-  const publicStats = useMemo(
-    () => summarizeSource(allGames, 'public-consensus'),
-    [allGames],
-  )
-  const restTravelStats = useMemo(
-    () => summarizeSource(allGames, 'rest-travel'),
     [allGames],
   )
   const deviationStats = useMemo(
@@ -420,7 +407,10 @@ export default function PerformanceView({
     [allGames],
   )
   const netEdgeStats = useMemo(
-    () => summarizeNetEdgeBuckets(allGames),
+    () =>
+      summarizeNetEdgeBuckets(allGames).filter(
+        (row) => row.id !== 'below-floor',
+      ),
     [allGames],
   )
   const graded = allGames.filter((game) => game.cover).length
@@ -433,17 +423,15 @@ export default function PerformanceView({
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
             The top tiles are overall ATS for the frozen Lines
-            recommendation, then card picks by their frozen source. Play of
-            the week locks at 8:00 AM ET the morning of the first kickoff;
-            play of the day locks that morning. Weeks from before those
-            stamps existed are reconstructed from the kickoff-frozen card.
-            Week 1 retains its public fills; the current
-            strategy uses line value with capped rest and travel adjustments.
-            Tiers, net-edge size, and strength sit under that. Deviations are
-            games where the completed card sent the other side. NFL recs
-            also split by TV window (TNF, Sunday 1:00, Sunday 4:00, SNF,
-            MNF). Games lock at kickoff so a Saturday move cannot rewrite
-            Friday&apos;s recommendation.
+            recommendation, then line-value card picks. Play of the week
+            locks at 8:00 AM ET the morning of the first kickoff; play of
+            the day locks that morning. Weeks from before those stamps
+            existed are reconstructed from the kickoff-frozen card. Tiers,
+            net-edge size, and line-value strength sit under that.
+            Deviations are games where the completed card sent the other
+            side. NFL recs also split by TV window (TNF, Sunday 1:00,
+            Sunday 4:00, SNF, MNF). Games lock at kickoff so a Saturday
+            move cannot rewrite Friday&apos;s recommendation.
           </p>
         </div>
         <div className="hero-aside">
@@ -494,22 +482,6 @@ export default function PerformanceView({
           <small>
             {lineValueStats.count} rec
             {lineValueStats.count === 1 ? '' : 's'} · {lineValueStats.detail}
-          </small>
-        </div>
-        <div className="summary-card lean">
-          <span>Rest / travel</span>
-          <strong>{restTravelStats.rate}</strong>
-          <small>
-            {restTravelStats.count} rec
-            {restTravelStats.count === 1 ? '' : 's'} · {restTravelStats.detail}
-          </small>
-        </div>
-        <div className="summary-card slight">
-          <span>Public</span>
-          <strong>{publicStats.rate}</strong>
-          <small>
-            {publicStats.count} rec
-            {publicStats.count === 1 ? '' : 's'} · {publicStats.detail}
           </small>
         </div>
       </section>
@@ -579,7 +551,8 @@ export default function PerformanceView({
         <p className="player-tier-explainer">
           Same composite the card sorts by — line, hook, injuries, rest, and
           travel. Older weeks reconstruct line value plus the hook when the
-          full net was not stored. Below 0.25 is the unpicked floor.
+          full net was not stored. Sides below 0.25 stay unpicked, so they
+          are not tracked here.
         </p>
         <div className="summary-grid performance-summary">
           {netEdgeStats.map((stats) => (
@@ -594,34 +567,27 @@ export default function PerformanceView({
         </div>
       </section>
 
-      <div
+      <section
         className="performance-strength-groups"
-        aria-label="Card strength hit rates by source"
+        aria-label="Line-value strength hit rates"
       >
-        {SOURCES.map((source) => (
-          <section key={source} aria-label={`${SOURCE_LABELS[source]} hit rates`}>
-            <p className="eyebrow">{SOURCE_LABELS[source]}</p>
-            <div className="summary-grid performance-strength">
-              {STRENGTHS.map((strength) => {
-                const stats = strengthStats[`${source}:${strength}`]
-                return (
-                  <div
-                    className={`summary-card ${strength}`}
-                    key={`${source}:${strength}`}
-                  >
-                    <span>{STRENGTH_LABELS[strength]}</span>
-                    <strong>{stats.rate}</strong>
-                    <small>
-                      {stats.count} rec{stats.count === 1 ? '' : 's'} ·{' '}
-                      {stats.detail}
-                    </small>
-                  </div>
-                )
-              })}
-            </div>
-          </section>
-        ))}
-      </div>
+        <p className="eyebrow">Line-value strength</p>
+        <div className="summary-grid performance-strength">
+          {STRENGTHS.map((strength) => {
+            const stats = strengthStats[strength]
+            return (
+              <div className={`summary-card ${strength}`} key={strength}>
+                <span>{STRENGTH_LABELS[strength]}</span>
+                <strong>{stats.rate}</strong>
+                <small>
+                  {stats.count} rec{stats.count === 1 ? '' : 's'} ·{' '}
+                  {stats.detail}
+                </small>
+              </div>
+            )
+          })}
+        </div>
+      </section>
 
       <section
         className="summary-grid performance-deviations"

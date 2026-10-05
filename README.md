@@ -160,7 +160,10 @@ field: clubs ranked by how often submitted cards took or faded them, after
 at least two distinct slate games. A favorite-heavy pool will mostly surface
 stronger teams on the take side and weaker teams on the fade side; each card
 also shows the take rate as a favorite and as a dog so that chalk story is
-visible. Display-only; it does not change expected pool or the habit model.
+visible. It also counts how the field times a card — early Thursday lock,
+Friday fill, Saturday-or-later, or game-day — using the same dump-window
+read as each player profile. Display-only; it does not change expected pool
+or the habit model.
 
 ```bash
 npm run snapshot-predictions
@@ -251,19 +254,21 @@ outcomes from CBS pick results fill `cover` (`home` / `away` / `push`) without
 rewriting the frozen rec. Hourly snapshots keep those covers. Open games also
 store the generated-card source and strength (line value, rest/travel, or
 legacy public; mild / solid / strong); those values freeze at kickoff
-with the rest of the pick. Performance tracks hit rates for each source ×
-strength bucket separately. The top tiles are the combined ATS record of every
-frozen Lines recommendation (the side we liked), then each card-pick source.
-NFL recs also split by TV window: TNF, Sunday 1:00, Sunday 4:00 (4:05/4:25),
-SNF, and MNF. Players shows the same windows for each entry and for the
-pool. London mornings and odd midweek games are left out.
+with the rest of the pick. Performance tracks overall ATS for every frozen
+Lines recommendation (the side we liked), then line-value card picks and
+their strength buckets. Rest/travel and public-source tiles are gone — those
+are no longer how the card is built, though a leftover Week 1 public fill
+can still appear on a frozen row. Net-edge bands start at the 0.25 pick
+floor; thinner sides stay unpicked. NFL recs also split by TV window: TNF,
+Sunday 1:00, Sunday 4:00 (4:05/4:25), SNF, and MNF. Players shows the same
+windows for each entry and for the pool. London mornings and odd midweek
+games are left out.
 Play of the week and play of the day lock at 8:00 AM ET — the morning of the
 week's first kickoff, and the morning of each card day. Copy card prints the
 week play with that as-of time; Copy day prints that day's play. Performance
 tracks those named sides. Weeks from before the stamps existed are
 reconstructed from the kickoff-frozen card (`backfilled: true`); later weeks
-lock live. Historical public fills remain attributed to the strategy that
-produced them. Strength buckets still sit under those.
+lock live.
 
 ## Last kickoff (rest)
 

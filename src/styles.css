@@ -2369,7 +2369,7 @@ a.team-page-link:focus-visible .team-name {
 }
 
 .performance-overall {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: 16px;
 }
 
@@ -2405,6 +2405,18 @@ a.team-page-link:focus-visible .team-name {
 
 .tendency-grid.nfl-windows {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.tendency-grid.pick-timing {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tendency-grid.pick-timing-week {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pool-timing-week-label {
+  margin: 4px 0 10px;
 }
 
 .performance-named-plays .summary-card {
@@ -4647,6 +4659,8 @@ footer {
 
   .tendency-grid,
   .tendency-grid.nfl-windows,
+  .tendency-grid.pick-timing,
+  .tendency-grid.pick-timing-week,
   .residual-grid {
     grid-template-columns: repeat(2, 1fr);
   }

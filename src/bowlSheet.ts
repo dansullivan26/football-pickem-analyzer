@@ -2,7 +2,7 @@ import {
   pickCodeForSide,
   type BowlConfidenceRow,
 } from './bowlConfidence.ts'
-import type { BowlGame } from './bowlPickem.ts'
+import { emptyBowlSide, formatBowlSpread, type BowlGame } from './bowlPickem.ts'
 
 export type BowlSheetPick = 'A' | 'H'
 
@@ -37,6 +37,7 @@ export type BowlSheetLine = {
   home: string
   pick: BowlSheetPick | null
   points: number | null
+  spreadLabel: string
   duplicate: boolean
   tba: boolean
 }
@@ -109,6 +110,7 @@ export function linesFromAdminSheet(sheet: BowlSheetFile): BowlSheetLine[] {
         home: game.home,
         pick: game.submittedPick,
         points: game.submittedPoints,
+        spreadLabel: '—',
         duplicate: false,
         tba: isTbaMatchup(game.away, game.home),
       })),
@@ -144,6 +146,7 @@ export function linesFromRankedGames(
         home: game.home.name,
         pick: row ? pickCodeForSide(row.pickSide) : null,
         points: row?.confidence ?? null,
+        spreadLabel: row?.priced ? formatBowlSpread(row.game.homeSpread) : '—',
         duplicate: false,
         tba: isTbaMatchup(game.away.name, game.home.name),
       }
@@ -177,4 +180,19 @@ export function duplicatePointValues(values: Array<number | null | undefined>) {
       .filter(([, count]) => count > 1)
       .map(([value]) => value),
   )
+}
+
+export function bowlGamesFromAdminSheet(sheet: BowlSheetFile): BowlGame[] {
+  return sheet.games.map((game) => ({
+    id: `sheet-${sheet.seasonYear}-${game.sheetRow}`,
+    providerEventId: null,
+    bowlName: game.bowlName,
+    location: game.location,
+    timeLabel: game.timeLabel,
+    kickoff: game.date ? `${game.date}T18:00:00.000Z` : null,
+    away: emptyBowlSide(game.away),
+    home: emptyBowlSide(game.home),
+    homeSpread: null,
+    spreadUpdatedAt: null,
+  }))
 }

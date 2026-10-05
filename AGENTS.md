@@ -105,6 +105,10 @@ cleanup.
   is A/H plus unique 1–N points in schedule order (`src/data/bowl-sheet-2025.json`
   is last year's 41-game workbook). Live matchups and DraftKings numbers
   live in `src/data/bowl-pickem.json`; the hourly odds job harvests NCAAF
-  rows in the Dec 16–Jan 21 window. Head-coach snapshots live in
-  `src/data/coaching-snapshot.json` (`npm run snapshot-bowl-context`).
-  Opt-outs are recorded in the bowl file, not inferred from the spread.
+  rows in the Dec 16–Jan 21 window. CFP “winner of” / TBA slots are a
+  what-if: pick the team you think lands there and the card re-ranks from
+  pair lines. The 2025 demo uses sandbox CFP lines in
+  `src/data/bowl-cfp-sandbox-2025.json`, not closing numbers. Head-coach
+  snapshots live in `src/data/coaching-snapshot.json`
+  (`npm run snapshot-bowl-context`). Opt-outs are recorded in the bowl
+  file, not inferred from the spread.

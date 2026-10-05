@@ -362,20 +362,25 @@ LOCATION, TIME, AWAY vs HOME, A or H, and Point Value (each number once;
 duplicates show in red). Later CFP games can still be TBA and still take a
 point slot.
 
-`/bowl-pickem` shows that sheet. Until 2026 matchups are priced it renders
-last year's filled card from `src/data/bowl-sheet-2025.json`. When games
-exist in `src/data/bowl-pickem.json`, suggested A/H is the DraftKings
-favorite and points rank by absolute spread. Copy sheet dumps TSV in the
-workbook's column order. The hourly **Refresh sportsbook lines** job
-already fetches every NCAAF DraftKings spread; after the weekly slate
-match, leftover rows whose kickoff falls between 16 December and 21 January
-are harvested into that file. Empty pulls leave the awaiting-matchups page
-in place. When CollegeFootballData posts postseason games, **Refresh last
-kickoff** (`npm run snapshot-bowl-context`) copies bowl names from `notes`
-and diffs head coaches against `src/data/coaching-snapshot.json` so
-December staff turnover has a baseline taken before the carousel. Player
-opt-outs are listed by hand in the same bowl file — they show up in the
-spread automatically, but the names are not inferred.
+`/bowl-pickem` has a 2026 tab and a 2025 demo tab. The 2025 tab loads
+last year's 41-game workbook from `src/data/bowl-sheet-2025.json` and can
+toggle as-submitted vs a CFP what-if: pick Miami or Texas AM (and the
+other first-round forks) and the 1…N column re-ranks live. Pair lines for
+that demo live in `src/data/bowl-cfp-sandbox-2025.json` and are labeled
+sandbox — not closing numbers. We did not backfill opt-outs, staff moves,
+or 41 bowl closers. When 2026 games exist in `src/data/bowl-pickem.json`,
+suggested A/H is the DraftKings favorite and the same what-if uses live
+harvested pairings. Copy sheet dumps TSV in the workbook's column order.
+The hourly **Refresh sportsbook lines** job already fetches every NCAAF
+DraftKings spread; after the weekly slate match, leftover rows whose
+kickoff falls between 16 December and 21 January are harvested into that
+file. Empty pulls leave the awaiting-matchups page in place. When
+CollegeFootballData posts postseason games, **Refresh last kickoff**
+(`npm run snapshot-bowl-context`) copies bowl names from `notes` and diffs
+head coaches against `src/data/coaching-snapshot.json` so December staff
+turnover has a baseline taken before the carousel. Player opt-outs are
+listed by hand in the same bowl file — they show up in the spread
+automatically, but the names are not inferred.
 
 The browser's **Refresh data** button starts **Refresh review data**, which
 runs **Ingest GrokBot dump** (`kind=consensus`, the latest Covers file already

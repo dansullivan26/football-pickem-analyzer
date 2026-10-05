@@ -12,7 +12,8 @@ npm run dev
 
 Lines is `/`, Players is `/players`, Teams is `/teams`, a team profile is
 `/teams/alabama` (or `/teams/north-carolina`, and so on), League History is
-`/history`, Performance is `/performance`, and Bad beats is `/bad-beats`.
+`/history`, Performance is `/performance`, Bowl Pick'em is `/bowl-pickem`,
+and Bad beats is `/bad-beats`.
 GitHub Pages serves the same SPA for those paths via `404.html`.
 Teams grades each side against the locked CBS line (home/away, favorite/dog)
 from the same covers Performance uses.
@@ -350,6 +351,25 @@ changes versus the last pull, that change is stored in
 coincidence; it does not claim the injury caused the move. Comment-only ESPN
 updates that stay in the same tier are ignored. A new slate week starts a
 new file.
+
+## Bowl Pick'em
+
+CBS's bowl challenge is a separate competition: straight-up winners with a
+unique confidence value on every game (1 = least sure, N = most sure, where
+N is the number of bowls). It is not ATS and it does not use the weekly
+slate.
+
+`/bowl-pickem` ranks DraftKings favorites by absolute spread once games
+exist in `src/data/bowl-pickem.json`. The hourly **Refresh sportsbook lines**
+job already fetches every NCAAF DraftKings spread; after the weekly slate
+match, leftover rows whose kickoff falls between 16 December and 21 January
+are harvested into that file. Empty pulls leave the awaiting-matchups page
+in place. When CollegeFootballData posts postseason games, **Refresh last
+kickoff** (`npm run snapshot-bowl-context`) copies bowl names from `notes`
+and diffs head coaches against `src/data/coaching-snapshot.json` so
+December staff turnover has a baseline taken before the carousel. Player
+opt-outs are listed by hand in the same bowl file — they show up in the
+spread automatically, but the names are not inferred.
 
 The browser's **Refresh data** button starts **Refresh review data**, which
 runs **Ingest GrokBot dump** (`kind=consensus`, the latest Covers file already

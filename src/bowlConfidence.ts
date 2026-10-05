@@ -10,6 +10,7 @@ export type BowlConfidenceRow = {
   game: BowlGame
   confidence: number
   pickSide: BowlStraightUpSide
+  pickCode: 'A' | 'H' | null
   pickName: string | null
   spreadMagnitude: number | null
   priced: boolean
@@ -23,6 +24,12 @@ function kickoffMs(value: string | null | undefined) {
 
 function spreadMagnitude(game: BowlGame) {
   return typeof game.homeSpread === 'number' ? Math.abs(game.homeSpread) : null
+}
+
+export function pickCodeForSide(side: BowlStraightUpSide): 'A' | 'H' | null {
+  if (side === 'away') return 'A'
+  if (side === 'home') return 'H'
+  return null
 }
 
 export function straightUpPick(game: BowlGame): {
@@ -68,6 +75,7 @@ export function rankBowlConfidence(games: BowlGame[]): BowlConfidenceRow[] {
       game,
       confidence: n - index,
       pickSide: pick.pickSide,
+      pickCode: pickCodeForSide(pick.pickSide),
       pickName: pick.pickName,
       spreadMagnitude: spreadMagnitude(game),
       priced,

@@ -13,6 +13,8 @@ export type BowlGame = {
   id: string
   providerEventId: string | null
   bowlName: string | null
+  location?: string | null
+  timeLabel?: string | null
   kickoff: string | null
   away: BowlSide
   home: BowlSide

@@ -101,8 +101,10 @@ cleanup.
 - ESPN first-team depth changes for the current pool week live in
   `src/data/nfl-depth-history.json`. The injury refresh uses earlier snapshots
   to retain ruled-out starters after ESPN moves replacements above them.
-- Bowl Pick'em is a separate straight-up confidence pool. Matchups and
-  DraftKings numbers live in `src/data/bowl-pickem.json`; the hourly odds
-  job harvests NCAAF rows in the Dec 16–Jan 21 window. Head-coach snapshots
-  live in `src/data/coaching-snapshot.json` (`npm run snapshot-bowl-context`).
+- Bowl Pick'em is a separate straight-up confidence pool. The admin sheet
+  is A/H plus unique 1–N points in schedule order (`src/data/bowl-sheet-2025.json`
+  is last year's 41-game workbook). Live matchups and DraftKings numbers
+  live in `src/data/bowl-pickem.json`; the hourly odds job harvests NCAAF
+  rows in the Dec 16–Jan 21 window. Head-coach snapshots live in
+  `src/data/coaching-snapshot.json` (`npm run snapshot-bowl-context`).
   Opt-outs are recorded in the bowl file, not inferred from the spread.

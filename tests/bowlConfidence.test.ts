@@ -46,11 +46,11 @@ test('ranks by absolute spread, biggest favorite first', () => {
   ])
 
   assert.deepEqual(
-    rows.map((row) => [row.game.id, row.confidence, row.pickName]),
+    rows.map((row) => [row.game.id, row.confidence, row.pickName, row.pickCode]),
     [
-      ['lock', 3, 'Lock U'],
-      ['lean', 2, 'Visitor'],
-      ['coin', 1, null],
+      ['lock', 3, 'Lock U', 'H'],
+      ['lean', 2, 'Visitor', 'A'],
+      ['coin', 1, null, null],
     ],
   )
   assert.equal(bowlConfidencePoints(3), 6)

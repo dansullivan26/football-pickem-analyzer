@@ -1,39 +1,30 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
-  EXAMPLE_BOWL_GAMES,
   bowlConfidencePoints,
-  favoriteLineLabel,
   rankBowlConfidence,
-  type BowlConfidenceRow,
 } from './bowlConfidence'
+import lastYearSheetData from './data/bowl-sheet-2025.json'
 import {
   BOWL_OPT_OUT_LABELS,
   BOWL_STAFF_CHANGE_LABELS,
   BOWL_STAFF_ROLE_LABELS,
   attachRosterToBowlGames,
-  bowlMatchupLabel,
   bowlStatusLabel,
-  formatBowlSpread,
   type BowlOptOut,
   type BowlPickemFile,
   type BowlStaffChange,
 } from './bowlPickem'
-import TeamLogo from './TeamLogo'
+import {
+  bowlSheetMatchup,
+  formatBowlSheetTsv,
+  linesFromAdminSheet,
+  linesFromRankedGames,
+  type BowlSheetFile,
+  type BowlSheetLine,
+} from './bowlSheet'
 import type { TeamRosterFile } from './teamRoster'
 
-function formatKickoff(iso: string | null) {
-  if (!iso) return 'Kickoff TBA'
-  const stamp = Date.parse(iso)
-  if (!Number.isFinite(stamp)) return 'Kickoff TBA'
-  return new Intl.DateTimeFormat('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  }).format(new Date(stamp))
-}
+const lastYearSheet = lastYearSheetData as BowlSheetFile
 
 function formatWhen(iso: string | null | undefined) {
   if (!iso) return null
@@ -45,47 +36,40 @@ function formatWhen(iso: string | null | undefined) {
   }).format(new Date(stamp))
 }
 
-function ConfidenceRow({
-  row,
-  maxConfidence,
-}: {
-  row: BowlConfidenceRow
-  maxConfidence: number
-}) {
-  const homeId = row.game.home.teamId
-  const awayId = row.game.away.teamId
+function SheetTable({ lines }: { lines: BowlSheetLine[] }) {
   return (
-    <div className="history-pick bowl-confidence-row">
-      <div
-        className={
-          row.confidence === maxConfidence
-            ? 'bowl-confidence-rank top'
-            : 'bowl-confidence-rank'
-        }
-      >
-        <span>{row.confidence}</span>
-      </div>
-      <div className="history-matchup">
-        <span>
-          {row.game.bowlName ?? 'Bowl game'}
-          {' · '}
-          {formatKickoff(row.game.kickoff)}
-        </span>
-        <strong className="bowl-matchup-teams">
-          {awayId ? <TeamLogo team={{ id: awayId }} /> : null}
-          {bowlMatchupLabel(row.game)}
-          {homeId ? <TeamLogo team={{ id: homeId }} /> : null}
-        </strong>
-        <small>
-          {row.priced
-            ? `DraftKings ${row.game.home.name} ${formatBowlSpread(row.game.homeSpread)}`
-            : 'Waiting on a DraftKings spread'}
-        </small>
-      </div>
-      <div className="history-selection">
-        <span>Straight-up pick</span>
-        <strong>{favoriteLineLabel(row)}</strong>
-      </div>
+    <div className="bowl-sheet-wrap">
+      <table className="bowl-sheet">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Bowl</th>
+            <th className="sheet-extra">Location / time</th>
+            <th>Away vs Home</th>
+            <th>A or H</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lines.map((line) => (
+            <tr key={line.key} className={line.tba ? 'tba' : undefined}>
+              <td>{line.dateLabel || 'TBA'}</td>
+              <td>
+                <strong>{line.bowlName}</strong>
+              </td>
+              <td className="sheet-extra">
+                {line.location ?? '—'}
+                {line.timeLabel ? ` · ${line.timeLabel}` : ''}
+              </td>
+              <td>{bowlSheetMatchup(line.away, line.home)}</td>
+              <td className="pick-code">{line.pick ?? '—'}</td>
+              <td className={line.duplicate ? 'points dup' : 'points'}>
+                {line.points ?? '—'}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -142,18 +126,24 @@ export default function BowlPickemView({
   seasonYear: number
   teamRoster: TeamRosterFile
 }) {
+  const [order, setOrder] = useState<'sheet' | 'confidence'>('sheet')
+  const [copied, setCopied] = useState(false)
   const ranked = useMemo(
     () => rankBowlConfidence(attachRosterToBowlGames(file.games, teamRoster)),
     [file.games, teamRoster],
   )
-  const example = useMemo(
-    () => rankBowlConfidence(EXAMPLE_BOWL_GAMES),
+  const awaiting = file.games.length === 0
+  const lastYearLines = useMemo(
+    () => linesFromAdminSheet(lastYearSheet),
     [],
   )
-  const awaiting = file.games.length === 0
-  const rows = awaiting ? example : ranked
-  const maxConfidence = rows[0]?.confidence ?? 0
+  const liveLines = useMemo(
+    () => linesFromRankedGames(file.games, ranked, order),
+    [file.games, ranked, order],
+  )
+  const lines = awaiting ? lastYearLines : liveLines
   const points = bowlConfidencePoints(ranked.length)
+  const dupCount = lines.filter((line) => line.duplicate).length
 
   useEffect(() => {
     const previous = document.title
@@ -163,20 +153,32 @@ export default function BowlPickemView({
     }
   }, [])
 
+  async function copySheet() {
+    try {
+      await navigator.clipboard.writeText(formatBowlSheetTsv(lines))
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setCopied(false)
+    }
+  }
+
   return (
     <main>
       <section className="hero players-hero">
         <div>
-          <p className="eyebrow">Straight-up · confidence points</p>
+          <p className="eyebrow">Straight-up · A or H · unique 1–N</p>
           <h1>Bowl Pick&apos;em</h1>
           <p className="hero-copy">
-            Separate from the weekly ATS pool. When CBS opens the bowl
-            challenge you pick winners, not covers, and assign every game a
-            unique confidence value — 1 is the toss-up, and the number of
-            bowls is the lock. This page ranks DraftKings favorites by
-            spread size so the card is ready as soon as matchups hit the
-            board. Opt-outs and coaching moves sit next to the ranking;
-            they are already in the number, but it helps to see the names.
+            The admin sheet is not ATS. Each row is a bowl in schedule
+            order: pick A (away, left) or H (home, right), then assign a
+            unique point value from 1 (least sure) through however many
+            bowls there are. Last year that was 1–41. A number used twice
+            is invalid. Later CFP games can still be TBA; they keep a
+            confidence slot, and leftover low numbers usually land there.
+            When DraftKings prices the slate, this page fills A/H from the
+            favorite and points from spread size so the sheet is ready to
+            paste.
           </p>
         </div>
         <div className="week-chip">
@@ -184,7 +186,7 @@ export default function BowlPickemView({
           <strong>{bowlStatusLabel(file.status)}</strong>
           <small>
             {awaiting
-              ? 'No matchups posted yet'
+              ? `Last year: ${lastYearSheet.pointMax} games`
               : `${ranked.length} games · ${points} points on the card`}
           </small>
         </div>
@@ -193,41 +195,62 @@ export default function BowlPickemView({
       <section className="week-card">
         <div className="week-card-heading">
           <div>
-            <span>{awaiting ? 'Preview ranking' : 'Suggested confidence card'}</span>
+            <span>{awaiting ? '2025-26 admin sheet' : 'Sheet to submit'}</span>
             <strong>
               {awaiting
-                ? 'Biggest favorite gets the high number'
-                : `${maxConfidence} down to 1`}
+                ? `${lastYearSheet.pointMax} rows · A/H and unique points`
+                : order === 'sheet'
+                  ? 'Schedule order, like the workbook'
+                  : `${ranked.length} down to 1`}
             </strong>
+          </div>
+          <div className="bowl-sheet-actions">
+            {!awaiting ? (
+              <label className="bowl-sheet-order">
+                Order
+                <select
+                  value={order}
+                  onChange={(event) =>
+                    setOrder(event.target.value as 'sheet' | 'confidence')
+                  }
+                >
+                  <option value="sheet">Sheet</option>
+                  <option value="confidence">By points</option>
+                </select>
+              </label>
+            ) : null}
+            <button
+              type="button"
+              className="refresh-button in-page"
+              onClick={() => void copySheet()}
+            >
+              {copied ? 'Copied' : 'Copy sheet'}
+            </button>
           </div>
         </div>
         {awaiting ? (
           <p className="bowl-section-note">
-            Bowl pairings are still months out. The hourly DraftKings
-            refresh already watches NCAAF rows whose kickoff falls in the
-            Dec 16–Jan 21 window, so this list fills itself once those
-            games are priced. The rows below are a fake four-game card so
-            the sort is visible now: 14.5, 7, 3, then a pick&apos;em.
+            This is last year&apos;s filled workbook — 41 bowls, A or H,
+            each point used once. Fiesta, Peach, and the title game were
+            still TBA and took 2, 3, and 1. 2026 pairings are not on the
+            board yet; the hourly DraftKings refresh will write them here
+            once December/January NCAAF games are priced.
           </p>
         ) : (
           <p className="bowl-section-note">
-            Ranked by absolute DraftKings home spread. Straight-up pick is
-            the favorite. Unpriced games fall to the bottom and keep a
-            confidence slot so the 1…N assignment stays complete.
+            Suggested A/H is the DraftKings favorite on the sheet&apos;s
+            home/away. Point values are unique, largest spread at the top
+            of the 1…N range. Unpriced or TBA rows keep a slot at the
+            bottom.
             {file.oddsUpdatedAt
               ? ` Last DK pull ${formatWhen(file.oddsUpdatedAt)}.`
               : ''}
+            {dupCount
+              ? ` ${dupCount} row${dupCount === 1 ? '' : 's'} share a point value — the admin sheet flags that in red.`
+              : ''}
           </p>
         )}
-        <div className="pick-history-list">
-          {rows.map((row) => (
-            <ConfidenceRow
-              key={row.game.id}
-              row={row}
-              maxConfidence={maxConfidence}
-            />
-          ))}
-        </div>
+        <SheetTable lines={lines} />
       </section>
 
       <section className="week-card">

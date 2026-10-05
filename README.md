@@ -356,12 +356,18 @@ new file.
 
 CBS's bowl challenge is a separate competition: straight-up winners with a
 unique confidence value on every game (1 = least sure, N = most sure, where
-N is the number of bowls). It is not ATS and it does not use the weekly
-slate.
+N is the number of bowls). Last year the admin workbook had 41 rows. It is
+not ATS and it does not use the weekly slate. Each row is DATE, BOWL,
+LOCATION, TIME, AWAY vs HOME, A or H, and Point Value (each number once;
+duplicates show in red). Later CFP games can still be TBA and still take a
+point slot.
 
-`/bowl-pickem` ranks DraftKings favorites by absolute spread once games
-exist in `src/data/bowl-pickem.json`. The hourly **Refresh sportsbook lines**
-job already fetches every NCAAF DraftKings spread; after the weekly slate
+`/bowl-pickem` shows that sheet. Until 2026 matchups are priced it renders
+last year's filled card from `src/data/bowl-sheet-2025.json`. When games
+exist in `src/data/bowl-pickem.json`, suggested A/H is the DraftKings
+favorite and points rank by absolute spread. Copy sheet dumps TSV in the
+workbook's column order. The hourly **Refresh sportsbook lines** job
+already fetches every NCAAF DraftKings spread; after the weekly slate
 match, leftover rows whose kickoff falls between 16 December and 21 January
 are harvested into that file. Empty pulls leave the awaiting-matchups page
 in place. When CollegeFootballData posts postseason games, **Refresh last

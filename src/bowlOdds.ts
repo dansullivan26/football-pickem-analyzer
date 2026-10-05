@@ -211,6 +211,8 @@ function mergeGame(previous: BowlGame | undefined, incoming: BowlGame, runAt: st
     id: previous.id || incoming.id,
     providerEventId: incoming.providerEventId ?? previous.providerEventId,
     bowlName: previous.bowlName ?? incoming.bowlName,
+    location: incoming.location ?? previous.location ?? null,
+    timeLabel: incoming.timeLabel ?? previous.timeLabel ?? null,
     kickoff: incoming.kickoff ?? previous.kickoff,
     away: keepSide(previous.away, incoming.away.name),
     home: keepSide(previous.home, incoming.home.name),

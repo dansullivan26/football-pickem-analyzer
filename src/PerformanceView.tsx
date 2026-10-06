@@ -58,14 +58,6 @@ const STRENGTH_LABELS: Record<PickStrength, string> = {
   mild: 'Mild',
 }
 
-const SOURCE_LABELS: Record<CardPickSource, string> = {
-  'line-value': 'Line value',
-  'rest-travel': 'Rest / travel',
-  'public-consensus': 'Public',
-  'season-results': 'Season results',
-  'pool-aware': 'Pool-aware',
-}
-
 function formatSpread(value: number | null | undefined) {
   if (value == null) return '—'
   if (value === 0) return 'PK'
@@ -425,9 +417,10 @@ export default function PerformanceView({
             The top tiles are overall ATS for the frozen Lines
             recommendation, then line-value card picks. Play of the week
             locks at 8:00 AM ET the morning of the first kickoff; play of
-            the day locks that morning. Weeks from before those stamps
-            existed are reconstructed from the kickoff-frozen card. Tiers,
-            net-edge size, and line-value strength sit under that.
+            the day locks that morning when the day has at least two games.
+            Weeks from before those stamps existed are reconstructed from
+            the kickoff-frozen card. Tiers, net-edge size, and line-value
+            strength sit under that.
             Deviations are games where the completed card sent the other
             side. NFL recs also split by TV window (TNF, Sunday 1:00,
             Sunday 4:00, SNF, MNF). Games lock at kickoff so a Saturday
@@ -698,9 +691,6 @@ export default function PerformanceView({
           <div className="pick-history-list frozen-card-list">
             <div className="history-pick frozen-head" aria-hidden="true">
               <span>Game</span>
-              <span>Tier</span>
-              <span>Source</span>
-              <span>Strength</span>
               <span>Pick</span>
               <span>Result</span>
               <span />
@@ -720,29 +710,6 @@ export default function PerformanceView({
                       ? ` · Book ${formatSpread(game.liveHomeSpread)}`
                       : ''}
                   </small>
-                </div>
-                <div className="frozen-cell frozen-tier">
-                  <span className={`recommendation ${game.category}`}>
-                    {game.category}
-                  </span>
-                </div>
-                <div className="frozen-cell frozen-source">
-                  {game.source ? (
-                    <span className={`pick-source ${game.source}`}>
-                      {SOURCE_LABELS[game.source]}
-                    </span>
-                  ) : (
-                    <span className="frozen-empty">—</span>
-                  )}
-                </div>
-                <div className="frozen-cell frozen-strength">
-                  {game.strength ? (
-                    <span className={`pick-strength ${game.strength}`}>
-                      {game.strength}
-                    </span>
-                  ) : (
-                    <span className="frozen-empty">—</span>
-                  )}
                 </div>
                 <div className="frozen-cell frozen-pick">
                   <strong>{sentLabel(game) ?? recLabel(game)}</strong>

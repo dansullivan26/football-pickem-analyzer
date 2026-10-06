@@ -716,6 +716,7 @@ function DayPlayCaption({
     group.rows.flatMap((row) => (row.kind === 'pick' ? [row.pick] : [])),
     group.dateKey,
     namedPlays,
+    group.rows.length,
   )
   if (!dayPlay) return null
   const asOf = formatNamedPlayAsOf(dayPlay.frozenAt)
@@ -742,6 +743,7 @@ function namedKindForRow(
     group.rows.flatMap((row) => (row.kind === 'pick' ? [row.pick] : [])),
     group.dateKey,
     namedPlays,
+    group.rows.length,
   )
   if (dayPlay && pick.gameId === dayPlay.pick.gameId) return 'day'
   return null

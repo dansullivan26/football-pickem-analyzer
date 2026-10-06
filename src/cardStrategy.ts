@@ -620,6 +620,7 @@ export function formatSuggestedCardText(
         dayPicksFromRows(group.rows),
         group.dateKey,
         namedPlays,
+        group.rows.length,
       )
       const lines = formatCopiedCardLines(
         group.rows,
@@ -716,6 +717,7 @@ export function formatSuggestedDayCardText(
     dayPicksFromRows(group.rows),
     group.dateKey,
     namedPlays,
+    group.rows.length,
   )
   const body = groupCardRowsByKickoff(group.rows)
     .map((window) => {

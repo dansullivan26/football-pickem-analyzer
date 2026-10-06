@@ -18,7 +18,6 @@ import {
   namedPlayKindForGame,
   namedPlayFreezeAt,
   resolveWeekNamedPlay,
-  topFrozenNamedPlay,
   weekPlayReady,
 } from '../src/namedPlays.ts'
 import type { FrozenRecommendation, RecommendationWeek } from '../src/types.ts'
@@ -205,11 +204,20 @@ test('copy day names that day even when play of the week is elsewhere', () => {
     weekLabel: 'Week 3',
     picks: [
       pick({
-        gameId: 'sat',
+        gameId: 'sat-unc',
         cbsEventId: 11,
         kickoff: saturdayNoon,
         awayAbbrev: 'UNC',
         poolSpread: 3.5,
+        compositeEdge: 1.4,
+      }),
+      pick({
+        gameId: 'sat-ind',
+        cbsEventId: 12,
+        kickoff: saturdayNoon,
+        awayAbbrev: 'IND',
+        poolSpread: -3,
+        compositeEdge: 0.6,
       }),
       pick({
         gameId: 'sun',
@@ -236,7 +244,7 @@ test('copy day names that day even when play of the week is elsewhere', () => {
       },
       now: sundayMorning,
     }),
-    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)',
+    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)\nIND -3 (light)',
   )
 })
 
@@ -276,9 +284,7 @@ test('freezeNamedPlays locks once and waits until morning', () => {
     cbsEventId: 22,
     frozenAt: '2026-09-19T12:05:00.000Z',
   })
-  assert.deepEqual(satAm.playsOfTheDay, [
-    { cbsEventId: 11, frozenAt: '2026-09-19T12:05:00.000Z' },
-  ])
+  assert.deepEqual(satAm.playsOfTheDay, [])
 
   const later = freezeNamedPlays(
     [
@@ -306,8 +312,9 @@ test('freezeNamedPlays locks once and waits until morning', () => {
     sundayMorning,
   )
   assert.deepEqual(later.playOfTheWeek, satAm.playOfTheWeek)
-  assert.equal(later.playsOfTheDay[0]?.cbsEventId, 11)
-  assert.equal(later.playsOfTheDay[1]?.cbsEventId, 33)
+  assert.deepEqual(later.playsOfTheDay, [
+    { cbsEventId: 33, frozenAt: '2026-09-20T16:00:00.000Z' },
+  ])
 })
 
 test('named play performance helpers read the stamps', () => {
@@ -321,6 +328,7 @@ test('named play performance helpers read the stamps', () => {
     playsOfTheDay: [
       { cbsEventId: 11, frozenAt: '2026-09-19T12:00:00.000Z' },
       { cbsEventId: 22, frozenAt: '2026-09-20T12:00:00.000Z' },
+      { cbsEventId: 4, frozenAt: '2026-09-17T12:00:00.000Z' },
     ],
     games: [
       frozen({
@@ -330,19 +338,32 @@ test('named play performance helpers read the stamps', () => {
         cover: 'away',
       }),
       frozen({
+        cbsEventId: 12,
+        kickoff: saturdayNoon,
+        pickedSide: 'home',
+        cover: 'home',
+      }),
+      frozen({
         cbsEventId: 22,
         kickoff: sundayOne,
         pickedSide: 'away',
         cover: 'home',
       }),
+      frozen({
+        cbsEventId: 4,
+        kickoff: '2026-09-17T20:15:00-04:00',
+        pickedSide: 'away',
+        cover: 'away',
+      }),
     ],
   }
 
   assert.equal(namedPlayKindForGame(week, 11), 'week')
-  assert.equal(namedPlayKindForGame(week, 22), 'day')
+  assert.equal(namedPlayKindForGame(week, 22), null)
+  assert.equal(namedPlayKindForGame(week, 4), null)
   assert.equal(namedPlayGames([week], 'week').length, 1)
-  assert.equal(namedPlayGames([week], 'day').length, 2)
-  assert.equal(topFrozenNamedPlay(week.games)?.cbsEventId, 11)
+  assert.equal(namedPlayGames([week], 'day').length, 1)
+  assert.equal(namedPlayGames([week], 'day')[0]?.cbsEventId, 11)
 })
 
 test('backfillNamedPlays reconstructs missing stamps from the frozen card', () => {
@@ -376,18 +397,7 @@ test('backfillNamedPlays reconstructs missing stamps from the frozen card', () =
     frozenAt: saturdayFreeze.toISOString(),
     backfilled: true,
   })
-  assert.deepEqual(filled.playsOfTheDay, [
-    {
-      cbsEventId: 11,
-      frozenAt: saturdayFreeze.toISOString(),
-      backfilled: true,
-    },
-    {
-      cbsEventId: 22,
-      frozenAt: sundayFreeze.toISOString(),
-      backfilled: true,
-    },
-  ])
+  assert.deepEqual(filled.playsOfTheDay, [])
 
   const live: RecommendationWeek = {
     ...week,
@@ -402,7 +412,46 @@ test('backfillNamedPlays reconstructs missing stamps from the frozen card', () =
   const kept = backfillNamedPlays(live, sundayMorning)
   assert.equal(kept.playOfTheWeek?.cbsEventId, 11)
   assert.equal(kept.playOfTheWeek?.backfilled, undefined)
-  assert.equal(kept.playsOfTheDay?.[0]?.cbsEventId, 11)
-  assert.equal(kept.playsOfTheDay?.[1]?.cbsEventId, 22)
-  assert.equal(kept.playsOfTheDay?.[1]?.backfilled, true)
+  assert.deepEqual(kept.playsOfTheDay, [])
+})
+
+test('play of the day needs a second game that day', () => {
+  const thursday = '2026-09-17T20:15:00-04:00'
+  const thursdayMorning = Date.parse('2026-09-17T08:00:00-04:00')
+  const locked = freezeNamedPlays(
+    [
+      frozen({
+        cbsEventId: 4,
+        kickoff: thursday,
+        category: 'lock',
+        compositeEdge: 5,
+      }),
+    ],
+    null,
+    '2026-09-17T12:00:00.000Z',
+    thursdayMorning,
+  )
+  assert.equal(locked.playOfTheWeek?.cbsEventId, 4)
+  assert.deepEqual(locked.playsOfTheDay, [])
+
+  const saturday = freezeNamedPlays(
+    [
+      frozen({
+        cbsEventId: 11,
+        kickoff: saturdayNoon,
+        compositeEdge: 1.2,
+      }),
+      frozen({
+        cbsEventId: 12,
+        kickoff: saturdayNoon,
+        compositeEdge: 0.4,
+      }),
+    ],
+    null,
+    '2026-09-19T12:05:00.000Z',
+    saturdayMorning,
+  )
+  assert.deepEqual(saturday.playsOfTheDay, [
+    { cbsEventId: 11, frozenAt: '2026-09-19T12:05:00.000Z' },
+  ])
 })

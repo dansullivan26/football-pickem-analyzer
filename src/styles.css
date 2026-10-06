@@ -4478,12 +4478,10 @@ a.team-page-link:focus-visible .team-name {
   opacity: 0.8;
 }
 
-/* The frozen card is a comparison table: one column per attribute so a tier or
-   strength can be scanned down the list instead of unpacked row by row. */
+/* Frozen card: matchup, the sent/rec side, result, bad-beat menu. */
 .frozen-card-list .history-pick {
   grid-template-columns:
-    minmax(140px, 1.5fr) 76px 92px 76px
-    minmax(112px, 1fr) 124px 32px;
+    minmax(160px, 1.6fr) minmax(140px, 1.2fr) 124px 32px;
   gap: 14px;
 }
 
@@ -4727,20 +4725,19 @@ footer {
     grid-row: 1 / span 2;
   }
 
-  /* Six columns cannot fit a phone, so the frozen card returns to a stack with
-     the attributes on one wrapping line. */
+  /* Phone: matchup and pick stack; result and menu stay on the right. */
   .frozen-head {
     display: none;
   }
 
   .frozen-card-list .history-pick {
-    grid-template-columns: repeat(3, auto) minmax(0, 1fr) 28px;
+    grid-template-columns: minmax(0, 1fr) auto 28px;
     gap: 7px 8px;
   }
 
   .frozen-card-list .history-matchup,
   .frozen-card-list .frozen-pick {
-    grid-column: 1 / 5;
+    grid-column: 1;
   }
 
   .frozen-card-list .frozen-pick {
@@ -4751,14 +4748,14 @@ footer {
   }
 
   .frozen-card-list .pick-result {
-    grid-row: 2;
-    grid-column: 4;
-    justify-self: end;
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
   }
 
   .frozen-card-list .bad-beat-menu {
     grid-row: 1 / span 2;
-    grid-column: 5;
+    grid-column: 3;
   }
 }
 

@@ -297,7 +297,7 @@ test('formatSuggestedCardText grades rest-only picks light or medium', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week (as of Sat 8:00 AM ET): DET -6.5 (medium)\n\nSaturday:\n\nIND -20.5 (light — play of the day)\n\nSunday:\n\nDET -6.5 (medium — play of the week)',
+    'Play of the week (as of Sat 8:00 AM ET): DET -6.5 (medium)\n\nSaturday:\n\nIND -20.5 (light)\n\nSunday:\n\nDET -6.5 (medium — play of the week)',
   )
 })
 
@@ -368,7 +368,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light — play of the day)\n\nSunday:\n\nKC +5.5 (strong — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nKC +5.5 (strong — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -379,7 +379,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light — play of the day)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
+    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
   )
 })
 
@@ -477,7 +477,7 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(sunday)
   assert.equal(
     formatSuggestedDayCardText(sunday, card.picks),
-    'Play of the day (as of Sun 8:00 AM ET): KC +5.5 (strong)\n\n1:00 PM\n\nKC +5.5 (strong — play of the day)',
+    '1:00 PM\n\nKC +5.5 (strong)',
   )
   const saturday = groupCardRowsByDay(
     orderCardRows(card.picks, card.unpicked, 'slate'),
@@ -485,7 +485,7 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(saturday)
   assert.equal(
     formatSuggestedDayCardText(saturday, card.picks),
-    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)',
+    '12:00 PM\n\nUNC +3.5 (light)',
   )
 })
 

@@ -12,6 +12,8 @@ import type {
 
 export const NAMED_PLAY_TIME_ZONE = 'America/New_York'
 export const NAMED_PLAY_FREEZE_HOUR_ET = 8
+/** TNF / MNF and other one-game days are not a field to pick from. */
+export const MIN_NAMED_DAY_GAMES = 2
 
 export type NamedPlayOptions = {
   playOfTheWeek?: FrozenNamedPlay | null
@@ -181,11 +183,27 @@ export function resolveWeekNamedPlay(
   return pick && freezeAt ? { pick, frozenAt: freezeAt.toISOString() } : null
 }
 
+export function dayNamedPlayEligible(gameCount: number) {
+  return gameCount >= MIN_NAMED_DAY_GAMES
+}
+
+export function dayFieldSize(
+  games: Array<{ cbsEventId: number; kickoff?: string | null }>,
+  cbsEventId: number,
+) {
+  const game = games.find((row) => row.cbsEventId === cbsEventId)
+  const dateKey = game ? etDayKey(game.kickoff ?? '') : null
+  if (!dateKey) return 0
+  return games.filter((row) => etDayKey(row.kickoff ?? '') === dateKey).length
+}
+
 export function resolveDayNamedPlay(
   dayPicks: SuggestedPick[],
   dateKey: string,
   options: NamedPlayOptions = {},
+  dayGameCount = dayPicks.length,
 ): ResolvedNamedPlay | null {
+  if (!dayNamedPlayEligible(dayGameCount)) return null
   const frozen = (options.playsOfTheDay ?? []).find((play) =>
     dayPicks.some((pick) => pick.cbsEventId === play.cbsEventId),
   )
@@ -256,6 +274,7 @@ function stampMissingNamedPlays(
   const existingDayPlays = existing?.playsOfTheDay ?? []
   const playsOfTheDay: FrozenNamedPlay[] = []
   for (const [dateKey, dayGames] of groupFrozenByEtDay(games)) {
+    if (!dayNamedPlayEligible(dayGames.length)) continue
     const kept = existingDayPlays.find((play) =>
       dayGames.some((game) => game.cbsEventId === play.cbsEventId),
     )
@@ -370,18 +389,33 @@ export function namedPlayGames(
         : (week.playsOfTheDay ?? []).map((play) => play.cbsEventId)
     for (const id of ids) {
       const game = week.games.find((row) => row.cbsEventId === id)
-      if (game) games.push(game)
+      if (!game) continue
+      if (kind === 'day' && !dayNamedPlayEligible(dayFieldSize(week.games, id))) {
+        continue
+      }
+      games.push(game)
     }
   }
   return games
 }
 
 export function namedPlayKindForGame(
-  week: Pick<RecommendationWeek, 'playOfTheWeek' | 'playsOfTheDay'> | null | undefined,
+  week:
+    | (Pick<RecommendationWeek, 'playOfTheWeek' | 'playsOfTheDay'> & {
+        games?: FrozenRecommendation[]
+      })
+    | null
+    | undefined,
   cbsEventId: number,
 ): 'week' | 'day' | null {
   if (week?.playOfTheWeek?.cbsEventId === cbsEventId) return 'week'
   if (week?.playsOfTheDay?.some((play) => play.cbsEventId === cbsEventId)) {
+    if (
+      week.games &&
+      !dayNamedPlayEligible(dayFieldSize(week.games, cbsEventId))
+    ) {
+      return null
+    }
     return 'day'
   }
   return null

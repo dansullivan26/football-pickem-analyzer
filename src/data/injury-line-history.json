@@ -2,7 +2,7 @@
   "week": 5,
   "seasonYear": 2026,
   "label": "Week 5",
-  "updatedAt": "2026-10-06T21:44:52.498Z",
+  "updatedAt": "2026-10-07T01:40:11.556Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3858,6 +3858,24 @@
           "homeSpreadBefore": 2.5,
           "homeSpreadAfter": 2.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T01:40:11.556Z",
+          "cbsEventId": 50029251,
+          "athleteId": "3123075",
+          "name": "Braxton Berrios",
+          "position": "WR",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4507,6 +4525,24 @@
           "toStatus": "Questionable",
           "fromTier": "out",
           "toTier": "questionable",
+          "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T01:40:11.556Z",
+          "cbsEventId": 50029252,
+          "athleteId": "15797",
+          "name": "Lane Johnson",
+          "position": "OT",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "home",
+          "fromStatus": "Reserve-Ret",
+          "toStatus": null,
+          "fromTier": "reserve",
+          "toTier": null,
           "availability": "better",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,

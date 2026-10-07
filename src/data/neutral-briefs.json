@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T06:39:08.135Z",
+  "updatedAt": "2026-10-07T14:15:27.692Z",
   "games": [
     {
       "status": "ok",
@@ -364,6 +364,54 @@
       "why": "The card pick backs North Carolina at +4.5, capitalizing on a 1-point line edge against the DraftKings spread of -3.5 despite a slight rest deficit against Pittsburgh's 8-day preparation. Weather conditions will be clear at Acrisure Stadium with 70°F temperatures and light 5 mph winds. Confidence remains light because both teams are sitting at 1-1 ATS with building profiles of only two decided games each.",
       "model": "gemini-3.8-flash",
       "frozenAt": "2026-10-07T06:39:08.135Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyts===",
+      "cbsEventId": 50028119,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Arizona",
+      "home": "West Virginia",
+      "error": "fetch failed",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T14:00:44.457Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Georgia",
+      "home": "Alabama",
+      "error": "fetch failed",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T14:05:05.139Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezte===",
+      "cbsEventId": 50028132,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Texas A&M",
+      "home": "Missouri",
+      "error": "fetch failed",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T14:10:07.426Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeztg===",
+      "cbsEventId": 50028133,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Indiana",
+      "home": "Nebraska",
+      "error": "fetch failed",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T14:15:27.692Z"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-10-07T08:55:36.383Z",
-    "reportUpdatedAt": "2026-10-07T08:55:27Z",
+    "fetchedAt": "2026-10-07T16:41:21.424Z",
+    "reportUpdatedAt": "2026-10-07T16:41:18Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-10-07T08:55:26Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -49,7 +49,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -78,7 +78,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -137,7 +137,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-10-07T08:55:26Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -196,7 +196,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-10-07T08:55:26Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -225,7 +225,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -274,18 +274,18 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-10-07T08:55:19Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4873232",
           "name": "Mason Graham",
           "position": "DT",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Knee",
-          "detail": "Graham underwent an MRI on Friday that revealed he sustained an MCL and ankle sprain in Thursday night's game, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-10-02T19:22Z"
+          "status": "Doubtful",
+          "tier": "doubtful",
+          "injury": "Knee - MCL",
+          "detail": "doubtful",
+          "updatedAt": "2026-10-07T16:12Z"
         }
       ]
     },
@@ -293,7 +293,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-10-07T08:55:19Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -312,7 +312,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-10-07T08:55:13Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -351,7 +351,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": []
     },
@@ -359,7 +359,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -388,7 +388,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-10-07T08:55:26Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -407,7 +407,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -446,7 +446,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-10-07T08:55:21Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -475,7 +475,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-10-07T08:55:13Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -554,7 +554,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-10-07T08:55:23Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -593,7 +593,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -622,7 +622,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-10-07T08:55:13Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -641,7 +641,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:41:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -680,7 +680,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -709,7 +709,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-10-07T08:55:19Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -778,7 +778,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-10-07T08:55:28Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -817,7 +817,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -846,7 +846,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -935,7 +935,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-10-07T08:55:13Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -954,7 +954,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-10-07T08:55:24Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -993,7 +993,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-10-07T08:55:32Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -1022,9 +1022,19 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-10-07T08:55:32Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4816107",
+          "name": "Benjamin Morrison",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Quadriceps",
+          "detail": "Morrison (quadriceps) did not participate in practice Tuesday.",
+          "updatedAt": "2026-10-06T21:48Z"
+        },
         {
           "athleteId": "3052587",
           "name": "Baker Mayfield",
@@ -1044,26 +1054,6 @@
           "injury": "Ribs",
           "detail": "Buccaneers head coach Todd Bowles said that Winfield was diagnosed Monday with a \"slight rib fracture\" and will miss 2-to-4 weeks, Jenna Laine of ESPN.com reports.",
           "updatedAt": "2026-10-05T22:02Z"
-        },
-        {
-          "athleteId": "4816107",
-          "name": "Benjamin Morrison",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Quadriceps",
-          "detail": "Morrison (quadriceps) did not participate in practice Tuesday.",
-          "updatedAt": "2026-10-06T21:48Z"
-        },
-        {
-          "athleteId": "3150744",
-          "name": "Chase McLaughlin",
-          "position": "PK",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Groin",
-          "detail": "McLaughlin didn't practice Tuesday due to a right groin/hip injury.",
-          "updatedAt": "2026-10-06T21:08Z"
         }
       ]
     },
@@ -1071,15 +1061,26 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
-      "injuries": []
+      "injuries": [
+        {
+          "athleteId": "4036134",
+          "name": "Amani Hooker",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "questionable",
+          "updatedAt": "2026-10-07T16:31Z"
+        }
+      ]
     },
     {
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-10-07T08:55:27Z",
+      "depthChartAt": "2026-10-07T16:40:40Z",
       "status": "ok",
       "injuries": [
         {

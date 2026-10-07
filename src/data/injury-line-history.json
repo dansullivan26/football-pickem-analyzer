@@ -2,7 +2,7 @@
   "week": 6,
   "seasonYear": 2026,
   "label": "Week 6",
-  "updatedAt": "2026-10-07T08:55:36.383Z",
+  "updatedAt": "2026-10-07T16:41:21.424Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -20,6 +20,42 @@
           "fromStatus": "Doubtful",
           "toStatus": null,
           "fromTier": "doubtful",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -8.5,
+          "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T16:41:21.424Z",
+          "cbsEventId": 50029260,
+          "athleteId": "4816107",
+          "name": "Benjamin Morrison",
+          "position": "CB",
+          "teamAbbrev": "TB",
+          "teamName": "Tampa Bay",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -8.5,
+          "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T16:41:21.424Z",
+          "cbsEventId": 50029260,
+          "athleteId": "3150744",
+          "name": "Chase McLaughlin",
+          "position": "PK",
+          "teamAbbrev": "TB",
+          "teamName": "Tampa Bay",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
           "homeSpreadBefore": -8.5,
@@ -107,6 +143,24 @@
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T16:41:21.424Z",
+          "cbsEventId": 50029264,
+          "athleteId": "4873232",
+          "name": "Mason Graham",
+          "position": "DT",
+          "teamAbbrev": "CLE",
+          "teamName": "Cleveland",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -147,6 +201,29 @@
           "availability": "worse",
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029266,
+      "events": [
+        {
+          "at": "2026-10-07T16:41:21.424Z",
+          "cbsEventId": 50029266,
+          "athleteId": "4036134",
+          "name": "Amani Hooker",
+          "position": "S",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 7.5,
+          "homeSpreadAfter": 7.5,
           "towardTeam": 0
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T14:15:27.692Z",
+  "updatedAt": "2026-10-07T19:53:46.821Z",
   "games": [
     {
       "status": "ok",
@@ -412,6 +412,58 @@
       "error": "fetch failed",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-07T14:15:27.692Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezto===",
+      "cbsEventId": 50028137,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Texas",
+      "home": "Oklahoma",
+      "side": "home",
+      "confidence": "light",
+      "why": "Oklahoma enters getting +7.5 points against Texas at the Cotton Bowl, aligning with the card pick leaning on the Sooners with the touchdown hook. Both teams arrive rested after 14-day bye weeks and share identical 0-2 ATS records on the year. Weather is clear and comfortable at 83°F, but confidence remains light with both programs holding small samples of just two decided games.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-07T19:51:59.484Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamryge3de===",
+      "cbsEventId": 50028162,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "UCLA",
+      "home": "Oregon",
+      "side": "no-call",
+      "confidence": "light",
+      "why": "Oregon is favored by 11.5 points against UCLA with identical CBS and DraftKings spreads showing zero line edge. Both squads enter Autzen Stadium off a 14-day bye, neutralizing any rest advantage under clear conditions (56°F, 2 mph winds). Furthermore, both teams remain in building profiles with very limited sample sizes—UCLA at 1-0 ATS with one graded game and Oregon at 1-1 ATS with two graded games—leaving no distinct directional edge.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-07T19:52:13.208Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
+      "cbsEventId": 50029181,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Philadelphia",
+      "home": "Jacksonville",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T19:52:55.078Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3da===",
+      "cbsEventId": 50029260,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Tampa Bay",
+      "home": "Dallas",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T19:53:46.821Z"
     }
   ]
 }

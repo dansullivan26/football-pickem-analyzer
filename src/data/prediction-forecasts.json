@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T02:45:23.624Z",
+  "updatedAt": "2026-10-07T08:55:32.140Z",
   "weeks": [
     {
       "week": 1,
@@ -54925,7 +54925,7 @@
       "seasonYear": 2026,
       "label": "Week 6",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-10-07T02:45:23.624Z",
+      "capturedAt": "2026-10-07T08:55:32.140Z",
       "frozenAt": null,
       "trainingThroughWeek": 5,
       "players": [
@@ -60155,7 +60155,7 @@
           "archetype": "Line-value follower",
           "archetypeDetail": "79% across 78 eligible picks",
           "priorPicks": 124,
-          "calls": 10,
+          "calls": 9,
           "games": [
             {
               "cbsEventId": 50029260,
@@ -60231,14 +60231,14 @@
               "away": "IND",
               "home": "NEB",
               "homeSpread": 7.5,
-              "predictedSide": "home",
-              "predictedTeam": "NEB",
-              "confidence": "high",
-              "meter": 56,
-              "meterWhy": "Line-value habit. 79% take over 78 prior chances.",
-              "habitKey": "line-value",
-              "reason": "Line-value habit · 78 prior chances",
-              "sampleSize": 78,
+              "predictedSide": null,
+              "predictedTeam": null,
+              "confidence": null,
+              "meter": null,
+              "meterWhy": "Habits conflict or remain too close to 50/50",
+              "habitKey": null,
+              "reason": "Habits conflict or remain too close to 50/50",
+              "sampleSize": 0,
               "actualSide": null,
               "correct": null
             },
@@ -63278,12 +63278,12 @@
               "homeSpread": 7.5,
               "predictedSide": "home",
               "predictedTeam": "NEB",
-              "confidence": "high",
-              "meter": 78,
-              "meterWhy": "Line-value habit. 91% take over 79 prior chances.",
-              "habitKey": "line-value",
-              "reason": "Line-value habit · 79 prior chances",
-              "sampleSize": 79,
+              "confidence": "medium",
+              "meter": 21,
+              "meterWhy": "Favorite/dog habit. 61% fade over 125 prior chances. The lean is 61%, not a 75% lock.",
+              "habitKey": "favorite",
+              "reason": "Favorite/dog habit · 125 prior chances",
+              "sampleSize": 125,
               "actualSide": null,
               "correct": null
             },
@@ -64505,7 +64505,7 @@
           "archetype": "Line-value follower",
           "archetypeDetail": "95% across 79 eligible picks",
           "priorPicks": 125,
-          "calls": 10,
+          "calls": 9,
           "games": [
             {
               "cbsEventId": 50029260,
@@ -64581,14 +64581,14 @@
               "away": "IND",
               "home": "NEB",
               "homeSpread": 7.5,
-              "predictedSide": "home",
-              "predictedTeam": "NEB",
-              "confidence": "high",
-              "meter": 86,
-              "meterWhy": "Line-value habit. 95% take over 79 prior chances.",
-              "habitKey": "line-value",
-              "reason": "Line-value habit · 79 prior chances",
-              "sampleSize": 79,
+              "predictedSide": null,
+              "predictedTeam": null,
+              "confidence": null,
+              "meter": null,
+              "meterWhy": "Habits conflict or remain too close to 50/50",
+              "habitKey": null,
+              "reason": "Habits conflict or remain too close to 50/50",
+              "sampleSize": 0,
               "actualSide": null,
               "correct": null
             },
@@ -66244,7 +66244,7 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-07T02:45:23.624Z",
+    "updatedAt": "2026-10-07T08:55:32.140Z",
     "overall": {
       "key": "overall",
       "games": 3225,

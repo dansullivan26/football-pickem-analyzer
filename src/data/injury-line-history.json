@@ -2,7 +2,7 @@
   "week": 6,
   "seasonYear": 2026,
   "label": "Week 6",
-  "updatedAt": "2026-10-07T02:45:34.038Z",
+  "updatedAt": "2026-10-07T08:55:36.383Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -127,6 +127,24 @@
           "fromTier": "reserve",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-07T08:55:36.383Z",
+          "cbsEventId": 50029265,
+          "athleteId": "4601021",
+          "name": "Jaylon Carlies",
+          "position": "LB",
+          "teamAbbrev": "IND",
+          "teamName": "Indianapolis",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": -2.5,
           "homeSpreadAfter": -2.5,
           "towardTeam": 0

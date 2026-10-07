@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T22:56:57.094Z",
+  "updatedAt": "2026-10-07T06:39:08.135Z",
   "games": [
     {
       "status": "ok",
@@ -312,6 +312,58 @@
       "why": "The card pick backs Atlanta +2.5, capturing a full point of line value against the DraftKings market of +1.5 in an indoor matchup. Atlanta enters with a rest advantage on an 11-day long week compared to New Orleans's 8 days, while the Saints deal with defensive absences including Carl Granderson and Kaden Elliss being ruled out. Confidence remains light because both teams carry building profiles with only three decided games on record.",
       "model": "gemini-3.8-flash",
       "frozenAt": "2026-10-04T22:56:57.094Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamryga4tg===",
+      "cbsEventId": 50028093,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Duke",
+      "home": "Georgia Tech",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T06:33:02.124Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamryga4tk===",
+      "cbsEventId": 50028095,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "LSU",
+      "home": "Kentucky",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-07T06:35:26.732Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "USC",
+      "home": "Penn State",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card backs Penn State at -1.5 based on a rest and travel edge of +1.0 net point. Penn State benefits from a long week with 8 days of rest, while USC is operating on a normal 7-day week and traveling across three time zones east into Beaver Stadium under clear conditions (64°F, 3 mph wind). However, confidence remains light because both teams have building profiles with only one decided game in the sample.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-07T06:38:31.666Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeytc===",
+      "cbsEventId": 50028111,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "North Carolina",
+      "home": "Pittsburgh",
+      "side": "away",
+      "confidence": "light",
+      "why": "The card pick backs North Carolina at +4.5, capitalizing on a 1-point line edge against the DraftKings spread of -3.5 despite a slight rest deficit against Pittsburgh's 8-day preparation. Weather conditions will be clear at Acrisure Stadium with 70°F temperatures and light 5 mph winds. Confidence remains light because both teams are sitting at 1-1 ATS with building profiles of only two decided games each.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-07T06:39:08.135Z"
     }
   ]
 }

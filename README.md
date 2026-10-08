@@ -41,9 +41,12 @@ npm run prepare-slate -- --input path/to/cbs-slate.json
 ```
 
 Commit the generated `src/data/current-slate.json`. Normalized odds are loaded
-from `public/data/odds.json`. The odds refresh fetches DraftKings spreads for
-the slate, then uses the matched SharpAPI event ID to request `total_points`
-only for the weekly tiebreaker game.
+from `public/data/odds.json`. The odds refresh fetches DraftKings **main**
+spreads for the slate (`is_alternate_line=false`), then uses the matched
+SharpAPI event ID to request `total_points` only for the weekly tiebreaker
+game. Alternate ladders stay off the request so a free-tier key (12
+requests/min) does not page through every extra number. NFL and NCAAF are
+fetched one league at a time; a 429 waits and retries.
 
 The same command also merges every team on that slate into
 `src/data/team-roster.json` (sport, abbrev, name, location, nickname,
@@ -332,7 +335,9 @@ commits.
    `SHARP_API_KEY`.
 3. Run the **Refresh sportsbook lines** workflow manually, or wait for its
    hourly schedule (`23 * * * *` UTC). GitHub can delay or skip cron jobs, so
-   the Action history is the source of truth, not the clock.
+   the Action history is the source of truth, not the clock. SharpAPI's free
+   tier is 12 requests/min; the job asks for main lines only and retries a
+   429 instead of failing the refresh.
 
 Each refresh also appends DraftKings ticks to `src/data/line-history.json`
 when a home spread or the tiebreaker total actually changes. The Lines page

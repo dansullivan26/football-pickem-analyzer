@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T00:07:45.695Z",
+  "updatedAt": "2026-10-08T05:54:56.301Z",
   "games": [
     {
       "status": "ok",
@@ -516,6 +516,54 @@
       "error": "429 rate limit",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-08T00:07:45.695Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dk===",
+      "cbsEventId": 50029265,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Indianapolis",
+      "home": "Pittsburgh",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T05:53:26.648Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dm===",
+      "cbsEventId": 50029266,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Houston",
+      "home": "Tennessee",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T05:53:56.553Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3do===",
+      "cbsEventId": 50029267,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "N.Y. Giants",
+      "home": "Washington",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T05:54:26.430Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dq===",
+      "cbsEventId": 50029268,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Denver",
+      "home": "L.A. Chargers",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T05:54:56.301Z"
     }
   ]
 }

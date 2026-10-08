@@ -11,6 +11,17 @@ export type BadBeat = {
   markedAt: string
 }
 
+// GitHub workflow_dispatch string inputs max out at 1,000 characters for the
+// whole add/remove payload, so leave headroom around the beat JSON wrapper.
+export const BAD_BEAT_NOTE_MAX_LENGTH = 500
+
+export function clipBadBeatNote(note: string | null | undefined): string | null {
+  if (typeof note !== 'string') return null
+  const trimmed = note.trim()
+  if (!trimmed) return null
+  return trimmed.slice(0, BAD_BEAT_NOTE_MAX_LENGTH)
+}
+
 export type BadBeatsFile = {
   updatedAt: string | null
   beats: BadBeat[]

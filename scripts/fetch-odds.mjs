@@ -2,11 +2,19 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { bowlGamesFromBookRows, mergeBowlOdds } from '../src/bowlOdds.ts'
 import { emptyBowlPickem } from '../src/bowlPickem.ts'
 import { updateLineHistory } from '../src/lineHistory.ts'
+import {
+  SHARP_MAX_429_RETRIES,
+  sharpOddsUrl,
+  sharpRetryDelayMs,
+} from '../src/sharpApi.ts'
 
-const API_URL = 'https://api.sharpapi.io/api/v1/odds'
 const API_KEY = process.env.SHARP_API_KEY
 const BOOKS = ['draftkings']
 const MAX_PAGES = 25
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
 const ROOT = new URL('../', import.meta.url)
 const slate = JSON.parse(
   await readFile(new URL('src/data/current-slate.json', ROOT), 'utf8'),
@@ -90,23 +98,33 @@ async function fetchLeague(league, market = 'point_spread', eventId) {
   let pages = 0
 
   do {
-    const url = new URL(API_URL)
-    url.searchParams.set('league', league)
-    url.searchParams.set('sportsbook', BOOKS.join(','))
-    url.searchParams.set('market', market)
-    url.searchParams.set('is_live', 'false')
-    url.searchParams.set('limit', '200')
-    if (eventId) url.searchParams.set('event_id', eventId)
-    if (cursor) url.searchParams.set('cursor', cursor)
+    const url = sharpOddsUrl({
+      league,
+      sportsbook: BOOKS.join(','),
+      market,
+      eventId,
+      cursor,
+    })
 
-    const response = await fetch(url, { headers: { 'X-API-Key': API_KEY } })
-    if (!response.ok) {
-      throw new Error(
-        `SharpAPI ${league} request failed: ${response.status} ${await response.text()}`,
+    let response
+    let bodyText = ''
+    for (let attempt = 0; ; attempt += 1) {
+      response = await fetch(url, { headers: { 'X-API-Key': API_KEY } })
+      bodyText = await response.text()
+      if (response.ok) break
+      const wait = sharpRetryDelayMs(response.status, bodyText, response.headers)
+      if (wait == null || attempt >= SHARP_MAX_429_RETRIES) {
+        throw new Error(
+          `SharpAPI ${league} request failed: ${response.status} ${bodyText}`,
+        )
+      }
+      console.log(
+        `SharpAPI ${league} ${market} ${response.status}, waiting ${Math.round(wait / 1000)}s (retry ${attempt + 1}/${SHARP_MAX_429_RETRIES}).`,
       )
+      await sleep(wait)
     }
 
-    const body = await response.json()
+    const body = JSON.parse(bodyText)
     rows.push(...body.data)
     pages += 1
     cursor = body.pagination?.has_more ? body.pagination.next_cursor : undefined
@@ -119,10 +137,9 @@ async function fetchLeague(league, market = 'point_spread', eventId) {
   return rows
 }
 
-const [nflRows, ncaafRows] = await Promise.all([
-  fetchLeague('nfl'),
-  fetchLeague('ncaaf'),
-])
+// Sequential so NFL + NCAAF first pages cannot burn the free 12/min cap together.
+const nflRows = await fetchLeague('nfl')
+const ncaafRows = await fetchLeague('ncaaf')
 const rawRows = [...nflRows, ...ncaafRows]
 
 const tiebreakerGame = slate.tiebreaker

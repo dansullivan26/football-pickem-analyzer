@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T19:25:10.469Z",
+  "updatedAt": "2026-10-08T23:51:40.139Z",
   "games": [
     {
       "status": "ok",
@@ -380,16 +380,18 @@
       "attemptedAt": "2026-10-08T19:25:10.469Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
       "cbsEventId": 50028122,
       "week": 6,
       "seasonYear": 2026,
       "away": "Georgia",
       "home": "Alabama",
-      "error": "fetch failed",
+      "side": "home",
+      "confidence": "medium",
+      "why": "The card pick backs Alabama at -1.5 behind a rest-travel net edge with Georgia traveling one time zone west. Alabama holds a 3-1 ATS record and matches the 'Covers as a favorite' archetype at 75% ATS across four games. Georgia is 2-0 ATS but carries an unformed profile with only two decided games, while adverse wet weather with 15 mph winds and a 75% chance of thunderstorms looms in Tuscaloosa.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T14:05:05.139Z"
+      "frozenAt": "2026-10-08T23:49:25.713Z"
     },
     {
       "status": "failed",
@@ -399,9 +401,9 @@
       "seasonYear": 2026,
       "away": "Texas A&M",
       "home": "Missouri",
-      "error": "fetch failed",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T14:10:07.426Z"
+      "attemptedAt": "2026-10-08T23:50:40.102Z"
     },
     {
       "status": "failed",
@@ -411,9 +413,9 @@
       "seasonYear": 2026,
       "away": "Indiana",
       "home": "Nebraska",
-      "error": "fetch failed",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T14:15:27.692Z"
+      "attemptedAt": "2026-10-08T23:51:10.132Z"
     },
     {
       "status": "ok",
@@ -451,9 +453,9 @@
       "seasonYear": 2026,
       "away": "Philadelphia",
       "home": "Jacksonville",
-      "error": "503 high demand",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T19:52:55.078Z"
+      "attemptedAt": "2026-10-08T23:51:40.139Z"
     },
     {
       "status": "failed",

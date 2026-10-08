@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T05:54:56.301Z",
+  "updatedAt": "2026-10-08T13:21:03.527Z",
   "games": [
     {
       "status": "ok",
@@ -564,6 +564,54 @@
       "error": "429 rate limit",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-08T05:54:56.301Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3ds===",
+      "cbsEventId": 50029269,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Detroit",
+      "home": "Arizona",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T13:12:54.495Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3ta===",
+      "cbsEventId": 50029270,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Chicago",
+      "home": "Green Bay",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T13:14:54.503Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3tc===",
+      "cbsEventId": 50029271,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "San Francisco",
+      "home": "Seattle",
+      "error": "fetch failed",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T13:20:11.128Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3te===",
+      "cbsEventId": 50029272,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Baltimore",
+      "home": "Atlanta",
+      "error": "503 high demand",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T13:21:03.527Z"
     }
   ]
 }

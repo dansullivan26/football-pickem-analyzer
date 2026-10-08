@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T13:21:03.527Z",
+  "updatedAt": "2026-10-08T19:25:10.469Z",
   "games": [
     {
       "status": "ok",
@@ -314,16 +314,18 @@
       "frozenAt": "2026-10-04T22:56:57.094Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamryga4tg===",
       "cbsEventId": 50028093,
       "week": 6,
       "seasonYear": 2026,
       "away": "Duke",
       "home": "Georgia Tech",
-      "error": "503 high demand",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick backs Georgia Tech at +7.5, capitalizing on a 1-point line value and a touchdown hook over the DK line of 6.5. Both teams enter rested off 14-day bye weeks to face adverse weather featuring rain showers, 98% precipitation, and 25 mph winds. With Duke having 0 graded games and Georgia Tech sitting at 0-2 ATS across just 2 decided contests, sample sizes remain thin.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T06:33:02.124Z"
+      "frozenAt": "2026-10-08T19:24:07.128Z"
     },
     {
       "status": "failed",
@@ -333,9 +335,9 @@
       "seasonYear": 2026,
       "away": "LSU",
       "home": "Kentucky",
-      "error": "503 high demand",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T06:35:26.732Z"
+      "attemptedAt": "2026-10-08T19:24:40.333Z"
     },
     {
       "status": "ok",
@@ -373,9 +375,9 @@
       "seasonYear": 2026,
       "away": "Arizona",
       "home": "West Virginia",
-      "error": "fetch failed",
+      "error": "429 rate limit",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-07T14:00:44.457Z"
+      "attemptedAt": "2026-10-08T19:25:10.469Z"
     },
     {
       "status": "failed",
@@ -612,6 +614,20 @@
       "error": "503 high demand",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-08T13:21:03.527Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3tg===",
+      "cbsEventId": 50029273,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Buffalo",
+      "home": "L.A. Rams",
+      "side": "home",
+      "confidence": "medium",
+      "why": "The card pick backs the L.A. Rams at -2.5, capitalizing on a 1-point line edge against the -3.5 market consensus inside SoFi Stadium's indoor venue. Both squads arrive on 8 days of rest, but Buffalo must travel three time zones west while managing five questionable tags including Ed Oliver and DJ Moore. Although the Bills boast a 3-1 ATS profile ('Covers ATS') against the Rams' 2-2 ATS mark, the hook advantage and travel disparity favor Los Angeles.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-08T19:22:33.588Z"
     }
   ]
 }

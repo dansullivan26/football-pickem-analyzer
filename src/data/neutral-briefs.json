@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T19:53:46.821Z",
+  "updatedAt": "2026-10-08T00:07:45.695Z",
   "games": [
     {
       "status": "ok",
@@ -464,6 +464,58 @@
       "error": "503 high demand",
       "model": "gemini-3.8-flash",
       "attemptedAt": "2026-10-07T19:53:46.821Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dc===",
+      "cbsEventId": 50029261,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Cincinnati",
+      "home": "Miami",
+      "side": "home",
+      "confidence": "medium",
+      "why": "The card backs Miami at +7.5, capturing a full 1-point line edge over DraftKings' 6.5 spread to stay above the key touchdown hook. While Miami carries a 1-3 ATS record and struggles as an underdog across four decided games, only 27% of the public is backing them at home in 86°F heat.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-08T00:06:28.654Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3de===",
+      "cbsEventId": 50029262,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Las Vegas",
+      "home": "New England",
+      "side": "away",
+      "confidence": "medium",
+      "why": "The card pick backs Las Vegas at +3.5, citing a 0.9-point net edge powered by the field-goal hook and an injury advantage. Las Vegas enters with a flawless 4-0 ATS record on normal rest. Meanwhile, New England carries a lengthy injury report with six players listed as questionable, including key defensive pieces Christian Gonzalez, Carlton Davis III, Christian Barmore, and Dre'Mont Jones.",
+      "model": "gemini-3.8-flash",
+      "frozenAt": "2026-10-08T00:06:45.276Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dg===",
+      "cbsEventId": 50029263,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Minnesota",
+      "home": "New Orleans",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T00:07:15.510Z"
+    },
+    {
+      "status": "failed",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3di===",
+      "cbsEventId": 50029264,
+      "week": 6,
+      "seasonYear": 2026,
+      "away": "Cleveland",
+      "home": "N.Y. Jets",
+      "error": "429 rate limit",
+      "model": "gemini-3.8-flash",
+      "attemptedAt": "2026-10-08T00:07:45.695Z"
     }
   ]
 }

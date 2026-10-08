@@ -42,6 +42,14 @@ function saneDelaySeconds(value: unknown) {
  * look like seconds; ignores the huge `retry_after` timestamps they have
  * been emitting. Falls back to `reset_at`, then 30s. Null if not a 429.
  */
+type SharpRateLimitBody = {
+  error?: {
+    retryAfter?: unknown
+    retry_after?: unknown
+    reset_at?: unknown
+  }
+}
+
 export function sharpRetryDelayMs(
   status: number,
   bodyText: string,
@@ -50,15 +58,9 @@ export function sharpRetryDelayMs(
 ): number | null {
   if (status !== 429) return null
 
-  let parsed: {
-    error?: {
-      retryAfter?: unknown
-      retry_after?: unknown
-      reset_at?: unknown
-    }
-  } | null = null
+  let parsed: SharpRateLimitBody | null = null
   try {
-    parsed = JSON.parse(bodyText) as typeof parsed
+    parsed = JSON.parse(bodyText) as SharpRateLimitBody
   } catch {
     parsed = null
   }

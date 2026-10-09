@@ -134,7 +134,7 @@ test('play of the week stays hidden until the first-game morning', () => {
       'slate',
       { now: fridayAfternoon },
     ),
-    'Saturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nKC +5.5 (strong)',
+    'Saturday:\n\nUNC +3.5 (light - line value on +2.5)\n\nSunday:\n\nKC +5.5 (strong - line value on +4.5)',
   )
   assert.equal(
     resolveWeekNamedPlay(card.picks, card.picks, { now: fridayAfternoon }),
@@ -189,7 +189,7 @@ test('a frozen Saturday play of the week does not move to Sunday', () => {
         now: saturdayNight,
       },
     ),
-    'Play of the week (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\nSaturday:\n\nUNC +3.5 (light — play of the week)\n\nSunday:\n\nKC +5.5 (strong)',
+    'Play of the week (as of Sat 8:00 AM ET): UNC +3.5 (light - line value on +2.5)\n\nSaturday:\n\nUNC +3.5 (light - line value on +2.5 — play of the week)\n\nSunday:\n\nKC +5.5 (strong - line value on +4.5)',
   )
 })
 
@@ -244,7 +244,7 @@ test('copy day names that day even when play of the week is elsewhere', () => {
       },
       now: sundayMorning,
     }),
-    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light)\n\n12:00 PM\n\nUNC +3.5 (light — play of the day)\nIND -3 (light)',
+    'Play of the day (as of Sat 8:00 AM ET): UNC +3.5 (light - line value on +2.5)\n\n12:00 PM\n\nUNC +3.5 (light - line value on +2.5 — play of the day)\nIND -3 (light - line value on -4)',
   )
 })
 

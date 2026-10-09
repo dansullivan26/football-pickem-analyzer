@@ -275,7 +275,9 @@ Play of the week and play of the day lock at 8:00 AM ET — the morning of the
 week's first kickoff, and the morning of each card day that has at least two
 games. A Thursday or Monday singleton is not named play of the day; there is
 no field to compare. Copy card prints the week play with that as-of time;
-Copy day prints that day's play when one exists. Performance tracks those
+Copy day prints that day's play when one exists. Copied recs include a
+light / medium / strong word plus the primary reason (line value on the
+DraftKings number, FG/TD hook, or rest/travel). Performance tracks those
 named sides. Weeks from before the stamps existed are reconstructed from the
 kickoff-frozen card (`backfilled: true`); later weeks lock live.
 

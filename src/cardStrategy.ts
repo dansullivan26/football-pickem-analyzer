@@ -58,6 +58,8 @@ export type SuggestedPick = {
   /** Net edge in spread-point equivalents after rest and travel. */
   compositeEdge: number
   detail: string
+  /** DraftKings home spread at generate time. Used for copy-card line value. */
+  liveHomeSpread?: number | null
 }
 
 export type UnpickedGame = {
@@ -213,6 +215,7 @@ export function generateSuggestedCard(
         score: cardPick.score,
         compositeEdge: cardPick.compositeEdge,
         detail: cardPick.detail,
+        liveHomeSpread: analysis.liveHomeSpread,
       })
       continue
     }
@@ -394,13 +397,84 @@ export function copiedRecommendationStrength(net: number) {
   return 'light'
 }
 
+function hookContribution(hook: SuggestedPick['hook']) {
+  if (hook === 'td') return 0.75
+  if (hook === 'fg') return 0.5
+  return 0
+}
+
+/** DraftKings number on the copied side, when we can still see it. */
+export function copiedBookSpread(pick: {
+  poolSpread: number
+  pickedSide: 'home' | 'away'
+  edge: number | null
+  liveHomeSpread?: number | null
+}) {
+  if (
+    typeof pick.liveHomeSpread === 'number' &&
+    Number.isFinite(pick.liveHomeSpread)
+  ) {
+    return poolSpreadForSide(pick.liveHomeSpread, pick.pickedSide)
+  }
+  if (pick.edge != null && Number.isFinite(pick.edge)) {
+    return pick.poolSpread - pick.edge
+  }
+  return null
+}
+
+/**
+ * Largest modeled reason the copied side is recommended. Line value wins a
+ * tie because it is the card's primary signal. Hook points only count when
+ * the pick stored a favorable FG/TD hook.
+ */
+export function copiedRecommendationDriver(pick: SuggestedPick) {
+  const hookPts = hookContribution(pick.hook)
+  const linePts =
+    pick.source === 'line-value' && pick.edge != null && pick.edge > 0
+      ? pick.edge
+      : 0
+
+  if (hookPts > linePts && pick.hook) {
+    return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
+  }
+  if (linePts > 0) {
+    const book = copiedBookSpread(pick)
+    return book != null ? `line value on ${formatPoolSpread(book)}` : 'line value'
+  }
+  if (pick.hook) {
+    return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
+  }
+  if (
+    pick.source === 'rest-travel' ||
+    (pick.compositeEdge > 0 && pick.edge == null)
+  ) {
+    return 'rest/travel'
+  }
+  if (pick.source === 'public-consensus') return 'public'
+  if (pick.source === 'season-results') return 'season results'
+  if (pick.source === 'pool-aware') return 'pool'
+  return null
+}
+
+function formatCopiedStrength(
+  pick: SuggestedPick,
+  namedKind: 'week' | 'day' | null,
+) {
+  const strength = copiedRecommendationStrength(pick.compositeEdge)
+  const driver = copiedRecommendationDriver(pick)
+  const core = driver ? `${strength} - ${driver}` : strength
+  if (namedKind === 'week') return `${core} — play of the week`
+  if (namedKind === 'day') return `${core} — play of the day`
+  return core
+}
+
 function formatNamedPlayHeader(
   kind: 'week' | 'day',
   pick: SuggestedPick,
   frozenAt: string,
 ) {
   const line = formatCopiedPick(sideAbbrev(pick, pick.pickedSide), pick.poolSpread)
-  const strength = copiedRecommendationStrength(pick.compositeEdge)
+  const strength = formatCopiedStrength(pick, null)
   const asOf = formatNamedPlayAsOf(frozenAt)
   const label = kind === 'week' ? 'Play of the week' : 'Play of the day'
   return asOf
@@ -416,14 +490,7 @@ function formatCopiedRecommendedLine(
   const sent = submittedPick(pick, deviate)
   const base = formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)
   if (deviate) return `${base} (deviated)`
-  const strength = copiedRecommendationStrength(pick.compositeEdge)
-  if (namedKind === 'week') {
-    return `${base} (${strength} — play of the week)`
-  }
-  if (namedKind === 'day') {
-    return `${base} (${strength} — play of the day)`
-  }
-  return `${base} (${strength})`
+  return `${base} (${formatCopiedStrength(pick, namedKind)})`
 }
 
 /**

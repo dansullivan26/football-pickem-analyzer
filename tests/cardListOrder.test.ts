@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   applyDaySendSelection,
+  copiedRecommendationDriver,
   copiedRecommendationStrength,
   daySendState,
   formatCardKickoff,
@@ -248,6 +249,48 @@ test('copiedRecommendationStrength is light, medium, or strong', () => {
   assert.equal(copiedRecommendationStrength(4.2), 'strong')
 })
 
+test('copiedRecommendationDriver names the biggest reason for the lean', () => {
+  assert.equal(
+    copiedRecommendationDriver(
+      pick({
+        gameId: 'unc',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        poolSpread: 4.5,
+        edge: 1,
+        liveHomeSpread: -3.5,
+        pickedSide: 'away',
+      }),
+    ),
+    'line value on +3.5',
+  )
+  assert.equal(
+    copiedRecommendationDriver(
+      pick({
+        gameId: 'wvu',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        poolSpread: 3.5,
+        edge: 0.25,
+        hook: 'fg',
+        source: 'line-value',
+      }),
+    ),
+    'FG hook',
+  )
+  assert.equal(
+    copiedRecommendationDriver(
+      pick({
+        gameId: 'rest',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        edge: null,
+        source: 'rest-travel',
+        category: 'neutral',
+        compositeEdge: 0.5,
+      }),
+    ),
+    'rest/travel',
+  )
+})
+
 test('formatSuggestedCardText grades rest-only picks light or medium', () => {
   const card: SuggestedCard = {
     strategyId: 'test',
@@ -297,7 +340,7 @@ test('formatSuggestedCardText grades rest-only picks light or medium', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week (as of Sat 8:00 AM ET): DET -6.5 (medium)\n\nSaturday:\n\nIND -20.5 (light)\n\nSunday:\n\nDET -6.5 (medium — play of the week)',
+    'Play of the week (as of Sat 8:00 AM ET): DET -6.5 (medium - rest/travel)\n\nSaturday:\n\nIND -20.5 (light - rest/travel)\n\nSunday:\n\nDET -6.5 (medium - rest/travel — play of the week)',
   )
 })
 
@@ -368,7 +411,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
 
   assert.equal(
     formatSuggestedCardText(card),
-    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nKC +5.5 (strong — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
+    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong - line value on +1.3)\n\nSaturday:\n\nUNC +3.5 (light - line value on +2.5)\n\nSunday:\n\nKC +5.5 (strong - line value on +1.3 — play of the week)\n\nMonday:\n\nDET @ BUF (manual review, no lean)',
   )
   assert.equal(
     formatSuggestedCardText(
@@ -379,7 +422,7 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
       new Map([['manual', 'away']]),
       'slate',
     ),
-    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong)\n\nSaturday:\n\nUNC +3.5 (light)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
+    'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong - line value on +1.3)\n\nSaturday:\n\nUNC +3.5 (light - line value on +2.5)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
   )
 })
 
@@ -422,6 +465,50 @@ test('formatSuggestedCardText tags an unpicked manual-review lean', () => {
   assert.equal(
     formatSuggestedCardText(card),
     'Saturday:\n\nNCST +3.5 (lean only, no pick)\nARIZST @ KANSAS (manual review, no lean)',
+  )
+})
+
+test('formatSuggestedDayCardText names line value or hook as the driver', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 3,
+    weekLabel: 'Week 3',
+    picks: [
+      pick({
+        gameId: 'unc',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        awayAbbrev: 'UNC',
+        pickedSide: 'away',
+        poolSpread: 4.5,
+        edge: 1,
+        liveHomeSpread: -3.5,
+        compositeEdge: 1,
+      }),
+      pick({
+        gameId: 'wvu',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        awayAbbrev: 'WVU',
+        pickedSide: 'away',
+        poolSpread: 3.5,
+        edge: 0.25,
+        hook: 'fg',
+        compositeEdge: 0.75,
+      }),
+    ],
+    unpicked: [],
+    tiebreaker: null,
+  }
+  const saturday = groupCardRowsByDay(
+    orderCardRows(card.picks, card.unpicked, 'slate'),
+  )[0]
+  assert.ok(saturday)
+  assert.equal(
+    formatSuggestedDayCardText(saturday, card.picks),
+    'Play of the day (as of Sat 8:00 AM ET): UNC +4.5 (light - line value on +3.5)\n\n12:00 PM\n\nUNC +4.5 (light - line value on +3.5 — play of the day)\nWVU +3.5 (light - FG hook)',
   )
 })
 
@@ -477,7 +564,7 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(sunday)
   assert.equal(
     formatSuggestedDayCardText(sunday, card.picks),
-    '1:00 PM\n\nKC +5.5 (strong)',
+    '1:00 PM\n\nKC +5.5 (strong - line value on +1.3)',
   )
   const saturday = groupCardRowsByDay(
     orderCardRows(card.picks, card.unpicked, 'slate'),
@@ -485,7 +572,7 @@ test('formatSuggestedDayCardText copies one day without a weekday heading', () =
   assert.ok(saturday)
   assert.equal(
     formatSuggestedDayCardText(saturday, card.picks),
-    '12:00 PM\n\nUNC +3.5 (light)',
+    '12:00 PM\n\nUNC +3.5 (light - line value on +2.5)',
   )
 })
 
@@ -538,6 +625,6 @@ test('formatSuggestedDayCardText groups a day by kickoff window', () => {
   assert.equal(formatCopiedKickoffHeading('2026-10-04T16:25:00-04:00'), '4:25 PM')
   assert.equal(
     formatSuggestedDayCardText(sunday, card.picks),
-    'Play of the day (as of Sun 8:00 AM ET): SF -7 (medium)\n\n1:00 PM\n\nBUF -3 (light)\nKC +3.5 (light)\n\n4:25 PM\n\nSF -7 (medium — play of the day)',
+    'Play of the day (as of Sun 8:00 AM ET): SF -7 (medium - line value on -8)\n\n1:00 PM\n\nBUF -3 (light - line value on -4)\nKC +3.5 (light - line value on +2.5)\n\n4:25 PM\n\nSF -7 (medium - line value on -8 — play of the day)',
   )
 })

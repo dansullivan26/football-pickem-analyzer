@@ -6,6 +6,21 @@ import {
   summarizeScoutError,
 } from '../src/scoutProvider.ts'
 
+test('resolves Cursor Grok from CURSOR_API_KEY first', () => {
+  const resolved = resolveScoutConfig({
+    CURSOR_API_KEY: 'crsr_test',
+    OPENAI_API_KEY: 'sk-openai',
+  })
+  assert.deepEqual(resolved, {
+    ok: true,
+    config: {
+      provider: 'cursor',
+      model: DEFAULT_SCOUT_MODELS.cursor,
+      apiKey: 'crsr_test',
+    },
+  })
+})
+
 test('resolves OpenAI, Anthropic, or Gemini from the matching key', () => {
   assert.deepEqual(
     resolveScoutConfig({ OPENAI_API_KEY: 'sk-test' }),
@@ -69,7 +84,13 @@ test('prefers OpenAI over a leftover Gemini key when provider is unset', () => {
 
 test('rejects an unknown provider or a missing key', () => {
   assert.equal(resolveScoutConfig({}).ok, false)
-  assert.equal(resolveScoutConfig({ SCOUT_PROVIDER: 'grok' }).ok, false)
+  assert.equal(resolveScoutConfig({ SCOUT_PROVIDER: 'foo' }).ok, false)
+  const grok = resolveScoutConfig({
+    SCOUT_PROVIDER: 'grok',
+    CURSOR_API_KEY: 'crsr_test',
+  })
+  assert.equal(grok.ok, true)
+  if (grok.ok) assert.equal(grok.config.provider, 'cursor')
   const missing = resolveScoutConfig({ SCOUT_PROVIDER: 'openai' })
   assert.equal(missing.ok, false)
   if (missing.ok) return

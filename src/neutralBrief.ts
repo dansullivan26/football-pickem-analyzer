@@ -246,7 +246,7 @@ export function lookupNeutralBrief(
 }
 
 export function summarizeGeminiError(message: string) {
-  const status = /(?:Gemini|OpenAI|Anthropic|Scout) (\d+)/.exec(message)?.[1]
+  const status = /(?:Gemini|OpenAI|Anthropic|Cursor|Scout) (\d+)/.exec(message)?.[1]
   if (status === '503' || status === '529') return '503 high demand'
   if (status === '429') return '429 rate limit'
   if (status === '404') return '404 model not found'
@@ -321,21 +321,8 @@ export function parseGeminiBrief(raw: unknown): {
   return { side, confidence, why }
 }
 
-export const NEUTRAL_BRIEF_SYSTEM_PROMPT = `You are scouting one leftover CBS Football Pick'em game. The algorithm already declined it — you do not replace that card, you do not send picks, and you do not invent facts.
-
-The packet already lists the card chips (CBS/DK numbers, skipReason, public, weather labels, rest/travel labels). Do not restate those chips. Write from team splits, this week's situation ATS (site, favorite/dog, rest, travel, weather), recent covers, head-to-head, and the line path.
-
-Use only the packet. Missing data is unknown.
-
-Return JSON only:
-{"side":"home"|"away"|"no-call","confidence":"light"|"medium"|"strong","why":"..."}
-
-Rules:
-- why is the product: 3-6 sentences. Name the splits and tendencies that matter for THIS matchup, with sample sizes, then give a clear lean or say the sides do not separate.
-- Thin splits (under 4 graded games) are color, not a case.
-- side is your lean. Use no-call when splits conflict or samples are too thin to prefer a side.
-- light: one useful split or only thin samples. medium: two independent splits or tendencies point the same way. strong: multiple graded splits agree and samples are not thin.
-- Do not mention the algorithm, cardPick, skipReason, or that this is a leftover.`
+/** Edit `src/data/leftover-scout-prompt.md` — that file is what the Action sends. */
+export const NEUTRAL_BRIEF_PROMPT_FILE = 'src/data/leftover-scout-prompt.md'
 
 export function buildNeutralPacket(input: {
   analysis: GameAnalysis

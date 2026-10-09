@@ -24,11 +24,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Install Cursor CLI
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Snapshot leftover notes
         run: npm run snapshot-neutral-briefs
         env:
           SCOUT_PROVIDER: ${{ vars.SCOUT_PROVIDER }}
           SCOUT_MODEL: ${{ vars.SCOUT_MODEL }}
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

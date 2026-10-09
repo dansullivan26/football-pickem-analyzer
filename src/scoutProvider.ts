@@ -1,11 +1,10 @@
 import {
   DEFAULT_GEMINI_MODEL,
-  NEUTRAL_BRIEF_SYSTEM_PROMPT,
   parseGeminiBrief,
   type NeutralPacket,
 } from './neutralBrief.ts'
 
-export type ScoutProvider = 'openai' | 'anthropic' | 'gemini'
+export type ScoutProvider = 'cursor' | 'openai' | 'anthropic' | 'gemini'
 
 export type ScoutConfig = {
   provider: ScoutProvider
@@ -14,6 +13,7 @@ export type ScoutConfig = {
 }
 
 export const DEFAULT_SCOUT_MODELS: Record<ScoutProvider, string> = {
+  cursor: 'grok-4.7',
   openai: 'gpt-4.1',
   anthropic: 'claude-sonnet-4-5',
   gemini: DEFAULT_GEMINI_MODEL,
@@ -30,23 +30,25 @@ export function resolveScoutConfig(
     return {
       ok: false,
       error:
-        `Unknown SCOUT_PROVIDER "${env.SCOUT_PROVIDER.trim()}". Use openai, anthropic, or gemini.`,
+        `Unknown SCOUT_PROVIDER "${env.SCOUT_PROVIDER.trim()}". Use cursor, openai, anthropic, or gemini.`,
     }
   }
   const provider =
     requested ??
-    (env.OPENAI_API_KEY?.trim()
-      ? 'openai'
-      : env.ANTHROPIC_API_KEY?.trim()
-        ? 'anthropic'
-        : env.GEMINI_API_KEY?.trim()
-          ? 'gemini'
-          : null)
+    (env.CURSOR_API_KEY?.trim()
+      ? 'cursor'
+      : env.OPENAI_API_KEY?.trim()
+        ? 'openai'
+        : env.ANTHROPIC_API_KEY?.trim()
+          ? 'anthropic'
+          : env.GEMINI_API_KEY?.trim()
+            ? 'gemini'
+            : null)
   if (!provider) {
     return {
       ok: false,
       error:
-        'Add OPENAI_API_KEY, ANTHROPIC_API_KEY, or GEMINI_API_KEY, and set SCOUT_PROVIDER to match.',
+        'Add CURSOR_API_KEY (Grok on your Cursor plan), or OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY.',
     }
   }
   const apiKey = keyFor(provider, env)
@@ -70,7 +72,7 @@ export function resolveScoutConfig(
 }
 
 export function summarizeScoutError(message: string) {
-  const status = /(?:Gemini|OpenAI|Anthropic|Scout) (\d+)/.exec(message)?.[1]
+  const status = /(?:Gemini|OpenAI|Anthropic|Cursor|Scout) (\d+)/.exec(message)?.[1]
   if (status === '503' || status === '529') return '503 high demand'
   if (status === '429') return '429 rate limit'
   if (status === '404') return '404 model not found'
@@ -78,15 +80,19 @@ export function summarizeScoutError(message: string) {
   return compact.slice(0, 120) || 'Scout request failed'
 }
 
-export async function askScout(packet: NeutralPacket, config: ScoutConfig) {
+export async function askScout(
+  packet: NeutralPacket,
+  config: ScoutConfig,
+  prompt: string,
+) {
   let lastError: Error | null = null
   for (let attempt = 1; attempt <= ASK_ATTEMPTS; attempt += 1) {
     try {
-      return await askScoutOnce(packet, config)
+      return await askScoutOnce(packet, config, prompt)
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error))
       const status = Number(
-        /(?:Gemini|OpenAI|Anthropic|Scout) (\d+)/.exec(lastError.message)?.[1],
+        /(?:Gemini|OpenAI|Anthropic|Cursor|Scout) (\d+)/.exec(lastError.message)?.[1],
       )
       if (!RETRY_STATUSES.has(status) || attempt === ASK_ATTEMPTS) {
         throw lastError
@@ -101,13 +107,24 @@ export async function askScout(packet: NeutralPacket, config: ScoutConfig) {
   throw lastError ?? new Error('Scout failed')
 }
 
-async function askScoutOnce(packet: NeutralPacket, config: ScoutConfig) {
-  if (config.provider === 'openai') return askOpenAI(packet, config)
-  if (config.provider === 'anthropic') return askAnthropic(packet, config)
-  return askGemini(packet, config)
+async function askScoutOnce(
+  packet: NeutralPacket,
+  config: ScoutConfig,
+  prompt: string,
+) {
+  if (config.provider === 'cursor') {
+    throw new Error('Cursor leftover notes go through the agent CLI')
+  }
+  if (config.provider === 'openai') return askOpenAI(packet, config, prompt)
+  if (config.provider === 'anthropic') return askAnthropic(packet, config, prompt)
+  return askGemini(packet, config, prompt)
 }
 
-async function askOpenAI(packet: NeutralPacket, config: ScoutConfig) {
+async function askOpenAI(
+  packet: NeutralPacket,
+  config: ScoutConfig,
+  prompt: string,
+) {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -120,7 +137,7 @@ async function askOpenAI(packet: NeutralPacket, config: ScoutConfig) {
       max_tokens: 700,
       response_format: { type: 'json_object' },
       messages: [
-        { role: 'system', content: NEUTRAL_BRIEF_SYSTEM_PROMPT },
+        { role: 'system', content: prompt },
         { role: 'user', content: packetPrompt(packet) },
       ],
     }),
@@ -139,7 +156,11 @@ async function askOpenAI(packet: NeutralPacket, config: ScoutConfig) {
   )
 }
 
-async function askAnthropic(packet: NeutralPacket, config: ScoutConfig) {
+async function askAnthropic(
+  packet: NeutralPacket,
+  config: ScoutConfig,
+  prompt: string,
+) {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -151,7 +172,7 @@ async function askAnthropic(packet: NeutralPacket, config: ScoutConfig) {
       model: config.model,
       max_tokens: 700,
       temperature: 0.35,
-      system: NEUTRAL_BRIEF_SYSTEM_PROMPT,
+      system: prompt,
       messages: [{ role: 'user', content: packetPrompt(packet) }],
     }),
   })
@@ -170,14 +191,18 @@ async function askAnthropic(packet: NeutralPacket, config: ScoutConfig) {
   return readBrief(text, body, 'Anthropic')
 }
 
-async function askGemini(packet: NeutralPacket, config: ScoutConfig) {
+async function askGemini(
+  packet: NeutralPacket,
+  config: ScoutConfig,
+  prompt: string,
+) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(config.model)}:generateContent?key=${encodeURIComponent(config.apiKey)}`
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       systemInstruction: {
-        parts: [{ text: NEUTRAL_BRIEF_SYSTEM_PROMPT }],
+        parts: [{ text: prompt }],
       },
       contents: [
         {
@@ -231,6 +256,7 @@ function packetPrompt(packet: NeutralPacket) {
 
 function normalizeProvider(value: string | undefined): ScoutProvider | null {
   const provider = value?.trim().toLowerCase()
+  if (provider === 'cursor' || provider === 'grok') return 'cursor'
   if (provider === 'openai' || provider === 'gpt') return 'openai'
   if (provider === 'anthropic' || provider === 'claude') return 'anthropic'
   if (provider === 'gemini' || provider === 'google') return 'gemini'
@@ -243,12 +269,14 @@ function keyFor(
 ) {
   const shared = env.SCOUT_API_KEY?.trim()
   if (shared) return shared
+  if (provider === 'cursor') return env.CURSOR_API_KEY?.trim() ?? ''
   if (provider === 'openai') return env.OPENAI_API_KEY?.trim() ?? ''
   if (provider === 'anthropic') return env.ANTHROPIC_API_KEY?.trim() ?? ''
   return env.GEMINI_API_KEY?.trim() ?? ''
 }
 
 function keyName(provider: ScoutProvider) {
+  if (provider === 'cursor') return 'CURSOR_API_KEY'
   if (provider === 'openai') return 'OPENAI_API_KEY'
   if (provider === 'anthropic') return 'ANTHROPIC_API_KEY'
   return 'GEMINI_API_KEY'

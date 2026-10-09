@@ -36,10 +36,12 @@ import {
   type NeutralBriefsFile,
   type NeutralCardPick,
 } from '../src/neutralBrief.ts'
+import { askCursor } from './askCursor.ts'
 import { askScout, resolveScoutConfig } from '../src/scoutProvider.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/neutral-briefs.json', ROOT)
+const PROMPT_FILE = new URL('src/data/leftover-scout-prompt.md', ROOT)
 const FORCE = process.argv.includes('--force')
 const ASK_ALL = process.argv.includes('--all')
 const SCOUT = resolveScoutConfig(process.env)
@@ -234,6 +236,7 @@ if (queue.length > 0 && !SCOUT.ok) {
 }
 
 const scout = SCOUT.ok ? SCOUT.config : null
+const scoutPrompt = (await readFile(PROMPT_FILE, 'utf8')).trim()
 if (scout) {
   console.log(`Scout provider ${scout.provider} (${scout.model})`)
 }
@@ -279,7 +282,10 @@ for (const item of queue) {
 
   try {
     if (!scout) continue
-    const answer = await askScout(packet, scout)
+    const answer =
+      scout.provider === 'cursor'
+        ? await askCursor(packet, scout, scoutPrompt)
+        : await askScout(packet, scout, scoutPrompt)
     const frozenAt = new Date().toISOString()
     const result = freezeNeutralBrief(
       file,

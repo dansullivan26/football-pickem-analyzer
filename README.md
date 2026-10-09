@@ -319,22 +319,25 @@ then the oldest paragraph), six per run by default. It runs about every
 `SCOUT_ASK_LIMIT` overrides the budget. A later successful run overwrites
 the paragraph. A 503 / 429 is stored as a retry note, not a freeze.
 
-The browser never calls the model. The Action talks to OpenAI, Anthropic,
-or Gemini — Cursor / ChatGPT Plus / Claude Pro are not an API. Add one
-paid provider key as a repository secret and set the matching variable:
+The browser never calls the model. The Action prefers **Cursor Grok** when
+`CURSOR_API_KEY` is set (the included Cursor Models pool). Edit the prompt
+in `src/data/leftover-scout-prompt.md` and commit — the next leftover run
+sends that file, then the game packet. Other providers still work as a
+fallback:
 
 | Provider | Secret | `SCOUT_PROVIDER` | Default `SCOUT_MODEL` |
 | --- | --- | --- | --- |
+| Cursor Grok | `CURSOR_API_KEY` | `cursor` | `grok-4.7` |
 | OpenAI | `OPENAI_API_KEY` | `openai` | `gpt-4.1` |
 | Anthropic | `ANTHROPIC_API_KEY` | `anthropic` | `claude-sonnet-4-5` |
 | Gemini | `GEMINI_API_KEY` | `gemini` | `gemini-3.8-flash` |
 
-If `SCOUT_PROVIDER` is unset, the job uses OpenAI, then Anthropic, then
-Gemini, depending on which key is present. Override the model with the
-`SCOUT_MODEL` repository variable. The same command is:
+If `SCOUT_PROVIDER` is unset, the job uses Cursor, then OpenAI, then
+Anthropic, then Gemini, depending on which key is present. Override the
+model with the `SCOUT_MODEL` repository variable. The same command is:
 
 ```bash
-SCOUT_PROVIDER=openai OPENAI_API_KEY=... npm run snapshot-neutral-briefs
+CURSOR_API_KEY=... npm run snapshot-neutral-briefs
 ```
 
 That writes `src/data/neutral-briefs.json`. A GITHUB_TOKEN push does not

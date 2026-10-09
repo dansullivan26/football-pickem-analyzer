@@ -34,8 +34,10 @@ Data-preparation scripts (`prepare-slate`, `prepare-players`,
 `prepare-consensus`, `snapshot-recommendations`, `snapshot-predictions`,
 `snapshot-neutral-briefs`, `apply-covers`, ...) are documented in `README.md`.
 They ingest private CBS/Covers dumps and are normally run by GitHub Actions,
-not by hand. `snapshot-neutral-briefs` needs an `OPENAI_API_KEY`,
-`ANTHROPIC_API_KEY`, or `GEMINI_API_KEY` secret.
+not by hand. `snapshot-neutral-briefs` needs `CURSOR_API_KEY` for
+included Grok, or an `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` /
+`GEMINI_API_KEY` fallback. Edit `src/data/leftover-scout-prompt.md`
+to change the leftover note instructions.
 
 ## Routing
 

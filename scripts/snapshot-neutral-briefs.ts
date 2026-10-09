@@ -30,8 +30,9 @@ import {
   buildNeutralPacket,
   emptyNeutralBriefs,
   freezeNeutralBrief,
+  isScoutGameDay,
   lookupNeutralBrief,
-  selectGamesToAsk,
+  selectGameDayScoutAsks,
   summarizeGeminiError,
   type NeutralBriefsFile,
   type NeutralCardPick,
@@ -208,24 +209,22 @@ const card = generateSuggestedCard(
 
 const pickById = new Map(card.picks.map((pick) => [pick.gameId, pick]))
 const unpickedById = new Map(card.unpicked.map((game) => [game.gameId, game]))
-const eligible = upcoming.filter(
-  (row) => row.category !== 'pending' && unpickedById.has(row.game.id),
-)
-const queue = selectGamesToAsk(
-  eligible.map((row) => ({
-    gameId: row.game.id,
-    cbsEventId: row.game.cbsEventId,
-    leftover: true,
-    brief: lookupNeutralBrief(
-      file,
-      { gameId: row.game.id },
-      slate.week.order,
-      slate.pool.seasonYear,
-    ),
-  })),
-  ASK_LIMIT,
-  true,
-)
+const priced = upcoming.filter((row) => row.category !== 'pending')
+const analysisById = new Map(priced.map((row) => [row.game.id, row]))
+const candidates = priced.map((row) => ({
+  gameId: row.game.id,
+  cbsEventId: row.game.cbsEventId,
+  kickoff: row.game.kickoff,
+  leftover: unpickedById.has(row.game.id),
+  brief: lookupNeutralBrief(
+    file,
+    { gameId: row.game.id },
+    slate.week.order,
+    slate.pool.seasonYear,
+  ),
+}))
+const gameDay = candidates.filter((row) => isScoutGameDay(row.kickoff, now))
+const queue = selectGameDayScoutAsks(candidates, ASK_LIMIT, now, FORCE)
 
 let wrote = 0
 let failed = 0
@@ -242,7 +241,7 @@ if (scout) {
 }
 
 for (const item of queue) {
-  const analysis = eligible.find((row) => row.game.id === item.gameId)
+  const analysis = analysisById.get(item.gameId)
   if (!analysis) continue
   const pick = pickById.get(item.gameId)
   const unpicked = unpickedById.get(item.gameId)
@@ -341,5 +340,5 @@ if (wrote > 0) {
 }
 
 console.log(
-  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} leftovers (${card.picks.length} recs skipped).`,
+  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${gameDay.length} game-day games (${card.unpicked.length} leftovers first, then recs).`,
 )

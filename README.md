@@ -309,19 +309,25 @@ card; nflverse covers a Thursday/London game the pool slate might skip.
 Manual-review leftovers on the ATS card can carry a scout paragraph: a lean
 from team splits, this week's situation (site, favorite/dog, rest, travel,
 weather), recent covers, head-to-head, the DraftKings line path, and the
-expected pool. The paragraph is context only. It never checks Send, never
-flips Deviate, and does not change v8. The algorithm recs stay the recs.
+expected pool. On game day the same job writes a color note on algorithm
+recs. The paragraph is context only. It never checks Send, never flips
+Deviate, and does not change v8. A disagreement is a flag, not a vote.
+The algorithm recs stay the recs.
 
-**Refresh Gemini notes** asks leftover games only (missing or failed first,
-then the oldest paragraph), six per run by default. It runs about every
-20 minutes (`7,27,47 * * * *` UTC) and can still be started by hand.
-`--all` asks every leftover with a DraftKings number in one go.
-`SCOUT_ASK_LIMIT` overrides the budget. A later successful run overwrites
-the paragraph. A 503 / 429 is stored as a retry note, not a freeze.
+**Refresh Gemini notes** waits until the game's Eastern kickoff day so
+injury reports and line movement can settle. A note written earlier in
+the week is stale on game day and gets rewritten. Leftovers go first,
+then recs still missing a same-day note, six per run by default. It
+runs about every 20 minutes (`7,27,47 * * * *` UTC) and can still be
+started by hand. Midweek runs that have no game-day games ask nothing
+and do not spend Grok. `--all` lifts the budget but still stays on
+today's slate. `--force` rewrites notes that are already same-day
+fresh. `SCOUT_ASK_LIMIT` overrides the budget. A 503 / 429 is stored
+as a retry note, not a freeze.
 
 The browser never calls the model. The Action prefers **Cursor Grok** when
 `CURSOR_API_KEY` is set (the included Cursor Models pool). Edit the prompt
-in `src/data/leftover-scout-prompt.md` and commit — the next leftover run
+in `src/data/leftover-scout-prompt.md` and commit — the next scout run
 sends that file, then the game packet. Other providers still work as a
 fallback:
 
@@ -456,7 +462,7 @@ The generated-card modal sends GrokBot this JSON:
 
 The modal starts with every game deselected. Only checked games are sent;
 ATS-card leftovers can show a scout paragraph next to Manual review.
-That note does not check Send.
+Recs get a same-day color note on game day. Those notes do not check Send.
 **Select all** checks every recommended game plus manual-review games that
 already have a side chosen. Each day heading has a **Send** box that checks
 or clears that day's recommended games only; manual-review sides stay as they

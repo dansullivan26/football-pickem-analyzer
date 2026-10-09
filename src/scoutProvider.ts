@@ -113,7 +113,7 @@ async function askScoutOnce(
   prompt: string,
 ) {
   if (config.provider === 'cursor') {
-    throw new Error('Cursor leftover notes go through the agent CLI')
+    throw new Error('Cursor scout notes go through the agent CLI')
   }
   if (config.provider === 'openai') return askOpenAI(packet, config, prompt)
   if (config.provider === 'anthropic') return askAnthropic(packet, config, prompt)

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-09T18:21:58.022Z",
+  "updatedAt": "2026-10-09T18:46:38.808Z",
   "games": [
     {
       "status": "ok",
@@ -443,11 +443,11 @@
       "seasonYear": 2026,
       "away": "UCLA",
       "home": "Oregon",
-      "side": "no-call",
+      "side": "away",
       "confidence": "light",
-      "why": "Oregon is favored by 11.5 points against UCLA with identical CBS and DraftKings spreads showing zero line edge. Both squads enter Autzen Stadium off a 14-day bye, neutralizing any rest advantage under clear conditions (56°F, 2 mph winds). Furthermore, both teams remain in building profiles with very limited sample sizes—UCLA at 1-0 ATS with one graded game and Oregon at 1-1 ATS with two graded games—leaving no distinct directional edge.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-07T19:52:13.208Z"
+      "why": "Both profiles are still building, with UCLA at one graded game and Oregon at two, so this lean sits on thin samples. UCLA is 1-0 ATS away and 1-0 ATS as a dog (each 100% in 2), and the only recent cover was a Week 1 road-dog win at California, the same site and market role as this week. Oregon is 0-1 ATS at home (0% in 2) after failing to cover as a home favorite against Boise State in Week 1, while the Week 4 cover came on the road at USC; as a favorite they are 1-1 ATS (50% in 3). Benign-weather ATS is a wash (UCLA 1-0 in 2, Oregon 1-1 in 3), bye-rest ATS is 0-0 on both sides, and head-to-head plus the line path are unknown. The road-dog cover and the home non-cover are the only directional crumbs, and they agree: lean UCLA.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-09T18:46:38.808Z"
     },
     {
       "status": "failed",

@@ -1,4 +1,5 @@
 import { formatPoolSpread, poolSpreadForSide } from './cardScoring.ts'
+import { formatLinePath } from './lineHistory.ts'
 import { buildTeamProfile } from './teamProfile.ts'
 import {
   summarizeAppearances,
@@ -6,8 +7,19 @@ import {
   type TeamRecord,
   type TeamSplit,
 } from './teamPerformance.ts'
-import { type GameTravelRest } from './travelRest.ts'
-import { formatWeatherBucket, type FrozenWeather } from './weatherBuckets.ts'
+import {
+  restSplitKey,
+  travelSplitKey,
+  type GameTravelRest,
+  type RestSplitKey,
+  type TravelSplitKey,
+} from './travelRest.ts'
+import {
+  formatWeatherBucket,
+  isColdTemp,
+  isHotTemp,
+  type FrozenWeather,
+} from './weatherBuckets.ts'
 import {
   NFL_AVAILABILITY_LABELS,
   type NflStarterInjuryTeam,
@@ -15,12 +27,12 @@ import {
 import type { GameAnalysis, SlateGame } from './types.ts'
 import type { SuggestedPick, UnpickedGame } from './cardStrategy.ts'
 
-/** Free-tier Flash for new AI Studio keys. Override with GEMINI_MODEL. */
+/** Override with GEMINI_MODEL. Use a paid Pro model once GEMINI_API_KEY is paid. */
 export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash'
-export const NEUTRAL_BRIEF_RECENT_COVERS = 4
-export const NEUTRAL_BRIEF_MAX_WHY = 480
-/** Free-tier budget: missing/failed first, then the oldest paragraph. */
-export const GEMINI_ASK_BUDGET = 4
+export const NEUTRAL_BRIEF_RECENT_COVERS = 8
+export const NEUTRAL_BRIEF_MAX_WHY = 900
+/** Leftover-only budget: missing/failed first, then the oldest paragraph. */
+export const GEMINI_ASK_BUDGET = 6
 
 export type NeutralBriefSide = 'home' | 'away' | 'no-call'
 export type NeutralBriefConfidence = 'light' | 'medium' | 'strong'
@@ -65,12 +77,33 @@ export type NeutralPacketCover = {
   teamSpread: number
 }
 
+export type NeutralPacketSplit = {
+  games: number
+  detail: string
+  rate: string
+}
+
+export type NeutralPacketSituation = {
+  role: string
+  site: string | null
+  market: string | null
+  rest: { kind: string; ats: string } | null
+  travel: { kind: string; ats: string } | null
+  weather: Array<{ kind: string; ats: string }>
+}
+
 export type NeutralPacketTeam = {
   side: 'home' | 'away'
   name: string
   abbrev: string
+  conference: string | null
+  rank: number | null
   poolSpread: number
+  role: string
   ats: string
+  splits: Record<string, string>
+  situation: NeutralPacketSituation
+  vsOpponent: NeutralPacketCover[]
   profile: {
     archetype: string
     detail: string
@@ -81,6 +114,13 @@ export type NeutralPacketTeam = {
   travel: string | null
   injuries: string[]
   recentCovers: NeutralPacketCover[]
+}
+
+export type NeutralPacketPool = {
+  home: number
+  away: number
+  unknown: number
+  called: number
 }
 
 export type NeutralPacket = {
@@ -97,12 +137,14 @@ export type NeutralPacket = {
   cbsHomeSpread: number
   dkHomeSpread: number | null
   lineEdge: number | null
+  linePath: string | null
   skipReason: string | null
   lean: { side: 'home' | 'away'; team: string; spread: number } | null
   cardPick: NeutralCardPick | null
   cardDetail: string | null
   weather: string | null
   public: { awayPct: number | null; homePct: number | null } | null
+  pool: NeutralPacketPool | null
   teams: NeutralPacketTeam[]
 }
 
@@ -118,14 +160,41 @@ export type GeminiAskCandidate = {
   gameId: string
   cbsEventId: number
   brief: NeutralBrief | null
+  leftover?: boolean
 }
 
 export type NeutralTeamSource = Pick<
   TeamRecord,
   'name' | 'abbrev' | 'appearances'
-> & {
-  overall?: TeamSplit
-}
+> &
+  Partial<
+    Pick<
+      TeamRecord,
+      | 'conference'
+      | 'rank'
+      | 'overall'
+      | 'home'
+      | 'away'
+      | 'neutral'
+      | 'favorite'
+      | 'dog'
+      | 'dogOutright'
+      | 'benign'
+      | 'adverse'
+      | 'wet'
+      | 'windy'
+      | 'hot'
+      | 'cold'
+      | 'indoor'
+      | 'oneZone'
+      | 'twoZones'
+      | 'threePlus'
+      | 'shortRest'
+      | 'normalRest'
+      | 'longRest'
+      | 'byeRest'
+    >
+  >
 
 const SIDES: readonly NeutralBriefSide[] = ['home', 'away', 'no-call']
 const CONFIDENCES: readonly NeutralBriefConfidence[] = [
@@ -252,20 +321,21 @@ export function parseGeminiBrief(raw: unknown): {
   return { side, confidence, why }
 }
 
-export const NEUTRAL_BRIEF_SYSTEM_PROMPT = `You are writing a short scouting note for one CBS Football Pick'em game. The card already has its own algorithm pick when the packet includes cardPick. You do not replace that card and you do not send picks.
+export const NEUTRAL_BRIEF_SYSTEM_PROMPT = `You are scouting one leftover CBS Football Pick'em game. The algorithm already declined it — you do not replace that card, you do not send picks, and you do not invent facts.
 
-Use only the packet. Do not invent injuries, weather, records, or lines. If a fact is missing, treat it as unknown.
+The packet already lists the card chips (CBS/DK numbers, skipReason, public, weather labels, rest/travel labels). Do not restate those chips. Write from team splits, this week's situation ATS (site, favorite/dog, rest, travel, weather), recent covers, head-to-head, and the line path.
+
+Use only the packet. Missing data is unknown.
 
 Return JSON only:
 {"side":"home"|"away"|"no-call","confidence":"light"|"medium"|"strong","why":"..."}
 
 Rules:
-- why is the product: 2-5 readable sentences quoting packet facts (ATS line, rest, travel, weather, profile, injuries, and the card pick if present).
-- side is your own lean for context, even if it disagrees with cardPick. Use no-call if the packet does not support a lean.
-- light if decided < 4 on the profiles you cite, or if you only have one thin fact.
-- medium if two packet facts point the same way.
-- strong only if multiple packet facts agree and samples are not thin.
-- If the packet is empty of directional facts, return no-call with light.`
+- why is the product: 3-6 sentences. Name the splits and tendencies that matter for THIS matchup, with sample sizes, then give a clear lean or say the sides do not separate.
+- Thin splits (under 4 graded games) are color, not a case.
+- side is your lean. Use no-call when splits conflict or samples are too thin to prefer a side.
+- light: one useful split or only thin samples. medium: two independent splits or tendencies point the same way. strong: multiple graded splits agree and samples are not thin.
+- Do not mention the algorithm, cardPick, skipReason, or that this is a leftover.`
 
 export function buildNeutralPacket(input: {
   analysis: GameAnalysis
@@ -281,6 +351,8 @@ export function buildNeutralPacket(input: {
     away?: NflStarterInjuryTeam
     home?: NflStarterInjuryTeam
   }
+  lineTicks?: Array<{ home: number }>
+  pool?: NeutralPacketPool | null
 }): NeutralPacket {
   const { analysis, unpicked, week, seasonYear } = input
   const game = analysis.game
@@ -297,6 +369,14 @@ export function buildNeutralPacket(input: {
       : cardPick
         ? { side: cardPick.side, team: cardPick.team, spread: cardPick.spread }
         : null
+  const awayOpponent = {
+    name: input.homeTeam?.name ?? game.home.name,
+    abbrev: input.homeTeam?.abbrev ?? game.home.abbrev,
+  }
+  const homeOpponent = {
+    name: input.awayTeam?.name ?? game.away.name,
+    abbrev: input.awayTeam?.abbrev ?? game.away.abbrev,
+  }
 
   return {
     week: week.order,
@@ -315,12 +395,17 @@ export function buildNeutralPacket(input: {
       analysis.liveHomeSpread != null
         ? roundToHundredth(game.homeSpread - analysis.liveHomeSpread)
         : null,
+    linePath: formatLinePath(
+      (input.lineTicks ?? []).map((tick) => tick.home),
+      formatPoolSpread,
+    ),
     skipReason: unpicked?.reason ?? null,
     lean,
     cardPick,
     cardDetail: cardPick?.detail ?? unpicked?.detail ?? null,
     weather: weatherLine(input.weather ?? null),
     public: publicLine(analysis),
+    pool: input.pool ?? null,
     teams: [
       packetTeam({
         side: 'away',
@@ -328,7 +413,9 @@ export function buildNeutralPacket(input: {
         source: input.awayTeam,
         travelRest: restTravel,
         names,
+        opponent: awayOpponent,
         injuries: input.injuries?.away,
+        weather: input.weather ?? null,
       }),
       packetTeam({
         side: 'home',
@@ -336,7 +423,9 @@ export function buildNeutralPacket(input: {
         source: input.homeTeam,
         travelRest: restTravel,
         names,
+        opponent: homeOpponent,
         injuries: input.injuries?.home,
+        weather: input.weather ?? null,
       }),
     ],
   }
@@ -348,11 +437,11 @@ export function formatNeutralBriefTag(
 ) {
   if (isNeutralBriefFailed(brief)) return 'Gemini failed · try again'
   if (brief.side === 'no-call') {
-    return `Gemini · no call · ${brief.confidence}`
+    return `Scout · no call · ${brief.confidence}`
   }
   const team = brief.side === 'home' ? game.home : game.away
   const spread = poolSpreadForSide(game.homeSpread, brief.side)
-  return `Gemini · ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
+  return `Scout · ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
 }
 
 export function formatGeminiPickTag(
@@ -376,8 +465,12 @@ export function formatGeminiPickTag(
 export function selectGamesToAsk(
   candidates: GeminiAskCandidate[],
   budget = GEMINI_ASK_BUDGET,
+  leftoversOnly = false,
 ) {
-  return [...candidates]
+  const pool = leftoversOnly
+    ? candidates.filter((row) => row.leftover)
+    : candidates
+  return [...pool]
     .sort((left, right) => {
       const rank = askRank(left) - askRank(right)
       if (rank) return rank
@@ -406,19 +499,59 @@ function packetTeam(input: {
   source: NeutralTeamSource | null
   travelRest?: GameTravelRest
   names: { away: string; home: string }
+  opponent: { name: string; abbrev: string }
   injuries?: NflStarterInjuryTeam
+  weather?: FrozenWeather | null
 }): NeutralPacketTeam {
   const team = input.game[input.side]
   const appearances = input.source?.appearances ?? []
-  const overall =
-    input.source?.overall ?? summarizeAppearances(appearances)
+  const splits = resolveSplits(input.source)
   const profile = buildTeamProfile({ appearances })
+  const poolSpread = poolSpreadForSide(input.game.homeSpread, input.side)
+  const rest =
+    input.side === 'away'
+      ? input.travelRest?.awayRest
+      : input.travelRest?.homeRest
+  const travel =
+    input.side === 'away'
+      ? input.travelRest?.awayTravel
+      : input.travelRest?.homeTravel
+  const restKey = restSplitKey(rest)
+  const travelKey = travelSplitKey(travel)
   return {
     side: input.side,
     name: input.source?.name ?? team.name,
     abbrev: input.source?.abbrev ?? team.abbrev,
-    poolSpread: poolSpreadForSide(input.game.homeSpread, input.side),
-    ats: overall.detail,
+    conference: input.source?.conference ?? team.conference ?? null,
+    rank: input.source?.rank ?? team.rank ?? null,
+    poolSpread,
+    role: roleLabel(poolSpread, input.side),
+    ats: splits.overall.detail,
+    splits: compactSplits(splits),
+    situation: {
+      role: roleLabel(poolSpread, input.side),
+      site: splitLine(input.side === 'home' ? splits.home : splits.away),
+      market: splitLine(
+        poolSpread > 0
+          ? splits.dog
+          : poolSpread < 0
+            ? splits.favorite
+            : null,
+      ),
+      rest:
+        restKey && splitLine(restSplitFor(splits, restKey))
+          ? { kind: restKey, ats: splitLine(restSplitFor(splits, restKey))! }
+          : null,
+      travel:
+        travelKey && splitLine(travelSplitFor(splits, travelKey))
+          ? {
+              kind: travelKey,
+              ats: splitLine(travelSplitFor(splits, travelKey))!,
+            }
+          : null,
+      weather: weatherSituation(splits, input.weather ?? null),
+    },
+    vsOpponent: vsOpponentCovers(appearances, input.opponent),
     profile: {
       archetype: profile.archetype,
       detail: profile.archetypeDetail,
@@ -434,6 +567,198 @@ function packetTeam(input: {
     injuries: injuryLines(input.injuries),
     recentCovers: recentCovers(appearances),
   }
+}
+
+type ResolvedSplits = {
+  overall: TeamSplit
+  home: TeamSplit
+  away: TeamSplit
+  neutral: TeamSplit
+  favorite: TeamSplit
+  dog: TeamSplit
+  dogOutright: TeamSplit
+  benign: TeamSplit
+  adverse: TeamSplit
+  wet: TeamSplit
+  windy: TeamSplit
+  hot: TeamSplit
+  cold: TeamSplit
+  indoor: TeamSplit
+  oneZone: TeamSplit
+  twoZones: TeamSplit
+  threePlus: TeamSplit
+  shortRest: TeamSplit
+  normalRest: TeamSplit
+  longRest: TeamSplit
+  byeRest: TeamSplit
+}
+
+function emptySplit(): TeamSplit {
+  return summarizeAppearances([])
+}
+
+function resolveSplits(source: NeutralTeamSource | null): ResolvedSplits {
+  const appearances = source?.appearances ?? []
+  return {
+    overall: source?.overall ?? summarizeAppearances(appearances),
+    home:
+      source?.home ??
+      summarizeAppearances(appearances, (row) => row.venue === 'home'),
+    away:
+      source?.away ??
+      summarizeAppearances(appearances, (row) => row.venue === 'away'),
+    neutral:
+      source?.neutral ??
+      summarizeAppearances(appearances, (row) => row.venue === 'neutral'),
+    favorite:
+      source?.favorite ??
+      summarizeAppearances(appearances, (row) => row.market === 'favorite'),
+    dog:
+      source?.dog ??
+      summarizeAppearances(appearances, (row) => row.market === 'dog'),
+    dogOutright: source?.dogOutright ?? emptySplit(),
+    benign:
+      source?.benign ??
+      summarizeAppearances(
+        appearances,
+        (row) => row.weather?.bucket === 'benign',
+      ),
+    adverse:
+      source?.adverse ??
+      summarizeAppearances(
+        appearances,
+        (row) => row.weather?.bucket === 'adverse',
+      ),
+    wet:
+      source?.wet ??
+      summarizeAppearances(appearances, (row) => row.weather?.wet === true),
+    windy:
+      source?.windy ??
+      summarizeAppearances(appearances, (row) => row.weather?.windy === true),
+    hot:
+      source?.hot ??
+      summarizeAppearances(appearances, (row) =>
+        isHotTemp(row.weather?.temperature),
+      ),
+    cold:
+      source?.cold ??
+      summarizeAppearances(appearances, (row) =>
+        isColdTemp(row.weather?.temperature),
+      ),
+    indoor:
+      source?.indoor ??
+      summarizeAppearances(
+        appearances,
+        (row) => row.weather?.bucket === 'indoor',
+      ),
+    oneZone:
+      source?.oneZone ??
+      summarizeAppearances(
+        appearances,
+        (row) => travelSplitKey(row.travel) === 'oneZone',
+      ),
+    twoZones:
+      source?.twoZones ??
+      summarizeAppearances(
+        appearances,
+        (row) => travelSplitKey(row.travel) === 'twoZones',
+      ),
+    threePlus:
+      source?.threePlus ??
+      summarizeAppearances(
+        appearances,
+        (row) => travelSplitKey(row.travel) === 'threePlus',
+      ),
+    shortRest:
+      source?.shortRest ??
+      summarizeAppearances(
+        appearances,
+        (row) => restSplitKey(row.rest) === 'short',
+      ),
+    normalRest:
+      source?.normalRest ??
+      summarizeAppearances(
+        appearances,
+        (row) => restSplitKey(row.rest) === 'normal',
+      ),
+    longRest:
+      source?.longRest ??
+      summarizeAppearances(
+        appearances,
+        (row) => restSplitKey(row.rest) === 'long',
+      ),
+    byeRest:
+      source?.byeRest ??
+      summarizeAppearances(appearances, (row) => restSplitKey(row.rest) === 'bye'),
+  }
+}
+
+function compactSplits(splits: ResolvedSplits) {
+  const out: Record<string, string> = {}
+  for (const [key, split] of Object.entries(splits)) {
+    const line = splitLine(split)
+    if (line) out[key] = line
+  }
+  return out
+}
+
+function splitLine(split: TeamSplit | null | undefined) {
+  if (!split || split.games === 0) return null
+  return `${split.detail} (${split.rate}) in ${split.games}`
+}
+
+function restSplitFor(splits: ResolvedSplits, kind: RestSplitKey) {
+  if (kind === 'short') return splits.shortRest
+  if (kind === 'normal') return splits.normalRest
+  if (kind === 'long') return splits.longRest
+  return splits.byeRest
+}
+
+function travelSplitFor(splits: ResolvedSplits, kind: TravelSplitKey) {
+  if (kind === 'oneZone') return splits.oneZone
+  if (kind === 'twoZones') return splits.twoZones
+  return splits.threePlus
+}
+
+function weatherSituation(
+  splits: ResolvedSplits,
+  weather: FrozenWeather | null,
+) {
+  if (!weather) return []
+  const rows: Array<{ kind: string; ats: string }> = []
+  const add = (kind: string, split: TeamSplit) => {
+    const line = splitLine(split)
+    if (line) rows.push({ kind, ats: line })
+  }
+  if (weather.bucket === 'indoor') add('indoor', splits.indoor)
+  else if (weather.bucket === 'benign') add('benign', splits.benign)
+  else add('adverse', splits.adverse)
+  if (weather.wet) add('wet', splits.wet)
+  if (weather.windy) add('windy', splits.windy)
+  if (isHotTemp(weather.temperature)) add('hot', splits.hot)
+  if (isColdTemp(weather.temperature)) add('cold', splits.cold)
+  return rows
+}
+
+function vsOpponentCovers(
+  appearances: TeamAppearance[],
+  opponent: { name: string; abbrev: string },
+) {
+  const abbrev = opponent.abbrev.trim().toLowerCase()
+  const name = opponent.name.trim().toLowerCase()
+  return recentCovers(
+    appearances.filter((row) => {
+      const rowAbbrev = row.opponentAbbrev.trim().toLowerCase()
+      const rowName = row.opponent.trim().toLowerCase()
+      return rowAbbrev === abbrev || rowName === name
+    }),
+  )
+}
+
+function roleLabel(spread: number, side: 'home' | 'away') {
+  const site = side === 'home' ? 'home' : 'road'
+  if (spread === 0) return `${site} pick'em`
+  return spread > 0 ? `${site} dog` : `${site} favorite`
 }
 
 function recentCovers(appearances: TeamAppearance[]): NeutralPacketCover[] {

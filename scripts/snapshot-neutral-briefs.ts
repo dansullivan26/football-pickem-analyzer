@@ -1,18 +1,26 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { generateSuggestedCard } from '../src/cardStrategy.ts'
 import { classifyEdge } from '../src/cardScoring.ts'
+import { poolSupportProjectionsForWeek } from '../src/cardPoolAware.ts'
 import { gameIsUpcoming } from '../src/gameStatus.ts'
+import {
+  lineHistoryByEvent,
+  ticksEndingAtLive,
+} from '../src/lineHistory.ts'
 import { buildTeamDirectory, teamKey } from '../src/teamPerformance.ts'
 import { buildTravelRestIndex } from '../src/travelRest.ts'
 import type { LastKickoffFile } from '../src/lastKickoff.ts'
+import type { PredictionForecasts } from '../src/playerPrediction.ts'
 import type { WeatherHistoryFile } from '../src/weatherBuckets.ts'
 import type { TeamRosterFile } from '../src/teamRoster.ts'
 import type { NflStarterInjuryFile } from '../src/nflStarterInjuries.ts'
 import type {
   ConsensusFeed,
   GameAnalysis,
+  LineHistory,
   OddsEvent,
   OddsFeed,
+  PlayerHistory,
   RecommendationHistory,
   Slate,
   SlateGame,
@@ -106,7 +114,8 @@ async function askGeminiOnce(packet: NeutralPacket) {
         },
       ],
       generationConfig: {
-        temperature: 0.2,
+        temperature: 0.35,
+        maxOutputTokens: 700,
         responseMimeType: 'application/json',
         responseSchema: {
           type: 'object',
@@ -184,6 +193,21 @@ const teamRoster = JSON.parse(
 const nflStarterInjuries = JSON.parse(
   await readFile(new URL('src/data/nfl-starter-injuries.json', ROOT), 'utf8'),
 ) as NflStarterInjuryFile
+const playerHistory = JSON.parse(
+  await readFile(new URL('src/data/player-history.json', ROOT), 'utf8'),
+) as PlayerHistory
+const lineHistory = JSON.parse(
+  await readFile(new URL('src/data/line-history.json', ROOT), 'utf8'),
+) as LineHistory
+
+let forecasts: PredictionForecasts | null = null
+try {
+  forecasts = JSON.parse(
+    await readFile(new URL('src/data/prediction-forecasts.json', ROOT), 'utf8'),
+  ) as PredictionForecasts
+} catch {
+  // Pool expected stays empty until forecasts exist.
+}
 
 let lastKickoff: LastKickoffFile | null = null
 try {
@@ -205,11 +229,20 @@ try {
   // First freeze.
 }
 
-const travelRestByEvent = buildTravelRestIndex(
-  slate,
+const travelRestIndex = buildTravelRestIndex(slate, history, lastKickoff)
+const travelRestByEvent = travelRestIndex.byEvent
+const lineByEvent = lineHistoryByEvent(
+  lineHistory,
+  slate.week.order,
+  slate.pool.seasonYear,
+)
+const poolByEvent = poolSupportProjectionsForWeek(
+  playerHistory,
   history,
-  lastKickoff,
-).byEvent
+  forecasts,
+  slate.week.order,
+  travelRestIndex.byAppearance,
+)
 const injuriesByAbbrev = new Map(
   (nflStarterInjuries.teams ?? []).map((team) => [team.abbrev, team]),
 )
@@ -257,11 +290,14 @@ const card = generateSuggestedCard(
 
 const pickById = new Map(card.picks.map((pick) => [pick.gameId, pick]))
 const unpickedById = new Map(card.unpicked.map((game) => [game.gameId, game]))
-const eligible = upcoming.filter((row) => row.category !== 'pending')
+const eligible = upcoming.filter(
+  (row) => row.category !== 'pending' && unpickedById.has(row.game.id),
+)
 const queue = selectGamesToAsk(
   eligible.map((row) => ({
     gameId: row.game.id,
     cbsEventId: row.game.cbsEventId,
+    leftover: true,
     brief: lookupNeutralBrief(
       file,
       { gameId: row.game.id },
@@ -270,6 +306,7 @@ const queue = selectGamesToAsk(
     ),
   })),
   ASK_LIMIT,
+  true,
 )
 
 let wrote = 0
@@ -314,6 +351,11 @@ for (const item of queue) {
             home: injuriesByAbbrev.get(analysis.game.home.abbrev),
           }
         : undefined,
+    lineTicks: ticksEndingAtLive(
+      lineByEvent.get(analysis.game.cbsEventId)?.ticks ?? [],
+      analysis.odds?.lines.draftkings,
+    ),
+    pool: poolByEvent.get(analysis.game.cbsEventId) ?? null,
   })
 
   try {
@@ -373,5 +415,5 @@ if (wrote > 0) {
 }
 
 console.log(
-  `Gemini notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} upcoming (${card.picks.length} picks, ${card.unpicked.length} leftovers).`,
+  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} leftovers (${card.picks.length} recs skipped).`,
 )

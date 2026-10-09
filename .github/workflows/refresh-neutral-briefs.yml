@@ -2,7 +2,7 @@ name: Refresh Gemini notes
 
 on:
   schedule:
-    # Small budget per run; missing/failed first, then oldest paragraph.
+    # Leftover-only budget; missing/failed first, then oldest paragraph.
     - cron: '7,27,47 * * * *'
   workflow_dispatch:
 

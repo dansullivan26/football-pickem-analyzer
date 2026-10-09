@@ -24,6 +24,7 @@ import {
   NFL_AVAILABILITY_LABELS,
   type NflStarterInjuryTeam,
 } from './nflStarterInjuries.ts'
+import { etDayKey } from './gameStatus.ts'
 import type { GameAnalysis, SlateGame } from './types.ts'
 import type { SuggestedPick, UnpickedGame } from './cardStrategy.ts'
 
@@ -31,7 +32,7 @@ import type { SuggestedPick, UnpickedGame } from './cardStrategy.ts'
 export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash'
 export const NEUTRAL_BRIEF_RECENT_COVERS = 8
 export const NEUTRAL_BRIEF_MAX_WHY = 900
-/** Leftover-only budget: missing/failed first, then the oldest paragraph. */
+/** Game-day budget: leftovers first, then recs still missing a same-day note. */
 export const GEMINI_ASK_BUDGET = 6
 
 export type NeutralBriefSide = 'home' | 'away' | 'no-call'
@@ -161,6 +162,7 @@ export type GeminiAskCandidate = {
   cbsEventId: number
   brief: NeutralBrief | null
   leftover?: boolean
+  kickoff?: string
 }
 
 export type NeutralTeamSource = Pick<
@@ -256,12 +258,12 @@ export function summarizeGeminiError(message: string) {
 
 export function formatNeutralBriefFailure(brief: NeutralBriefFailed) {
   if (brief.error.startsWith('503')) {
-    return 'Scout was busy (503). The next leftover-notes run will try this game again.'
+    return 'Scout was busy (503). The next scout run will try this game again.'
   }
   if (brief.error.startsWith('429')) {
-    return 'Scout hit a rate limit. The next leftover-notes run will try this game again.'
+    return 'Scout hit a rate limit. The next scout run will try this game again.'
   }
-  return `Scout failed (${brief.error}). The next leftover-notes run will try this game again.`
+  return `Scout failed (${brief.error}). The next scout run will try this game again.`
 }
 
 export function freezeNeutralBrief(
@@ -449,6 +451,25 @@ export function formatGeminiPickTag(
   return `Gemini leans ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
 }
 
+export function isScoutGameDay(
+  kickoff: string,
+  now: Date | number = Date.now(),
+) {
+  const gameDay = etDayKey(kickoff)
+  const today = etDayKey(now instanceof Date ? now.getTime() : now)
+  return Boolean(gameDay && today && gameDay === today)
+}
+
+export function isGameDayFreshNote(
+  brief: NeutralBrief | null | undefined,
+  kickoff: string,
+) {
+  if (!brief || isNeutralBriefFailed(brief)) return false
+  const written = etDayKey(brief.frozenAt)
+  const gameDay = etDayKey(kickoff)
+  return Boolean(written && gameDay && written === gameDay)
+}
+
 export function selectGamesToAsk(
   candidates: GeminiAskCandidate[],
   budget = GEMINI_ASK_BUDGET,
@@ -468,10 +489,27 @@ export function selectGamesToAsk(
     .slice(0, Math.max(0, budget))
 }
 
+/** Upcoming priced games whose ET kickoff is today and still need a same-day note. */
+export function selectGameDayScoutAsks(
+  candidates: Array<GeminiAskCandidate & { kickoff: string }>,
+  budget = GEMINI_ASK_BUDGET,
+  now: Date | number = Date.now(),
+  includeFresh = false,
+) {
+  const pool = candidates.filter((row) => {
+    if (!isScoutGameDay(row.kickoff, now)) return false
+    if (includeFresh) return true
+    return !isGameDayFreshNote(row.brief, row.kickoff)
+  })
+  return selectGamesToAsk(pool, budget, false)
+}
+
 function askRank(row: GeminiAskCandidate) {
-  if (!row.brief) return 0
-  if (isNeutralBriefFailed(row.brief)) return 1
-  return 2
+  // Recs sort after leftovers. Each bucket is missing < failed < oldest note.
+  const leftoverBoost = row.leftover === false ? 3 : 0
+  if (!row.brief) return leftoverBoost
+  if (isNeutralBriefFailed(row.brief)) return leftoverBoost + 1
+  return leftoverBoost + 2
 }
 
 function askStamp(row: GeminiAskCandidate) {

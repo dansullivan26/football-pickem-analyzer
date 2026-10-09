@@ -11,4 +11,6 @@ test('leftover scout prompt tells the model to lean on thin samples', async () =
   assert.match(prompt, /Do not use no-call just because decided games are under 4/)
   assert.match(prompt, /Return JSON only/)
   assert.match(prompt, /"side":"home"\|"away"\|"no-call"/)
+  assert.match(prompt, /on game day/)
+  assert.match(prompt, /disagreement is a flag, not a vote/)
 })

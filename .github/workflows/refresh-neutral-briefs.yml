@@ -2,7 +2,7 @@ name: Refresh Gemini notes
 
 on:
   schedule:
-    # Leftover-only budget; missing/failed first, then oldest paragraph.
+    # Game-day only. Leftovers first, then recs missing a same-day note.
     - cron: '7,27,47 * * * *'
   workflow_dispatch:
 
@@ -29,7 +29,7 @@ jobs:
           curl https://cursor.com/install -fsS | bash
           echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Snapshot leftover notes
+      - name: Snapshot game-day scout notes
         run: npm run snapshot-neutral-briefs
         env:
           SCOUT_PROVIDER: ${{ vars.SCOUT_PROVIDER }}
@@ -39,18 +39,18 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-      - name: Commit leftover notes
+      - name: Commit scout notes
         id: commit
         run: |
           if git diff --quiet -- src/data/neutral-briefs.json; then
-            echo "No leftover-note changes to commit."
+            echo "No scout-note changes to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/neutral-briefs.json
-          git commit -m "data: refresh leftover notes"
+          git commit -m "data: refresh scout notes"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
           echo "committed=true" >> "$GITHUB_OUTPUT"

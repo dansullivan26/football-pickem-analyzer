@@ -13,8 +13,11 @@ import {
   freezeNeutralBrief,
   isNeutralBriefFailed,
   isNeutralBriefOk,
+  isGameDayFreshNote,
+  isScoutGameDay,
   lookupNeutralBrief,
   parseGeminiBrief,
+  selectGameDayScoutAsks,
   selectGamesToAsk,
   summarizeGeminiError,
   type NeutralBrief,
@@ -397,7 +400,7 @@ test('failure copy tells the operator the next run will retry', () => {
   assert.equal(summarizeGeminiError('Anthropic 529: overloaded'), '503 high demand')
   assert.equal(
     formatNeutralBriefFailure(failed()),
-    'Scout was busy (503). The next leftover-notes run will try this game again.',
+    'Scout was busy (503). The next scout run will try this game again.',
   )
   assert.equal(
     formatNeutralBriefTag(failed(), unpicked()),
@@ -505,6 +508,93 @@ test('packet includes line path, pool expected, and head-to-head covers', () => 
   assert.equal(packet.teams[0]?.vsOpponent[0]?.result, 'win')
   assert.equal(packet.teams[1]?.vsOpponent[0]?.opponent, 'Tennessee')
   assert.equal(packet.teams[1]?.vsOpponent[0]?.result, 'loss')
+})
+
+test('game-day gate waits until the ET kickoff day', () => {
+  const saturdayKick = '2026-10-10T15:30:00-04:00'
+  const fridayAfternoon = new Date('2026-10-09T18:00:00-04:00')
+  const saturdayMorning = new Date('2026-10-10T08:00:00-04:00')
+  assert.equal(isScoutGameDay(saturdayKick, fridayAfternoon), false)
+  assert.equal(isScoutGameDay(saturdayKick, saturdayMorning), true)
+  assert.equal(isScoutGameDay('2026-10-11T13:00:00-04:00', saturdayMorning), false)
+})
+
+test('a note written before game day is stale; a same-day note is fresh', () => {
+  const saturdayKick = '2026-10-10T15:30:00-04:00'
+  const fridayNote = brief({ frozenAt: '2026-10-09T18:46:38.808Z' })
+  const saturdayNote = brief({ frozenAt: '2026-10-10T12:00:00.000Z' })
+  assert.equal(isGameDayFreshNote(fridayNote, saturdayKick), false)
+  assert.equal(isGameDayFreshNote(saturdayNote, saturdayKick), true)
+  assert.equal(isGameDayFreshNote(failed(), saturdayKick), false)
+  assert.equal(isGameDayFreshNote(null, saturdayKick), false)
+})
+
+test('game-day queue skips other days, prefers leftovers, and skips fresh notes', () => {
+  const saturdayKick = '2026-10-10T15:30:00-04:00'
+  const sundayKick = '2026-10-11T13:00:00-04:00'
+  const saturdayMorning = new Date('2026-10-10T08:00:00-04:00')
+  const fridayNote = brief({
+    gameId: 'ucla-ore',
+    cbsEventId: 1,
+    frozenAt: '2026-10-09T18:46:38.808Z',
+  })
+  const saturdayNote = brief({
+    gameId: 'fresh-rec',
+    cbsEventId: 4,
+    frozenAt: '2026-10-10T12:00:00.000Z',
+  })
+  const candidates = [
+    {
+      gameId: 'sunday-nfl',
+      cbsEventId: 5,
+      leftover: false,
+      kickoff: sundayKick,
+      brief: null,
+    },
+    {
+      gameId: 'fresh-rec',
+      cbsEventId: 4,
+      leftover: false,
+      kickoff: saturdayKick,
+      brief: saturdayNote,
+    },
+    {
+      gameId: 'sat-rec',
+      cbsEventId: 3,
+      leftover: false,
+      kickoff: saturdayKick,
+      brief: null,
+    },
+    {
+      gameId: 'ucla-ore',
+      cbsEventId: 1,
+      leftover: true,
+      kickoff: saturdayKick,
+      brief: fridayNote,
+    },
+    {
+      gameId: 'sat-leftover-missing',
+      cbsEventId: 2,
+      leftover: true,
+      kickoff: saturdayKick,
+      brief: null,
+    },
+  ]
+
+  assert.deepEqual(
+    selectGameDayScoutAsks(candidates, 6, saturdayMorning).map((row) => row.gameId),
+    ['sat-leftover-missing', 'ucla-ore', 'sat-rec'],
+  )
+  assert.deepEqual(
+    selectGameDayScoutAsks(candidates, 6, new Date('2026-10-09T18:00:00-04:00')).map(
+      (row) => row.gameId,
+    ),
+    [],
+  )
+  assert.deepEqual(
+    selectGameDayScoutAsks(candidates, 6, saturdayMorning, true).map((row) => row.gameId),
+    ['sat-leftover-missing', 'ucla-ore', 'sat-rec', 'fresh-rec'],
+  )
 })
 
 test('pick-row tag marks agreement or a Gemini lean', () => {

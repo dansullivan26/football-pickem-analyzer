@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-09T12:08:08.373Z",
+  "updatedAt": "2026-10-09T18:21:58.022Z",
   "games": [
     {
       "status": "ok",
@@ -328,16 +328,18 @@
       "frozenAt": "2026-10-08T19:24:07.128Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamryga4tk===",
       "cbsEventId": 50028095,
       "week": 6,
       "seasonYear": 2026,
       "away": "LSU",
       "home": "Kentucky",
-      "error": "429 rate limit",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick supports Kentucky at +10.5, capturing a 2-point line value edge against the DraftKings 8.5-point spread alongside LSU traveling one time zone east. Both teams have small profile samples with decided counts under four (LSU at 3 and Kentucky at 1). Adverse conditions with 18 mph winds and a 53% chance of showers and thunderstorms further favor taking the double-digit home underdog.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-08T19:24:40.333Z"
+      "frozenAt": "2026-10-09T18:21:19.955Z"
     },
     {
       "status": "ok",
@@ -368,16 +370,18 @@
       "frozenAt": "2026-10-07T06:39:08.135Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyts===",
       "cbsEventId": 50028119,
       "week": 6,
       "seasonYear": 2026,
       "away": "Arizona",
       "home": "West Virginia",
-      "error": "429 rate limit",
+      "side": "home",
+      "confidence": "light",
+      "why": "The card pick backs West Virginia catching +3.5, highlighting the field-goal hook and Arizona traveling three time zones east for an early kickoff. Arizona sits at 0-1 ATS with an unestablished profile across just one graded game, making their form difficult to gauge. West Virginia holds an even 2-2 ATS mark on normal rest, providing a reasonable spot to take the points at home in comfortable weather.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-08T19:25:10.469Z"
+      "frozenAt": "2026-10-09T18:21:58.022Z"
     },
     {
       "status": "ok",
@@ -605,21 +609,23 @@
       "seasonYear": 2026,
       "away": "San Francisco",
       "home": "Seattle",
-      "error": "fetch failed",
+      "error": "503 high demand",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-08T13:20:11.128Z"
+      "attemptedAt": "2026-10-09T18:20:11.717Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3te===",
       "cbsEventId": 50029272,
       "week": 6,
       "seasonYear": 2026,
       "away": "Baltimore",
       "home": "Atlanta",
-      "error": "503 high demand",
+      "side": "home",
+      "confidence": "medium",
+      "why": "The card pick backs Atlanta at -2.5, capturing a full point of value compared to the DraftKings -3.5 market line and keeping the wager under the key field-goal hook. Although Atlanta is on a short 6-day week while Baltimore holds normal 7-day rest indoors, the Ravens face notable injury concerns with quarterback Lamar Jackson listed as questionable with an ankle issue.",
       "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-08T13:21:03.527Z"
+      "frozenAt": "2026-10-09T18:20:27.697Z"
     },
     {
       "status": "ok",

@@ -203,7 +203,8 @@ dump timestamp), and `games[]` (`cbsEventId` or `gameId`, plus `sides` and/or
 `report` still ingest. Each game row also shows an **Expected pool** read from
 the leak-free player model: the side and percent of the rest of the pool
 (current roster minus the operator card). Players with no responsible call
-count against that share. That is expected contest share, not a cover
+count against that share, so the number is a floor — those no-calls could
+still take the named side. That is expected contest share, not a cover
 claim. The Pool-aware generated card uses the same field numbers for
 leverage fades. After GrokBot ingests graded picks, the same footer adds
 **Actual pool** — the side and percent of that same field, with the old

@@ -26,30 +26,27 @@ import type {
   SlateGame,
 } from '../src/types.ts'
 import {
-  DEFAULT_GEMINI_MODEL,
   GEMINI_ASK_BUDGET,
-  NEUTRAL_BRIEF_SYSTEM_PROMPT,
   buildNeutralPacket,
   emptyNeutralBriefs,
   freezeNeutralBrief,
   lookupNeutralBrief,
-  parseGeminiBrief,
   selectGamesToAsk,
   summarizeGeminiError,
   type NeutralBriefsFile,
   type NeutralCardPick,
-  type NeutralPacket,
 } from '../src/neutralBrief.ts'
+import { askScout, resolveScoutConfig } from '../src/scoutProvider.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/neutral-briefs.json', ROOT)
 const FORCE = process.argv.includes('--force')
 const ASK_ALL = process.argv.includes('--all')
-const MODEL = process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
-const API_KEY = process.env.GEMINI_API_KEY?.trim() ?? ''
+const SCOUT = resolveScoutConfig(process.env)
 const ASK_LIMIT = ASK_ALL
   ? Number.POSITIVE_INFINITY
-  : Number(process.env.GEMINI_ASK_LIMIT) || GEMINI_ASK_BUDGET
+  : Number(process.env.SCOUT_ASK_LIMIT || process.env.GEMINI_ASK_LIMIT) ||
+    GEMINI_ASK_BUDGET
 
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
@@ -89,87 +86,6 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined, consensus: Ga
     category: classifyEdge(magnitude),
     recommendedSide: edge > 0 ? 'home' : edge < 0 ? 'away' : null,
   }
-}
-
-const GEMINI_RETRY_STATUSES = new Set([429, 503])
-const GEMINI_ATTEMPTS = 4
-
-async function askGeminiOnce(packet: NeutralPacket) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent?key=${encodeURIComponent(API_KEY)}`
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: NEUTRAL_BRIEF_SYSTEM_PROMPT }],
-      },
-      contents: [
-        {
-          role: 'user',
-          parts: [
-            {
-              text: `Packet:\n${JSON.stringify(packet, null, 2)}`,
-            },
-          ],
-        },
-      ],
-      generationConfig: {
-        temperature: 0.35,
-        maxOutputTokens: 700,
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: 'object',
-          properties: {
-            side: { type: 'string', enum: ['home', 'away', 'no-call'] },
-            confidence: { type: 'string', enum: ['light', 'medium', 'strong'] },
-            why: { type: 'string' },
-          },
-          required: ['side', 'confidence', 'why'],
-        },
-      },
-    }),
-  })
-  const body = await response.text()
-  if (!response.ok) {
-    throw new Error(`Gemini ${response.status}: ${body.slice(0, 400)}`)
-  }
-  const payload = JSON.parse(body) as {
-    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>
-  }
-  const text = payload.candidates?.[0]?.content?.parts
-    ?.map((part) => part.text ?? '')
-    .join('')
-    .trim()
-  const parsed = parseGeminiBrief(text)
-  if (!parsed) {
-    throw new Error(`Gemini returned an unreadable brief: ${text?.slice(0, 240) ?? body.slice(0, 240)}`)
-  }
-  return parsed
-}
-
-async function askGemini(packet: NeutralPacket) {
-  let lastError: Error | null = null
-  for (let attempt = 1; attempt <= GEMINI_ATTEMPTS; attempt += 1) {
-    try {
-      return await askGeminiOnce(packet)
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error))
-      const status = Number(/Gemini (\d+)/.exec(lastError.message)?.[1])
-      if (!GEMINI_RETRY_STATUSES.has(status) || attempt === GEMINI_ATTEMPTS) {
-        throw lastError
-      }
-      const waitMs = 4000 * 2 ** (attempt - 1)
-      console.log(
-        `::warning title=Gemini busy::retry ${attempt}/${GEMINI_ATTEMPTS} in ${waitMs / 1000}s — ${lastError.message.slice(0, 160)}`,
-      )
-      await sleep(waitMs)
-    }
-  }
-  throw lastError ?? new Error('Gemini failed')
-}
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 const slate = JSON.parse(
@@ -312,11 +228,14 @@ const queue = selectGamesToAsk(
 let wrote = 0
 let failed = 0
 
-if (queue.length > 0 && !API_KEY) {
-  console.log(
-    '::error title=Missing GEMINI_API_KEY::Add the GitHub Actions secret GEMINI_API_KEY from https://aistudio.google.com/apikey',
-  )
+if (queue.length > 0 && !SCOUT.ok) {
+  console.log(`::error title=Missing scout key::${SCOUT.error}`)
   process.exit(1)
+}
+
+const scout = SCOUT.ok ? SCOUT.config : null
+if (scout) {
+  console.log(`Scout provider ${scout.provider} (${scout.model})`)
 }
 
 for (const item of queue) {
@@ -359,7 +278,8 @@ for (const item of queue) {
   })
 
   try {
-    const answer = await askGemini(packet)
+    if (!scout) continue
+    const answer = await askScout(packet, scout)
     const frozenAt = new Date().toISOString()
     const result = freezeNeutralBrief(
       file,
@@ -374,7 +294,7 @@ for (const item of queue) {
         side: answer.side,
         confidence: answer.confidence,
         why: answer.why,
-        model: MODEL,
+        model: `${scout.provider}:${scout.model}`,
         frozenAt,
       },
       FORCE,
@@ -388,7 +308,7 @@ for (const item of queue) {
     failed += 1
     const message = error instanceof Error ? error.message : String(error)
     console.log(
-      `::warning title=Gemini brief failed::${analysis.game.away.name} @ ${analysis.game.home.name}: ${message}`,
+      `::warning title=Scout brief failed::${analysis.game.away.name} @ ${analysis.game.home.name}: ${message}`,
     )
     const result = freezeNeutralBrief(file, {
       status: 'failed',
@@ -399,14 +319,14 @@ for (const item of queue) {
       away: analysis.game.away.name,
       home: analysis.game.home.name,
       error: summarizeGeminiError(message),
-      model: MODEL,
+      model: scout ? `${scout.provider}:${scout.model}` : 'unconfigured',
       attemptedAt: new Date().toISOString(),
     })
     file = result.file
     if (result.wrote) wrote += 1
   }
   if (queue.indexOf(item) < queue.length - 1) {
-    await sleep(1500)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
   }
 }
 

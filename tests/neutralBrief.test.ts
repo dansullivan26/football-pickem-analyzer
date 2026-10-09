@@ -393,13 +393,15 @@ test('a successful freeze is not replaced by a later 503', () => {
 
 test('failure copy tells the operator the next run will retry', () => {
   assert.equal(summarizeGeminiError('Gemini 503: high demand'), '503 high demand')
+  assert.equal(summarizeGeminiError('OpenAI 429: rate limit'), '429 rate limit')
+  assert.equal(summarizeGeminiError('Anthropic 529: overloaded'), '503 high demand')
   assert.equal(
     formatNeutralBriefFailure(failed()),
-    'Gemini was busy (503). The next Refresh Gemini notes run will try this game again.',
+    'Scout was busy (503). The next leftover-notes run will try this game again.',
   )
   assert.equal(
     formatNeutralBriefTag(failed(), unpicked()),
-    'Gemini failed · try again',
+    'Scout failed · try again',
   )
 })
 

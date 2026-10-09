@@ -34,7 +34,8 @@ Data-preparation scripts (`prepare-slate`, `prepare-players`,
 `prepare-consensus`, `snapshot-recommendations`, `snapshot-predictions`,
 `snapshot-neutral-briefs`, `apply-covers`, ...) are documented in `README.md`.
 They ingest private CBS/Covers dumps and are normally run by GitHub Actions,
-not by hand. `snapshot-neutral-briefs` needs the `GEMINI_API_KEY` secret.
+not by hand. `snapshot-neutral-briefs` needs an `OPENAI_API_KEY`,
+`ANTHROPIC_API_KEY`, or `GEMINI_API_KEY` secret.
 
 ## Routing
 

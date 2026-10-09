@@ -246,22 +246,22 @@ export function lookupNeutralBrief(
 }
 
 export function summarizeGeminiError(message: string) {
-  const status = /Gemini (\d+)/.exec(message)?.[1]
-  if (status === '503') return '503 high demand'
+  const status = /(?:Gemini|OpenAI|Anthropic|Scout) (\d+)/.exec(message)?.[1]
+  if (status === '503' || status === '529') return '503 high demand'
   if (status === '429') return '429 rate limit'
   if (status === '404') return '404 model not found'
   const compact = message.replace(/\s+/g, ' ').trim()
-  return compact.slice(0, 120) || 'Gemini request failed'
+  return compact.slice(0, 120) || 'Scout request failed'
 }
 
 export function formatNeutralBriefFailure(brief: NeutralBriefFailed) {
   if (brief.error.startsWith('503')) {
-    return 'Gemini was busy (503). The next Refresh Gemini notes run will try this game again.'
+    return 'Scout was busy (503). The next leftover-notes run will try this game again.'
   }
   if (brief.error.startsWith('429')) {
-    return 'Gemini hit a rate limit. The next Refresh Gemini notes run will try this game again.'
+    return 'Scout hit a rate limit. The next leftover-notes run will try this game again.'
   }
-  return `Gemini failed (${brief.error}). The next Refresh Gemini notes run will try this game again.`
+  return `Scout failed (${brief.error}). The next leftover-notes run will try this game again.`
 }
 
 export function freezeNeutralBrief(
@@ -435,7 +435,7 @@ export function formatNeutralBriefTag(
   brief: NeutralBrief,
   game: Pick<UnpickedGame, 'away' | 'home' | 'homeSpread'>,
 ) {
-  if (isNeutralBriefFailed(brief)) return 'Gemini failed · try again'
+  if (isNeutralBriefFailed(brief)) return 'Scout failed · try again'
   if (brief.side === 'no-call') {
     return `Scout · no call · ${brief.confidence}`
   }
@@ -448,7 +448,7 @@ export function formatGeminiPickTag(
   brief: NeutralBrief,
   pick: Pick<SuggestedPick, 'away' | 'home' | 'pickedSide' | 'poolSpread'>,
 ) {
-  if (isNeutralBriefFailed(brief)) return 'Gemini failed · try again'
+  if (isNeutralBriefFailed(brief)) return 'Scout failed · try again'
   if (brief.side === 'no-call') {
     return `Gemini · no call · ${brief.confidence}`
   }

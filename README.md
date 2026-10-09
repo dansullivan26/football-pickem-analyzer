@@ -316,18 +316,25 @@ flips Deviate, and does not change v8. The algorithm recs stay the recs.
 then the oldest paragraph), six per run by default. It runs about every
 20 minutes (`7,27,47 * * * *` UTC) and can still be started by hand.
 `--all` asks every leftover with a DraftKings number in one go.
-`GEMINI_ASK_LIMIT` overrides the budget. A later successful run overwrites
+`SCOUT_ASK_LIMIT` overrides the budget. A later successful run overwrites
 the paragraph. A 503 / 429 is stored as a retry note, not a freeze.
 
-The browser never calls the model. Add a [Google AI Studio](https://aistudio.google.com/apikey)
-key as the repository secret `GEMINI_API_KEY`. A paid key is what makes the
-notes useful; the free Flash tier rate-limits and the old prompt only
-restated the card chips. The default model is still `gemini-3.8-flash`.
-Set the repository variable `GEMINI_MODEL` to a paid Gemini model (for
-example `gemini-2.5-pro`) once the paid key is in place. The same command is:
+The browser never calls the model. The Action talks to OpenAI, Anthropic,
+or Gemini — Cursor / ChatGPT Plus / Claude Pro are not an API. Add one
+paid provider key as a repository secret and set the matching variable:
+
+| Provider | Secret | `SCOUT_PROVIDER` | Default `SCOUT_MODEL` |
+| --- | --- | --- | --- |
+| OpenAI | `OPENAI_API_KEY` | `openai` | `gpt-4.1` |
+| Anthropic | `ANTHROPIC_API_KEY` | `anthropic` | `claude-sonnet-4-5` |
+| Gemini | `GEMINI_API_KEY` | `gemini` | `gemini-3.8-flash` |
+
+If `SCOUT_PROVIDER` is unset, the job uses OpenAI, then Anthropic, then
+Gemini, depending on which key is present. Override the model with the
+`SCOUT_MODEL` repository variable. The same command is:
 
 ```bash
-GEMINI_API_KEY=... npm run snapshot-neutral-briefs
+SCOUT_PROVIDER=openai OPENAI_API_KEY=... npm run snapshot-neutral-briefs
 ```
 
 That writes `src/data/neutral-briefs.json`. A GITHUB_TOKEN push does not

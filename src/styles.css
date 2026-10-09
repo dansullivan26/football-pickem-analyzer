@@ -1096,7 +1096,12 @@ h2 {
   margin: 4px 0 0;
   color: var(--ink);
   font-size: 0.78rem;
-  line-height: 1.35;
+  line-height: 1.45;
+  max-width: 62rem;
+}
+
+.manual-review .gemini-brief-why {
+  font-size: 0.82rem;
 }
 
 .gemini-brief-why.failed {

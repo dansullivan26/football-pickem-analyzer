@@ -209,6 +209,12 @@ test('packet quotes profiles, rest, recent covers, and this week’s number', ()
   assert.equal(packet.public?.homePct, 62)
   assert.equal(packet.teams[0]?.profile.archetype, 'Covers ATS')
   assert.equal(packet.teams[0]?.recentCovers[0]?.opponent, 'UAB')
+  assert.equal(packet.teams[0]?.role, 'road dog')
+  assert.equal(packet.teams[1]?.role, 'home favorite')
+  assert.match(packet.teams[0]?.splits.away ?? '', /2-0 ATS/)
+  assert.match(packet.teams[0]?.splits.dog ?? '', /1-0 ATS/)
+  assert.match(packet.teams[0]?.situation.site ?? '', /2-0 ATS/)
+  assert.match(packet.teams[0]?.situation.market ?? '', /1-0 ATS/)
   assert.equal(packet.teams[0]?.rest, 'Tennessee 7-day week')
   assert.equal(packet.teams[0]?.travel, 'Tennessee traveling 1 zone west')
   assert.equal(packet.teams[1]?.rest, 'Texas 14-day week')
@@ -216,6 +222,8 @@ test('packet quotes profiles, rest, recent covers, and this week’s number', ()
   assert.equal(packet.teams[1]?.profile.archetype, 'Building profile')
   assert.deepEqual(packet.teams[0]?.injuries, [])
   assert.equal(packet.cardPick, null)
+  assert.equal(packet.linePath, null)
+  assert.equal(packet.pool, null)
 
   const withCard = buildNeutralPacket({
     analysis: analysis(),
@@ -332,11 +340,11 @@ test('brief tag names the CBS side and confidence', () => {
   const game = unpicked()
   assert.equal(
     formatNeutralBriefTag(brief(), game),
-    'Gemini · Tennessee +5.5 · medium',
+    'Scout · Tennessee +5.5 · medium',
   )
   assert.equal(
     formatNeutralBriefTag(brief({ side: 'no-call', confidence: 'light' }), game),
-    'Gemini · no call · light',
+    'Scout · no call · light',
   )
 })
 
@@ -385,13 +393,15 @@ test('a successful freeze is not replaced by a later 503', () => {
 
 test('failure copy tells the operator the next run will retry', () => {
   assert.equal(summarizeGeminiError('Gemini 503: high demand'), '503 high demand')
+  assert.equal(summarizeGeminiError('OpenAI 429: rate limit'), '429 rate limit')
+  assert.equal(summarizeGeminiError('Anthropic 529: overloaded'), '503 high demand')
   assert.equal(
     formatNeutralBriefFailure(failed()),
-    'Gemini was busy (503). The next Refresh Gemini notes run will try this game again.',
+    'Scout was busy (503). The next leftover-notes run will try this game again.',
   )
   assert.equal(
     formatNeutralBriefTag(failed(), unpicked()),
-    'Gemini failed · try again',
+    'Scout failed · try again',
   )
 })
 
@@ -429,6 +439,72 @@ test('ask queue prefers missing, then failed, then the oldest paragraph', () => 
     asked.map((row) => row.gameId),
     ['missing', 'failed', 'old-ok'],
   )
+})
+
+test('leftover-only queue skips algorithm recs', () => {
+  const asked = selectGamesToAsk(
+    [
+      { gameId: 'rec', cbsEventId: 1, leftover: false, brief: null },
+      { gameId: 'leftover', cbsEventId: 2, leftover: true, brief: null },
+      { gameId: 'other-rec', cbsEventId: 3, leftover: false, brief: null },
+    ],
+    4,
+    true,
+  )
+  assert.deepEqual(
+    asked.map((row) => row.gameId),
+    ['leftover'],
+  )
+})
+
+test('packet includes line path, pool expected, and head-to-head covers', () => {
+  const packet = buildNeutralPacket({
+    analysis: analysis(),
+    unpicked: unpicked(),
+    week: { order: 5, label: 'Week 5' },
+    seasonYear: 2026,
+    awayTeam: {
+      name: 'Tennessee',
+      abbrev: 'TENN',
+      appearances: [
+        appearance({
+          cbsEventId: 21,
+          week: 2,
+          venue: 'away',
+          market: 'dog',
+          homeSpread: 3.5,
+          result: 'win',
+          opponent: 'Texas',
+          opponentAbbrev: 'TEX',
+        }),
+      ],
+    },
+    homeTeam: {
+      name: 'Texas',
+      abbrev: 'TEX',
+      appearances: [
+        appearance({
+          cbsEventId: 21,
+          week: 2,
+          venue: 'home',
+          market: 'favorite',
+          homeSpread: -3.5,
+          result: 'loss',
+          opponent: 'Tennessee',
+          opponentAbbrev: 'TENN',
+        }),
+      ],
+    },
+    lineTicks: [{ home: -7 }, { home: -6 }, { home: -5.5 }],
+    pool: { home: 4, away: 9, unknown: 3, called: 13 },
+  })
+
+  assert.equal(packet.linePath, '-7 → -6 → -5.5')
+  assert.deepEqual(packet.pool, { home: 4, away: 9, unknown: 3, called: 13 })
+  assert.equal(packet.teams[0]?.vsOpponent[0]?.opponent, 'Texas')
+  assert.equal(packet.teams[0]?.vsOpponent[0]?.result, 'win')
+  assert.equal(packet.teams[1]?.vsOpponent[0]?.opponent, 'Tennessee')
+  assert.equal(packet.teams[1]?.vsOpponent[0]?.result, 'loss')
 })
 
 test('pick-row tag marks agreement or a Gemini lean', () => {

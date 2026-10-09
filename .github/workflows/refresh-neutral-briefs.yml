@@ -2,7 +2,7 @@ name: Refresh Gemini notes
 
 on:
   schedule:
-    # Small budget per run; missing/failed first, then oldest paragraph.
+    # Leftover-only budget; missing/failed first, then oldest paragraph.
     - cron: '7,27,47 * * * *'
   workflow_dispatch:
 
@@ -24,23 +24,33 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Snapshot Gemini notes
+      - name: Install Cursor CLI
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Snapshot leftover notes
         run: npm run snapshot-neutral-briefs
         env:
+          SCOUT_PROVIDER: ${{ vars.SCOUT_PROVIDER }}
+          SCOUT_MODEL: ${{ vars.SCOUT_MODEL }}
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-      - name: Commit Gemini notes
+      - name: Commit leftover notes
         id: commit
         run: |
           if git diff --quiet -- src/data/neutral-briefs.json; then
-            echo "No Gemini-note changes to commit."
+            echo "No leftover-note changes to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/neutral-briefs.json
-          git commit -m "data: refresh Gemini notes"
+          git commit -m "data: refresh leftover notes"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
           echo "committed=true" >> "$GITHUB_OUTPUT"

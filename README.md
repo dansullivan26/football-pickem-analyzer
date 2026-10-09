@@ -304,27 +304,40 @@ A 13+ day college gap is a bye only when that schedule row exists. A card
 gap alone stays a long week. NFL byes were already schedule-honest on the
 card; nflverse covers a Thursday/London game the pool slate might skip.
 
-## Gemini notes
+## Leftover scout notes
 
-Every upcoming ATS-card game can carry a Gemini paragraph next to the
-algorithm rec. The paragraph is context only: it never checks Send, never
-flips Deviate, and does not change v8. Gemini may lean the other way; that
-is fine. A later successful run overwrites the paragraph. A 503 / 429 is
-stored as a retry note, not a freeze.
+Manual-review leftovers on the ATS card can carry a scout paragraph: a lean
+from team splits, this week's situation (site, favorite/dog, rest, travel,
+weather), recent covers, head-to-head, the DraftKings line path, and the
+expected pool. The paragraph is context only. It never checks Send, never
+flips Deviate, and does not change v8. The algorithm recs stay the recs.
 
-**Refresh Gemini notes** asks four games per run (missing or failed first,
-then the oldest paragraph) so the free tier is not blasted. It runs about
-every 20 minutes (`7,27,47 * * * *` UTC) and can still be started by hand.
-`--all` asks every upcoming game with a DraftKings number in one go.
-`GEMINI_ASK_LIMIT` overrides the budget.
+**Refresh Gemini notes** asks leftover games only (missing or failed first,
+then the oldest paragraph), six per run by default. It runs about every
+20 minutes (`7,27,47 * * * *` UTC) and can still be started by hand.
+`--all` asks every leftover with a DraftKings number in one go.
+`SCOUT_ASK_LIMIT` overrides the budget. A later successful run overwrites
+the paragraph. A 503 / 429 is stored as a retry note, not a freeze.
 
-The browser never calls Gemini. Add a free [Google AI Studio](https://aistudio.google.com/apikey)
-key as the repository secret `GEMINI_API_KEY`. The default model is
-`gemini-3.8-flash`. Override it with the repository variable `GEMINI_MODEL`
-if Google moves the free model again. The same command is:
+The browser never calls the model. The Action prefers **Cursor Grok** when
+`CURSOR_API_KEY` is set (the included Cursor Models pool). Edit the prompt
+in `src/data/leftover-scout-prompt.md` and commit — the next leftover run
+sends that file, then the game packet. Other providers still work as a
+fallback:
+
+| Provider | Secret | `SCOUT_PROVIDER` | Default `SCOUT_MODEL` |
+| --- | --- | --- | --- |
+| Cursor Grok | `CURSOR_API_KEY` | `cursor` | `grok-4.7` |
+| OpenAI | `OPENAI_API_KEY` | `openai` | `gpt-4.1` |
+| Anthropic | `ANTHROPIC_API_KEY` | `anthropic` | `claude-sonnet-4-5` |
+| Gemini | `GEMINI_API_KEY` | `gemini` | `gemini-3.8-flash` |
+
+If `SCOUT_PROVIDER` is unset, the job uses Cursor, then OpenAI, then
+Anthropic, then Gemini, depending on which key is present. Override the
+model with the `SCOUT_MODEL` repository variable. The same command is:
 
 ```bash
-GEMINI_API_KEY=... npm run snapshot-neutral-briefs
+CURSOR_API_KEY=... npm run snapshot-neutral-briefs
 ```
 
 That writes `src/data/neutral-briefs.json`. A GITHUB_TOKEN push does not
@@ -442,7 +455,7 @@ The generated-card modal sends GrokBot this JSON:
 ```
 
 The modal starts with every game deselected. Only checked games are sent;
-ATS-card rows can show a Gemini paragraph next to the algorithm rec.
+ATS-card leftovers can show a scout paragraph next to Manual review.
 That note does not check Send.
 **Select all** checks every recommended game plus manual-review games that
 already have a side chosen. Each day heading has a **Send** box that checks

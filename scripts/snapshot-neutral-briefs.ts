@@ -1,47 +1,54 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { generateSuggestedCard } from '../src/cardStrategy.ts'
 import { classifyEdge } from '../src/cardScoring.ts'
+import { poolSupportProjectionsForWeek } from '../src/cardPoolAware.ts'
 import { gameIsUpcoming } from '../src/gameStatus.ts'
+import {
+  lineHistoryByEvent,
+  ticksEndingAtLive,
+} from '../src/lineHistory.ts'
 import { buildTeamDirectory, teamKey } from '../src/teamPerformance.ts'
 import { buildTravelRestIndex } from '../src/travelRest.ts'
 import type { LastKickoffFile } from '../src/lastKickoff.ts'
+import type { PredictionForecasts } from '../src/playerPrediction.ts'
 import type { WeatherHistoryFile } from '../src/weatherBuckets.ts'
 import type { TeamRosterFile } from '../src/teamRoster.ts'
 import type { NflStarterInjuryFile } from '../src/nflStarterInjuries.ts'
 import type {
   ConsensusFeed,
   GameAnalysis,
+  LineHistory,
   OddsEvent,
   OddsFeed,
+  PlayerHistory,
   RecommendationHistory,
   Slate,
   SlateGame,
 } from '../src/types.ts'
 import {
-  DEFAULT_GEMINI_MODEL,
   GEMINI_ASK_BUDGET,
-  NEUTRAL_BRIEF_SYSTEM_PROMPT,
   buildNeutralPacket,
   emptyNeutralBriefs,
   freezeNeutralBrief,
   lookupNeutralBrief,
-  parseGeminiBrief,
   selectGamesToAsk,
   summarizeGeminiError,
   type NeutralBriefsFile,
   type NeutralCardPick,
-  type NeutralPacket,
 } from '../src/neutralBrief.ts'
+import { askCursor } from './askCursor.ts'
+import { askScout, resolveScoutConfig } from '../src/scoutProvider.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/neutral-briefs.json', ROOT)
+const PROMPT_FILE = new URL('src/data/leftover-scout-prompt.md', ROOT)
 const FORCE = process.argv.includes('--force')
 const ASK_ALL = process.argv.includes('--all')
-const MODEL = process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
-const API_KEY = process.env.GEMINI_API_KEY?.trim() ?? ''
+const SCOUT = resolveScoutConfig(process.env)
 const ASK_LIMIT = ASK_ALL
   ? Number.POSITIVE_INFINITY
-  : Number(process.env.GEMINI_ASK_LIMIT) || GEMINI_ASK_BUDGET
+  : Number(process.env.SCOUT_ASK_LIMIT || process.env.GEMINI_ASK_LIMIT) ||
+    GEMINI_ASK_BUDGET
 
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
@@ -83,86 +90,6 @@ function analyzeGame(game: SlateGame, odds: OddsEvent | undefined, consensus: Ga
   }
 }
 
-const GEMINI_RETRY_STATUSES = new Set([429, 503])
-const GEMINI_ATTEMPTS = 4
-
-async function askGeminiOnce(packet: NeutralPacket) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent?key=${encodeURIComponent(API_KEY)}`
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: NEUTRAL_BRIEF_SYSTEM_PROMPT }],
-      },
-      contents: [
-        {
-          role: 'user',
-          parts: [
-            {
-              text: `Packet:\n${JSON.stringify(packet, null, 2)}`,
-            },
-          ],
-        },
-      ],
-      generationConfig: {
-        temperature: 0.2,
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: 'object',
-          properties: {
-            side: { type: 'string', enum: ['home', 'away', 'no-call'] },
-            confidence: { type: 'string', enum: ['light', 'medium', 'strong'] },
-            why: { type: 'string' },
-          },
-          required: ['side', 'confidence', 'why'],
-        },
-      },
-    }),
-  })
-  const body = await response.text()
-  if (!response.ok) {
-    throw new Error(`Gemini ${response.status}: ${body.slice(0, 400)}`)
-  }
-  const payload = JSON.parse(body) as {
-    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>
-  }
-  const text = payload.candidates?.[0]?.content?.parts
-    ?.map((part) => part.text ?? '')
-    .join('')
-    .trim()
-  const parsed = parseGeminiBrief(text)
-  if (!parsed) {
-    throw new Error(`Gemini returned an unreadable brief: ${text?.slice(0, 240) ?? body.slice(0, 240)}`)
-  }
-  return parsed
-}
-
-async function askGemini(packet: NeutralPacket) {
-  let lastError: Error | null = null
-  for (let attempt = 1; attempt <= GEMINI_ATTEMPTS; attempt += 1) {
-    try {
-      return await askGeminiOnce(packet)
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error))
-      const status = Number(/Gemini (\d+)/.exec(lastError.message)?.[1])
-      if (!GEMINI_RETRY_STATUSES.has(status) || attempt === GEMINI_ATTEMPTS) {
-        throw lastError
-      }
-      const waitMs = 4000 * 2 ** (attempt - 1)
-      console.log(
-        `::warning title=Gemini busy::retry ${attempt}/${GEMINI_ATTEMPTS} in ${waitMs / 1000}s — ${lastError.message.slice(0, 160)}`,
-      )
-      await sleep(waitMs)
-    }
-  }
-  throw lastError ?? new Error('Gemini failed')
-}
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
 const slate = JSON.parse(
   await readFile(new URL('src/data/current-slate.json', ROOT), 'utf8'),
 ) as Slate
@@ -184,6 +111,21 @@ const teamRoster = JSON.parse(
 const nflStarterInjuries = JSON.parse(
   await readFile(new URL('src/data/nfl-starter-injuries.json', ROOT), 'utf8'),
 ) as NflStarterInjuryFile
+const playerHistory = JSON.parse(
+  await readFile(new URL('src/data/player-history.json', ROOT), 'utf8'),
+) as PlayerHistory
+const lineHistory = JSON.parse(
+  await readFile(new URL('src/data/line-history.json', ROOT), 'utf8'),
+) as LineHistory
+
+let forecasts: PredictionForecasts | null = null
+try {
+  forecasts = JSON.parse(
+    await readFile(new URL('src/data/prediction-forecasts.json', ROOT), 'utf8'),
+  ) as PredictionForecasts
+} catch {
+  // Pool expected stays empty until forecasts exist.
+}
 
 let lastKickoff: LastKickoffFile | null = null
 try {
@@ -205,11 +147,20 @@ try {
   // First freeze.
 }
 
-const travelRestByEvent = buildTravelRestIndex(
-  slate,
+const travelRestIndex = buildTravelRestIndex(slate, history, lastKickoff)
+const travelRestByEvent = travelRestIndex.byEvent
+const lineByEvent = lineHistoryByEvent(
+  lineHistory,
+  slate.week.order,
+  slate.pool.seasonYear,
+)
+const poolByEvent = poolSupportProjectionsForWeek(
+  playerHistory,
   history,
-  lastKickoff,
-).byEvent
+  forecasts,
+  slate.week.order,
+  travelRestIndex.byAppearance,
+)
 const injuriesByAbbrev = new Map(
   (nflStarterInjuries.teams ?? []).map((team) => [team.abbrev, team]),
 )
@@ -257,11 +208,14 @@ const card = generateSuggestedCard(
 
 const pickById = new Map(card.picks.map((pick) => [pick.gameId, pick]))
 const unpickedById = new Map(card.unpicked.map((game) => [game.gameId, game]))
-const eligible = upcoming.filter((row) => row.category !== 'pending')
+const eligible = upcoming.filter(
+  (row) => row.category !== 'pending' && unpickedById.has(row.game.id),
+)
 const queue = selectGamesToAsk(
   eligible.map((row) => ({
     gameId: row.game.id,
     cbsEventId: row.game.cbsEventId,
+    leftover: true,
     brief: lookupNeutralBrief(
       file,
       { gameId: row.game.id },
@@ -270,16 +224,21 @@ const queue = selectGamesToAsk(
     ),
   })),
   ASK_LIMIT,
+  true,
 )
 
 let wrote = 0
 let failed = 0
 
-if (queue.length > 0 && !API_KEY) {
-  console.log(
-    '::error title=Missing GEMINI_API_KEY::Add the GitHub Actions secret GEMINI_API_KEY from https://aistudio.google.com/apikey',
-  )
+if (queue.length > 0 && !SCOUT.ok) {
+  console.log(`::error title=Missing scout key::${SCOUT.error}`)
   process.exit(1)
+}
+
+const scout = SCOUT.ok ? SCOUT.config : null
+const scoutPrompt = (await readFile(PROMPT_FILE, 'utf8')).trim()
+if (scout) {
+  console.log(`Scout provider ${scout.provider} (${scout.model})`)
 }
 
 for (const item of queue) {
@@ -314,10 +273,19 @@ for (const item of queue) {
             home: injuriesByAbbrev.get(analysis.game.home.abbrev),
           }
         : undefined,
+    lineTicks: ticksEndingAtLive(
+      lineByEvent.get(analysis.game.cbsEventId)?.ticks ?? [],
+      analysis.odds?.lines.draftkings,
+    ),
+    pool: poolByEvent.get(analysis.game.cbsEventId) ?? null,
   })
 
   try {
-    const answer = await askGemini(packet)
+    if (!scout) continue
+    const answer =
+      scout.provider === 'cursor'
+        ? await askCursor(packet, scout, scoutPrompt)
+        : await askScout(packet, scout, scoutPrompt)
     const frozenAt = new Date().toISOString()
     const result = freezeNeutralBrief(
       file,
@@ -332,7 +300,7 @@ for (const item of queue) {
         side: answer.side,
         confidence: answer.confidence,
         why: answer.why,
-        model: MODEL,
+        model: `${scout.provider}:${scout.model}`,
         frozenAt,
       },
       FORCE,
@@ -346,7 +314,7 @@ for (const item of queue) {
     failed += 1
     const message = error instanceof Error ? error.message : String(error)
     console.log(
-      `::warning title=Gemini brief failed::${analysis.game.away.name} @ ${analysis.game.home.name}: ${message}`,
+      `::warning title=Scout brief failed::${analysis.game.away.name} @ ${analysis.game.home.name}: ${message}`,
     )
     const result = freezeNeutralBrief(file, {
       status: 'failed',
@@ -357,14 +325,14 @@ for (const item of queue) {
       away: analysis.game.away.name,
       home: analysis.game.home.name,
       error: summarizeGeminiError(message),
-      model: MODEL,
+      model: scout ? `${scout.provider}:${scout.model}` : 'unconfigured',
       attemptedAt: new Date().toISOString(),
     })
     file = result.file
     if (result.wrote) wrote += 1
   }
   if (queue.indexOf(item) < queue.length - 1) {
-    await sleep(1500)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
   }
 }
 
@@ -373,5 +341,5 @@ if (wrote > 0) {
 }
 
 console.log(
-  `Gemini notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} upcoming (${card.picks.length} picks, ${card.unpicked.length} leftovers).`,
+  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${eligible.length} leftovers (${card.picks.length} recs skipped).`,
 )

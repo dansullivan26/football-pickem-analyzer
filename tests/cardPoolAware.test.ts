@@ -83,11 +83,26 @@ test('poolExpectationView names the expected side against the whole field', () =
     null,
   ])
   const view = poolExpectationView(projection, 'Indiana', 'Northwestern')
-  assert.equal(view?.line, 'Indiana 77%')
+  assert.equal(view?.line, 'Indiana at least 77%')
   assert.equal(view?.detail, '20 of 26 players · 4 no call')
-  assert.match(view?.title ?? '', /expect 77% of the pool to take Indiana/)
+  assert.match(view?.title ?? '', /expect at least 77% of the pool to take Indiana/)
+  assert.match(view?.title ?? '', /could still pick Indiana/)
   assert.equal(view?.side, 'home')
   assert.equal(view?.pct, 77)
+})
+
+test('poolExpectationView drops at least when every player has a call', () => {
+  const view = poolExpectationView(
+    projectPoolForGame([
+      ...Array.from({ length: 20 }, () => 'home' as const),
+      ...Array.from({ length: 2 }, () => 'away' as const),
+    ]),
+    'Indiana',
+    'Northwestern',
+  )
+  assert.equal(view?.line, 'Indiana 91%')
+  assert.equal(view?.detail, '20 of 22 players')
+  assert.doesNotMatch(view?.title ?? '', /at least/)
 })
 
 test('poolExpectationView calls a split instead of a 50% side', () => {

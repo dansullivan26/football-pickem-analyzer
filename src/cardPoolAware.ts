@@ -82,6 +82,8 @@ export type PoolExpectationView = {
 /**
  * Row-card copy for the leak-free pool forecast. Percent is of the field
  * we have to beat — called and unknown — not of responsible calls only.
+ * No-calls sit in the denominator, so a named side is a floor: those
+ * players could still take it.
  */
 export function poolExpectationView(
   projection: PoolProjection | null | undefined,
@@ -126,14 +128,15 @@ export function poolExpectationView(
   const team = side === 'home' ? homeName : awayName
   const count = side === 'home' ? projection.home : projection.away
   const pct = field ? Math.round((count / field) * 100) : 0
+  const floor = projection.unknown > 0
   return {
-    line: `${team} ${pct}%`,
+    line: floor ? `${team} at least ${pct}%` : `${team} ${pct}%`,
     detail: `${count} of ${field} players${
-      projection.unknown ? ` · ${projection.unknown} no call` : ''
+      floor ? ` · ${projection.unknown} no call` : ''
     }`,
-    title: `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${field} other players${
-      projection.unknown ? `; ${projection.unknown} have no responsible call` : ''
-    }). No-calls count against the share. Your card is left out. This is expected contest share, not a cover claim.`,
+    title: floor
+      ? `Based on our prediction model we expect at least ${pct}% of the pool to take ${team} (${count} of ${field} other players; ${projection.unknown} have no responsible call and could still pick ${team}). That is a floor on expected contest share. Your card is left out. Not a cover claim.`
+      : `Based on our prediction model we expect ${pct}% of the pool to take ${team} (${count} of ${field} other players). Your card is left out. This is expected contest share, not a cover claim.`,
     none: false,
     side,
     pct,

@@ -2,7 +2,7 @@
   "week": 6,
   "seasonYear": 2026,
   "label": "Week 6",
-  "updatedAt": "2026-10-08T22:31:24.411Z",
+  "updatedAt": "2026-10-09T02:19:20.189Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -187,6 +187,24 @@
           "homeSpreadBefore": -7,
           "homeSpreadAfter": -7.5,
           "towardTeam": -0.5
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029181,
+          "athleteId": "2970716",
+          "name": "Eric Murray",
+          "position": "S",
+          "teamAbbrev": "JAC",
+          "teamName": "Jacksonville",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -282,6 +300,42 @@
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -9.5,
           "towardTeam": 2
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029260,
+          "athleteId": "4568652",
+          "name": "Tyler Smith",
+          "position": "G",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -9.5,
+          "homeSpreadAfter": -9.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029260,
+          "athleteId": "4426506",
+          "name": "Joey Porter Jr.",
+          "position": "CB",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -9.5,
+          "homeSpreadAfter": -9.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -1857,6 +1911,24 @@
           "homeSpreadBefore": 5.5,
           "homeSpreadAfter": 5.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029269,
+          "athleteId": "4685503",
+          "name": "Walter Nolen III",
+          "position": "DT",
+          "teamAbbrev": "ARI",
+          "teamName": "Arizona",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 5.5,
+          "homeSpreadAfter": 5.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -2367,6 +2439,65 @@
           "position": "LB",
           "teamAbbrev": "ATL",
           "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029273,
+      "events": [
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029273,
+          "athleteId": "4684527",
+          "name": "T.J. Sanders",
+          "position": "DT",
+          "teamAbbrev": "BUF",
+          "teamName": "Buffalo",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029273,
+          "athleteId": "4243181",
+          "name": "Nate Landman",
+          "position": "LB",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-09T02:19:20.189Z",
+          "cbsEventId": 50029273,
+          "athleteId": "4249128",
+          "name": "Quentin Lake",
+          "position": "S",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
           "side": "home",
           "fromStatus": null,
           "toStatus": "Questionable",

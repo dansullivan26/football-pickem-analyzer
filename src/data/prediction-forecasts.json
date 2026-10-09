@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T22:31:14.046Z",
+  "updatedAt": "2026-10-09T02:19:13.405Z",
   "weeks": [
     {
       "week": 1,
@@ -54925,8 +54925,8 @@
       "seasonYear": 2026,
       "label": "Week 6",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-10-08T22:31:14.046Z",
-      "frozenAt": null,
+      "capturedAt": "2026-10-09T02:19:13.405Z",
+      "frozenAt": "2026-10-09T02:19:13.405Z",
       "trainingThroughWeek": 5,
       "players": [
         {
@@ -66244,44 +66244,44 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-08T22:31:14.046Z",
+    "updatedAt": "2026-10-09T02:19:13.405Z",
     "overall": {
       "key": "overall",
-      "games": 3225,
-      "calls": 2083,
+      "games": 3875,
+      "calls": 2582,
       "graded": 2078,
       "correct": 1410,
-      "noCalls": 1142,
+      "noCalls": 1293,
       "accuracy": 0.6785370548604427,
-      "noCallRate": 0.3541085271317829
+      "noCallRate": 0.3336774193548387
     },
     "byLeague": [
       {
         "key": "NCAAF",
-        "games": 1561,
-        "calls": 752,
+        "games": 1821,
+        "calls": 946,
         "graded": 752,
         "correct": 489,
-        "noCalls": 809,
+        "noCalls": 875,
         "accuracy": 0.6502659574468085,
-        "noCallRate": 0.518257527226137
+        "noCallRate": 0.4805052169137836
       },
       {
         "key": "NFL",
-        "games": 1664,
-        "calls": 1331,
+        "games": 2054,
+        "calls": 1636,
         "graded": 1326,
         "correct": 921,
-        "noCalls": 333,
+        "noCalls": 418,
         "accuracy": 0.6945701357466063,
-        "noCallRate": 0.20012019230769232
+        "noCallRate": 0.2035053554040896
       }
     ],
     "byMarket": [
       {
         "key": "dog",
-        "games": 335,
-        "calls": 335,
+        "games": 394,
+        "calls": 394,
         "graded": 333,
         "correct": 198,
         "noCalls": 0,
@@ -66290,8 +66290,8 @@
       },
       {
         "key": "favorite",
-        "games": 1748,
-        "calls": 1748,
+        "games": 2188,
+        "calls": 2188,
         "graded": 1745,
         "correct": 1212,
         "noCalls": 0,
@@ -66300,11 +66300,11 @@
       },
       {
         "key": "no-call",
-        "games": 1142,
+        "games": 1293,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 1142,
+        "noCalls": 1293,
         "accuracy": null,
         "noCallRate": 1
       }
@@ -66312,8 +66312,8 @@
     "byHabit": [
       {
         "key": "favorite",
-        "games": 1719,
-        "calls": 1719,
+        "games": 2100,
+        "calls": 2100,
         "graded": 1716,
         "correct": 1154,
         "noCalls": 0,
@@ -66322,8 +66322,8 @@
       },
       {
         "key": "home",
-        "games": 110,
-        "calls": 110,
+        "games": 137,
+        "calls": 137,
         "graded": 110,
         "correct": 62,
         "noCalls": 0,
@@ -66332,8 +66332,8 @@
       },
       {
         "key": "line-value",
-        "games": 201,
-        "calls": 201,
+        "games": 237,
+        "calls": 237,
         "graded": 199,
         "correct": 160,
         "noCalls": 0,
@@ -66342,18 +66342,18 @@
       },
       {
         "key": "no-call",
-        "games": 1142,
+        "games": 1293,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 1142,
+        "noCalls": 1293,
         "accuracy": null,
         "noCallRate": 1
       },
       {
         "key": "rest",
-        "games": 15,
-        "calls": 15,
+        "games": 34,
+        "calls": 34,
         "graded": 15,
         "correct": 10,
         "noCalls": 0,
@@ -66362,8 +66362,8 @@
       },
       {
         "key": "travel",
-        "games": 38,
-        "calls": 38,
+        "games": 74,
+        "calls": 74,
         "graded": 38,
         "correct": 24,
         "noCalls": 0,
@@ -66374,8 +66374,8 @@
     "byConfidence": [
       {
         "key": "high",
-        "games": 737,
-        "calls": 737,
+        "games": 848,
+        "calls": 848,
         "graded": 736,
         "correct": 564,
         "noCalls": 0,
@@ -66384,8 +66384,8 @@
       },
       {
         "key": "low",
-        "games": 17,
-        "calls": 17,
+        "games": 38,
+        "calls": 38,
         "graded": 17,
         "correct": 9,
         "noCalls": 0,
@@ -66394,8 +66394,8 @@
       },
       {
         "key": "medium",
-        "games": 1329,
-        "calls": 1329,
+        "games": 1696,
+        "calls": 1696,
         "graded": 1325,
         "correct": 837,
         "noCalls": 0,
@@ -66404,11 +66404,11 @@
       },
       {
         "key": "no-call",
-        "games": 1142,
+        "games": 1293,
         "calls": 0,
         "graded": 0,
         "correct": 0,
-        "noCalls": 1142,
+        "noCalls": 1293,
         "accuracy": null,
         "noCallRate": 1
       }

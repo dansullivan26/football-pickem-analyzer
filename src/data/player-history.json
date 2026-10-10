@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-10T19:07:16-04:00",
+    "fetchedAt": "2026-10-10T19:36:01-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -53968,13 +53968,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 14,
+          "correctPicks": 3,
           "picksCount": 11,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -54088,9 +54088,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54104,9 +54104,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54133,13 +54133,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -54148,13 +54149,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -54371,13 +54373,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
-          "weekScore": 4,
+          "weekScore": 6,
           "weekRank": 1,
-          "correctPicks": 4,
+          "correctPicks": 6,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -54491,9 +54493,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54507,9 +54509,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54536,13 +54538,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -54551,13 +54554,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -54775,12 +54779,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
           "weekScore": 4,
-          "weekRank": 6,
+          "weekRank": 9,
           "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -54894,9 +54898,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54910,9 +54914,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -54939,13 +54943,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -54954,13 +54959,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -55177,13 +55183,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 14,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -55297,9 +55303,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -55313,9 +55319,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -55342,13 +55348,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -55357,13 +55364,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -55580,13 +55588,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
-          "weekScore": 3,
-          "weekRank": 6,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -55700,9 +55708,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -55716,9 +55724,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -55745,13 +55753,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -55760,13 +55769,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -55984,12 +55994,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
           "weekScore": 2,
-          "weekRank": 19,
+          "weekRank": 20,
           "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -56103,9 +56113,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56119,9 +56129,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56148,13 +56158,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -56163,13 +56174,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -56387,12 +56399,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
           "weekScore": 2,
-          "weekRank": 19,
+          "weekRank": 14,
           "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -56506,9 +56518,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56522,9 +56534,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56551,13 +56563,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -56566,13 +56579,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -56790,12 +56804,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
           "weekScore": 2,
-          "weekRank": 19,
+          "weekRank": 20,
           "correctPicks": 2,
           "picksCount": 24,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 8,
+          "revealedPicksCount": 10,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -56909,9 +56923,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56925,9 +56939,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -56953,13 +56967,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -56968,13 +56983,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -57191,13 +57207,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
-          "weekScore": 5,
+          "weekScore": 6,
           "weekRank": 1,
-          "correctPicks": 5,
+          "correctPicks": 6,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -57311,9 +57327,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -57327,9 +57343,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -57356,13 +57372,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -57371,13 +57388,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -57595,12 +57613,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
           "weekScore": 1,
-          "weekRank": 24,
+          "weekRank": 20,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -57714,9 +57732,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -57730,9 +57748,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -57759,13 +57777,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -57774,13 +57793,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -57997,13 +58017,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojs",
           "name": "rob bandelier",
-          "weekScore": 3,
-          "weekRank": 6,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -58117,9 +58137,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58133,9 +58153,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58162,13 +58182,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -58177,13 +58198,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -58400,13 +58422,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 14,
+          "correctPicks": 3,
           "picksCount": 24,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 8,
+          "revealedPicksCount": 10,
           "picksCountFirstSeenAt": "2026-10-10T12:14:26-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -58519,9 +58541,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58535,9 +58557,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58564,13 +58586,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -58579,13 +58602,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -58802,13 +58826,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
-          "weekScore": 4,
-          "weekRank": 4,
-          "correctPicks": 4,
+          "weekScore": 5,
+          "weekRank": 1,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -58922,9 +58946,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58938,9 +58962,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -58967,13 +58991,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -58982,13 +59007,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -59205,13 +59231,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
-          "weekScore": 3,
-          "weekRank": 6,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -59325,9 +59351,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -59341,9 +59367,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -59370,13 +59396,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -59385,13 +59412,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -59608,13 +59636,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
-          "weekScore": 2,
-          "weekRank": 6,
-          "correctPicks": 2,
+          "weekScore": 4,
+          "weekRank": 9,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -59728,9 +59756,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -59744,9 +59772,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -59773,13 +59801,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -59788,13 +59817,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -60012,12 +60042,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
           "weekScore": 2,
-          "weekRank": 19,
+          "weekRank": 20,
           "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -60131,9 +60161,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60147,9 +60177,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60176,13 +60206,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -60191,13 +60222,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -60414,13 +60446,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
-          "weekScore": 4,
+          "weekScore": 6,
           "weekRank": 1,
-          "correctPicks": 4,
+          "correctPicks": 6,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -60534,9 +60566,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60550,9 +60582,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60579,13 +60611,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -60594,13 +60627,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -60817,13 +60851,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 20,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -60937,9 +60971,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60953,9 +60987,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -60982,13 +61016,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -60997,13 +61032,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -61220,13 +61256,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
-          "weekScore": 3,
-          "weekRank": 6,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 9,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -61340,9 +61376,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -61356,9 +61392,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -61385,13 +61421,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -61400,13 +61437,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -61623,13 +61661,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 14,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -61743,9 +61781,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -61759,9 +61797,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -61788,13 +61826,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -61803,13 +61842,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -62026,13 +62066,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
-          "weekScore": 2,
-          "weekRank": 13,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 9,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -62146,9 +62186,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -62162,9 +62202,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -62191,13 +62231,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -62206,13 +62247,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -62430,12 +62472,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
           "weekScore": 2,
-          "weekRank": 19,
+          "weekRank": 14,
           "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T06:33:06-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -62549,9 +62591,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -62565,9 +62607,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -62594,13 +62636,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -62609,13 +62652,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -62832,9 +62876,9 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
-          "weekScore": 3,
-          "weekRank": 4,
-          "correctPicks": 3,
+          "weekScore": 5,
+          "weekRank": 5,
+          "correctPicks": 5,
           "picksCount": 11,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
@@ -62952,9 +62996,9 @@
               "pickedTeamId": "krswc3j2g42ts===",
               "pickedTeam": "OKLA",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T12:14:26-04:00"
             },
@@ -62968,9 +63012,9 @@
               "pickedTeamId": "krswc3j2ha3tg===",
               "pickedTeam": "UCLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T12:14:26-04:00"
             },
@@ -63238,12 +63282,12 @@
           "entryId": "ivxhi4tzhizdkmjrguydonbw",
           "name": "Austin Downum",
           "weekScore": 1,
-          "weekRank": 24,
+          "weekRank": 26,
           "correctPicks": 1,
           "picksCount": 24,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 8,
+          "revealedPicksCount": 10,
           "picksCountFirstSeenAt": "2026-10-10T12:14:26-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -63356,9 +63400,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -63372,9 +63416,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -63401,13 +63445,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dk===",
+              "pickedTeam": "PSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -63416,13 +63461,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -63640,12 +63686,12 @@
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
           "weekScore": 4,
-          "weekRank": 6,
+          "weekRank": 9,
           "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "NO_TIEBREAKER",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -63759,9 +63805,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -63775,9 +63821,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -63804,13 +63850,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -63819,13 +63866,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gu4ts===",
+              "pickedTeam": "UGA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -64043,12 +64091,12 @@
           "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
           "name": "Adam Gannon",
           "weekScore": 1,
-          "weekRank": 24,
+          "weekRank": 20,
           "correctPicks": 1,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 11,
           "picksCountFirstSeenAt": "2026-10-08T23:04:48-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -64162,9 +64210,9 @@
               "pickedTeamId": "krswc3j2ha2tg===",
               "pickedTeam": "TEXAS",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -64178,9 +64226,9 @@
               "pickedTeamId": "krswc3j2g43dc===",
               "pickedTeam": "OREG",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-10T15:40:05-04:00"
             },
@@ -64207,13 +64255,14 @@
               "away": "USC",
               "home": "PSU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha3to===",
+              "pickedTeam": "USC",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
@@ -64222,13 +64271,14 @@
               "away": "UGA",
               "home": "BAMA",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2to===",
+              "pickedTeam": "BAMA",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-10T19:36:01-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
@@ -135452,6 +135502,1406 @@
       "window": {
         "after": "2026-10-10T18:04:18-04:00",
         "atOrBefore": "2026-10-10T19:07:16-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojs",
+      "name": "rob bandelier",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojs",
+      "name": "rob bandelier",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjrguydonbw",
+      "name": "Austin Downum",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g43dk===",
+        "pickedTeam": "PSU"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjrguydonbw",
+      "name": "Austin Downum",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gu4ts===",
+        "pickedTeam": "UGA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygeyta===",
+      "cbsEventId": 50028110,
+      "away": "USC",
+      "home": "PSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha3to===",
+        "pickedTeam": "USC"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
+      }
+    },
+    {
+      "week": 6,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dcoa=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrygezde===",
+      "cbsEventId": 50028122,
+      "away": "UGA",
+      "home": "BAMA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gq2to===",
+        "pickedTeam": "BAMA"
+      },
+      "firstSeenAt": "2026-10-10T19:36:01-04:00",
+      "previousFetchedAt": "2026-10-10T19:07:16-04:00",
+      "fetchedAt": "2026-10-10T19:36:01-04:00",
+      "window": {
+        "after": "2026-10-10T19:07:16-04:00",
+        "atOrBefore": "2026-10-10T19:36:01-04:00"
       }
     }
   ],

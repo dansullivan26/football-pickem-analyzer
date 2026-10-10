@@ -5,6 +5,11 @@ on:
     # Game-day only. Leftovers first, then recs missing a same-day note.
     - cron: '7,27,47 * * * *'
   workflow_dispatch:
+    inputs:
+      ask_all:
+        description: Ask every game-day game this run (still ET-day gated)
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -30,7 +35,12 @@ jobs:
           echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Snapshot game-day scout notes
-        run: npm run snapshot-neutral-briefs
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.ask_all }}" = "true" ]; then
+            npm run snapshot-neutral-briefs -- --all
+          else
+            npm run snapshot-neutral-briefs
+          fi
         env:
           SCOUT_PROVIDER: ${{ vars.SCOUT_PROVIDER }}
           SCOUT_MODEL: ${{ vars.SCOUT_MODEL }}

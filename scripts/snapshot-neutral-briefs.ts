@@ -50,6 +50,8 @@ const ASK_LIMIT = ASK_ALL
   ? Number.POSITIVE_INFINITY
   : Number(process.env.SCOUT_ASK_LIMIT || process.env.GEMINI_ASK_LIMIT) ||
     GEMINI_ASK_BUDGET
+const ASK_PAUSE_MS =
+  Number(process.env.SCOUT_ASK_PAUSE_MS) || 8_000
 
 function roundToHalf(value: number) {
   return Math.round(value * 2) / 2
@@ -331,7 +333,7 @@ for (const item of queue) {
     if (result.wrote) wrote += 1
   }
   if (queue.indexOf(item) < queue.length - 1) {
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise((resolve) => setTimeout(resolve, ASK_PAUSE_MS))
   }
 }
 

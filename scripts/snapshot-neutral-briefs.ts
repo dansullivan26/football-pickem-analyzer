@@ -32,6 +32,7 @@ import {
   freezeNeutralBrief,
   isScoutGameDay,
   lookupNeutralBrief,
+  parseScoutDay,
   selectGameDayScoutAsks,
   summarizeGeminiError,
   type NeutralBriefsFile,
@@ -45,6 +46,10 @@ const OUTPUT = new URL('src/data/neutral-briefs.json', ROOT)
 const PROMPT_FILE = new URL('src/data/leftover-scout-prompt.md', ROOT)
 const FORCE = process.argv.includes('--force')
 const ASK_ALL = process.argv.includes('--all')
+const SCOUT_DAY = parseScoutDay(
+  process.argv.find((arg, index, args) => args[index - 1] === '--day') ||
+    process.env.SCOUT_DAY,
+)
 const SCOUT = resolveScoutConfig(process.env)
 const ASK_LIMIT = ASK_ALL
   ? Number.POSITIVE_INFINITY
@@ -225,8 +230,10 @@ const candidates = priced.map((row) => ({
     slate.pool.seasonYear,
   ),
 }))
-const gameDay = candidates.filter((row) => isScoutGameDay(row.kickoff, now))
-const queue = selectGameDayScoutAsks(candidates, ASK_LIMIT, now, FORCE)
+const gameDay = candidates.filter((row) =>
+  isScoutGameDay(row.kickoff, now, SCOUT_DAY),
+)
+const queue = selectGameDayScoutAsks(candidates, ASK_LIMIT, now, FORCE, SCOUT_DAY)
 
 let wrote = 0
 let failed = 0
@@ -240,6 +247,9 @@ const scout = SCOUT.ok ? SCOUT.config : null
 const scoutPrompt = (await readFile(PROMPT_FILE, 'utf8')).trim()
 if (scout) {
   console.log(`Scout provider ${scout.provider} (${scout.model})`)
+}
+if (SCOUT_DAY) {
+  console.log(`Scout day override ${SCOUT_DAY} ET`)
 }
 
 for (const item of queue) {
@@ -342,5 +352,5 @@ if (wrote > 0) {
 }
 
 console.log(
-  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${gameDay.length} game-day games (${card.unpicked.length} leftovers first, then recs).`,
+  `Scout notes: ${wrote} wrote, ${failed} failed, asked ${queue.length} of ${gameDay.length} ${SCOUT_DAY ?? 'today'} games (${card.unpicked.length} leftovers first, then recs).`,
 )

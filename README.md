@@ -322,8 +322,10 @@ runs about every 20 minutes (`7,27,47 * * * *` UTC) and can still be
 started by hand. Midweek runs that have no game-day games ask nothing
 and do not spend Grok. `--all` lifts the budget but still stays on
 today's slate (the Action's **Run workflow** form has an Ask all
-checkbox). Asks are one game at a time, with an 8-second pause between
-them on top of the model call. `--force` rewrites notes that are already
+checkbox). The same form can set an ET **Scout day** (`YYYY-MM-DD`) to
+fill Saturday on Friday night, or any other day, without waiting for
+midnight. Cron still uses today ET. Asks are one game at a time, with
+an 8-second pause between them on top of the model call. `--force` rewrites notes that are already
 same-day fresh. `SCOUT_ASK_LIMIT` overrides the budget. A 503 / 429 is
 stored as a retry note, not a freeze.
 

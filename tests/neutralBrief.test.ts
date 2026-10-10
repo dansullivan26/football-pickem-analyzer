@@ -16,6 +16,7 @@ import {
   isGameDayFreshNote,
   isScoutGameDay,
   lookupNeutralBrief,
+  parseScoutDay,
   parseGeminiBrief,
   selectGameDayScoutAsks,
   selectGamesToAsk,
@@ -595,6 +596,40 @@ test('game-day queue skips other days, prefers leftovers, and skips fresh notes'
     selectGameDayScoutAsks(candidates, 6, saturdayMorning, true).map((row) => row.gameId),
     ['sat-leftover-missing', 'ucla-ore', 'sat-rec', 'fresh-rec'],
   )
+})
+
+test('a manual run can pick an ET day before that midnight', () => {
+  const fridayNight = new Date('2026-10-09T23:40:00-04:00')
+  const saturdayKick = '2026-10-10T15:30:00-04:00'
+  const sundayKick = '2026-10-11T13:00:00-04:00'
+  assert.equal(parseScoutDay('2026-10-10'), '2026-10-10')
+  assert.equal(parseScoutDay(''), null)
+  assert.throws(() => parseScoutDay('Saturday'), /YYYY-MM-DD/)
+  assert.equal(isScoutGameDay(saturdayKick, fridayNight, '2026-10-10'), true)
+  assert.equal(isScoutGameDay(sundayKick, fridayNight, '2026-10-10'), false)
+  const asked = selectGameDayScoutAsks(
+    [
+      {
+        gameId: 'sat',
+        cbsEventId: 1,
+        leftover: true,
+        kickoff: saturdayKick,
+        brief: null,
+      },
+      {
+        gameId: 'sun',
+        cbsEventId: 2,
+        leftover: false,
+        kickoff: sundayKick,
+        brief: null,
+      },
+    ],
+    6,
+    fridayNight,
+    false,
+    '2026-10-10',
+  )
+  assert.deepEqual(asked.map((row) => row.gameId), ['sat'])
 })
 
 test('pick-row tag marks agreement or a Gemini lean', () => {

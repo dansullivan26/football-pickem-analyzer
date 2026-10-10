@@ -451,12 +451,22 @@ export function formatGeminiPickTag(
   return `Gemini leans ${team} ${formatPoolSpread(spread)} · ${brief.confidence}`
 }
 
+export function parseScoutDay(value: string | null | undefined) {
+  const day = value?.trim() ?? ''
+  if (!day) return null
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) {
+    throw new Error(`Scout day must be YYYY-MM-DD (got ${JSON.stringify(value)})`)
+  }
+  return day
+}
+
 export function isScoutGameDay(
   kickoff: string,
   now: Date | number = Date.now(),
+  onDay?: string | null,
 ) {
   const gameDay = etDayKey(kickoff)
-  const today = etDayKey(now instanceof Date ? now.getTime() : now)
+  const today = parseScoutDay(onDay) ?? etDayKey(now instanceof Date ? now.getTime() : now)
   return Boolean(gameDay && today && gameDay === today)
 }
 
@@ -489,15 +499,16 @@ export function selectGamesToAsk(
     .slice(0, Math.max(0, budget))
 }
 
-/** Upcoming priced games whose ET kickoff is today and still need a same-day note. */
+/** Upcoming priced games on the chosen ET day that still need a same-day note. */
 export function selectGameDayScoutAsks(
   candidates: Array<GeminiAskCandidate & { kickoff: string }>,
   budget = GEMINI_ASK_BUDGET,
   now: Date | number = Date.now(),
   includeFresh = false,
+  onDay?: string | null,
 ) {
   const pool = candidates.filter((row) => {
-    if (!isScoutGameDay(row.kickoff, now)) return false
+    if (!isScoutGameDay(row.kickoff, now, onDay)) return false
     if (includeFresh) return true
     return !isGameDayFreshNote(row.brief, row.kickoff)
   })

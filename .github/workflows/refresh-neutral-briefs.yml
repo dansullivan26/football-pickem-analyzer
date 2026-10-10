@@ -6,8 +6,11 @@ on:
     - cron: '7,27,47 * * * *'
   workflow_dispatch:
     inputs:
+      scout_day:
+        description: ET date to scout (YYYY-MM-DD). Blank = today ET.
+        type: string
       ask_all:
-        description: Ask every game-day game this run (still ET-day gated)
+        description: Ask every game on that day this run
         type: boolean
         default: false
 
@@ -49,6 +52,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          SCOUT_DAY: ${{ github.event.inputs.scout_day }}
       - name: Commit scout notes
         id: commit
         run: |

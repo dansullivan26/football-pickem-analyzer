@@ -434,6 +434,34 @@ test('farther travel receives a larger suppression than short travel', () => {
   assert.equal(threeZones.travel, -0.75)
 })
 
+test('IU laying 7.5 with one-zone travel stays unpicked when DK gives a point', () => {
+  const result = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'away',
+    edge: 1,
+    homeSpread: 7.5,
+    liveHomeSpread: 8.5,
+    consensus: undefined,
+    travelRest: {
+      awayRest: { days: 7, kind: 'normal', label: 'Normal week (7d)' },
+      homeRest: { days: 7, kind: 'normal', label: 'Normal week (7d)' },
+      awayTravel: { zones: 1, direction: 'west', label: '1 time zone west' },
+      homeTravel: null,
+    },
+  })
+  assert.equal(result.pickedSide, null)
+  assert.equal(result.leanSide, null)
+  assert.equal(result.compositeEdge, 0)
+  assert.equal(
+    result.detail,
+    '1-point line value · TD hook -0.75 · travel -0.25 · 0-point net edge',
+  )
+  assert.equal(
+    result.skipReason,
+    'Line value is exactly offset by hook and travel',
+  )
+})
+
 test('rest and travel can overturn only a thin line edge', () => {
   const result = resolveCardPick({
     category: 'slight',

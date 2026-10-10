@@ -211,6 +211,12 @@ export function recommendationAdjustment(input: {
   }
 }
 
+function joinEnglish(parts: string[]) {
+  if (parts.length <= 1) return parts[0] ?? ''
+  if (parts.length === 2) return `${parts[0]} and ${parts[1]}`
+  return `${parts.slice(0, -1).join(', ')}, and ${parts[parts.length - 1]}`
+}
+
 function formatPoints(value: number) {
   if (Number.isInteger(value)) return String(value)
   const hundredths = Math.round(value * 100) / 100
@@ -676,10 +682,21 @@ export function resolveCardPick(input: {
     const hasHook = adjustment.hook !== 0
     const hasInjury = adjustment.injury !== 0
     const hasContext = adjustment.context !== 0
+    const offsetBy = [
+      hasHook ? 'hook' : null,
+      adjustment.rest !== 0 ? 'rest' : null,
+      adjustment.travel !== 0 ? 'travel' : null,
+    ].filter((part): part is string => part != null)
+    const explainSide =
+      adjustment.leanSide ??
+      input.recommendedSide ??
+      (adjustment.line < 0 ? 'away' : adjustment.line > 0 ? 'home' : null)
     const skipReason =
       Math.abs(adjustment.total) > 0 &&
       Math.abs(adjustment.total) + 1e-9 < MIN_COMPOSITE_EDGE
         ? `Composite edge is below ${MIN_COMPOSITE_EDGE.toFixed(2)} points`
+        : hasLine && offsetBy.length > 0 && Math.abs(adjustment.total) < 1e-9
+        ? `Line value is exactly offset by ${joinEnglish(offsetBy)}`
         : (hasLine || hasHook || hasInjury) && hasContext
         ? 'Modeled edge is exactly offset by rest and travel'
         : input.category === 'pending'
@@ -692,13 +709,15 @@ export function resolveCardPick(input: {
       compositeEdge: Math.abs(adjustment.total),
       poolSpread: adjustment.leanSide
         ? poolSpreadForSide(input.homeSpread, adjustment.leanSide)
-        : null,
-      detail: adjustment.leanSide
+        : explainSide
+          ? poolSpreadForSide(input.homeSpread, explainSide)
+          : null,
+      detail: explainSide
         ? compositeDetail(
             adjustment,
             input.edge,
             input.homeSpread,
-            adjustment.leanSide,
+            explainSide,
           )
         : null,
     }

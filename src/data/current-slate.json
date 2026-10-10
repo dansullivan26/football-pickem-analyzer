@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-10T19:07:16-04:00",
+    "fetchedAt": "2026-10-10T19:36:01-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -256,7 +256,7 @@
         "nickname": "Blue Devils",
         "location": "Duke",
         "conference": "ACC",
-        "record": "4-0",
+        "record": "4-1",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -268,7 +268,7 @@
         "nickname": "Yellow Jackets",
         "location": "Georgia Tech",
         "conference": "ACC",
-        "record": "1-3",
+        "record": "2-3",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -290,7 +290,7 @@
       "cbsEventId": 50028137,
       "sport": "NCAAF",
       "week": 6,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-10T15:30:00-04:00",
       "kickoffLabel": "Sat Oct 10, 3:30 PM ET",
       "tv": "ABC",
@@ -321,7 +321,7 @@
       "homeSpread": 7.5,
       "line": "TEXAS -7.5",
       "awayScore": 24,
-      "homeScore": 24,
+      "homeScore": 27,
       "venue": {
         "stadium": "Cotton Bowl",
         "city": "Dallas",
@@ -335,7 +335,7 @@
       "cbsEventId": 50028162,
       "sport": "NCAAF",
       "week": 6,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-10T15:30:00-04:00",
       "kickoffLabel": "Sat Oct 10, 3:30 PM ET",
       "tv": "CBS",
@@ -346,7 +346,7 @@
         "nickname": "Bruins",
         "location": "UCLA",
         "conference": "BIG10",
-        "record": "4-0",
+        "record": "5-0",
         "rank": 21,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -358,7 +358,7 @@
         "nickname": "Ducks",
         "location": "Oregon",
         "conference": "BIG10",
-        "record": "3-1",
+        "record": "3-2",
         "rank": 13,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -380,7 +380,7 @@
       "cbsEventId": 50028095,
       "sport": "NCAAF",
       "week": 6,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-10-10T19:00:00-04:00",
       "kickoffLabel": "Sat Oct 10, 7:00 PM ET",
       "tv": "ESPN",
@@ -410,8 +410,8 @@
       },
       "homeSpread": 10.5,
       "line": "LSU -10.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 3,
+      "homeScore": 7,
       "venue": {
         "stadium": "Kroger Field",
         "city": "Lexington",
@@ -425,7 +425,7 @@
       "cbsEventId": 50028110,
       "sport": "NCAAF",
       "week": 6,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-10-10T19:30:00-04:00",
       "kickoffLabel": "Sat Oct 10, 7:30 PM ET",
       "tv": "NBC",
@@ -455,8 +455,8 @@
       },
       "homeSpread": -1.5,
       "line": "PSU -1.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "West Shore Home Field at Beaver Stadium",
         "city": "University Park",

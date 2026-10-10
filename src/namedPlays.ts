@@ -121,6 +121,16 @@ export function dayPlayReady(dateKey: string, now?: Date | number) {
   return isNamedPlayReady(namedPlayFreezeAt(dateKey), now)
 }
 
+/** True once that day's first kickoff has started. */
+export function dayFieldHasKickedOff(
+  items: Iterable<{ kickoff: string }>,
+  now?: Date | number,
+) {
+  const first = firstCardKickoff(items)
+  if (!first) return false
+  return toNow(now) >= Date.parse(first)
+}
+
 export function formatNamedPlayAsOf(iso: string) {
   const date = new Date(iso)
   if (Number.isNaN(date.getTime())) return null
@@ -202,19 +212,25 @@ export function resolveDayNamedPlay(
   dateKey: string,
   options: NamedPlayOptions = {},
   dayGameCount = dayPicks.length,
+  dayItems: Iterable<{ kickoff: string }> = dayPicks,
 ): ResolvedNamedPlay | null {
   if (!dayNamedPlayEligible(dayGameCount)) return null
+  if (!dayPlayReady(dateKey, options.now)) return null
+  const kickedOff = dayFieldHasKickedOff(dayItems, options.now)
   const frozen = (options.playsOfTheDay ?? []).find((play) =>
     dayPicks.some((pick) => pick.cbsEventId === play.cbsEventId),
   )
-  if (frozen) {
+  if (frozen && kickedOff) {
     const pick = findPickByEvent(dayPicks, frozen.cbsEventId)
     return pick ? { pick, frozenAt: frozen.frozenAt } : null
   }
-  if (!dayPlayReady(dateKey, options.now)) return null
   const pick = topRecommendedPick(dayPicks)
+  if (!pick) return null
+  if (frozen && frozen.cbsEventId === pick.cbsEventId) {
+    return { pick, frozenAt: frozen.frozenAt }
+  }
   const freezeAt = namedPlayFreezeAt(dateKey)
-  return pick && freezeAt ? { pick, frozenAt: freezeAt.toISOString() } : null
+  return freezeAt ? { pick, frozenAt: freezeAt.toISOString() } : null
 }
 
 function frozenOrderKey(game: FrozenRecommendation): RecommendationOrderKey {
@@ -278,18 +294,19 @@ function stampMissingNamedPlays(
     const kept = existingDayPlays.find((play) =>
       dayGames.some((game) => game.cbsEventId === play.cbsEventId),
     )
-    if (kept) {
+    if (kept && dayFieldHasKickedOff(dayGames, now)) {
       playsOfTheDay.push(kept)
       continue
     }
     if (!dayPlayReady(dateKey, now)) continue
+    const next = topFrozenNamedPlay(dayGames)
+    if (kept && next && kept.cbsEventId === next.cbsEventId) {
+      playsOfTheDay.push(kept)
+      continue
+    }
     const frozenAt = resolveFrozenAt(dateKey)
     if (!frozenAt) continue
-    const stamped = stampNamedPlay(
-      topFrozenNamedPlay(dayGames),
-      frozenAt,
-      backfilled,
-    )
+    const stamped = stampNamedPlay(next, frozenAt, backfilled)
     if (stamped) playsOfTheDay.push(stamped)
   }
 
@@ -309,8 +326,10 @@ function groupFrozenByEtDay(games: FrozenRecommendation[]) {
 }
 
 /**
- * Lock named plays once, on the 8:00 AM ET morning of the first kickoff
- * (week) or that day's kickoffs (day). Later snapshots keep the stamp.
+ * Play of the week locks at 8:00 AM ET the morning of the week's first
+ * kickoff. Play of the day can be named after 8:00 AM ET that morning, but
+ * keeps following the day's #1 rec until that day's first kickoff, then
+ * locks. Later snapshots keep the stamp.
  */
 export function freezeNamedPlays(
   games: FrozenRecommendation[],

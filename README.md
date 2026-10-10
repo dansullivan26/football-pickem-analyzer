@@ -271,10 +271,11 @@ floor; thinner sides stay unpicked. NFL recs also split by TV window: TNF,
 Sunday 1:00, Sunday 4:00 (4:05/4:25), SNF, and MNF. Players shows the same
 windows for each entry and for the pool. London mornings and odd midweek
 games are left out.
-Play of the week and play of the day lock at 8:00 AM ET — the morning of the
-week's first kickoff, and the morning of each card day that has at least two
-games. A Thursday or Monday singleton is not named play of the day; there is
-no field to compare. Copy card prints the week play with that as-of time;
+Play of the week locks at 8:00 AM ET the morning of the week's first
+kickoff. Play of the day can be named after 8:00 AM ET on a card day
+with at least two games, but it keeps following that day's #1 rec
+until the day's first kickoff, then locks. A Thursday or Monday
+singleton is not named play of the day; there is no field to compare. Copy card prints the week play with that as-of time;
 Copy day prints that day's play when one exists. Copied recs include a
 light / medium / strong word plus the primary reason (line value on the
 DraftKings number, FG/TD hook, or rest/travel). Performance tracks those

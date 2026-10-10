@@ -17,6 +17,7 @@ import {
   namedPlayGames,
   namedPlayKindForGame,
   namedPlayFreezeAt,
+  resolveDayNamedPlay,
   resolveWeekNamedPlay,
   weekPlayReady,
 } from '../src/namedPlays.ts'
@@ -454,4 +455,109 @@ test('play of the day needs a second game that day', () => {
   assert.deepEqual(saturday.playsOfTheDay, [
     { cbsEventId: 11, frozenAt: '2026-09-19T12:05:00.000Z' },
   ])
+})
+
+test('play of the day follows the live #1 until that day’s first kickoff', () => {
+  const morning = freezeNamedPlays(
+    [
+      frozen({
+        cbsEventId: 95,
+        kickoff: saturdayNoon,
+        away: 'LSU',
+        home: 'UK',
+        category: 'lean',
+        compositeEdge: 2.25,
+      }),
+      frozen({
+        cbsEventId: 93,
+        kickoff: saturdayNoon,
+        away: 'DUKE',
+        home: 'GATECH',
+        category: 'slight',
+        compositeEdge: 1.75,
+      }),
+    ],
+    null,
+    '2026-09-19T12:05:00.000Z',
+    saturdayMorning,
+  )
+  assert.deepEqual(morning.playsOfTheDay, [
+    { cbsEventId: 95, frozenAt: '2026-09-19T12:05:00.000Z' },
+  ])
+
+  const prekick = freezeNamedPlays(
+    [
+      frozen({
+        cbsEventId: 95,
+        kickoff: saturdayNoon,
+        away: 'LSU',
+        home: 'UK',
+        category: 'slight',
+        compositeEdge: 1.25,
+      }),
+      frozen({
+        cbsEventId: 93,
+        kickoff: saturdayNoon,
+        away: 'DUKE',
+        home: 'GATECH',
+        category: 'lean',
+        compositeEdge: 2.75,
+      }),
+    ],
+    morning,
+    '2026-09-19T15:28:00.000Z',
+    Date.parse('2026-09-19T11:28:00-04:00'),
+  )
+  assert.deepEqual(prekick.playsOfTheDay, [
+    { cbsEventId: 93, frozenAt: '2026-09-19T15:28:00.000Z' },
+  ])
+
+  const afterKick = freezeNamedPlays(
+    [
+      frozen({
+        cbsEventId: 95,
+        kickoff: saturdayNoon,
+        category: 'lock',
+        compositeEdge: 4,
+      }),
+      frozen({
+        cbsEventId: 93,
+        kickoff: saturdayNoon,
+        category: 'slight',
+        compositeEdge: 0.5,
+      }),
+    ],
+    prekick,
+    '2026-09-19T17:00:00.000Z',
+    Date.parse('2026-09-19T13:00:00-04:00'),
+  )
+  assert.deepEqual(afterKick.playsOfTheDay, prekick.playsOfTheDay)
+
+  const liveBeforeKick = resolveDayNamedPlay(
+    [
+      pick({
+        gameId: 'uk',
+        cbsEventId: 95,
+        kickoff: saturdayNoon,
+        homeAbbrev: 'UK',
+        category: 'slight',
+        compositeEdge: 1.25,
+      }),
+      pick({
+        gameId: 'gt',
+        cbsEventId: 93,
+        kickoff: saturdayNoon,
+        homeAbbrev: 'GATECH',
+        category: 'lean',
+        compositeEdge: 2.75,
+      }),
+    ],
+    '2026-09-19',
+    {
+      playsOfTheDay: [{ cbsEventId: 95, frozenAt: '2026-09-19T12:05:00.000Z' }],
+      now: Date.parse('2026-09-19T11:49:00-04:00'),
+    },
+    2,
+  )
+  assert.equal(liveBeforeKick?.pick.cbsEventId, 93)
 })

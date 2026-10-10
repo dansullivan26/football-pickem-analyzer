@@ -717,6 +717,9 @@ function DayPlayCaption({
     group.dateKey,
     namedPlays,
     group.rows.length,
+    group.rows.map((row) => ({
+      kickoff: row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff,
+    })),
   )
   if (!dayPlay) return null
   const asOf = formatNamedPlayAsOf(dayPlay.frozenAt)
@@ -744,6 +747,9 @@ function namedKindForRow(
     group.dateKey,
     namedPlays,
     group.rows.length,
+    group.rows.map((row) => ({
+      kickoff: row.kind === 'pick' ? row.pick.kickoff : row.game.kickoff,
+    })),
   )
   if (dayPlay && pick.gameId === dayPlay.pick.gameId) return 'day'
   return null

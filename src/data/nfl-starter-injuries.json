@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-10-11T18:11:17.309Z",
-    "reportUpdatedAt": "2026-10-11T18:11:11Z",
+    "fetchedAt": "2026-10-11T22:08:59.474Z",
+    "reportUpdatedAt": "2026-10-11T22:08:52Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -20,28 +20,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Knee",
-          "detail": "Wingard (knee) has been ruled out for Sunday's game against the Lions, Bo Brack of GoPHNX.com reports.",
-          "updatedAt": "2026-10-09T22:16Z"
-        },
-        {
-          "athleteId": "4432708",
-          "name": "Marvin Harrison Jr.",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Coach's Decision",
-          "detail": "A trade for Harrison will not be completed \"until after Sunday's games are played,\" but the Cardinals \"feel comfortable enough\" knowing it will occur that they will deactivate him for Sunday's game against the Lions, Adam Schefter of ESPN reports.",
-          "updatedAt": "2026-10-10T15:35Z"
-        },
-        {
-          "athleteId": "4685503",
-          "name": "Walter Nolen III",
-          "position": "DT",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Calf",
-          "detail": "Nolen (calf) is questionable against the Lions on Sunday, Zach Gershman of the Cardinals' official site reports.",
-          "updatedAt": "2026-10-10T01:19Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:57Z"
         },
         {
           "athleteId": "5084939",
@@ -59,7 +39,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-10-11T18:11:08Z",
+      "depthChartAt": "2026-10-11T22:08:53Z",
       "status": "ok",
       "injuries": [
         {
@@ -108,7 +88,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -167,7 +147,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -206,7 +186,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-10-11T18:11:09Z",
+      "depthChartAt": "2026-10-11T22:08:51Z",
       "status": "ok",
       "injuries": [
         {
@@ -226,8 +206,28 @@
           "status": "Out",
           "tier": "out",
           "injury": "Hamstring",
-          "detail": "Williams (hamstring) is listed as inactive Sunday in Green Bay.",
-          "updatedAt": "2026-10-11T15:47Z"
+          "detail": "Head coach Ben Johnson wouldn't commit to a return date for Williams (hamstring) after Sunday's loss at Green Bay, Chris Emma of 670TheScore.com reports. \"He's on track. We'll see if that's Atlanta or after,\" Johnson said. \"I think it's going to be close.\"",
+          "updatedAt": "2026-10-11T21:05Z"
+        },
+        {
+          "athleteId": "4426374",
+          "name": "Tyrique Stevenson Sr.",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "Stevenson (hamstring) is doubtful to return to Sunday's game against the Packers.",
+          "updatedAt": "2026-10-11T19:00Z"
+        },
+        {
+          "athleteId": "4242659",
+          "name": "Dayo Odeyingbo",
+          "position": "DE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Quadriceps",
+          "detail": "Odeyingbo (quadriceps) is doubtful to return to Sunday's game against the Packers.",
+          "updatedAt": "2026-10-11T20:03Z"
         },
         {
           "athleteId": "3121544",
@@ -236,8 +236,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "Edwards (hamstring) is questionable to return to Sunday's game against the Packers, Chris Emma of WBBM NewsRadio reports.",
-          "updatedAt": "2026-10-11T17:56Z"
+          "detail": "Edwards (hamstring) has been ruled out for the remainder of Sunday's game against the Packers.",
+          "updatedAt": "2026-10-11T18:44Z"
         }
       ]
     },
@@ -245,7 +245,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -264,7 +264,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -288,14 +288,34 @@
           "updatedAt": "2026-10-11T15:43Z"
         },
         {
+          "athleteId": "3131498",
+          "name": "Tytus Howard",
+          "position": "OT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Knee",
+          "detail": "Howard (knee) is questionable to return to Sunday's game against the Jets.",
+          "updatedAt": "2026-10-11T19:52Z"
+        },
+        {
+          "athleteId": "4685702",
+          "name": "Quinshon Judkins",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Foot",
+          "detail": "Judkins was wearing a walking boot on his right foot after Sunday's 17-12 loss at the Jets, Chris Easterling of the Akron Beacon Journal reports.",
+          "updatedAt": "2026-10-11T21:13Z"
+        },
+        {
           "athleteId": "4870653",
           "name": "KC Concepcion",
           "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Head",
-          "detail": "Concepcion (head) has been ruled out for the rest of Sunday's game at the Jets.",
-          "updatedAt": "2026-10-11T17:37Z"
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "Conception has entered the NFL's concussion protocol, Daniel Oyefusi of ESPN.com reported Sunday.",
+          "updatedAt": "2026-10-11T20:48Z"
         }
       ]
     },
@@ -303,7 +323,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -352,7 +372,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-10-11T18:11:07Z",
+      "depthChartAt": "2026-10-11T22:08:36Z",
       "status": "ok",
       "injuries": [
         {
@@ -362,8 +382,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Ankle",
-          "detail": "Surtain (ankle) has been ruled out for Sunday's game against the Chargers, Aric DiLalla of the Broncos' official site reports.",
-          "updatedAt": "2026-10-10T16:13Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:41Z"
         },
         {
           "athleteId": "4382401",
@@ -372,8 +392,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Ribs",
-          "detail": "Moss (ribs) has been ruled out for Sunday's game against the Chargers, Aric DiLalla of the Broncos' official site reports.",
-          "updatedAt": "2026-10-10T16:16Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:41Z"
         },
         {
           "athleteId": "4600981",
@@ -391,18 +411,28 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:36Z",
       "status": "ok",
       "injuries": [
         {
-          "athleteId": "4431615",
-          "name": "Tyleik Williams",
-          "position": "DT",
+          "athleteId": "4035434",
+          "name": "Devin White",
+          "position": "LB",
           "status": "Questionable",
           "tier": "questionable",
-          "injury": "Foot",
-          "detail": "questionable",
-          "updatedAt": "2026-10-07T21:52Z"
+          "injury": "Forearm",
+          "detail": "White (forearm) is questionable to return to Sunday's contest versus Arizona.",
+          "updatedAt": "2026-10-11T21:10Z"
+        },
+        {
+          "athleteId": "3126997",
+          "name": "Tom Kennedy",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Knee",
+          "detail": "Kennedy (knee) is questionable to return to Sunday's contest against the Cardinals.",
+          "updatedAt": "2026-10-11T21:17Z"
         }
       ]
     },
@@ -410,9 +440,19 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:51Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "2983055",
+          "name": "Javon Hargrave",
+          "position": "DT",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Achilles",
+          "detail": "Hargrave (undisclosed) likely sustained a season-ending torn Achilles, Bill Huber of SI.com reports.",
+          "updatedAt": "2026-10-11T20:39Z"
+        },
         {
           "athleteId": "4242390",
           "name": "Aaron Banks",
@@ -430,8 +470,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Moore is questionable to return to Sunday's game against the Bears due to an ankle injury.",
-          "updatedAt": "2026-10-11T17:50Z"
+          "detail": "The Packers ruled out Moore (ankle) for the remainder of Sunday's game against the Bears.",
+          "updatedAt": "2026-10-11T18:37Z"
         }
       ]
     },
@@ -439,7 +479,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:56Z",
       "status": "ok",
       "injuries": [
         {
@@ -451,6 +491,26 @@
           "injury": "Coach's Decision",
           "detail": "inactive",
           "updatedAt": "2026-10-11T15:46Z"
+        },
+        {
+          "athleteId": "4035538",
+          "name": "David Montgomery",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Groin",
+          "detail": "The Texans ruled out Montgomery (groin) for the remainder of Sunday's game against the Titans.",
+          "updatedAt": "2026-10-11T18:45Z"
+        },
+        {
+          "athleteId": "4241223",
+          "name": "Jalen Pitre",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "Pitre departed with a shoulder injury and never returned during Sunday's 26-3 win over the Titans.",
+          "updatedAt": "2026-10-11T20:09Z"
         }
       ]
     },
@@ -458,7 +518,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -487,7 +547,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -536,7 +596,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-10-11T18:11:07Z",
+      "depthChartAt": "2026-10-11T22:08:33Z",
       "status": "ok",
       "injuries": [
         {
@@ -546,8 +606,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Hamstring",
-          "detail": "Jackson (hamstring) has been ruled out for Sunday's game against the Broncos.",
-          "updatedAt": "2026-10-10T00:25Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:52Z"
         },
         {
           "athleteId": "4040842",
@@ -556,8 +616,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Lower Leg",
-          "detail": "Awosika (lower leg) has been ruled out for Sunday's game against the Broncos.",
-          "updatedAt": "2026-10-10T02:18Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:52Z"
         },
         {
           "athleteId": "4683487",
@@ -566,8 +626,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Neck",
-          "detail": "Alt (neck) has been ruled out for Sunday's game against the Broncos.",
-          "updatedAt": "2026-10-10T02:15Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:52Z"
         },
         {
           "athleteId": "3691739",
@@ -576,8 +636,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Hamstring",
-          "detail": "James (hamstring) has been ruled out against the Broncos on Sunday.",
-          "updatedAt": "2026-10-10T00:28Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:52Z"
         },
         {
           "athleteId": "4429025",
@@ -586,28 +646,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Chest",
-          "detail": "Johnston (chest) has been ruled out for Sunday's game against Denver.",
-          "updatedAt": "2026-10-09T20:43Z"
-        },
-        {
-          "athleteId": "4241263",
-          "name": "Charlie Kolar",
-          "position": "TE",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Forearm",
-          "detail": "Kolar (forearm) is listed as questionable for Sunday's game against the Broncos.",
-          "updatedAt": "2026-10-10T16:17Z"
-        },
-        {
-          "athleteId": "4612826",
-          "name": "Ladd McConkey",
-          "position": "WR",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Foot",
-          "detail": "McConkey (foot) isn't expected to play Sunday versus the Broncos, Adam Schefter of ESPN reports.",
-          "updatedAt": "2026-10-11T11:36Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:52Z"
         },
         {
           "athleteId": "4248627",
@@ -635,7 +675,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -654,7 +694,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:43Z",
       "status": "ok",
       "injuries": [
         {
@@ -674,8 +714,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Neck",
-          "detail": "Hemingway (neck) is questionable to return to Sunday's game against the Patriots.",
-          "updatedAt": "2026-10-11T17:53Z"
+          "detail": "Hemingway (neck) has been ruled out for the remainder of Sunday's game against the Patriots.",
+          "updatedAt": "2026-10-11T18:14Z"
         }
       ]
     },
@@ -683,7 +723,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-10-11T18:11:09Z",
+      "depthChartAt": "2026-10-11T22:08:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -697,14 +737,34 @@
           "updatedAt": "2026-10-11T15:37Z"
         },
         {
-          "athleteId": "4043130",
-          "name": "Jordyn Brooks",
-          "position": "LB",
+          "athleteId": "4360488",
+          "name": "JuJu Brents",
+          "position": "CB",
           "status": "Questionable",
           "tier": "questionable",
-          "injury": "Foot",
-          "detail": "Brooks (foot) is questionable to return to Sunday's game against the Bengals.",
-          "updatedAt": "2026-10-11T17:58Z"
+          "injury": "Neck",
+          "detail": "Brents exited in the fourth quarter of Sunday's game against the Bengals due to a stinger and is questionable to return.",
+          "updatedAt": "2026-10-11T19:53Z"
+        },
+        {
+          "athleteId": "4819257",
+          "name": "Jonah Savaiinaea",
+          "position": "G",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "Savaiinaea is questionable to return to Sunday's game against the Bengals due to an ankle injury.",
+          "updatedAt": "2026-10-11T18:19Z"
+        },
+        {
+          "athleteId": "4880346",
+          "name": "Michael Taaffe",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Chest",
+          "detail": "Taaffe (chest) is questionable to return to Sunday's game against the Bengals.",
+          "updatedAt": "2026-10-11T19:04Z"
         }
       ]
     },
@@ -712,7 +772,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -726,16 +786,6 @@
           "updatedAt": "2026-10-11T15:52Z"
         },
         {
-          "athleteId": "4036133",
-          "name": "T.J. Hockenson",
-          "position": "TE",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Concussion",
-          "detail": "The Vikings downgraded Hockenson to out for Sunday's game against the Saints due to a concussion.",
-          "updatedAt": "2026-10-11T17:42Z"
-        },
-        {
           "athleteId": "4429205",
           "name": "Jordan Addison",
           "position": "WR",
@@ -744,6 +794,16 @@
           "injury": "Hamstring",
           "detail": "Addison (hamstring) is inactive for Sunday's game at New Orleans, Ben Goessling of The Minnesota Star Tribune reports.",
           "updatedAt": "2026-10-11T15:44Z"
+        },
+        {
+          "athleteId": "4036133",
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "The Vikings downgraded Hockenson to out for Sunday's game against the Saints due to a concussion.",
+          "updatedAt": "2026-10-11T17:42Z"
         }
       ]
     },
@@ -751,9 +811,29 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:29Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "3115303",
+          "name": "Jermaine Eluemunor",
+          "position": "OT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Calf",
+          "detail": "questionable",
+          "updatedAt": "2026-10-11T22:01Z"
+        },
+        {
+          "athleteId": "4430261",
+          "name": "Tyler Nubin",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Neck",
+          "detail": "Nubin (neck) is questionable to return to Sunday's game against the Commanders, Dan Salomone of the Giants' official site reports.",
+          "updatedAt": "2026-10-11T19:50Z"
+        },
         {
           "athleteId": "4036132",
           "name": "Chauncey Golston",
@@ -780,7 +860,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -822,6 +902,16 @@
           "injury": "Finger",
           "detail": "inactive",
           "updatedAt": "2026-10-11T15:49Z"
+        },
+        {
+          "athleteId": "5083315",
+          "name": "Kenyon Sadiq",
+          "position": "TE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "Sadiq won't return to Sunday's game versus the Browns due to a concussion.",
+          "updatedAt": "2026-10-11T19:45Z"
         }
       ]
     },
@@ -829,7 +919,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -853,14 +943,24 @@
           "updatedAt": "2026-10-11T15:43Z"
         },
         {
+          "athleteId": "3915525",
+          "name": "Dre'Mont Jones",
+          "position": "DE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "Jones (shoulder) is questionable to return to Sunday's game against the Raiders.",
+          "updatedAt": "2026-10-11T20:07Z"
+        },
+        {
           "athleteId": "4685298",
           "name": "Will Campbell",
           "position": "OT",
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Campbell (knee) is questionable to return to Sunday's game against the Raiders.",
-          "updatedAt": "2026-10-11T18:04Z"
+          "detail": "Campbell (knee) has been ruled out for the remainder of Sunday's game against the Raiders.",
+          "updatedAt": "2026-10-11T19:32Z"
         },
         {
           "athleteId": "4039505",
@@ -888,7 +988,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:29Z",
       "status": "ok",
       "injuries": [
         {
@@ -927,7 +1027,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -961,16 +1061,6 @@
           "updatedAt": "2026-10-11T12:03Z"
         },
         {
-          "athleteId": "4431545",
-          "name": "Will Shipley",
-          "position": "RB",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Foot",
-          "detail": "The Eagles ruled out Shipley (foot) for the remainder of Sunday's game versus the Jaguars in London.",
-          "updatedAt": "2026-10-11T15:53Z"
-        },
-        {
           "athleteId": "3139368",
           "name": "Marcus Epps",
           "position": "S",
@@ -989,6 +1079,16 @@
           "injury": "Hamstring",
           "detail": "inactive",
           "updatedAt": "2026-10-11T12:03Z"
+        },
+        {
+          "athleteId": "4431545",
+          "name": "Will Shipley",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Foot",
+          "detail": "The Eagles ruled out Shipley (foot) for the remainder of Sunday's game versus the Jaguars in London.",
+          "updatedAt": "2026-10-11T15:53Z"
         }
       ]
     },
@@ -996,7 +1096,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:31Z",
       "status": "ok",
       "injuries": [
         {
@@ -1008,6 +1108,16 @@
           "injury": "Ankle",
           "detail": "inactive",
           "updatedAt": "2026-10-11T15:40Z"
+        },
+        {
+          "athleteId": "4431492",
+          "name": "Roman Wilson",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Finger",
+          "detail": "The Steelers ruled out Wilson (finger) for the rest of Sunday's game against the Colts, Brooke Pryor of ESPN.com reports.",
+          "updatedAt": "2026-10-11T18:47Z"
         },
         {
           "athleteId": "4035687",
@@ -1025,7 +1135,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:36Z",
       "status": "ok",
       "injuries": [
         {
@@ -1035,8 +1145,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Calf",
-          "detail": "Bosa (calf) has been ruled out ahead of Sunday's game against the Seahawks.",
-          "updatedAt": "2026-10-10T01:33Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:59Z"
         },
         {
           "athleteId": "16002",
@@ -1045,8 +1155,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Knee",
-          "detail": "San Francisco head coach Kyle Shanahan said Monday that Juszczyk will miss multiple weeks after hyperextending and sustaining a bone bruise to his right knee in Sunday's 24-14 win over the Broncos, Matt Barrows of The Athletic reports.",
-          "updatedAt": "2026-10-07T18:34Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:59Z"
         },
         {
           "athleteId": "4693337",
@@ -1055,18 +1165,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Ankle",
-          "detail": "out",
-          "updatedAt": "2026-10-07T18:39Z"
-        },
-        {
-          "athleteId": "4565200",
-          "name": "Upton Stout",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Shoulder - AC Joint",
-          "detail": "Stout (shoulder) is listed as questionable ahead of Sunday's game against the Seahawks.",
-          "updatedAt": "2026-10-10T01:37Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-11T18:59Z"
         }
       ]
     },
@@ -1074,15 +1174,26 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:36Z",
       "status": "ok",
-      "injuries": []
+      "injuries": [
+        {
+          "athleteId": "4428659",
+          "name": "Drake Thomas",
+          "position": "LB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "questionable",
+          "updatedAt": "2026-10-11T22:01Z"
+        }
+      ]
     },
     {
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:25Z",
       "status": "ok",
       "injuries": [
         {
@@ -1121,7 +1232,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:35Z",
       "status": "ok",
       "injuries": [
         {
@@ -1135,14 +1246,24 @@
           "updatedAt": "2026-10-11T15:34Z"
         },
         {
+          "athleteId": "4429607",
+          "name": "Cor'Dale Flott",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Chest",
+          "detail": "Flott (chest) has been ruled out for the remainder of Sunday's game against the Texans.",
+          "updatedAt": "2026-10-11T19:25Z"
+        },
+        {
           "athleteId": "4685617",
           "name": "Kevin Winston Jr.",
           "position": "S",
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Quadriceps",
-          "detail": "Winston (quad) is questionable to return to Sunday's matchup against the Texans.",
-          "updatedAt": "2026-10-11T17:19Z"
+          "detail": "Winston (quadriceps) will undergo an MRI, Terry McCormick of TitanInsider.com reports.",
+          "updatedAt": "2026-10-11T20:20Z"
         }
       ]
     },
@@ -1150,7 +1271,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-10-11T18:11:10Z",
+      "depthChartAt": "2026-10-11T22:08:36Z",
       "status": "ok",
       "injuries": [
         {

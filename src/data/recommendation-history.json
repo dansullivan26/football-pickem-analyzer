@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T10:30:08.172Z",
+  "updatedAt": "2026-10-11T13:08:28.627Z",
   "weeks": [
     {
       "week": 1,
@@ -3727,7 +3727,7 @@
       "week": 6,
       "seasonYear": 2026,
       "label": "Week 6",
-      "capturedAt": "2026-10-11T06:01:57.311Z",
+      "capturedAt": "2026-10-11T13:08:28.627Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029273,
@@ -3742,6 +3742,10 @@
         {
           "cbsEventId": 50028093,
           "frozenAt": "2026-10-10T15:28:21.967Z"
+        },
+        {
+          "cbsEventId": 50029181,
+          "frozenAt": "2026-10-11T13:08:28.627Z"
         }
       ],
       "games": [
@@ -4003,8 +4007,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 27,
-          "homeScore": 24
+          "awayScore": 34,
+          "homeScore": 35
         },
         {
           "cbsEventId": 50028110,
@@ -4032,8 +4036,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 24,
-          "homeScore": 20
+          "awayScore": 31,
+          "homeScore": 23
         },
         {
           "cbsEventId": 50028122,
@@ -4061,7 +4065,7 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 17,
+          "awayScore": 20,
           "homeScore": 17
         },
         {
@@ -4098,16 +4102,16 @@
           "away": "CIN",
           "home": "MIA",
           "homeSpread": 7.5,
-          "liveHomeSpread": 6.5,
-          "category": "slight",
-          "recommendedSide": "home",
-          "hook": "td",
+          "liveHomeSpread": 7.5,
+          "category": "neutral",
+          "recommendedSide": null,
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1.75,
+          "compositeEdge": 0.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -4233,16 +4237,16 @@
           "away": "HOU",
           "home": "TEN",
           "homeSpread": 7.5,
-          "liveHomeSpread": 7.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 7,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 0.75,
+          "compositeEdge": 1.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

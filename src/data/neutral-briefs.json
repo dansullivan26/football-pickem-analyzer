@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T04:44:51.635Z",
+  "updatedAt": "2026-10-11T07:07:39.867Z",
   "games": [
     {
       "status": "ok",
@@ -454,16 +454,18 @@
       "frozenAt": "2026-10-10T04:44:51.635Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzge4dc===",
       "cbsEventId": 50029181,
       "week": 6,
       "seasonYear": 2026,
       "away": "Philadelphia",
       "home": "Jacksonville",
-      "error": "429 rate limit",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-08T23:51:40.139Z"
+      "side": "home",
+      "confidence": "medium",
+      "why": "Philadelphia is 0-4 ATS (0% in five games), 0-1 as a dog in two and 0-1 away in two, with four straight non-covers, and their only neutral-site game was also a loss against the number. Jacksonville is 3-1 ATS (75% in five), 2-0 as a favorite in three and 2-0 in three games tagged home, covering in three of the last four. Those samples are still early-season thin at four graded games each, and there is no head-to-head. The line has moved from -7 to -7.5 toward Jacksonville. Philadelphia is also without Saquon Barkley, DeVonta Smith, and center Drew Kendall, with safety Marcus Epps out, while Jacksonville lists only safety Eric Murray as doubtful. Lean Jacksonville.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:02:17.558Z"
     },
     {
       "status": "failed",
@@ -506,64 +508,74 @@
       "frozenAt": "2026-10-08T00:06:45.276Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dg===",
       "cbsEventId": 50029263,
       "week": 6,
       "seasonYear": 2026,
       "away": "Minnesota",
       "home": "New Orleans",
-      "error": "429 rate limit",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T05:40:52.629Z"
+      "side": "away",
+      "confidence": "medium",
+      "why": "Four graded games apiece is still a thin Week 6 sample, but the splits that match this spot point the same way. Minnesota is 2-0 ATS on the road in three and 2-1 ATS as a favorite in four, with a 2-1 ATS mark on normal rest in four; the indoor split is only 1-1 in three. New Orleans is 0-2 ATS at home in three and 1-2 ATS indoors in four, and the 2-0 ATS as a dog in three came on the road, so it does not cancel the home misses. The number moved from +1.5 to +2.5, Minnesota covered both recent road games after failing to cover at home against Miami, and New Orleans failed to cover both home spots against Atlanta and Las Vegas. Christian Darrisaw is out and Brian O'Neill, Justin Jefferson, and Jordan Addison are questionable, against Kaden Elliss out plus Alvin Kamara, two defensive tackles, and a safety questionable for New Orleans.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:03:20.501Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3di===",
       "cbsEventId": 50029264,
       "week": 6,
       "seasonYear": 2026,
       "away": "Cleveland",
       "home": "N.Y. Jets",
-      "error": "429 rate limit",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T05:41:22.537Z"
+      "side": "away",
+      "confidence": "medium",
+      "why": "Cleveland is 3-1 ATS as a dog across four graded games and has won outright in three of those four, with covers in each of the last three weeks (Pittsburgh and Carolina at home, Tampa Bay on the road). The road split is only 1-1 ATS in two decided trips, and there is no head-to-head sample. The Jets are 1-0 ATS at home on a single graded game, have no decided result as a favorite, and are 1-2 ATS on a normal week in four games after losing their last two. New York is without Breece Hall, guard Dylan Parham, linebacker Kiko Mauigoa, and receiver Adonai Mitchell, with Kingsley Enagbare questionable, while Cleveland lists only defensive tackle Mason Graham out. The line moved from -2.5 to -1.5 and back to -2.5, a round trip rather than a held move. Week 6 samples are still thin, but the dog covers and the Jets' absences point the same way: Cleveland.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:04:13.060Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dk===",
       "cbsEventId": 50029265,
       "week": 6,
       "seasonYear": 2026,
       "away": "Indianapolis",
       "home": "Pittsburgh",
-      "error": "429 rate limit",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T05:41:52.409Z"
+      "side": "away",
+      "confidence": "light",
+      "why": "Week 6 samples are thin, with four graded games apiece, so this is a limb. Indianapolis is 2-0 ATS on the road in three games, 2-1 ATS as a dog in four, and 3-0 ATS on normal rest in four, and they have covered three straight (at Washington, against Houston, at Kansas City) after a Week 2 loss to Baltimore. Pittsburgh is 2-0 ATS at home in three games, but only 1-1 ATS as a favorite in three and 0-1 ATS in two wet games, with no graded long-rest result (0-0 in one). There is no head-to-head history and no line path. Injuries are mixed—Carlies is out and Ward and Allen are questionable for Indianapolis, while Dean is out and Ramsey is questionable for Pittsburgh—and do not settle the matchup. Lean Indianapolis: the road, dog, and normal-rest cover marks, plus the three-game cover run, carry more weight than Pittsburgh’s small home sample.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:05:30.554Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3dm===",
       "cbsEventId": 50029266,
       "week": 6,
       "seasonYear": 2026,
       "away": "Houston",
       "home": "Tennessee",
-      "error": "429 rate limit",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T05:42:22.318Z"
+      "side": "home",
+      "confidence": "medium",
+      "why": "Houston is 0-4 ATS as a favorite in four graded games, and the only road result in that set was a non-cover at Indianapolis as a 2.5-point favorite. The last four weeks match that split: losses against Dallas, Indianapolis, Cincinnati, and Buffalo, all as a favorite. Tennessee is 2-1 ATS as a dog in four games, covering +11.5 at Baltimore and +7.5 against Philadelphia and missing +3.5 against the Giants. Samples are thin this early — Houston is 0-1 ATS away and Tennessee has no home split on file — but on normal rest Houston is 0-3 ATS and Tennessee is 2-1, so the favorite, dog, and rest tendencies line up. The home number went +7.5 to +7 and back to +7.5, and the ticket weight sits on Houston.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:06:29.650Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3do===",
       "cbsEventId": 50029267,
       "week": 6,
       "seasonYear": 2026,
       "away": "N.Y. Giants",
       "home": "Washington",
-      "error": "503 high demand",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T12:06:40.009Z"
+      "side": "away",
+      "confidence": "light",
+      "why": "Both clubs have only four graded games, so the book is thin, but the roles still separate them. The Giants are 3-1 ATS overall and 2-1 ATS as a dog in four, with a 1-0 ATS mark on normal rest in two, though the road log is still 0-0 in one and three of the four recent covers came at home (dog win, favorite win, neutral dog loss, dog win). Washington is 2-2 ATS, 1-1 ATS at home in three, and 1-2 ATS on normal rest in four, with no graded game as a favorite (0-0 in one); the other way, they are 2-0 ATS on three trips of three-plus time zones and 1-0 ATS in two adverse, wet, and windy games. The line has only bounced between -3.5 and -4.5 and is back at the open, and there is no head-to-head sample.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T07:07:39.867Z"
     },
     {
       "status": "ok",

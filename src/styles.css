@@ -1788,7 +1788,8 @@ select:focus {
 }
 
 .game-weather,
-.game-travel-rest {
+.game-travel-rest,
+.game-coming-off {
   flex-basis: 100%;
   color: var(--muted);
   line-height: 1.35;
@@ -5069,6 +5070,7 @@ footer {
   .game-venue,
   .game-weather,
   .game-travel-rest,
+  .game-coming-off,
   .game-injuries {
     grid-column: 1 / -1;
   }

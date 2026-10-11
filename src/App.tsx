@@ -82,6 +82,7 @@ import {
   poolSideSplitsForWeek,
 } from './poolRecord'
 import { formatRankedTeamName, teamKey, teamPageSlugs, buildTeamDirectory } from './teamPerformance'
+import { comingOffNotesForGame } from './lastOutcome'
 import {
   formatGameRestLine,
   formatGameTravelLine,
@@ -151,6 +152,14 @@ const travelRestIndex = buildTravelRestIndex(
   lastKickoffData as LastKickoffFile,
 )
 const travelRestByEvent = travelRestIndex.byEvent
+const teamDirectory = buildTeamDirectory(
+  slate,
+  recommendationHistory,
+  weatherHistoryData as WeatherHistoryFile,
+  lastKickoffData as LastKickoffFile,
+  teamRoster,
+)
+const teamsByKey = new Map(teamDirectory.teams.map((team) => [team.key, team]))
 const fieldEntryId = ourRosterEntry(playerHistory)?.entryId ?? null
 const poolRecordsByEvent = poolRecordsForWeek(
   playerHistory,
@@ -595,6 +604,7 @@ function GameCard({
         home: game.home.name,
       })
     : null
+  const comingOff = comingOffNotesForGame(game, teamsByKey, teamKey)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
@@ -661,6 +671,16 @@ function GameCard({
         {restLine && (
           <span className="game-travel-rest" title={travelRestTitle()}>
             {restLine}
+          </span>
+        )}
+        {comingOff.away && (
+          <span className="game-coming-off" title={comingOff.away.title}>
+            {comingOff.away.line}
+          </span>
+        )}
+        {comingOff.home && (
+          <span className="game-coming-off" title={comingOff.home.title}>
+            {comingOff.home.line}
           </span>
         )}
         {game.sport === 'NCAAF' && (

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T06:01:57.625Z",
+  "updatedAt": "2026-10-11T10:30:08.313Z",
   "weeks": [
     {
       "week": 1,
@@ -64708,8 +64708,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029261,
@@ -66244,15 +66244,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-11T06:01:57.625Z",
+    "updatedAt": "2026-10-11T10:30:08.313Z",
     "overall": {
       "key": "overall",
       "games": 3875,
       "calls": 2582,
-      "graded": 2290,
-      "correct": 1543,
+      "graded": 2291,
+      "correct": 1544,
       "noCalls": 1293,
-      "accuracy": 0.6737991266375546,
+      "accuracy": 0.6739415102575295,
       "noCallRate": 0.3336774193548387
     },
     "byLeague": [
@@ -66270,10 +66270,10 @@
         "key": "NFL",
         "games": 2054,
         "calls": 1636,
-        "graded": 1345,
-        "correct": 936,
+        "graded": 1346,
+        "correct": 937,
         "noCalls": 418,
-        "accuracy": 0.695910780669145,
+        "accuracy": 0.6961367013372957,
         "noCallRate": 0.2035053554040896
       }
     ],
@@ -66292,10 +66292,10 @@
         "key": "favorite",
         "games": 2188,
         "calls": 2188,
-        "graded": 1931,
-        "correct": 1328,
+        "graded": 1932,
+        "correct": 1329,
         "noCalls": 0,
-        "accuracy": 0.6877265665458312,
+        "accuracy": 0.687888198757764,
         "noCallRate": 0
       },
       {
@@ -66334,10 +66334,10 @@
         "key": "line-value",
         "games": 237,
         "calls": 237,
-        "graded": 211,
-        "correct": 171,
+        "graded": 212,
+        "correct": 172,
         "noCalls": 0,
-        "accuracy": 0.8104265402843602,
+        "accuracy": 0.8113207547169812,
         "noCallRate": 0
       },
       {
@@ -66376,10 +66376,10 @@
         "key": "high",
         "games": 848,
         "calls": 848,
-        "graded": 781,
-        "correct": 595,
+        "graded": 782,
+        "correct": 596,
         "noCalls": 0,
-        "accuracy": 0.7618437900128041,
+        "accuracy": 0.7621483375959079,
         "noCallRate": 0
       },
       {

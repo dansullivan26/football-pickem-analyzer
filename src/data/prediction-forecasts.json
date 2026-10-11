@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T13:37:08.692Z",
+  "updatedAt": "2026-10-11T17:13:42.033Z",
   "weeks": [
     {
       "week": 1,
@@ -55155,7 +55155,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55172,7 +55172,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -55189,8 +55189,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029264,
@@ -55206,8 +55206,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -55223,8 +55223,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -55240,7 +55240,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55257,8 +55257,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -55274,7 +55274,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55590,7 +55590,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55607,7 +55607,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55624,7 +55624,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -55641,7 +55641,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -55658,7 +55658,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -55675,7 +55675,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -55692,8 +55692,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -55709,7 +55709,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -56025,8 +56025,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -56042,8 +56042,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -56059,8 +56059,8 @@
               "habitKey": "rest",
               "reason": "Rest habit + favorite/dog habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -56076,8 +56076,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029265,
@@ -56093,8 +56093,8 @@
               "habitKey": "rest",
               "reason": "Rest habit + favorite/dog habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -56110,8 +56110,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -56127,7 +56127,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -56144,8 +56144,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -56460,8 +56460,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -56477,8 +56477,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -56494,8 +56494,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -56511,8 +56511,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -56528,8 +56528,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -56545,8 +56545,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -56562,8 +56562,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -56579,8 +56579,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -56895,7 +56895,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -56912,8 +56912,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -56929,7 +56929,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -56946,8 +56946,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -56963,8 +56963,8 @@
               "habitKey": "home",
               "reason": "Home/road habit + favorite/dog habit · 76 prior chances",
               "sampleSize": 76,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -56980,8 +56980,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -56997,8 +56997,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -57014,8 +57014,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -57330,8 +57330,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -57347,8 +57347,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -57364,8 +57364,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -57381,8 +57381,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -57398,8 +57398,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -57415,8 +57415,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -57432,8 +57432,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -57449,8 +57449,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -57765,7 +57765,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -57782,7 +57782,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -57799,7 +57799,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -57816,7 +57816,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -57833,7 +57833,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -57850,7 +57850,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -57867,7 +57867,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -57884,7 +57884,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -58200,8 +58200,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -58217,8 +58217,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -58234,8 +58234,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -58251,8 +58251,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -58268,8 +58268,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -58285,8 +58285,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -58302,8 +58302,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -58319,8 +58319,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 120 prior chances",
               "sampleSize": 120,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -58635,8 +58635,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -58652,8 +58652,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -58669,8 +58669,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029264,
@@ -58686,8 +58686,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -58703,8 +58703,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -58720,8 +58720,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -58737,8 +58737,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -58754,8 +58754,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -59070,8 +59070,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029262,
@@ -59087,8 +59087,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -59104,8 +59104,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -59121,8 +59121,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -59138,8 +59138,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -59155,8 +59155,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -59172,8 +59172,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -59189,8 +59189,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -59505,8 +59505,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -59522,8 +59522,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -59539,8 +59539,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -59556,8 +59556,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -59573,8 +59573,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -59590,8 +59590,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -59607,7 +59607,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -59624,8 +59624,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -59940,8 +59940,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -59957,8 +59957,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -59974,8 +59974,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -59991,8 +59991,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -60008,8 +60008,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -60025,8 +60025,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -60042,8 +60042,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -60059,8 +60059,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 123 prior chances",
               "sampleSize": 123,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -60375,8 +60375,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 78 prior chances",
               "sampleSize": 78,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -60392,7 +60392,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -60409,8 +60409,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 78 prior chances",
               "sampleSize": 78,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -60426,7 +60426,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60443,7 +60443,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -60460,7 +60460,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60477,7 +60477,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60494,8 +60494,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 78 prior chances",
               "sampleSize": 78,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -60810,8 +60810,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 119 prior chances",
               "sampleSize": 119,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029262,
@@ -60827,8 +60827,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 119 prior chances",
               "sampleSize": 119,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -60844,7 +60844,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60861,8 +60861,8 @@
               "habitKey": "rest",
               "reason": "Rest habit + favorite/dog habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029265,
@@ -60878,7 +60878,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60895,8 +60895,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 119 prior chances",
               "sampleSize": 119,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -60912,7 +60912,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -60929,8 +60929,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 119 prior chances",
               "sampleSize": 119,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -61245,8 +61245,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -61262,8 +61262,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -61279,8 +61279,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -61296,8 +61296,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -61313,8 +61313,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -61330,8 +61330,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -61347,8 +61347,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -61364,8 +61364,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -61680,8 +61680,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -61697,8 +61697,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -61714,8 +61714,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029264,
@@ -61731,8 +61731,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -61748,8 +61748,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -61765,8 +61765,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -61782,8 +61782,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -61799,8 +61799,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -62115,8 +62115,8 @@
               "habitKey": "home",
               "reason": "Home/road habit + favorite/dog habit · 77 prior chances",
               "sampleSize": 77,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029262,
@@ -62132,8 +62132,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -62149,8 +62149,8 @@
               "habitKey": "rest",
               "reason": "Rest habit + home/road habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -62166,8 +62166,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -62183,8 +62183,8 @@
               "habitKey": "rest",
               "reason": "Rest habit · 22 prior chances",
               "sampleSize": 22,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -62200,8 +62200,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -62217,8 +62217,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -62234,8 +62234,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -62550,8 +62550,8 @@
               "habitKey": "home",
               "reason": "Home/road habit · 74 prior chances",
               "sampleSize": 74,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029262,
@@ -62567,7 +62567,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -62584,8 +62584,8 @@
               "habitKey": "home",
               "reason": "Home/road habit · 74 prior chances",
               "sampleSize": 74,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -62601,7 +62601,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -62618,8 +62618,8 @@
               "habitKey": "home",
               "reason": "Home/road habit · 74 prior chances",
               "sampleSize": 74,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -62635,7 +62635,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -62652,8 +62652,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 9 prior chances",
               "sampleSize": 9,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -62669,7 +62669,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -62985,7 +62985,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -63002,8 +63002,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -63019,7 +63019,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -63036,8 +63036,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -63053,8 +63053,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit + home/road habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -63070,8 +63070,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -63087,7 +63087,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -63104,8 +63104,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -63420,8 +63420,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -63437,8 +63437,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029263,
@@ -63454,8 +63454,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -63471,8 +63471,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -63488,8 +63488,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -63505,8 +63505,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -63522,8 +63522,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -63539,8 +63539,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -63855,8 +63855,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -63872,8 +63872,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -63889,8 +63889,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -63906,8 +63906,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -63923,8 +63923,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit + home/road habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -63940,8 +63940,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -63957,8 +63957,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -63974,8 +63974,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -64290,8 +64290,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029262,
@@ -64307,8 +64307,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -64324,8 +64324,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029264,
@@ -64341,8 +64341,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029265,
@@ -64358,8 +64358,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -64375,8 +64375,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029267,
@@ -64392,8 +64392,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -64409,8 +64409,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50029268,
@@ -64725,8 +64725,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -64742,7 +64742,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -64759,8 +64759,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -64776,7 +64776,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -64793,7 +64793,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -64810,7 +64810,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -64827,7 +64827,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -64844,8 +64844,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -64861,7 +64861,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -64878,8 +64878,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029271,
@@ -64895,8 +64895,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029272,
@@ -64912,8 +64912,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 79 prior chances",
               "sampleSize": 79,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029273,
@@ -65160,8 +65160,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -65177,8 +65177,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -65194,8 +65194,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -65211,8 +65211,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -65228,8 +65228,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit + home/road habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029266,
@@ -65245,8 +65245,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -65262,8 +65262,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 11 prior chances",
               "sampleSize": 11,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029270,
@@ -65279,8 +65279,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 125 prior chances",
               "sampleSize": 125,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -65595,7 +65595,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -65612,7 +65612,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -65629,7 +65629,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -65646,7 +65646,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -65663,7 +65663,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -65680,7 +65680,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -65697,7 +65697,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -65714,7 +65714,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -66030,8 +66030,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029262,
@@ -66047,8 +66047,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029263,
@@ -66064,8 +66064,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029264,
@@ -66081,8 +66081,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029265,
@@ -66098,8 +66098,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029266,
@@ -66115,8 +66115,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029267,
@@ -66132,8 +66132,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50029270,
@@ -66149,8 +66149,8 @@
               "habitKey": "favorite",
               "reason": "Favorite/dog habit · 108 prior chances",
               "sampleSize": 108,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029268,
@@ -66244,15 +66244,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-11T13:37:08.692Z",
+    "updatedAt": "2026-10-11T17:13:42.033Z",
     "overall": {
       "key": "overall",
       "games": 3875,
       "calls": 2582,
-      "graded": 2311,
-      "correct": 1562,
+      "graded": 2471,
+      "correct": 1652,
       "noCalls": 1293,
-      "accuracy": 0.6758978797057551,
+      "accuracy": 0.6685552407932012,
       "noCallRate": 0.3336774193548387
     },
     "byLeague": [
@@ -66270,10 +66270,10 @@
         "key": "NFL",
         "games": 2054,
         "calls": 1636,
-        "graded": 1366,
-        "correct": 955,
+        "graded": 1526,
+        "correct": 1045,
         "noCalls": 418,
-        "accuracy": 0.6991215226939971,
+        "accuracy": 0.6847968545216252,
         "noCallRate": 0.2035053554040896
       }
     ],
@@ -66282,20 +66282,20 @@
         "key": "dog",
         "games": 394,
         "calls": 394,
-        "graded": 359,
-        "correct": 215,
+        "graded": 382,
+        "correct": 231,
         "noCalls": 0,
-        "accuracy": 0.5988857938718662,
+        "accuracy": 0.6047120418848168,
         "noCallRate": 0
       },
       {
         "key": "favorite",
         "games": 2188,
         "calls": 2188,
-        "graded": 1952,
-        "correct": 1347,
+        "graded": 2089,
+        "correct": 1421,
         "noCalls": 0,
-        "accuracy": 0.6900614754098361,
+        "accuracy": 0.6802297750119675,
         "noCallRate": 0
       },
       {
@@ -66314,30 +66314,30 @@
         "key": "favorite",
         "games": 2100,
         "calls": 2100,
-        "graded": 1897,
-        "correct": 1273,
+        "graded": 2022,
+        "correct": 1337,
         "noCalls": 0,
-        "accuracy": 0.6710595677385345,
+        "accuracy": 0.6612265084075173,
         "noCallRate": 0
       },
       {
         "key": "home",
         "games": 137,
         "calls": 137,
-        "graded": 128,
-        "correct": 72,
+        "graded": 133,
+        "correct": 75,
         "noCalls": 0,
-        "accuracy": 0.5625,
+        "accuracy": 0.5639097744360902,
         "noCallRate": 0
       },
       {
         "key": "line-value",
         "games": 237,
         "calls": 237,
-        "graded": 214,
-        "correct": 174,
+        "graded": 226,
+        "correct": 186,
         "noCalls": 0,
-        "accuracy": 0.8130841121495327,
+        "accuracy": 0.8230088495575221,
         "noCallRate": 0
       },
       {
@@ -66354,20 +66354,20 @@
         "key": "rest",
         "games": 34,
         "calls": 34,
-        "graded": 20,
-        "correct": 12,
+        "graded": 30,
+        "correct": 17,
         "noCalls": 0,
-        "accuracy": 0.6,
+        "accuracy": 0.5666666666666667,
         "noCallRate": 0
       },
       {
         "key": "travel",
         "games": 74,
         "calls": 74,
-        "graded": 52,
-        "correct": 31,
+        "graded": 60,
+        "correct": 37,
         "noCalls": 0,
-        "accuracy": 0.5961538461538461,
+        "accuracy": 0.6166666666666667,
         "noCallRate": 0
       }
     ],
@@ -66376,30 +66376,30 @@
         "key": "high",
         "games": 848,
         "calls": 848,
-        "graded": 787,
-        "correct": 600,
+        "graded": 823,
+        "correct": 623,
         "noCalls": 0,
-        "accuracy": 0.7623888182973316,
+        "accuracy": 0.7569866342648846,
         "noCallRate": 0
       },
       {
         "key": "low",
         "games": 38,
         "calls": 38,
-        "graded": 25,
-        "correct": 13,
+        "graded": 30,
+        "correct": 16,
         "noCalls": 0,
-        "accuracy": 0.52,
+        "accuracy": 0.5333333333333333,
         "noCallRate": 0
       },
       {
         "key": "medium",
         "games": 1696,
         "calls": 1696,
-        "graded": 1499,
-        "correct": 949,
+        "graded": 1618,
+        "correct": 1013,
         "noCalls": 0,
-        "accuracy": 0.6330887258172114,
+        "accuracy": 0.6260815822002472,
         "noCallRate": 0
       },
       {

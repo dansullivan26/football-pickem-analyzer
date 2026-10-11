@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T07:07:39.867Z",
+  "updatedAt": "2026-10-11T14:03:11.939Z",
   "games": [
     {
       "status": "ok",
@@ -488,10 +488,10 @@
       "away": "Cincinnati",
       "home": "Miami",
       "side": "home",
-      "confidence": "medium",
-      "why": "The card backs Miami at +7.5, capturing a full 1-point line edge over DraftKings' 6.5 spread to stay above the key touchdown hook. While Miami carries a 1-3 ATS record and struggles as an underdog across four decided games, only 27% of the public is backing them at home in 86°F heat.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-08T00:06:28.654Z"
+      "confidence": "light",
+      "why": "Cincinnati is 1-2 ATS as a favorite in 4 games and has failed to cover its last two favorite spots, at home against Jacksonville and on the road at Pittsburgh. Miami's dog record cuts the other way on a thin sheet: 1-3 ATS in 5, 0-1 ATS at home in 2, and 0-4 straight up as a dog, with no head-to-head sample. Injuries still favor the points — Ja'Marr Chase (concussion) and Tee Higgins (groin) are both questionable, along with Bryan Cook and Colbie Young, while Miami lists only Caleb Douglas (ankle) out. The line moved +7 to +6.5 and back to +7.5, and the public is stacked on the road favorite. Four or five graded games is a thin book, but the favorite misses and the receiver questions point to Miami.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T13:59:27.676Z"
     },
     {
       "status": "ok",
@@ -503,9 +503,9 @@
       "home": "New England",
       "side": "away",
       "confidence": "medium",
-      "why": "The card pick backs Las Vegas at +3.5, citing a 0.9-point net edge powered by the field-goal hook and an injury advantage. Las Vegas enters with a flawless 4-0 ATS record on normal rest. Meanwhile, New England carries a lengthy injury report with six players listed as questionable, including key defensive pieces Christian Gonzalez, Carlton Davis III, Christian Barmore, and Dre'Mont Jones.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-08T00:06:45.276Z"
+      "why": "Las Vegas is 4-0 ATS in five games, 3-0 as a dog in four, and 3-0 on normal rest in four, with a road split of 1-0 in two. New England is 3-1 ATS in five, 1-0 at home in two, and 1-0 as a favorite in two, with a 1-1 mark on normal rest in three and 1-1 in benign weather in three. Las Vegas’s graded covers are 4-0 indoors in four, and the benign-weather split is 0-0 in one, so this outdoor setting is still a thin slice of that record. They have covered four straight, including a Week 4 road win as a 3.5-point dog, while New England is without corners Carlton Davis and Christian Gonzalez and lists Dre'Mont Jones, Christian Barmore, Christian Elliss, and Morgan Moses questionable, against Jalen Nailor out and Ashton Jeanty questionable for Las Vegas. Head-to-head is empty and the line path is blank.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T14:00:19.898Z"
     },
     {
       "status": "ok",
@@ -587,9 +587,9 @@
       "home": "L.A. Chargers",
       "side": "home",
       "confidence": "light",
-      "why": "The card pick backs the L.A. Chargers at +3.5 indoors at SoFi Stadium, highlighting a 0.4-point net edge built around the field goal hook. Denver faces travel across one time zone with significant secondary concerns, as top cornerback Pat Surtain II is doubtful alongside Riley Moss being questionable. However, confidence remains tempered as the Chargers sit at 1-3 ATS and deal with their own offensive line hits, including tackle Rashawn Slater ruled out.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-09T12:07:02.049Z"
+      "why": "Both sides have only four graded games, so every split is thin, but Denver’s road and travel marks are the ones that match this trip. The Broncos are 0-2 ATS away in two games and 0-2 ATS on one-zone trips in three, and the graded road results at Kansas City and San Francisco both failed to cover. Their favorite mark is 1-0 ATS in two, and the only favorite cover on the sheet was at home against Jacksonville. The Chargers are 1-1 ATS as dogs in three and covered last week at Seattle, against an overall 1-3 ATS and an 0-2 ATS indoor mark in three. Joe Alt, Derwin James, Donte Jackson, and Quentin Johnston are out, with Ladd McConkey and Charlie Kolar questionable, while Denver is without Pat Surtain II and Riley Moss. Those road and one-zone misses are enough for a light lean to the L.A. Chargers, with the indoor misses and the heavier injury list as the counterweight.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T14:01:33.764Z"
     },
     {
       "status": "ok",
@@ -600,34 +600,38 @@
       "away": "Detroit",
       "home": "Arizona",
       "side": "away",
-      "confidence": "medium",
-      "why": "The card pick leans toward Detroit at -4.5, capturing a 1-point line edge against the DraftKings market spread of 5.5. Arizona faces roster attrition with guard Isaiah Adams ruled out alongside three questionable defenders and backs, whereas Detroit lists only defensive tackle Tyleik Williams as questionable.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-09T12:07:12.000Z"
+      "confidence": "light",
+      "why": "Samples are thin, with four graded games apiece. Detroit is 0-2 ATS on the road in three games and 1-2 ATS as a favorite in four, the three-zone trip is 0-0 ATS in one, and normal rest is 0-1 ATS in two; the only recent cover was a home win over the Jets, and last week they lost as a road favorite at Carolina. Arizona is 2-1 ATS as a dog in four, but those covers were plus-8.5 at San Francisco and plus-10.5 on a neutral field, the home-dog loss to Seattle was the closer spot, and they are 0-1 ATS at home in two with no head-to-head sample logged. Indoor results are a wash at 1-1 ATS in three for each side. The line moved from plus-4.5 to plus-5.5, and Arizona is without Marvin Harrison Jr. and Andrew Wingard, with Walter Nolen III questionable and Isaiah Adams on the reserve list, while Detroit lists only Tyleik Williams as questionable.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T14:03:11.939Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3ta===",
       "cbsEventId": 50029270,
       "week": 6,
       "seasonYear": 2026,
       "away": "Chicago",
       "home": "Green Bay",
-      "error": "503 high demand",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T12:08:08.373Z"
+      "side": "away",
+      "confidence": "light",
+      "why": "Four graded games is a thin early-season sample, and there is no head-to-head. Chicago is still 3-1 ATS in five, 2-1 as a favorite in four, 3-0 ATS in benign weather in four, and 1-0 on the road, with that lone road game a cover as a 2.5-point favorite at Carolina. Green Bay is 0-4 ATS in five, 0-1 as a dog in two, and 0-2 in benign weather in three, with four straight non-covers and no home ATS split listed. Normal rest does not separate them: Chicago is 0-1 ATS in two and Green Bay is 0-1 ATS in two. The line has moved from Green Bay +3 to +1.5, Caleb Williams is questionable with a hamstring, and Green Bay lists Aaron Banks doubtful (toe) and Javon Hargrave questionable (toe). On that thin sample the side is Chicago, from the favorite and benign-weather covers.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T13:55:45.574Z"
     },
     {
-      "status": "failed",
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3tc===",
       "cbsEventId": 50029271,
       "week": 6,
       "seasonYear": 2026,
       "away": "San Francisco",
       "home": "Seattle",
-      "error": "503 high demand",
-      "model": "gemini-3.8-flash",
-      "attemptedAt": "2026-10-09T18:20:11.717Z"
+      "side": "away",
+      "confidence": "light",
+      "why": "Both teams have four graded games, so this is a thin early-season sample and only a light lean. Seattle is 0-2 ATS at home in 3, 1-3 ATS as a favorite in 5, 0-2 ATS on normal rest in 3, and 0-2 ATS in benign weather in 3, with non-covers in three of the last four, including home favorites of -3.5 against New England and -7.5 against the Chargers. San Francisco is 3-1 ATS overall in 5, 1-0 ATS as a dog in 2, 1-1 ATS on normal rest in 3, and 2-1 ATS in benign weather in 4, with covers against Denver, Miami, and the Rams in the last four. San Francisco's road split is 0-0 ATS in 1, that dog cover came on a neutral field, and there is no head-to-head sample. The line path has run -2.5 to -3.5 to -3 to -3.5, and San Francisco is without Nick Bosa (calf), Kyle Juszczyk (knee), and Marques Sigle (ankle), with Upton Stout questionable, while Seattle's injury list is empty.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-11T13:58:25.375Z"
     },
     {
       "status": "ok",

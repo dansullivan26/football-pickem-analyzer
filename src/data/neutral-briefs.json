@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T18:45:27.677Z",
+  "updatedAt": "2026-10-12T08:04:43.907Z",
   "games": [
     {
       "status": "ok",
@@ -656,10 +656,10 @@
       "away": "Buffalo",
       "home": "L.A. Rams",
       "side": "home",
-      "confidence": "medium",
-      "why": "The card pick backs the L.A. Rams at -2.5, capitalizing on a 1-point line edge against the -3.5 market consensus inside SoFi Stadium's indoor venue. Both squads arrive on 8 days of rest, but Buffalo must travel three time zones west while managing five questionable tags including Ed Oliver and DJ Moore. Although the Bills boast a 3-1 ATS profile ('Covers ATS') against the Rams' 2-2 ATS mark, the hook advantage and travel disparity favor Los Angeles.",
-      "model": "gemini-3.8-flash",
-      "frozenAt": "2026-10-08T19:22:33.588Z"
+      "confidence": "light",
+      "why": "Four graded games apiece is a thin sample, and there is no head-to-head history. Buffalo is 3-1 ATS overall, but that rate is mostly home-favorite covers; in this road-dog role they are 1-0 ATS on the road in one game and 1-0 ATS as a dog in two, with no graded result on a three-time-zone trip (0-0 in one). The Rams are 2-2 ATS as a favorite in five games and have no home split, while both clubs are 1-0 ATS indoors in two and 1-0 ATS on a long week in two, so rest and roof do not separate them. The number has only shuffled between -3 and -3.5 and sits back at -3.5. The injury list is louder than the splits: Ed Oliver is out (knee) and Dee Alford and DJ Moore are questionable for Buffalo, against only Quentin Lake questionable (hip) for the Rams. That is enough for a light lean to the L.A. Rams.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-12T08:04:43.907Z"
     }
   ]
 }

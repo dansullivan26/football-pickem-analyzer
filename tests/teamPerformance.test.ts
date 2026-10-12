@@ -733,6 +733,46 @@ test('Dublin is a neutral site for both CBS sides; Stanford stays a real home', 
   assert.equal(stanfordRecord?.appearances[0]?.venue, 'home')
 })
 
+test('SoFi Rams games count as home, not a neutral site', () => {
+  const bills = team('BUF', 'Buffalo', 'AFC')
+  const rams = team('LAR', 'L.A. Rams', 'NFC')
+  rams.location = 'Los Angeles'
+  rams.nickname = 'Rams'
+  const sofi = {
+    stadium: 'SoFi Stadium',
+    city: 'Inglewood',
+    state: 'CA',
+    indoor: true,
+  }
+  const directory = buildTeamDirectory(
+    slate([
+      slateGame(1, bills, rams, -3.5, {
+        sport: 'NFL',
+        venue: sofi,
+      }),
+    ]),
+    history([
+      rec({
+        cbsEventId: 1,
+        sport: 'NFL',
+        away: 'BUF',
+        home: 'LAR',
+        homeSpread: -3.5,
+        venue: sofi,
+        cover: 'home',
+      }),
+    ]),
+  )
+
+  const ramsRecord = directory.teams.find((row) => row.abbrev === 'LAR')
+  const billsRecord = directory.teams.find((row) => row.abbrev === 'BUF')
+  assert.equal(ramsRecord?.appearances[0]?.venue, 'home')
+  assert.equal(billsRecord?.appearances[0]?.venue, 'away')
+  assert.equal(ramsRecord?.home.detail, '1-0 ATS')
+  assert.equal(ramsRecord?.neutral.games, 0)
+  assert.equal(billsRecord?.away.detail, '0-1 ATS')
+})
+
 test('teamPageSlugs matches the Teams directory for slate sides', () => {
   const unc = team('UNC', 'North Carolina', 'ACC')
   const tcu = team('TCU', 'TCU', 'BIG12')

@@ -99,8 +99,10 @@ const CITY_TZ: Record<string, string> = {
   'dublin|ie': 'Europe/Dublin',
 }
 
-const NEUTRAL_STADIUM =
-  /aviva|nissan stadium|lambeau|wembley|tottenham|estadio azteca|deutsche bank park|allianz arena|mercedes-benz|at&t stadium|allegiant|sofi stadium|neo qu[ií]mica|morumbi|corinthians/i
+/** International / third-country buildings. NFL homes are not listed here —
+ *  SoFi, Lambeau, etc. also host bowls, but they are real homes for tenants. */
+const ALWAYS_NEUTRAL_STADIUM =
+  /aviva|wembley|tottenham|estadio azteca|deutsche bank park|allianz arena|neo qu[ií]mica|morumbi|corinthians/i
 
 function normalize(value: string) {
   return value.trim().toLowerCase().replace(/\./g, '')
@@ -136,7 +138,7 @@ export function timeZoneFromTeamLabel(label: string | null | undefined) {
 export function venueLooksNeutral(venue: GameVenue | null | undefined) {
   if (!venue?.city || !venue.state) return true
   if (!usStateName(venue.state)) return true
-  return NEUTRAL_STADIUM.test(venue.stadium ?? '')
+  return ALWAYS_NEUTRAL_STADIUM.test(venue.stadium ?? '')
 }
 
 /** US state implied by a school or NFL location label, if any. */

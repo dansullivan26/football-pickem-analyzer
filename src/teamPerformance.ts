@@ -608,8 +608,18 @@ export function buildTeamDirectory(
       const homeInfo = roster.get(teamKey(game.sport, game.home))
       const sites = classifyGameSites(
         game.venue ?? live?.venue ?? null,
-        { location: awayInfo?.location, name: awayInfo?.name },
-        { location: homeInfo?.location, name: homeInfo?.name },
+        {
+          location: awayInfo?.location,
+          name: awayInfo?.name,
+          nickname: awayInfo?.nickname,
+          abbrev: game.away,
+        },
+        {
+          location: homeInfo?.location,
+          name: homeInfo?.name,
+          nickname: homeInfo?.nickname,
+          abbrev: game.home,
+        },
         homeVenues.get(`${game.sport}:${game.away}`) ?? [],
         homeVenues.get(`${game.sport}:${game.home}`) ?? [],
       )

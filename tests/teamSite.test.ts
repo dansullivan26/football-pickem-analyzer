@@ -29,12 +29,80 @@ const mercedes: GameVenue = {
   state: 'GA',
   indoor: true,
 }
+const sofi: GameVenue = {
+  stadium: 'SoFi Stadium',
+  city: 'Inglewood',
+  state: 'CA',
+  indoor: true,
+}
+const lambeau: GameVenue = {
+  stadium: 'Lambeau Field',
+  city: 'Green Bay',
+  state: 'WI',
+  indoor: false,
+}
 const sanford: GameVenue = {
   stadium: 'Sanford Stadium',
   city: 'Athens',
   state: 'GA',
   indoor: false,
 }
+
+test('SoFi is home for the Rams and Chargers, not a neutral site', () => {
+  const ramsHome = classifyGameSites(
+    sofi,
+    { location: 'New York', name: 'N.Y. Giants', abbrev: 'NYG' },
+    { location: 'Los Angeles', name: 'L.A. Rams', nickname: 'Rams', abbrev: 'LAR' },
+  )
+  assert.deepEqual(ramsHome, { away: 'away', home: 'home' })
+
+  const chargersHome = classifyGameSites(
+    sofi,
+    { location: 'Denver', name: 'Denver', abbrev: 'DEN' },
+    {
+      location: 'Los Angeles',
+      name: 'L.A. Chargers',
+      nickname: 'Chargers',
+      abbrev: 'LAC',
+    },
+  )
+  assert.deepEqual(chargersHome, { away: 'away', home: 'home' })
+
+  const shared = classifyGameSites(
+    sofi,
+    { location: 'Los Angeles', name: 'L.A. Rams', nickname: 'Rams', abbrev: 'LAR' },
+    {
+      location: 'Los Angeles',
+      name: 'L.A. Chargers',
+      nickname: 'Chargers',
+      abbrev: 'LAC',
+    },
+  )
+  assert.deepEqual(shared, { away: 'away', home: 'home' })
+
+  const bowl = classifyGameSites(
+    sofi,
+    { location: 'Penn State', name: 'Penn State' },
+    { location: 'Washington', name: 'Washington' },
+  )
+  assert.deepEqual(bowl, { away: 'neutral', home: 'neutral' })
+})
+
+test('Lambeau is home for the Packers and a bowl site for Wisconsin–Notre Dame', () => {
+  const packers = classifyGameSites(
+    lambeau,
+    { location: 'Chicago', name: 'Chicago', abbrev: 'CHI' },
+    { location: 'Green Bay', name: 'Green Bay', nickname: 'Packers', abbrev: 'GB' },
+  )
+  assert.deepEqual(packers, { away: 'away', home: 'home' })
+
+  const irish = classifyGameSites(
+    lambeau,
+    { location: 'Wisconsin', name: 'Wisconsin' },
+    { location: 'Notre Dame', name: 'Notre Dame' },
+  )
+  assert.deepEqual(irish, { away: 'neutral', home: 'neutral' })
+})
 
 test('Dublin and Mercedes-Benz are neutral for both sides', () => {
   const dublin = classifyGameSites(
@@ -50,6 +118,13 @@ test('Dublin and Mercedes-Benz are neutral for both sides', () => {
     { location: 'Georgia', name: 'Georgia' },
   )
   assert.deepEqual(atlanta, { away: 'neutral', home: 'neutral' })
+
+  const falcons = classifyGameSites(
+    mercedes,
+    { location: 'Carolina', name: 'Carolina', abbrev: 'CAR' },
+    { location: 'Atlanta', name: 'Atlanta', nickname: 'Falcons', abbrev: 'ATL' },
+  )
+  assert.deepEqual(falcons, { away: 'away', home: 'home' })
 })
 
 test('Hawaii at Stanford is a real road / home site', () => {
@@ -92,9 +167,13 @@ test('collectHomeVenues skips Aviva and keeps Stanford', () => {
   const homes = collectHomeVenues([
     { sport: 'NCAAF', home: 'TCU', venue: aviva },
     { sport: 'NCAAF', home: 'STNFRD', venue: stanford },
+    { sport: 'NFL', home: 'LAR', venue: sofi },
+    { sport: 'NCAAF', home: 'ND', venue: lambeau },
   ])
   assert.equal(homes.has('NCAAF:TCU'), false)
   assert.equal(homes.get('NCAAF:STNFRD')?.[0]?.stadium, 'Stanford Stadium')
+  assert.equal(homes.get('NFL:LAR')?.[0]?.stadium, 'SoFi Stadium')
+  assert.equal(homes.has('NCAAF:ND'), false)
 })
 
 test('appearanceVenueWord and recIsNeutralSite follow the site, not CBS', () => {
@@ -103,7 +182,20 @@ test('appearanceVenueWord and recIsNeutralSite follow the site, not CBS', () => 
   assert.equal(appearanceVenueWord('neutral'), 'neutral vs')
   assert.equal(recIsNeutralSite({ venue: aviva }), true)
   assert.equal(recIsNeutralSite({ venue: stanford }), false)
+  assert.equal(recIsNeutralSite({ venue: sofi }), false)
   assert.equal(recIsNeutralSite({ neutralSite: false, venue: aviva }), false)
+})
+
+test('attachFrozenNeutralSite stamps SoFi Rams as a real home', () => {
+  const stamped = attachFrozenNeutralSite(
+    {},
+    {
+      venue: sofi,
+      away: { location: 'Buffalo', name: 'Buffalo', abbrev: 'BUF' },
+      home: { location: 'Los Angeles', name: 'L.A. Rams', nickname: 'Rams', abbrev: 'LAR' },
+    },
+  )
+  assert.equal(stamped.neutralSite, false)
 })
 
 test('attachFrozenNeutralSite writes then locks the stamp', () => {

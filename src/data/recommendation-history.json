@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T10:28:41.769Z",
+  "updatedAt": "2026-10-12T19:53:09.255Z",
   "weeks": [
     {
       "week": 1,
@@ -3727,7 +3727,7 @@
       "week": 6,
       "seasonYear": 2026,
       "label": "Week 6",
-      "capturedAt": "2026-10-12T09:26:53.375Z",
+      "capturedAt": "2026-10-12T19:53:09.255Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029273,
@@ -4442,8 +4442,8 @@
             "indoor": true
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 30,
+          "homeScore": 23
         },
         {
           "cbsEventId": 50029273,
@@ -4452,16 +4452,16 @@
           "away": "BUF",
           "home": "LAR",
           "homeSpread": -2.5,
-          "liveHomeSpread": -4.5,
-          "category": "lean",
+          "liveHomeSpread": -3.5,
+          "category": "slight",
           "recommendedSide": "home",
-          "hook": null,
+          "hook": "fg",
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
-          "score": 11.75,
-          "compositeEdge": 3.25,
+          "score": 6.75,
+          "compositeEdge": 2.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

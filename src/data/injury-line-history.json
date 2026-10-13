@@ -2,7 +2,7 @@
   "week": 6,
   "seasonYear": 2026,
   "label": "Week 6",
-  "updatedAt": "2026-10-13T17:40:37.136Z",
+  "updatedAt": "2026-10-13T22:56:39.975Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -759,6 +759,24 @@
           "toStatus": "Questionable",
           "fromTier": "out",
           "toTier": "questionable",
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-13T22:56:39.975Z",
+          "cbsEventId": 50029181,
+          "athleteId": "4692525",
+          "name": "Anton Harrison",
+          "position": "OT",
+          "teamAbbrev": "JAC",
+          "teamName": "Jacksonville",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
           "availability": "better",
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -7.5,

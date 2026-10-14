@@ -3,67 +3,1095 @@
     "site": "Covers",
     "product": "King of Covers contest consensus",
     "description": "contest ATS tickets; headline % is all lines; atsByLine is picks at each number; away.spread/home.spread are current Sides, which may not match any ticket bucket.",
-    "fetchedAt": "2026-10-12T08:47:42-04:00",
+    "fetchedAt": "2026-10-14T08:40:20-04:00",
     "timezone": "America/Indianapolis"
   },
   "week": {
-    "order": 6,
-    "label": "Week 6",
+    "order": 7,
+    "label": "Week 7",
     "gamesOnSlate": 25,
-    "matched": 1,
+    "matched": 25,
     "unmatched": 0
   },
   "report": {
-    "summary": "1 of 1 games moved since yesterday 08:35 ET. BUF @ LAR public 55/45 → 58/42.",
+    "summary": "First Week 7 Covers consensus capture (25 remaining games).",
     "details": null,
-    "comparedTo": "2026-10-11T08:35:16-04:00",
+    "comparedTo": null,
     "games": []
   },
   "games": [
     {
-      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dcob2guydamrzgi3tg===",
-      "cbsEventId": 50029273,
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3ti===",
+      "cbsEventId": 50029274,
       "sport": "NFL",
-      "kickoff": "2026-10-12T20:15:00-04:00",
+      "kickoff": "2026-10-15T20:15:00-04:00",
       "matchStatus": "matched",
-      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/8a0f1605-96d8-4dd8-908e-b44a016e0e82",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/ceffbecf-a280-4744-b755-b44a016ded22",
+      "cbsHomeSpread": 2.5,
+      "away": {
+        "name": "Seattle",
+        "abbrev": "SEA",
+        "coversName": "Seattle",
+        "spread": -2.5,
+        "pct": 52,
+        "picks": 377
+      },
+      "home": {
+        "name": "Denver",
+        "abbrev": "DEN",
+        "coversName": "Denver",
+        "spread": 2.5,
+        "pct": 48,
+        "picks": 355
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -1.5,
+          "awayPicks": 74,
+          "homePicks": 70
+        },
+        {
+          "awaySpread": -2.5,
+          "awayPicks": 283,
+          "homePicks": 264
+        },
+        {
+          "awaySpread": -3,
+          "awayPicks": 20,
+          "homePicks": 21
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamryge4tk===",
+      "cbsEventId": 50028195,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T12:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/ef2a646d-81a2-40d4-9b69-b45900d1b902",
+      "cbsHomeSpread": 3.5,
+      "away": {
+        "name": "Ohio State",
+        "abbrev": "OHIOST",
+        "coversName": "Ohio State",
+        "spread": -3.5,
+        "pct": 70,
+        "picks": 258
+      },
+      "home": {
+        "name": "Indiana",
+        "abbrev": "IND",
+        "coversName": "Indiana",
+        "spread": 3.5,
+        "pct": 30,
+        "picks": 112
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -2.5,
+          "awayPicks": 58,
+          "homePicks": 32
+        },
+        {
+          "awaySpread": -3,
+          "awayPicks": 12,
+          "homePicks": 1
+        },
+        {
+          "awaySpread": -3.5,
+          "awayPicks": 139,
+          "homePicks": 62
+        },
+        {
+          "awaySpread": -4,
+          "awayPicks": 49,
+          "homePicks": 17
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygiztc===",
+      "cbsEventId": 50028231,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T12:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/13ef692d-ab97-4ae1-998c-b45500dfc03a",
+      "cbsHomeSpread": -12.5,
+      "away": {
+        "name": "Miss. State",
+        "abbrev": "MISSST",
+        "coversName": "MS State",
+        "spread": 13.5,
+        "pct": 62,
+        "picks": 194
+      },
+      "home": {
+        "name": "LSU",
+        "abbrev": "LSU",
+        "coversName": "LSU",
+        "spread": -13.5,
+        "pct": 38,
+        "picks": 118
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 13.5,
+          "awayPicks": 61,
+          "homePicks": 27
+        },
+        {
+          "awaySpread": 12.5,
+          "awayPicks": 86,
+          "homePicks": 72
+        },
+        {
+          "awaySpread": 11.5,
+          "awayPicks": 27,
+          "homePicks": 7
+        },
+        {
+          "awaySpread": 10.5,
+          "awayPicks": 20,
+          "homePicks": 12
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamryge4te===",
+      "cbsEventId": 50028192,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T15:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/09ea0864-149f-451b-bb33-b45500e04c24",
+      "cbsHomeSpread": -19.5,
+      "away": {
+        "name": "Auburn",
+        "abbrev": "AUBURN",
+        "coversName": "Auburn",
+        "spread": 21,
+        "pct": 56,
+        "picks": 135
+      },
+      "home": {
+        "name": "Georgia",
+        "abbrev": "UGA",
+        "coversName": "Georgia",
+        "spread": -21,
+        "pct": 44,
+        "picks": 107
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 20.5,
+          "awayPicks": 62,
+          "homePicks": 47
+        },
+        {
+          "awaySpread": 19.5,
+          "awayPicks": 6,
+          "homePicks": 1
+        },
+        {
+          "awaySpread": 18.5,
+          "awayPicks": 67,
+          "homePicks": 59
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygiydc===",
+      "cbsEventId": 50028201,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T15:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/9776a7e2-b966-4eeb-97a8-b45500dffec7",
+      "cbsHomeSpread": -6.5,
+      "away": {
+        "name": "Penn State",
+        "abbrev": "PSU",
+        "coversName": "Penn State",
+        "spread": 6.5,
+        "pct": 43,
+        "picks": 95
+      },
+      "home": {
+        "name": "Michigan",
+        "abbrev": "MICH",
+        "coversName": "Michigan",
+        "spread": -6.5,
+        "pct": 57,
+        "picks": 125
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 6,
+          "awayPicks": 21,
+          "homePicks": 34
+        },
+        {
+          "awaySpread": 5.5,
+          "awayPicks": 20,
+          "homePicks": 23
+        },
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 54,
+          "homePicks": 68
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygiytg===",
+      "cbsEventId": 50028213,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T15:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/0bf7722c-8777-4348-9e09-b45500dfe749",
+      "cbsHomeSpread": 7.5,
+      "away": {
+        "name": "Alabama",
+        "abbrev": "BAMA",
+        "coversName": "Alabama",
+        "spread": -9.5,
+        "pct": 60,
+        "picks": 174
+      },
+      "home": {
+        "name": "Tennessee",
+        "abbrev": "TENN",
+        "coversName": "Tennessee",
+        "spread": 9.5,
+        "pct": 40,
+        "picks": 118
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -4.5,
+          "awayPicks": 46,
+          "homePicks": 28
+        },
+        {
+          "awaySpread": -6.5,
+          "awayPicks": 49,
+          "homePicks": 10
+        },
+        {
+          "awaySpread": -7,
+          "awayPicks": 3,
+          "homePicks": 3
+        },
+        {
+          "awaySpread": -7.5,
+          "awayPicks": 16,
+          "homePicks": 17
+        },
+        {
+          "awaySpread": -8.5,
+          "awayPicks": 60,
+          "homePicks": 60
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi2dg===",
+      "cbsEventId": 50028243,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T15:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/a6b91861-d8e0-4bf9-99c5-b45500e00233",
+      "cbsHomeSpread": -6.5,
+      "away": {
+        "name": "Missouri",
+        "abbrev": "MIZZOU",
+        "coversName": "Missouri",
+        "spread": 5.5,
+        "pct": 53,
+        "picks": 131
+      },
+      "home": {
+        "name": "Ole Miss",
+        "abbrev": "MISS",
+        "coversName": "Mississippi",
+        "spread": -5.5,
+        "pct": 47,
+        "picks": 116
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 42,
+          "homePicks": 32
+        },
+        {
+          "awaySpread": 6,
+          "awayPicks": 64,
+          "homePicks": 53
+        },
+        {
+          "awaySpread": 5.5,
+          "awayPicks": 25,
+          "homePicks": 31
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygizdo===",
+      "cbsEventId": 50028227,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T19:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/b5823d3a-7851-416f-a63b-b45500dfa61c",
+      "cbsHomeSpread": -4.5,
+      "away": {
+        "name": "Oklahoma State",
+        "abbrev": "OKLAST",
+        "coversName": "Oklahoma State",
+        "spread": 4.5,
+        "pct": 64,
+        "picks": 176
+      },
+      "home": {
+        "name": "Houston",
+        "abbrev": "HOU",
+        "coversName": "Houston",
+        "spread": -4.5,
+        "pct": 36,
+        "picks": 100
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 4.5,
+          "awayPicks": 76,
+          "homePicks": 45
+        },
+        {
+          "awaySpread": 3.5,
+          "awayPicks": 100,
+          "homePicks": 55
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi2de===",
+      "cbsEventId": 50028242,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T19:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/f929cba5-b6f5-48c4-825a-b45900d2c908",
+      "cbsHomeSpread": -6.5,
+      "away": {
+        "name": "Kentucky",
+        "abbrev": "UK",
+        "coversName": "Kentucky",
+        "spread": 6.5,
+        "pct": 62,
+        "picks": 174
+      },
+      "home": {
+        "name": "Oklahoma",
+        "abbrev": "OKLA",
+        "coversName": "Oklahoma",
+        "spread": -6.5,
+        "pct": 38,
+        "picks": 105
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 7,
+          "awayPicks": 3,
+          "homePicks": 1
+        },
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 140,
+          "homePicks": 73
+        },
+        {
+          "awaySpread": 6,
+          "awayPicks": 31,
+          "homePicks": 31
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi3di===",
+      "cbsEventId": 50028264,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T19:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/fa8fb10f-d5e7-4650-a593-b45900d219e0",
+      "cbsHomeSpread": 9.5,
+      "away": {
+        "name": "Notre Dame",
+        "abbrev": "ND",
+        "coversName": "Notre Dame",
+        "spread": -10.5,
+        "pct": 41,
+        "picks": 130
+      },
+      "home": {
+        "name": "BYU",
+        "abbrev": "BYU",
+        "coversName": "BYU",
+        "spread": 10.5,
+        "pct": 59,
+        "picks": 190
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -9.5,
+          "awayPicks": 26,
+          "homePicks": 37
+        },
+        {
+          "awaySpread": -10.5,
+          "awayPicks": 42,
+          "homePicks": 65
+        },
+        {
+          "awaySpread": -11.5,
+          "awayPicks": 1,
+          "homePicks": 3
+        },
+        {
+          "awaySpread": -12.5,
+          "awayPicks": 61,
+          "homePicks": 85
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi4de===",
+      "cbsEventId": 50028282,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T19:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/b9a4658f-9ca3-48da-98eb-b45500e017d3",
+      "cbsHomeSpread": -3.5,
+      "away": {
+        "name": "Wisconsin",
+        "abbrev": "WISC",
+        "coversName": "Wisconsin",
+        "spread": 2.5,
+        "pct": 31,
+        "picks": 77
+      },
+      "home": {
+        "name": "UCLA",
+        "abbrev": "UCLA",
+        "coversName": "UCLA",
+        "spread": -2.5,
+        "pct": 69,
+        "picks": 174
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 3.5,
+          "awayPicks": 36,
+          "homePicks": 64
+        },
+        {
+          "awaySpread": 2.5,
+          "awayPicks": 35,
+          "homePicks": 93
+        },
+        {
+          "awaySpread": 3,
+          "awayPicks": 6,
+          "homePicks": 17
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi3tm===",
+      "cbsEventId": 50028276,
+      "sport": "NCAAF",
+      "kickoff": "2026-10-17T23:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/28c6b13f-25c2-47a8-9c5b-b4830128b7fe",
+      "cbsHomeSpread": -7.5,
+      "away": {
+        "name": "Nebraska",
+        "abbrev": "NEB",
+        "coversName": "Nebraska",
+        "spread": 7.5,
+        "pct": 59,
+        "picks": 127
+      },
+      "home": {
+        "name": "Oregon",
+        "abbrev": "OREG",
+        "coversName": "Oregon",
+        "spread": -7.5,
+        "pct": 41,
+        "picks": 88
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 7.5,
+          "awayPicks": 80,
+          "homePicks": 51
+        },
+        {
+          "awaySpread": 7,
+          "awayPicks": 24,
+          "homePicks": 14
+        },
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 23,
+          "homePicks": 23
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzge4de===",
+      "cbsEventId": 50029182,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T09:30:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/1ffed4dd-a19c-4102-a504-b44900b8ea38",
       "cbsHomeSpread": -2.5,
       "away": {
-        "name": "Buffalo",
-        "abbrev": "BUF",
-        "coversName": "Buffalo",
-        "spread": 3.5,
+        "name": "Houston",
+        "abbrev": "HOU",
+        "coversName": "Houston",
+        "spread": 2.5,
+        "pct": 33,
+        "picks": 191
+      },
+      "home": {
+        "name": "Jacksonville",
+        "abbrev": "JAC",
+        "coversName": "Jacksonville",
+        "spread": -2.5,
+        "pct": 67,
+        "picks": 393
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 3,
+          "awayPicks": 144,
+          "homePicks": 255
+        },
+        {
+          "awaySpread": 1.5,
+          "awayPicks": 47,
+          "homePicks": 138
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tk===",
+      "cbsEventId": 50029275,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/247a40f1-f51f-42cd-bb90-b44a016df9f6",
+      "cbsHomeSpread": 3.5,
+      "away": {
+        "name": "Chicago",
+        "abbrev": "CHI",
+        "coversName": "Chicago",
+        "spread": -2.5,
+        "pct": 42,
+        "picks": 214
+      },
+      "home": {
+        "name": "Atlanta",
+        "abbrev": "ATL",
+        "coversName": "Atlanta",
+        "spread": 2.5,
         "pct": 58,
-        "picks": 694
+        "picks": 301
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 1.5,
+          "awayPicks": 11,
+          "homePicks": 17
+        },
+        {
+          "awaySpread": -1.5,
+          "awayPicks": 23,
+          "homePicks": 36
+        },
+        {
+          "awaySpread": -3,
+          "awayPicks": 176,
+          "homePicks": 233
+        },
+        {
+          "awaySpread": -3.5,
+          "awayPicks": 4,
+          "homePicks": 15
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tm===",
+      "cbsEventId": 50029276,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/a912d429-f8ce-4b87-8065-b44a016df4f9",
+      "cbsHomeSpread": 4.5,
+      "away": {
+        "name": "Baltimore",
+        "abbrev": "BAL",
+        "coversName": "Baltimore",
+        "spread": -4.5,
+        "pct": 50,
+        "picks": 260
+      },
+      "home": {
+        "name": "Cleveland",
+        "abbrev": "CLE",
+        "coversName": "Cleveland",
+        "spread": 4.5,
+        "pct": 50,
+        "picks": 256
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -3,
+          "awayPicks": 8,
+          "homePicks": 5
+        },
+        {
+          "awaySpread": -3.5,
+          "awayPicks": 38,
+          "homePicks": 32
+        },
+        {
+          "awaySpread": -4.5,
+          "awayPicks": 104,
+          "homePicks": 126
+        },
+        {
+          "awaySpread": -6.5,
+          "awayPicks": 110,
+          "homePicks": 93
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3to===",
+      "cbsEventId": 50029277,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/af76a552-4ea6-49a7-851a-b44a016df66e",
+      "cbsHomeSpread": -6.5,
+      "away": {
+        "name": "Tennessee",
+        "abbrev": "TEN",
+        "coversName": "Tennessee",
+        "spread": 6.5,
+        "pct": 28,
+        "picks": 144
+      },
+      "home": {
+        "name": "Indianapolis",
+        "abbrev": "IND",
+        "coversName": "Indianapolis",
+        "spread": -6.5,
+        "pct": 72,
+        "picks": 372
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 7,
+          "awayPicks": 83,
+          "homePicks": 200
+        },
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 17,
+          "homePicks": 43
+        },
+        {
+          "awaySpread": 3.5,
+          "awayPicks": 44,
+          "homePicks": 129
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tq===",
+      "cbsEventId": 50029278,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/70cd1436-68d9-440d-a3fc-b44a016e03c2",
+      "cbsHomeSpread": -7.5,
+      "away": {
+        "name": "N.Y. Jets",
+        "abbrev": "NYJ",
+        "coversName": "N.Y. Jets",
+        "spread": 6.5,
+        "pct": 43,
+        "picks": 225
+      },
+      "home": {
+        "name": "New England",
+        "abbrev": "NE",
+        "coversName": "New England",
+        "spread": -6.5,
+        "pct": 57,
+        "picks": 302
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 9.5,
+          "awayPicks": 99,
+          "homePicks": 64
+        },
+        {
+          "awaySpread": 7.5,
+          "awayPicks": 3,
+          "homePicks": 6
+        },
+        {
+          "awaySpread": 7,
+          "awayPicks": 123,
+          "homePicks": 232
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3ts===",
+      "cbsEventId": 50029279,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/564ee8c0-f65f-46fe-b09e-b44a016e2150",
+      "cbsHomeSpread": -1.5,
+      "away": {
+        "name": "New Orleans",
+        "abbrev": "NO",
+        "coversName": "New Orleans",
+        "spread": 1.5,
+        "pct": 39,
+        "picks": 207
+      },
+      "home": {
+        "name": "N.Y. Giants",
+        "abbrev": "NYG",
+        "coversName": "N.Y. Giants",
+        "spread": -1.5,
+        "pct": 61,
+        "picks": 329
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 2.5,
+          "awayPicks": 92,
+          "homePicks": 105
+        },
+        {
+          "awaySpread": 1.5,
+          "awayPicks": 78,
+          "homePicks": 148
+        },
+        {
+          "awaySpread": -1.5,
+          "awayPicks": 37,
+          "homePicks": 76
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4da===",
+      "cbsEventId": 50029280,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/9525f1ef-fb80-4086-9f54-b44a016df962",
+      "cbsHomeSpread": -1.5,
+      "away": {
+        "name": "Carolina",
+        "abbrev": "CAR",
+        "coversName": "Carolina",
+        "spread": -1.5,
+        "pct": 48,
+        "picks": 259
+      },
+      "home": {
+        "name": "Philadelphia",
+        "abbrev": "PHI",
+        "coversName": "Philadelphia",
+        "spread": 1.5,
+        "pct": 52,
+        "picks": 278
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 95,
+          "homePicks": 74
+        },
+        {
+          "awaySpread": 2.5,
+          "awayPicks": 34,
+          "homePicks": 31
+        },
+        {
+          "awaySpread": 1.5,
+          "awayPicks": 130,
+          "homePicks": 173
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dc===",
+      "cbsEventId": 50029281,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T13:00:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/a22a6671-8f0d-4aa7-96ea-b44a016e0674",
+      "cbsHomeSpread": 2.5,
+      "away": {
+        "name": "Pittsburgh",
+        "abbrev": "PIT",
+        "coversName": "Pittsburgh",
+        "spread": -2.5,
+        "pct": 54,
+        "picks": 279
+      },
+      "home": {
+        "name": "Tampa Bay",
+        "abbrev": "TB",
+        "coversName": "Tampa Bay",
+        "spread": 2.5,
+        "pct": 46,
+        "picks": 237
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 1.5,
+          "awayPicks": 108,
+          "homePicks": 92
+        },
+        {
+          "awaySpread": -2.5,
+          "awayPicks": 63,
+          "homePicks": 43
+        },
+        {
+          "awaySpread": -3,
+          "awayPicks": 108,
+          "homePicks": 102
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T16:05:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/bafdab39-c419-4bb8-8c84-b44a016e04db",
+      "cbsHomeSpread": -13.5,
+      "away": {
+        "name": "Arizona",
+        "abbrev": "ARI",
+        "coversName": "Arizona",
+        "spread": 12.5,
+        "pct": 55,
+        "picks": 258
       },
       "home": {
         "name": "L.A. Rams",
         "abbrev": "LAR",
         "coversName": "L.A. Rams",
-        "spread": -3.5,
-        "pct": 42,
-        "picks": 506
+        "spread": -12.5,
+        "pct": 45,
+        "picks": 215
       },
       "atsByLine": [
         {
-          "awaySpread": 3.5,
-          "awayPicks": 405,
-          "homePicks": 206
+          "awaySpread": 13.5,
+          "awayPicks": 124,
+          "homePicks": 74
         },
         {
-          "awaySpread": 3,
-          "awayPicks": 115,
-          "homePicks": 60
+          "awaySpread": 12.5,
+          "awayPicks": 72,
+          "homePicks": 71
+        },
+        {
+          "awaySpread": 10.5,
+          "awayPicks": 62,
+          "homePicks": 70
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
+      "cbsEventId": 50029283,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T16:25:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/bec88e7c-4873-44ee-bbf3-b44a016e06ba",
+      "cbsHomeSpread": -8.5,
+      "away": {
+        "name": "L.A. Chargers",
+        "abbrev": "LAC",
+        "coversName": "L.A. Chargers",
+        "spread": 7.5,
+        "pct": 38,
+        "picks": 204
+      },
+      "home": {
+        "name": "Kansas City",
+        "abbrev": "KC",
+        "coversName": "Kansas City",
+        "spread": -7.5,
+        "pct": 62,
+        "picks": 329
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 8.5,
+          "awayPicks": 136,
+          "homePicks": 135
+        },
+        {
+          "awaySpread": 7.5,
+          "awayPicks": 18,
+          "homePicks": 18
         },
         {
           "awaySpread": 2.5,
-          "awayPicks": 171,
-          "homePicks": 235
+          "awayPicks": 50,
+          "homePicks": 176
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4di===",
+      "cbsEventId": 50029284,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T16:25:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/259fabdf-88ab-45bd-beaa-b44a016e0235",
+      "cbsHomeSpread": 5.5,
+      "away": {
+        "name": "Buffalo",
+        "abbrev": "BUF",
+        "coversName": "Buffalo",
+        "spread": -4.5,
+        "pct": 59,
+        "picks": 308
+      },
+      "home": {
+        "name": "Las Vegas",
+        "abbrev": "LV",
+        "coversName": "Las Vegas",
+        "spread": 4.5,
+        "pct": 41,
+        "picks": 210
+      },
+      "atsByLine": [
+        {
+          "awaySpread": -4.5,
+          "awayPicks": 32,
+          "homePicks": 25
+        },
+        {
+          "awaySpread": -5.5,
+          "awayPicks": 58,
+          "homePicks": 30
+        },
+        {
+          "awaySpread": -6,
+          "awayPicks": 111,
+          "homePicks": 68
+        },
+        {
+          "awaySpread": -6.5,
+          "awayPicks": 107,
+          "homePicks": 87
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dk===",
+      "cbsEventId": 50029285,
+      "sport": "NFL",
+      "kickoff": "2026-10-18T20:20:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/53bf4326-4191-4e9a-b22e-b44a016def9b",
+      "cbsHomeSpread": -1.5,
+      "away": {
+        "name": "Dallas",
+        "abbrev": "DAL",
+        "coversName": "Dallas",
+        "spread": 1.5,
+        "pct": 44,
+        "picks": 228
+      },
+      "home": {
+        "name": "Green Bay",
+        "abbrev": "GB",
+        "coversName": "Green Bay",
+        "spread": -1.5,
+        "pct": 56,
+        "picks": 289
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 3,
+          "awayPicks": 103,
+          "homePicks": 60
         },
         {
           "awaySpread": 1.5,
-          "awayPicks": 3,
-          "homePicks": 5
+          "awayPicks": 104,
+          "homePicks": 183
+        },
+        {
+          "awaySpread": -1.5,
+          "awayPicks": 2,
+          "homePicks": 3
+        },
+        {
+          "awaySpread": -2.5,
+          "awayPicks": 19,
+          "homePicks": 43
+        }
+      ]
+    },
+    {
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dm===",
+      "cbsEventId": 50029286,
+      "sport": "NFL",
+      "kickoff": "2026-10-19T20:15:00-04:00",
+      "matchStatus": "matched",
+      "coversDetailsUrl": "https://contests.covers.com/consensus/matchupconsensusdetails/0ed05c60-195f-49f2-8d96-b44a016e1aae",
+      "cbsHomeSpread": -7.5,
+      "away": {
+        "name": "Washington",
+        "abbrev": "WAS",
+        "coversName": "Washington",
+        "spread": 7.5,
+        "pct": 19,
+        "picks": 95
+      },
+      "home": {
+        "name": "San Francisco",
+        "abbrev": "SF",
+        "coversName": "San Francisco",
+        "spread": -7.5,
+        "pct": 81,
+        "picks": 415
+      },
+      "atsByLine": [
+        {
+          "awaySpread": 5.5,
+          "awayPicks": 95,
+          "homePicks": 415
         }
       ]
     }

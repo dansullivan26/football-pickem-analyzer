@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-15T01:35:02.667Z",
+  "updatedAt": "2026-10-15T18:24:46.633Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1302,6 +1302,24 @@
           "homeSpreadBefore": -1.5,
           "homeSpreadAfter": 1.5,
           "towardTeam": -3
+        },
+        {
+          "at": "2026-10-15T18:24:46.633Z",
+          "cbsEventId": 50029280,
+          "athleteId": "4040715",
+          "name": "Jalen Hurts",
+          "position": "QB",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": -2
         }
       ]
     },
@@ -1394,6 +1412,24 @@
           "fromTier": "doubtful",
           "toTier": "questionable",
           "availability": "better",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-15T18:24:46.633Z",
+          "cbsEventId": 50029281,
+          "athleteId": "4034790",
+          "name": "Antoine Winfield Jr.",
+          "position": "S",
+          "teamAbbrev": "TB",
+          "teamName": "Tampa Bay",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
           "homeSpreadBefore": 2.5,
           "homeSpreadAfter": 2.5,
           "towardTeam": 0
@@ -1830,6 +1866,29 @@
           "availability": "worse",
           "homeSpreadBefore": -1.5,
           "homeSpreadAfter": -1.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029286,
+      "events": [
+        {
+          "at": "2026-10-15T18:24:46.633Z",
+          "cbsEventId": 50029286,
+          "athleteId": "4426403",
+          "name": "Nick Cross",
+          "position": "S",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
           "towardTeam": 0
         }
       ]

@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-14T08:23:00-04:00",
+    "fetchedAt": "2026-10-15T20:29:30-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -20,7 +20,7 @@
       "cbsEventId": 50029274,
       "sport": "NFL",
       "week": 6,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-10-15T20:15:00-04:00",
       "kickoffLabel": "Thu Oct 15, 8:15 PM ET",
       "tv": "AMZN",
@@ -33,8 +33,8 @@
         "conference": "NFC",
         "record": "3-2",
         "rank": 7,
-        "pickemPctStraightUp": 71,
-        "pickemPctAgainstSpread": 62
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqyte===",
@@ -45,13 +45,13 @@
         "conference": "AFC",
         "record": "3-2",
         "rank": 8,
-        "pickemPctStraightUp": 29,
-        "pickemPctAgainstSpread": 38
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 2.5,
       "line": "SEA -2.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "Empower Field at Mile High",
         "city": "Denver",
@@ -78,8 +78,8 @@
         "conference": "BIG10",
         "record": "5-1",
         "rank": 4,
-        "pickemPctStraightUp": 77,
-        "pickemPctAgainstSpread": 70
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gyzds===",
@@ -90,8 +90,8 @@
         "conference": "BIG10",
         "record": "6-0",
         "rank": 5,
-        "pickemPctStraightUp": 23,
-        "pickemPctAgainstSpread": 30
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 3.5,
       "line": "OHIOST -3.5",
@@ -123,8 +123,8 @@
         "conference": "SEC",
         "record": "4-1",
         "rank": 16,
-        "pickemPctStraightUp": 19,
-        "pickemPctAgainstSpread": 64
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gy3ds===",
@@ -135,8 +135,8 @@
         "conference": "SEC",
         "record": "4-2",
         "rank": 22,
-        "pickemPctStraightUp": 81,
-        "pickemPctAgainstSpread": 36
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -12.5,
       "line": "LSU -12.5",
@@ -168,8 +168,8 @@
         "conference": "SEC",
         "record": "3-2",
         "rank": null,
-        "pickemPctStraightUp": 2,
-        "pickemPctAgainstSpread": 28
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gu4ts===",
@@ -180,8 +180,8 @@
         "conference": "SEC",
         "record": "6-0",
         "rank": 1,
-        "pickemPctStraightUp": 98,
-        "pickemPctAgainstSpread": 72
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -19.5,
       "line": "UGA -19.5",
@@ -213,8 +213,8 @@
         "conference": "BIG10",
         "record": "3-3",
         "rank": null,
-        "pickemPctStraightUp": 18,
-        "pickemPctAgainstSpread": 46
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gy4ds===",
@@ -225,8 +225,8 @@
         "conference": "BIG10",
         "record": "3-2",
         "rank": null,
-        "pickemPctStraightUp": 82,
-        "pickemPctAgainstSpread": 54
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -6.5,
       "line": "MICH -6.5",
@@ -258,8 +258,8 @@
         "conference": "SEC",
         "record": "5-1",
         "rank": 6,
-        "pickemPctStraightUp": 88,
-        "pickemPctAgainstSpread": 67
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2ha2ds===",
@@ -270,8 +270,8 @@
         "conference": "SEC",
         "record": "5-1",
         "rank": 14,
-        "pickemPctStraightUp": 12,
-        "pickemPctAgainstSpread": 33
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 7.5,
       "line": "BAMA -7.5",
@@ -303,8 +303,8 @@
         "conference": "SEC",
         "record": "5-1",
         "rank": 13,
-        "pickemPctStraightUp": 23,
-        "pickemPctAgainstSpread": 48
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2g4ydc===",
@@ -315,8 +315,8 @@
         "conference": "SEC",
         "record": "4-1",
         "rank": 9,
-        "pickemPctStraightUp": 77,
-        "pickemPctAgainstSpread": 52
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -6.5,
       "line": "MISS -6.5",
@@ -348,8 +348,8 @@
         "conference": "BIG12",
         "record": "4-1",
         "rank": 18,
-        "pickemPctStraightUp": 33,
-        "pickemPctAgainstSpread": 52
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gyzda===",
@@ -360,8 +360,8 @@
         "conference": "BIG12",
         "record": "5-1",
         "rank": 20,
-        "pickemPctStraightUp": 67,
-        "pickemPctAgainstSpread": 48
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -4.5,
       "line": "HOU -4.5",
@@ -393,8 +393,8 @@
         "conference": "SEC",
         "record": "5-1",
         "rank": 15,
-        "pickemPctStraightUp": 60,
-        "pickemPctAgainstSpread": 74
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2g42ts===",
@@ -405,8 +405,8 @@
         "conference": "SEC",
         "record": "3-2",
         "rank": null,
-        "pickemPctStraightUp": 40,
-        "pickemPctAgainstSpread": 26
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -6.5,
       "line": "OKLA -6.5",
@@ -438,8 +438,8 @@
         "conference": "IA",
         "record": "6-0",
         "rank": 2,
-        "pickemPctStraightUp": 87,
-        "pickemPctAgainstSpread": 54
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2guydi===",
@@ -450,8 +450,8 @@
         "conference": "BIG12",
         "record": "5-0",
         "rank": 8,
-        "pickemPctStraightUp": 13,
-        "pickemPctAgainstSpread": 46
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 9.5,
       "line": "ND -9.5",
@@ -483,8 +483,8 @@
         "conference": "BIG10",
         "record": "4-1",
         "rank": null,
-        "pickemPctStraightUp": 15,
-        "pickemPctAgainstSpread": 24
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2ha3tg===",
@@ -495,8 +495,8 @@
         "conference": "BIG10",
         "record": "5-0",
         "rank": 12,
-        "pickemPctStraightUp": 85,
-        "pickemPctAgainstSpread": 76
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -3.5,
       "line": "UCLA -3.5",
@@ -528,8 +528,8 @@
         "conference": "BIG10",
         "record": "5-1",
         "rank": null,
-        "pickemPctStraightUp": 44,
-        "pickemPctAgainstSpread": 66
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2g43dc===",
@@ -540,8 +540,8 @@
         "conference": "BIG10",
         "record": "3-2",
         "rank": null,
-        "pickemPctStraightUp": 56,
-        "pickemPctAgainstSpread": 34
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -7.5,
       "line": "OREG -7.5",
@@ -573,8 +573,8 @@
         "conference": "AFC",
         "record": "1-4",
         "rank": 23,
-        "pickemPctStraightUp": 8,
-        "pickemPctAgainstSpread": 20
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqytm===",
@@ -585,8 +585,8 @@
         "conference": "AFC",
         "record": "4-1",
         "rank": 4,
-        "pickemPctStraightUp": 92,
-        "pickemPctAgainstSpread": 80
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -2.5,
       "line": "JAC -2.5",
@@ -618,8 +618,8 @@
         "conference": "NFC",
         "record": "3-2",
         "rank": 15,
-        "pickemPctStraightUp": 62,
-        "pickemPctAgainstSpread": 40
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqydk===",
@@ -630,8 +630,8 @@
         "conference": "NFC",
         "record": "2-3",
         "rank": 22,
-        "pickemPctStraightUp": 38,
-        "pickemPctAgainstSpread": 60
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 3.5,
       "line": "CHI -3.5",
@@ -663,8 +663,8 @@
         "conference": "AFC",
         "record": "4-1",
         "rank": 6,
-        "pickemPctStraightUp": 89,
-        "pickemPctAgainstSpread": 64
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzti===",
@@ -675,8 +675,8 @@
         "conference": "AFC",
         "record": "3-2",
         "rank": 19,
-        "pickemPctStraightUp": 11,
-        "pickemPctAgainstSpread": 36
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 4.5,
       "line": "BAL -4.5",
@@ -708,8 +708,8 @@
         "conference": "AFC",
         "record": "0-5",
         "rank": 31,
-        "pickemPctStraightUp": 3,
-        "pickemPctAgainstSpread": 20
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqytk===",
@@ -720,8 +720,8 @@
         "conference": "AFC",
         "record": "2-3",
         "rank": 24,
-        "pickemPctStraightUp": 97,
-        "pickemPctAgainstSpread": 80
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -6.5,
       "line": "IND -6.5",
@@ -753,8 +753,8 @@
         "conference": "AFC",
         "record": "2-3",
         "rank": 25,
-        "pickemPctStraightUp": 4,
-        "pickemPctAgainstSpread": 36
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzda===",
@@ -765,8 +765,8 @@
         "conference": "AFC",
         "record": "3-2",
         "rank": 11,
-        "pickemPctStraightUp": 96,
-        "pickemPctAgainstSpread": 64
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -7.5,
       "line": "NE -7.5",
@@ -798,8 +798,8 @@
         "conference": "NFC",
         "record": "1-4",
         "rank": 26,
-        "pickemPctStraightUp": 20,
-        "pickemPctAgainstSpread": 27
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzde===",
@@ -810,8 +810,8 @@
         "conference": "NFC",
         "record": "3-1-1",
         "rank": 16,
-        "pickemPctStraightUp": 80,
-        "pickemPctAgainstSpread": 73
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -1.5,
       "line": "NYG -1.5",
@@ -843,8 +843,8 @@
         "conference": "NFC",
         "record": "2-2",
         "rank": 20,
-        "pickemPctStraightUp": 32,
-        "pickemPctAgainstSpread": 40
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzdk===",
@@ -855,8 +855,8 @@
         "conference": "NFC",
         "record": "2-3",
         "rank": 21,
-        "pickemPctStraightUp": 68,
-        "pickemPctAgainstSpread": 60
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -1.5,
       "line": "PHI -1.5",
@@ -888,8 +888,8 @@
         "conference": "AFC",
         "record": "3-2",
         "rank": 13,
-        "pickemPctStraightUp": 86,
-        "pickemPctAgainstSpread": 72
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqztc===",
@@ -900,8 +900,8 @@
         "conference": "NFC",
         "record": "1-4",
         "rank": 29,
-        "pickemPctStraightUp": 14,
-        "pickemPctAgainstSpread": 28
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 2.5,
       "line": "PIT -2.5",
@@ -933,8 +933,8 @@
         "conference": "NFC",
         "record": "1-4",
         "rank": 27,
-        "pickemPctStraightUp": 2,
-        "pickemPctAgainstSpread": 52
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzdo===",
@@ -945,8 +945,8 @@
         "conference": "NFC",
         "record": "2-3",
         "rank": 10,
-        "pickemPctStraightUp": 98,
-        "pickemPctAgainstSpread": 48
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -13.5,
       "line": "LAR -13.5",
@@ -978,8 +978,8 @@
         "conference": "AFC",
         "record": "0-5",
         "rank": 30,
-        "pickemPctStraightUp": 3,
-        "pickemPctAgainstSpread": 38
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqyto===",
@@ -990,8 +990,8 @@
         "conference": "AFC",
         "record": "4-0",
         "rank": 2,
-        "pickemPctStraightUp": 97,
-        "pickemPctAgainstSpread": 62
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -8.5,
       "line": "KC -8.5",
@@ -1023,8 +1023,8 @@
         "conference": "AFC",
         "record": "4-1",
         "rank": 5,
-        "pickemPctStraightUp": 93,
-        "pickemPctAgainstSpread": 68
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzdi===",
@@ -1035,8 +1035,8 @@
         "conference": "AFC",
         "record": "3-2",
         "rank": 18,
-        "pickemPctStraightUp": 7,
-        "pickemPctAgainstSpread": 32
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": 5.5,
       "line": "BUF -5.5",
@@ -1068,8 +1068,8 @@
         "conference": "NFC",
         "record": "2-3",
         "rank": 17,
-        "pickemPctStraightUp": 21,
-        "pickemPctAgainstSpread": 32
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqyti===",
@@ -1080,8 +1080,8 @@
         "conference": "NFC",
         "record": "3-2",
         "rank": 14,
-        "pickemPctStraightUp": 79,
-        "pickemPctAgainstSpread": 68
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -1.5,
       "line": "GB -1.5",
@@ -1113,8 +1113,8 @@
         "conference": "NFC",
         "record": "1-3-1",
         "rank": 28,
-        "pickemPctStraightUp": 2,
-        "pickemPctAgainstSpread": 20
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "home": {
         "id": "krswc3j2gqzds===",
@@ -1125,8 +1125,8 @@
         "conference": "NFC",
         "record": "5-0",
         "rank": 1,
-        "pickemPctStraightUp": 98,
-        "pickemPctAgainstSpread": 80
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
       },
       "homeSpread": -7.5,
       "line": "SF -7.5",

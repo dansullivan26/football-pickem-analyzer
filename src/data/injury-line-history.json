@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-17T05:43:09.164Z",
+  "updatedAt": "2026-10-17T14:17:39.380Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -2081,6 +2081,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-17T14:17:39.380Z",
+          "cbsEventId": 50029278,
+          "athleteId": "4723820",
+          "name": "Omar Cooper Jr.",
+          "position": "WR",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Injured Reserve",
+          "fromTier": null,
+          "toTier": "reserve",
+          "availability": "worse",
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -7.5,
           "towardTeam": 0

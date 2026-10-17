@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T10:59:02.392Z",
+  "updatedAt": "2026-10-17T14:17:29.084Z",
   "weeks": [
     {
       "week": 1,
@@ -4480,7 +4480,7 @@
       "week": 7,
       "seasonYear": 2026,
       "label": "Week 7",
-      "capturedAt": "2026-10-17T10:59:02.392Z",
+      "capturedAt": "2026-10-17T14:17:29.084Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029286,
@@ -4491,7 +4491,12 @@
         "cbsEventId": 50029280,
         "frozenAt": "2026-10-15T13:33:02.231Z"
       },
-      "playsOfTheDay": [],
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50028231,
+          "frozenAt": "2026-10-17T14:17:29.084Z"
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029274,
@@ -4529,16 +4534,16 @@
           "away": "OHIOST",
           "home": "IND",
           "homeSpread": 3.5,
-          "liveHomeSpread": 3.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 3,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 0.5,
+          "compositeEdge": 1,
           "awayRank": 4,
           "homeRank": 5,
           "venue": {
@@ -4664,16 +4669,16 @@
           "away": "MIZZOU",
           "home": "MISS",
           "homeSpread": -6.5,
-          "liveHomeSpread": -5.5,
-          "category": "slight",
+          "liveHomeSpread": -4.5,
+          "category": "lean",
           "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
-          "strength": "mild",
-          "score": 0.75,
-          "compositeEdge": 0.25,
+          "strength": "solid",
+          "score": 5.75,
+          "compositeEdge": 1.25,
           "awayRank": 13,
           "homeRank": 9,
           "venue": {

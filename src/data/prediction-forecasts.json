@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T17:21:06.583Z",
+  "updatedAt": "2026-10-17T18:06:44.932Z",
   "weeks": [
     {
       "week": 1,
@@ -75893,8 +75893,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 95 prior chances",
               "sampleSize": 95,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50028201,
@@ -75910,7 +75910,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -75927,7 +75927,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -75944,8 +75944,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 95 prior chances",
               "sampleSize": 95,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028227,
@@ -77565,15 +77565,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-17T17:21:06.583Z",
+    "updatedAt": "2026-10-17T18:06:44.932Z",
     "overall": {
       "key": "overall",
       "games": 4525,
       "calls": 3050,
-      "graded": 2620,
-      "correct": 1736,
+      "graded": 2622,
+      "correct": 1737,
       "noCalls": 1475,
-      "accuracy": 0.6625954198473283,
+      "accuracy": 0.6624713958810069,
       "noCallRate": 0.3259668508287293
     },
     "byLeague": [
@@ -77581,10 +77581,10 @@
         "key": "NCAAF",
         "games": 2107,
         "calls": 1156,
-        "graded": 976,
-        "correct": 624,
+        "graded": 978,
+        "correct": 625,
         "noCalls": 951,
-        "accuracy": 0.639344262295082,
+        "accuracy": 0.6390593047034765,
         "noCallRate": 0.4513526340768866
       },
       {
@@ -77603,20 +77603,20 @@
         "key": "dog",
         "games": 465,
         "calls": 465,
-        "graded": 399,
-        "correct": 241,
+        "graded": 400,
+        "correct": 242,
         "noCalls": 0,
-        "accuracy": 0.6040100250626567,
+        "accuracy": 0.605,
         "noCallRate": 0
       },
       {
         "key": "favorite",
         "games": 2585,
         "calls": 2585,
-        "graded": 2221,
+        "graded": 2222,
         "correct": 1495,
         "noCalls": 0,
-        "accuracy": 0.6731202161188654,
+        "accuracy": 0.6728172817281728,
         "noCallRate": 0
       },
       {
@@ -77655,10 +77655,10 @@
         "key": "line-value",
         "games": 270,
         "calls": 270,
-        "graded": 238,
-        "correct": 196,
+        "graded": 240,
+        "correct": 197,
         "noCalls": 0,
-        "accuracy": 0.8235294117647058,
+        "accuracy": 0.8208333333333333,
         "noCallRate": 0
       },
       {
@@ -77697,10 +77697,10 @@
         "key": "high",
         "games": 956,
         "calls": 956,
-        "graded": 859,
-        "correct": 647,
+        "graded": 861,
+        "correct": 648,
         "noCalls": 0,
-        "accuracy": 0.7532013969732246,
+        "accuracy": 0.7526132404181185,
         "noCallRate": 0
       },
       {

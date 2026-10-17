@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T18:04:03.186Z",
+  "updatedAt": "2026-10-17T19:35:59.564Z",
   "weeks": [
     {
       "week": 1,
@@ -4480,11 +4480,11 @@
       "week": 7,
       "seasonYear": 2026,
       "label": "Week 7",
-      "capturedAt": "2026-10-17T18:04:03.186Z",
+      "capturedAt": "2026-10-17T19:35:59.564Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029286,
-        "draftKingsTotal": 52.5,
+        "draftKingsTotal": 51.5,
         "frozenAt": null
       },
       "playOfTheWeek": {
@@ -4552,7 +4552,9 @@
             "state": "IN",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 10,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50028231,
@@ -4581,7 +4583,7 @@
           },
           "neutralSite": true,
           "awayScore": 0,
-          "homeScore": 0
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028192,
@@ -5103,16 +5105,16 @@
           "away": "BUF",
           "home": "LV",
           "homeSpread": 5.5,
-          "liveHomeSpread": 4.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 5.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
+          "source": "rest-travel",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 6,
-          "compositeEdge": 2,
+          "score": 3,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": null,
           "venue": {

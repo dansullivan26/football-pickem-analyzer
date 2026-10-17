@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-17T00:36:52.739Z",
+  "updatedAt": "2026-10-17T05:43:09.164Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1243,6 +1243,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-17T05:43:09.164Z",
+          "cbsEventId": 50029276,
+          "athleteId": "4685736",
+          "name": "Emery Jones Jr.",
+          "position": "OT",
+          "teamAbbrev": "BAL",
+          "teamName": "Baltimore",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,
           "towardTeam": 0
@@ -2688,6 +2706,24 @@
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 2.5,
           "towardTeam": 1
+        },
+        {
+          "at": "2026-10-17T05:43:09.164Z",
+          "cbsEventId": 50029280,
+          "athleteId": "2973051",
+          "name": "Taylor Moton",
+          "position": "OT",
+          "teamAbbrev": "CAR",
+          "teamName": "Carolina",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -3641,6 +3677,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-17T05:43:09.164Z",
+          "cbsEventId": 50029284,
+          "athleteId": "4429109",
+          "name": "Tonka Hemingway",
+          "position": "DT",
+          "teamAbbrev": "LV",
+          "teamName": "Las Vegas",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
           "homeSpreadBefore": 4.5,
           "homeSpreadAfter": 4.5,
           "towardTeam": 0

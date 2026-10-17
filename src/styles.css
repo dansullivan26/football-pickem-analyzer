@@ -987,7 +987,8 @@ h2 {
   align-self: start;
 }
 
-.suggested-picks em {
+.suggested-picks em,
+.suggested-picks .card-common-opponents {
   grid-column: 1 / -1;
 }
 
@@ -1789,10 +1790,35 @@ select:focus {
 
 .game-weather,
 .game-travel-rest,
-.game-coming-off {
+.game-coming-off,
+.game-common-opponents {
   flex-basis: 100%;
   color: var(--muted);
   line-height: 1.35;
+}
+
+.game-common-opponents,
+.card-common-opponents {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.common-opponents-heading {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.common-opponents-row {
+  display: block;
+}
+
+.card-common-opponents {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  max-width: 62rem;
 }
 
 .game-weather {
@@ -5071,6 +5097,7 @@ footer {
   .game-weather,
   .game-travel-rest,
   .game-coming-off,
+  .game-common-opponents,
   .game-injuries {
     grid-column: 1 / -1;
   }

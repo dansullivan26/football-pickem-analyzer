@@ -83,6 +83,8 @@ import {
 } from './poolRecord'
 import { formatRankedTeamName, teamKey, teamPageSlugs, buildTeamDirectory } from './teamPerformance'
 import { comingOffNotesForGame } from './lastOutcome'
+import { commonOpponentsForGame } from './commonOpponents'
+import { CommonOpponentsNote } from './CommonOpponentsNote'
 import {
   formatGameRestLine,
   formatGameTravelLine,
@@ -605,6 +607,7 @@ function GameCard({
       })
     : null
   const comingOff = comingOffNotesForGame(game, teamsByKey, teamKey)
+  const commonOpponents = commonOpponentsForGame(game, teamsByKey)
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
@@ -683,6 +686,7 @@ function GameCard({
             {comingOff.home.line}
           </span>
         )}
+        <CommonOpponentsNote breakdown={commonOpponents} />
         {game.sport === 'NCAAF' && (
           <span className="game-injuries">
             <span>Injuries</span>
@@ -1738,6 +1742,7 @@ function App() {
                   (week.seasonYear ?? slate.pool.seasonYear) ===
                     slate.pool.seasonYear,
               )}
+              teamsByKey={teamsByKey}
               onClose={closeSuggestedCard}
             />
           )}

@@ -53,6 +53,11 @@ import {
   weekPlayReady,
   type NamedPlayOptions,
 } from './namedPlays'
+import {
+  commonOpponentsForAbbrevs,
+  type CommonOpponentTeam,
+} from './commonOpponents'
+import { CommonOpponentsNote } from './CommonOpponentsNote'
 
 export default function SuggestedCardPanel({
   card,
@@ -60,6 +65,7 @@ export default function SuggestedCardPanel({
   savedSentGames = [],
   neutralBriefs,
   namedPlays,
+  teamsByKey,
   onClose,
 }: {
   card: SuggestedCard
@@ -67,6 +73,7 @@ export default function SuggestedCardPanel({
   savedSentGames?: Iterable<CardOverrideGame>
   neutralBriefs?: NeutralBriefsFile | null
   namedPlays?: NamedPlayOptions
+  teamsByKey?: ReadonlyMap<string, CommonOpponentTeam>
   onClose: () => void
 }) {
   const savedGames = [...savedSentGames]
@@ -529,6 +536,23 @@ export default function SuggestedCardPanel({
                         card.week,
                         card.seasonYear,
                       )}
+                      commonOpponents={
+                        teamsByKey
+                          ? commonOpponentsForAbbrevs(
+                              {
+                                abbrev: row.pick.awayAbbrev,
+                                name: row.pick.away,
+                              },
+                              {
+                                abbrev: row.pick.homeAbbrev,
+                                name: row.pick.home,
+                              },
+                              row.pick.kickoff,
+                              row.pick.cbsEventId,
+                              teamsByKey,
+                            )
+                          : null
+                      }
                       onToggleDeviate={toggleDeviate}
                       onToggleSend={toggleSend}
                     />
@@ -545,6 +569,23 @@ export default function SuggestedCardPanel({
                         card.week,
                         card.seasonYear,
                       )}
+                      commonOpponents={
+                        teamsByKey
+                          ? commonOpponentsForAbbrevs(
+                              {
+                                abbrev: row.game.awayAbbrev,
+                                name: row.game.away,
+                              },
+                              {
+                                abbrev: row.game.homeAbbrev,
+                                name: row.game.home,
+                              },
+                              row.game.kickoff,
+                              row.game.cbsEventId,
+                              teamsByKey,
+                            )
+                          : null
+                      }
                       onToggle={toggleManualPick}
                       onToggleSend={toggleSend}
                     />
@@ -791,6 +832,7 @@ function SuggestedPickRow({
   selectedToSend,
   poolProjection,
   brief,
+  commonOpponents,
   onToggleDeviate,
   onToggleSend,
 }: {
@@ -800,6 +842,7 @@ function SuggestedPickRow({
   selectedToSend: boolean
   poolProjection?: PoolProjection
   brief: NeutralBrief | null
+  commonOpponents: ReturnType<typeof commonOpponentsForAbbrevs>
   onToggleDeviate: (gameId: string) => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -887,6 +930,10 @@ function SuggestedPickRow({
       ) : brief && !isNeutralBriefFailed(brief) ? (
         <em className="gemini-brief-why">{brief.why}</em>
       ) : null}
+      <CommonOpponentsNote
+        breakdown={commonOpponents}
+        className="card-common-opponents"
+      />
     </li>
   )
 }
@@ -897,6 +944,7 @@ function ManualReviewRow({
   selectedToSend,
   poolProjection,
   brief,
+  commonOpponents,
   onToggle,
   onToggleSend,
 }: {
@@ -905,6 +953,7 @@ function ManualReviewRow({
   selectedToSend: boolean
   poolProjection?: PoolProjection
   brief: NeutralBrief | null
+  commonOpponents: ReturnType<typeof commonOpponentsForAbbrevs>
   onToggle: (gameId: string, side: 'home' | 'away') => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -939,6 +988,10 @@ function ManualReviewRow({
         ) : brief && !isNeutralBriefFailed(brief) ? (
           <em className="gemini-brief-why">{brief.why}</em>
         ) : null}
+        <CommonOpponentsNote
+          breakdown={commonOpponents}
+          className="card-common-opponents"
+        />
       </div>
       <div className="suggested-pick-tags">
         <span className="pick-source manual-review">Manual review</span>

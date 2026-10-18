@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T09:45:55.588Z",
+  "updatedAt": "2026-10-18T06:10:29.279Z",
   "games": [
     {
       "status": "ok",
@@ -817,6 +817,20 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzge4de===",
+      "cbsEventId": 50029182,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Houston",
+      "home": "Jacksonville",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Week 7 samples are still thin, and there is no head-to-head in the packet, but the graded splits lean to Jacksonville. Houston is 1-4 ATS in six games and 1-4 ATS as a favorite in five, with an empty dog split and a flat 1-1 ATS road mark in two; the only recent cover was last week at Tennessee as a 7.5-point favorite after four straight misses. Jacksonville is 3-2 ATS in six, 2-1 ATS at home in three, and 2-1 ATS as a favorite in four, with home-favorite covers against Cleveland and New England around a miss against Philadelphia. Houston is without running back David Montgomery and safety Jalen Pitre, and linebacker Henry To'oTo'o is questionable, while Jacksonville is missing corner Montaric Brown and long snapper Ross Matiscik. The line shortened from 3 to 2.5, so a three-point win covers. Lean Jacksonville.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:06:36.631Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3ti===",
       "cbsEventId": 50029274,
       "week": 7,
@@ -828,6 +842,76 @@
       "why": "Six games in, the samples are thin, but the role splits still point somewhere. Seattle is 1-4 ATS as a favorite in six games and has failed to cover four of its last five, all as a favorite, including the last three (home losses at -2.5 and -7.5, then a road loss at -7.5); the only cover was a Week 3 road win at -3.5. On the road they are 1-1 ATS in three, with no graded short-rest or one-zone result (0-0 in one each), and they are 0-3 ATS in four benign-weather games. Denver is 2-0 ATS at home in three and 1-0 ATS on short rest in two; the 1-2 dog mark in four games is two road losses and a home cover at +2.5. No head-to-head and no line path are in the packet.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-10-15T04:28:13.952Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tk===",
+      "cbsEventId": 50029275,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Chicago",
+      "home": "Atlanta",
+      "side": "home",
+      "confidence": "light",
+      "why": "Chicago is 2-2 ATS as a favorite in 5 and 1-1 ATS on the road in 3, with a cold 0-2 ATS mark on normal rest in 3. Atlanta is 2-2 ATS as a dog in 5, and those covers came away from home; they are 0-2 ATS in 3 home games and 1-2 ATS indoors in 4, including home losses to Baltimore in Week 6 and Carolina in Week 3. Head-to-head history is empty. The number has moved from +3 to +2.5 to +1.5, and Chicago’s injury list is the heavier one: Caleb Williams is questionable with a hamstring, T.J. Edwards is out, and two cornerbacks are questionable, while Atlanta has C.J. Henderson out and Za’Darius Smith questionable. Five graded games is a thin sample, and Chicago is also 1-0 ATS on two one-zone trips, so the 0-2 home mark is a real flag. The lean is still Atlanta, lightly, on the shortening number and the injury gap.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:07:30.436Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tm===",
+      "cbsEventId": 50029276,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Baltimore",
+      "home": "Cleveland",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Samples are still thin in Week 7, and there is no head-to-head row in the packet. Cleveland is 2-0 ATS at home in 3, 3-0 ATS in benign weather in 4, and 2-0 ATS on normal rest in 3, and they covered both latest home games against Pittsburgh and Carolina. They are also 3-2 ATS as a dog in 6. Baltimore is 3-0 ATS on the road in 4 and only 2-2 ATS as a favorite in 5, and this week Lamar Jackson is out with an ankle and center Cam Jurgens is out with a concussion, with tackle Emery Jones Jr. and receiver Ja'Kobi Lane questionable, against three Cleveland questionables. The line path ran from +4.5 through +5.5 and has shortened to +3.5 toward Cleveland. Lean Cleveland at home: the home, weather, and rest splits line up with the quarterback absence and that late move, with Baltimore's perfect road sample the caution that keeps this medium.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:08:36.880Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3to===",
+      "cbsEventId": 50029277,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Tennessee",
+      "home": "Indianapolis",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Week 7 samples are still modest, but Indianapolis is 3-1 ATS on a normal week in 5 games and 1-0 ATS as a favorite in 2, which matches this spot. Their home and indoor marks are only 1-1, so the building is a wash. Tennessee is 2-2 ATS as a dog in 5 and 1-1 ATS on the road in 3, with no split strong enough to label, yet they are 0-4 straight up in those dog spots. The line has only toggled between -7 and -6.5 and did not hold -7. Tennessee is without a defensive tackle and a safety, while Indianapolis is without a linebacker and has a tight end questionable. Lean Indianapolis.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:09:24.394Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tq===",
+      "cbsEventId": 50029278,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "N.Y. Jets",
+      "home": "New England",
+      "side": "home",
+      "confidence": "medium",
+      "why": "New England is 2-0 ATS at home in 3 and 2-0 ATS as a favorite in 3, inside a 4-1 ATS start, and both home-favorite spots covered (Pittsburgh -5.5, Las Vegas -3.5) within four covers in five weeks. Week 7 samples are still thin, with five graded games each and no head-to-head or line path on file. The Jets are 1-2 ATS on the road in 4 and 2-2 ATS as a dog in 5, and the last two road-dog spots missed (Detroit +6.5, Chicago +3.5) after an earlier road cover at Tennessee +2.5. New York is also without Breece Hall, guard Dylan Parham, and Adonai Mitchell, while New England’s only out is corner Carlton Davis and the tackle and A.J. Brown listings remain questionable. Benign-weather ATS only slightly favors the home side (2-1 in 4 versus 1-1 in 3) and both clubs are on a normal week, so the lean is New England to cover.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:10:29.279Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dc===",
+      "cbsEventId": 50029281,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Pittsburgh",
+      "home": "Tampa Bay",
+      "side": "home",
+      "confidence": "light",
+      "why": "Week 7 samples are still thin (Pittsburgh 3-2 ATS in six, Tampa Bay 2-3 ATS in six), and the split that matches this spot is Pittsburgh on the road: 0-2 ATS in three away games. Both recent road trips failed to cover, a Week 5 loss at Cleveland as a 2.5-point favorite and a Week 3 loss at New England as a dog, while the 2-1 ATS favorite mark in four games was built on home covers of Indianapolis and Atlanta. Tampa Bay is 1-2 ATS at home in four and 2-2 ATS as a dog in five, with the last two results both covers as a dog, including a Week 5 home cover of Green Bay. Injuries cut the other way: Baker Mayfield and Antoine Winfield Jr. are out and Benjamin Morrison is doubtful, while Pittsburgh lists Ben Skowronek out and Jalen Ramsey, Jamel Dean, and Keeanu Benton questionable.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T06:05:26.837Z"
     }
   ]
 }

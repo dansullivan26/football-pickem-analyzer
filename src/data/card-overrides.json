@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T20:32:51.978Z",
+  "updatedAt": "2026-10-18T03:12:32.982Z",
   "weeks": [
     {
       "week": 1,
@@ -362,7 +362,7 @@
     },
     {
       "week": 7,
-      "sentAt": "2026-10-17T20:32:51.978Z",
+      "sentAt": "2026-10-18T03:12:32.982Z",
       "games": [
         {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3ti===",
@@ -391,10 +391,6 @@
         {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygi2dg===",
           "pickedSide": "away"
-        },
-        {
-          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzge4de===",
-          "pickedSide": "home"
         },
         {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3tk===",
@@ -453,13 +449,18 @@
           "pickedSide": "away"
         },
         {
-          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dm===",
-          "pickedSide": "away"
-        },
-        {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrygizdo===",
           "pickedSide": "home",
           "manual": true
+        },
+        {
+          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzge4de===",
+          "pickedSide": "away",
+          "deviate": true
+        },
+        {
+          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dm===",
+          "pickedSide": "away"
         }
       ]
     }

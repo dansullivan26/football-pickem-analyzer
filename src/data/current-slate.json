@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-17T23:05:47-04:00",
+    "fetchedAt": "2026-10-18T06:28:12-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -335,7 +335,7 @@
       "cbsEventId": 50028227,
       "sport": "NCAAF",
       "week": 7,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-17T19:30:00-04:00",
       "kickoffLabel": "Sat Oct 17, 7:30 PM ET",
       "tv": "FOX",
@@ -346,7 +346,7 @@
         "nickname": "Cowboys",
         "location": "Oklahoma State",
         "conference": "BIG12",
-        "record": "4-1",
+        "record": "4-2",
         "rank": 18,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -358,7 +358,7 @@
         "nickname": "Cougars",
         "location": "Houston",
         "conference": "BIG12",
-        "record": "5-1",
+        "record": "6-1",
         "rank": 20,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -425,7 +425,7 @@
       "cbsEventId": 50028264,
       "sport": "NCAAF",
       "week": 7,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-17T19:30:00-04:00",
       "kickoffLabel": "Sat Oct 17, 7:30 PM ET",
       "tv": "ABC",
@@ -436,7 +436,7 @@
         "nickname": "Fighting Irish",
         "location": "Notre Dame",
         "conference": "IA",
-        "record": "6-0",
+        "record": "6-1",
         "rank": 2,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -448,7 +448,7 @@
         "nickname": "Cougars",
         "location": "BYU",
         "conference": "BIG12",
-        "record": "5-0",
+        "record": "6-0",
         "rank": 8,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -481,7 +481,7 @@
         "nickname": "Badgers",
         "location": "Wisconsin",
         "conference": "BIG10",
-        "record": "4-1",
+        "record": "4-2",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -493,7 +493,7 @@
         "nickname": "Bruins",
         "location": "UCLA",
         "conference": "BIG10",
-        "record": "5-0",
+        "record": "6-0",
         "rank": 12,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -515,7 +515,7 @@
       "cbsEventId": 50028276,
       "sport": "NCAAF",
       "week": 7,
-      "status": "SCHEDULED",
+      "status": "FINAL",
       "kickoff": "2026-10-17T23:00:00-04:00",
       "kickoffLabel": "Sat Oct 17, 11:00 PM ET",
       "tv": "FOX",
@@ -526,7 +526,7 @@
         "nickname": "Cornhuskers",
         "location": "Nebraska",
         "conference": "BIG10",
-        "record": "5-1",
+        "record": "5-2",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -538,15 +538,15 @@
         "nickname": "Ducks",
         "location": "Oregon",
         "conference": "BIG10",
-        "record": "3-2",
+        "record": "4-2",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
       "homeSpread": -7.5,
       "line": "OREG -7.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 14,
+      "homeScore": 17,
       "venue": {
         "stadium": "Autzen Stadium",
         "city": "Eugene",

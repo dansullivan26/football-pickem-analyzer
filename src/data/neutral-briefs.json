@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T06:10:29.279Z",
+  "updatedAt": "2026-10-18T10:59:31.282Z",
   "games": [
     {
       "status": "ok",
@@ -901,6 +901,34 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi3ts===",
+      "cbsEventId": 50029279,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "New Orleans",
+      "home": "N.Y. Giants",
+      "side": "home",
+      "confidence": "light",
+      "why": "Both teams have only five graded games, so these splits are still thin. The Giants are 4-1 ATS overall and 3-0 at home in four games, 2-0 ATS on normal rest in three, and they have covered four of their last five, including a Week 4 home win as a favorite against Tennessee. The favorite piece is only 1-0 in two games, and three of those four covers came as a dog. New Orleans is 2-0 ATS on the road in three, 2-1 as a dog in four, and 2-0 ATS traveling one time zone in three, but they are 2-3 overall, 0-3 at home, and have missed the number in each of the last three. Injuries muddy both sides — Kamara and Olave are questionable for New Orleans with Elliss out, while Thomas and Eluemunor are questionable for the Giants with Nubin out — and there is no head-to-head or line path. The home cover record and the hotter recent run are enough for a light lean to the Giants.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:54:14.095Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4da===",
+      "cbsEventId": 50029280,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Carolina",
+      "home": "Philadelphia",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Philadelphia is 1-4 ATS in 6, and the spots that match this game are empty: 0-2 ATS at home in 3, 0-3 ATS as a favorite in 4, and 0-3 ATS in benign weather in 4. Their only cover in the last five was Week 6 as a 6.5-point road dog at Jacksonville; the home losses to the Rams and Washington both failed to cover. Carolina is 2-2 ATS in 5, 1-1 on the road in 3 and 1-1 as a dog in 3, with a 0-0 bye split in 1, so the visitor side is a thin Week 7 sample with no head-to-head. The home number ran -1.5 to +1.5 to +3.5, back to +2.5, and out to +3.5 again, a path that repriced the game toward Carolina. Barkley is out with a hamstring, while Carolina lists Freeling doubtful and Moton, Lewis, Wharton, Phillips, and Etienne questionable. Lean Carolina: the home-favorite misses and the line path point the same way, at medium weight because the graded samples are still small.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:55:08.271Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dc===",
       "cbsEventId": 50029281,
       "week": 7,
@@ -912,6 +940,62 @@
       "why": "Week 7 samples are still thin (Pittsburgh 3-2 ATS in six, Tampa Bay 2-3 ATS in six), and the split that matches this spot is Pittsburgh on the road: 0-2 ATS in three away games. Both recent road trips failed to cover, a Week 5 loss at Cleveland as a 2.5-point favorite and a Week 3 loss at New England as a dog, while the 2-1 ATS favorite mark in four games was built on home covers of Indianapolis and Atlanta. Tampa Bay is 1-2 ATS at home in four and 2-2 ATS as a dog in five, with the last two results both covers as a dog, including a Week 5 home cover of Green Bay. Injuries cut the other way: Baker Mayfield and Antoine Winfield Jr. are out and Benjamin Morrison is doubtful, while Pittsburgh lists Ben Skowronek out and Jalen Ramsey, Jamel Dean, and Keeanu Benton questionable.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-10-18T06:05:26.837Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Arizona",
+      "home": "L.A. Rams",
+      "side": "away",
+      "confidence": "light",
+      "why": "Samples are still thin six games in, but Arizona’s road mark is the split that fits this game: 2-1 ATS in four away games, against 0-2 ATS in two at home, and both road covers came as dogs (plus 8.5 at San Francisco, plus 10.5 at the Chargers). As dogs overall they are only 2-2 ATS in five, and indoors they are 1-2 ATS in four, so the site edge is narrower than the road line alone. The Rams are 2-3 ATS in six as favorites and 1-1 ATS at home in three, with a Week 6 home miss laying 2.5 and only one recent cover beyond a field goal (minus 7.5 against the Giants); on short rest they are 0-1 ATS in two. Arizona’s normal-rest mark cuts the other way at 1-3 ATS in five, and the injury list is heavier on their side — Jeremiyah Love and Andrew Wingard out, Budda Baker, Zaven Collins, and Blake Gillikin questionable — while the Rams list only Trent McDuffie and Kam Curl questionable.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:56:15.931Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
+      "cbsEventId": 50029283,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "L.A. Chargers",
+      "home": "Kansas City",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Week 7 samples are still thin — the Chargers have five graded games and Kansas City four — but the Chargers' cover splits are the ones that fit this spot. They are 1-4 ATS overall in six, 1-2 ATS as dogs in four with an 0-3 straight-up mark in those dog games, and 1-3 ATS on normal rest in five. Kansas City is only 2-2 ATS as a favorite in five and 1-1 ATS at home in three, the bye split is 0-0 in one, and there is no head-to-head, so their own record does not show they reliably lay a number. The line path is the counter, running to -9.5 before settling at -7.5, and Kansas City's last game was a miss as a 4.5-point favorite at Las Vegas, while the Chargers have one cover in five (a road dog at Seattle, against a loss at Buffalo as a 7.5-point dog).",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:57:24.901Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4di===",
+      "cbsEventId": 50029284,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Buffalo",
+      "home": "Las Vegas",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Week 7 samples are still modest, both clubs are 4-1 ATS, and there is no head-to-head. Las Vegas is 4-0 ATS indoors in 5, 3-1 ATS as a dog in 5, and 2-0 ATS at home in 3, and they covered a home dog of 4.5 against Kansas City in Week 5 before a road-dog miss last week. Buffalo is 2-0 ATS on the road in 3 and 2-1 ATS as a favorite in 4, but the recent road covers came as a dog and the favorite loss came laying 6.5. Short rest and a three-zone trip are only 1-0 ATS in 2 for Buffalo, while four Buffalo players are questionable (two defensive tackles, a receiver, and a corner) against one Las Vegas defensive tackle already out. The line has chopped between +5.5 and +4.5 and sits back at +4.5. Lean Las Vegas.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:58:34.979Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dk===",
+      "cbsEventId": 50029285,
+      "week": 7,
+      "seasonYear": 2026,
+      "away": "Dallas",
+      "home": "Green Bay",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Both clubs have only five graded games, so the samples are still thin. Green Bay is 0-3 ATS as a favorite in four spots, and the recent window matches that role: non-covers against Tampa Bay, Atlanta, and the Jets, with the only cover coming last week at home as a dog. Their home split is a flat 1-1 ATS in three, so the tendency that fits this week is laying points rather than the building. Dallas is 1-1 ATS as a dog and 1-1 ATS on the road in three games each, including a cover at Houston in their last road-dog spot, and the long-rest bucket is 0-0 in one so it adds no graded sample. Green Bay’s list is the heavier one — Banks, Cisse, and Williams questionable, Ford and Moore on the reserve list — while Dallas is without Overshown and has Porter questionable. No head-to-head is on file; the lean is Dallas.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-18T10:59:31.282Z"
     }
   ]
 }

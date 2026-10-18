@@ -298,8 +298,12 @@ come from player-dump agreement, never from these schedules.
    refresh so teams that were off the card last week still get their
    real last game, not the last pool appearance. Without the key, NFL
    rows still refresh and any previous college rows are kept. A change
-   to `last-kickoff.json` deploys Pages; a GITHUB_TOKEN push alone would
-   leave the site on slate-gap rest.
+   to `last-kickoff.json` or `ncaaf-schedule.json` deploys Pages; a
+   GITHUB_TOKEN push alone would leave the site on slate-gap rest.
+   The same CFBD pull writes completed college scores into
+   `src/data/ncaaf-schedule.json` so Lines can show NCAAF common
+   opponents that never had a CBS number. Those rows are straight-up
+   only and stay out of the recommendation.
 
 A 13+ day college gap is a bye only when that schedule row exists. A card
 gap alone stays a long week. NFL byes were already schedule-honest on the

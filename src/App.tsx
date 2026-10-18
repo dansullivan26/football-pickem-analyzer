@@ -7,6 +7,7 @@ import predictionForecastsData from './data/prediction-forecasts.json'
 import lineHistoryData from './data/line-history.json'
 import badBeatsData from './data/bad-beats.json'
 import lastKickoffData from './data/last-kickoff.json'
+import ncaafScheduleData from './data/ncaaf-schedule.json'
 import weatherHistoryData from './data/weather-history.json'
 import nflStarterInjuriesData from './data/nfl-starter-injuries.json'
 import injuryLineHistoryData from './data/injury-line-history.json'
@@ -86,6 +87,10 @@ import { comingOffNotesForGame } from './lastOutcome'
 import { commonOpponentsForGame } from './commonOpponents'
 import { CommonOpponentsNote } from './CommonOpponentsNote'
 import {
+  offSlateCommonOpponents,
+  type NcaafScheduleFile,
+} from './ncaafSchedule'
+import {
   formatGameRestLine,
   formatGameTravelLine,
   gameTravelZones,
@@ -154,6 +159,7 @@ const travelRestIndex = buildTravelRestIndex(
   lastKickoffData as LastKickoffFile,
 )
 const travelRestByEvent = travelRestIndex.byEvent
+const ncaafSchedule = ncaafScheduleData as NcaafScheduleFile
 const teamDirectory = buildTeamDirectory(
   slate,
   recommendationHistory,
@@ -608,6 +614,24 @@ function GameCard({
     : null
   const comingOff = comingOffNotesForGame(game, teamsByKey, teamKey)
   const commonOpponents = commonOpponentsForGame(game, teamsByKey)
+  const offSlateOpponents = offSlateCommonOpponents(
+    {
+      sport: game.sport,
+      kickoff: game.kickoff,
+      away: {
+        abbrev: game.away.abbrev,
+        name: game.away.name,
+        location: game.away.location,
+      },
+      home: {
+        abbrev: game.home.abbrev,
+        name: game.home.name,
+        location: game.home.location,
+      },
+    },
+    ncaafSchedule,
+    commonOpponents,
+  )
   const isTiebreaker = game.id === slate.tiebreaker?.gameId
   const history = lineHistoryByCbs.get(game.cbsEventId)
   const score = formatGameScore(game)
@@ -686,7 +710,10 @@ function GameCard({
             {comingOff.home.line}
           </span>
         )}
-        <CommonOpponentsNote breakdown={commonOpponents} />
+        <CommonOpponentsNote
+          breakdown={commonOpponents}
+          offSlate={offSlateOpponents}
+        />
         {game.sport === 'NCAAF' && (
           <span className="game-injuries">
             <span>Injuries</span>
@@ -1743,6 +1770,7 @@ function App() {
                     slate.pool.seasonYear,
               )}
               teamsByKey={teamsByKey}
+              ncaafSchedule={ncaafSchedule}
               onClose={closeSuggestedCard}
             />
           )}

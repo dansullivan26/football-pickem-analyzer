@@ -10,7 +10,7 @@ import {
 
 export type CommonOpponentTeam = Pick<
   TeamRecord,
-  'abbrev' | 'name' | 'appearances'
+  'abbrev' | 'name' | 'location' | 'appearances'
 >
 
 export type CommonOpponentMeeting = {

@@ -1821,6 +1821,11 @@ select:focus {
   max-width: 62rem;
 }
 
+.game-common-opponents.off-slate .common-opponents-heading,
+.card-common-opponents.off-slate .common-opponents-heading {
+  font-weight: 600;
+}
+
 .game-weather {
   display: inline-flex;
   flex-wrap: wrap;

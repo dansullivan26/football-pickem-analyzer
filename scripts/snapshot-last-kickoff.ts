@@ -9,10 +9,16 @@ import {
   type LastKickoffRow,
   type ScheduleRosterTeam,
 } from '../src/lastKickoff.ts'
+import {
+  emptyNcaafSchedule,
+  ncaafScheduleFromCfbdGames,
+  type NcaafScheduleFile,
+} from '../src/ncaafSchedule.ts'
 import type { RecommendationHistory, Slate } from '../src/types.ts'
 
 const ROOT = new URL('../', import.meta.url)
 const OUTPUT = new URL('src/data/last-kickoff.json', ROOT)
+const SCHEDULE_OUTPUT = new URL('src/data/ncaaf-schedule.json', ROOT)
 const NFLVERSE_URL =
   'https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv.gz'
 const CFBD_BASE = 'https://api.collegefootballdata.com'
@@ -54,14 +60,30 @@ const nflRows = await fetchNflverse(seasonYear, roster, nowMs).catch((error) => 
   return keepSource(previous.teams, 'nflverse')
 })
 
+let previousSchedule: NcaafScheduleFile = emptyNcaafSchedule(seasonYear)
+try {
+  previousSchedule = JSON.parse(
+    await readFile(SCHEDULE_OUTPUT, 'utf8'),
+  ) as NcaafScheduleFile
+} catch {
+  // First schedule snapshot.
+}
+
 let cfbdRows = keepSource(previous.teams, 'cfbd')
+let schedule = previousSchedule
 if (!apiKey) {
   console.warn(
     'CFBD_API_KEY is not set — keeping any previous college last-kickoff rows. Get a free key at https://collegefootballdata.com/key and add it as the CFBD_API_KEY repository secret.',
   )
 } else {
   try {
-    cfbdRows = await fetchCfbd(apiKey, seasonYear, roster, nowMs)
+    const games = await cfbdGames(apiKey, seasonYear)
+    cfbdRows = lastKickoffsFromCfbdGames(games, roster, nowMs)
+    schedule = {
+      updatedAt: new Date(nowMs).toISOString(),
+      seasonYear,
+      games: ncaafScheduleFromCfbdGames(games, nowMs),
+    }
   } catch (error) {
     console.warn(
       'CFBD games missed this run:',
@@ -83,12 +105,16 @@ const file = teamsChanged ? next : previous
 
 await mkdir(new URL('src/data', ROOT), { recursive: true })
 await writeFile(OUTPUT, `${JSON.stringify(file, null, 2)}\n`)
+await writeFile(SCHEDULE_OUTPUT, `${JSON.stringify(schedule, null, 2)}\n`)
 
 const nfl = file.teams.filter((row) => row.key.startsWith('NFL:')).length
 const ncaaf = file.teams.filter((row) => row.key.startsWith('NCAAF:')).length
 console.log(
   `Last kickoff ${file.seasonYear}: ${file.teams.length} teams (${ncaaf} NCAAF, ${nfl} NFL)` +
     (teamsChanged ? '.' : ' — unchanged.'),
+)
+console.log(
+  `NCAAF schedule ${schedule.seasonYear}: ${schedule.games.length} completed games.`,
 )
 
 function keepSource(
@@ -111,16 +137,6 @@ async function fetchNflverse(
   }
   const csv = gunzipSync(Buffer.from(await response.arrayBuffer())).toString('utf8')
   return lastKickoffsFromNflverseCsv(csv, year, teams, now)
-}
-
-async function fetchCfbd(
-  key: string,
-  year: number,
-  teams: ScheduleRosterTeam[],
-  now: number,
-) {
-  const games = await cfbdGames(key, year)
-  return lastKickoffsFromCfbdGames(games, teams, now)
 }
 
 async function cfbdGames(key: string, year: number) {

@@ -2,18 +2,24 @@ import {
   formatCommonOpponentMeeting,
   type CommonOpponentsBreakdown,
 } from './commonOpponents'
+import {
+  formatOffSlateMeeting,
+  type OffSlateBreakdown,
+} from './ncaafSchedule'
 
 export const COMMON_OPPONENTS_TITLE =
   "Prior CBS pick'em appearances only. Informational — not in the recommendation."
 
-export function CommonOpponentsNote({
+export const OFF_SLATE_OPPONENTS_TITLE =
+  'CollegeFootballData schedule, straight-up only — no CBS number. Informational — not in the recommendation.'
+
+function AtsBlock({
   breakdown,
-  className = 'game-common-opponents',
+  className,
 }: {
-  breakdown: CommonOpponentsBreakdown | null
-  className?: string
+  breakdown: CommonOpponentsBreakdown
+  className: string
 }) {
-  if (!breakdown) return null
   return (
     <div className={className} title={COMMON_OPPONENTS_TITLE}>
       <span className="common-opponents-heading">{breakdown.heading}</span>
@@ -32,5 +38,58 @@ export function CommonOpponentsNote({
         </span>
       ))}
     </div>
+  )
+}
+
+function OffSlateBlock({
+  breakdown,
+  className,
+}: {
+  breakdown: OffSlateBreakdown
+  className: string
+}) {
+  return (
+    <div
+      className={`${className} off-slate`}
+      title={OFF_SLATE_OPPONENTS_TITLE}
+    >
+      <span className="common-opponents-heading">{breakdown.heading}</span>
+      {breakdown.groups.map((group) => (
+        <span
+          className="common-opponents-row"
+          key={`${group.kind}-${group.opponentKey}-${group.away.kickoff}-${group.home.kickoff}`}
+        >
+          <strong>
+            {group.kind === 'head-to-head' ? 'Head-to-head' : group.opponentName}
+          </strong>
+          {' · '}
+          {formatOffSlateMeeting(group.away)}
+          {' · '}
+          {formatOffSlateMeeting(group.home)}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+export function CommonOpponentsNote({
+  breakdown,
+  offSlate = null,
+  className = 'game-common-opponents',
+}: {
+  breakdown: CommonOpponentsBreakdown | null
+  offSlate?: OffSlateBreakdown | null
+  className?: string
+}) {
+  if (!breakdown && !offSlate) return null
+  return (
+    <>
+      {breakdown ? (
+        <AtsBlock breakdown={breakdown} className={className} />
+      ) : null}
+      {offSlate ? (
+        <OffSlateBlock breakdown={offSlate} className={className} />
+      ) : null}
+    </>
   )
 }

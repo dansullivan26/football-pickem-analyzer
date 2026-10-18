@@ -35,14 +35,14 @@ jobs:
       - name: Commit last-kickoff file
         id: commit
         run: |
-          if git diff --quiet -- src/data/last-kickoff.json src/data/coaching-snapshot.json src/data/bowl-pickem.json; then
+          if git diff --quiet -- src/data/last-kickoff.json src/data/ncaaf-schedule.json src/data/coaching-snapshot.json src/data/bowl-pickem.json; then
             echo "No last-kickoff or bowl-context changes to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/last-kickoff.json src/data/coaching-snapshot.json src/data/bowl-pickem.json
+          git add src/data/last-kickoff.json src/data/ncaaf-schedule.json src/data/coaching-snapshot.json src/data/bowl-pickem.json
           git commit -m "data: refresh last kickoffs and bowl context"
           git pull --rebase origin main
           git push

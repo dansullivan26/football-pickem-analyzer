@@ -98,6 +98,10 @@ cleanup.
 - Kickoff weather buckets live in `src/data/weather-history.json` and are
   frozen by **Refresh sportsbook lines** (`npm run snapshot-weather`). Do
   not reconstruct ATS from weather.
+- Off-slate NCAAF common opponents come from `src/data/ncaaf-schedule.json`,
+  written by **Refresh last kickoff** (`npm run snapshot-last-kickoff`).
+  Those rows are straight-up CFBD results, not CBS ATS, and are not in
+  the recommendation.
 - NFL starter-status vs DraftKings coincidences live in
   `src/data/injury-line-history.json`, written by **Refresh sportsbook
   lines** after `refresh-nfl-injuries`. Same-hour line movement is a

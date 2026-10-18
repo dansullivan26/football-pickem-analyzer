@@ -55,9 +55,15 @@ import {
 } from './namedPlays'
 import {
   commonOpponentsForAbbrevs,
+  sportForMatchup,
   type CommonOpponentTeam,
 } from './commonOpponents'
 import { CommonOpponentsNote } from './CommonOpponentsNote'
+import {
+  offSlateCommonOpponents,
+  type NcaafScheduleFile,
+} from './ncaafSchedule'
+import { teamKey } from './teamPerformance'
 
 export default function SuggestedCardPanel({
   card,
@@ -66,6 +72,7 @@ export default function SuggestedCardPanel({
   neutralBriefs,
   namedPlays,
   teamsByKey,
+  ncaafSchedule,
   onClose,
 }: {
   card: SuggestedCard
@@ -74,6 +81,7 @@ export default function SuggestedCardPanel({
   neutralBriefs?: NeutralBriefsFile | null
   namedPlays?: NamedPlayOptions
   teamsByKey?: ReadonlyMap<string, CommonOpponentTeam>
+  ncaafSchedule?: NcaafScheduleFile | null
   onClose: () => void
 }) {
   const savedGames = [...savedSentGames]
@@ -536,23 +544,20 @@ export default function SuggestedCardPanel({
                         card.week,
                         card.seasonYear,
                       )}
-                      commonOpponents={
-                        teamsByKey
-                          ? commonOpponentsForAbbrevs(
-                              {
-                                abbrev: row.pick.awayAbbrev,
-                                name: row.pick.away,
-                              },
-                              {
-                                abbrev: row.pick.homeAbbrev,
-                                name: row.pick.home,
-                              },
-                              row.pick.kickoff,
-                              row.pick.cbsEventId,
-                              teamsByKey,
-                            )
-                          : null
-                      }
+                      commonOpponents={opponentNotes(
+                        {
+                          abbrev: row.pick.awayAbbrev,
+                          name: row.pick.away,
+                        },
+                        {
+                          abbrev: row.pick.homeAbbrev,
+                          name: row.pick.home,
+                        },
+                        row.pick.kickoff,
+                        row.pick.cbsEventId,
+                        teamsByKey,
+                        ncaafSchedule,
+                      )}
                       onToggleDeviate={toggleDeviate}
                       onToggleSend={toggleSend}
                     />
@@ -569,23 +574,20 @@ export default function SuggestedCardPanel({
                         card.week,
                         card.seasonYear,
                       )}
-                      commonOpponents={
-                        teamsByKey
-                          ? commonOpponentsForAbbrevs(
-                              {
-                                abbrev: row.game.awayAbbrev,
-                                name: row.game.away,
-                              },
-                              {
-                                abbrev: row.game.homeAbbrev,
-                                name: row.game.home,
-                              },
-                              row.game.kickoff,
-                              row.game.cbsEventId,
-                              teamsByKey,
-                            )
-                          : null
-                      }
+                      commonOpponents={opponentNotes(
+                        {
+                          abbrev: row.game.awayAbbrev,
+                          name: row.game.away,
+                        },
+                        {
+                          abbrev: row.game.homeAbbrev,
+                          name: row.game.home,
+                        },
+                        row.game.kickoff,
+                        row.game.cbsEventId,
+                        teamsByKey,
+                        ncaafSchedule,
+                      )}
                       onToggle={toggleManualPick}
                       onToggleSend={toggleSend}
                     />
@@ -825,6 +827,41 @@ function DaySendToggle({
   )
 }
 
+function opponentNotes(
+  away: { abbrev: string; name: string },
+  home: { abbrev: string; name: string },
+  kickoff: string,
+  cbsEventId: number,
+  teamsByKey?: ReadonlyMap<string, CommonOpponentTeam>,
+  ncaafSchedule?: NcaafScheduleFile | null,
+) {
+  if (!teamsByKey) return { cbs: null, offSlate: null }
+  const cbs = commonOpponentsForAbbrevs(
+    away,
+    home,
+    kickoff,
+    cbsEventId,
+    teamsByKey,
+  )
+  const sport = sportForMatchup(away.abbrev, home.abbrev, teamsByKey)
+  if (sport !== 'NCAAF') return { cbs, offSlate: null }
+  const awayTeam = teamsByKey.get(teamKey('NCAAF', away.abbrev))
+  const homeTeam = teamsByKey.get(teamKey('NCAAF', home.abbrev))
+  return {
+    cbs,
+    offSlate: offSlateCommonOpponents(
+      {
+        sport,
+        kickoff,
+        away: { ...away, location: awayTeam?.location ?? away.name },
+        home: { ...home, location: homeTeam?.location ?? home.name },
+      },
+      ncaafSchedule,
+      cbs,
+    ),
+  }
+}
+
 function SuggestedPickRow({
   pick,
   namedKind,
@@ -842,7 +879,7 @@ function SuggestedPickRow({
   selectedToSend: boolean
   poolProjection?: PoolProjection
   brief: NeutralBrief | null
-  commonOpponents: ReturnType<typeof commonOpponentsForAbbrevs>
+  commonOpponents: ReturnType<typeof opponentNotes>
   onToggleDeviate: (gameId: string) => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -931,7 +968,8 @@ function SuggestedPickRow({
         <em className="gemini-brief-why">{brief.why}</em>
       ) : null}
       <CommonOpponentsNote
-        breakdown={commonOpponents}
+        breakdown={commonOpponents.cbs}
+        offSlate={commonOpponents.offSlate}
         className="card-common-opponents"
       />
     </li>
@@ -953,7 +991,7 @@ function ManualReviewRow({
   selectedToSend: boolean
   poolProjection?: PoolProjection
   brief: NeutralBrief | null
-  commonOpponents: ReturnType<typeof commonOpponentsForAbbrevs>
+  commonOpponents: ReturnType<typeof opponentNotes>
   onToggle: (gameId: string, side: 'home' | 'away') => void
   onToggleSend: (gameId: string) => void
 }) {
@@ -989,7 +1027,8 @@ function ManualReviewRow({
           <em className="gemini-brief-why">{brief.why}</em>
         ) : null}
         <CommonOpponentsNote
-          breakdown={commonOpponents}
+          breakdown={commonOpponents.cbs}
+          offSlate={commonOpponents.offSlate}
           className="card-common-opponents"
         />
       </div>

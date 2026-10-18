@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T11:25:12.193Z",
+  "updatedAt": "2026-10-18T16:00:36.680Z",
   "weeks": [
     {
       "week": 1,
@@ -4480,7 +4480,7 @@
       "week": 7,
       "seasonYear": 2026,
       "label": "Week 7",
-      "capturedAt": "2026-10-18T11:25:12.193Z",
+      "capturedAt": "2026-10-18T16:00:36.680Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029286,
@@ -4495,6 +4495,10 @@
         {
           "cbsEventId": 50028231,
           "frozenAt": "2026-10-17T14:17:29.084Z"
+        },
+        {
+          "cbsEventId": 50029280,
+          "frozenAt": "2026-10-18T16:00:36.680Z"
         }
       ],
       "games": [
@@ -4872,7 +4876,9 @@
             "indoor": false
           },
           "neutralSite": true,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 0,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50029275,
@@ -5115,7 +5121,8 @@
             "state": "MO",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "deviated": true
         },
         {
           "cbsEventId": 50029284,

@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-17T22:28:11.168Z",
+  "updatedAt": "2026-10-18T06:05:41.454Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -2955,6 +2955,24 @@
           "fromTier": "out",
           "toTier": "reserve",
           "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-18T06:05:41.454Z",
+          "cbsEventId": 50029280,
+          "athleteId": "4685350",
+          "name": "Trevor Etienne",
+          "position": "RB",
+          "teamAbbrev": "CAR",
+          "teamName": "Carolina",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,
           "towardTeam": 0

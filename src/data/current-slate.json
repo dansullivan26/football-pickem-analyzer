@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-18T16:14:31-04:00",
+    "fetchedAt": "2026-10-18T16:38:30-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -605,7 +605,7 @@
       "cbsEventId": 50029275,
       "sport": "NFL",
       "week": 6,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-18T13:00:00-04:00",
       "kickoffLabel": "Sun Oct 18, 1:00 PM ET",
       "tv": "FOX",
@@ -616,7 +616,7 @@
         "nickname": "Bears",
         "location": "Chicago",
         "conference": "NFC",
-        "record": "3-2",
+        "record": "4-2",
         "rank": 15,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -628,7 +628,7 @@
         "nickname": "Falcons",
         "location": "Atlanta",
         "conference": "NFC",
-        "record": "2-3",
+        "record": "2-4",
         "rank": 22,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -661,7 +661,7 @@
         "nickname": "Ravens",
         "location": "Baltimore",
         "conference": "AFC",
-        "record": "4-1",
+        "record": "4-2",
         "rank": 6,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -673,7 +673,7 @@
         "nickname": "Browns",
         "location": "Cleveland",
         "conference": "AFC",
-        "record": "3-2",
+        "record": "4-2",
         "rank": 19,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -706,7 +706,7 @@
         "nickname": "Titans",
         "location": "Tennessee",
         "conference": "AFC",
-        "record": "0-5",
+        "record": "1-5",
         "rank": 31,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -718,7 +718,7 @@
         "nickname": "Colts",
         "location": "Indianapolis",
         "conference": "AFC",
-        "record": "2-3",
+        "record": "2-4",
         "rank": 24,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -751,7 +751,7 @@
         "nickname": "Jets",
         "location": "New York",
         "conference": "AFC",
-        "record": "2-3",
+        "record": "2-4",
         "rank": 25,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -763,7 +763,7 @@
         "nickname": "Patriots",
         "location": "New England",
         "conference": "AFC",
-        "record": "3-2",
+        "record": "4-2",
         "rank": 11,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -785,7 +785,7 @@
       "cbsEventId": 50029279,
       "sport": "NFL",
       "week": 6,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-18T13:00:00-04:00",
       "kickoffLabel": "Sun Oct 18, 1:00 PM ET",
       "tv": "FOX",
@@ -830,7 +830,7 @@
       "cbsEventId": 50029280,
       "sport": "NFL",
       "week": 6,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-10-18T13:00:00-04:00",
       "kickoffLabel": "Sun Oct 18, 1:00 PM ET",
       "tv": "CBS",
@@ -905,7 +905,7 @@
       },
       "homeSpread": 2.5,
       "line": "PIT -2.5",
-      "awayScore": 19,
+      "awayScore": 26,
       "homeScore": 19,
       "venue": {
         "stadium": "Raymond James Stadium",
@@ -950,8 +950,8 @@
       },
       "homeSpread": -13.5,
       "line": "LAR -13.5",
-      "awayScore": 0,
-      "homeScore": 0,
+      "awayScore": 3,
+      "homeScore": 3,
       "venue": {
         "stadium": "SoFi Stadium",
         "city": "Inglewood",
@@ -965,7 +965,7 @@
       "cbsEventId": 50029283,
       "sport": "NFL",
       "week": 6,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-10-18T16:25:00-04:00",
       "kickoffLabel": "Sun Oct 18, 4:25 PM ET",
       "tv": "CBS",
@@ -995,8 +995,8 @@
       },
       "homeSpread": -8.5,
       "line": "KC -8.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 3,
       "venue": {
         "stadium": "GEHA Field at Arrowhead Stadium",
         "city": "Kansas City",
@@ -1010,7 +1010,7 @@
       "cbsEventId": 50029284,
       "sport": "NFL",
       "week": 6,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-10-18T16:25:00-04:00",
       "kickoffLabel": "Sun Oct 18, 4:25 PM ET",
       "tv": "CBS",
@@ -1040,8 +1040,8 @@
       },
       "homeSpread": 5.5,
       "line": "BUF -5.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 3,
+      "homeScore": 0,
       "venue": {
         "stadium": "Allegiant Stadium",
         "city": "Paradise",

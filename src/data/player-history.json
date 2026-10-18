@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-18T13:11:29-04:00",
+    "fetchedAt": "2026-10-18T16:14:31-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -64876,7 +64876,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T20:29:32-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -65118,9 +65118,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65134,9 +65134,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65150,9 +65150,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65211,13 +65211,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -65284,13 +65285,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
           "name": "Bill Eskew",
-          "weekScore": 8,
-          "weekRank": 9,
-          "correctPicks": 8,
+          "weekScore": 9,
+          "weekRank": 3,
+          "correctPicks": 9,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -65532,9 +65533,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65548,9 +65549,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65564,9 +65565,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65625,13 +65626,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -65699,12 +65701,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
           "weekScore": 8,
-          "weekRank": 14,
+          "weekRank": 17,
           "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -65946,9 +65948,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65962,9 +65964,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -65978,9 +65980,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66039,13 +66041,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -66112,13 +66115,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
           "name": "Dave Bone",
-          "weekScore": 7,
-          "weekRank": 14,
-          "correctPicks": 7,
+          "weekScore": 8,
+          "weekRank": 13,
+          "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -66360,9 +66363,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66376,9 +66379,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66392,9 +66395,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66453,13 +66456,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -66527,12 +66531,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
           "weekScore": 8,
-          "weekRank": 5,
-          "correctPicks": 8,
+          "weekRank": 9,
+          "correctPicks": 9,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -66774,9 +66778,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66790,9 +66794,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66806,9 +66810,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -66867,13 +66871,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -66942,11 +66947,11 @@
           "name": "Jay Kopas",
           "weekScore": 2,
           "weekRank": 25,
-          "correctPicks": 2,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -67188,9 +67193,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67204,9 +67209,9 @@
               "pickedTeamId": "krswc3j2gqzte===",
               "pickedTeam": "TEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67220,9 +67225,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67281,13 +67286,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -67356,11 +67362,11 @@
           "name": "jeff miller",
           "weekScore": 8,
           "weekRank": 9,
-          "correctPicks": 8,
+          "correctPicks": 9,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T20:29:32-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -67602,9 +67608,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67618,9 +67624,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67634,9 +67640,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -67695,13 +67701,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -67769,12 +67776,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
           "weekScore": 8,
-          "weekRank": 14,
+          "weekRank": 13,
           "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -68016,9 +68023,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68032,9 +68039,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68048,9 +68055,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68109,13 +68116,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -68182,13 +68190,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
-          "weekScore": 4,
-          "weekRank": 18,
-          "correctPicks": 4,
+          "weekScore": 5,
+          "weekRank": 17,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -68430,9 +68438,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68446,9 +68454,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68462,9 +68470,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68523,13 +68531,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -68598,11 +68607,11 @@
           "name": "Nancy Bone",
           "weekScore": 5,
           "weekRank": 20,
-          "correctPicks": 5,
+          "correctPicks": 6,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T20:29:32-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -68844,9 +68853,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68860,9 +68869,9 @@
               "pickedTeamId": "krswc3j2gqzte===",
               "pickedTeam": "TEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68876,9 +68885,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -68937,13 +68946,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -69016,7 +69026,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -69258,9 +69268,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69274,9 +69284,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69290,9 +69300,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69351,13 +69361,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -69425,12 +69436,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
           "weekScore": 5,
-          "weekRank": 20,
+          "weekRank": 23,
           "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -69672,9 +69683,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69688,9 +69699,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69704,9 +69715,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -69765,13 +69776,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -69838,13 +69850,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
-          "weekScore": 6,
+          "weekScore": 7,
           "weekRank": 3,
-          "correctPicks": 6,
+          "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -70086,9 +70098,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70102,9 +70114,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70118,9 +70130,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70179,13 +70191,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -70258,7 +70271,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -70500,9 +70513,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70516,9 +70529,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70532,9 +70545,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70593,13 +70606,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -70667,12 +70681,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
           "weekScore": 7,
-          "weekRank": 9,
+          "weekRank": 13,
           "correctPicks": 7,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -70914,9 +70928,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70930,9 +70944,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -70946,9 +70960,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71007,13 +71021,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -71086,7 +71101,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -71328,9 +71343,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71344,9 +71359,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71360,9 +71375,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71421,13 +71436,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -71494,13 +71510,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
-          "weekScore": 10,
-          "weekRank": 2,
-          "correctPicks": 10,
+          "weekScore": 11,
+          "weekRank": 1,
+          "correctPicks": 13,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -71742,9 +71758,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71758,9 +71774,9 @@
               "pickedTeamId": "krswc3j2gqzte===",
               "pickedTeam": "TEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71774,9 +71790,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -71835,13 +71851,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -71908,13 +71925,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 7,
-          "weekRank": 1,
-          "correctPicks": 7,
+          "weekScore": 8,
+          "weekRank": 2,
+          "correctPicks": 10,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T16:52:41-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -72156,9 +72173,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72172,9 +72189,9 @@
               "pickedTeamId": "krswc3j2gqzte===",
               "pickedTeam": "TEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72188,9 +72205,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72249,13 +72266,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -72322,13 +72340,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
-          "weekScore": 9,
-          "weekRank": 3,
-          "correctPicks": 9,
+          "weekScore": 10,
+          "weekRank": 5,
+          "correctPicks": 10,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -72570,9 +72588,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72586,9 +72604,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72602,9 +72620,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -72663,13 +72681,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzdo===",
+              "pickedTeam": "LAR",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -72736,13 +72755,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
-          "weekScore": 5,
+          "weekScore": 6,
           "weekRank": 9,
-          "correctPicks": 5,
+          "correctPicks": 7,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -72984,9 +73003,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73000,9 +73019,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73016,9 +73035,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73077,13 +73096,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -73151,12 +73171,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
           "weekScore": 7,
-          "weekRank": 18,
+          "weekRank": 17,
           "correctPicks": 7,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T20:29:32-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -73398,9 +73418,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73414,9 +73434,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73430,9 +73450,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73491,13 +73511,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -73565,12 +73586,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
           "weekScore": 4,
-          "weekRank": 23,
+          "weekRank": 20,
           "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -73812,9 +73833,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73828,9 +73849,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73844,9 +73865,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -73905,13 +73926,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -73978,9 +74000,9 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
-          "weekScore": 5,
+          "weekScore": 6,
           "weekRank": 5,
-          "correctPicks": 5,
+          "correctPicks": 7,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "NO_TIEBREAKER",
@@ -74226,9 +74248,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-17T15:39:57-04:00"
             },
@@ -74242,9 +74264,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-17T15:39:57-04:00"
             },
@@ -74258,9 +74280,9 @@
               "pickedTeamId": "krswc3j2gqzdg===",
               "pickedTeam": "NYJ",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-17T15:39:57-04:00"
             },
@@ -74631,8 +74653,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -74646,8 +74668,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -74661,8 +74683,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -74791,13 +74813,13 @@
         {
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
-          "weekScore": 7,
-          "weekRank": 14,
-          "correctPicks": 7,
+          "weekScore": 8,
+          "weekRank": 13,
+          "correctPicks": 8,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 20,
+          "revealedPicksCount": 21,
           "picksCountFirstSeenAt": "2026-10-15T06:25:51-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -75039,9 +75061,9 @@
               "pickedTeamId": "krswc3j2gqzti===",
               "pickedTeam": "CLE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75055,9 +75077,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75071,9 +75093,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75132,13 +75154,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -75206,12 +75229,12 @@
           "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
           "name": "Adam Gannon",
           "weekScore": 3,
-          "weekRank": 23,
+          "weekRank": 24,
           "correctPicks": 3,
           "picksCount": 22,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 17,
+          "revealedPicksCount": 18,
           "picksCountFirstSeenAt": "2026-10-17T14:05:33-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -75450,9 +75473,9 @@
               "pickedTeamId": "krswc3j2gqydm===",
               "pickedTeam": "BAL",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75466,9 +75489,9 @@
               "pickedTeamId": "krswc3j2gqytk===",
               "pickedTeam": "IND",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75482,9 +75505,9 @@
               "pickedTeamId": "krswc3j2gqzda===",
               "pickedTeam": "NE",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-10-18T13:11:29-04:00"
             },
@@ -75543,13 +75566,14 @@
               "away": "ARI",
               "home": "LAR",
               "homeSpread": -13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqydi===",
+              "pickedTeam": "ARI",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-18T16:14:31-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4dg===",
@@ -172355,6 +172379,678 @@
       "window": {
         "after": "2026-10-18T09:42:28-04:00",
         "atOrBefore": "2026-10-18T13:11:29-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojs",
+      "name": "rob bandelier",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzdo===",
+        "pickedTeam": "LAR"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
+      }
+    },
+    {
+      "week": 7,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2demy=",
+      "entryId": "ivxhi4tzhizdkmjtgm4tgmbu",
+      "name": "Adam Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2demz2guydamrzgi4de===",
+      "cbsEventId": 50029282,
+      "away": "ARI",
+      "home": "LAR",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqydi===",
+        "pickedTeam": "ARI"
+      },
+      "firstSeenAt": "2026-10-18T16:14:31-04:00",
+      "previousFetchedAt": "2026-10-18T13:11:29-04:00",
+      "fetchedAt": "2026-10-18T16:14:31-04:00",
+      "window": {
+        "after": "2026-10-18T13:11:29-04:00",
+        "atOrBefore": "2026-10-18T16:14:31-04:00"
       }
     }
   ],

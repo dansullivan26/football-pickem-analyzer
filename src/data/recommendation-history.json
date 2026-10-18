@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T23:42:11.320Z",
+  "updatedAt": "2026-10-18T01:14:17.163Z",
   "weeks": [
     {
       "week": 1,
@@ -4480,11 +4480,11 @@
       "week": 7,
       "seasonYear": 2026,
       "label": "Week 7",
-      "capturedAt": "2026-10-17T22:28:05.125Z",
+      "capturedAt": "2026-10-18T01:14:17.163Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029286,
-        "draftKingsTotal": 51.5,
+        "draftKingsTotal": 52.5,
         "frozenAt": null
       },
       "playOfTheWeek": {
@@ -4611,8 +4611,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 24,
-          "homeScore": 14
+          "awayScore": 27,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50028201,
@@ -4640,8 +4640,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
-          "homeScore": 7
+          "awayScore": 18,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028213,
@@ -4670,7 +4670,7 @@
           },
           "neutralSite": false,
           "awayScore": 10,
-          "homeScore": 12
+          "homeScore": 26
         },
         {
           "cbsEventId": 50028243,
@@ -4699,7 +4699,7 @@
           },
           "neutralSite": true,
           "awayScore": 3,
-          "homeScore": 21
+          "homeScore": 31
         },
         {
           "cbsEventId": 50028227,
@@ -4726,7 +4726,9 @@
             "state": "TX",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 3,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50028242,
@@ -4753,7 +4755,9 @@
             "state": "OK",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50028264,
@@ -4780,7 +4784,9 @@
             "state": "UT",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 3,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50028282,
@@ -4807,7 +4813,9 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50028276,
@@ -5113,16 +5121,16 @@
           "away": "BUF",
           "home": "LV",
           "homeSpread": 5.5,
-          "liveHomeSpread": 5.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 4.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
+          "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "score": 6,
+          "compositeEdge": 2,
           "awayRank": null,
           "homeRank": null,
           "venue": {

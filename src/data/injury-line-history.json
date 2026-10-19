@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-19T17:35:43.881Z",
+  "updatedAt": "2026-10-19T20:58:03.280Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -2966,6 +2966,24 @@
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -7.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-19T20:58:03.280Z",
+          "cbsEventId": 50029278,
+          "athleteId": "4361432",
+          "name": "Romeo Doubs",
+          "position": "WR",
+          "teamAbbrev": "NE",
+          "teamName": "New England",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Injured Reserve",
+          "fromTier": "questionable",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4822,6 +4840,24 @@
           "homeSpreadBefore": -12.5,
           "homeSpreadAfter": -12.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-19T20:58:03.280Z",
+          "cbsEventId": 50029282,
+          "athleteId": "4259619",
+          "name": "Blake Grupe",
+          "position": "PK",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Injured Reserve",
+          "fromTier": "questionable",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -12.5,
+          "homeSpreadAfter": -12.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -5971,6 +6007,24 @@
           "homeSpreadBefore": 1.5,
           "homeSpreadAfter": 1.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-19T20:58:03.280Z",
+          "cbsEventId": 50029285,
+          "athleteId": "4428914",
+          "name": "Dee Winters",
+          "position": "LB",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 1.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -6387,6 +6441,42 @@
           "fromTier": null,
           "toTier": "reserve",
           "availability": "worse",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-19T20:58:03.280Z",
+          "cbsEventId": 50029286,
+          "athleteId": "4575131",
+          "name": "Jacory Croskey-Merritt",
+          "position": "RB",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-19T20:58:03.280Z",
+          "cbsEventId": 50029286,
+          "athleteId": "4574689",
+          "name": "Trey Amos",
+          "position": "CB",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "away",
+          "fromStatus": "Injured Reserve",
+          "toStatus": null,
+          "fromTier": "reserve",
+          "toTier": null,
+          "availability": "better",
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -7.5,
           "towardTeam": 0

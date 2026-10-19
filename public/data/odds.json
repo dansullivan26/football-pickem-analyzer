@@ -1,7 +1,7 @@
 {
   "provider": "SharpAPI",
-  "updatedAt": "2026-10-18T21:37:04.566Z",
-  "comparedTo": "2026-10-18T18:43:29.624Z",
+  "updatedAt": "2026-10-19T00:16:13.504Z",
+  "comparedTo": "2026-10-18T21:37:04.566Z",
   "books": [
     {
       "key": "draftkings",
@@ -316,8 +316,9 @@
       "homeTeam": "Green Bay",
       "lines": {
         "draftkings": {
-          "line": -1.5,
-          "retrievedAt": "2026-10-18T21:37:04.566Z"
+          "line": 1.5,
+          "retrievedAt": "2026-10-19T00:16:13.504Z",
+          "previousLine": -1.5
         }
       }
     },
@@ -330,13 +331,14 @@
       "lines": {
         "draftkings": {
           "line": -7.5,
-          "retrievedAt": "2026-10-18T21:37:04.566Z"
+          "retrievedAt": "2026-10-19T00:16:13.504Z"
         }
       },
       "totals": {
         "draftkings": {
-          "line": 52.5,
-          "retrievedAt": "2026-10-18T21:37:04.566Z"
+          "line": 51.5,
+          "retrievedAt": "2026-10-19T00:16:13.504Z",
+          "previousLine": 52.5
         }
       }
     }

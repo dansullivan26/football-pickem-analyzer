@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-10-18T21:37:07.540Z",
-    "reportUpdatedAt": "2026-10-18T21:36:59Z",
+    "fetchedAt": "2026-10-19T00:16:16.955Z",
+    "reportUpdatedAt": "2026-10-19T00:16:14Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-10-18T21:33:18Z",
+      "depthChartAt": "2026-10-19T00:15:19Z",
       "status": "ok",
       "injuries": [
         {
@@ -39,7 +39,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-10-18T21:36:33Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -88,7 +88,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-10-18T21:36:39Z",
+      "depthChartAt": "2026-10-19T00:12:49Z",
       "status": "ok",
       "injuries": [
         {
@@ -127,7 +127,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-10-18T21:34:35Z",
+      "depthChartAt": "2026-10-19T00:11:50Z",
       "status": "ok",
       "injuries": [
         {
@@ -149,6 +149,16 @@
           "injury": "Shoulder - AC Joint",
           "detail": "Moore (shoulder) is listed as inactive Sunday in Las Vegas.",
           "updatedAt": "2026-10-18T18:57Z"
+        },
+        {
+          "athleteId": "4385690",
+          "name": "Dalton Kincaid",
+          "position": "TE",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ribs",
+          "detail": "Kincaid (ribs) is questionable to return to Sunday's game against the Raiders.",
+          "updatedAt": "2026-10-18T22:39Z"
         }
       ]
     },
@@ -156,7 +166,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-10-18T21:36:38Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -175,7 +185,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-10-18T21:34:47Z",
+      "depthChartAt": "2026-10-19T00:12:49Z",
       "status": "ok",
       "injuries": [
         {
@@ -224,7 +234,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-10-18T21:36:39Z",
+      "depthChartAt": "2026-10-19T00:12:50Z",
       "status": "ok",
       "injuries": [
         {
@@ -251,8 +261,8 @@
           "athleteId": "4242208",
           "name": "Grant Delpit",
           "position": "S",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Concussion",
           "detail": "Delpit (concussion) has been ruled out for the remainder of Sunday's game against the Ravens.",
           "updatedAt": "2026-10-18T17:41Z"
@@ -263,7 +273,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-10-18T21:36:35Z",
+      "depthChartAt": "2026-10-19T00:13:11Z",
       "status": "ok",
       "injuries": [
         {
@@ -273,18 +283,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Hamstring",
-          "detail": "Dallas has downgraded Overshown (hamstring) to out for Sunday night's game against the Packers, Mike Garafolo of NFL Network reports.",
-          "updatedAt": "2026-10-18T00:03Z"
-        },
-        {
-          "athleteId": "4426506",
-          "name": "Joey Porter Jr.",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Ankle",
-          "detail": "Porter (ankle) is questionable but on track to play in Sunday's game against the Packers, Jeremy Fowler of ESPN reports.",
-          "updatedAt": "2026-10-18T11:17Z"
+          "detail": "inactive",
+          "updatedAt": "2026-10-18T22:55Z"
         }
       ]
     },
@@ -292,7 +292,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-10-18T21:33:17Z",
+      "depthChartAt": "2026-10-19T00:14:23Z",
       "status": "ok",
       "injuries": [
         {
@@ -331,38 +331,18 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-10-18T21:36:40Z",
+      "depthChartAt": "2026-10-19T00:13:21Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "5076652",
-          "name": "Brandon Cisse",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Hip",
-          "detail": "Cisse (hip) is listed as questionable for Sunday's game against the Cowboys, Wes Hodkiewicz of the Packers' official site reports.",
-          "updatedAt": "2026-10-17T02:13Z"
-        },
         {
           "athleteId": "4242390",
           "name": "Aaron Banks",
           "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
+          "status": "Out",
+          "tier": "out",
           "injury": "Toe",
-          "detail": "Banks (knee/toe) is questionable for Sunday's game against Dallas.",
-          "updatedAt": "2026-10-17T04:24Z"
-        },
-        {
-          "athleteId": "4431487",
-          "name": "Savion Williams",
-          "position": "WR",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Ankle",
-          "detail": "The Packers activated Williams (ankle) from injured reserve Saturday.",
-          "updatedAt": "2026-10-18T01:53Z"
+          "detail": "Banks (toe) is inactive for Sunday night's game against Dallas.",
+          "updatedAt": "2026-10-18T23:11Z"
         },
         {
           "athleteId": "4259762",
@@ -390,7 +370,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-10-18T21:33:18Z",
+      "depthChartAt": "2026-10-19T00:15:10Z",
       "status": "ok",
       "injuries": [
         {
@@ -439,7 +419,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-10-18T21:32:55Z",
+      "depthChartAt": "2026-10-19T00:14:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -498,7 +478,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-10-18T21:35:40Z",
+      "depthChartAt": "2026-10-19T00:14:24Z",
       "status": "ok",
       "injuries": [
         {
@@ -537,7 +517,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-10-18T21:36:11Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -566,7 +546,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-10-18T21:34:47Z",
+      "depthChartAt": "2026-10-19T00:11:51Z",
       "status": "ok",
       "injuries": [
         {
@@ -645,7 +625,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-10-18T21:36:34Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -665,8 +645,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Grupe (knee) is doubtful to return to Sunday's game against the Cardinals, Gary Klein of the Los Angeles Times reports.",
-          "updatedAt": "2026-10-18T20:31Z"
+          "detail": "Grupe (knee) has been ruled out for the remainder of Sunday's game against the Cardinals, Sarah Barshop of ESPN.com reports.",
+          "updatedAt": "2026-10-18T22:19Z"
         }
       ]
     },
@@ -674,7 +654,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-10-18T21:33:17Z",
+      "depthChartAt": "2026-10-19T00:14:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -693,7 +673,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-10-18T21:33:17Z",
+      "depthChartAt": "2026-10-19T00:15:06Z",
       "status": "ok",
       "injuries": [
         {
@@ -704,7 +684,7 @@
           "tier": "out",
           "injury": "Calf",
           "detail": "inactive",
-          "updatedAt": "2026-10-18T21:21Z"
+          "updatedAt": "2026-10-19T00:00Z"
         },
         {
           "athleteId": "4430261",
@@ -727,6 +707,16 @@
           "updatedAt": "2026-10-18T19:26Z"
         },
         {
+          "athleteId": "3929950",
+          "name": "Tremaine Edmunds",
+          "position": "LB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "Edmuns (shoulder) suffered an injury on the final Saints' offensive play of Sunday's game, Dan Duggan of The Athletic reports.",
+          "updatedAt": "2026-10-18T21:47Z"
+        },
+        {
           "athleteId": "4040655",
           "name": "Darnell Mooney",
           "position": "WR",
@@ -742,7 +732,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-10-18T21:36:34Z",
+      "depthChartAt": "2026-10-19T00:12:46Z",
       "status": "ok",
       "injuries": [
         {
@@ -791,7 +781,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-10-18T21:36:34Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -850,7 +840,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-10-18T21:36:34Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -909,7 +899,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-10-18T21:36:35Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -948,7 +938,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-10-18T21:36:34Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -977,7 +967,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-10-18T21:33:16Z",
+      "depthChartAt": "2026-10-19T00:14:24Z",
       "status": "ok",
       "injuries": [
         {
@@ -1046,7 +1036,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-10-18T21:34:43Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -1065,7 +1055,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-10-18T21:36:37Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -1104,7 +1094,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-10-18T21:36:33Z",
+      "depthChartAt": "2026-10-19T00:12:44Z",
       "status": "ok",
       "injuries": [
         {
@@ -1143,7 +1133,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-10-18T21:36:37Z",
+      "depthChartAt": "2026-10-19T00:13:22Z",
       "status": "ok",
       "injuries": [
         {

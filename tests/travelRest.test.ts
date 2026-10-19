@@ -14,6 +14,7 @@ import {
   travelingSide,
 } from '../src/travelRest.ts'
 import {
+  timeZoneForNflAbbrev,
   timeZoneFromTeamLabel,
   timeZoneFromVenue,
   travelZones,
@@ -135,6 +136,9 @@ test('timeZoneFromTeamLabel reads states, Fla aliases, and school names', () => 
   assert.equal(timeZoneFromTeamLabel('Florida State'), 'America/New_York')
   assert.equal(timeZoneFromTeamLabel('Boise State'), 'America/Boise')
   assert.equal(timeZoneFromTeamLabel('Stanford'), 'America/Los_Angeles')
+  assert.equal(timeZoneFromTeamLabel('Washington'), 'America/Los_Angeles')
+  assert.equal(timeZoneForNflAbbrev('WAS'), 'America/New_York')
+  assert.equal(timeZoneForNflAbbrev('WSH'), 'America/New_York')
 })
 
 test('Hawaii traveling to Stanford is three zones east', () => {
@@ -345,6 +349,109 @@ test('buildTravelRestIndex uses a schedule last-kickoff when the card has no pri
 
   assert.equal(index.byEvent.get(2)?.homeRest?.days, 7)
   assert.equal(index.byEvent.get(2)?.homeRest?.kind, 'normal')
+})
+
+test('NFL Washington is Eastern; NCAAF Washington stays Pacific', () => {
+  const commanders = team('WAS', 'Washington', { name: 'Washington' })
+  const eagles = team('PHI', 'Philadelphia')
+  const cowboys = team('DAL', 'Dallas')
+  const seahawks = team('SEA', 'Seattle')
+  const giants = team('NYG', 'New York', { name: 'N.Y. Giants' })
+  const niners = team('SF', 'San Francisco')
+  const huskies = team('WASH', 'Washington', { name: 'Washington' })
+  const ohioState = team('OHIOST', 'Ohio State')
+  const atSeattle = game(7, team('ARI', 'Arizona'), seahawks, {
+    sport: 'NFL',
+    kickoff: '2026-09-06T16:05:00-04:00',
+    venue: {
+      stadium: 'Lumen Field',
+      city: 'Seattle',
+      state: 'WA',
+      indoor: false,
+    },
+  })
+
+  const atPhi = game(1, commanders, eagles, {
+    sport: 'NFL',
+    kickoff: '2026-09-13T16:25:00-04:00',
+    venue: {
+      stadium: 'Lincoln Financial Field',
+      city: 'Philadelphia',
+      state: 'PA',
+      indoor: false,
+    },
+  })
+  const atDal = game(2, commanders, cowboys, {
+    sport: 'NFL',
+    kickoff: '2026-09-20T16:25:00-04:00',
+    venue: {
+      stadium: 'AT&T Stadium',
+      city: 'Arlington',
+      state: 'TX',
+      indoor: true,
+    },
+  })
+  const vsSea = game(3, seahawks, commanders, {
+    sport: 'NFL',
+    kickoff: '2026-09-27T13:00:00-04:00',
+    venue: {
+      stadium: 'Northwest Stadium',
+      city: 'Landover',
+      state: 'MD',
+      indoor: false,
+    },
+  })
+  const vsNyg = game(4, giants, commanders, {
+    sport: 'NFL',
+    kickoff: '2026-10-11T13:00:00-04:00',
+    venue: {
+      stadium: 'Northwest Stadium',
+      city: 'Landover',
+      state: 'MD',
+      indoor: false,
+    },
+  })
+  const atSf = game(5, commanders, niners, {
+    sport: 'NFL',
+    kickoff: '2026-10-19T20:15:00-04:00',
+    venue: {
+      stadium: "Levi's Stadium",
+      city: 'Santa Clara',
+      state: 'CA',
+      indoor: false,
+    },
+  })
+  const huskiesAtOhio = game(6, huskies, ohioState, {
+    kickoff: '2026-09-13T12:00:00-04:00',
+    venue: {
+      stadium: 'Ohio Stadium',
+      city: 'Columbus',
+      state: 'OH',
+      indoor: false,
+    },
+  })
+
+  const index = buildTravelRestIndex(
+    slateOf([atSeattle, atPhi, atDal, vsSea, vsNyg, atSf, huskiesAtOhio]),
+    historyOf([
+      rec(atSeattle),
+      rec(atPhi),
+      rec(atDal),
+      rec(vsSea),
+      rec(vsNyg),
+      rec(atSf),
+      rec(huskiesAtOhio),
+    ]),
+  )
+
+  assert.equal(index.byAppearance.get('1:away')?.travel?.direction, 'same')
+  assert.equal(index.byAppearance.get('2:away')?.travel?.label, '1 time zone west')
+  assert.equal(index.byAppearance.get('3:home')?.travel, null)
+  assert.equal(index.byAppearance.get('3:away')?.travel?.label, '3 time zones east')
+  assert.equal(index.byAppearance.get('4:home')?.travel, null)
+  assert.equal(index.byAppearance.get('4:away')?.travel?.direction, 'same')
+  assert.equal(index.byAppearance.get('5:away')?.travel?.label, '3 time zones west')
+  assert.equal(index.byAppearance.get('6:away')?.travel?.label, '3 time zones east')
 })
 
 test('attachFrozenVenue writes then locks the slate venue', () => {

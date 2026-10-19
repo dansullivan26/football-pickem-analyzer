@@ -60,6 +60,20 @@ const STATE_ALIASES: Record<string, string> = {
   'FLA.': 'Florida',
 }
 
+/**
+ * NFL teams whose CBS location is a US state in a different zone.
+ * Commanders are "Washington" (the city), not Washington state.
+ */
+const NFL_ABBREV_TZ: Record<string, string> = {
+  WAS: 'America/New_York',
+  WSH: 'America/New_York',
+}
+
+export function timeZoneForNflAbbrev(abbrev: string | null | undefined) {
+  if (!abbrev) return null
+  return NFL_ABBREV_TZ[abbrev.trim().toUpperCase()] ?? null
+}
+
 const SCHOOL_TZ: Record<string, string> = {
   stanford: 'America/Los_Angeles',
   tcu: 'America/Chicago',

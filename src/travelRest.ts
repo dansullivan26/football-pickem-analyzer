@@ -8,6 +8,7 @@ import {
 } from './lastKickoff.ts'
 import { collectHomeVenues } from './teamSite.ts'
 import {
+  timeZoneForNflAbbrev,
   timeZoneFromTeamLabel,
   timeZoneFromVenue,
   travelZones,
@@ -289,6 +290,10 @@ function rosterTeam(
 }
 
 function teamTimeZone(team: TeamRef, homeVenues: GameVenue[]) {
+  if (team.sport === 'NFL') {
+    const fromAbbrev = timeZoneForNflAbbrev(team.abbrev)
+    if (fromAbbrev) return fromAbbrev
+  }
   const fromLabel =
     timeZoneFromTeamLabel(team.location ?? null) ??
     timeZoneFromTeamLabel(team.name ?? null)

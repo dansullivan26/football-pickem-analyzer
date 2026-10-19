@@ -1,7 +1,7 @@
 {
   "provider": "SharpAPI",
-  "updatedAt": "2026-10-19T20:58:00.447Z",
-  "comparedTo": "2026-10-19T17:35:40.696Z",
+  "updatedAt": "2026-10-19T22:29:47.273Z",
+  "comparedTo": "2026-10-19T20:58:00.447Z",
   "books": [
     {
       "key": "draftkings",
@@ -329,14 +329,16 @@
       "homeTeam": "San Francisco",
       "lines": {
         "draftkings": {
-          "line": -7.5,
-          "retrievedAt": "2026-10-19T20:58:00.447Z"
+          "line": -6.5,
+          "retrievedAt": "2026-10-19T22:29:47.273Z",
+          "previousLine": -7.5
         }
       },
       "totals": {
         "draftkings": {
-          "line": 51.5,
-          "retrievedAt": "2026-10-19T20:58:00.447Z"
+          "line": 52.5,
+          "retrievedAt": "2026-10-19T22:29:47.273Z",
+          "previousLine": 51.5
         }
       }
     }

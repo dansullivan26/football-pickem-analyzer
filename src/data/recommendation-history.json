@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T10:58:38.514Z",
+  "updatedAt": "2026-10-19T16:33:29.837Z",
   "weeks": [
     {
       "week": 1,
@@ -4480,7 +4480,7 @@
       "week": 7,
       "seasonYear": 2026,
       "label": "Week 7",
-      "capturedAt": "2026-10-19T10:58:38.514Z",
+      "capturedAt": "2026-10-19T16:33:29.837Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029286,
@@ -5212,11 +5212,11 @@
           "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "away",
-          "strength": "solid",
-          "score": 6,
-          "compositeEdge": 0.75,
+          "source": null,
+          "pickedSide": null,
+          "strength": null,
+          "score": null,
+          "compositeEdge": 0,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -5225,7 +5225,8 @@
             "state": "CA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "deviated": true
         }
       ]
     }

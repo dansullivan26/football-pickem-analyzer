@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-20T18:33:14.263Z",
+  "updatedAt": "2026-10-20T22:26:07.160Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3416,6 +3416,24 @@
           "homeSpreadBefore": -7.5,
           "homeSpreadAfter": -7.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-20T22:26:07.160Z",
+          "cbsEventId": 50029278,
+          "athleteId": "4362890",
+          "name": "Ben Brown",
+          "position": "C",
+          "teamAbbrev": "NE",
+          "teamName": "New England",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -5578,6 +5596,24 @@
           "homeSpreadBefore": -12.5,
           "homeSpreadAfter": -12.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-20T22:26:07.160Z",
+          "cbsEventId": 50029282,
+          "athleteId": "16800",
+          "name": "Davante Adams",
+          "position": "WR",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -12.5,
+          "homeSpreadAfter": -12.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -6979,6 +7015,24 @@
           "homeSpreadBefore": 1.5,
           "homeSpreadAfter": 1.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-20T22:26:07.160Z",
+          "cbsEventId": 50029285,
+          "athleteId": "5076652",
+          "name": "Brandon Cisse",
+          "position": "CB",
+          "teamAbbrev": "GB",
+          "teamName": "Green Bay",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 1.5,
+          "homeSpreadAfter": 1.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -7701,6 +7755,24 @@
           "fromTier": "out",
           "toTier": "doubtful",
           "availability": "better",
+          "homeSpreadBefore": -6.5,
+          "homeSpreadAfter": -6.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-20T22:26:07.160Z",
+          "cbsEventId": 50029286,
+          "athleteId": "3121422",
+          "name": "Terry McLaurin",
+          "position": "WR",
+          "teamAbbrev": "WAS",
+          "teamName": "Washington",
+          "side": "away",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
           "homeSpreadBefore": -6.5,
           "homeSpreadAfter": -6.5,
           "towardTeam": 0

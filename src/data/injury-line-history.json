@@ -2,7 +2,7 @@
   "week": 7,
   "seasonYear": 2026,
   "label": "Week 7",
-  "updatedAt": "2026-10-20T22:26:07.160Z",
+  "updatedAt": "2026-10-21T01:43:49.215Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -5614,6 +5614,24 @@
           "homeSpreadBefore": -12.5,
           "homeSpreadAfter": -12.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-21T01:43:49.215Z",
+          "cbsEventId": 50029282,
+          "athleteId": "3125114",
+          "name": "Poona Ford",
+          "position": "DT",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -12.5,
+          "homeSpreadAfter": -12.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -7772,6 +7790,24 @@
           "toStatus": "Out",
           "fromTier": "doubtful",
           "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -6.5,
+          "homeSpreadAfter": -6.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-21T01:43:49.215Z",
+          "cbsEventId": 50029286,
+          "athleteId": "4565200",
+          "name": "Upton Stout",
+          "position": "CB",
+          "teamAbbrev": "SF",
+          "teamName": "San Francisco",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
           "availability": "worse",
           "homeSpreadBefore": -6.5,
           "homeSpreadAfter": -6.5,

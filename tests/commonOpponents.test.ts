@@ -48,6 +48,73 @@ const game = {
   home: { abbrev: 'ATL', name: 'Atlanta' },
 }
 
+test('meeting copy names the team SU result and ATS result', () => {
+  assert.equal(
+    formatCommonOpponentMeeting({
+      teamAbbrev: 'NE',
+      teamName: 'New England',
+      week: 7,
+      weekLabel: 'Week 7',
+      kickoff: '2026-10-19T13:00:00-04:00',
+      cbsEventId: 1,
+      venue: 'home',
+      spread: -7.5,
+      result: 'loss',
+      ours: 26,
+      theirs: 19,
+    }),
+    'New England: W 26–19 (Week 7). ATS -7.5 Loss',
+  )
+  assert.equal(
+    formatCommonOpponentMeeting({
+      teamAbbrev: 'CHI',
+      teamName: 'Chicago',
+      week: 5,
+      weekLabel: 'Week 5',
+      kickoff: '2026-10-04T13:00:00-04:00',
+      cbsEventId: 2,
+      venue: 'home',
+      spread: -3.5,
+      result: 'win',
+      ours: 23,
+      theirs: 12,
+    }),
+    'Chicago: W 23–12 (Week 5). ATS -3.5 Win',
+  )
+  assert.equal(
+    formatCommonOpponentMeeting({
+      teamAbbrev: 'ATL',
+      teamName: 'Atlanta',
+      week: 3,
+      weekLabel: 'Week 3',
+      kickoff: '2026-09-27T13:00:00-04:00',
+      cbsEventId: 3,
+      venue: 'home',
+      spread: -3,
+      result: 'push',
+      ours: 20,
+      theirs: 20,
+    }),
+    'Atlanta: T 20–20 (Week 3). ATS -3 Push',
+  )
+  assert.equal(
+    formatCommonOpponentMeeting({
+      teamAbbrev: 'GB',
+      teamName: 'Green Bay',
+      week: 8,
+      weekLabel: 'Week 8',
+      kickoff: '2026-10-25T13:00:00-04:00',
+      cbsEventId: 4,
+      venue: 'away',
+      spread: 3.5,
+      result: null,
+      ours: null,
+      theirs: null,
+    }),
+    'Green Bay: (Week 8). ATS +3.5 pending',
+  )
+})
+
 test('returns null when the sides have no shared CBS opponent', () => {
   const teams = new Map([
     [
@@ -139,11 +206,11 @@ test('pairs the latest prior meeting against a shared opponent', () => {
   assert.equal(group?.away.cbsEventId, 11)
   assert.equal(
     formatCommonOpponentMeeting(group!.away),
-    'Chicago W4 vs +3 cover 24–20',
+    'Chicago: W 24–20 (Week 4). ATS +3 Win',
   )
   assert.equal(
     formatCommonOpponentMeeting(group!.home),
-    'Atlanta W3 vs -6.5 miss 16–30',
+    'Atlanta: L 16–30 (Week 3). ATS -6.5 Loss',
   )
 })
 
@@ -268,7 +335,7 @@ test('lists a prior head-to-head ahead of shared opponents', () => {
   assert.equal(breakdown?.groups[0]?.opponentAbbrev, 'ATL')
   assert.equal(
     formatCommonOpponentMeeting(breakdown!.groups[0]!.away),
-    'Chicago W2 at +3 cover 21–17',
+    'Chicago: W 21–17 (Week 2). ATS +3 Win',
   )
 })
 

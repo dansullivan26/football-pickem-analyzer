@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-10-22T06:25:57-04:00",
+    "fetchedAt": "2026-10-22T17:00:29-04:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -76538,11 +76538,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -78114,11 +78114,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 1,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -78508,11 +78508,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -78902,11 +78902,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -84024,11 +84024,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -84418,11 +84418,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 1,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "revealedPicksCount": 1,
+          "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -84436,13 +84436,14 @@
               "away": "NE",
               "home": "CHI",
               "homeSpread": -3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzda===",
+              "pickedTeam": "NE",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-10-22T17:00:29-04:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrygmyde===",
@@ -186119,6 +186120,34 @@
         "after": "2026-10-19T06:27:11-04:00",
         "atOrBefore": "2026-10-19T20:22:55-04:00"
       }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydg===",
+      "cbsEventId": 50029403,
+      "away": "NE",
+      "home": "CHI",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gqzda===",
+        "pickedTeam": "NE"
+      },
+      "firstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -188232,6 +188261,102 @@
       "window": {
         "after": "2026-10-18T09:42:28-04:00",
         "atOrBefore": "2026-10-18T13:11:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 1,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
+      }
+    },
+    {
+      "week": 8,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2deoa=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 1,
+      "picksCountFirstSeenAt": "2026-10-22T17:00:29-04:00",
+      "previousFetchedAt": "2026-10-22T06:25:57-04:00",
+      "fetchedAt": "2026-10-22T17:00:29-04:00",
+      "window": {
+        "after": "2026-10-22T06:25:57-04:00",
+        "atOrBefore": "2026-10-22T17:00:29-04:00"
       }
     }
   ]

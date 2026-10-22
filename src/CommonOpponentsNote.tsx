@@ -31,10 +31,12 @@ function AtsBlock({
           <strong>
             {group.kind === 'head-to-head' ? 'Head-to-head' : group.opponentName}
           </strong>
-          {' · '}
-          {formatCommonOpponentMeeting(group.away)}
-          {' · '}
-          {formatCommonOpponentMeeting(group.home)}
+          <span className="common-opponents-meeting">
+            {formatCommonOpponentMeeting(group.away)}
+          </span>
+          <span className="common-opponents-meeting">
+            {formatCommonOpponentMeeting(group.home)}
+          </span>
         </span>
       ))}
     </div>
@@ -62,10 +64,12 @@ function OffSlateBlock({
           <strong>
             {group.kind === 'head-to-head' ? 'Head-to-head' : group.opponentName}
           </strong>
-          {' · '}
-          {formatOffSlateMeeting(group.away)}
-          {' · '}
-          {formatOffSlateMeeting(group.home)}
+          <span className="common-opponents-meeting">
+            {formatOffSlateMeeting(group.away)}
+          </span>
+          <span className="common-opponents-meeting">
+            {formatOffSlateMeeting(group.home)}
+          </span>
         </span>
       ))}
     </div>

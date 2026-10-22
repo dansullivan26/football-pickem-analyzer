@@ -1,5 +1,4 @@
 import { formatPoolSpread, poolSpreadForSide } from './cardScoring.ts'
-import { appearanceVenueWord } from './teamSite.ts'
 import {
   teamKey,
   type CoverOutcome,
@@ -98,19 +97,30 @@ function toMeeting(
   }
 }
 
-function resultWord(result: CoverOutcome) {
-  if (result === 'win') return 'cover'
-  if (result === 'loss') return 'miss'
-  if (result === 'push') return 'push'
+function straightUpMark(ours: number | null, theirs: number | null) {
+  if (ours == null || theirs == null) return null
+  if (ours > theirs) return 'W'
+  if (ours < theirs) return 'L'
+  return 'T'
+}
+
+function atsResultWord(result: CoverOutcome) {
+  if (result === 'win') return 'Win'
+  if (result === 'loss') return 'Loss'
+  if (result === 'push') return 'Push'
   return 'pending'
 }
 
 export function formatCommonOpponentMeeting(meeting: CommonOpponentMeeting) {
+  const when = `Week ${meeting.week}`
+  const su = straightUpMark(meeting.ours, meeting.theirs)
   const score =
     meeting.ours != null && meeting.theirs != null
-      ? ` ${meeting.ours}–${meeting.theirs}`
-      : ''
-  return `${meeting.teamName} W${meeting.week} ${appearanceVenueWord(meeting.venue)} ${formatPoolSpread(meeting.spread)} ${resultWord(meeting.result)}${score}`
+      ? `${meeting.ours}–${meeting.theirs}`
+      : null
+  const resultPart = [su, score].filter(Boolean).join(' ')
+  const scored = resultPart ? `${resultPart} (${when})` : `(${when})`
+  return `${meeting.teamName}: ${scored}. ATS ${formatPoolSpread(meeting.spread)} ${atsResultWord(meeting.result)}`
 }
 
 export function formatCommonOpponentsHeading(groups: CommonOpponentGroup[]) {

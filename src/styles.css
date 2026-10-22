@@ -1810,6 +1810,12 @@ select:focus {
 }
 
 .common-opponents-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.common-opponents-meeting {
   display: block;
 }
 

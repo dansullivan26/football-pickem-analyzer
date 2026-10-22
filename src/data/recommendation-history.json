@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T07:45:43.058Z",
+  "updatedAt": "2026-10-22T13:56:06.842Z",
   "weeks": [
     {
       "week": 1,
@@ -5236,14 +5236,17 @@
       "week": 8,
       "seasonYear": 2026,
       "label": "Week 8",
-      "capturedAt": "2026-10-22T07:45:43.058Z",
+      "capturedAt": "2026-10-22T13:56:06.842Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029434,
         "draftKingsTotal": 44.5,
         "frozenAt": null
       },
-      "playOfTheWeek": null,
+      "playOfTheWeek": {
+        "cbsEventId": 50029405,
+        "frozenAt": "2026-10-22T13:56:06.842Z"
+      },
       "playsOfTheDay": [],
       "games": [
         {
@@ -5253,16 +5256,16 @@
           "away": "NE",
           "home": "CHI",
           "homeSpread": -3.5,
-          "liveHomeSpread": -2.5,
-          "category": "slight",
-          "recommendedSide": "away",
-          "hook": "fg",
+          "liveHomeSpread": -3.5,
+          "category": "neutral",
+          "recommendedSide": null,
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1.25,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -5307,16 +5310,16 @@
           "away": "IND",
           "home": "MICH",
           "homeSpread": 7.5,
-          "liveHomeSpread": 6.5,
-          "category": "slight",
-          "recommendedSide": "home",
-          "hook": "td",
+          "liveHomeSpread": 7.5,
+          "category": "neutral",
+          "recommendedSide": null,
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1.75,
+          "compositeEdge": 0.75,
           "awayRank": 6,
           "homeRank": null,
           "venue": {

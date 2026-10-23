@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T22:30:26.257Z",
+  "updatedAt": "2026-10-23T01:40:14.750Z",
   "weeks": [
     {
       "week": 1,
@@ -5236,7 +5236,7 @@
       "week": 8,
       "seasonYear": 2026,
       "label": "Week 8",
-      "capturedAt": "2026-10-22T22:30:26.257Z",
+      "capturedAt": "2026-10-23T01:40:14.750Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029434,
@@ -5274,7 +5274,9 @@
             "state": "IL",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50028302,
@@ -5283,16 +5285,16 @@
           "away": "TXTECH",
           "home": "CINCY",
           "homeSpread": 11.5,
-          "liveHomeSpread": 10.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 11.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "source": null,
+          "pickedSide": null,
+          "strength": null,
+          "score": null,
+          "compositeEdge": 0,
           "awayRank": 8,
           "homeRank": null,
           "venue": {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T15:12:39.555Z",
+  "updatedAt": "2026-10-24T20:00:23.924Z",
   "weeks": [
     {
       "week": 1,
@@ -473,7 +473,7 @@
     },
     {
       "week": 8,
-      "sentAt": "2026-10-24T15:12:39.555Z",
+      "sentAt": "2026-10-24T20:00:23.924Z",
       "games": [
         {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydg===",
@@ -514,6 +514,11 @@
           "pickedSide": "away"
         },
         {
+          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrygm2do===",
+          "pickedSide": "home",
+          "manual": true
+        },
+        {
           "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrygm3ti===",
           "pickedSide": "home"
         },
@@ -522,9 +527,9 @@
           "pickedSide": "home"
         },
         {
-          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrygm2do===",
-          "pickedSide": "home",
-          "manual": true
+          "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzge4dg===",
+          "pickedSide": "away",
+          "deviate": true
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T07:25:56.897Z",
+  "updatedAt": "2026-10-24T12:47:38.442Z",
   "weeks": [
     {
       "week": 1,
@@ -5236,7 +5236,7 @@
       "week": 8,
       "seasonYear": 2026,
       "label": "Week 8",
-      "capturedAt": "2026-10-24T07:25:56.897Z",
+      "capturedAt": "2026-10-24T12:47:38.442Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029434,
@@ -5247,7 +5247,12 @@
         "cbsEventId": 50029405,
         "frozenAt": "2026-10-22T13:56:06.842Z"
       },
-      "playsOfTheDay": [],
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50028384,
+          "frozenAt": "2026-10-24T12:47:38.442Z"
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029403,
@@ -5285,16 +5290,16 @@
           "away": "TXTECH",
           "home": "CINCY",
           "homeSpread": 11.5,
-          "liveHomeSpread": 11.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 10.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": null,
-          "pickedSide": null,
-          "strength": null,
-          "score": null,
-          "compositeEdge": 0,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
           "awayRank": 8,
           "homeRank": null,
           "venue": {
@@ -5555,16 +5560,16 @@
           "away": "IOWAST",
           "home": "ARIZ",
           "homeSpread": -9.5,
-          "liveHomeSpread": -10.5,
-          "category": "slight",
+          "liveHomeSpread": -11.5,
+          "category": "lean",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 4.5,
-          "compositeEdge": 1.5,
+          "strength": "solid",
+          "score": 9.5,
+          "compositeEdge": 2.5,
           "awayRank": null,
           "homeRank": 25,
           "venue": {
@@ -5771,16 +5776,16 @@
           "away": "CLE",
           "home": "TEN",
           "homeSpread": 1.5,
-          "liveHomeSpread": 1.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 2.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
-          "pickedSide": "home",
+          "source": "line-value",
+          "pickedSide": "away",
           "strength": "mild",
-          "score": 0.75,
-          "compositeEdge": 0.25,
+          "score": 2.25,
+          "compositeEdge": 0.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {

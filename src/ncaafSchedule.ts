@@ -6,7 +6,6 @@ import {
   scheduleKickoffBefore,
 } from './lastKickoff.ts'
 import type { CommonOpponentsBreakdown } from './commonOpponents.ts'
-import { appearanceVenueWord } from './teamSite.ts'
 import type { TeamVenue } from './teamPerformance.ts'
 
 export type NcaafScheduleGame = {
@@ -229,10 +228,16 @@ export function formatOffSlateDate(kickoff: string) {
   }).format(date)
 }
 
+function offSlateSiteWord(venue: TeamVenue) {
+  if (venue === 'home') return 'home'
+  if (venue === 'away') return 'road'
+  return 'neutral'
+}
+
 export function formatOffSlateMeeting(meeting: OffSlateMeeting) {
   const date = formatOffSlateDate(meeting.kickoff)
   const when = date ? ` ${date}` : ''
-  return `${meeting.teamName}${when} ${appearanceVenueWord(meeting.venue)} ${meeting.result} ${meeting.ours}–${meeting.theirs}`
+  return `${meeting.teamName}${when} ${offSlateSiteWord(meeting.venue)} ${meeting.result} ${meeting.ours}–${meeting.theirs}`
 }
 
 export function formatOffSlateHeading(groups: OffSlateGroup[]) {

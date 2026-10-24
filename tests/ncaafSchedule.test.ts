@@ -143,11 +143,47 @@ test('off-slate commons are SU and skip a CBS-card opponent', () => {
   assert.equal(breakdown?.groups[0]?.opponentName, 'Auburn')
   assert.equal(
     formatOffSlateMeeting(breakdown!.groups[0]!.away),
-    'Georgia Sep 13 vs win 31–17',
+    'Georgia Sep 13 home win 31–17',
   )
   assert.equal(
     formatOffSlateMeeting(breakdown!.groups[0]!.home),
-    'Alabama Sep 27 at win 24–21',
+    'Alabama Sep 27 road win 24–21',
+  )
+})
+
+test('off-slate lines name home, road, or neutral before the result', () => {
+  assert.equal(
+    formatOffSlateMeeting({
+      teamName: 'Texas A&M',
+      kickoff: '2026-09-19T19:30:00-04:00',
+      venue: 'home',
+      result: 'loss',
+      ours: 21,
+      theirs: 31,
+    }),
+    'Texas A&M Sep 19 home loss 21–31',
+  )
+  assert.equal(
+    formatOffSlateMeeting({
+      teamName: 'Alabama',
+      kickoff: '2026-09-12T15:30:00-04:00',
+      venue: 'away',
+      result: 'win',
+      ours: 45,
+      theirs: 17,
+    }),
+    'Alabama Sep 12 road win 45–17',
+  )
+  assert.equal(
+    formatOffSlateMeeting({
+      teamName: 'USC',
+      kickoff: '2026-10-10T15:30:00-04:00',
+      venue: 'neutral',
+      result: 'win',
+      ours: 31,
+      theirs: 23,
+    }),
+    'USC Oct 10 neutral win 31–23',
   )
 })
 
@@ -176,7 +212,7 @@ test('off-slate head-to-head is labeled separately from CBS', () => {
   assert.equal(breakdown?.groups[0]?.kind, 'head-to-head')
   assert.equal(
     formatOffSlateMeeting(breakdown!.groups[0]!.away),
-    'Miss. State Sep 20 at loss 20–45',
+    'Miss. State Sep 20 road loss 20–45',
   )
 })
 

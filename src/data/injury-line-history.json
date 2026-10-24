@@ -2,7 +2,7 @@
   "week": 8,
   "seasonYear": 2026,
   "label": "Week 8",
-  "updatedAt": "2026-10-24T01:43:50.890Z",
+  "updatedAt": "2026-10-24T19:35:12.274Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1976,6 +1976,24 @@
           "homeSpreadBefore": -10.5,
           "homeSpreadAfter": -10.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-24T19:35:12.274Z",
+          "cbsEventId": 50029426,
+          "athleteId": "4373809",
+          "name": "Jevon Holland",
+          "position": "S",
+          "teamAbbrev": "NYG",
+          "teamName": "N.Y. Giants",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": -10.5,
+          "homeSpreadAfter": -10.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -2796,6 +2814,24 @@
           "homeSpreadBefore": -4.5,
           "homeSpreadAfter": -4.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-24T19:35:12.274Z",
+          "cbsEventId": 50029428,
+          "athleteId": "4700136",
+          "name": "Kiko Mauigoa",
+          "position": "LB",
+          "teamAbbrev": "NYJ",
+          "teamName": "N.Y. Jets",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -3088,6 +3124,24 @@
           "availability": "worse",
           "homeSpreadBefore": 1.5,
           "homeSpreadAfter": 1.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-24T19:35:12.274Z",
+          "cbsEventId": 50029429,
+          "athleteId": "4242208",
+          "name": "Grant Delpit",
+          "position": "S",
+          "teamAbbrev": "CLE",
+          "teamName": "Cleveland",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 2.5,
+          "homeSpreadAfter": 2.5,
           "towardTeam": 0
         }
       ]

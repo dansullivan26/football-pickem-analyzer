@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T07:25:57.247Z",
+  "updatedAt": "2026-10-24T10:34:54.332Z",
   "weeks": [
     {
       "week": 1,
@@ -87180,8 +87180,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028323,
@@ -87197,7 +87197,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -87214,8 +87214,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028365,
@@ -87231,8 +87231,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028347,
@@ -87248,8 +87248,8 @@
               "habitKey": "travel",
               "reason": "Travel habit · 24 prior chances",
               "sampleSize": 24,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": false
             },
             {
               "cbsEventId": 50028314,
@@ -87265,8 +87265,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028332,
@@ -87282,7 +87282,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -87299,8 +87299,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028353,
@@ -87316,7 +87316,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -87333,8 +87333,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028384,
@@ -87350,8 +87350,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 109 prior chances",
               "sampleSize": 109,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50029183,
@@ -88886,15 +88886,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-24T07:25:57.247Z",
+    "updatedAt": "2026-10-24T10:34:54.332Z",
     "overall": {
       "key": "overall",
       "games": 5175,
       "calls": 3504,
-      "graded": 3033,
-      "correct": 2004,
+      "graded": 3041,
+      "correct": 2011,
       "noCalls": 1671,
-      "accuracy": 0.6607319485657764,
+      "accuracy": 0.6612956264386715,
       "noCallRate": 0.3228985507246377
     },
     "byLeague": [
@@ -88902,10 +88902,10 @@
         "key": "NCAAF",
         "games": 2393,
         "calls": 1356,
-        "graded": 1142,
-        "correct": 718,
+        "graded": 1150,
+        "correct": 725,
         "noCalls": 1037,
-        "accuracy": 0.6287215411558669,
+        "accuracy": 0.6304347826086957,
         "noCallRate": 0.4333472628499791
       },
       {
@@ -88924,20 +88924,20 @@
         "key": "dog",
         "games": 530,
         "calls": 530,
-        "graded": 466,
-        "correct": 291,
+        "graded": 470,
+        "correct": 295,
         "noCalls": 0,
-        "accuracy": 0.6244635193133047,
+        "accuracy": 0.6276595744680851,
         "noCallRate": 0
       },
       {
         "key": "favorite",
         "games": 2974,
         "calls": 2974,
-        "graded": 2567,
-        "correct": 1713,
+        "graded": 2571,
+        "correct": 1716,
         "noCalls": 0,
-        "accuracy": 0.6673159329957148,
+        "accuracy": 0.6674445740956826,
         "noCallRate": 0
       },
       {
@@ -88976,10 +88976,10 @@
         "key": "line-value",
         "games": 309,
         "calls": 309,
-        "graded": 271,
-        "correct": 226,
+        "graded": 278,
+        "correct": 233,
         "noCalls": 0,
-        "accuracy": 0.8339483394833949,
+        "accuracy": 0.8381294964028777,
         "noCallRate": 0
       },
       {
@@ -89006,10 +89006,10 @@
         "key": "travel",
         "games": 119,
         "calls": 119,
-        "graded": 108,
+        "graded": 109,
         "correct": 63,
         "noCalls": 0,
-        "accuracy": 0.5833333333333334,
+        "accuracy": 0.5779816513761468,
         "noCallRate": 0
       }
     ],
@@ -89018,10 +89018,10 @@
         "key": "high",
         "games": 1052,
         "calls": 1052,
-        "graded": 960,
-        "correct": 726,
+        "graded": 967,
+        "correct": 733,
         "noCalls": 0,
-        "accuracy": 0.75625,
+        "accuracy": 0.7580144777662875,
         "noCallRate": 0
       },
       {
@@ -89038,10 +89038,10 @@
         "key": "medium",
         "games": 2414,
         "calls": 2414,
-        "graded": 2035,
+        "graded": 2036,
         "correct": 1257,
         "noCalls": 0,
-        "accuracy": 0.6176904176904177,
+        "accuracy": 0.6173870333988212,
         "noCallRate": 0
       },
       {

@@ -2,7 +2,7 @@
   "week": 8,
   "seasonYear": 2026,
   "label": "Week 8",
-  "updatedAt": "2026-10-23T22:24:11.103Z",
+  "updatedAt": "2026-10-24T01:43:50.890Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -2413,6 +2413,24 @@
           "homeSpreadBefore": -6.5,
           "homeSpreadAfter": -6.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-24T01:43:50.890Z",
+          "cbsEventId": 50029427,
+          "athleteId": "4361985",
+          "name": "Christian Darrisaw",
+          "position": "OT",
+          "teamAbbrev": "MIN",
+          "teamName": "Minnesota",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -6.5,
+          "homeSpreadAfter": -6.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4438,6 +4456,24 @@
           "teamAbbrev": "DAL",
           "teamName": "Dallas",
           "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-24T01:43:50.890Z",
+          "cbsEventId": 50029434,
+          "athleteId": "4426331",
+          "name": "Nolan Smith Jr.",
+          "position": "LB",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "home",
           "fromStatus": "Questionable",
           "toStatus": null,
           "fromTier": "questionable",

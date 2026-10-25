@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T23:47:02.439Z",
+  "updatedAt": "2026-10-25T01:19:35.841Z",
   "weeks": [
     {
       "week": 1,
@@ -5236,7 +5236,7 @@
       "week": 8,
       "seasonYear": 2026,
       "label": "Week 8",
-      "capturedAt": "2026-10-24T22:35:25.312Z",
+      "capturedAt": "2026-10-25T01:19:35.841Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029434,
@@ -5455,8 +5455,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 25,
-          "homeScore": 13
+          "awayScore": 49,
+          "homeScore": 27
         },
         {
           "cbsEventId": 50028332,
@@ -5484,8 +5484,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 21,
-          "homeScore": 17
+          "awayScore": 24,
+          "homeScore": 27
         },
         {
           "cbsEventId": 50028341,
@@ -5515,7 +5515,7 @@
           "neutralSite": false,
           "deviated": true,
           "awayScore": 20,
-          "homeScore": 17
+          "homeScore": 31
         },
         {
           "cbsEventId": 50028353,
@@ -5543,8 +5543,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
-          "homeScore": 10
+          "awayScore": 10,
+          "homeScore": 13
         },
         {
           "cbsEventId": 50028374,
@@ -5571,7 +5571,9 @@
             "state": "WI",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50028384,
@@ -5598,7 +5600,9 @@
             "state": "AZ",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 3,
+          "homeScore": 15
         },
         {
           "cbsEventId": 50029183,
@@ -5607,16 +5611,16 @@
           "away": "PIT",
           "home": "NO",
           "homeSpread": 3.5,
-          "liveHomeSpread": 3,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 3.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -5770,16 +5774,16 @@
           "away": "MIA",
           "home": "NYJ",
           "homeSpread": -4.5,
-          "liveHomeSpread": -5.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -4.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
+          "source": "rest-travel",
+          "pickedSide": "away",
           "strength": "mild",
-          "score": 0.75,
-          "compositeEdge": 0.25,
+          "score": 2.25,
+          "compositeEdge": 0.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -5878,16 +5882,16 @@
           "away": "LAR",
           "home": "LV",
           "homeSpread": 4.5,
-          "liveHomeSpread": 3,
-          "category": "lean",
+          "liveHomeSpread": 3.5,
+          "category": "slight",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "solid",
-          "score": 6,
-          "compositeEdge": 1.5,
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": null,
           "venue": {

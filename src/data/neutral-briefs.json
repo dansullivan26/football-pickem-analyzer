@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T05:30:48.495Z",
+  "updatedAt": "2026-10-25T05:25:16.729Z",
   "games": [
     {
       "status": "ok",
@@ -1167,6 +1167,20 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzge4dg===",
+      "cbsEventId": 50029183,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "Pittsburgh",
+      "home": "New Orleans",
+      "side": "home",
+      "confidence": "light",
+      "why": "Pittsburgh is 3-1 ATS as a favorite in 5 graded games, but only 1-2 ATS on the road in 4; the last road favorite covered at Tampa Bay after a miss at Cleveland. New Orleans is 3-1 ATS as a dog in 5, with covers at Detroit, Baltimore, and the Giants, yet the home split is 0-3 ATS in 4 and the only home-dog spot (Minnesota in Week 6) did not cover. Rest is a wash, both 2-1 ATS in 4 on a normal week, there is no head-to-head, and the line only moved from +3.5 to +3 before returning to +3.5. Injuries are mixed and thin: Skowronek is out and Elliott is questionable for Pittsburgh, while Ruiz and Shepherd are questionable for New Orleans. Role samples are only four or five games, so this is a light lean to New Orleans getting the points on the dog covers and Pittsburgh’s road misses, with the 0-3 home mark as the caution.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:19:12.962Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydg===",
       "cbsEventId": 50029403,
       "week": 8,
@@ -1178,6 +1192,76 @@
       "why": "Chicago is 3-1 ATS (75%) in five benign-weather games, the only split their profile treats as a pattern, while New England is 2-2 ATS in five games in that same bucket and their best overall mark is 4-2 ATS (67%) in seven. New England is 2-1 ATS on the road and 2-1 ATS as a dog, both in four games, matching the 2-1 marks they carry at home and as a favorite. Chicago is 2-1 ATS at home in four and 3-2 ATS as a favorite in six, and the short-rest book is Chicago 1-0 ATS in two appearances against an unscored New England short week and one-zone trip. New England's road-dog results are a thin 2-1, with a cover as a 6.5-point dog at Buffalo and a miss as a 2.5-point dog at Jacksonville, and last week they failed to cover 7.5 at home while Chicago covered as a 3.5-point road favorite.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-10-22T05:57:03.198Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydi===",
+      "cbsEventId": 50029404,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "San Francisco",
+      "home": "Atlanta",
+      "side": "no-call",
+      "confidence": "light",
+      "why": "San Francisco is 4-2 ATS in 7, but the favorite split that matches this role is only 2-2 ATS in 5, and the road mark is a thin 1-0 ATS in 2. Short-rest and three-zone samples are empty (0-0 ATS in 1 each), so those spots are unknown. Atlanta is 0-3 ATS at home in 4, 1-3 ATS indoors in 5, and 0-2 ATS on normal rest in 3, with recent home misses against Chicago, Baltimore, and Carolina and both covers coming away from home. There is no head-to-head. The number has moved from +3.5 to +2.5 toward Atlanta, and San Francisco is without Nick Bosa, Deebo Samuel, Mike Evans, and Marques Sigle, while Atlanta's outs are Divine Deablo and Brian Robinson. Home and indoor misses lean to San Francisco, and the line path plus that injury list lean to Atlanta, so the crumbs conflict and this is a no-call.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:20:46.069Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydk===",
+      "cbsEventId": 50029405,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "Cincinnati",
+      "home": "Baltimore",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Week 8 samples are still thin — Cincinnati has 5 decided games and Baltimore 6 — but the spot still leans one way. Baltimore is 0-2 ATS at home in 3 games and 2-3 ATS as a favorite in 6, while the cover profile is on the road at 3-1 ATS in 4, and both recent home favorites (Tennessee, New Orleans) failed to cover. Cincinnati is 1-0 ATS as a dog in 2, including a road win at Houston as a 2.5-point dog, set against a 1-2 ATS road mark in 4 and three straight non-covers while laying points. Lamar Jackson is out with an ankle injury and Jaylinn Hawkins is out with a knee injury, and the line has moved from Baltimore -3 through several flips to Baltimore +2.5. Cincinnati is off a bye with no graded bye result, Baltimore is 2-3 ATS on normal rest in 6, and head-to-head is unknown. Lean Cincinnati: the home ATS misses and the quarterback absence point the same way.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:21:55.409Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqydm===",
+      "cbsEventId": 50029406,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "Tampa Bay",
+      "home": "Carolina",
+      "side": "home",
+      "confidence": "light",
+      "why": "Week 8 samples are thin — Carolina has five decided games and Tampa Bay six — and the lean is still Carolina. In this home-favorite, normal-rest, fair-weather spot Carolina is 1-1 ATS at home in three, 1-1 ATS as a favorite in three, 2-1 ATS on normal rest in four, and 2-2 ATS in five benign-weather games, and they covered last week at Philadelphia. Tampa Bay’s matching spots are softer: 1-1 ATS on the road in three, 2-3 ATS as a dog in six, 1-2 ATS on normal rest in four, and 1-3 ATS in five fair-weather games, with a non-cover last week against Pittsburgh after covers against Dallas and Green Bay. Head-to-head is empty. The line has moved from -3.5 to -2.5 toward Tampa Bay, but Tampa Bay is missing Luke Goedeke, Antoine Winfield Jr., and Emeka Egbuka, with Baker Mayfield questionable, while Carolina lists only Jaelan Phillips out. Lean Carolina at home.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:23:28.747Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqzdm===",
+      "cbsEventId": 50029426,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "N.Y. Giants",
+      "home": "Houston",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Week 8 samples are still modest, but this spot is lopsided in the splits. Houston is 0-3 ATS at home in 4, 1-4 ATS as a favorite in 6, and 0-4 ATS indoors in 5, so a home favorite in a dome is the role that has not covered. The Giants are 3-1 ATS as a dog in 5, including a Week 6 road-dog cover at Washington, though they are only 1-1 ATS on the road in 3 and failed to cover as a 7.5-point road dog at the Rams in Week 3. No head-to-head is on file. The line has moved from -9.5 to -10.5 toward Houston, and New York is the thinner injury group, with Newsome and Holland out and Adebo and Nubin questionable, while Houston is without Montgomery and safeties Pitre and Blankenship. That move and the secondary absences are the caution; the graded pattern still points to the dog, so the lean is the Giants.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:24:25.732Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2deob2guydamrzgqzdo===",
+      "cbsEventId": 50029427,
+      "week": 8,
+      "seasonYear": 2026,
+      "away": "Indianapolis",
+      "home": "Minnesota",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Minnesota is 4-1 ATS overall in 6 and 3-1 ATS as a favorite in 5, and four of the last five covers stuck, the miss coming at home laying 11.5. Indianapolis is 2-2 ATS as a dog in 5 and 1-2 ATS indoors in 4, against Minnesota's 2-1 indoor mark in 4, and the Colts have failed to cover their last two. The counter-crumbs are small and site-specific: Indianapolis is 2-1 ATS on the road in 4 and 1-0 ATS traveling one zone in 2, while Minnesota is only 1-1 ATS at home in 3 with a 0-0 bye split in 1. No head-to-head series and no line path are in the packet. Indianapolis is without Sauce Gardner, Tyler Warren, and Anthony Gould, with Justin Walley and Bryce Boettcher questionable, and Minnesota's injury list is empty. Samples are still early-season thin, but the favorite split, recent covers, and the injury gap lean Minnesota at home.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-25T05:25:16.729Z"
     }
   ]
 }

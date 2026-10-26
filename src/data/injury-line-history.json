@@ -2,7 +2,7 @@
   "week": 8,
   "seasonYear": 2026,
   "label": "Week 8",
-  "updatedAt": "2026-10-26T06:41:51.430Z",
+  "updatedAt": "2026-10-26T14:25:33.029Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -4845,6 +4845,24 @@
           "homeSpreadBefore": -3.5,
           "homeSpreadAfter": -3.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-10-26T14:25:33.029Z",
+          "cbsEventId": 50029431,
+          "athleteId": "4426411",
+          "name": "Sean Rhyan",
+          "position": "G",
+          "teamAbbrev": "GB",
+          "teamName": "Green Bay",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -5972,6 +5990,24 @@
           "toStatus": "Out",
           "fromTier": null,
           "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-26T14:25:33.029Z",
+          "cbsEventId": 50029434,
+          "athleteId": "4035624",
+          "name": "Landon Dickerson",
+          "position": "G",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Injured Reserve",
+          "fromTier": null,
+          "toTier": "reserve",
           "availability": "worse",
           "homeSpreadBefore": 4.5,
           "homeSpreadAfter": 4.5,

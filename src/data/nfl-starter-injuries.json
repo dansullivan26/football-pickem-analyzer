@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-10-27T13:24:12.944Z",
-    "reportUpdatedAt": "2026-10-27T13:24:02Z",
+    "fetchedAt": "2026-10-27T19:29:50.901Z",
+    "reportUpdatedAt": "2026-10-27T19:29:44Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-10-27T13:20:36Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -60,8 +60,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "questionable",
-          "updatedAt": "2026-10-27T13:11Z"
+          "detail": "Head coach Mike LaFleur said Monday that Love (ankle) will take part in Wednesday's practice, Theo Mackie of The Arizona Republic reports.",
+          "updatedAt": "2026-10-26T21:39Z"
         },
         {
           "athleteId": "3918331",
@@ -79,7 +79,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-10-27T13:22:57Z",
+      "depthChartAt": "2026-10-27T19:26:56Z",
       "status": "ok",
       "injuries": [
         {
@@ -128,18 +128,18 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-10-27T13:20:38Z",
+      "depthChartAt": "2026-10-27T19:28:09Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4832793",
           "name": "Olaivavega Ioane",
           "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Knee",
-          "detail": "Ioane (knee) has been ruled out for the remainder of Sunday's game against the Bengals.",
-          "updatedAt": "2026-10-25T18:45Z"
+          "status": "Doubtful",
+          "tier": "doubtful",
+          "injury": "Knee - MCL",
+          "detail": "doubtful",
+          "updatedAt": "2026-10-27T14:34Z"
         },
         {
           "athleteId": "3916387",
@@ -148,8 +148,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "questionable",
-          "updatedAt": "2026-10-27T13:11Z"
+          "detail": "Ravens head coach Jesse Minter said that Jackson (ankle) is \"in a decent spot\" to play Sunday against the Bills, Jeff Zrebiec of The Athletic reports.",
+          "updatedAt": "2026-10-26T19:13Z"
         },
         {
           "athleteId": "3858276",
@@ -177,7 +177,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-10-27T13:23:07Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -207,18 +207,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "questionable",
-          "updatedAt": "2026-10-27T13:11Z"
-        },
-        {
-          "athleteId": "4695883",
-          "name": "Jalen Coker",
-          "position": "WR",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Shoulder",
-          "detail": "Coker was listed as limited on Monday's estimated practice report due to a shoulder injury, Darin Gantt of the Panthers' official site reports.",
-          "updatedAt": "2026-10-26T21:34Z"
+          "detail": "Phillips (hamstring) was listed as a non-participant on Monday's practice estimate.",
+          "updatedAt": "2026-10-26T22:17Z"
         },
         {
           "athleteId": "2973051",
@@ -236,18 +226,18 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-10-27T13:22:57Z",
+      "depthChartAt": "2026-10-27T19:26:55Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "3121544",
           "name": "T.J. Edwards",
           "position": "LB",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "out",
-          "updatedAt": "2026-10-26T17:55Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         }
       ]
     },
@@ -255,7 +245,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-10-27T13:20:39Z",
+      "depthChartAt": "2026-10-27T19:26:55Z",
       "status": "ok",
       "injuries": []
     },
@@ -263,7 +253,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-10-27T13:20:39Z",
+      "depthChartAt": "2026-10-27T19:28:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -292,7 +282,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-10-27T13:20:39Z",
+      "depthChartAt": "2026-10-27T19:26:56Z",
       "status": "ok",
       "injuries": [
         {
@@ -321,7 +311,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-10-27T13:20:40Z",
+      "depthChartAt": "2026-10-27T19:28:10Z",
       "status": "ok",
       "injuries": [
         {
@@ -390,7 +380,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-10-27T13:23:01Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -419,15 +409,15 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-10-27T13:20:38Z",
+      "depthChartAt": "2026-10-27T19:26:55Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4426411",
           "name": "Sean Rhyan",
           "position": "G",
-          "status": "Doubtful",
-          "tier": "doubtful",
+          "status": "Out",
+          "tier": "out",
           "injury": "Ankle",
           "detail": "Rhyan (ankle) is expected to miss multiple weeks after being injured in Sunday's loss to the Lions, Ian Rapoport of NFL Network reports.",
           "updatedAt": "2026-10-26T21:50Z"
@@ -488,7 +478,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-10-27T13:20:39Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -537,7 +527,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-10-27T13:23:05Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -571,6 +561,16 @@
           "updatedAt": "2026-10-27T13:11Z"
         },
         {
+          "athleteId": "4870598",
+          "name": "CJ Allen",
+          "position": "LB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
+        },
+        {
           "athleteId": "4431459",
           "name": "Tyler Warren",
           "position": "TE",
@@ -596,7 +596,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-10-27T13:23:02Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -635,7 +635,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-10-27T13:23:05Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -664,7 +664,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-10-27T13:23:05Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": []
     },
@@ -672,7 +672,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-10-27T13:23:02Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -701,7 +701,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-10-27T13:22:59Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -720,28 +720,18 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-10-27T13:23:06Z",
+      "depthChartAt": "2026-10-27T19:26:55Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4361266",
           "name": "Greg Newsome II",
           "position": "CB",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Concussion",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:42Z"
-        },
-        {
-          "athleteId": "4373809",
-          "name": "Jevon Holland",
-          "position": "S",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Concussion",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:42Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "4696981",
@@ -752,6 +742,16 @@
           "injury": "Hamstring",
           "detail": "Skattebo is expected to \"OK\" after tweaking his hamstring on a 42-yard run in overtime during Sunday's 27-21 win over the Texans, Mike Garafolo of NFL Network reports.",
           "updatedAt": "2026-10-26T14:09Z"
+        },
+        {
+          "athleteId": "4373809",
+          "name": "Jevon Holland",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "3929950",
@@ -769,7 +769,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-10-27T13:20:35Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -828,28 +828,28 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-10-27T13:23:03Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4362890",
           "name": "Ben Brown",
           "position": "C",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Knee",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:40Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "3916923",
           "name": "Carlton Davis III",
           "position": "CB",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Neck",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:40Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "4259646",
@@ -867,28 +867,28 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-10-27T13:23:01Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4076951",
           "name": "Nathan Shepherd",
           "position": "DT",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Illness",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:41Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "4258199",
           "name": "Cesar Ruiz",
           "position": "G",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Knee",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:41Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "3931399",
@@ -906,38 +906,18 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-10-27T13:23:03Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4426331",
           "name": "Nolan Smith Jr.",
           "position": "LB",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Concussion",
-          "detail": "out",
-          "updatedAt": "2026-10-27T13:07Z"
-        },
-        {
-          "athleteId": "4241478",
-          "name": "DeVonta Smith",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Hamstring",
-          "detail": "out",
-          "updatedAt": "2026-10-27T13:07Z"
-        },
-        {
-          "athleteId": "4428850",
-          "name": "Dontayvion Wicks",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Ankle",
-          "detail": "out",
-          "updatedAt": "2026-10-27T13:07Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         },
         {
           "athleteId": "3929630",
@@ -946,8 +926,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Back",
-          "detail": "Barkley said Monday that his back injury was compensatory after he tweaked his hamstring on his first run of the game and tried to play through it, EJ Smith of The Philadelphia Inquirer reports.",
-          "updatedAt": "2026-10-27T04:09Z"
+          "detail": "Barkley said after Monday's 38-21 loss to the Cowboys that his \"hamstring came out great,\" and noted that the back issue that kept him out for the entire fourth quarter isn't anything that he expects to prevent him from playing Sunday against the Commanders, Tim McManus of ESPN.com reports.",
+          "updatedAt": "2026-10-27T15:38Z"
         },
         {
           "athleteId": "3926231",
@@ -956,8 +936,28 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
+          "detail": "Covey (knee) has been ruled out for the remainder of Monday's contest versus the Cowboys.",
+          "updatedAt": "2026-10-27T00:59Z"
+        },
+        {
+          "athleteId": "4241478",
+          "name": "DeVonta Smith",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
           "detail": "questionable",
-          "updatedAt": "2026-10-27T13:07Z"
+          "updatedAt": "2026-10-27T13:11Z"
+        },
+        {
+          "athleteId": "4428850",
+          "name": "Dontayvion Wicks",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         }
       ]
     },
@@ -965,18 +965,18 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-10-27T13:23:06Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
           "athleteId": "4035656",
           "name": "Ben Skowronek",
           "position": "WR",
-          "status": "Out",
-          "tier": "out",
+          "status": "Questionable",
+          "tier": "questionable",
           "injury": "Calf",
-          "detail": "out",
-          "updatedAt": "2026-10-26T18:54Z"
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
         }
       ]
     },
@@ -984,29 +984,9 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-10-27T13:23:06Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "4693337",
-          "name": "Marques Sigle",
-          "position": "S",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Ankle",
-          "detail": "out",
-          "updatedAt": "2026-10-26T19:10Z"
-        },
-        {
-          "athleteId": "3126486",
-          "name": "Deebo Samuel Sr.",
-          "position": "WR",
-          "status": "Out",
-          "tier": "out",
-          "injury": "Hamstring",
-          "detail": "Samuel (hamstring) has a chance to return following the 49ers' Week 8 bye, Matt Maiocco of NBC Sports Bay Area reports.",
-          "updatedAt": "2026-10-26T22:35Z"
-        },
         {
           "athleteId": "4565200",
           "name": "Upton Stout",
@@ -1024,7 +1004,7 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Head coach Kyle Shanahan indicated Monday that Bosa (knee) \"has a chance\" to return following the 49ers' Week 8 bye, David Lombardi of SFStandard.com reports.",
+          "detail": "San Francisco head coach Kyle Shanahan said Monday that Bosa (knee) \"has a chance\" to return to action Nov. 8 versus the Raiders following a Week 8 bye, David Lombardi of SFStandard.com reports.",
           "updatedAt": "2026-10-26T23:05Z"
         },
         {
@@ -1036,6 +1016,26 @@
           "injury": "Hamstring",
           "detail": "McCaffrey is dealing with a mild hamstring strain rather than a quadriceps injury, and the 49ers believe he'll be ready following the team's Week 8 bye, David Lombardi of SF Standard reports.",
           "updatedAt": "2026-10-26T22:12Z"
+        },
+        {
+          "athleteId": "4693337",
+          "name": "Marques Sigle",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Ankle",
+          "detail": "questionable",
+          "updatedAt": "2026-10-27T13:11Z"
+        },
+        {
+          "athleteId": "3126486",
+          "name": "Deebo Samuel Sr.",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Hamstring",
+          "detail": "Samuel (hamstring) has a chance to return following the 49ers' Week 8 bye, Matt Maiocco of NBC Sports Bay Area reports.",
+          "updatedAt": "2026-10-26T22:35Z"
         },
         {
           "athleteId": "16737",
@@ -1053,7 +1053,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-10-27T13:23:06Z",
+      "depthChartAt": "2026-10-27T19:26:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -1092,7 +1092,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-10-27T13:20:37Z",
+      "depthChartAt": "2026-10-27T19:28:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -1131,7 +1131,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-10-27T13:23:01Z",
+      "depthChartAt": "2026-10-27T19:26:55Z",
       "status": "ok",
       "injuries": [
         {

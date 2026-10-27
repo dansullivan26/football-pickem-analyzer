@@ -2,7 +2,7 @@
   "week": 8,
   "seasonYear": 2026,
   "label": "Week 8",
-  "updatedAt": "2026-10-27T19:29:50.901Z",
+  "updatedAt": "2026-10-27T23:52:00.028Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -5376,6 +5376,24 @@
           "toStatus": "Questionable",
           "fromTier": "out",
           "toTier": "questionable",
+          "availability": "better",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-27T23:52:00.028Z",
+          "cbsEventId": 50029430,
+          "athleteId": "4692835",
+          "name": "Jalen Brooks",
+          "position": "WR",
+          "teamAbbrev": "ARI",
+          "teamName": "Arizona",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
           "availability": "better",
           "homeSpreadBefore": 4.5,
           "homeSpreadAfter": 4.5,

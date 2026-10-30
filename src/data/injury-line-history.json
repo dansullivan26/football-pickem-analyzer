@@ -2,7 +2,7 @@
   "week": 9,
   "seasonYear": 2026,
   "label": "Week 9",
-  "updatedAt": "2026-10-30T02:01:54.204Z",
+  "updatedAt": "2026-10-30T08:46:45.011Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -269,6 +269,24 @@
           "teamAbbrev": "GB",
           "teamName": "Green Bay",
           "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-10-30T08:46:45.011Z",
+          "cbsEventId": 50029287,
+          "athleteId": "4576075",
+          "name": "Corey Bullock",
+          "position": "C",
+          "teamAbbrev": "CAR",
+          "teamName": "Carolina",
+          "side": "away",
           "fromStatus": null,
           "toStatus": "Questionable",
           "fromTier": null,

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T09:00:34.491Z",
+  "updatedAt": "2026-10-31T15:20:39.063Z",
   "games": [
     {
       "status": "ok",
@@ -1419,6 +1419,48 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq2ds===",
+      "cbsEventId": 50028449,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "SMU",
+      "home": "Syracuse",
+      "side": "home",
+      "confidence": "light",
+      "why": "Both profiles are still building: SMU has one graded game and Syracuse has none, so this is a thin-sample limb. SMU's only cover was Week 1 at Florida State as a 2.5-point road favorite, and that single result is the whole away split, favorite split, and one-zone travel split (1-0 ATS in two games each). Syracuse is 0-0 ATS at home, as a dog, and indoors, each in one game, with no recent covers and no head-to-head. SMU is also 0-0 ATS indoors in one game, so the Florida State cover does not grade a dome, and neither side lists an injury. The home number ran from +9.5 to +10.5 and returned to +9.5, so the larger favorite price did not hold. Lean Syracuse, lightly, on that path and on how little of SMU's short-number road cover applies here.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-31T15:15:29.000Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq2to===",
+      "cbsEventId": 50028457,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Wisconsin",
+      "home": "Iowa",
+      "side": "away",
+      "confidence": "light",
+      "why": "Both profiles are still thin, with three graded games each, so every split here is a small sample. Iowa has not covered in this role: 0-1 ATS at home in two games and 0-1 ATS as a favorite in two, and the only cover on file is Week 4 as a road dog at Michigan. Last week Iowa missed laying 6.5 at Minnesota, while Wisconsin’s dog mark is 1-2 ATS in four games, with a Week 8 cover of +3.5 against USC and a Week 7 road miss at UCLA. On a normal week Wisconsin is 1-0 ATS in two games and Iowa is 0-1 ATS in two, and the line has moved from -3.5 to -2.5 toward Wisconsin with 65% of the public on Iowa. Wisconsin’s own road split is only 0-1 ATS in two games, and there is no head-to-head or injury list, so this is a light lean to Wisconsin.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-31T15:16:42.355Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq3dq===",
+      "cbsEventId": 50028468,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "South Carolina",
+      "home": "Oklahoma",
+      "side": "away",
+      "confidence": "medium",
+      "why": "South Carolina is 1-0 ATS in 2 games, and the only graded cover was Week 8 at home as a 2.5-point favorite against Tennessee. The road, dog, one-zone, normal-rest, and wet or adverse rows are each 0-0 in 1, so this week’s spots are ungraded. Oklahoma is 1-3 ATS (25%) in 5, 0-2 ATS as a favorite in 3, 0-1 ATS at home in 2, and 0-1 ATS on a normal week in 2; Week 7 at home laying 6.5 to Kentucky missed, and the recent cover was Week 6 as a 7.5-point road dog at Texas. Oklahoma is also 0-0 ATS in wet and adverse weather (1 game each), with no head-to-head and no injury notes. The line has moved from -5.5 to -3.5 toward South Carolina. Samples are thin, and the lean is still South Carolina.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-31T15:17:45.215Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq4da===",
       "cbsEventId": 50028480,
       "week": 9,
@@ -1433,6 +1475,20 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq4te===",
+      "cbsEventId": 50028492,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Colorado St.",
+      "home": "Utah St.",
+      "side": "home",
+      "confidence": "light",
+      "why": "Both profiles are still one graded game, well short of the four needed for a style, so this is a thin-sample limb. Utah St. is 0-1 ATS at home and 0-1 ATS as a favorite (0-1 in two games in each bucket), and the only recent result is a Week 1 miss as a 13.5-point home favorite against Idaho State. Colorado St. is 1-0 ATS overall, but that cover was Week 1 at home as a 3.5-point favorite over Wyoming; the road split and the dog split are both 0-0 ATS in one game, so this road-dog spot is ungraded. No head-to-head is on file, both injury lists are empty, and the adverse, wet, and normal-rest buckets are 0-0 ATS for each side. The line has moved -6.5 to -7.5 to -8.5, toward Utah St. That path is the usable crumb, so the lean is Utah St. at home, with the one-game home-favorite miss only a flag.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-31T15:18:34.376Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrygq4to===",
       "cbsEventId": 50028497,
       "week": 9,
@@ -1444,6 +1500,20 @@
       "why": "Oregon is 0-3 ATS at home in four games and 1-4 ATS as a favorite in six, which is the role they have here. Their only favorite cover was Week 4 at USC; they have since failed to cover three straight, at Illinois and at home against Nebraska and UCLA. Northwestern is 1-0 ATS both away and as a dog, but that is a single Week 4 cover at Indiana as a 20.5-point dog, they are 0-1 straight up as a dog in two games, and the profile is only two graded games. Oregon is also 0-2 ATS on normal rest in three games, while Northwestern is 0-0 ATS on normal rest and on a two-zone trip, so those buckets are unknown. There is no head-to-head and neither injury list has a name. The dog's sample is thin, but Oregon's home and favorite splits point the same way, so the lean is Northwestern.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-10-31T08:57:10.747Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamryguydi===",
+      "cbsEventId": 50028504,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Ohio State",
+      "home": "USC",
+      "side": "away",
+      "confidence": "light",
+      "why": "Both sides are still building, with three graded games apiece, so every split is a thin sample. Ohio State is 3-0 ATS overall and 3-0 ATS away in four games, 2-0 ATS as a favorite in three, and has covered three in a row on the road (at Indiana as a 3.5-point favorite, at Iowa as a 13.5-point favorite, and at Texas as a 1.5-point dog). This week's bye and three-zone trip are 0-0 ATS in one game each, while Ohio State is 1-0 ATS in the adverse bucket and 1-0 ATS in the wet bucket, each in two games. USC is 1-2 ATS overall in four, 0-1 ATS at home in two, and 1-1 ATS as a dog in three, with a home-dog miss against Oregon and a failed cover last week as a favorite at Wisconsin after a dog cover at Penn State. Head-to-head, the line path, and injuries are unknown.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-10-31T15:20:39.063Z"
     },
     {
       "status": "ok",

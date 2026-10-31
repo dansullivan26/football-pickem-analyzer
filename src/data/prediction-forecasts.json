@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T07:07:12.857Z",
+  "updatedAt": "2026-10-31T10:34:54.018Z",
   "weeks": [
     {
       "week": 1,
@@ -98501,7 +98501,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -98518,8 +98518,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028457,
@@ -98535,8 +98535,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028480,
@@ -98552,7 +98552,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -98569,8 +98569,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 124 prior chances",
               "sampleSize": 124,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028492,
@@ -98586,7 +98586,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -98603,7 +98603,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -98620,7 +98620,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -98637,7 +98637,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -98654,7 +98654,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -98671,7 +98671,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -98892,7 +98892,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             }
           ]
@@ -100207,15 +100207,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-10-31T07:07:12.857Z",
+    "updatedAt": "2026-10-31T10:34:54.018Z",
     "overall": {
       "key": "overall",
       "games": 5825,
       "calls": 3968,
-      "graded": 3477,
-      "correct": 2297,
+      "graded": 3480,
+      "correct": 2300,
       "noCalls": 1857,
-      "accuracy": 0.6606269772792638,
+      "accuracy": 0.6609195402298851,
       "noCallRate": 0.3187982832618026
     },
     "byLeague": [
@@ -100223,10 +100223,10 @@
         "key": "NCAAF",
         "games": 2679,
         "calls": 1558,
-        "graded": 1335,
-        "correct": 845,
+        "graded": 1338,
+        "correct": 848,
         "noCalls": 1121,
-        "accuracy": 0.6329588014981273,
+        "accuracy": 0.6337817638266069,
         "noCallRate": 0.41843971631205673
       },
       {
@@ -100255,10 +100255,10 @@
         "key": "favorite",
         "games": 3404,
         "calls": 3404,
-        "graded": 2948,
-        "correct": 1968,
+        "graded": 2951,
+        "correct": 1971,
         "noCalls": 0,
-        "accuracy": 0.6675712347354138,
+        "accuracy": 0.6679091833276856,
         "noCallRate": 0
       },
       {
@@ -100297,10 +100297,10 @@
         "key": "line-value",
         "games": 342,
         "calls": 342,
-        "graded": 307,
-        "correct": 258,
+        "graded": 310,
+        "correct": 261,
         "noCalls": 0,
-        "accuracy": 0.8403908794788274,
+        "accuracy": 0.8419354838709677,
         "noCallRate": 0
       },
       {
@@ -100339,10 +100339,10 @@
         "key": "high",
         "games": 1141,
         "calls": 1141,
-        "graded": 1053,
-        "correct": 798,
+        "graded": 1056,
+        "correct": 801,
         "noCalls": 0,
-        "accuracy": 0.7578347578347578,
+        "accuracy": 0.7585227272727273,
         "noCallRate": 0
       },
       {

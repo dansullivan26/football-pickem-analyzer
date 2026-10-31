@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T20:02:18.486Z",
+  "updatedAt": "2026-10-31T22:37:36.846Z",
   "weeks": [
     {
       "week": 1,
@@ -5992,7 +5992,7 @@
       "week": 9,
       "seasonYear": 2026,
       "label": "Week 9",
-      "capturedAt": "2026-10-31T18:39:35.477Z",
+      "capturedAt": "2026-10-31T22:37:36.846Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029417,
@@ -6066,8 +6066,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 14
+          "awayScore": 20,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50028449,
@@ -6095,8 +6095,8 @@
             "indoor": true
           },
           "neutralSite": false,
-          "awayScore": 10,
-          "homeScore": 20
+          "awayScore": 27,
+          "homeScore": 30
         },
         {
           "cbsEventId": 50028457,
@@ -6125,7 +6125,7 @@
           },
           "neutralSite": false,
           "awayScore": 0,
-          "homeScore": 20
+          "homeScore": 30
         },
         {
           "cbsEventId": 50028480,
@@ -6153,8 +6153,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 17,
-          "homeScore": 10
+          "awayScore": 26,
+          "homeScore": 34
         },
         {
           "cbsEventId": 50028418,
@@ -6181,7 +6181,9 @@
             "state": "GA",
             "indoor": true
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50028492,
@@ -6208,7 +6210,9 @@
             "state": "UT",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 6,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50028497,
@@ -6235,7 +6239,9 @@
             "state": "OR",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 23,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50028408,
@@ -6262,7 +6268,9 @@
             "state": "OH",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 42,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50028468,
@@ -6289,7 +6297,9 @@
             "state": "OK",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 28,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50028440,
@@ -6298,16 +6308,16 @@
           "away": "GATECH",
           "home": "PITT",
           "homeSpread": -7.5,
-          "liveHomeSpread": -7.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -8.5,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "away",
-          "strength": "solid",
-          "score": 6,
-          "compositeEdge": 0.75,
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 0.75,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

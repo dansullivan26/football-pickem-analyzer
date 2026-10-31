@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T07:07:12.568Z",
+  "updatedAt": "2026-10-31T13:45:13.231Z",
   "weeks": [
     {
       "week": 1,
@@ -5992,7 +5992,7 @@
       "week": 9,
       "seasonYear": 2026,
       "label": "Week 9",
-      "capturedAt": "2026-10-31T07:07:12.568Z",
+      "capturedAt": "2026-10-31T13:45:13.231Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029417,
@@ -6003,7 +6003,12 @@
         "cbsEventId": 50029416,
         "frozenAt": "2026-10-29T16:59:27.035Z"
       },
-      "playsOfTheDay": [],
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50028492,
+          "frozenAt": "2026-10-31T13:45:13.231Z"
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029287,
@@ -6177,16 +6182,16 @@
           "away": "COLOST",
           "home": "UTAHST",
           "homeSpread": -6.5,
-          "liveHomeSpread": -7.5,
-          "category": "slight",
+          "liveHomeSpread": -8.5,
+          "category": "lean",
           "recommendedSide": "home",
-          "hook": "td",
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
-          "score": 6,
-          "compositeEdge": 1.75,
+          "score": 10.25,
+          "compositeEdge": 2.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {

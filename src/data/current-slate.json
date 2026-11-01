@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-01T16:18:59-05:00",
+    "fetchedAt": "2026-11-01T16:33:49-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -560,7 +560,7 @@
       "cbsEventId": 50029288,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "CBS",
@@ -706,7 +706,7 @@
         "nickname": "Vikings",
         "location": "Minnesota",
         "conference": "NFC",
-        "record": "6-0",
+        "record": "6-1",
         "rank": 1,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -718,7 +718,7 @@
         "nickname": "Lions",
         "location": "Detroit",
         "conference": "NFC",
-        "record": "4-2",
+        "record": "5-2",
         "rank": 10,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -751,7 +751,7 @@
         "nickname": "Colts",
         "location": "Indianapolis",
         "conference": "AFC",
-        "record": "2-5",
+        "record": "2-6",
         "rank": 25,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -763,7 +763,7 @@
         "nickname": "Jaguars",
         "location": "Jacksonville",
         "conference": "AFC",
-        "record": "4-2",
+        "record": "5-2",
         "rank": 9,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -796,7 +796,7 @@
         "nickname": "Raiders",
         "location": "Las Vegas",
         "conference": "AFC",
-        "record": "3-4",
+        "record": "4-4",
         "rank": 22,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -808,7 +808,7 @@
         "nickname": "Jets",
         "location": "New York",
         "conference": "AFC",
-        "record": "2-5",
+        "record": "2-6",
         "rank": 26,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -841,7 +841,7 @@
         "nickname": "Browns",
         "location": "Cleveland",
         "conference": "AFC",
-        "record": "5-2",
+        "record": "5-3",
         "rank": 14,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -853,7 +853,7 @@
         "nickname": "Steelers",
         "location": "Pittsburgh",
         "conference": "AFC",
-        "record": "5-2",
+        "record": "6-2",
         "rank": 15,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -886,7 +886,7 @@
         "nickname": "Falcons",
         "location": "Atlanta",
         "conference": "NFC",
-        "record": "3-4",
+        "record": "3-5",
         "rank": 19,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -898,7 +898,7 @@
         "nickname": "Buccaneers",
         "location": "Tampa Bay",
         "conference": "NFC",
-        "record": "2-5",
+        "record": "3-5",
         "rank": 23,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -951,7 +951,7 @@
       "homeSpread": -6.5,
       "line": "LAR -6.5",
       "awayScore": 0,
-      "homeScore": 0,
+      "homeScore": 3,
       "venue": {
         "stadium": "SoFi Stadium",
         "city": "Inglewood",
@@ -965,7 +965,7 @@
       "cbsEventId": 50029414,
       "sport": "NFL",
       "week": 8,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-01T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 1, 4:25 PM ET",
       "tv": "CBS",
@@ -995,8 +995,8 @@
       },
       "homeSpread": 1.5,
       "line": "KC -1.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "Empower Field at Mile High",
         "city": "Denver",
@@ -1010,7 +1010,7 @@
       "cbsEventId": 50029415,
       "sport": "NFL",
       "week": 8,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-01T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 1, 4:25 PM ET",
       "tv": "CBS",
@@ -1040,8 +1040,8 @@
       },
       "homeSpread": 7.5,
       "line": "NE -7.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "Hard Rock Stadium",
         "city": "Miami",

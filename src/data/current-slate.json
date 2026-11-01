@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-01T15:04:34-05:00",
+    "fetchedAt": "2026-11-01T16:18:59-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -122,7 +122,7 @@
         "location": "SMU",
         "conference": "ACC",
         "record": "6-2",
-        "rank": 19,
+        "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -167,7 +167,7 @@
         "location": "Wisconsin",
         "conference": "BIG10",
         "record": "5-3",
-        "rank": 25,
+        "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -179,7 +179,7 @@
         "location": "Iowa",
         "conference": "BIG10",
         "record": "6-2",
-        "rank": null,
+        "rank": 21,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -212,7 +212,7 @@
         "location": "Arizona",
         "conference": "BIG12",
         "record": "6-2",
-        "rank": 22,
+        "rank": 24,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -257,7 +257,7 @@
         "location": "Florida",
         "conference": "SEC",
         "record": "5-3",
-        "rank": 17,
+        "rank": 25,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -269,7 +269,7 @@
         "location": "Georgia",
         "conference": "SEC",
         "record": "7-1",
-        "rank": 3,
+        "rank": 2,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -347,7 +347,7 @@
         "location": "Northwestern",
         "conference": "BIG10",
         "record": "6-2",
-        "rank": 20,
+        "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -392,7 +392,7 @@
         "location": "Utah",
         "conference": "BIG12",
         "record": "8-0",
-        "rank": 6,
+        "rank": 3,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -437,7 +437,7 @@
         "location": "South Carolina",
         "conference": "SEC",
         "record": "5-3",
-        "rank": null,
+        "rank": 23,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -527,7 +527,7 @@
         "location": "Ohio State",
         "conference": "BIG10",
         "record": "6-2",
-        "rank": 2,
+        "rank": 11,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -539,7 +539,7 @@
         "location": "USC",
         "conference": "BIG10",
         "record": "7-2",
-        "rank": null,
+        "rank": 18,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
@@ -590,8 +590,8 @@
       },
       "homeSpread": -4.5,
       "line": "BUF -4.5",
-      "awayScore": 7,
-      "homeScore": 16,
+      "awayScore": 10,
+      "homeScore": 36,
       "venue": {
         "stadium": "New Highmark Stadium",
         "city": "Orchard Park",
@@ -635,8 +635,8 @@
       },
       "homeSpread": -10.5,
       "line": "CIN -10.5",
-      "awayScore": 13,
-      "homeScore": 21,
+      "awayScore": 36,
+      "homeScore": 36,
       "venue": {
         "stadium": "Paycor Stadium",
         "city": "Cincinnati",
@@ -680,8 +680,8 @@
       },
       "homeSpread": -6.5,
       "line": "DAL -6.5",
-      "awayScore": 3,
-      "homeScore": 17,
+      "awayScore": 30,
+      "homeScore": 30,
       "venue": {
         "stadium": "AT&T Stadium",
         "city": "Arlington",
@@ -695,7 +695,7 @@
       "cbsEventId": 50029408,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "FOX",
@@ -725,8 +725,8 @@
       },
       "homeSpread": -3.5,
       "line": "DET -3.5",
-      "awayScore": 7,
-      "homeScore": 6,
+      "awayScore": 15,
+      "homeScore": 19,
       "venue": {
         "stadium": "Ford Field",
         "city": "Detroit",
@@ -740,7 +740,7 @@
       "cbsEventId": 50029409,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "CBS",
@@ -770,8 +770,8 @@
       },
       "homeSpread": -7.5,
       "line": "JAC -7.5",
-      "awayScore": 0,
-      "homeScore": 35,
+      "awayScore": 7,
+      "homeScore": 42,
       "venue": {
         "stadium": "EverBank Stadium",
         "city": "Jacksonville",
@@ -785,7 +785,7 @@
       "cbsEventId": 50029410,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "FOX",
@@ -815,8 +815,8 @@
       },
       "homeSpread": -0.5,
       "line": "NYJ -0.5",
-      "awayScore": 28,
-      "homeScore": 30,
+      "awayScore": 38,
+      "homeScore": 33,
       "venue": {
         "stadium": "MetLife Stadium",
         "city": "E. Rutherford",
@@ -830,7 +830,7 @@
       "cbsEventId": 50029411,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "CBS",
@@ -875,7 +875,7 @@
       "cbsEventId": 50029412,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 1, 1:00 PM ET",
       "tv": "FOX",
@@ -906,7 +906,7 @@
       "homeSpread": -1.5,
       "line": "TB -1.5",
       "awayScore": 0,
-      "homeScore": 15,
+      "homeScore": 16,
       "venue": {
         "stadium": "Raymond James Stadium",
         "city": "Tampa",
@@ -920,7 +920,7 @@
       "cbsEventId": 50029413,
       "sport": "NFL",
       "week": 8,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-01T16:05:00-05:00",
       "kickoffLabel": "Sun Nov 1, 4:05 PM ET",
       "tv": "FOX",
@@ -950,8 +950,8 @@
       },
       "homeSpread": -6.5,
       "line": "LAR -6.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "SoFi Stadium",
         "city": "Inglewood",

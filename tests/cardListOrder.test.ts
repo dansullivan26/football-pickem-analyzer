@@ -4,6 +4,7 @@ import {
   applyDaySendSelection,
   copiedRecommendationDriver,
   copiedRecommendationStrength,
+  otherFactorRecommendationLabel,
   daySendState,
   formatCardKickoff,
   formatSuggestedCardText,
@@ -288,6 +289,58 @@ test('copiedRecommendationDriver names the biggest reason for the lean', () => {
       }),
     ),
     'rest/travel',
+  )
+})
+
+test('otherFactorRecommendationLabel marks picks that are not a line gap', () => {
+  assert.equal(
+    otherFactorRecommendationLabel(
+      pick({
+        gameId: 'line',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        source: 'line-value',
+        edge: 1,
+      }),
+    ),
+    null,
+  )
+  assert.equal(
+    otherFactorRecommendationLabel(
+      pick({
+        gameId: 'hook',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        source: 'line-value',
+        edge: 0,
+        hook: 'fg',
+        category: 'neutral',
+      }),
+    ),
+    'Other factors',
+  )
+  assert.equal(
+    otherFactorRecommendationLabel(
+      pick({
+        gameId: 'rest',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        source: 'rest-travel',
+        edge: null,
+        category: 'neutral',
+        compositeEdge: 0.5,
+      }),
+    ),
+    'Other factors',
+  )
+  assert.equal(
+    otherFactorRecommendationLabel(
+      pick({
+        gameId: 'flip',
+        kickoff: '2026-09-19T12:00:00-04:00',
+        source: 'rest-travel',
+        edge: 1,
+        category: 'slight',
+      }),
+    ),
+    'Other factors',
   )
 })
 

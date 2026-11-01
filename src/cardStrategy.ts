@@ -456,6 +456,17 @@ export function copiedRecommendationDriver(pick: SuggestedPick) {
   return null
 }
 
+/**
+ * ATS-card label when the side is not a CBS vs DraftKings gap.
+ * Hook, rest, travel, and injuries still recommend the game; the modal
+ * marks them so they don't read as line value.
+ */
+export function otherFactorRecommendationLabel(pick: SuggestedPick) {
+  const fromLineValue =
+    pick.source === 'line-value' && pick.edge != null && pick.edge > 0
+  return fromLineValue ? null : 'Other factors'
+}
+
 function formatCopiedStrength(
   pick: SuggestedPick,
   namedKind: 'week' | 'day' | null,

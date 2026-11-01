@@ -10,6 +10,7 @@ import {
   groupCardRowsByDay,
   type CardDayGroup,
   orderCardRows,
+  otherFactorRecommendationLabel,
   recommendedGameIdsForDay,
   sortSuggestedPicks,
   submittedPick,
@@ -885,6 +886,7 @@ function SuggestedPickRow({
 }) {
   const sent = submittedPick(pick, deviate)
   const kickoff = formatCardKickoff(pick.kickoff)
+  const otherFactors = otherFactorRecommendationLabel(pick)
   const poolSupport = poolSupportView(
     poolProjection,
     sent.pickedSide,
@@ -894,6 +896,7 @@ function SuggestedPickRow({
   return (
     <li
       className={[
+        otherFactors ? 'other-factors' : '',
         deviate ? 'deviated' : '',
         selectedToSend ? 'selected-to-send' : '',
       ].filter(Boolean).join(' ') || undefined}
@@ -916,6 +919,9 @@ function SuggestedPickRow({
         </span>
       </div>
       <div className="suggested-pick-tags">
+        {otherFactors ? (
+          <span className="pick-source other-factors">{otherFactors}</span>
+        ) : null}
         {namedKind ? (
           <span className={`pick-named-play ${namedKind}`}>
             {namedKind === 'week' ? 'Play of the week' : 'Play of the day'}

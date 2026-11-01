@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T15:20:39.063Z",
+  "updatedAt": "2026-11-01T08:18:01.693Z",
   "games": [
     {
       "status": "ok",
@@ -1528,6 +1528,90 @@
       "why": "Graded samples are still modest — Carolina has six decided games and no split strong enough to label, Green Bay seven. The role that fits this matchup is the cleaner read: Green Bay is 1-3 ATS (25%) in five games as a favorite, while Carolina is 2-1 ATS (67%) in four as a dog and 2-1 ATS (67%) in four on the road. Green Bay at home pushes the other way, 2-1 ATS (67%) in four, and they have covered three straight, including a Week 7 home-favorite cover. Short rest and injuries cut back toward Carolina: Green Bay is 0-1 ATS in two short-rest games, their best split is a normal week (3-1 ATS in four), and they are without a guard, a tackle, and a linebacker with a defensive tackle and receiver questionable, while Carolina is without a guard and a linebacker. Head-to-head and the line path are unknown.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-10-29T09:43:49.282Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgi4dq===",
+      "cbsEventId": 50029288,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Baltimore",
+      "home": "Buffalo",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Baltimore is 3-1 ATS on the road in five games and 1-0 ATS as a dog in two, and the last time they had this role they covered at Atlanta as a 2.5-point road dog in Week 6 after failing to cover their last two as favorites. Buffalo is 2-2 ATS as a favorite in five and 2-1 ATS at home in four, with the bye still 0-0 ATS in one. The line has only bounced from -3.5 to -3, back to -3.5, and down to -3, while 69% of the public and 15 of 17 called pool picks are on Buffalo. Benign-weather results lean toward Buffalo on a short sample, 2-0 ATS in three games against Baltimore's 0-2 ATS in three, and Baltimore is without guard Olaivavega Ioane and safety Jaylinn Hawkins while Buffalo's four injuries (Alford, Brown, Kincaid, Moore) are only questionable. Dog, bye, and weather samples are still thin in Week 9. Lean Baltimore.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:11:35.148Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgi4ds===",
+      "cbsEventId": 50029289,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Tennessee",
+      "home": "Cincinnati",
+      "side": "away",
+      "confidence": "light",
+      "why": "Cincinnati is 1-3 ATS as a favorite in 5 games and 1-3 ATS on normal rest in 5, and they have failed to cover on a normal week in 3 of 4 graded games. The recent log matches that: non-covers as a 7.5-point favorite at Miami, a 2.5-point home favorite against Jacksonville, and a 3.5-point favorite at Pittsburgh, with the only home favorite cover back in Week 2 at 3.5. Tennessee is 2-1 ATS on the road in 4 and 3-3 ATS as a dog in 7, including road covers as an 11.5-point dog at Baltimore and a 6.5-point dog at Indianapolis. Samples are still thin — Cincinnati is only 1-1 ATS at home in 3 — and the other crumbs point the other way: Tennessee is 1-3 ATS in benign weather in 5, the line ran -10.5 to -13.5 before settling at -12.5, and Tennessee is without punter Tommy Townsend and receiver Carnell Tate with John Franklin-Myers questionable while Cincinnati lists no injuries.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:13:46.913Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgqydo===",
+      "cbsEventId": 50029407,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Arizona",
+      "home": "Dallas",
+      "side": "home",
+      "confidence": "light",
+      "why": "Arizona is 3-1 ATS on the road in five games, but the three road-dog covers came at +13.5, +10.5, and +8.5, and the only road game near a pick (at the Giants, -0.5) was a loss. On normal rest they are 2-4 ATS in seven, and indoors they are 2-3 ATS in six, while Dallas is 2-1 ATS indoors in four. Dallas is 1-2 ATS at home in four and 0-1 ATS on short rest in two, off a cover as a 4.5-point favorite at Philadelphia, so the home and short-week profile is the live counter. The line has swung from -6.5 to -7.5 and back three times before settling at -7, with 62% of the public on Arizona. Arizona is without a guard and a defensive tackle, and the center, a corner, and a safety are questionable; Dallas is without a linebacker and a receiver, with Pickens (shoulder) and Clark (back) questionable. Half-season samples and that road trend keep this light, with the lean to Dallas.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:15:48.845Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgqydq===",
+      "cbsEventId": 50029408,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Minnesota",
+      "home": "Detroit",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Minnesota is 3-0 ATS in four road games and 1-0 ATS as a dog in two, inside a 4-2 ATS mark in seven. Detroit is 1-2 ATS in four home games and 2-3 ATS in six as a favorite, and 2-4 ATS overall in seven. Normal-rest weeks also lean Minnesota (3-1 ATS in five versus Detroit's 1-1 ATS in three), while both are 2-2 ATS indoors in five, so the roof does not separate them. Head-to-head is empty and there is no line path. Minnesota covered its last three road games, including a dog cover at Chicago, while Detroit failed to cover last week at home as a favorite against Green Bay; Detroit's only listing is a questionable corner (Roger McCreary, foot). The dog and travel samples are only two games, but the road split and Detroit's home and favorite marks point the same way, so the lean is Minnesota.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:16:38.086Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgqyds===",
+      "cbsEventId": 50029409,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "Indianapolis",
+      "home": "Jacksonville",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Indianapolis is in its best graded role: 3-1 ATS (75%) in 5 road games and 3-2 ATS (60%) in 6 as a dog, with road-dog covers at Minnesota last week and at Kansas City. Jacksonville’s matching spots are smaller and flatter — 2-1 ATS (67%) at home in 4 and 2-2 ATS (50%) as a favorite in 5 — and the last two favorite tickets, neutral against Houston and at home against Philadelphia, both missed. Weather is a thin counter-sample: Jacksonville is 1-0 ATS in adverse and wet games across 2, Indianapolis is 0-1 in those buckets, and the wind split is ungraded for both. Jacksonville’s bye has no cover sample (0-0 in 1) while Indianapolis is 4-2 ATS on normal rest in 7; head-to-head and the line path are empty.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:18:01.693Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dgmr2guydamrzgqytg===",
+      "cbsEventId": 50029413,
+      "week": 9,
+      "seasonYear": 2026,
+      "away": "L.A. Chargers",
+      "home": "L.A. Rams",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Samples are still a handful of games, with no head-to-head and no line path, but the splits that match this spot lean to the Rams. The Chargers are 1-5 ATS overall, 1-3 ATS as dogs in five, and 0-4 straight up in those dog spots, and they are 0-3 ATS indoors in four. The Rams are a counter at home, only 1-2 ATS in four there and 3-4 ATS as favorites overall, but they are 2-0 ATS on normal rest in three while the Chargers' post-bye line is 0-0 ATS in one and unknown. Recent covers fit the same side: the Chargers have one cover in six, a Week 5 road-dog win at Seattle, and the Rams covered last week at Las Vegas after home misses in Weeks 6 and 7. Injuries lean that way too — Chargers guard Kayode Awosika is out and Derwin James is on the reserve list, while the Rams list a doubtful long snapper and questionable center, corner, and receiver. The lean is the home Rams.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-01T08:10:18.021Z"
     }
   ]
 }

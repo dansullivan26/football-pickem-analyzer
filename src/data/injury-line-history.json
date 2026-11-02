@@ -2,7 +2,7 @@
   "week": 9,
   "seasonYear": 2026,
   "label": "Week 9",
-  "updatedAt": "2026-11-02T00:54:35.856Z",
+  "updatedAt": "2026-11-02T07:48:18.620Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -5063,6 +5063,24 @@
           "fromTier": null,
           "toTier": "out",
           "availability": "worse",
+          "homeSpreadBefore": 6.5,
+          "homeSpreadAfter": 6.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-02T07:48:18.620Z",
+          "cbsEventId": 50029415,
+          "athleteId": "3046439",
+          "name": "Hunter Henry",
+          "position": "TE",
+          "teamAbbrev": "NE",
+          "teamName": "New England",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Questionable",
+          "fromTier": "out",
+          "toTier": "questionable",
+          "availability": "better",
           "homeSpreadBefore": 6.5,
           "homeSpreadAfter": 6.5,
           "towardTeam": 0

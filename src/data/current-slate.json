@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-01T19:05:35-05:00",
+    "fetchedAt": "2026-11-01T20:28:14-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -931,7 +931,7 @@
         "nickname": "Chargers",
         "location": "Los Angeles",
         "conference": "AFC",
-        "record": "0-6",
+        "record": "0-7",
         "rank": 32,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -943,7 +943,7 @@
         "nickname": "Rams",
         "location": "Los Angeles",
         "conference": "NFC",
-        "record": "3-4",
+        "record": "4-4",
         "rank": 16,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -965,7 +965,7 @@
       "cbsEventId": 50029414,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 1, 4:25 PM ET",
       "tv": "CBS",
@@ -996,7 +996,7 @@
       "homeSpread": 1.5,
       "line": "KC -1.5",
       "awayScore": 24,
-      "homeScore": 13,
+      "homeScore": 28,
       "venue": {
         "stadium": "Empower Field at Mile High",
         "city": "Denver",
@@ -1010,7 +1010,7 @@
       "cbsEventId": 50029415,
       "sport": "NFL",
       "week": 8,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-01T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 1, 4:25 PM ET",
       "tv": "CBS",
@@ -1041,7 +1041,7 @@
       "homeSpread": 7.5,
       "line": "NE -7.5",
       "awayScore": 24,
-      "homeScore": 13,
+      "homeScore": 19,
       "venue": {
         "stadium": "Hard Rock Stadium",
         "city": "Miami",
@@ -1055,7 +1055,7 @@
       "cbsEventId": 50029416,
       "sport": "NFL",
       "week": 8,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-01T20:20:00-05:00",
       "kickoffLabel": "Sun Nov 1, 8:20 PM ET",
       "tv": "NBC",
@@ -1085,8 +1085,8 @@
       },
       "homeSpread": -3.5,
       "line": "WAS -3.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "Northwest Stadium",
         "city": "Landover",

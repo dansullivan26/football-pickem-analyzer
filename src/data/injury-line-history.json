@@ -2,7 +2,7 @@
   "week": 9,
   "seasonYear": 2026,
   "label": "Week 9",
-  "updatedAt": "2026-11-03T23:30:58.268Z",
+  "updatedAt": "2026-11-04T06:44:20.620Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1303,6 +1303,24 @@
           "fromStatus": "Questionable",
           "toStatus": null,
           "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-04T06:44:20.620Z",
+          "cbsEventId": 50029288,
+          "athleteId": "3916387",
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "teamAbbrev": "BAL",
+          "teamName": "Baltimore",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": null,
+          "fromTier": "out",
           "toTier": null,
           "availability": "better",
           "homeSpreadBefore": -3.5,

@@ -2,7 +2,7 @@
   "week": 10,
   "seasonYear": 2026,
   "label": "Week 10",
-  "updatedAt": "2026-11-04T13:30:36.920Z",
+  "updatedAt": "2026-11-04T15:34:49.887Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -20,6 +20,24 @@
           "fromStatus": "Injured Reserve",
           "toStatus": null,
           "fromTier": "reserve",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-04T15:34:49.887Z",
+          "cbsEventId": 50029173,
+          "athleteId": "4431194",
+          "name": "Billy Bowman Jr.",
+          "position": "CB",
+          "teamAbbrev": "ATL",
+          "teamName": "Atlanta",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
           "homeSpreadBefore": 3.5,
@@ -166,6 +184,24 @@
           "homeSpreadBefore": -1.5,
           "homeSpreadAfter": -1.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-04T15:34:49.887Z",
+          "cbsEventId": 50029295,
+          "athleteId": "3122840",
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "teamAbbrev": "CLE",
+          "teamName": "Cleveland",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -1.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": -1
         }
       ]
     },

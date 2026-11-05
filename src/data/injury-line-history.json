@@ -2,7 +2,7 @@
   "week": 10,
   "seasonYear": 2026,
   "label": "Week 10",
-  "updatedAt": "2026-11-05T01:49:00.759Z",
+  "updatedAt": "2026-11-05T02:36:51.156Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1702,6 +1702,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": -6,
+          "homeSpreadAfter": -6,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-05T02:36:51.156Z",
+          "cbsEventId": 50029302,
+          "athleteId": "5125873",
+          "name": "Theo Benedet",
+          "position": "OT",
+          "teamAbbrev": "CHI",
+          "teamName": "Chicago",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": -6,
           "homeSpreadAfter": -6,
           "towardTeam": 0

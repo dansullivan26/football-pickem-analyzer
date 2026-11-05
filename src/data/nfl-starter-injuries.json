@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-11-05T01:49:00.759Z",
-    "reportUpdatedAt": "2026-11-05T01:48:57Z",
+    "fetchedAt": "2026-11-05T02:36:51.156Z",
+    "reportUpdatedAt": "2026-11-05T02:36:49Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-11-05T01:46:10Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -50,8 +50,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ribs",
-          "detail": "Wilson (ribs) wore a yellow non-contact jersey at Wednesday's practice, Bo Brack of GoPHNX.com reports.",
-          "updatedAt": "2026-11-04T22:35Z"
+          "detail": "Wilson (rest/ribs) practiced in a limited capacity Wednesday, Theo Mackie of The Arizona Republic reports.",
+          "updatedAt": "2026-11-05T02:25Z"
         }
       ]
     },
@@ -59,7 +59,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-11-05T01:44:50Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -98,7 +98,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-11-05T01:44:39Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -137,7 +137,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-11-05T01:47:11Z",
+      "depthChartAt": "2026-11-05T02:35:29Z",
       "status": "ok",
       "injuries": [
         {
@@ -167,8 +167,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Foot",
-          "detail": "questionable",
-          "updatedAt": "2026-11-05T00:07Z"
+          "detail": "Okereke (foot) didn't participate in Carolina's practice Wednesday.",
+          "updatedAt": "2026-11-05T02:12Z"
         },
         {
           "athleteId": "4242975",
@@ -186,7 +186,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-11-05T01:45:01Z",
+      "depthChartAt": "2026-11-05T02:33:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -198,6 +198,16 @@
           "injury": "Groin",
           "detail": "Jarrett (groin) is doubtful to return to Monday night's game against the Seahawks.",
           "updatedAt": "2026-11-03T04:23Z"
+        },
+        {
+          "athleteId": "5125873",
+          "name": "Theo Benedet",
+          "position": "OT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "questionable",
+          "updatedAt": "2026-11-05T02:27Z"
         }
       ]
     },
@@ -205,7 +215,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-11-05T01:44:51Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -234,7 +244,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-11-05T01:47:12Z",
+      "depthChartAt": "2026-11-05T02:35:43Z",
       "status": "ok",
       "injuries": [
         {
@@ -333,7 +343,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-11-05T01:47:12Z",
+      "depthChartAt": "2026-11-05T02:35:28Z",
       "status": "ok",
       "injuries": [
         {
@@ -353,8 +363,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Calf",
-          "detail": "questionable",
-          "updatedAt": "2026-11-03T13:03Z"
+          "detail": "Winters (calf) was limited in Wednesday's practice, Patrik Walker of the Cowboys' official site reports.",
+          "updatedAt": "2026-11-05T02:17Z"
         },
         {
           "athleteId": "4870706",
@@ -403,8 +413,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ribs",
-          "detail": "questionable",
-          "updatedAt": "2026-11-03T13:03Z"
+          "detail": "Turpin (ribs) did not practice Wednesday, Patrik Walker of the Cowboys' official site reports.",
+          "updatedAt": "2026-11-05T02:02Z"
         }
       ]
     },
@@ -412,7 +422,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-11-05T01:46:00Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -451,7 +461,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-11-05T01:45:01Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -510,7 +520,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-11-05T01:44:12Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -579,7 +589,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-11-05T01:46:55Z",
+      "depthChartAt": "2026-11-05T02:35:22Z",
       "status": "ok",
       "injuries": [
         {
@@ -608,7 +618,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-11-05T01:47:14Z",
+      "depthChartAt": "2026-11-05T02:35:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -647,7 +657,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-11-05T01:46:14Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -677,8 +687,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hip",
-          "detail": "questionable",
-          "updatedAt": "2026-11-04T21:34Z"
+          "detail": "Remigio (hip) was limited in Wednesday's practice.",
+          "updatedAt": "2026-11-05T01:47Z"
         },
         {
           "athleteId": "4428331",
@@ -696,7 +706,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-11-05T01:44:18Z",
+      "depthChartAt": "2026-11-05T02:33:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -735,7 +745,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-11-05T01:47:16Z",
+      "depthChartAt": "2026-11-05T02:35:22Z",
       "status": "ok",
       "injuries": [
         {
@@ -745,8 +755,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Shoulder",
-          "detail": "out",
-          "updatedAt": "2026-11-04T21:52Z"
+          "detail": "Watson is expected to undergo shoulder surgery and to miss the remainder of the 2026 season, Gary Klein of the Los Angeles Times reports.",
+          "updatedAt": "2026-11-05T01:59Z"
         },
         {
           "athleteId": "4426405",
@@ -804,7 +814,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-11-05T01:47:15Z",
+      "depthChartAt": "2026-11-05T02:35:27Z",
       "status": "ok",
       "injuries": [
         {
@@ -833,7 +843,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-11-05T01:46:13Z",
+      "depthChartAt": "2026-11-05T02:35:16Z",
       "status": "ok",
       "injuries": [
         {
@@ -912,7 +922,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-11-05T01:44:20Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -941,7 +951,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-11-05T01:44:23Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -972,7 +982,7 @@
           "tier": "questionable",
           "injury": "Calf",
           "detail": "questionable",
-          "updatedAt": "2026-11-05T01:01Z"
+          "updatedAt": "2026-11-05T02:34Z"
         },
         {
           "athleteId": "4696981",
@@ -1000,7 +1010,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-11-05T01:46:14Z",
+      "depthChartAt": "2026-11-05T02:35:24Z",
       "status": "ok",
       "injuries": [
         {
@@ -1059,7 +1069,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-11-05T01:46:02Z",
+      "depthChartAt": "2026-11-05T02:33:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -1138,7 +1148,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-11-05T01:46:14Z",
+      "depthChartAt": "2026-11-05T02:33:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -1177,7 +1187,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-11-05T01:46:18Z",
+      "depthChartAt": "2026-11-05T02:36:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -1256,7 +1266,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-11-05T01:43:52Z",
+      "depthChartAt": "2026-11-05T02:33:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -1335,7 +1345,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-11-05T01:44:27Z",
+      "depthChartAt": "2026-11-05T02:32:26Z",
       "status": "ok",
       "injuries": [
         {
@@ -1394,7 +1404,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-11-05T01:47:19Z",
+      "depthChartAt": "2026-11-05T02:35:23Z",
       "status": "ok",
       "injuries": [
         {
@@ -1414,8 +1424,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Foot",
-          "detail": "Head coach Todd Bowles said Egbuka (foot) didn't practice Wednesday, but the wide receiver was able to run on a side field, and the Buccaneers will see how he feels Thursday, Scott Smith of the Buccaneers' official site reports.",
-          "updatedAt": "2026-11-04T18:29Z"
+          "detail": "Egbuka (foot) was spotted running on the side with a trainer Wednesday, Greg Auman of Fox Sports reports.",
+          "updatedAt": "2026-11-04T17:17Z"
         }
       ]
     },
@@ -1423,7 +1433,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-11-05T01:44:30Z",
+      "depthChartAt": "2026-11-05T02:33:58Z",
       "status": "ok",
       "injuries": [
         {

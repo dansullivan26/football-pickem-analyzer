@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-05T06:27:54-05:00",
+    "fetchedAt": "2026-11-07T14:11:51-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -20,7 +20,7 @@
       "cbsEventId": 50028620,
       "sport": "NCAAF",
       "week": 10,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-07T12:00:00-05:00",
       "kickoffLabel": "Sat Nov 7, 12:00 PM ET",
       "tv": "ABC",
@@ -50,8 +50,8 @@
       },
       "homeSpread": -5.5,
       "line": "UTAH -5.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 20,
+      "homeScore": 14,
       "venue": {
         "stadium": "Rice-Eccles Stadium",
         "city": "Salt Lake City",
@@ -698,7 +698,7 @@
       "status": "SCHEDULED",
       "kickoff": "2026-11-08T13:00:00-05:00",
       "kickoffLabel": "Sun Nov 8, 1:00 PM ET",
-      "tv": "FOX",
+      "tv": "CBS",
       "away": {
         "id": "krswc3j2gqytg===",
         "abbrev": "DET",

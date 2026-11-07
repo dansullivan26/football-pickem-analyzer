@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T06:21:42.046Z",
+  "updatedAt": "2026-11-07T13:23:11.398Z",
   "games": [
     {
       "status": "ok",
@@ -1794,6 +1794,76 @@
       "why": "LSU is 3-0 ATS at home in four games and 4-2 ATS as a favorite in seven, with home covers against Clemson, Texas A&M, and Mississippi State. Alabama is 3-4 ATS in eight and has missed the number three straight, against Texas A&M, Tennessee, and Georgia. Alabama is 2-1 ATS on the road in four, and the graded road games in hand were all as a favorite; the dog role is still 0-0. Both teams are off a bye with a 0-0 bye sample, benign-weather ATS is 2-1 in four for each side, both injury lists are blank, and there is no head-to-head. The line moved from -5.5 to -6.5 toward LSU with 57% of the public on Alabama. Home results, Alabama's cover skid, and that line path agree on modest samples, so the lean is LSU.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-11-07T06:21:42.046Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4dm===",
+      "cbsEventId": 50028586,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Vanderbilt",
+      "home": "Miss. State",
+      "side": "away",
+      "confidence": "light",
+      "why": "Both profiles are still thin — two graded games each, short of the four needed for a style — so this is a small-sample limb. Vanderbilt is 2-0 ATS in three games, 1-0 ATS on the road in two, and 1-0 ATS as a dog in two, with covers at Auburn (+8.5, away dog) and against NC State (-3.5). Mississippi State is 0-2 ATS in three, 0-1 ATS at home in two, and 0-1 ATS in benign weather in two; both decided results were dog losses (LSU +12.5, Alabama +6.5), and the home-favorite role is still 0-0 ATS in one game. No head-to-head or injury items are in the packet. The line moved -2.5 to -3.5 and all the way back to -2.5, so the extra point on Mississippi State did not hold. The cover ledger and that reversal both point to Vanderbilt +2.5.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-07T13:19:00.039Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4ti===",
+      "cbsEventId": 50028594,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Iowa",
+      "home": "Northwestern",
+      "side": "away",
+      "confidence": "light",
+      "why": "Iowa has no labeled pattern through 4 graded games, and the spots that match this one are even: 1-1 ATS away in 3, 1-1 ATS as a dog in 3, and 1-1 ATS on normal rest in 3. The comparable cover was Week 4 at Michigan as a 5.5-point road dog; they also covered last week as a home favorite against Wisconsin and failed to cover on the road at Minnesota. Northwestern is only 3 graded games in, but home and favorite are both 1-0 ATS in 2, with the listed home-favorite cover against Colorado in Week 3. There is no head-to-head in the packet and neither side lists an injury. Those 1-0 marks point the other way, and Iowa is 1-2 ATS in 4 benign-weather games, so the role splits do not stack. The line path has run from Northwestern -2.5 to +2.5, and that move is enough to lean Iowa on a light read.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-07T13:20:06.767Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4tm===",
+      "cbsEventId": 50028596,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Georgia",
+      "home": "Ole Miss",
+      "side": "home",
+      "confidence": "light",
+      "why": "Graded samples are still thin, with Ole Miss at 4 decided games and Georgia at 5, so this is a small-book read. The split that fits Ole Miss is home field, where they are 2-0 ATS in 3, including a cover as a home dog at +3.5 against LSU. That does not extend cleanly through the rest of this spot: they are only 1-1 ATS as a dog in 3, 0-1 ATS on normal rest in 2, and 1-2 ATS in benign weather in 4. Georgia's matching tendencies point the other way — 2-0 ATS on the road in 3, 3-1 ATS as a favorite in 5, and 2-0 ATS on one-zone trips in 3 — with covers in four of five recent games and the only miss as a 19.5-point home favorite. There is no head-to-head series, no line path, and no listed injury on either side. The home-dog cover at this number is enough to lean Ole Miss, lightly, with Georgia's road-favorite cover rate the main counterweight.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-07T13:21:16.257Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygyydk===",
+      "cbsEventId": 50028605,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "West Virginia",
+      "home": "Texas Tech",
+      "side": "away",
+      "confidence": "medium",
+      "why": "West Virginia has covered every graded road game (3-0 ATS in four) and is 3-1 ATS as a dog in five, with road-dog covers at +9.5, +3.5, and +8.5. A one-zone trip west matches a 2-0 ATS mark in three, while the bye is still 0-0 ATS in one, so the extra week has no cover sample. Texas Tech is only 1-0 ATS at home in two and 1-1 ATS as a favorite in three; the home cover was -3.5, and the -11.5 road favorite did not cover. No injuries and no head-to-head are listed, and benign-weather ATS is a wash (West Virginia 2-2 in five, Texas Tech 1-1 in three). The line went -16.5 to -17.5 and back to -16.5, so the extra point toward Texas Tech did not hold. The road and dog books are the cleanest evidence, and they lean West Virginia.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-07T13:22:08.754Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygyzda===",
+      "cbsEventId": 50028620,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "BYU",
+      "home": "Utah",
+      "side": "home",
+      "confidence": "light",
+      "why": "Both profiles are still building, with two graded games inside a three-game sample, so this is a thin-sample limb. Utah is the home favorite and has covered every time it was favored (2-0 ATS in 3), including a Week 9 road cover at Cincinnati as a 6.5-point favorite and a Week 2 home cover against Arkansas as an 11.5-point favorite; the home split is 1-0 ATS in 2. BYU is also 2-0 ATS in 3 and 1-0 ATS as a dog in 2, but both covers were at home — Notre Dame as a 9.5-point dog in Week 7 and Arizona as a 7.5-point favorite in Week 2 — and the road split that matches today is 0-0 ATS in 1. The line path (-5.5 → -4.5 → -3.5 → -4.5) moved toward BYU and then gave a point back, which is the crumb on the dog. There is no head-to-head and neither injury list has a name, and benign weather is 2-0 ATS in 3 for both, so it does not separate them.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-07T13:23:11.398Z"
     }
   ]
 }

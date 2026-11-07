@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T15:47:12.519Z",
+  "updatedAt": "2026-11-07T20:20:40.344Z",
   "weeks": [
     {
       "week": 1,
@@ -6747,7 +6747,7 @@
       "week": 10,
       "seasonYear": 2026,
       "label": "Week 10",
-      "capturedAt": "2026-11-07T15:47:12.519Z",
+      "capturedAt": "2026-11-07T20:20:40.344Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029303,
@@ -6790,7 +6790,9 @@
             "state": "UT",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 20,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50028552,
@@ -7232,15 +7234,15 @@
           "away": "NYG",
           "home": "PHI",
           "homeSpread": 3.5,
-          "liveHomeSpread": 3.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 3,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
-          "pickedSide": "away",
-          "strength": "mild",
-          "score": 0.75,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "solid",
+          "score": 6,
           "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,

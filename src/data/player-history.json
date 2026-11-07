@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-07T06:29:48-05:00",
+    "fetchedAt": "2026-11-07T10:06:57-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -97524,11 +97524,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 11,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-07T10:06:57-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -105404,9 +105404,9 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 1,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
           "picksCountFirstSeenAt": "2026-11-06T06:29:41-05:00",
           "tiebreaker": {
@@ -106192,11 +106192,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 11,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "revealedPicksCount": 11,
+          "picksCountFirstSeenAt": "2026-11-07T10:06:57-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -106210,13 +106210,14 @@
               "away": "BYU",
               "home": "UTAH",
               "homeSpread": -5.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2guydi===",
+              "pickedTeam": "BYU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2te===",
@@ -106225,13 +106226,14 @@
               "away": "OREG",
               "home": "OHIOST",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g43dc===",
+              "pickedTeam": "OREG",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4dc===",
@@ -106240,13 +106242,14 @@
               "away": "BAMA",
               "home": "LSU",
               "homeSpread": -5.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy3ds===",
+              "pickedTeam": "LSU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4dm===",
@@ -106255,13 +106258,14 @@
               "away": "VANDY",
               "home": "MISSST",
               "homeSpread": -2.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha4de===",
+              "pickedTeam": "VANDY",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2ts===",
@@ -106270,13 +106274,14 @@
               "away": "UK",
               "home": "TENN",
               "homeSpread": -6.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ds===",
+              "pickedTeam": "TENN",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamryguyts===",
@@ -106285,13 +106290,14 @@
               "away": "AF",
               "home": "ARMY",
               "homeSpread": -3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gq2ti===",
+              "pickedTeam": "AF",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2tc===",
@@ -106300,13 +106306,14 @@
               "away": "MIAMI",
               "home": "ND",
               "homeSpread": -5.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g42tg===",
+              "pickedTeam": "ND",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4ti===",
@@ -106315,13 +106322,14 @@
               "away": "IOWA",
               "home": "NWEST",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gyzti===",
+              "pickedTeam": "IOWA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4tm===",
@@ -106330,13 +106338,14 @@
               "away": "UGA",
               "home": "MISS",
               "homeSpread": 3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4ydc===",
+              "pickedTeam": "MISS",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamryguztg===",
@@ -106345,13 +106354,14 @@
               "away": "OKLA",
               "home": "FLA",
               "homeSpread": -6.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g42ts===",
+              "pickedTeam": "OKLA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygyydk===",
@@ -106360,13 +106370,14 @@
               "away": "WVU",
               "home": "TXTECH",
               "homeSpread": -16.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2heydo===",
+              "pickedTeam": "WVU",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-07T10:06:57-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzge3tg===",
@@ -243341,6 +243352,314 @@
         "after": "2026-11-02T06:34:07-05:00",
         "atOrBefore": "2026-11-02T20:24:36-05:00"
       }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygyzda===",
+      "cbsEventId": 50028620,
+      "away": "BYU",
+      "home": "UTAH",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2guydi===",
+        "pickedTeam": "BYU"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2te===",
+      "cbsEventId": 50028552,
+      "away": "OREG",
+      "home": "OHIOST",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2g43dc===",
+        "pickedTeam": "OREG"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4dc===",
+      "cbsEventId": 50028581,
+      "away": "BAMA",
+      "home": "LSU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gy3ds===",
+        "pickedTeam": "LSU"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4dm===",
+      "cbsEventId": 50028586,
+      "away": "VANDY",
+      "home": "MISSST",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha4de===",
+        "pickedTeam": "VANDY"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2ts===",
+      "cbsEventId": 50028559,
+      "away": "UK",
+      "home": "TENN",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ds===",
+        "pickedTeam": "TENN"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamryguyts===",
+      "cbsEventId": 50028519,
+      "away": "AF",
+      "home": "ARMY",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gq2ti===",
+        "pickedTeam": "AF"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu2tc===",
+      "cbsEventId": 50028551,
+      "away": "MIAMI",
+      "home": "ND",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g42tg===",
+        "pickedTeam": "ND"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4ti===",
+      "cbsEventId": 50028594,
+      "away": "IOWA",
+      "home": "NWEST",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gyzti===",
+        "pickedTeam": "IOWA"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygu4tm===",
+      "cbsEventId": 50028596,
+      "away": "UGA",
+      "home": "MISS",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g4ydc===",
+        "pickedTeam": "MISS"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamryguztg===",
+      "cbsEventId": 50028533,
+      "away": "OKLA",
+      "home": "FLA",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2g42ts===",
+        "pickedTeam": "OKLA"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrygyydk===",
+      "cbsEventId": 50028605,
+      "away": "WVU",
+      "home": "TXTECH",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2heydo===",
+        "pickedTeam": "WVU"
+      },
+      "firstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -246430,6 +246749,54 @@
       "window": {
         "after": "2026-11-06T06:29:41-05:00",
         "atOrBefore": "2026-11-07T06:29:48-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 11,
+      "picksCountFirstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "changeType": "picksCount",
+      "from": 1,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-06T06:29:41-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
+      }
+    },
+    {
+      "week": 10,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dima=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 11,
+      "picksCountFirstSeenAt": "2026-11-07T10:06:57-05:00",
+      "previousFetchedAt": "2026-11-07T06:29:48-05:00",
+      "fetchedAt": "2026-11-07T10:06:57-05:00",
+      "window": {
+        "after": "2026-11-07T06:29:48-05:00",
+        "atOrBefore": "2026-11-07T10:06:57-05:00"
       }
     }
   ]

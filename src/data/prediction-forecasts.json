@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T13:45:16.461Z",
+  "updatedAt": "2026-11-07T15:07:32.320Z",
   "weeks": [
     {
       "week": 1,
@@ -100209,7 +100209,7 @@
       "seasonYear": 2026,
       "label": "Week 10",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-11-07T13:45:16.461Z",
+      "capturedAt": "2026-11-07T15:07:32.320Z",
       "frozenAt": null,
       "trainingThroughWeek": 9,
       "players": [
@@ -109805,8 +109805,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 135 prior chances",
               "sampleSize": 135,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028552,
@@ -109822,7 +109822,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -109839,8 +109839,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 135 prior chances",
               "sampleSize": 135,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028586,
@@ -109856,7 +109856,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -109873,7 +109873,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -109890,7 +109890,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -109907,8 +109907,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 135 prior chances",
               "sampleSize": 135,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028594,
@@ -109924,8 +109924,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 135 prior chances",
               "sampleSize": 135,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028596,
@@ -109941,7 +109941,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "home",
               "correct": null
             },
             {
@@ -109958,7 +109958,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -109975,7 +109975,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -111528,7 +111528,7 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-11-07T13:45:16.461Z",
+    "updatedAt": "2026-11-07T15:07:32.320Z",
     "overall": {
       "key": "overall",
       "games": 5825,

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T11:30:29.965Z",
+  "updatedAt": "2026-11-07T13:45:16.461Z",
   "weeks": [
     {
       "week": 1,
@@ -100209,7 +100209,7 @@
       "seasonYear": 2026,
       "label": "Week 10",
       "strategyId": "v1-habits",
-      "capturedAt": "2026-11-07T11:30:29.965Z",
+      "capturedAt": "2026-11-07T13:45:16.461Z",
       "frozenAt": null,
       "trainingThroughWeek": 9,
       "players": [
@@ -105439,7 +105439,7 @@
           "archetype": "Line-value follower",
           "archetypeDetail": "79% across 134 eligible picks",
           "priorPicks": 224,
-          "calls": 11,
+          "calls": 12,
           "games": [
             {
               "cbsEventId": 50028620,
@@ -105787,14 +105787,14 @@
               "away": "LV",
               "home": "SF",
               "homeSpread": -9.5,
-              "predictedSide": null,
-              "predictedTeam": null,
-              "confidence": null,
-              "meter": null,
-              "meterWhy": "Habits conflict or remain too close to 50/50",
-              "habitKey": null,
-              "reason": "Habits conflict or remain too close to 50/50",
-              "sampleSize": 0,
+              "predictedSide": "home",
+              "predictedTeam": "SF",
+              "confidence": "high",
+              "meter": 57,
+              "meterWhy": "Line-value habit. 79% take over 134 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 134 prior chances",
+              "sampleSize": 134,
               "actualSide": null,
               "correct": null
             },
@@ -108484,7 +108484,7 @@
           "archetype": "Line-value follower",
           "archetypeDetail": "88% across 135 eligible picks",
           "priorPicks": 225,
-          "calls": 11,
+          "calls": 12,
           "games": [
             {
               "cbsEventId": 50028620,
@@ -108832,14 +108832,14 @@
               "away": "LV",
               "home": "SF",
               "homeSpread": -9.5,
-              "predictedSide": null,
-              "predictedTeam": null,
-              "confidence": null,
-              "meter": null,
-              "meterWhy": "Habits conflict or remain too close to 50/50",
-              "habitKey": null,
-              "reason": "Habits conflict or remain too close to 50/50",
-              "sampleSize": 0,
+              "predictedSide": "home",
+              "predictedTeam": "SF",
+              "confidence": "high",
+              "meter": 74,
+              "meterWhy": "Line-value habit. 88% take over 135 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 135 prior chances",
+              "sampleSize": 135,
               "actualSide": null,
               "correct": null
             },
@@ -109789,7 +109789,7 @@
           "archetype": "Line-value follower",
           "archetypeDetail": "94% across 135 eligible picks",
           "priorPicks": 225,
-          "calls": 11,
+          "calls": 12,
           "games": [
             {
               "cbsEventId": 50028620,
@@ -110137,14 +110137,14 @@
               "away": "LV",
               "home": "SF",
               "homeSpread": -9.5,
-              "predictedSide": null,
-              "predictedTeam": null,
-              "confidence": null,
-              "meter": null,
-              "meterWhy": "Habits conflict or remain too close to 50/50",
-              "habitKey": null,
-              "reason": "Habits conflict or remain too close to 50/50",
-              "sampleSize": 0,
+              "predictedSide": "home",
+              "predictedTeam": "SF",
+              "confidence": "high",
+              "meter": 86,
+              "meterWhy": "Line-value habit. 94% take over 135 prior chances.",
+              "habitKey": "line-value",
+              "reason": "Line-value habit · 135 prior chances",
+              "sampleSize": 135,
               "actualSide": null,
               "correct": null
             },
@@ -111528,7 +111528,7 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-11-07T11:30:29.965Z",
+    "updatedAt": "2026-11-07T13:45:16.461Z",
     "overall": {
       "key": "overall",
       "games": 5825,

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T11:30:49.202Z",
+  "updatedAt": "2026-11-08T13:44:33.453Z",
   "weeks": [
     {
       "week": 1,
@@ -6747,7 +6747,7 @@
       "week": 10,
       "seasonYear": 2026,
       "label": "Week 10",
-      "capturedAt": "2026-11-08T06:35:15.378Z",
+      "capturedAt": "2026-11-08T13:44:33.453Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029303,
@@ -6762,6 +6762,10 @@
         {
           "cbsEventId": 50028594,
           "frozenAt": "2026-11-07T13:45:16.167Z"
+        },
+        {
+          "cbsEventId": 50029301,
+          "frozenAt": "2026-11-08T13:44:33.453Z"
         }
       ],
       "games": [
@@ -6966,8 +6970,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 17,
-          "homeScore": 24
+          "awayScore": 24,
+          "homeScore": 31
         },
         {
           "cbsEventId": 50028594,
@@ -6996,7 +7000,7 @@
           },
           "neutralSite": true,
           "awayScore": 24,
-          "homeScore": 3
+          "homeScore": 10
         },
         {
           "cbsEventId": 50028596,
@@ -7024,8 +7028,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 28,
-          "homeScore": 0
+          "awayScore": 42,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50028533,
@@ -7053,7 +7057,7 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 13,
+          "awayScore": 23,
           "homeScore": 7
         },
         {
@@ -7082,8 +7086,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 10,
-          "homeScore": 14
+          "awayScore": 48,
+          "homeScore": 53
         },
         {
           "cbsEventId": 50029173,
@@ -7146,16 +7150,16 @@
           "away": "DAL",
           "home": "IND",
           "homeSpread": 6.5,
-          "liveHomeSpread": 4.5,
-          "category": "lean",
+          "liveHomeSpread": 5.5,
+          "category": "slight",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "solid",
-          "score": 6.5,
-          "compositeEdge": 1.5,
+          "strength": "mild",
+          "score": 1.5,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -7227,16 +7231,16 @@
           "away": "CLE",
           "home": "NO",
           "homeSpread": -2.5,
-          "liveHomeSpread": -3.5,
+          "liveHomeSpread": -3,
           "category": "slight",
           "recommendedSide": "home",
-          "hook": "fg",
+          "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
-          "score": 7.5,
-          "compositeEdge": 2.5,
+          "score": 6,
+          "compositeEdge": 2,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -7254,15 +7258,15 @@
           "away": "NYG",
           "home": "PHI",
           "homeSpread": 3.5,
-          "liveHomeSpread": 3.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 3,
+          "category": "slight",
+          "recommendedSide": "home",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
-          "pickedSide": "away",
-          "strength": "mild",
-          "score": 0.75,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "solid",
+          "score": 6,
           "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,

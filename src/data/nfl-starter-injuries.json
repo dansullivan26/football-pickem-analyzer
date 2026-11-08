@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-11-08T06:22:20.826Z",
-    "reportUpdatedAt": "2026-11-08T06:22:12Z",
+    "fetchedAt": "2026-11-08T13:44:38.652Z",
+    "reportUpdatedAt": "2026-11-08T13:44:34Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-11-08T06:17:36Z",
+      "depthChartAt": "2026-11-08T13:40:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -69,9 +69,19 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-11-08T06:17:33Z",
+      "depthChartAt": "2026-11-08T13:40:13Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4431194",
+          "name": "Billy Bowman Jr.",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Coach's Decision",
+          "detail": "Bowman is inactive for Sunday's game against the Bengals.",
+          "updatedAt": "2026-11-08T13:33Z"
+        },
         {
           "athleteId": "4870612",
           "name": "Zachariah Branch",
@@ -79,28 +89,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Hamstring",
-          "detail": "Coach Kevin Stefanski noted Monday that Branch (hamstring) won't play Sunday against the Bengals, William McFadden of the Falcons' official site reports.",
-          "updatedAt": "2026-11-02T18:55Z"
-        },
-        {
-          "athleteId": "4037626",
-          "name": "Divine Deablo",
-          "position": "LB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Forearm",
-          "detail": "The Falcons listed Deablo (forearm) as questionable for Sunday's game against the Bengals, Tori McElhaney of the Falcons' official site reports.",
-          "updatedAt": "2026-11-06T17:10Z"
-        },
-        {
-          "athleteId": "5081394",
-          "name": "James Pearce Jr.",
-          "position": "LB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Back",
-          "detail": "The Falcons listed Pearce (back) as questionable for Sunday's game against the Bengals, Tori McElhaney of the Falcons' official site reports.",
-          "updatedAt": "2026-11-06T17:18Z"
+          "detail": "inactive",
+          "updatedAt": "2026-11-08T13:05Z"
         },
         {
           "athleteId": "4241474",
@@ -118,7 +108,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-11-08T06:17:35Z",
+      "depthChartAt": "2026-11-08T13:40:32Z",
       "status": "ok",
       "injuries": [
         {
@@ -147,7 +137,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-11-08T06:19:29Z",
+      "depthChartAt": "2026-11-08T13:42:45Z",
       "status": "ok",
       "injuries": [
         {
@@ -196,7 +186,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-11-08T06:17:38Z",
+      "depthChartAt": "2026-11-08T13:40:32Z",
       "status": "ok",
       "injuries": [
         {
@@ -206,8 +196,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Thumb",
-          "detail": "Stevenson (thumb) is officially listed as questionable for Sunday's game versus the Buccaneers.",
-          "updatedAt": "2026-11-07T00:12Z"
+          "detail": "Stevenson (thumb) \"should be good to go\" for Sunday's game against the Buccaneers, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-11-08T12:31Z"
         }
       ]
     },
@@ -215,7 +205,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-11-08T06:19:25Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": []
     },
@@ -223,7 +213,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:43:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -243,8 +233,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Concussion",
-          "detail": "Watson cleared the concussion protocol Saturday but remains questionable for Sunday's game at New Orleans.",
-          "updatedAt": "2026-11-07T18:12Z"
+          "detail": "Watson (concussion) is expected to be inactive for Sunday's game at New Orleans, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-11-08T12:33Z"
         }
       ]
     },
@@ -252,7 +242,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -311,7 +301,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-11-08T06:19:25Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -360,7 +350,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-11-08T06:17:40Z",
+      "depthChartAt": "2026-11-08T13:40:23Z",
       "status": "ok",
       "injuries": [
         {
@@ -390,8 +380,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ribs",
-          "detail": "St. Brown (ribs) is questionable for Sunday's game against the Dolphins, Tim Twentyman of the Lions' official site reports.",
-          "updatedAt": "2026-11-06T21:07Z"
+          "detail": "St. Brown (ribs) is slated to play in Sunday's game at Miami, Tom Pelissero of Netflix reports.",
+          "updatedAt": "2026-11-08T11:08Z"
         },
         {
           "athleteId": "4569465",
@@ -409,7 +399,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-11-08T06:19:27Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -458,7 +448,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-11-08T06:19:29Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -477,7 +467,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-11-08T06:19:25Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -526,7 +516,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:42:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -555,7 +545,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-11-08T06:17:36Z",
+      "depthChartAt": "2026-11-08T13:40:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -574,7 +564,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-11-08T06:19:25Z",
+      "depthChartAt": "2026-11-08T13:42:43Z",
       "status": "ok",
       "injuries": [
         {
@@ -633,7 +623,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:42:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -652,7 +642,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:42:43Z",
       "status": "ok",
       "injuries": [
         {
@@ -662,8 +652,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Quadriceps",
-          "detail": "Wright (quad) is listed as questionable for Sunday's game against the Lions, David Furones of the South Florida Sun Sentinel reports.",
-          "updatedAt": "2026-11-06T21:31Z"
+          "detail": "Wright (quadriceps) isn't in line to play in Sunday's game against the Lions, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-11-08T12:39Z"
         }
       ]
     },
@@ -671,7 +661,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-11-08T06:17:34Z",
+      "depthChartAt": "2026-11-08T13:40:32Z",
       "status": "ok",
       "injuries": [
         {
@@ -700,7 +690,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:42:43Z",
       "status": "ok",
       "injuries": [
         {
@@ -729,7 +719,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:44:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -758,7 +748,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-11-08T06:17:34Z",
+      "depthChartAt": "2026-11-08T13:40:32Z",
       "status": "ok",
       "injuries": [
         {
@@ -807,7 +797,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:44:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -856,7 +846,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-11-08T06:19:28Z",
+      "depthChartAt": "2026-11-08T13:44:16Z",
       "status": "ok",
       "injuries": [
         {
@@ -906,8 +896,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ribs",
-          "detail": "McKee (ribs) is officially listed as questionable for Sunday's game versus the Giants.",
-          "updatedAt": "2026-11-07T01:26Z"
+          "detail": "McKee (ribs) \"is expected to serve as the backup quarterback\" Sunday against the Giants, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-11-08T12:17Z"
         }
       ]
     },
@@ -915,7 +905,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-11-08T06:17:36Z",
+      "depthChartAt": "2026-11-08T13:40:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -935,8 +925,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Achilles",
-          "detail": "Evans (Achilles) has been ruled out for Sunday's game against the Raiders, Nick Wagoner of ESPN reports.",
-          "updatedAt": "2026-11-06T22:05Z"
+          "detail": "Evans (Achilles), who won't play in Sunday's game against the Raiders, appears to be \"questionable at best\" for next Sunday's road matchup with the Cowboys, Mike Garafolo of NFL Network reports.",
+          "updatedAt": "2026-11-08T13:26Z"
         },
         {
           "athleteId": "4565200",
@@ -964,7 +954,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-11-08T06:19:29Z",
+      "depthChartAt": "2026-11-08T13:42:45Z",
       "status": "ok",
       "injuries": [
         {
@@ -1014,8 +1004,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Quadriceps",
-          "detail": "Darnold (quadriceps), who has been ruled out for Sunday's game against the Cardinals, is considered week-to-week, Brady Henderson of ESPN.com reports.",
-          "updatedAt": "2026-11-05T15:41Z"
+          "detail": "Darnold (quadriceps) may miss Seattle's Week 10 game at Las Vegas, Adam Schefter of ESPN reports.",
+          "updatedAt": "2026-11-08T12:19Z"
         },
         {
           "athleteId": "4032473",
@@ -1033,7 +1023,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-11-08T06:19:26Z",
+      "depthChartAt": "2026-11-08T13:42:45Z",
       "status": "ok",
       "injuries": [
         {
@@ -1053,8 +1043,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Foot",
-          "detail": "Egbuka (foot) is listed as questionable for Sunday's game in Chicago.",
-          "updatedAt": "2026-11-06T20:23Z"
+          "detail": "Egbuka (foot), who is listed as questionable for Sunday's game at Chicago, is slated to return to action, Tom Pelissero of Netflix reports.",
+          "updatedAt": "2026-11-08T11:16Z"
         }
       ]
     },
@@ -1062,7 +1052,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-11-08T06:19:29Z",
+      "depthChartAt": "2026-11-08T13:44:21Z",
       "status": "ok",
       "injuries": [
         {

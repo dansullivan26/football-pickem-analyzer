@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T13:23:11.398Z",
+  "updatedAt": "2026-11-08T07:14:52.626Z",
   "games": [
     {
       "status": "ok",
@@ -1864,6 +1864,90 @@
       "why": "Both profiles are still building, with two graded games inside a three-game sample, so this is a thin-sample limb. Utah is the home favorite and has covered every time it was favored (2-0 ATS in 3), including a Week 9 road cover at Cincinnati as a 6.5-point favorite and a Week 2 home cover against Arkansas as an 11.5-point favorite; the home split is 1-0 ATS in 2. BYU is also 2-0 ATS in 3 and 1-0 ATS as a dog in 2, but both covers were at home — Notre Dame as a 9.5-point dog in Week 7 and Arizona as a 7.5-point favorite in Week 2 — and the road split that matches today is 0-0 ATS in 1. The line path (-5.5 → -4.5 → -3.5 → -4.5) moved toward BYU and then gave a point back, which is the crumb on the dog. There is no head-to-head and neither injury list has a name, and benign weather is 2-0 ATS in 3 for both, so it does not separate them.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-11-07T13:23:11.398Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzge3tg===",
+      "cbsEventId": 50029173,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Cincinnati",
+      "home": "Atlanta",
+      "side": "home",
+      "confidence": "light",
+      "why": "Cincinnati is 1-4 ATS as a favorite in six games and 1-4 ATS on normal rest in six. The recent sheet shows favorite non-covers against Tennessee (-10.5), Miami (-7.5), Jacksonville (-2.5), and Pittsburgh (-3.5), with the only listed covers coming as a dog at Baltimore and Houston. Atlanta is 3-4 ATS as a dog in eight, including a home +3.5 cover against San Francisco in Week 8 and a home +3.5 loss against Chicago in Week 7, with a 1-3 ATS home mark in four and a 1-3 ATS normal-rest mark in five. Samples are still modest at seven and eight decided games, head-to-head is empty, and each neutral line is 0-0 ATS in one game in Madrid. The spread went from +3.5 to +3 and back to +3.5. Atlanta lists Zachariah Branch out (hamstring), Brian Robinson Jr. on the reserve list (hamstring), and Divine Deablo and James Pearce Jr. questionable, while Cincinnati has no injuries listed.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:07:33.846Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzgi4tc===",
+      "cbsEventId": 50029291,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Denver",
+      "home": "Carolina",
+      "side": "away",
+      "confidence": "strong",
+      "why": "Denver is 3-0 ATS as a favorite in 4 graded games and 6-2 ATS overall in 9, and both road favorites on the log, Arizona and the Chargers, covered. The full away split is only 2-2 ATS in 5, with both losses as a dog, and the two-zone trip is ungraded at 0-0 in 1, so a 4-0 home cover profile is only partly relevant. Carolina is 1-2 ATS at home in 4, 2-2 ATS as a dog in 5, and 2-4 ATS across 7 benign-weather games, has missed the last two, and has no head-to-head sample. Carolina is without guard Damien Lewis, linebackers Bobby Okereke and Jaelan Phillips, and corner Will Lee III, while Denver is without safety Brandon Jones and has Talanoa Hufanga and Pat Bryant questionable. The home line left +2.5 for +1.5 and returned to +2.5, which does not cut against the favorite, home, and injury splits. Side with Denver.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:09:12.148Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzgi4te===",
+      "cbsEventId": 50029292,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Dallas",
+      "home": "Indianapolis",
+      "side": "home",
+      "confidence": "light",
+      "why": "Dallas is 2-3 ATS (40%) as a favorite in 6 games and 3-5 ATS (38%) overall in 9. This week's road, indoor, and one-zone spots are all even at 2-2 ATS in 5, 2-2 ATS in 5, and 1-1 ATS in 3, and the line has chopped between +4.5 and +5.5 without holding either number. Indianapolis is 3-3 ATS as a dog in 7 and 4-3 ATS on normal rest in 8, and it covered two of the three games it was getting 6.5 or more, both on the road where it is 3-2 ATS in 5. At home it is 1-2 ATS in 4, with Justin Walley, Akeem Davis-Gaither, and A.J. Haulcy out and Jalen Travis questionable, while Dallas is 2-1 ATS on normal rest in 4 with KaVontae Turpin out and George Pickens, Jake Ferguson, Joey Porter Jr., and DeMarvion Overshown only questionable. No head-to-head is available, so the lean is a light one to Indianapolis on the favorite-cover misses and the public weight on Dallas.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:10:38.023Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzgi4tg===",
+      "cbsEventId": 50029293,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "N.Y. Jets",
+      "home": "Kansas City",
+      "side": "home",
+      "confidence": "light",
+      "why": "Kansas City is 2-1 ATS at home in 4 and 3-2 ATS in benign weather in 6, with the road at 1-3 ATS in 4. On a normal week they are 1-3 ATS in 5 and as favorites they are 3-3 ATS in 7, so the home split is the one that fits this spot. The Jets are 2-2 ATS on the road in 5 and 3-2 ATS as dogs in 6, with only 1-4 straight-up in those dog spots, and they have dropped the last two against the number as home favorites. Garrett Wilson is out with a concussion and Trevin Wallace is out, leaving the road dog without its top receiver, while Kansas City lists a corner out and a receiver questionable. There is no head-to-head in the packet, the graded samples are still thin, and the line moved from -9.5 to -8.5 before returning to -9.5; Kansas City also covered a home favorite of -8.5 in Week 7. Lean Kansas City.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:11:43.846Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzgi4ti===",
+      "cbsEventId": 50029294,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Detroit",
+      "home": "Miami",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Miami is 2-1 ATS at home in four games and 4-3 ATS as a dog across eight, and the last four decided games have all been covers, including home spots at +7.5 against New England and Cincinnati. Detroit is 1-2 ATS on the road in four and 0-2 ATS in three benign-weather games, against a 3-2 indoor mark in five, so an outdoor road favorite role is the weaker side of a still-small sample. The home line has moved from +7 through +5.5 and back to +6.5 despite the tickets sitting on Detroit, while Detroit is missing center Cade Mays and corner D.J. Reed, Amon-Ra St. Brown is questionable with a rib injury, and Miami lists only Jaylen Wright as questionable. Seven graded games is not a deep book and neither side has a dominant pattern, and Miami’s own benign-weather split is a soft 1-2 in four. The home-dog covers, the road split, and the injury gap still line up. Lean Miami getting the points.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:12:48.737Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dimb2guydamrzgi4tk===",
+      "cbsEventId": 50029295,
+      "week": 10,
+      "seasonYear": 2026,
+      "away": "Cleveland",
+      "home": "New Orleans",
+      "side": "away",
+      "confidence": "medium",
+      "why": "New Orleans is 0-4 ATS at home in five games and 0-2 ATS as a favorite in three, with the home-favorite losses coming at -2.5 and -3.5. Indoors they are 1-3 ATS in five games. Cleveland is 4-3 ATS as a dog in eight and 4-1 ATS on normal rest in six; the road mark is 2-3 ATS in six, and only one of four recent road-dog spots covered. The line ran from -1.5 out to -4.5 before settling at -3.5, and there is no head-to-head sample. Watson is questionable with a concussion and Collins is out, while New Orleans has two tackles, a receiver, and a corner questionable. The home and favorite misses are the graded pattern that fits this role, so the lean is Cleveland.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-08T07:14:52.626Z"
     }
   ]
 }

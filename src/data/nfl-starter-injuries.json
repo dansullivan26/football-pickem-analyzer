@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-11-08T22:58:53.781Z",
-    "reportUpdatedAt": "2026-11-08T22:58:48Z",
+    "fetchedAt": "2026-11-09T02:46:29.999Z",
+    "reportUpdatedAt": "2026-11-09T02:46:22Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-11-08T22:54:17Z",
+      "depthChartAt": "2026-11-09T02:46:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -40,8 +40,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Toe",
-          "detail": "Lopez (toe) is questionable to return to Arizona's matchup versus the Seahawks on Sunday.",
-          "updatedAt": "2026-11-08T22:21Z"
+          "detail": "Lopez (toe) has been ruled out for the remainder of Sunday's matchup with the Seahawks, Darren Urban of the Cardinals' official site reports.",
+          "updatedAt": "2026-11-08T23:17Z"
         }
       ]
     },
@@ -49,7 +49,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-11-08T22:56:20Z",
+      "depthChartAt": "2026-11-09T02:46:05Z",
       "status": "ok",
       "injuries": [
         {
@@ -88,7 +88,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-11-08T22:54:17Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -117,7 +117,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-11-08T22:54:17Z",
+      "depthChartAt": "2026-11-09T02:43:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -166,26 +166,15 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-11-08T22:55:01Z",
+      "depthChartAt": "2026-11-09T02:43:07Z",
       "status": "ok",
-      "injuries": [
-        {
-          "athleteId": "4426374",
-          "name": "Tyrique Stevenson Sr.",
-          "position": "CB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Thumb",
-          "detail": "Stevenson (thumb) \"should be good to go\" for Sunday's game against the Buccaneers, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-11-08T12:31Z"
-        }
-      ]
+      "injuries": []
     },
     {
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-11-08T22:53:49Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": []
     },
@@ -193,7 +182,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-11-08T22:54:02Z",
+      "depthChartAt": "2026-11-09T02:46:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -222,7 +211,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-11-08T22:56:08Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -276,6 +265,16 @@
           "updatedAt": "2026-11-08T19:17Z"
         },
         {
+          "athleteId": "3929850",
+          "name": "P.J. Locke",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "Locke suffered a concussion during Sunday's 27-23 win over the Colts, Todd Archer of ESPN.com reports.",
+          "updatedAt": "2026-11-09T00:18Z"
+        },
+        {
           "athleteId": "4242355",
           "name": "Jake Ferguson",
           "position": "TE",
@@ -291,7 +290,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-11-08T22:57:45Z",
+      "depthChartAt": "2026-11-09T02:45:42Z",
       "status": "ok",
       "injuries": [
         {
@@ -331,8 +330,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Concussion",
-          "detail": "Waddle (concussion) has been ruled out for the remainder of Sunday's game against the Panthers, Parker Gabriel of The Denver Post reports.",
-          "updatedAt": "2026-11-08T19:52Z"
+          "detail": "Waddle is being evaluated for a potential concussion during Sunday's game against the Panthers, Parker Gabriel of The Denver Post reports.",
+          "updatedAt": "2026-11-08T18:52Z"
         },
         {
           "athleteId": "4066109",
@@ -350,7 +349,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-11-08T22:56:50Z",
+      "depthChartAt": "2026-11-09T02:46:12Z",
       "status": "ok",
       "injuries": [
         {
@@ -389,7 +388,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-11-08T22:54:06Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -429,8 +428,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Chest",
-          "detail": "Hopper (chest) is questionable to return to Sunday's Week 9 game against New England.",
-          "updatedAt": "2026-11-08T21:42Z"
+          "detail": "Hopper (chest) has been ruled out for the remainder of Sunday's game against the Patriots.",
+          "updatedAt": "2026-11-08T23:32Z"
         },
         {
           "athleteId": "4047365",
@@ -438,9 +437,19 @@
           "position": "RB",
           "status": "Questionable",
           "tier": "questionable",
-          "injury": "Hand",
-          "detail": "Jacobs (hand) is questionable to return to Sunday's game against the Patriots.",
-          "updatedAt": "2026-11-08T22:04Z"
+          "injury": "Finger",
+          "detail": "Jacobs fractured his finger during Sunday's 45-27 win over the Patriots, Matt Schneidman of The Athletic reports.",
+          "updatedAt": "2026-11-09T01:24Z"
+        },
+        {
+          "athleteId": "4259305",
+          "name": "Bo Melton",
+          "position": "WR",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Head",
+          "detail": "Melton exited Sunday's game against the Patriots and is being evaluated for a concussion.",
+          "updatedAt": "2026-11-09T00:35Z"
         }
       ]
     },
@@ -448,7 +457,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-11-08T22:56:46Z",
+      "depthChartAt": "2026-11-09T02:43:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -467,7 +476,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-11-08T22:54:02Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -516,7 +525,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-11-08T22:56:01Z",
+      "depthChartAt": "2026-11-09T02:45:36Z",
       "status": "ok",
       "injuries": [
         {
@@ -556,8 +565,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Elbow",
-          "detail": "Coach Andy Reid acknowledged after Sunday's 35-12 win over the Jets that Mahomes will likely be sore Monday after suffering an apparent elbow injury during the contest, Lindsey Thiry of ESPN reports.",
-          "updatedAt": "2026-11-08T21:55Z"
+          "detail": "Mahomes (elbow) underwent an MRI after Sunday's 35-12 win over the Jets, and the tests did not reveal a major injury, Ian Rapoport of NFL Network reports.",
+          "updatedAt": "2026-11-09T01:33Z"
         },
         {
           "athleteId": "4683062",
@@ -575,7 +584,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-11-08T22:56:03Z",
+      "depthChartAt": "2026-11-09T02:46:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -599,6 +608,16 @@
           "updatedAt": "2026-11-08T21:50Z"
         },
         {
+          "athleteId": "4038941",
+          "name": "Justin Herbert",
+          "position": "QB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Finger",
+          "detail": "Herbert sustained a left middle finger injury in Sunday's 44-22 loss to the Texans, Alex Insdorf of BoltBeat.com reports.",
+          "updatedAt": "2026-11-09T01:14Z"
+        },
+        {
           "athleteId": "4612826",
           "name": "Ladd McConkey",
           "position": "WR",
@@ -614,7 +633,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-11-08T22:54:44Z",
+      "depthChartAt": "2026-11-09T02:46:00Z",
       "status": "ok",
       "injuries": [
         {
@@ -683,7 +702,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-11-08T22:56:02Z",
+      "depthChartAt": "2026-11-09T02:46:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -695,6 +714,16 @@
           "injury": "Coach's Decision",
           "detail": "Benson (coach's decision) is a healthy scratch for Sunday's battle against San Francisco.",
           "updatedAt": "2026-11-08T20:23Z"
+        },
+        {
+          "athleteId": "4431623",
+          "name": "Trey Zuhn III",
+          "position": "C",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Concussion",
+          "detail": "Zuhn (concussion) has been ruled out for the remainder of Las Vegas' matchup versus the 49ers on Sunday.",
+          "updatedAt": "2026-11-08T23:55Z"
         }
       ]
     },
@@ -702,7 +731,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-11-08T22:54:42Z",
+      "depthChartAt": "2026-11-09T02:43:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -721,7 +750,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-11-08T22:56:50Z",
+      "depthChartAt": "2026-11-09T02:42:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -750,7 +779,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-11-08T22:56:08Z",
+      "depthChartAt": "2026-11-09T02:45:56Z",
       "status": "ok",
       "injuries": [
         {
@@ -769,7 +798,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-11-08T22:54:08Z",
+      "depthChartAt": "2026-11-09T02:46:06Z",
       "status": "ok",
       "injuries": [
         {
@@ -798,7 +827,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-11-08T22:54:41Z",
+      "depthChartAt": "2026-11-09T02:46:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -810,6 +839,36 @@
           "injury": "Knee",
           "detail": "inactive",
           "updatedAt": "2026-11-08T19:59Z"
+        },
+        {
+          "athleteId": "3916923",
+          "name": "Carlton Davis III",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Knee",
+          "detail": "Davis (knee) is questionable to return to New England's matchup Sunday versus the Packers.",
+          "updatedAt": "2026-11-08T23:29Z"
+        },
+        {
+          "athleteId": "4685298",
+          "name": "Will Campbell",
+          "position": "OT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Knee",
+          "detail": "Campbell (knee) is questionable to return to Sunday's contest against the Packers.",
+          "updatedAt": "2026-11-09T00:30Z"
+        },
+        {
+          "athleteId": "4569173",
+          "name": "Rhamondre Stevenson",
+          "position": "RB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Knee",
+          "detail": "Stevenson (knee) won't return to Sunday's game against the Packers, Mark Daniels of MassLive.com reports.",
+          "updatedAt": "2026-11-09T00:19Z"
         }
       ]
     },
@@ -817,7 +876,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-11-08T22:55:10Z",
+      "depthChartAt": "2026-11-09T02:46:06Z",
       "status": "ok",
       "injuries": [
         {
@@ -836,7 +895,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-11-08T22:55:08Z",
+      "depthChartAt": "2026-11-09T02:46:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -895,7 +954,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-11-08T22:55:09Z",
+      "depthChartAt": "2026-11-09T02:46:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -919,6 +978,26 @@
           "updatedAt": "2026-11-08T13:26Z"
         },
         {
+          "athleteId": "4242488",
+          "name": "Deommodore Lenoir",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Foot",
+          "detail": "Lenoir sustained a foot injury during Sunday's 38-17 win against Las Vegas.",
+          "updatedAt": "2026-11-09T01:16Z"
+        },
+        {
+          "athleteId": "4427325",
+          "name": "Renardo Green",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Back",
+          "detail": "Green suffered a back injury during Sunday's 38-17 win against the Raiders, Matt Barrows of The Athletic reports.",
+          "updatedAt": "2026-11-09T01:11Z"
+        },
+        {
           "athleteId": "3895856",
           "name": "Christian Kirk",
           "position": "WR",
@@ -934,7 +1013,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-11-08T22:56:07Z",
+      "depthChartAt": "2026-11-09T02:43:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -1003,7 +1082,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-11-08T22:54:40Z",
+      "depthChartAt": "2026-11-09T02:43:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -1013,18 +1092,8 @@
           "status": "Out",
           "tier": "out",
           "injury": "Knee - MCL",
-          "detail": "Head coach Todd Bowles said that Diaby (knee) has been diagnosed with an MCL sprain and won't be available for Sunday's game against the Bears, Scott Smith of the Buccaneers' official site reports.",
-          "updatedAt": "2026-11-02T20:53Z"
-        },
-        {
-          "athleteId": "4567750",
-          "name": "Emeka Egbuka",
-          "position": "WR",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Foot",
-          "detail": "Egbuka (foot), who is listed as questionable for Sunday's game at Chicago, is slated to return to action, Tom Pelissero of Netflix reports.",
-          "updatedAt": "2026-11-08T11:16Z"
+          "detail": "inactive",
+          "updatedAt": "2026-11-09T00:04Z"
         }
       ]
     },
@@ -1032,7 +1101,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-11-08T22:56:14Z",
+      "depthChartAt": "2026-11-09T02:46:06Z",
       "status": "ok",
       "injuries": [
         {

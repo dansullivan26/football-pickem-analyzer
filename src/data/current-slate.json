@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-08T19:04:48-05:00",
+    "fetchedAt": "2026-11-08T20:26:49-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -875,7 +875,7 @@
       "cbsEventId": 50029298,
       "sport": "NFL",
       "week": 9,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-08T16:05:00-05:00",
       "kickoffLabel": "Sun Nov 8, 4:05 PM ET",
       "tv": "CBS",
@@ -886,7 +886,7 @@
         "nickname": "Texans",
         "location": "Houston",
         "conference": "AFC",
-        "record": "2-5",
+        "record": "3-5",
         "rank": 23,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -898,15 +898,15 @@
         "nickname": "Chargers",
         "location": "Los Angeles",
         "conference": "AFC",
-        "record": "0-7",
+        "record": "0-8",
         "rank": 32,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
       "homeSpread": 4.5,
       "line": "HOU -4.5",
-      "awayScore": 41,
-      "homeScore": 15,
+      "awayScore": 44,
+      "homeScore": 22,
       "venue": {
         "stadium": "SoFi Stadium",
         "city": "Inglewood",
@@ -920,7 +920,7 @@
       "cbsEventId": 50029299,
       "sport": "NFL",
       "week": 9,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-08T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 8, 4:25 PM ET",
       "tv": "FOX",
@@ -931,7 +931,7 @@
         "nickname": "Raiders",
         "location": "Las Vegas",
         "conference": "AFC",
-        "record": "4-4",
+        "record": "4-5",
         "rank": 24,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -943,7 +943,7 @@
         "nickname": "49ers",
         "location": "San Francisco",
         "conference": "NFC",
-        "record": "6-1",
+        "record": "7-1",
         "rank": 2,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -965,7 +965,7 @@
       "cbsEventId": 50029300,
       "sport": "NFL",
       "week": 9,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-08T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 8, 4:25 PM ET",
       "tv": "FOX",
@@ -995,8 +995,8 @@
       },
       "homeSpread": -2.5,
       "line": "NE -2.5",
-      "awayScore": 42,
-      "homeScore": 21,
+      "awayScore": 45,
+      "homeScore": 27,
       "venue": {
         "stadium": "Gillette Stadium",
         "city": "Foxborough",
@@ -1010,7 +1010,7 @@
       "cbsEventId": 50029301,
       "sport": "NFL",
       "week": 9,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-08T16:25:00-05:00",
       "kickoffLabel": "Sun Nov 8, 4:25 PM ET",
       "tv": "FOX",
@@ -1021,7 +1021,7 @@
         "nickname": "Cardinals",
         "location": "Arizona",
         "conference": "NFC",
-        "record": "3-5",
+        "record": "3-6",
         "rank": 21,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -1033,7 +1033,7 @@
         "nickname": "Seahawks",
         "location": "Seattle",
         "conference": "NFC",
-        "record": "4-4",
+        "record": "5-4",
         "rank": 14,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -1055,7 +1055,7 @@
       "cbsEventId": 50029302,
       "sport": "NFL",
       "week": 9,
-      "status": "SCHEDULED",
+      "status": "IN_PROGRESS",
       "kickoff": "2026-11-08T20:20:00-05:00",
       "kickoffLabel": "Sun Nov 8, 8:20 PM ET",
       "tv": "NBC",
@@ -1085,8 +1085,8 @@
       },
       "homeSpread": -6.5,
       "line": "CHI -6.5",
-      "awayScore": null,
-      "homeScore": null,
+      "awayScore": 0,
+      "homeScore": 0,
       "venue": {
         "stadium": "Soldier Field",
         "city": "Chicago",

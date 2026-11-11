@@ -533,12 +533,15 @@ to **GitHub Actions**. Pushes to `main` then deploy automatically.
 - **Slight:** 0.5–1 point
 - **Neutral:** lines match (no edge)
 
-The comparison uses the current DraftKings home-team spread. Generated-card
-picks start with the team receiving the better number in the CBS pool. The
-favorable side of a field-goal hook is worth 0.5 spread points; a touchdown
-hook is worth 0.75. Taking the unfavorable side subtracts that value. This can
-break a true-neutral CBS/DraftKings tie toward the favorable hook side. NFL
-first-team availability (ESPN, unofficial) is a small signed term: Out 0.25,
+The comparison uses the current DraftKings home-team spread. When CBS and
+DraftKings differ, the generated card picks the team receiving the better
+number, and the band is the size of that gap. A favorable field-goal hook is
+worth 0.5 spread points and a touchdown hook is worth 0.75. Injuries, rest,
+and travel can raise the number used to rank inside the band when they agree
+with that side. Opposing factors stay in the detail and cannot shrink the gap,
+flip the side, or wipe the pick. When the lines match, a favorable hook can
+still break the tie, and injuries, rest, and travel can still recommend a side.
+NFL first-team availability (ESPN, unofficial) is a small signed term: Out 0.25,
 Doubtful 0.15, Reserve 0.20, Questionable 0.05. Each side is summed, then
 the signed gap (visitor minus home) is capped at ±0.5. Two dinged teams
 keep their difference; a massacre versus a healthy roster cannot exceed
@@ -546,10 +549,9 @@ half a point. College games skip it. Rest
 adds or subtracts 0.25 spread points per day from the normal seven-day baseline,
 capped at 0.75 per matchup. Travel subtracts 0.25 per crossed time zone, also
 capped at 0.75. The combined rest/travel adjustment is capped at one spread
-point, so it can boost or suppress line, hook, and injury value and overturn
-only a thin edge. Nets below 0.25 spread points stay unpicked, so a
-Questionable-count cannot print a recommendation by itself. If the composite
-is exactly tied, the game also remains unpicked.
+point. With no line gap, nets below 0.25 spread points stay unpicked, so a
+Questionable-count cannot print a recommendation by itself. A no-gap game also
+stays unpicked when the remaining factors cancel.
 Missing context is neutral rather than inferred. Covers percentages remain
 visible but never select or rank a recommendation.
 
@@ -559,11 +561,12 @@ DraftKings, the Lines card shows a favorable hook badge and the generated card
 adds the hook value to its net edge. Favorable-hook picks retain a solid
 line-value floor (not mild) with an FG/TD hook badge.
 If the recommended pool number sits on the bad side of 3 or 7 (favorite −3.5 /
-−7.5, dog +2.5 / +6.5), the card shows an unfavorable hook badge instead. That
-badge now corresponds to a 0.5/0.75-point subtraction in generated-card math.
+−7.5, dog +2.5 / +6.5), the card shows an unfavorable hook badge instead. On a
+line-gap pick that badge is a note and does not reduce the grade.
 Generated-card Recommendation
 sort matches the Lines page: lock, then hammer, then lean, then slight, then
-neutral/context-only picks. Inside a tier, the composite edge — line plus hook,
-injuries, rest, and travel — ranks first. Raw line edge and hook kind break remaining
-ties. A favorable hook still badges as solid but stays in its raw line-value
-tier.
+neutral/context-only picks. Inside a tier, the ranking number is the line gap
+plus any agreeing hook, injury, rest, and travel. A hammer stays ahead of a
+lean even when the lean's boosted number is higher. Raw line edge and hook kind
+break remaining ties. A favorable hook still badges as solid but stays in its
+raw line-value tier.

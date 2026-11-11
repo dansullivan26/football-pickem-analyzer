@@ -27,7 +27,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'Line value is the primary signal. The favorable side of a field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75; taking the unfavorable side subtracts the same amount. NFL first-team availability is a small signed term (Out 0.25, Doubtful 0.15, Reserve 0.20, Questionable 0.05). Each team is summed, then visitor minus home is capped at ±0.5 so a massacre versus a healthy roster cannot dominate, while two dinged teams still keep their difference. Rest and travel can adjust the result by at most 1 spread point combined. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick. A game stays unpicked when line value, hooks, injuries, rest, and travel produce no net advantage.'
+  'A CBS versus DraftKings gap picks that side, and the band is the size of the gap. A favorable field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75. NFL first-team availability, rest, and travel can add as well, but only when they agree with the line. Opposing factors stay in the note and do not shrink, flip, or zero the pick. Injury loads are Out 0.25, Doubtful 0.15, Reserve 0.20, and Questionable 0.05, then visitor minus home is capped at ±0.5. Rest and travel together add at most 1 spread point. When the lines match, hooks, injuries, rest, and travel can still recommend a side. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -123,6 +123,13 @@ function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value))
 }
 
+/** Keep a factor only when it points the same way as a line gap. */
+function towardLine(line: number, value: number) {
+  if (line === 0) return value
+  if (value === 0 || Math.sign(value) !== Math.sign(line)) return 0
+  return value
+}
+
 function restValue(rest: SideRest | null | undefined) {
   if (!rest) return 0
   return clamp(
@@ -194,9 +201,17 @@ export function recommendationAdjustment(input: {
     MAX_CONTEXT_ADJUSTMENT,
   )
   const injury = injuryAdjustment(input.injuries?.away, input.injuries?.home)
-  const total = line + hook + injury + context
+  const contextKept = clamp(
+    towardLine(line, rest) + towardLine(line, travel),
+    -MAX_CONTEXT_ADJUSTMENT,
+    MAX_CONTEXT_ADJUSTMENT,
+  )
+  const total =
+    line + towardLine(line, hook) + towardLine(line, injury) + contextKept
   const leanSide: 'home' | 'away' | null =
     total > 0 ? 'home' : total < 0 ? 'away' : null
+  const lineSide: 'home' | 'away' | null =
+    line > 0 ? 'home' : line < 0 ? 'away' : null
   const clearsFloor = Math.abs(total) + 1e-9 >= MIN_COMPOSITE_EDGE
   return {
     line,
@@ -206,8 +221,8 @@ export function recommendationAdjustment(input: {
     injury,
     context,
     total,
-    leanSide,
-    pickedSide: clearsFloor ? leanSide : null,
+    leanSide: lineSide ?? leanSide,
+    pickedSide: lineSide ?? (clearsFloor ? leanSide : null),
   }
 }
 
@@ -375,7 +390,8 @@ export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
   {
     factor: 'Rest + travel cap',
     value: `±${MAX_CONTEXT_ADJUSTMENT.toFixed(2)}`,
-    detail: 'Combined context can overturn only a thin line edge.',
+    detail:
+      'Can add to a line gap and cannot reduce one. With no line gap, still capped at one point.',
   },
   {
     factor: 'Recommend floor',
@@ -622,24 +638,17 @@ function compositeDetail(
   if (edge != null && edge > 0) {
     parts.push(`${formatPoints(edge)}-point line value`)
   }
+  const lineGap = edge != null && edge > 0
+  const factor = (label: string, value: number) => {
+    const text = `${label} ${value > 0 ? '+' : ''}${formatPoints(value)}`
+    return lineGap && value < 0 ? `${text} not applied` : text
+  }
   if (hookKind && pickedHook !== 0) {
-    parts.push(
-      `${hookKind === 'fg' ? 'FG' : 'TD'} hook ${pickedHook > 0 ? '+' : ''}${formatPoints(pickedHook)}`,
-    )
+    parts.push(factor(hookKind === 'fg' ? 'FG hook' : 'TD hook', pickedHook))
   }
-  if (pickedInjury !== 0) {
-    parts.push(
-      `injuries ${pickedInjury > 0 ? '+' : ''}${formatPoints(pickedInjury)}`,
-    )
-  }
-  if (pickedRest !== 0) {
-    parts.push(`rest ${pickedRest > 0 ? '+' : ''}${formatPoints(pickedRest)}`)
-  }
-  if (pickedTravel !== 0) {
-    parts.push(
-      `travel ${pickedTravel > 0 ? '+' : ''}${formatPoints(pickedTravel)}`,
-    )
-  }
+  if (pickedInjury !== 0) parts.push(factor('injuries', pickedInjury))
+  if (pickedRest !== 0) parts.push(factor('rest', pickedRest))
+  if (pickedTravel !== 0) parts.push(factor('travel', pickedTravel))
   parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
   return parts.join(' · ')
 }
@@ -733,7 +742,6 @@ export function resolveCardPick(input: {
       input.recommendedSide === pickedSide) ||
     (pickedHook > 0 && Math.sign(adjustment.line + adjustment.hook) === sideSign)
   const source: CardPickSource = followsLine ? 'line-value' : 'rest-travel'
-  const pickedInjury = adjustment.injury * sideSign
 
   return {
     source,
@@ -745,9 +753,8 @@ export function resolveCardPick(input: {
       ? Math.max(
           hook ? HOOK_SOLID_FLOOR : 0,
           lineValueScore(input.category, input.edge ?? 0) +
-            pickedHook * PCT_PER_SPREAD_POINT +
-            pickedInjury * PCT_PER_SPREAD_POINT +
-            adjustment.context * sideSign * PCT_PER_SPREAD_POINT,
+            Math.max(0, Math.abs(adjustment.total) - Math.abs(adjustment.line)) *
+              PCT_PER_SPREAD_POINT,
         )
       : Math.abs(adjustment.total) * PCT_PER_SPREAD_POINT,
     compositeEdge: Math.abs(adjustment.total),

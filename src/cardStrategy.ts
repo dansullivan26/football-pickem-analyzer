@@ -27,7 +27,7 @@ export {
 } from './cardScoring.ts'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v8-line-hook-injury-rest-travel'
+export const CARD_STRATEGY_ID = 'v9-line-locks-factors-add'
 
 export type SuggestedPick = {
   gameId: string
@@ -134,13 +134,13 @@ export type SuggestedTiebreaker = {
 }
 
 /**
- * v6 card rules:
- * 1. Start with the signed line-value edge.
- * 2. Add key-number hook value.
- * 3. Add a capped NFL first-team injury term.
- * 4. Add capped rest and travel adjustments (at most one point combined).
+ * v9 card rules:
+ * 1. A CBS/DraftKings gap picks that side. The band is the size of the gap.
+ * 2. Agreeing hook, injury, rest, and travel add to the number used inside the band.
+ * 3. Opposing factors stay in the note and cannot shrink, flip, or zero the pick.
+ * 4. When the lines match, hook, injury, rest, and travel can still recommend a side.
  * 5. Covers remains informational and never selects or sorts a pick.
- * 6. A zero composite edge stays unpicked.
+ * 6. With no line gap, a net below 0.25 spread points stays unpicked.
  */
 export function generateSuggestedCard(
   analyses: GameAnalysis[],

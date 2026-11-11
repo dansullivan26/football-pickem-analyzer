@@ -2,7 +2,7 @@
   "week": 11,
   "seasonYear": 2026,
   "label": "Week 11",
-  "updatedAt": "2026-11-11T04:07:52.785Z",
+  "updatedAt": "2026-11-11T16:23:24.310Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -65,6 +65,29 @@
           "availability": "better",
           "homeSpreadBefore": 3.5,
           "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        }
+      ]
+    },
+    {
+      "cbsEventId": 50029306,
+      "events": [
+        {
+          "at": "2026-11-11T16:23:24.310Z",
+          "cbsEventId": 50029306,
+          "athleteId": "3122840",
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "teamAbbrev": "CLE",
+          "teamName": "Cleveland",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": "Out",
+          "fromTier": "questionable",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
           "towardTeam": 0
         }
       ]

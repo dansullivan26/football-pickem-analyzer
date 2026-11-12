@@ -392,7 +392,7 @@ test('a favorable hook boosts a slight and an unfavorable hook does not shrink i
   assert.equal(unfavorable.hook, null)
   assert.equal(
     unfavorable.detail,
-    '1-point line value · FG hook -0.5 not applied · 1-point net edge',
+    '1-point line value · FG hook -0.5 · 0.5-point net edge',
   )
 })
 
@@ -459,7 +459,7 @@ test('a point of line value survives an opposing touchdown hook and a one-zone t
   assert.equal(result.skipReason, null)
   assert.equal(
     result.detail,
-    '1-point line value · TD hook -0.75 not applied · travel -0.25 not applied · 1-point net edge',
+    '1-point line value · TD hook -0.75 · travel -0.25 · 0-point net edge',
   )
 })
 
@@ -485,11 +485,11 @@ test('rest and travel cannot flip a thin line edge', () => {
   assert.equal(result.publicSupport, 'agree')
   assert.equal(
     result.detail,
-    '0.5-point line value · travel -0.75 not applied · 0.5-point net edge',
+    '0.5-point line value · travel -0.75 · 0.25-point net the other way',
   )
 })
 
-test('an agreeing bye still adds when an opposing hook is ignored', () => {
+test('an opposing hook trims an agreeing bye and the rank stays above the line', () => {
   const result = resolveCardPick({
     category: 'slight',
     recommendedSide: 'home',
@@ -507,13 +507,77 @@ test('an agreeing bye still adds when an opposing hook is ignored', () => {
 
   assert.equal(result.pickedSide, 'home')
   assert.equal(result.source, 'line-value')
-  assert.equal(result.compositeEdge, 1.75)
-  assert.equal(result.score, 5.25)
+  assert.equal(result.compositeEdge, 1.25)
+  assert.equal(result.score, 3.75)
   assert.equal(result.hook, null)
   assert.equal(
     result.detail,
-    '1-point line value · FG hook -0.5 not applied · rest +0.75 · 1.75-point net edge',
+    '1-point line value · FG hook -0.5 · rest +0.75 · 1.25-point net edge',
   )
+})
+
+test('a mixed rest and travel note shows the real sum when it stays above the line', () => {
+  const result = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'home',
+    edge: 1,
+    homeSpread: -9.5,
+    liveHomeSpread: -10.5,
+    consensus: undefined,
+    travelRest: {
+      awayRest: { days: 8, kind: 'long', label: 'Long week (8d)' },
+      homeRest: { days: 7, kind: 'normal', label: 'Normal week (7d)' },
+      awayTravel: { zones: 2, direction: 'west', label: '2 time zones west' },
+      homeTravel: null,
+    },
+  })
+
+  assert.equal(result.pickedSide, 'home')
+  assert.equal(result.compositeEdge, 1.25)
+  assert.equal(result.score, 3.75)
+  assert.equal(
+    result.detail,
+    '1-point line value · rest -0.25 · travel +0.5 · 1.25-point net edge',
+  )
+})
+
+test('a line held at the gap ranks above a no-line pick with an equal net', () => {
+  const held = resolveCardPick({
+    category: 'slight',
+    recommendedSide: 'home',
+    edge: 1,
+    homeSpread: -3.5,
+    liveHomeSpread: -4.5,
+    consensus: undefined,
+  })
+  const ids = [
+    {
+      category: 'neutral' as const,
+      edge: 0,
+      compositeEdge: 1,
+      hook: null,
+      publicSupport: 'none' as const,
+      publicPct: null,
+      kickoff: '2026-09-05T12:00:00-04:00',
+      id: 'no-line',
+    },
+    {
+      category: 'slight' as const,
+      edge: 1,
+      compositeEdge: held.compositeEdge ?? 0,
+      hook: null,
+      publicSupport: 'none' as const,
+      publicPct: null,
+      kickoff: '2026-09-05T19:00:00-04:00',
+      id: 'line-held',
+    },
+  ]
+    .sort(compareRecommendationOrder)
+    .map((row) => row.id)
+
+  assert.equal(held.compositeEdge, 1)
+  assert.equal(held.detail, '1-point line value · FG hook -0.5 · 0.5-point net edge')
+  assert.deepEqual(ids, ['line-held', 'no-line'])
 })
 
 test('a hammer ranks ahead of a lean whose boost is higher', () => {

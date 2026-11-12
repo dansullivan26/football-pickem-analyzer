@@ -27,7 +27,7 @@ export {
 } from './cardScoring.ts'
 
 /** Bump this when the pick rules change so generated cards stay labeled. */
-export const CARD_STRATEGY_ID = 'v9-line-locks-factors-add'
+export const CARD_STRATEGY_ID = 'v10-line-floor-signed-net'
 
 export type SuggestedPick = {
   gameId: string
@@ -134,10 +134,10 @@ export type SuggestedTiebreaker = {
 }
 
 /**
- * v9 card rules:
+ * v10 card rules:
  * 1. A CBS/DraftKings gap picks that side. The band is the size of the gap.
- * 2. Agreeing hook, injury, rest, and travel add to the number used inside the band.
- * 3. Opposing factors stay in the note and cannot shrink, flip, or zero the pick.
+ * 2. Hook, injury, rest, and travel sum in both directions. The note shows that sum.
+ * 3. The ranking number does not fall below the gap, and the factors cannot flip or wipe the pick.
  * 4. When the lines match, hook, injury, rest, and travel can still recommend a side.
  * 5. Covers remains informational and never selects or sorts a pick.
  * 6. With no line gap, a net below 0.25 spread points stays unpicked.

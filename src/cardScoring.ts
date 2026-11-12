@@ -27,7 +27,7 @@ export const MIN_PUBLIC_BUCKET_PICKS = 10
 export const MIN_PUBLIC_BUCKET_SHARE = 0.05
 
 export const CARD_STRATEGY_NOTE =
-  'A CBS versus DraftKings gap picks that side, and the band is the size of the gap. A favorable field-goal hook adds 0.5 spread points and a touchdown hook adds 0.75. NFL first-team availability, rest, and travel can add as well, but only when they agree with the line. Opposing factors stay in the note and do not shrink, flip, or zero the pick. Injury loads are Out 0.25, Doubtful 0.15, Reserve 0.20, and Questionable 0.05, then visitor minus home is capped at ±0.5. Rest and travel together add at most 1 spread point. When the lines match, hooks, injuries, rest, and travel can still recommend a side. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick.'
+  'A CBS versus DraftKings gap picks that side, and the band is the size of the gap. Hook, injury, rest, and travel are summed in both directions. The note shows that sum, even when it falls below the line gap. The number used to rank inside the band does not fall below the gap, and the factors cannot flip the side or wipe the pick. A favorable field-goal hook is 0.5 and a touchdown hook is 0.75. Injury loads are Out 0.25, Doubtful 0.15, Reserve 0.20, and Questionable 0.05, then visitor minus home is capped at ±0.5. Rest and travel together are capped at 1 spread point. When the lines match, hooks, injuries, rest, and travel can still recommend a side. A net below 0.25 spread points stays unpicked. Covers percentages remain visible but never select or rank a pick.'
 
 export const LINE_VALUE_CATEGORIES = new Set<EdgeCategory>([
   'lock',
@@ -112,7 +112,12 @@ export type RecommendationAdjustment = {
   injury: number
   /** Applied rest + travel adjustment after the combined cap. */
   context: number
-  /** Signed composite score from the home side's perspective. */
+  /** Signed sum of every factor, before the line-gap floor. */
+  rawTotal: number
+  /**
+   * Signed ranking value from the home side. On a line gap this does not
+   * fall below the gap.
+   */
   total: number
   /** Sign of `total`, even when it is below the recommend floor. */
   leanSide: 'home' | 'away' | null
@@ -121,13 +126,6 @@ export type RecommendationAdjustment = {
 
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value))
-}
-
-/** Keep a factor only when it points the same way as a line gap. */
-function towardLine(line: number, value: number) {
-  if (line === 0) return value
-  if (value === 0 || Math.sign(value) !== Math.sign(line)) return 0
-  return value
 }
 
 function restValue(rest: SideRest | null | undefined) {
@@ -201,13 +199,12 @@ export function recommendationAdjustment(input: {
     MAX_CONTEXT_ADJUSTMENT,
   )
   const injury = injuryAdjustment(input.injuries?.away, input.injuries?.home)
-  const contextKept = clamp(
-    towardLine(line, rest) + towardLine(line, travel),
-    -MAX_CONTEXT_ADJUSTMENT,
-    MAX_CONTEXT_ADJUSTMENT,
-  )
+  const rawTotal = line + hook + injury + context
+  const lineSign = Math.sign(line)
   const total =
-    line + towardLine(line, hook) + towardLine(line, injury) + contextKept
+    line === 0
+      ? rawTotal
+      : lineSign * Math.max(Math.abs(line), rawTotal * lineSign)
   const leanSide: 'home' | 'away' | null =
     total > 0 ? 'home' : total < 0 ? 'away' : null
   const lineSide: 'home' | 'away' | null =
@@ -220,6 +217,7 @@ export function recommendationAdjustment(input: {
     travel,
     injury,
     context,
+    rawTotal,
     total,
     leanSide: lineSide ?? leanSide,
     pickedSide: lineSide ?? (clearsFloor ? leanSide : null),
@@ -391,7 +389,7 @@ export const COMPOSITE_EDGE_SCALE: CompositeScaleRow[] = [
     factor: 'Rest + travel cap',
     value: `±${MAX_CONTEXT_ADJUSTMENT.toFixed(2)}`,
     detail:
-      'Can add to a line gap and cannot reduce one. With no line gap, still capped at one point.',
+      'Counts in both directions. On a line gap, the ranking number cannot fall below the gap.',
   },
   {
     factor: 'Recommend floor',
@@ -638,18 +636,20 @@ function compositeDetail(
   if (edge != null && edge > 0) {
     parts.push(`${formatPoints(edge)}-point line value`)
   }
-  const lineGap = edge != null && edge > 0
-  const factor = (label: string, value: number) => {
-    const text = `${label} ${value > 0 ? '+' : ''}${formatPoints(value)}`
-    return lineGap && value < 0 ? `${text} not applied` : text
-  }
+  const factor = (label: string, value: number) =>
+    `${label} ${value > 0 ? '+' : ''}${formatPoints(value)}`
   if (hookKind && pickedHook !== 0) {
     parts.push(factor(hookKind === 'fg' ? 'FG hook' : 'TD hook', pickedHook))
   }
   if (pickedInjury !== 0) parts.push(factor('injuries', pickedInjury))
   if (pickedRest !== 0) parts.push(factor('rest', pickedRest))
   if (pickedTravel !== 0) parts.push(factor('travel', pickedTravel))
-  parts.push(`${formatPoints(Math.abs(adjustment.total))}-point net edge`)
+  const rawFromSide = adjustment.rawTotal * sideSign
+  parts.push(
+    rawFromSide < -1e-9
+      ? `${formatPoints(Math.abs(rawFromSide))}-point net the other way`
+      : `${formatPoints(Math.abs(rawFromSide))}-point net edge`,
+  )
   return parts.join(' · ')
 }
 

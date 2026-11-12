@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-12T06:26:20-05:00",
+    "fetchedAt": "2026-11-12T16:56:11-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -110767,11 +110767,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -111161,11 +111161,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -111555,11 +111555,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -113919,11 +113919,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -115495,11 +115495,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -116283,11 +116283,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 4,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
           "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -117071,11 +117071,11 @@
           "weekScore": 0,
           "weekRank": null,
           "correctPicks": 0,
-          "picksCount": 0,
+          "picksCount": 1,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 0,
-          "picksCountFirstSeenAt": null,
+          "revealedPicksCount": 1,
+          "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
             "answer": null,
@@ -117089,13 +117089,14 @@
               "away": "WAS",
               "home": "NYG",
               "homeSpread": -2.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gqzde===",
+              "pickedTeam": "NYG",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-12T16:56:11-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg42tm===",
@@ -271720,6 +271721,34 @@
         "after": "2026-11-09T06:31:42-05:00",
         "atOrBefore": "2026-11-09T20:23:58-05:00"
       }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydi===",
+      "cbsEventId": 50029304,
+      "away": "WAS",
+      "home": "NYG",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2gqzde===",
+        "pickedTeam": "NYG"
+      },
+      "firstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -274921,6 +274950,118 @@
       "window": {
         "after": "2026-11-09T06:31:42-05:00",
         "atOrBefore": "2026-11-09T20:23:58-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 4,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
+      }
+    },
+    {
+      "week": 11,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2diny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 0,
+      "to": 1,
+      "picksCountFirstSeenAt": "2026-11-12T16:56:11-05:00",
+      "previousFetchedAt": "2026-11-12T06:26:20-05:00",
+      "fetchedAt": "2026-11-12T16:56:11-05:00",
+      "window": {
+        "after": "2026-11-12T06:26:20-05:00",
+        "atOrBefore": "2026-11-12T16:56:11-05:00"
       }
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T11:35:40.191Z",
+  "updatedAt": "2026-11-13T17:55:03.068Z",
   "weeks": [
     {
       "week": 1,
@@ -7501,7 +7501,7 @@
       "week": 11,
       "seasonYear": 2026,
       "label": "Week 11",
-      "capturedAt": "2026-11-13T09:46:24.971Z",
+      "capturedAt": "2026-11-13T17:55:03.068Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029316,
@@ -7540,8 +7540,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 24,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028756,
@@ -7712,16 +7712,16 @@
           "away": "KANSAS",
           "home": "WVU",
           "homeSpread": -2.5,
-          "liveHomeSpread": -3,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -2.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1.25,
+          "compositeEdge": 0.75,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -7739,16 +7739,16 @@
           "away": "FLA",
           "home": "UK",
           "homeSpread": -3.5,
-          "liveHomeSpread": -3.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -3,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 0.5,
+          "compositeEdge": 1,
           "awayRank": null,
           "homeRank": 11,
           "venue": {

@@ -2,7 +2,7 @@
   "week": 11,
   "seasonYear": 2026,
   "label": "Week 11",
-  "updatedAt": "2026-11-13T00:25:29.350Z",
+  "updatedAt": "2026-11-13T01:59:04.618Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -2464,6 +2464,24 @@
           "homeSpreadBefore": 9.5,
           "homeSpreadAfter": 9.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-13T01:59:04.618Z",
+          "cbsEventId": 50029312,
+          "athleteId": "4426515",
+          "name": "Puka Nacua",
+          "position": "WR",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "away",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": 9.5,
+          "homeSpreadAfter": 9.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -2785,6 +2803,24 @@
           "homeSpreadBefore": -3.5,
           "homeSpreadAfter": -3.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-13T01:59:04.618Z",
+          "cbsEventId": 50029315,
+          "athleteId": "4572036",
+          "name": "DJ Turner II",
+          "position": "CB",
+          "teamAbbrev": "CIN",
+          "teamName": "Cincinnati",
+          "side": "home",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -2985,6 +3021,24 @@
           "fromTier": null,
           "toTier": "questionable",
           "availability": "worse",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-13T01:59:04.618Z",
+          "cbsEventId": 50029316,
+          "athleteId": "4567138",
+          "name": "Justin Eboigbe",
+          "position": "DT",
+          "teamAbbrev": "LAC",
+          "teamName": "L.A. Chargers",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
           "homeSpreadBefore": -4.5,
           "homeSpreadAfter": -4.5,
           "towardTeam": 0

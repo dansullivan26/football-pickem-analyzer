@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-13T21:09:05-05:00",
+    "fetchedAt": "2026-11-14T06:33:12-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -65,7 +65,7 @@
       "cbsEventId": 50028756,
       "sport": "NCAAF",
       "week": 11,
-      "status": "IN_PROGRESS",
+      "status": "FINAL",
       "kickoff": "2026-11-13T21:00:00-05:00",
       "kickoffLabel": "Fri Nov 13, 9:00 PM ET",
       "tv": "FOX",
@@ -76,7 +76,7 @@
         "nickname": "Fighting Illini",
         "location": "Illinois",
         "conference": "BIG10",
-        "record": "6-3",
+        "record": "6-4",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
@@ -88,15 +88,15 @@
         "nickname": "Bruins",
         "location": "UCLA",
         "conference": "BIG10",
-        "record": "9-0",
+        "record": "10-0",
         "rank": 4,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
       "homeSpread": -9.5,
       "line": "UCLA -9.5",
-      "awayScore": 0,
-      "homeScore": 0,
+      "awayScore": 14,
+      "homeScore": 22,
       "venue": {
         "stadium": "Rose Bowl",
         "city": "Los Angeles",
@@ -241,46 +241,46 @@
       "tiebreakerOrder": null
     },
     {
-      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg42de===",
-      "cbsEventId": 50028742,
+      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrygy4tm===",
+      "cbsEventId": 50028696,
       "sport": "NCAAF",
       "week": 11,
       "status": "SCHEDULED",
       "kickoff": "2026-11-14T15:30:00-05:00",
       "kickoffLabel": "Sat Nov 14, 3:30 PM ET",
-      "tv": "FOX",
+      "tv": "ESP2",
       "away": {
-        "id": "krswc3j2gq4di===",
-        "abbrev": "BAYLOR",
-        "name": "Baylor",
-        "nickname": "Bears",
-        "location": "Baylor",
+        "id": "krswc3j2gy2di===",
+        "abbrev": "KANSAS",
+        "name": "Kansas",
+        "nickname": "Jayhawks",
+        "location": "Kansas",
         "conference": "BIG12",
-        "record": "6-3",
+        "record": "3-6",
         "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
       "home": {
-        "id": "krswc3j2guydi===",
-        "abbrev": "BYU",
-        "name": "BYU",
-        "nickname": "Cougars",
-        "location": "BYU",
+        "id": "krswc3j2heydo===",
+        "abbrev": "WVU",
+        "name": "West Virginia",
+        "nickname": "Mountaineers",
+        "location": "West Virginia",
         "conference": "BIG12",
-        "record": "7-2",
-        "rank": 10,
+        "record": "5-4",
+        "rank": null,
         "pickemPctStraightUp": null,
         "pickemPctAgainstSpread": null
       },
-      "homeSpread": -7.5,
-      "line": "BYU -7.5",
+      "homeSpread": -2.5,
+      "line": "WVU -2.5",
       "awayScore": null,
       "homeScore": null,
       "venue": {
-        "stadium": "LaVell Edwards Stadium",
-        "city": "Provo",
-        "state": "UT",
+        "stadium": "Mountaineer Field at Milan Puskar Stadium",
+        "city": "Morgantown",
+        "state": "WV",
         "indoor": false
       },
       "tiebreakerOrder": null
@@ -331,51 +331,6 @@
       "tiebreakerOrder": null
     },
     {
-      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrygy4tm===",
-      "cbsEventId": 50028696,
-      "sport": "NCAAF",
-      "week": 11,
-      "status": "SCHEDULED",
-      "kickoff": "2026-11-14T17:30:00-05:00",
-      "kickoffLabel": "Sat Nov 14, 5:30 PM ET",
-      "tv": "ESPU",
-      "away": {
-        "id": "krswc3j2gy2di===",
-        "abbrev": "KANSAS",
-        "name": "Kansas",
-        "nickname": "Jayhawks",
-        "location": "Kansas",
-        "conference": "BIG12",
-        "record": "3-6",
-        "rank": null,
-        "pickemPctStraightUp": null,
-        "pickemPctAgainstSpread": null
-      },
-      "home": {
-        "id": "krswc3j2heydo===",
-        "abbrev": "WVU",
-        "name": "West Virginia",
-        "nickname": "Mountaineers",
-        "location": "West Virginia",
-        "conference": "BIG12",
-        "record": "5-4",
-        "rank": null,
-        "pickemPctStraightUp": null,
-        "pickemPctAgainstSpread": null
-      },
-      "homeSpread": -2.5,
-      "line": "WVU -2.5",
-      "awayScore": null,
-      "homeScore": null,
-      "venue": {
-        "stadium": "Mountaineer Field at Milan Puskar Stadium",
-        "city": "Morgantown",
-        "state": "WV",
-        "indoor": false
-      },
-      "tiebreakerOrder": null
-    },
-    {
       "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrygy3dk===",
       "cbsEventId": 50028665,
       "sport": "NCAAF",
@@ -416,6 +371,51 @@
         "stadium": "Kroger Field",
         "city": "Lexington",
         "state": "KY",
+        "indoor": false
+      },
+      "tiebreakerOrder": null
+    },
+    {
+      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg42de===",
+      "cbsEventId": 50028742,
+      "sport": "NCAAF",
+      "week": 11,
+      "status": "SCHEDULED",
+      "kickoff": "2026-11-14T19:00:00-05:00",
+      "kickoffLabel": "Sat Nov 14, 7:00 PM ET",
+      "tv": "FOX",
+      "away": {
+        "id": "krswc3j2gq4di===",
+        "abbrev": "BAYLOR",
+        "name": "Baylor",
+        "nickname": "Bears",
+        "location": "Baylor",
+        "conference": "BIG12",
+        "record": "6-3",
+        "rank": null,
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
+      },
+      "home": {
+        "id": "krswc3j2guydi===",
+        "abbrev": "BYU",
+        "name": "BYU",
+        "nickname": "Cougars",
+        "location": "BYU",
+        "conference": "BIG12",
+        "record": "7-2",
+        "rank": 10,
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
+      },
+      "homeSpread": -7.5,
+      "line": "BYU -7.5",
+      "awayScore": null,
+      "homeScore": null,
+      "venue": {
+        "stadium": "LaVell Edwards Stadium",
+        "city": "Provo",
+        "state": "UT",
         "indoor": false
       },
       "tiebreakerOrder": null
@@ -466,51 +466,6 @@
       "tiebreakerOrder": null
     },
     {
-      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg42dc===",
-      "cbsEventId": 50028741,
-      "sport": "NCAAF",
-      "week": 11,
-      "status": "SCHEDULED",
-      "kickoff": "2026-11-14T19:30:00-05:00",
-      "kickoffLabel": "Sat Nov 14, 7:30 PM ET",
-      "tv": "FOX",
-      "away": {
-        "id": "krswc3j2ha3tq===",
-        "abbrev": "UTAH",
-        "name": "Utah",
-        "nickname": "Utes",
-        "location": "Utah",
-        "conference": "BIG12",
-        "record": "9-0",
-        "rank": 2,
-        "pickemPctStraightUp": null,
-        "pickemPctAgainstSpread": null
-      },
-      "home": {
-        "id": "krswc3j2gq3do===",
-        "abbrev": "ARIZ",
-        "name": "Arizona",
-        "nickname": "Wildcats",
-        "location": "Arizona",
-        "conference": "BIG12",
-        "record": "7-2",
-        "rank": 23,
-        "pickemPctStraightUp": null,
-        "pickemPctAgainstSpread": null
-      },
-      "homeSpread": 2.5,
-      "line": "UTAH -2.5",
-      "awayScore": null,
-      "homeScore": null,
-      "venue": {
-        "stadium": "Casino Del Sol Stadium",
-        "city": "Tucson",
-        "state": "AZ",
-        "indoor": false
-      },
-      "tiebreakerOrder": null
-    },
-    {
       "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg4ytm===",
       "cbsEventId": 50028716,
       "sport": "NCAAF",
@@ -551,6 +506,51 @@
         "stadium": "Boone Pickens Stadium",
         "city": "Stillwater",
         "state": "OK",
+        "indoor": false
+      },
+      "tiebreakerOrder": null
+    },
+    {
+      "id": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamryg42dc===",
+      "cbsEventId": 50028741,
+      "sport": "NCAAF",
+      "week": 11,
+      "status": "SCHEDULED",
+      "kickoff": "2026-11-14T22:30:00-05:00",
+      "kickoffLabel": "Sat Nov 14, 10:30 PM ET",
+      "tv": "FOX",
+      "away": {
+        "id": "krswc3j2ha3tq===",
+        "abbrev": "UTAH",
+        "name": "Utah",
+        "nickname": "Utes",
+        "location": "Utah",
+        "conference": "BIG12",
+        "record": "9-0",
+        "rank": 2,
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
+      },
+      "home": {
+        "id": "krswc3j2gq3do===",
+        "abbrev": "ARIZ",
+        "name": "Arizona",
+        "nickname": "Wildcats",
+        "location": "Arizona",
+        "conference": "BIG12",
+        "record": "7-2",
+        "rank": 23,
+        "pickemPctStraightUp": null,
+        "pickemPctAgainstSpread": null
+      },
+      "homeSpread": 2.5,
+      "line": "UTAH -2.5",
+      "awayScore": null,
+      "homeScore": null,
+      "venue": {
+        "stadium": "Casino Del Sol Stadium",
+        "city": "Tucson",
+        "state": "AZ",
         "indoor": false
       },
       "tiebreakerOrder": null

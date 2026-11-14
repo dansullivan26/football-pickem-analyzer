@@ -2,7 +2,7 @@
   "week": 11,
   "seasonYear": 2026,
   "label": "Week 11",
-  "updatedAt": "2026-11-13T23:44:24.842Z",
+  "updatedAt": "2026-11-14T06:46:56.563Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3467,6 +3467,24 @@
           "homeSpreadBefore": 10.5,
           "homeSpreadAfter": 10.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-14T06:46:56.563Z",
+          "cbsEventId": 50029311,
+          "athleteId": "4048231",
+          "name": "Ezra Cleveland",
+          "position": "G",
+          "teamAbbrev": "JAC",
+          "teamName": "Jacksonville",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": 10.5,
+          "homeSpreadAfter": 10.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -4597,6 +4615,24 @@
           "athleteId": "4686612",
           "name": "Tre' Harris",
           "position": "WR",
+          "teamAbbrev": "LAC",
+          "teamName": "L.A. Chargers",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -4.5,
+          "homeSpreadAfter": -4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-14T06:46:56.563Z",
+          "cbsEventId": 50029316,
+          "athleteId": "4427404",
+          "name": "Cam Hart",
+          "position": "CB",
           "teamAbbrev": "LAC",
           "teamName": "L.A. Chargers",
           "side": "away",

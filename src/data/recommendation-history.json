@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T11:34:51.403Z",
+  "updatedAt": "2026-11-14T14:05:29.839Z",
   "weeks": [
     {
       "week": 1,
@@ -7501,7 +7501,7 @@
       "week": 11,
       "seasonYear": 2026,
       "label": "Week 11",
-      "capturedAt": "2026-11-14T06:46:48.629Z",
+      "capturedAt": "2026-11-14T14:05:29.839Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029316,
@@ -7512,7 +7512,12 @@
         "cbsEventId": 50029313,
         "frozenAt": "2026-11-12T20:49:47.985Z"
       },
-      "playsOfTheDay": [],
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50028679,
+          "frozenAt": "2026-11-14T14:05:29.839Z"
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029304,
@@ -7569,8 +7574,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 14,
+          "homeScore": 22
         },
         {
           "cbsEventId": 50028679,
@@ -7654,31 +7659,31 @@
           "neutralSite": true
         },
         {
-          "cbsEventId": 50028742,
+          "cbsEventId": 50028696,
           "sport": "NCAAF",
           "kickoff": "2026-11-14T15:30:00-05:00",
-          "away": "BAYLOR",
-          "home": "BYU",
-          "homeSpread": -7.5,
-          "liveHomeSpread": -8.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "away": "KANSAS",
+          "home": "WVU",
+          "homeSpread": -2.5,
+          "liveHomeSpread": -2.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "strength": "solid",
+          "score": 6,
+          "compositeEdge": 0.75,
           "awayRank": null,
-          "homeRank": 10,
+          "homeRank": null,
           "venue": {
-            "stadium": "LaVell Edwards Stadium",
-            "city": "Provo",
-            "state": "UT",
+            "stadium": "Mountaineer Field at Milan Puskar Stadium",
+            "city": "Morgantown",
+            "state": "WV",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": false
         },
         {
           "cbsEventId": 50028754,
@@ -7703,33 +7708,6 @@
             "stadium": "Autzen Stadium",
             "city": "Eugene",
             "state": "OR",
-            "indoor": false
-          },
-          "neutralSite": false
-        },
-        {
-          "cbsEventId": 50028696,
-          "sport": "NCAAF",
-          "kickoff": "2026-11-14T17:30:00-05:00",
-          "away": "KANSAS",
-          "home": "WVU",
-          "homeSpread": -2.5,
-          "liveHomeSpread": -2.5,
-          "category": "neutral",
-          "recommendedSide": null,
-          "hook": null,
-          "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "solid",
-          "score": 6,
-          "compositeEdge": 0.75,
-          "awayRank": null,
-          "homeRank": null,
-          "venue": {
-            "stadium": "Mountaineer Field at Milan Puskar Stadium",
-            "city": "Morgantown",
-            "state": "WV",
             "indoor": false
           },
           "neutralSite": false
@@ -7762,6 +7740,33 @@
           "neutralSite": false
         },
         {
+          "cbsEventId": 50028742,
+          "sport": "NCAAF",
+          "kickoff": "2026-11-14T19:00:00-05:00",
+          "away": "BAYLOR",
+          "home": "BYU",
+          "homeSpread": -7.5,
+          "liveHomeSpread": -8.5,
+          "category": "slight",
+          "recommendedSide": "home",
+          "hook": null,
+          "cover": null,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
+          "awayRank": null,
+          "homeRank": 10,
+          "venue": {
+            "stadium": "LaVell Edwards Stadium",
+            "city": "Provo",
+            "state": "UT",
+            "indoor": false
+          },
+          "neutralSite": true
+        },
+        {
           "cbsEventId": 50028707,
           "sport": "NCAAF",
           "kickoff": "2026-11-14T19:30:00-05:00",
@@ -7789,33 +7794,6 @@
           "neutralSite": true
         },
         {
-          "cbsEventId": 50028741,
-          "sport": "NCAAF",
-          "kickoff": "2026-11-14T19:30:00-05:00",
-          "away": "UTAH",
-          "home": "ARIZ",
-          "homeSpread": 2.5,
-          "liveHomeSpread": 1.5,
-          "category": "slight",
-          "recommendedSide": "home",
-          "hook": null,
-          "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
-          "awayRank": 2,
-          "homeRank": 23,
-          "venue": {
-            "stadium": "Casino Del Sol Stadium",
-            "city": "Tucson",
-            "state": "AZ",
-            "indoor": false
-          },
-          "neutralSite": false
-        },
-        {
           "cbsEventId": 50028716,
           "sport": "NCAAF",
           "kickoff": "2026-11-14T21:30:00-05:00",
@@ -7838,6 +7816,33 @@
             "stadium": "Boone Pickens Stadium",
             "city": "Stillwater",
             "state": "OK",
+            "indoor": false
+          },
+          "neutralSite": false
+        },
+        {
+          "cbsEventId": 50028741,
+          "sport": "NCAAF",
+          "kickoff": "2026-11-14T22:30:00-05:00",
+          "away": "UTAH",
+          "home": "ARIZ",
+          "homeSpread": 2.5,
+          "liveHomeSpread": 1.5,
+          "category": "slight",
+          "recommendedSide": "home",
+          "hook": null,
+          "cover": null,
+          "source": "line-value",
+          "pickedSide": "home",
+          "strength": "mild",
+          "score": 3,
+          "compositeEdge": 1,
+          "awayRank": 2,
+          "homeRank": 23,
+          "venue": {
+            "stadium": "Casino Del Sol Stadium",
+            "city": "Tucson",
+            "state": "AZ",
             "indoor": false
           },
           "neutralSite": false

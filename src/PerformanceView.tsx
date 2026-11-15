@@ -127,7 +127,7 @@ function summarize(
     const fails = rows.filter((game) => game.cover === 'away').length
     const pushes = rows.filter((game) => game.cover === 'push').length
     return {
-      count: rows.length,
+      count: covers + fails + pushes,
       wins: covers,
       losses: fails,
       pushes,
@@ -142,7 +142,7 @@ function summarize(
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -165,7 +165,7 @@ function summarizeStrength(
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -182,7 +182,7 @@ function summarizeRecommendations(games: FrozenRecommendation[]) {
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -199,7 +199,7 @@ function summarizeSource(games: FrozenRecommendation[], source: CardPickSource) 
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -216,7 +216,7 @@ function summarizeNamedSides(games: FrozenRecommendation[]) {
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -233,7 +233,7 @@ function summarizeDeviations(games: FrozenRecommendation[]) {
   const losses = results.filter((result) => result === 'loss').length
   const pushes = results.filter((result) => result === 'push').length
   return {
-    count: rows.length,
+    count: wins + losses + pushes,
     wins,
     losses,
     pushes,
@@ -415,7 +415,8 @@ export default function PerformanceView({
           <h1>Recommendation performance</h1>
           <p className="hero-copy">
             The top tiles are overall ATS for the frozen Lines
-            recommendation, then line-value card picks. Play of the week
+            recommendation, then line-value card picks. Each count is
+            games that already have a cover. Play of the week
             locks at 8:00 AM ET the morning of the first kickoff; play of
             the day locks that morning when the day has at least two games.
             Weeks from before those stamps existed are reconstructed from

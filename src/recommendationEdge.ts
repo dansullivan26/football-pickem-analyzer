@@ -144,7 +144,7 @@ export function summarizeNetEdgeBuckets(games: FrozenRecommendation[]) {
       id: bucket.id,
       label: bucket.label,
       cardClass: bucket.cardClass,
-      count: inBucket.length,
+      count: wins + losses,
       wins,
       losses,
       pending,

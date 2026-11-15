@@ -61,8 +61,11 @@ test('summarizeNetEdgeBuckets grades the line-value side in each band', () => {
     rec({ cbsEventId: 4, compositeEdge: 3.2, cover: 'home' }),
     rec({ cbsEventId: 5, compositeEdge: 4.5, cover: 'home' }),
     rec({ cbsEventId: 6, category: 'pending', liveHomeSpread: null, recommendedSide: null }),
+    rec({ cbsEventId: 7, compositeEdge: 2, cover: null }),
+    rec({ cbsEventId: 8, compositeEdge: 2, recommendedSide: null, cover: 'home' }),
   ])
   const byId = Object.fromEntries(stats.map((row) => [row.id, row]))
+  assert.equal(byId.lean?.count, 1)
   assert.equal(byId['below-floor']?.detail, '0-1 ATS')
   assert.equal(byId.thin?.detail, '1-0 ATS')
   assert.equal(byId.lean?.detail, '0-1 ATS')

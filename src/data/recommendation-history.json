@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T21:37:22.357Z",
+  "updatedAt": "2026-11-15T23:00:39.035Z",
   "weeks": [
     {
       "week": 1,
@@ -7501,11 +7501,11 @@
       "week": 11,
       "seasonYear": 2026,
       "label": "Week 11",
-      "capturedAt": "2026-11-15T17:53:05.672Z",
+      "capturedAt": "2026-11-15T23:00:39.035Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029316,
-        "draftKingsTotal": 39.5,
+        "draftKingsTotal": 38.5,
         "frozenAt": null
       },
       "playOfTheWeek": {
@@ -7897,8 +7897,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 3,
-          "homeScore": 7
+          "awayScore": 10,
+          "homeScore": 35
         },
         {
           "cbsEventId": 50029305,
@@ -7925,7 +7925,9 @@
             "state": "GA",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 35,
+          "homeScore": 13
         },
         {
           "cbsEventId": 50029306,
@@ -7952,7 +7954,9 @@
             "state": "OH",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 24,
+          "homeScore": 27
         },
         {
           "cbsEventId": 50029307,
@@ -7979,7 +7983,9 @@
             "state": "WI",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 30,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50029308,
@@ -8006,7 +8012,9 @@
             "state": "IN",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 22,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50029309,
@@ -8033,7 +8041,9 @@
             "state": "LA",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 20,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50029310,
@@ -8060,7 +8070,9 @@
             "state": "NJ",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 31,
+          "homeScore": 12
         },
         {
           "cbsEventId": 50029311,
@@ -8088,7 +8100,9 @@
             "indoor": false
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 40,
+          "homeScore": 23
         },
         {
           "cbsEventId": 50029312,
@@ -8116,7 +8130,9 @@
             "indoor": true
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 3,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50029313,
@@ -8143,7 +8159,9 @@
             "state": "NV",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50029314,
@@ -8170,7 +8188,9 @@
             "state": "TX",
             "indoor": true
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50029315,
@@ -8206,13 +8226,13 @@
           "away": "LAC",
           "home": "BAL",
           "homeSpread": -5.5,
-          "liveHomeSpread": -5.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": -4.5,
+          "category": "slight",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
-          "source": "rest-travel",
-          "pickedSide": "home",
+          "source": "line-value",
+          "pickedSide": "away",
           "strength": "mild",
           "score": 3,
           "compositeEdge": 1,

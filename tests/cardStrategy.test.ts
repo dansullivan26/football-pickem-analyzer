@@ -621,9 +621,65 @@ test('public consensus cannot fill a game with no modeled advantage', () => {
 
   assert.equal(result.pickedSide, null)
   assert.equal(result.source, null)
+  assert.equal(result.detail, null)
   assert.equal(
     result.skipReason,
     'No line-value, hook, injury, rest, or travel advantage',
+  )
+})
+
+test('a zero net still shows the factors that cancel', () => {
+  const billsJets = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: 8.5,
+    liveHomeSpread: 8.5,
+    consensus: undefined,
+    travelRest: {
+      awayRest: { days: 6, kind: 'short', label: 'Short week (6d)' },
+      homeRest: { days: 7, kind: 'normal', label: 'Normal week (7d)' },
+      awayTravel: { zones: 0, direction: 'same', label: 'Same time zone' },
+      homeTravel: null,
+    },
+    injuries: {
+      away: injuryTeam('BUF', []),
+      home: injuryTeam('NYJ', ['out']),
+    },
+  })
+  assert.equal(billsJets.pickedSide, null)
+  assert.equal(billsJets.leanSide, null)
+  assert.equal(
+    billsJets.detail,
+    'injuries -0.25 · rest +0.25 · 0-point net edge',
+  )
+  assert.equal(
+    billsJets.skipReason,
+    'Modeled edge is exactly offset by injuries and rest',
+  )
+
+  const restTravel = resolveCardPick({
+    category: 'neutral',
+    recommendedSide: null,
+    edge: 0,
+    homeSpread: -6,
+    liveHomeSpread: -6,
+    consensus: undefined,
+    travelRest: {
+      awayRest: { days: 8, kind: 'long', label: 'Long week (8d)' },
+      homeRest: { days: 7, kind: 'normal', label: 'Normal week (7d)' },
+      awayTravel: { zones: 1, direction: 'east', label: '1 time zone east' },
+      homeTravel: null,
+    },
+  })
+  assert.equal(restTravel.pickedSide, null)
+  assert.equal(
+    restTravel.detail,
+    'rest -0.25 · travel +0.25 · 0-point net edge',
+  )
+  assert.equal(
+    restTravel.skipReason,
+    'Modeled edge is exactly offset by rest and travel',
   )
 })
 

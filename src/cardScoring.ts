@@ -687,30 +687,34 @@ export function resolveCardPick(input: {
       input.liveHomeSpread == null ? undefined : input.homeSpread,
   })
   if (!adjustment.pickedSide) {
-    const hasLine = adjustment.line !== 0
-    const hasHook = adjustment.hook !== 0
-    const hasInjury = adjustment.injury !== 0
-    const hasContext = adjustment.context !== 0
     const offsetBy = [
-      hasHook ? 'hook' : null,
+      adjustment.line !== 0 ? 'line value' : null,
+      adjustment.hook !== 0 ? 'hook' : null,
+      adjustment.injury !== 0 ? 'injuries' : null,
       adjustment.rest !== 0 ? 'rest' : null,
       adjustment.travel !== 0 ? 'travel' : null,
     ].filter((part): part is string => part != null)
     const explainSide =
       adjustment.leanSide ??
       input.recommendedSide ??
-      (adjustment.line < 0 ? 'away' : adjustment.line > 0 ? 'home' : null)
+      (adjustment.line < 0
+        ? 'away'
+        : adjustment.line > 0
+          ? 'home'
+          : offsetBy.length > 0
+            ? 'home'
+            : null)
+    const netsToZero =
+      offsetBy.length > 0 && Math.abs(adjustment.rawTotal) < 1e-9
     const skipReason =
       Math.abs(adjustment.total) > 0 &&
       Math.abs(adjustment.total) + 1e-9 < MIN_COMPOSITE_EDGE
         ? `Composite edge is below ${MIN_COMPOSITE_EDGE.toFixed(2)} points`
-        : hasLine && offsetBy.length > 0 && Math.abs(adjustment.total) < 1e-9
-        ? `Line value is exactly offset by ${joinEnglish(offsetBy)}`
-        : (hasLine || hasHook || hasInjury) && hasContext
-        ? 'Modeled edge is exactly offset by rest and travel'
-        : input.category === 'pending'
-          ? 'No DraftKings line and no rest or travel advantage'
-          : 'No line-value, hook, injury, rest, or travel advantage'
+        : netsToZero
+          ? `Modeled edge is exactly offset by ${joinEnglish(offsetBy)}`
+          : input.category === 'pending'
+            ? 'No DraftKings line and no rest or travel advantage'
+            : 'No line-value, hook, injury, rest, or travel advantage'
     return {
       ...empty,
       skipReason,

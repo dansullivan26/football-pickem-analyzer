@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T02:48:19.645Z",
+  "updatedAt": "2026-11-15T02:52:33.071Z",
   "weeks": [
     {
       "week": 1,
@@ -7501,7 +7501,7 @@
       "week": 11,
       "seasonYear": 2026,
       "label": "Week 11",
-      "capturedAt": "2026-11-14T23:25:58.995Z",
+      "capturedAt": "2026-11-15T02:52:33.071Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029316,
@@ -7661,7 +7661,7 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 19,
+          "awayScore": 22,
           "homeScore": 7
         },
         {
@@ -7690,8 +7690,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 30,
-          "homeScore": 7
+          "awayScore": 37,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50028754,
@@ -7720,7 +7720,7 @@
           },
           "neutralSite": false,
           "awayScore": 7,
-          "homeScore": 21
+          "homeScore": 31
         },
         {
           "cbsEventId": 50028665,
@@ -7747,7 +7747,9 @@
             "state": "KY",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 21,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50028742,
@@ -7774,7 +7776,9 @@
             "state": "UT",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 0,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028707,
@@ -7801,7 +7805,9 @@
             "state": "LA",
             "indoor": false
           },
-          "neutralSite": true
+          "neutralSite": true,
+          "awayScore": 10,
+          "homeScore": 14
         },
         {
           "cbsEventId": 50028716,
@@ -7828,7 +7834,9 @@
             "state": "OK",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 0
         },
         {
           "cbsEventId": 50028741,
@@ -7837,16 +7845,16 @@
           "away": "UTAH",
           "home": "ARIZ",
           "homeSpread": 2.5,
-          "liveHomeSpread": 1.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 2.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "pickedSide": "away",
+          "strength": "solid",
+          "score": 6,
+          "compositeEdge": 0.25,
           "awayRank": 2,
           "homeRank": 23,
           "venue": {
@@ -7999,16 +8007,16 @@
           "away": "CAR",
           "home": "NO",
           "homeSpread": -1.5,
-          "liveHomeSpread": -2.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -1.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
+          "source": "rest-travel",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3.75,
-          "compositeEdge": 1.25,
+          "score": 0.75,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

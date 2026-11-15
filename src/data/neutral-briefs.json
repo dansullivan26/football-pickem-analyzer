@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T16:33:25.175Z",
+  "updatedAt": "2026-11-15T07:51:18.145Z",
   "games": [
     {
       "status": "ok",
@@ -2217,6 +2217,20 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzge4di===",
+      "cbsEventId": 50029184,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "New England",
+      "home": "Detroit",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Detroit has covered 4-3 ATS (57%) in 8 games as a favorite and 3-1 ATS (75%) in 5 on normal rest, the split behind a covers-on-a-normal-week profile, while the home-site record is an even 2-2 ATS in 5. New England is 2-3 ATS (40%) in 6 on the road, 2-2 ATS (50%) in 5 as a dog, and 2-3 ATS (40%) in 6 on normal rest, and nine graded games still show no split strong enough to label. Detroit covered two of its last three, including a Week 9 home win at -3.5 against Minnesota after a Week 8 home loss at the same number to Green Bay, while New England has failed to cover four straight, including a Week 8 away-dog loss at +3.5 in Chicago. Both clubs are without a center and a corner (Cade Mays and D.J. Reed out for Detroit; Ben Brown and Carlton Davis III out for New England); Amon-Ra St.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:45:14.901Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydi===",
       "cbsEventId": 50029304,
       "week": 11,
@@ -2228,6 +2242,76 @@
       "why": "The Giants are 6-2 ATS (75%) in 9 and 3-1 ATS (75%) in 5 at home, and they are 2-1 ATS (67%) in 4 as a favorite. Washington is 3-3 ATS (50%) in 7 as a dog and 2-1 ATS (67%) in 4 on the road, so the visitors' best case is the site split while the dog split is even. The line has moved from -1.5 to -2.5 toward New York, and the Giants already covered as 3.5-point road dogs against Washington in Week 6. Short-rest results are thin — the Giants are 1-0 ATS in 2, and Washington is 0-0 ATS in 1 — and Washington has guard Lucas Patrick out with a concussion, while Giants notes list Cam Skattebo out and J.J. McCarthy questionable yet both as full Tuesday participants. New York has covered its last two graded games, including a Week 10 road win as a favorite, after failing to cover as a home favorite in Week 7. Lean to the Giants at home.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-11-12T07:28:54.471Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydk===",
+      "cbsEventId": 50029305,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Kansas City",
+      "home": "Atlanta",
+      "side": "home",
+      "confidence": "light",
+      "why": "Kansas City is 1-3 ATS on the road in 5 games and has missed the number in 3 of 4 graded road games. The lone road cover was as a -11.5 favorite at Miami; the road spots at Denver (-1.5), Las Vegas (-4.5), and Seattle (+2.5) all failed to cover. Atlanta is 1-3 ATS at home in 5, 3-5 ATS as a dog in 9, and 1-4 ATS on normal rest in 6. The home number has moved from +3.5 to +3, and Kansas City is without offensive tackle Jaylon Moore (ankle) and running back Kenneth Walker III (groin), while Atlanta is without linebacker Divine Deablo (forearm), with defensive tackle Gervon Dexter Sr. (illness) and linebacker James Pearce Jr. (back) questionable. No head-to-head games are listed. Kansas City's road misses, the move toward Atlanta, and those two offensive absences support Atlanta at home, with light confidence because Atlanta's home and normal-rest samples point the other way.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:46:56.681Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydm===",
+      "cbsEventId": 50029306,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Houston",
+      "home": "Cleveland",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Cleveland is 6-3 ATS overall, 3-0 ATS at home in 4, and 5-3 ATS as a dog in 9, and they have covered all three home-dog spots, including Baltimore at +4.5. Houston is 2-5 ATS as a favorite in 8 and 2-4 ATS on normal rest in 7, plus 0-1 ATS in 2 one-zone trips. Houston is also the more banged-up side: Danielle Hunter and Azeez Al-Shaair are out, with Will Anderson Jr. and Trent Brown questionable, while Cleveland is missing only Ronnie Hickman. There is no head-to-head history. Houston is still 2-1 ATS on the road in 4 and Cleveland is 0-1 ATS in adverse and wet games in 2, both thin samples. Those sit against a larger home, dog, rest, and favorite stack, so the lean is Cleveland.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:47:49.253Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydo===",
+      "cbsEventId": 50029307,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Minnesota",
+      "home": "Green Bay",
+      "side": "no-call",
+      "confidence": "light",
+      "why": "Minnesota is 3-1 ATS on the road in 5 games and Green Bay is 2-3 ATS as a favorite in 6, with the line moving from -3.5 to -2.5 and the public on Green Bay. Minnesota is also 1-2 ATS as a dog in 4 and has dropped three straight against the number, including dog losses to Buffalo and Detroit. Green Bay is 3-1 ATS at home in 5, 3-1 ATS on normal rest in 5, and 4-2 ATS in benign weather in 7, and has covered five in a row. Week 2 was a Minnesota cover as a 1.5-point home favorite, a different site and role, and both clubs are short-handed: Hockenson, Cashman, and Jennings are out for Minnesota with Addison questionable, while Jacobs and Rhyan are out for Green Bay with Franklin doubtful. The road split, Green Bay's favorite record, and the move toward the dog point to Minnesota; the home, rest, weather, and current cover streak point to Green Bay.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:49:47.059Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmydq===",
+      "cbsEventId": 50029308,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Miami",
+      "home": "Indianapolis",
+      "side": "home",
+      "confidence": "medium",
+      "why": "Indianapolis is 3-2 ATS indoors in 6 games and 5-3 ATS on normal rest in 9, while Miami is 1-1 ATS indoors in 3 and 3-3 ATS on normal rest in 7. This week's site and role splits are flat: Indianapolis is 2-2 ATS at home in 5 and 1-1 ATS as a favorite in 3, and Miami is 2-2 ATS on the road in 5 and 4-4 ATS as a dog in 9. The line moved from -3.5 to -4.5 toward Indianapolis, and Miami is 1-7 straight up as a dog in 9, so the home favorite is the side that usually wins the game. Miami covered 4 of its last 5 graded games before a Week 10 miss, and Indianapolis covered at home last week. Miami center Aaron Brewer is out and receiver Chris Bell is doubtful, while Indianapolis tackle Jalen Travis and long snapper Luke Rhodes are out.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:51:18.145Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmyds===",
+      "cbsEventId": 50029309,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Carolina",
+      "home": "New Orleans",
+      "side": "away",
+      "confidence": "medium",
+      "why": "New Orleans has not covered at home (0-5 ATS in 6) or as a favorite (0-3 ATS in 4), and indoors they are 1-4 ATS in 6. Those are one repeated home-favorite hole rather than three separate samples, and the last five home results are all non-covers. The number has shortened from -2.5 to -1.5, and the Saints are missing starting center Erik McCoy and tackle Taliese Fuaga. Carolina is a middling road dog at 2-2 ATS away in 5 and 2-3 ATS as a dog in 6, with three straight non-covers, a 0-1 ATS mark on one-zone trips in 2, and linebacker Bobby Okereke out. Both teams are 3-5 ATS overall, normal rest is 2-2 ATS in 5 for each, and there is no head-to-head sample. The home split, the point of line movement, and the offensive-line absences still point to Carolina.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T07:44:13.411Z"
     }
   ]
 }

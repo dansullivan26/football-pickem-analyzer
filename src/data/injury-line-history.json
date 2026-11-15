@@ -2,7 +2,7 @@
   "week": 11,
   "seasonYear": 2026,
   "label": "Week 11",
-  "updatedAt": "2026-11-15T02:52:37.349Z",
+  "updatedAt": "2026-11-15T11:16:46.526Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -362,6 +362,24 @@
           "fromStatus": "Injured Reserve",
           "toStatus": "Questionable",
           "fromTier": "reserve",
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-15T11:16:46.526Z",
+          "cbsEventId": 50029184,
+          "athleteId": "15718",
+          "name": "Greg Van Roten",
+          "position": "G",
+          "teamAbbrev": "NE",
+          "teamName": "New England",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
           "toTier": "questionable",
           "availability": "worse",
           "homeSpreadBefore": -2.5,

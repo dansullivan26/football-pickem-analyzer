@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T07:51:18.145Z",
+  "updatedAt": "2026-11-15T15:04:23.482Z",
   "games": [
     {
       "status": "ok",
@@ -2312,6 +2312,90 @@
       "why": "New Orleans has not covered at home (0-5 ATS in 6) or as a favorite (0-3 ATS in 4), and indoors they are 1-4 ATS in 6. Those are one repeated home-favorite hole rather than three separate samples, and the last five home results are all non-covers. The number has shortened from -2.5 to -1.5, and the Saints are missing starting center Erik McCoy and tackle Taliese Fuaga. Carolina is a middling road dog at 2-2 ATS away in 5 and 2-3 ATS as a dog in 6, with three straight non-covers, a 0-1 ATS mark on one-zone trips in 2, and linebacker Bobby Okereke out. Both teams are 3-5 ATS overall, normal rest is 2-2 ATS in 5 for each, and there is no head-to-head sample. The home split, the point of line movement, and the offensive-line absences still point to Carolina.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-11-15T07:44:13.411Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmyta===",
+      "cbsEventId": 50029310,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Buffalo",
+      "home": "N.Y. Jets",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Buffalo is 6-2 ATS (75%) in 9, and the two splits that match this spot both lean that way: 3-1 ATS on the road in 5 and 4-2 ATS as a favorite in 7. The Jets have no counter-split, at 4-5 ATS in 10, 2-2 ATS at home in 5, and 3-3 ATS as a dog in 7, with only a 1-5 straight-up record in those dog games. Rest is a wash for Buffalo (1-1 ATS in 3 short-rest games) and a mild drag for New York (3-5 ATS in 9 on normal rest). Buffalo has covered its last two, both as a favorite, and six of its last eight, while the Jets have missed three straight, including last week as a 9.5-point dog. The line only oscillated by a half-point and returned to the first number, and there is no head-to-head sample. Buffalo’s right tackle is doubtful, which is a real flag laying this number, but several Jets skill players are questionable, including Garrett Wilson, so the lean stays with Buffalo.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T14:59:26.883Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmytc===",
+      "cbsEventId": 50029311,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Jacksonville",
+      "home": "Tennessee",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Tennessee is 1-3 ATS at home in five games (25%), with home-dog losses in Weeks 8 and 6 and only a Week 3 home cover, so this site has been a miss more often than not. Jacksonville is 3-2 ATS as a favorite in six games and 2-1 ATS in four benign-weather games, while the road record is a thin 1-1 ATS in three and the recent favorite covers came at home. Tennessee’s 4-3 ATS as a dog in eight is a mild offset, and they did cover +10.5 and +11.5, but both of those were on the road and they are 1-6 straight up as dogs. Injuries point the same way as the home split: Tennessee has linebackers Anthony Hill Jr. and Cody Barton out, receiver Carnell Tate out, and guard Peter Skoronski on the reserve list, against only safety Jessie Bates III out for Jacksonville on a coach’s decision.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T15:01:29.971Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmyte===",
+      "cbsEventId": 50029312,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "L.A. Rams",
+      "home": "Arizona",
+      "side": "away",
+      "confidence": "medium",
+      "why": "L.A. Rams are 3-1 ATS on the road in five games and 4-0 ATS on normal rest in five, with a 5-4 ATS mark as favorites in ten. They have covered three straight, two of them as road favorites against Washington and Las Vegas. Arizona is 0-3 ATS at home in four games and 4-4 ATS as a dog in nine, including recent home misses against Denver, Detroit, and Seattle. Arizona did cover as a 13.5-point dog in Los Angeles in week 7, the Rams are 0-1 ATS in two one-zone trips, and Los Angeles lists Steve Avila out with Puka Nacua on the reserve list, so the prior meeting, travel, and injuries cut the other way. Indoor results are ordinary (Rams 3-2 ATS in six, Arizona 3-3 ATS in seven) and no line path is listed. The road, normal-rest, and Arizona home samples are the splits that match this spot, and they lean Los Angeles.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T15:02:30.997Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmytg===",
+      "cbsEventId": 50029313,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Seattle",
+      "home": "Las Vegas",
+      "side": "home",
+      "confidence": "strong",
+      "why": "Las Vegas is 6-3 ATS in 10, 3-1 ATS at home in 5, and 5-3 ATS as a dog in 9. The indoor and normal-rest spots match that profile: 5-1 ATS indoors in 7 and 5-3 ATS on normal rest in 9. Seattle is 3-6 ATS in 10 as a favorite, 1-2 ATS on the road in 4, and 0-3 ATS on normal rest in 4, with only a 1-0 indoor mark in a two-game sample. Recent road favorites have mostly missed (loss at Denver, loss at Washington, win at Arizona), while Las Vegas has covered two of its last three home games as a dog. Sam Darnold, Charles Cross, Leonard Williams, and Quenton Nelson are all out, and Las Vegas lists no injuries. The lean is Las Vegas at home.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T15:03:32.944Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmyti===",
+      "cbsEventId": 50029314,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "San Francisco",
+      "home": "Dallas",
+      "side": "home",
+      "confidence": "light",
+      "why": "San Francisco is 3-3 ATS as a favorite in seven games and 1-1 ATS on the road in three, and the last road-favorite spot (Atlanta, -3.5) was a non-cover. Indoors they are 0-1 ATS in two tries, and the two-zone trip has no graded cover. Dallas cuts the other way at 1-3 ATS at home in five and 1-2 ATS as a dog in four, including a home-dog miss against Baltimore. The line has only bounced between +3.5 and +4.5 and closed back on the dog, while 68% of the public and 14 of 16 called pool tickets are on San Francisco. San Francisco also brings the longer injury list, with Mike Evans out and Trent Williams plus three corners questionable, against Dallas missing Jake Ferguson, P.J. Locke, and Donovan Ezeiruaku. Road and indoor samples are thin and the home record is a real flag, but the flat favorite spot, the public pile-on, and that injury cluster still lean Dallas.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T15:00:38.411Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dinz2guydamrzgmytk===",
+      "cbsEventId": 50029315,
+      "week": 11,
+      "seasonYear": 2026,
+      "away": "Pittsburgh",
+      "home": "Cincinnati",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Cincinnati is 2-4 ATS as a favorite in 7, 1-2 ATS at home in 4, and 2-4 ATS on a normal week in 7, with a 2-3 ATS mark in benign weather in 6. Pittsburgh is 6-2 ATS overall in 9 and covered four straight before the bye, including a Week 4 win over Cincinnati as a 3.5-point dog, but the matching role is only 2-2 ATS on the road in 5 and 1-1 ATS as a dog in 3, and the bye has no graded cover (0-0 in 1). The line ran from -3.5 to -4.5 and back to -3.5, so the extra point toward Cincinnati did not hold. Derrick Harmon (DT, foot) is questionable, a small mark against an empty Cincinnati injury list. Those favorite and home samples are enough to lean Pittsburgh with the points, with the road-dog splits still too even to treat it as a strong side.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-15T15:04:23.482Z"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "provider": "SharpAPI",
-  "updatedAt": "2026-11-15T14:10:13.748Z",
-  "comparedTo": "2026-11-15T11:16:42.010Z",
+  "updatedAt": "2026-11-15T17:53:05.437Z",
+  "comparedTo": "2026-11-15T14:10:13.748Z",
   "books": [
     {
       "key": "draftkings",
@@ -187,7 +187,7 @@
       "lines": {
         "draftkings": {
           "line": 3,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -200,7 +200,7 @@
       "lines": {
         "draftkings": {
           "line": 4.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -213,7 +213,7 @@
       "lines": {
         "draftkings": {
           "line": -2.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -226,7 +226,7 @@
       "lines": {
         "draftkings": {
           "line": -4.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -238,8 +238,9 @@
       "homeTeam": "New Orleans",
       "lines": {
         "draftkings": {
-          "line": -1.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "line": 1.5,
+          "retrievedAt": "2026-11-15T17:53:05.437Z",
+          "previousLine": -1.5
         }
       }
     },
@@ -252,7 +253,7 @@
       "lines": {
         "draftkings": {
           "line": 8.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -265,7 +266,7 @@
       "lines": {
         "draftkings": {
           "line": 10.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -278,7 +279,7 @@
       "lines": {
         "draftkings": {
           "line": 9.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -291,7 +292,7 @@
       "lines": {
         "draftkings": {
           "line": 6.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -304,7 +305,7 @@
       "lines": {
         "draftkings": {
           "line": 4.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -317,7 +318,7 @@
       "lines": {
         "draftkings": {
           "line": -3.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "retrievedAt": "2026-11-15T17:53:05.437Z"
         }
       }
     },
@@ -329,14 +330,16 @@
       "homeTeam": "Baltimore",
       "lines": {
         "draftkings": {
-          "line": -4.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "line": -5.5,
+          "retrievedAt": "2026-11-15T17:53:05.437Z",
+          "previousLine": -4.5
         }
       },
       "totals": {
         "draftkings": {
-          "line": 38.5,
-          "retrievedAt": "2026-11-15T14:10:13.748Z"
+          "line": 39.5,
+          "retrievedAt": "2026-11-15T17:53:05.437Z",
+          "previousLine": 38.5
         }
       }
     }

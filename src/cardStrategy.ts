@@ -422,10 +422,25 @@ export function copiedBookSpread(pick: {
   return null
 }
 
+const COPIED_FACTOR_LABELS = ['TD hook', 'FG hook', 'injuries', 'rest', 'travel'] as const
+
+/** Factor names in the same order the game note prints them. */
+export function copiedFactorLabels(detail: string | null | undefined) {
+  if (!detail) return []
+  return COPIED_FACTOR_LABELS.filter((label) => detail.includes(label))
+}
+
+function joinFactorLabels(labels: readonly string[]) {
+  if (labels.length === 0) return null
+  if (labels.length === 1) return labels[0]
+  if (labels.length === 2) return `${labels[0]} and ${labels[1]}`
+  return `${labels.slice(0, -1).join(', ')}, and ${labels[labels.length - 1]}`
+}
+
 /**
- * Largest modeled reason the copied side is recommended. Line value wins a
- * tie because it is the card's primary signal. Hook points only count when
- * the pick stored a favorable FG/TD hook.
+ * Largest modeled reason the copied side is recommended. A line gap stays
+ * "line value". With no gap, the label lists the factors actually printed
+ * on the game note.
  */
 export function copiedRecommendationDriver(pick: SuggestedPick) {
   const hookPts = hookContribution(pick.hook)
@@ -434,16 +449,16 @@ export function copiedRecommendationDriver(pick: SuggestedPick) {
       ? pick.edge
       : 0
 
-  if (hookPts > linePts && pick.hook) {
-    return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
-  }
   if (linePts > 0) {
+    if (hookPts > linePts && pick.hook) {
+      return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
+    }
     const book = copiedBookSpread(pick)
     return book != null ? `line value on ${formatPoolSpread(book)}` : 'line value'
   }
-  if (pick.hook) {
-    return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
-  }
+  const shown = joinFactorLabels(copiedFactorLabels(pick.detail))
+  if (shown) return shown
+  if (pick.hook) return pick.hook === 'fg' ? 'FG hook' : 'TD hook'
   if (
     pick.source === 'rest-travel' ||
     (pick.compositeEdge > 0 && pick.edge == null)
@@ -518,7 +533,9 @@ function formatCopiedManualLine(
     return `${formatCopiedPick(sent.pickedAbbrev, sent.poolSpread)} (manual pick)`
   }
   if (game.leanSide && game.leanSpread != null) {
-    return `${formatCopiedPick(sideAbbrev(game, game.leanSide), game.leanSpread)} (lean only, no pick)`
+    const factors = joinFactorLabels(copiedFactorLabels(game.detail))
+    const tag = factors ? `lean only, no pick - ${factors}` : 'lean only, no pick'
+    return `${formatCopiedPick(sideAbbrev(game, game.leanSide), game.leanSpread)} (${tag})`
   }
   return `${game.awayAbbrev} @ ${game.homeAbbrev} (manual review, no lean)`
 }

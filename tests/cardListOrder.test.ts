@@ -290,6 +290,20 @@ test('copiedRecommendationDriver names the biggest reason for the lean', () => {
     ),
     'rest/travel',
   )
+  assert.equal(
+    copiedRecommendationDriver(
+      pick({
+        gameId: 'cle',
+        kickoff: '2026-11-15T13:00:00-05:00',
+        edge: 0,
+        source: 'rest-travel',
+        category: 'neutral',
+        compositeEdge: 0.6,
+        detail: 'injuries +0.35 · travel +0.25 · 0.6-point net edge',
+      }),
+    ),
+    'injuries and travel',
+  )
 })
 
 test('otherFactorRecommendationLabel marks picks that are not a line gap', () => {
@@ -476,6 +490,40 @@ test('formatSuggestedCardText names play of the week and pick strength', () => {
       'slate',
     ),
     'Play of the week (as of Sat 8:00 AM ET): KC +5.5 (strong - line value on +1.3)\n\nSaturday:\n\nUNC +3.5 (light - line value on +2.5)\n\nSunday:\n\nNYG -5.5 (deviated)\n\nMonday:\n\nDET +4.5 (manual pick)',
+  )
+})
+
+test('formatSuggestedCardText names the factors on a lean that is not a pick', () => {
+  const card: SuggestedCard = {
+    strategyId: 'test',
+    title: 'ATS Card',
+    strategyNote: 'noisy note',
+    generatedAt: '2026-09-19T12:00:00.000Z',
+    seasonYear: 2026,
+    week: 11,
+    weekLabel: 'Week 11',
+    picks: [],
+    unpicked: [
+      unpicked({
+        gameId: 'no',
+        kickoff: '2026-11-15T13:00:00-05:00',
+        away: 'Miami',
+        awayAbbrev: 'MIA',
+        home: 'New Orleans',
+        homeAbbrev: 'NO',
+        homeSpread: -1.5,
+        leanSide: 'home',
+        leanTeam: 'New Orleans',
+        leanSpread: -1.5,
+        detail: 'travel +0.25 · 0.25-point net edge',
+      }),
+    ],
+    tiebreaker: null,
+  }
+
+  assert.equal(
+    formatSuggestedCardText(card),
+    'Sunday:\n\nNO -1.5 (lean only, no pick - travel)',
   )
 })
 

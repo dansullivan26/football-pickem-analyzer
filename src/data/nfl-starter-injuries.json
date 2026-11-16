@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-11-16T20:21:28.544Z",
-    "reportUpdatedAt": "2026-11-16T20:21:24Z",
+    "fetchedAt": "2026-11-16T22:22:53.733Z",
+    "reportUpdatedAt": "2026-11-16T22:22:45Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-11-16T20:19:38Z",
+      "depthChartAt": "2026-11-16T22:22:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -32,6 +32,16 @@
           "injury": "Knee",
           "detail": "Williams (knee) has been ruled out for Sunday's game against the Rams, Darren Urban of the Cardinals' official site reports.",
           "updatedAt": "2026-11-15T20:26Z"
+        },
+        {
+          "athleteId": "3918331",
+          "name": "Andrew Wingard",
+          "position": "S",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Wrist",
+          "detail": "out",
+          "updatedAt": "2026-11-16T21:32Z"
         }
       ]
     },
@@ -39,7 +49,7 @@
       "abbrev": "ATL",
       "name": "Atlanta",
       "espnTeamId": "1",
-      "depthChartAt": "2026-11-16T20:19:55Z",
+      "depthChartAt": "2026-11-16T22:17:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -58,7 +68,7 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-11-16T20:19:25Z",
+      "depthChartAt": "2026-11-16T22:22:38Z",
       "status": "ok",
       "injuries": [
         {
@@ -77,7 +87,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-11-16T20:17:56Z",
+      "depthChartAt": "2026-11-16T22:21:54Z",
       "status": "ok",
       "injuries": [
         {
@@ -116,7 +126,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-11-16T20:19:26Z",
+      "depthChartAt": "2026-11-16T22:18:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -145,7 +155,7 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-11-16T20:19:35Z",
+      "depthChartAt": "2026-11-16T22:22:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -174,7 +184,7 @@
       "abbrev": "CLE",
       "name": "Cleveland",
       "espnTeamId": "5",
-      "depthChartAt": "2026-11-16T20:19:58Z",
+      "depthChartAt": "2026-11-16T22:17:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -203,9 +213,19 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-11-16T20:17:56Z",
+      "depthChartAt": "2026-11-16T22:19:46Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4248911",
+          "name": "DaRon Bland",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Ankle",
+          "detail": "Bland sustained a high-ankle sprain in Sunday's 46-40 loss to the 49ers, Todd Archer of ESPN.com reports.",
+          "updatedAt": "2026-11-16T19:32Z"
+        },
         {
           "athleteId": "4685263",
           "name": "Tyler Booker",
@@ -245,16 +265,6 @@
           "injury": "Knee",
           "detail": "out",
           "updatedAt": "2026-11-16T19:09Z"
-        },
-        {
-          "athleteId": "4248911",
-          "name": "DaRon Bland",
-          "position": "CB",
-          "status": "Doubtful",
-          "tier": "doubtful",
-          "injury": "Ankle",
-          "detail": "Bland sustained a high-ankle sprain in Sunday's 46-40 loss to the 49ers, Todd Archer of ESPN.com reports.",
-          "updatedAt": "2026-11-16T19:32Z"
         }
       ]
     },
@@ -262,7 +272,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-11-16T20:19:19Z",
+      "depthChartAt": "2026-11-16T22:17:16Z",
       "status": "ok",
       "injuries": [
         {
@@ -301,7 +311,7 @@
       "abbrev": "GB",
       "name": "Green Bay",
       "espnTeamId": "9",
-      "depthChartAt": "2026-11-16T20:20:00Z",
+      "depthChartAt": "2026-11-16T22:18:00Z",
       "status": "ok",
       "injuries": [
         {
@@ -371,8 +381,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Moore (ankle) has been ruled out for the rest of Sunday's game against the Vikings, Rob Demovsky of ESPN.com reports.",
-          "updatedAt": "2026-11-15T19:54Z"
+          "detail": "Moore's ankle injury is not considered serious, Jeremy Fowler of ESPN.com reports.",
+          "updatedAt": "2026-11-16T20:17Z"
         }
       ]
     },
@@ -380,7 +390,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-11-16T20:17:56Z",
+      "depthChartAt": "2026-11-16T22:20:17Z",
       "status": "ok",
       "injuries": [
         {
@@ -429,7 +439,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-11-16T20:19:33Z",
+      "depthChartAt": "2026-11-16T22:22:52Z",
       "status": "ok",
       "injuries": [
         {
@@ -498,7 +508,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-11-16T20:19:30Z",
+      "depthChartAt": "2026-11-16T22:21:52Z",
       "status": "ok",
       "injuries": [
         {
@@ -517,7 +527,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-11-16T20:19:00Z",
+      "depthChartAt": "2026-11-16T22:18:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -556,7 +566,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-11-16T20:21:22Z",
+      "depthChartAt": "2026-11-16T22:21:29Z",
       "status": "ok",
       "injuries": [
         {
@@ -595,7 +605,7 @@
       "abbrev": "LAR",
       "name": "L.A. Rams",
       "espnTeamId": "14",
-      "depthChartAt": "2026-11-16T20:17:17Z",
+      "depthChartAt": "2026-11-16T22:17:22Z",
       "status": "ok",
       "injuries": [
         {
@@ -644,7 +654,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-11-16T20:19:41Z",
+      "depthChartAt": "2026-11-16T22:22:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -664,8 +674,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Bowers, who will undergo additional testing Monday, isn't believed to have suffered a major ankle injury in Sunday's 21-13 loss to the Seahawks, Ian Rapoport of NFL Network reports.",
-          "updatedAt": "2026-11-16T13:16Z"
+          "detail": "Raiders head coach Klint Kubiak confirmed Monday that Bowers (ankle) is considered day-to-day after exiting Sunday's 21-13 loss to the Seahawks, Sam Warren of The Athletic reports. \"It's not as bad as we thought, but still a significant injury,\" Kubiak said.",
+          "updatedAt": "2026-11-16T21:00Z"
         }
       ]
     },
@@ -673,7 +683,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-11-16T20:19:20Z",
+      "depthChartAt": "2026-11-16T22:22:08Z",
       "status": "ok",
       "injuries": [
         {
@@ -732,7 +742,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-11-16T20:20:13Z",
+      "depthChartAt": "2026-11-16T22:18:05Z",
       "status": "ok",
       "injuries": [
         {
@@ -782,8 +792,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Quadriceps",
-          "detail": "Van Ginkel (quadriceps) is questionable to return to Sunday's game against the Packers.",
-          "updatedAt": "2026-11-15T20:53Z"
+          "detail": "Van Ginkel (quadriceps) is expected to practice in preparation for Week 11, Kevin Seifert of ESPN.com reported Monday.",
+          "updatedAt": "2026-11-16T20:55Z"
         }
       ]
     },
@@ -791,7 +801,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-11-16T20:19:31Z",
+      "depthChartAt": "2026-11-16T22:18:07Z",
       "status": "ok",
       "injuries": []
     },
@@ -799,7 +809,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-11-16T20:19:44Z",
+      "depthChartAt": "2026-11-16T22:21:59Z",
       "status": "ok",
       "injuries": [
         {
@@ -858,7 +868,7 @@
       "abbrev": "NE",
       "name": "New England",
       "espnTeamId": "17",
-      "depthChartAt": "2026-11-16T20:20:37Z",
+      "depthChartAt": "2026-11-16T22:18:00Z",
       "status": "ok",
       "injuries": [
         {
@@ -937,7 +947,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-11-16T20:19:40Z",
+      "depthChartAt": "2026-11-16T22:22:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -986,7 +996,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-11-16T20:19:17Z",
+      "depthChartAt": "2026-11-16T22:17:55Z",
       "status": "ok",
       "injuries": [
         {
@@ -1003,8 +1013,8 @@
           "athleteId": "4368304",
           "name": "Mason McCormick",
           "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
+          "status": "Doubtful",
+          "tier": "doubtful",
           "injury": "Ankle",
           "detail": "McCormick suffered an ankle injury in Sunday night's game against the Bengals and will not return, Nick Farabaugh of PennLive.com reports.",
           "updatedAt": "2026-11-16T03:00Z"
@@ -1015,7 +1025,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-11-16T20:17:20Z",
+      "depthChartAt": "2026-11-16T22:18:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1025,8 +1035,18 @@
           "status": "Out",
           "tier": "out",
           "injury": "Achilles",
-          "detail": "out",
-          "updatedAt": "2026-11-16T19:38Z"
+          "detail": "Head coach Kyle Shanahan said Monday that the 49ers are \"hoping to\" have Evans (Achilles) back at practice this week, Nick Wagoner of ESPN.com reports.",
+          "updatedAt": "2026-11-16T22:05Z"
+        },
+        {
+          "athleteId": "4427325",
+          "name": "Renardo Green",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Back",
+          "detail": "questionable",
+          "updatedAt": "2026-11-16T22:10Z"
         }
       ]
     },
@@ -1034,7 +1054,7 @@
       "abbrev": "SEA",
       "name": "Seattle",
       "espnTeamId": "26",
-      "depthChartAt": "2026-11-16T20:20:06Z",
+      "depthChartAt": "2026-11-16T22:18:04Z",
       "status": "ok",
       "injuries": [
         {
@@ -1103,7 +1123,7 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-11-16T20:19:28Z",
+      "depthChartAt": "2026-11-16T22:18:10Z",
       "status": "ok",
       "injuries": [
         {
@@ -1182,7 +1202,7 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-11-16T20:17:57Z",
+      "depthChartAt": "2026-11-16T22:18:04Z",
       "status": "ok",
       "injuries": [
         {

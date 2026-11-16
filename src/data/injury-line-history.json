@@ -2,7 +2,7 @@
   "week": 11,
   "seasonYear": 2026,
   "label": "Week 11",
-  "updatedAt": "2026-11-16T20:21:28.544Z",
+  "updatedAt": "2026-11-16T22:22:53.733Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -5470,6 +5470,24 @@
           "homeSpreadBefore": 9.5,
           "homeSpreadAfter": 9.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-16T22:22:53.733Z",
+          "cbsEventId": 50029312,
+          "athleteId": "3918331",
+          "name": "Andrew Wingard",
+          "position": "S",
+          "teamAbbrev": "ARI",
+          "teamName": "Arizona",
+          "side": "home",
+          "fromStatus": null,
+          "toStatus": "Out",
+          "fromTier": null,
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 9.5,
+          "homeSpreadAfter": 9.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -6164,6 +6182,42 @@
           "homeSpreadBefore": 4.5,
           "homeSpreadAfter": 4.5,
           "towardTeam": 0
+        },
+        {
+          "at": "2026-11-16T22:22:53.733Z",
+          "cbsEventId": 50029314,
+          "athleteId": "4248911",
+          "name": "DaRon Bland",
+          "position": "CB",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "home",
+          "fromStatus": "Doubtful",
+          "toStatus": "Out",
+          "fromTier": "doubtful",
+          "toTier": "out",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-16T22:22:53.733Z",
+          "cbsEventId": 50029314,
+          "athleteId": "4427325",
+          "name": "Renardo Green",
+          "position": "CB",
+          "teamAbbrev": "SF",
+          "teamName": "San Francisco",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 4.5,
+          "homeSpreadAfter": 4.5,
+          "towardTeam": 0
         }
       ]
     },
@@ -6435,6 +6489,24 @@
           "toStatus": "Questionable",
           "fromTier": null,
           "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -3.5,
+          "homeSpreadAfter": -3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-16T22:22:53.733Z",
+          "cbsEventId": 50029315,
+          "athleteId": "4368304",
+          "name": "Mason McCormick",
+          "position": "G",
+          "teamAbbrev": "PIT",
+          "teamName": "Pittsburgh",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": "Doubtful",
+          "fromTier": "questionable",
+          "toTier": "doubtful",
           "availability": "worse",
           "homeSpreadBefore": -3.5,
           "homeSpreadAfter": -3.5,

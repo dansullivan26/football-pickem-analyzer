@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T03:42:21.258Z",
+  "updatedAt": "2026-11-19T13:36:02.970Z",
   "weeks": [
     {
       "week": 1,
@@ -8256,14 +8256,17 @@
       "week": 12,
       "seasonYear": 2026,
       "label": "Week 12",
-      "capturedAt": "2026-11-19T03:42:21.258Z",
+      "capturedAt": "2026-11-19T13:36:02.970Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029328,
-        "draftKingsTotal": 54.5,
+        "draftKingsTotal": 53.5,
         "frozenAt": null
       },
-      "playOfTheWeek": null,
+      "playOfTheWeek": {
+        "cbsEventId": 50028810,
+        "frozenAt": "2026-11-19T13:36:02.970Z"
+      },
       "playsOfTheDay": [],
       "games": [
         {
@@ -8310,7 +8313,7 @@
           "strength": "mild",
           "score": 0.75,
           "compositeEdge": 0.25,
-          "awayRank": 10,
+          "awayRank": 12,
           "homeRank": null,
           "venue": {
             "stadium": "David Booth Kansas Memorial Stadium",
@@ -8337,7 +8340,7 @@
           "strength": "solid",
           "score": 6,
           "compositeEdge": 1.25,
-          "awayRank": 14,
+          "awayRank": 16,
           "homeRank": null,
           "venue": {
             "stadium": "Tom Osborne Field at Memorial Stadium",
@@ -8445,7 +8448,7 @@
           "strength": "solid",
           "score": 6,
           "compositeEdge": 1.5,
-          "awayRank": 8,
+          "awayRank": 6,
           "homeRank": null,
           "venue": {
             "stadium": "Alaska Airlines Field at Husky Stadium",
@@ -8516,16 +8519,16 @@
           "away": "UGA",
           "home": "SC",
           "homeSpread": 16.5,
-          "liveHomeSpread": 15.5,
-          "category": "slight",
+          "liveHomeSpread": 14.5,
+          "category": "lean",
           "recommendedSide": "home",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "strength": "solid",
+          "score": 8,
+          "compositeEdge": 2,
           "awayRank": 1,
           "homeRank": 21,
           "venue": {
@@ -8553,7 +8556,7 @@
           "strength": "mild",
           "score": 0.75,
           "compositeEdge": 0.25,
-          "awayRank": 16,
+          "awayRank": 17,
           "homeRank": null,
           "venue": {
             "stadium": "Memorial Stadium at Faurot Field",

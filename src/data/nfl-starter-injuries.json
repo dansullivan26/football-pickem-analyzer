@@ -1,8 +1,8 @@
 {
   "source": {
     "provider": "ESPN",
-    "fetchedAt": "2026-11-19T13:36:13.335Z",
-    "reportUpdatedAt": "2026-11-19T13:36:07Z",
+    "fetchedAt": "2026-11-19T22:19:37.592Z",
+    "reportUpdatedAt": "2026-11-19T22:19:35Z",
     "note": "Starter means first team on ESPN’s current or earlier weekly depth chart. This retains a ruled-out starter after ESPN moves the replacement above him. ESPN is unofficial; verify final inactives before kickoff."
   },
   "teams": [
@@ -10,7 +10,7 @@
       "abbrev": "ARI",
       "name": "Arizona",
       "espnTeamId": "22",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:18:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -69,9 +69,19 @@
       "abbrev": "BAL",
       "name": "Baltimore",
       "espnTeamId": "33",
-      "depthChartAt": "2026-11-19T13:32:15Z",
+      "depthChartAt": "2026-11-19T22:17:35Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "3126356",
+          "name": "Marlon Humphrey",
+          "position": "CB",
+          "status": "Out",
+          "tier": "out",
+          "injury": "Coach's Decision",
+          "detail": "Ravens head coach Jesse Minter said that Humphrey won't play Sunday against the Panthers after the defensive back made a derogatory comment about the city of Baltimore in an episode of his podcast released Wednesday, Jamison Hensley of ESPN.com reports.",
+          "updatedAt": "2026-11-19T17:07Z"
+        },
         {
           "athleteId": "4035245",
           "name": "Nnamdi Madubuike",
@@ -79,18 +89,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "Madubuike (hamstring) did not participate at practice Wednesday, Jamison Hensley of ESPN.com reports.",
-          "updatedAt": "2026-11-19T01:11Z"
-        },
-        {
-          "athleteId": "4832793",
-          "name": "Olaivavega Ioane",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Shoulder",
-          "detail": "Ioane (shoulder) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-19T02:19Z"
+          "detail": "Madubuike (hamstring) remained sidelined for Thursday's practice, Jonas Shaffer of TheBaltimoreBanner.com reports.",
+          "updatedAt": "2026-11-19T20:19Z"
         },
         {
           "athleteId": "3858276",
@@ -108,7 +108,7 @@
       "abbrev": "BUF",
       "name": "Buffalo",
       "espnTeamId": "2",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:15:16Z",
       "status": "ok",
       "injuries": [
         {
@@ -118,7 +118,7 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Groin",
-          "detail": "Benford (groin) did not participate in Wednesday's practice.",
+          "detail": "Benford (groin) was estimated as a nonparticipant in Wednesday's walkthrough.",
           "updatedAt": "2026-11-19T01:26Z"
         },
         {
@@ -128,8 +128,18 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Concussion",
-          "detail": "Alford (concussion) did not participate in Wednesday's practice.",
+          "detail": "Alford (concussion) did not participate in Wednesday's walkthrough.",
           "updatedAt": "2026-11-19T01:31Z"
+        },
+        {
+          "athleteId": "4684527",
+          "name": "T.J. Sanders",
+          "position": "DT",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "questionable",
+          "updatedAt": "2026-11-19T21:35Z"
         },
         {
           "athleteId": "4568624",
@@ -138,7 +148,7 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Calf",
-          "detail": "Williams (calf) didn't participate in Buffalo's practice Wednesday.",
+          "detail": "Williams (calf) didn't participate in Buffalo's walkthrough Wednesday.",
           "updatedAt": "2026-11-19T01:29Z"
         },
         {
@@ -148,18 +158,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Hooker (knee) was a limited participant in Wednesday's practice.",
+          "detail": "Hooker (knee) was a limited participant in Wednesday's walkthrough.",
           "updatedAt": "2026-11-19T00:54Z"
-        },
-        {
-          "athleteId": "4676004",
-          "name": "Cole Bishop",
-          "position": "S",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Shoulder",
-          "detail": "Hooker (knee) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-19T00:57Z"
         },
         {
           "athleteId": "4385690",
@@ -168,8 +168,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Thumb",
-          "detail": "Kincaid (thumb/ankle) did not practice Wednesday, David Furones of the Sun Sentinel reports.",
-          "updatedAt": "2026-11-18T21:29Z"
+          "detail": "Kincaid (thumb/ankle) wasn't spotted on the field for Thursday's practice, Joe Buscaglia of The Athletic reports.",
+          "updatedAt": "2026-11-19T19:43Z"
         }
       ]
     },
@@ -177,7 +177,7 @@
       "abbrev": "CAR",
       "name": "Carolina",
       "espnTeamId": "29",
-      "depthChartAt": "2026-11-19T13:32:58Z",
+      "depthChartAt": "2026-11-19T22:15:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -197,8 +197,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Knee",
-          "detail": "Tremble didn't practice Wednesday due to a knee issue, with head coach Dave Canales noting after the session that the tight end's injury is a \"concern,\" Steve Reed of the Associated Press reports.",
-          "updatedAt": "2026-11-18T21:14Z"
+          "detail": "Tremble (knee) was limited in Thursday's practice, Mike Kaye of ESPN.com reports.",
+          "updatedAt": "2026-11-19T20:25Z"
         }
       ]
     },
@@ -206,7 +206,7 @@
       "abbrev": "CHI",
       "name": "Chicago",
       "espnTeamId": "3",
-      "depthChartAt": "2026-11-19T13:31:51Z",
+      "depthChartAt": "2026-11-19T22:19:07Z",
       "status": "ok",
       "injuries": [
         {
@@ -235,9 +235,19 @@
       "abbrev": "CIN",
       "name": "Cincinnati",
       "espnTeamId": "4",
-      "depthChartAt": "2026-11-19T13:34:35Z",
+      "depthChartAt": "2026-11-19T22:15:56Z",
       "status": "ok",
       "injuries": [
+        {
+          "athleteId": "4426422",
+          "name": "Dax Hill",
+          "position": "CB",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Illness",
+          "detail": "questionable",
+          "updatedAt": "2026-11-19T21:30Z"
+        },
         {
           "athleteId": "3125082",
           "name": "Dalton Risner",
@@ -247,6 +257,16 @@
           "injury": "Knee",
           "detail": "Risner (knee) will not return to Sunday night's game against the Steelers.",
           "updatedAt": "2026-11-16T03:38Z"
+        },
+        {
+          "athleteId": "4646773",
+          "name": "Dylan Fairchild",
+          "position": "G",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Oblique",
+          "detail": "questionable",
+          "updatedAt": "2026-11-19T21:30Z"
         },
         {
           "athleteId": "3051746",
@@ -264,7 +284,7 @@
       "abbrev": "DAL",
       "name": "Dallas",
       "espnTeamId": "6",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:16:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -323,7 +343,7 @@
       "abbrev": "DEN",
       "name": "Denver",
       "espnTeamId": "7",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:14:37Z",
       "status": "ok",
       "injuries": [
         {
@@ -333,8 +353,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Concussion",
-          "detail": "Moss (concussion) has been ruled out for the remainder of Sunday's game against the Panthers, Parker Gabriel of The Denver Post reports.",
-          "updatedAt": "2026-11-08T19:46Z"
+          "detail": "Moss (concussion) signed a four-year contract extension with the Broncos on Thursday, Aric DiLalla of the team's official site reports.",
+          "updatedAt": "2026-11-19T20:06Z"
         },
         {
           "athleteId": "4039059",
@@ -347,24 +367,14 @@
           "updatedAt": "2026-11-19T01:28Z"
         },
         {
-          "athleteId": "4360853",
-          "name": "Talanoa Hufanga",
-          "position": "S",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Ankle",
-          "detail": "Hufanga (ankle) was a full participant at practice Wednesday, Aric DiLalla of the Broncos' official site reports.",
-          "updatedAt": "2026-11-19T01:27Z"
-        },
-        {
           "athleteId": "4372016",
           "name": "Jaylen Waddle",
           "position": "WR",
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Concussion",
-          "detail": "Waddle (concussion) was present for Wednesday's practice, Chris Tomasson of the Denver Gazette reports.",
-          "updatedAt": "2026-11-18T21:50Z"
+          "detail": "Waddle (concussion) was a full participant in Wednesday's practice.",
+          "updatedAt": "2026-11-18T23:05Z"
         }
       ]
     },
@@ -372,7 +382,7 @@
       "abbrev": "DET",
       "name": "Detroit",
       "espnTeamId": "8",
-      "depthChartAt": "2026-11-19T13:35:02Z",
+      "depthChartAt": "2026-11-19T22:15:57Z",
       "status": "ok",
       "injuries": [
         {
@@ -411,7 +421,7 @@
       "abbrev": "HOU",
       "name": "Houston",
       "espnTeamId": "34",
-      "depthChartAt": "2026-11-19T13:34:57Z",
+      "depthChartAt": "2026-11-19T22:17:48Z",
       "status": "ok",
       "injuries": [
         {
@@ -430,7 +440,7 @@
       "abbrev": "IND",
       "name": "Indianapolis",
       "espnTeamId": "11",
-      "depthChartAt": "2026-11-19T13:31:45Z",
+      "depthChartAt": "2026-11-19T22:18:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -440,7 +450,7 @@
           "status": "Out",
           "tier": "out",
           "injury": "Knee",
-          "detail": "The Colts have ruled Ward (knee) out for Thursday night's game against the Texans.",
+          "detail": "The Colts have ruled out Ward (knee) for Thursday night's game against the Texans.",
           "updatedAt": "2026-11-18T20:58Z"
         },
         {
@@ -470,8 +480,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Calf",
-          "detail": "Gardner (calf) is listed as questionable for Thursday's game against the Texans.",
-          "updatedAt": "2026-11-19T00:03Z"
+          "detail": "According to Jane Slater of NFL Network, Gardner (calf) is not in line to play Thursday night against the Texans.",
+          "updatedAt": "2026-11-19T17:03Z"
         },
         {
           "athleteId": "2566045",
@@ -499,7 +509,7 @@
       "abbrev": "JAC",
       "name": "Jacksonville",
       "espnTeamId": "30",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:15:56Z",
       "status": "ok",
       "injuries": [
         {
@@ -529,8 +539,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Tuten (ankle/foot) was a limited participant in Wednesday's practice, Ryan O'Halloran of The Florida Times-Union reports.",
-          "updatedAt": "2026-11-18T21:22Z"
+          "detail": "Tuten (ankle/foot) was listed as a non-participant in Thursday's practice, Ryan O'Halloran of The Florida Times-Union reports.",
+          "updatedAt": "2026-11-19T21:24Z"
         },
         {
           "athleteId": "4429168",
@@ -549,8 +559,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Meyers (ankle) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-18T21:16Z"
+          "detail": "Meyers (ankle) was a limited participant in Thursday's practice, Ryan O'Halloran of The Florida Times-Union reports.",
+          "updatedAt": "2026-11-19T21:20Z"
         }
       ]
     },
@@ -558,7 +568,7 @@
       "abbrev": "KC",
       "name": "Kansas City",
       "espnTeamId": "12",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:17:40Z",
       "status": "ok",
       "injuries": [
         {
@@ -570,16 +580,6 @@
           "injury": "Concussion",
           "detail": "Smith (concussion) did not practice Wednesday, Matt McMullen of the Chiefs' official site reports.",
           "updatedAt": "2026-11-19T01:53Z"
-        },
-        {
-          "athleteId": "4362759",
-          "name": "Nick Bolton",
-          "position": "LB",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Shin",
-          "detail": "Bolton (shin) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-19T00:55Z"
         },
         {
           "athleteId": "4043041",
@@ -598,8 +598,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Groin",
-          "detail": "Walker (groin) won't practice Wednesday, Sam McDowell of The Kansas City Star reports.",
-          "updatedAt": "2026-11-18T18:03Z"
+          "detail": "Walker (groin) did not practice Thursday.",
+          "updatedAt": "2026-11-19T21:11Z"
         }
       ]
     },
@@ -607,7 +607,7 @@
       "abbrev": "LAC",
       "name": "L.A. Chargers",
       "espnTeamId": "24",
-      "depthChartAt": "2026-11-19T13:32:58Z",
+      "depthChartAt": "2026-11-19T22:16:29Z",
       "status": "ok",
       "injuries": [
         {
@@ -657,8 +657,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Back",
-          "detail": "McConkey (back) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-19T00:17Z"
+          "detail": "McConkey (back) was spotted at Thursday's practice in a non-contact jersey, Noah Furtado of The Athletic reports.",
+          "updatedAt": "2026-11-19T21:41Z"
         }
       ]
     },
@@ -666,7 +666,7 @@
       "abbrev": "LV",
       "name": "Las Vegas",
       "espnTeamId": "13",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:17:03Z",
       "status": "ok",
       "injuries": [
         {
@@ -706,8 +706,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Coach Klint Kubiak noted Wednesday that Bowers (ankle) doesn't need to practice this week in order to play Sunday Sunday against the Broncos, Sam Warren of The Athletic reports.",
-          "updatedAt": "2026-11-18T22:01Z"
+          "detail": "Bowers (ankle) was on the field for the start of Thursday's practice, Ryan McFadden of ESPN.com reports.",
+          "updatedAt": "2026-11-19T19:18Z"
         }
       ]
     },
@@ -715,7 +715,7 @@
       "abbrev": "MIA",
       "name": "Miami",
       "espnTeamId": "15",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:18:09Z",
       "status": "ok",
       "injuries": [
         {
@@ -775,8 +775,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Shoulder",
-          "detail": "Douglas was a limited participant in Wednesday's practice due to a shoulder injury, David Furones of the South Florida Sun Sentinel reports.",
-          "updatedAt": "2026-11-18T22:08Z"
+          "detail": "Douglas (shoulder) continued to don a non-contact jersey during Thursday's practice, Barry Jackson of the Miami Herald reports.",
+          "updatedAt": "2026-11-19T18:09Z"
         },
         {
           "athleteId": "4869961",
@@ -794,7 +794,7 @@
       "abbrev": "MIN",
       "name": "Minnesota",
       "espnTeamId": "16",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:16:29Z",
       "status": "ok",
       "injuries": [
         {
@@ -834,8 +834,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Wrist",
-          "detail": "Hockenson (wrist) practiced in a limited capacity Wednesday.",
-          "updatedAt": "2026-11-18T22:10Z"
+          "detail": "Hockenson (wrist) practiced on a limited basis Thursday.",
+          "updatedAt": "2026-11-19T21:45Z"
         }
       ]
     },
@@ -843,7 +843,7 @@
       "abbrev": "NYG",
       "name": "N.Y. Giants",
       "espnTeamId": "19",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:15:32Z",
       "status": "ok",
       "injuries": []
     },
@@ -851,7 +851,7 @@
       "abbrev": "NYJ",
       "name": "N.Y. Jets",
       "espnTeamId": "20",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:16:30Z",
       "status": "ok",
       "injuries": [
         {
@@ -910,7 +910,7 @@
       "abbrev": "NO",
       "name": "New Orleans",
       "espnTeamId": "18",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:16:15Z",
       "status": "ok",
       "injuries": [
         {
@@ -960,8 +960,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Chest",
-          "detail": "Head coach Kellen Moore said Tyson was limited at Wednesday's practice due to a chest injury, Nick Underhill of NewOrleans.Football reports.",
-          "updatedAt": "2026-11-18T21:38Z"
+          "detail": "Tyson (chest) practiced in a limited capacity Thursday.",
+          "updatedAt": "2026-11-19T21:26Z"
         }
       ]
     },
@@ -969,7 +969,7 @@
       "abbrev": "PHI",
       "name": "Philadelphia",
       "espnTeamId": "21",
-      "depthChartAt": "2026-11-19T13:34:35Z",
+      "depthChartAt": "2026-11-19T22:18:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -1009,8 +1009,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Hamstring",
-          "detail": "Smith (hamstring) was spotted practicing Wednesday, Tim McManus of ESPN.com reports.",
-          "updatedAt": "2026-11-18T20:19Z"
+          "detail": "Smith (hamstring) is taking part in Thursday's practice, Andrew DiCecco of InsideTheBirds.com reports.",
+          "updatedAt": "2026-11-19T19:41Z"
         },
         {
           "athleteId": "4428850",
@@ -1019,8 +1019,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Wicks (ankle) practiced in a limited capacity Wednesday.",
-          "updatedAt": "2026-11-18T23:04Z"
+          "detail": "Wicks (ankle) is participating in practice Thursday, Andrew DiCecco of InsideTheBirds.com reports.",
+          "updatedAt": "2026-11-19T19:45Z"
         }
       ]
     },
@@ -1028,7 +1028,7 @@
       "abbrev": "PIT",
       "name": "Pittsburgh",
       "espnTeamId": "23",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:19:02Z",
       "status": "ok",
       "injuries": [
         {
@@ -1040,16 +1040,6 @@
           "injury": "Hand",
           "detail": "Queen (hand) was a limited practice participant Wednesday, Teresa Varley of the Steelers' official site reports.",
           "updatedAt": "2026-11-19T01:23Z"
-        },
-        {
-          "athleteId": "3929846",
-          "name": "DeShon Elliott",
-          "position": "S",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Knee",
-          "detail": "Elliott (knee) was a limited participant in Wednesday's practice, Teresa Varley of the Steelers' official site reports.",
-          "updatedAt": "2026-11-19T01:19Z"
         },
         {
           "athleteId": "4368304",
@@ -1067,7 +1057,7 @@
       "abbrev": "SF",
       "name": "San Francisco",
       "espnTeamId": "25",
-      "depthChartAt": "2026-11-19T13:34:35Z",
+      "depthChartAt": "2026-11-19T22:15:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -1117,8 +1107,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Achilles",
-          "detail": "Head coach Kyle Shanahan said Evans (Achilles) won't practice Wednesday, but Shanahan hopes the wide receiver will return to drills Thursday, Nick Wagoner of ESPN.com reports.",
-          "updatedAt": "2026-11-18T18:52Z"
+          "detail": "Evans (Achilles) is suited up for Thursday's practice, Cam Inman of The San Jose Mercury News reports.",
+          "updatedAt": "2026-11-19T20:13Z"
         }
       ]
     },
@@ -1126,7 +1116,7 @@
       "abbrev": "TB",
       "name": "Tampa Bay",
       "espnTeamId": "27",
-      "depthChartAt": "2026-11-19T13:35:02Z",
+      "depthChartAt": "2026-11-19T22:15:58Z",
       "status": "ok",
       "injuries": [
         {
@@ -1146,8 +1136,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Foot",
-          "detail": "Mayfield (foot) isn't practicing Wednesday, Greg Auman of Fox Sports reports.",
-          "updatedAt": "2026-11-18T17:17Z"
+          "detail": "Mayfield (foot/right thumb) officially was limited at Thursday's practice.",
+          "updatedAt": "2026-11-19T21:53Z"
         },
         {
           "athleteId": "4034790",
@@ -1156,7 +1146,7 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Ankle",
-          "detail": "Winfield (ankle) did not participate in practice Wednesday, Greg Auman of Fox Sports reports.",
+          "detail": "Winfield (ankle) didn't participate in Wednesday's practice.",
           "updatedAt": "2026-11-18T19:52Z"
         }
       ]
@@ -1165,19 +1155,9 @@
       "abbrev": "TEN",
       "name": "Tennessee",
       "espnTeamId": "10",
-      "depthChartAt": "2026-11-19T13:35:03Z",
+      "depthChartAt": "2026-11-19T22:17:47Z",
       "status": "ok",
       "injuries": [
-        {
-          "athleteId": "3120464",
-          "name": "John Franklin-Myers",
-          "position": "DE",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Back",
-          "detail": "Franklin-Myers (back) was limited in Wednesday's practice, Paul Kuharsky of PaulKuharsky.com reports.",
-          "updatedAt": "2026-11-19T00:25Z"
-        },
         {
           "athleteId": "4870805",
           "name": "Anthony Hill Jr.",
@@ -1199,6 +1179,16 @@
           "updatedAt": "2026-11-19T00:31Z"
         },
         {
+          "athleteId": "4685617",
+          "name": "Kevin Winston Jr.",
+          "position": "S",
+          "status": "Questionable",
+          "tier": "questionable",
+          "injury": "Shoulder",
+          "detail": "questionable",
+          "updatedAt": "2026-11-19T21:13Z"
+        },
+        {
           "athleteId": "4240532",
           "name": "Tony Adams",
           "position": "S",
@@ -1215,8 +1205,8 @@
           "status": "Questionable",
           "tier": "questionable",
           "injury": "Shoulder",
-          "detail": "Tate (shoulder) was a limited participant in Wednesday's practice.",
-          "updatedAt": "2026-11-18T21:00Z"
+          "detail": "Tate (shoulder) was a limited participant in Thursday's practice.",
+          "updatedAt": "2026-11-19T21:13Z"
         }
       ]
     },
@@ -1224,20 +1214,9 @@
       "abbrev": "WAS",
       "name": "Washington",
       "espnTeamId": "28",
-      "depthChartAt": "2026-11-19T13:35:00Z",
+      "depthChartAt": "2026-11-19T22:15:44Z",
       "status": "ok",
-      "injuries": [
-        {
-          "athleteId": "2576736",
-          "name": "Lucas Patrick",
-          "position": "G",
-          "status": "Questionable",
-          "tier": "questionable",
-          "injury": "Concussion",
-          "detail": "questionable",
-          "updatedAt": "2026-11-17T12:19Z"
-        }
-      ]
+      "injuries": []
     }
   ]
 }

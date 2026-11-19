@@ -3,7 +3,7 @@
     "site": "Covers",
     "product": "King of Covers contest consensus",
     "description": "contest ATS tickets; headline % is all lines; atsByLine is picks at each number; away.spread/home.spread are current Sides, which may not match any ticket bucket.",
-    "fetchedAt": "2026-11-18T08:29:46-05:00",
+    "fetchedAt": "2026-11-19T08:28:31-05:00",
     "timezone": "America/Indianapolis"
   },
   "week": {
@@ -14,9 +14,9 @@
     "unmatched": 0
   },
   "report": {
-    "summary": "First Week 12 Covers consensus capture (25 remaining games).",
+    "summary": "18 of 25 games moved since yesterday 08:29 ET. Sides: UNC @ UVA 2.5 → 1.5; UGA @ SC -15.5 → -14.5; OKLAST @ ARIZST -3.5 → -2.5; NYJ @ LAC 3.5 → 2.5. IND @ HOU public 47/53 → 51/49. List Sides disagreed with tickets on MIA @ BUF (17.5 vs ats 14/16.5). List Sides disagreed with tickets on TEN @ DAL (8.5 vs ats 7.5).",
     "details": null,
-    "comparedTo": null,
+    "comparedTo": "2026-11-18T08:29:46-05:00",
     "games": []
   },
   "games": [
@@ -33,22 +33,22 @@
         "abbrev": "IND",
         "coversName": "Indianapolis",
         "spread": 12.5,
-        "pct": 47,
-        "picks": 238
+        "pct": 51,
+        "picks": 353
       },
       "home": {
         "name": "Houston",
         "abbrev": "HOU",
         "coversName": "Houston",
         "spread": -12.5,
-        "pct": 53,
-        "picks": 272
+        "pct": 49,
+        "picks": 337
       },
       "atsByLine": [
         {
           "awaySpread": 11.5,
-          "awayPicks": 124,
-          "homePicks": 98
+          "awayPicks": 239,
+          "homePicks": 163
         },
         {
           "awaySpread": 10.5,
@@ -76,7 +76,7 @@
         "coversName": "BYU",
         "spread": -5.5,
         "pct": 70,
-        "picks": 147
+        "picks": 188
       },
       "home": {
         "name": "Kansas",
@@ -84,13 +84,13 @@
         "coversName": "Kansas",
         "spread": 5.5,
         "pct": 30,
-        "picks": 64
+        "picks": 80
       },
       "atsByLine": [
         {
           "awaySpread": -5.5,
-          "awayPicks": 135,
-          "homePicks": 54
+          "awayPicks": 176,
+          "homePicks": 70
         },
         {
           "awaySpread": -6,
@@ -117,16 +117,16 @@
         "abbrev": "OHIOST",
         "coversName": "Ohio State",
         "spread": -3.5,
-        "pct": 63,
-        "picks": 143
+        "pct": 61,
+        "picks": 173
       },
       "home": {
         "name": "Nebraska",
         "abbrev": "NEB",
         "coversName": "Nebraska",
         "spread": 3.5,
-        "pct": 37,
-        "picks": 84
+        "pct": 39,
+        "picks": 111
       },
       "atsByLine": [
         {
@@ -141,8 +141,8 @@
         },
         {
           "awaySpread": -3.5,
-          "awayPicks": 71,
-          "homePicks": 56
+          "awayPicks": 101,
+          "homePicks": 83
         }
       ]
     },
@@ -158,23 +158,23 @@
         "name": "North Carolina",
         "abbrev": "UNC",
         "coversName": "North Carolina",
-        "spread": 2.5,
-        "pct": 57,
-        "picks": 104
+        "spread": 1.5,
+        "pct": 59,
+        "picks": 136
       },
       "home": {
         "name": "Virginia",
         "abbrev": "UVA",
         "coversName": "Virginia",
-        "spread": -2.5,
-        "pct": 43,
-        "picks": 79
+        "spread": -1.5,
+        "pct": 41,
+        "picks": 96
       },
       "atsByLine": [
         {
           "awaySpread": 1.5,
-          "awayPicks": 104,
-          "homePicks": 79
+          "awayPicks": 136,
+          "homePicks": 96
         }
       ]
     },
@@ -192,7 +192,7 @@
         "coversName": "UCLA",
         "spread": -3.5,
         "pct": 70,
-        "picks": 170
+        "picks": 216
       },
       "home": {
         "name": "Michigan",
@@ -200,13 +200,13 @@
         "coversName": "Michigan",
         "spread": 3.5,
         "pct": 30,
-        "picks": 74
+        "picks": 94
       },
       "atsByLine": [
         {
           "awaySpread": -3.5,
-          "awayPicks": 82,
-          "homePicks": 20
+          "awayPicks": 128,
+          "homePicks": 40
         },
         {
           "awaySpread": -4.5,
@@ -244,7 +244,7 @@
         "coversName": "LSU",
         "spread": 1.5,
         "pct": 33,
-        "picks": 103
+        "picks": 119
       },
       "home": {
         "name": "Tennessee",
@@ -252,7 +252,7 @@
         "coversName": "Tennessee",
         "spread": -1.5,
         "pct": 67,
-        "picks": 208
+        "picks": 244
       },
       "atsByLine": [
         {
@@ -262,8 +262,8 @@
         },
         {
           "awaySpread": -1.5,
-          "awayPicks": 94,
-          "homePicks": 198
+          "awayPicks": 110,
+          "homePicks": 234
         }
       ]
     },
@@ -280,22 +280,22 @@
         "abbrev": "IND",
         "coversName": "Indiana",
         "spread": -7.5,
-        "pct": 58,
-        "picks": 120
+        "pct": 60,
+        "picks": 154
       },
       "home": {
         "name": "Washington",
         "abbrev": "WASH",
         "coversName": "Washington",
         "spread": 7.5,
-        "pct": 42,
-        "picks": 86
+        "pct": 40,
+        "picks": 103
       },
       "atsByLine": [
         {
           "awaySpread": -7.5,
-          "awayPicks": 67,
-          "homePicks": 50
+          "awayPicks": 101,
+          "homePicks": 67
         },
         {
           "awaySpread": -8.5,
@@ -318,7 +318,7 @@
         "coversName": "Texas A&M",
         "spread": 7.5,
         "pct": 38,
-        "picks": 67
+        "picks": 84
       },
       "home": {
         "name": "Oklahoma",
@@ -326,13 +326,13 @@
         "coversName": "Oklahoma",
         "spread": -7.5,
         "pct": 62,
-        "picks": 111
+        "picks": 139
       },
       "atsByLine": [
         {
           "awaySpread": 7.5,
-          "awayPicks": 67,
-          "homePicks": 111
+          "awayPicks": 84,
+          "homePicks": 139
         }
       ]
     },
@@ -350,7 +350,7 @@
         "coversName": "Arizona",
         "spread": -7.5,
         "pct": 65,
-        "picks": 113
+        "picks": 147
       },
       "home": {
         "name": "Kansas State",
@@ -358,13 +358,13 @@
         "coversName": "Kansas State",
         "spread": 7.5,
         "pct": 35,
-        "picks": 62
+        "picks": 78
       },
       "atsByLine": [
         {
           "awaySpread": -6.5,
-          "awayPicks": 55,
-          "homePicks": 23
+          "awayPicks": 89,
+          "homePicks": 39
         },
         {
           "awaySpread": -7.5,
@@ -400,23 +400,28 @@
         "name": "Georgia",
         "abbrev": "UGA",
         "coversName": "Georgia",
-        "spread": -15.5,
+        "spread": -14.5,
         "pct": 53,
-        "picks": 96
+        "picks": 120
       },
       "home": {
         "name": "South Carolina",
         "abbrev": "SC",
         "coversName": "South Carolina",
-        "spread": 15.5,
+        "spread": 14.5,
         "pct": 47,
-        "picks": 84
+        "picks": 107
       },
       "atsByLine": [
         {
+          "awaySpread": -14.5,
+          "awayPicks": 1,
+          "homePicks": 0
+        },
+        {
           "awaySpread": -16.5,
-          "awayPicks": 96,
-          "homePicks": 84
+          "awayPicks": 119,
+          "homePicks": 107
         }
       ]
     },
@@ -434,7 +439,7 @@
         "coversName": "Kentucky",
         "spread": 5.5,
         "pct": 57,
-        "picks": 142
+        "picks": 163
       },
       "home": {
         "name": "Missouri",
@@ -442,7 +447,7 @@
         "coversName": "Missouri",
         "spread": -5.5,
         "pct": 43,
-        "picks": 105
+        "picks": 123
       },
       "atsByLine": [
         {
@@ -452,8 +457,8 @@
         },
         {
           "awaySpread": 5.5,
-          "awayPicks": 57,
-          "homePicks": 38
+          "awayPicks": 78,
+          "homePicks": 56
         }
       ]
     },
@@ -470,32 +475,32 @@
         "abbrev": "UTAH",
         "coversName": "Utah",
         "spread": -7.5,
-        "pct": 63,
-        "picks": 125
+        "pct": 60,
+        "picks": 152
       },
       "home": {
         "name": "TCU",
         "abbrev": "TCU",
         "coversName": "TCU",
         "spread": 7.5,
-        "pct": 38,
-        "picks": 75
+        "pct": 40,
+        "picks": 103
       },
       "atsByLine": [
         {
           "awaySpread": -7,
-          "awayPicks": 2,
+          "awayPicks": 4,
           "homePicks": 2
         },
         {
           "awaySpread": -6.5,
-          "awayPicks": 61,
-          "homePicks": 30
+          "awayPicks": 75,
+          "homePicks": 48
         },
         {
           "awaySpread": -7.5,
-          "awayPicks": 62,
-          "homePicks": 43
+          "awayPicks": 73,
+          "homePicks": 53
         }
       ]
     },
@@ -511,23 +516,23 @@
         "name": "Oklahoma State",
         "abbrev": "OKLAST",
         "coversName": "Oklahoma State",
-        "spread": -3.5,
-        "pct": 66,
-        "picks": 118
+        "spread": -2.5,
+        "pct": 65,
+        "picks": 145
       },
       "home": {
         "name": "Arizona St.",
         "abbrev": "ARIZST",
         "coversName": "Arizona State",
-        "spread": 3.5,
-        "pct": 34,
-        "picks": 61
+        "spread": 2.5,
+        "pct": 35,
+        "picks": 77
       },
       "atsByLine": [
         {
           "awaySpread": -2.5,
-          "awayPicks": 57,
-          "homePicks": 18
+          "awayPicks": 73,
+          "homePicks": 29
         },
         {
           "awaySpread": -3,
@@ -536,8 +541,8 @@
         },
         {
           "awaySpread": -3.5,
-          "awayPicks": 48,
-          "homePicks": 32
+          "awayPicks": 59,
+          "homePicks": 37
         },
         {
           "awaySpread": -4,
@@ -558,23 +563,23 @@
         "name": "Miami",
         "abbrev": "MIA",
         "coversName": "Miami",
-        "spread": 16.5,
-        "pct": 55,
-        "picks": 185
+        "spread": 17.5,
+        "pct": 56,
+        "picks": 247
       },
       "home": {
         "name": "Buffalo",
         "abbrev": "BUF",
         "coversName": "Buffalo",
-        "spread": -16.5,
-        "pct": 45,
-        "picks": 153
+        "spread": -17.5,
+        "pct": 44,
+        "picks": 196
       },
       "atsByLine": [
         {
           "awaySpread": 16.5,
-          "awayPicks": 185,
-          "homePicks": 152
+          "awayPicks": 247,
+          "homePicks": 195
         },
         {
           "awaySpread": 14,
@@ -596,22 +601,22 @@
         "abbrev": "BAL",
         "coversName": "Baltimore",
         "spread": 2.5,
-        "pct": 24,
-        "picks": 90
+        "pct": 25,
+        "picks": 124
       },
       "home": {
         "name": "Carolina",
         "abbrev": "CAR",
         "coversName": "Carolina",
         "spread": -2.5,
-        "pct": 76,
-        "picks": 279
+        "pct": 75,
+        "picks": 363
       },
       "atsByLine": [
         {
           "awaySpread": 1.5,
-          "awayPicks": 90,
-          "homePicks": 279
+          "awayPicks": 124,
+          "homePicks": 363
         }
       ]
     },
@@ -628,22 +633,22 @@
         "abbrev": "NO",
         "coversName": "New Orleans",
         "spread": 10.5,
-        "pct": 39,
-        "picks": 147
+        "pct": 41,
+        "picks": 199
       },
       "home": {
         "name": "Chicago",
         "abbrev": "CHI",
         "coversName": "Chicago",
         "spread": -10.5,
-        "pct": 61,
-        "picks": 231
+        "pct": 59,
+        "picks": 287
       },
       "atsByLine": [
         {
           "awaySpread": 11.5,
-          "awayPicks": 63,
-          "homePicks": 76
+          "awayPicks": 115,
+          "homePicks": 132
         },
         {
           "awaySpread": 10.5,
@@ -669,23 +674,23 @@
         "name": "Tennessee",
         "abbrev": "TEN",
         "coversName": "Tennessee",
-        "spread": 7.5,
-        "pct": 44,
-        "picks": 152
+        "spread": 8.5,
+        "pct": 46,
+        "picks": 210
       },
       "home": {
         "name": "Dallas",
         "abbrev": "DAL",
         "coversName": "Dallas",
-        "spread": -7.5,
-        "pct": 56,
-        "picks": 197
+        "spread": -8.5,
+        "pct": 54,
+        "picks": 245
       },
       "atsByLine": [
         {
           "awaySpread": 7.5,
-          "awayPicks": 153,
-          "homePicks": 198
+          "awayPicks": 210,
+          "homePicks": 245
         }
       ]
     },
@@ -702,22 +707,27 @@
         "abbrev": "TB",
         "coversName": "Tampa Bay",
         "spread": 6.5,
-        "pct": 40,
-        "picks": 156
+        "pct": 43,
+        "picks": 213
       },
       "home": {
         "name": "Detroit",
         "abbrev": "DET",
         "coversName": "Detroit",
         "spread": -6.5,
-        "pct": 60,
-        "picks": 230
+        "pct": 57,
+        "picks": 288
       },
       "atsByLine": [
         {
           "awaySpread": 7.5,
-          "awayPicks": 23,
-          "homePicks": 25
+          "awayPicks": 32,
+          "homePicks": 29
+        },
+        {
+          "awaySpread": 6.5,
+          "awayPicks": 47,
+          "homePicks": 54
         },
         {
           "awaySpread": 6,
@@ -744,22 +754,22 @@
         "abbrev": "ARI",
         "coversName": "Arizona",
         "spread": 15.5,
-        "pct": 43,
-        "picks": 125
+        "pct": 44,
+        "picks": 175
       },
       "home": {
         "name": "Kansas City",
         "abbrev": "KC",
         "coversName": "Kansas City",
         "spread": -15.5,
-        "pct": 57,
-        "picks": 165
+        "pct": 56,
+        "picks": 220
       },
       "atsByLine": [
         {
           "awaySpread": 15.5,
-          "awayPicks": 125,
-          "homePicks": 167
+          "awayPicks": 175,
+          "homePicks": 220
         }
       ]
     },
@@ -776,22 +786,22 @@
         "abbrev": "PIT",
         "coversName": "Pittsburgh",
         "spread": -4.5,
-        "pct": 66,
-        "picks": 234
+        "pct": 67,
+        "picks": 306
       },
       "home": {
         "name": "Philadelphia",
         "abbrev": "PHI",
         "coversName": "Philadelphia",
         "spread": 4.5,
-        "pct": 34,
-        "picks": 118
+        "pct": 33,
+        "picks": 153
       },
       "atsByLine": [
         {
           "awaySpread": -4.5,
-          "awayPicks": 236,
-          "homePicks": 118
+          "awayPicks": 306,
+          "homePicks": 153
         }
       ]
     },
@@ -807,23 +817,23 @@
         "name": "N.Y. Jets",
         "abbrev": "NYJ",
         "coversName": "N.Y. Jets",
-        "spread": 3.5,
-        "pct": 44,
-        "picks": 160
+        "spread": 2.5,
+        "pct": 42,
+        "picks": 199
       },
       "home": {
         "name": "L.A. Chargers",
         "abbrev": "LAC",
         "coversName": "L.A. Chargers",
-        "spread": -3.5,
-        "pct": 56,
-        "picks": 201
+        "spread": -2.5,
+        "pct": 58,
+        "picks": 270
       },
       "atsByLine": [
         {
           "awaySpread": 3.5,
-          "awayPicks": 42,
-          "homePicks": 57
+          "awayPicks": 57,
+          "homePicks": 72
         },
         {
           "awaySpread": 3,
@@ -832,8 +842,8 @@
         },
         {
           "awaySpread": 2.5,
-          "awayPicks": 24,
-          "homePicks": 20
+          "awayPicks": 48,
+          "homePicks": 72
         },
         {
           "awaySpread": 1.5,
@@ -855,16 +865,16 @@
         "abbrev": "JAC",
         "coversName": "Jacksonville",
         "spread": -5.5,
-        "pct": 65,
-        "picks": 254
+        "pct": 63,
+        "picks": 318
       },
       "home": {
         "name": "N.Y. Giants",
         "abbrev": "NYG",
         "coversName": "N.Y. Giants",
         "spread": 5.5,
-        "pct": 35,
-        "picks": 135
+        "pct": 37,
+        "picks": 184
       },
       "atsByLine": [
         {
@@ -874,8 +884,8 @@
         },
         {
           "awaySpread": -6.5,
-          "awayPicks": 164,
-          "homePicks": 76
+          "awayPicks": 228,
+          "homePicks": 124
         }
       ]
     },
@@ -893,7 +903,7 @@
         "coversName": "Las Vegas",
         "spread": 10.5,
         "pct": 49,
-        "picks": 172
+        "picks": 222
       },
       "home": {
         "name": "Denver",
@@ -901,13 +911,13 @@
         "coversName": "Denver",
         "spread": -10.5,
         "pct": 51,
-        "picks": 180
+        "picks": 229
       },
       "atsByLine": [
         {
           "awaySpread": 10.5,
-          "awayPicks": 49,
-          "homePicks": 45
+          "awayPicks": 98,
+          "homePicks": 93
         },
         {
           "awaySpread": 10,
@@ -934,27 +944,27 @@
         "abbrev": "MIN",
         "coversName": "Minnesota",
         "spread": 3.5,
-        "pct": 37,
-        "picks": 147
+        "pct": 40,
+        "picks": 207
       },
       "home": {
         "name": "San Francisco",
         "abbrev": "SF",
         "coversName": "San Francisco",
         "spread": -3.5,
-        "pct": 63,
-        "picks": 249
+        "pct": 60,
+        "picks": 306
       },
       "atsByLine": [
         {
           "awaySpread": 3.5,
-          "awayPicks": 51,
-          "homePicks": 88
+          "awayPicks": 94,
+          "homePicks": 123
         },
         {
           "awaySpread": 3,
-          "awayPicks": 97,
-          "homePicks": 162
+          "awayPicks": 113,
+          "homePicks": 183
         }
       ]
     },
@@ -971,16 +981,16 @@
         "abbrev": "CIN",
         "coversName": "Cincinnati",
         "spread": -6.5,
-        "pct": 72,
-        "picks": 204
+        "pct": 68,
+        "picks": 259
       },
       "home": {
         "name": "Washington",
         "abbrev": "WAS",
         "coversName": "Washington",
         "spread": 6.5,
-        "pct": 28,
-        "picks": 81
+        "pct": 32,
+        "picks": 123
       },
       "atsByLine": [
         {
@@ -995,8 +1005,8 @@
         },
         {
           "awaySpread": -6.5,
-          "awayPicks": 115,
-          "homePicks": 64
+          "awayPicks": 168,
+          "homePicks": 106
         }
       ]
     }

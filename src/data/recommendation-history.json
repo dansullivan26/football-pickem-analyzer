@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T13:29:44.527Z",
+  "updatedAt": "2026-11-21T18:41:48.551Z",
   "weeks": [
     {
       "week": 1,
@@ -8256,11 +8256,11 @@
       "week": 12,
       "seasonYear": 2026,
       "label": "Week 12",
-      "capturedAt": "2026-11-21T13:29:44.527Z",
+      "capturedAt": "2026-11-21T18:41:48.551Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029328,
-        "draftKingsTotal": 53.5,
+        "draftKingsTotal": 54.5,
         "frozenAt": null
       },
       "playOfTheWeek": {
@@ -8330,7 +8330,9 @@
             "indoor": false
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 0,
+          "homeScore": 3
         },
         {
           "cbsEventId": 50028843,
@@ -8357,7 +8359,9 @@
             "state": "NE",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 7
         },
         {
           "cbsEventId": 50028813,
@@ -8449,16 +8453,16 @@
           "away": "IND",
           "home": "WASH",
           "homeSpread": 7.5,
-          "liveHomeSpread": 7.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 9.5,
+          "category": "lean",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "home",
+          "pickedSide": "away",
           "strength": "solid",
-          "score": 6,
-          "compositeEdge": 1.5,
+          "score": 8,
+          "compositeEdge": 2,
           "awayRank": 8,
           "homeRank": null,
           "venue": {
@@ -8746,16 +8750,16 @@
           "away": "TB",
           "home": "DET",
           "homeSpread": -6.5,
-          "liveHomeSpread": -5.5,
-          "category": "slight",
+          "liveHomeSpread": -4.5,
+          "category": "lean",
           "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "strength": "solid",
+          "score": 8,
+          "compositeEdge": 2,
           "awayRank": null,
           "homeRank": null,
           "venue": {
@@ -8773,16 +8777,16 @@
           "away": "ARI",
           "home": "KC",
           "homeSpread": -15.5,
-          "liveHomeSpread": -16.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": -15.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
+          "source": "rest-travel",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3.75,
-          "compositeEdge": 1.25,
+          "score": 0.75,
+          "compositeEdge": 0.25,
           "awayRank": null,
           "homeRank": null,
           "venue": {

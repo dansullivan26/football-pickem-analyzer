@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T18:44:25.207Z",
+  "updatedAt": "2026-11-21T19:32:50.904Z",
   "weeks": [
     {
       "week": 1,
@@ -8256,7 +8256,7 @@
       "week": 12,
       "seasonYear": 2026,
       "label": "Week 12",
-      "capturedAt": "2026-11-21T18:44:25.207Z",
+      "capturedAt": "2026-11-21T19:32:50.904Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029328,
@@ -8331,8 +8331,8 @@
           },
           "neutralSite": false,
           "deviated": true,
-          "awayScore": 0,
-          "homeScore": 3
+          "awayScore": 6,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50028843,
@@ -8360,8 +8360,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 7
+          "awayScore": 14,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028813,
@@ -8388,7 +8388,9 @@
             "state": "VA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50028795,
@@ -8507,16 +8509,16 @@
           "away": "ARIZ",
           "home": "KSTATE",
           "homeSpread": 7.5,
-          "liveHomeSpread": 7.5,
-          "category": "neutral",
-          "recommendedSide": null,
+          "liveHomeSpread": 10,
+          "category": "lean",
+          "recommendedSide": "away",
           "hook": null,
           "cover": null,
           "source": "line-value",
-          "pickedSide": "home",
+          "pickedSide": "away",
           "strength": "solid",
-          "score": 6,
-          "compositeEdge": 1,
+          "score": 10,
+          "compositeEdge": 2.5,
           "awayRank": 19,
           "homeRank": null,
           "venue": {

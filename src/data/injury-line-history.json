@@ -2,7 +2,7 @@
   "week": 12,
   "seasonYear": 2026,
   "label": "Week 12",
-  "updatedAt": "2026-11-21T18:41:55.529Z",
+  "updatedAt": "2026-11-21T19:32:58.179Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -1507,6 +1507,42 @@
           "availability": "better",
           "homeSpreadBefore": -8.5,
           "homeSpreadAfter": -8.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-21T19:32:58.179Z",
+          "cbsEventId": 50029321,
+          "athleteId": "4248911",
+          "name": "DaRon Bland",
+          "position": "CB",
+          "teamAbbrev": "DAL",
+          "teamName": "Dallas",
+          "side": "home",
+          "fromStatus": "Out",
+          "toStatus": "Injured Reserve",
+          "fromTier": "out",
+          "toTier": "reserve",
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-21T19:32:58.179Z",
+          "cbsEventId": 50029321,
+          "athleteId": "4240532",
+          "name": "Tony Adams",
+          "position": "S",
+          "teamAbbrev": "TEN",
+          "teamName": "Tennessee",
+          "side": "away",
+          "fromStatus": "Questionable",
+          "toStatus": null,
+          "fromTier": "questionable",
+          "toTier": null,
+          "availability": "better",
+          "homeSpreadBefore": -7.5,
+          "homeSpreadAfter": -7.5,
           "towardTeam": 0
         }
       ]

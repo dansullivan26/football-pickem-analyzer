@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T11:33:41.708Z",
+  "updatedAt": "2026-11-22T14:17:34.330Z",
   "weeks": [
     {
       "week": 1,
@@ -8256,7 +8256,7 @@
       "week": 12,
       "seasonYear": 2026,
       "label": "Week 12",
-      "capturedAt": "2026-11-22T08:15:20.053Z",
+      "capturedAt": "2026-11-22T14:17:34.330Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029328,
@@ -8271,6 +8271,10 @@
         {
           "cbsEventId": 50028810,
           "frozenAt": "2026-11-21T13:29:44.527Z"
+        },
+        {
+          "cbsEventId": 50029322,
+          "frozenAt": "2026-11-22T14:17:34.330Z"
         }
       ],
       "games": [
@@ -8536,7 +8540,7 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 20,
+          "awayScore": 35,
           "homeScore": 28
         },
         {
@@ -8565,7 +8569,7 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 27,
+          "awayScore": 34,
           "homeScore": 6
         },
         {
@@ -8623,8 +8627,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 10,
-          "homeScore": 0
+          "awayScore": 38,
+          "homeScore": 17
         },
         {
           "cbsEventId": 50028864,
@@ -8651,7 +8655,9 @@
             "state": "AZ",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 30,
+          "homeScore": 27
         },
         {
           "cbsEventId": 50029318,
@@ -8930,16 +8936,16 @@
           "away": "MIN",
           "home": "SF",
           "homeSpread": -3.5,
-          "liveHomeSpread": -3,
-          "category": "slight",
-          "recommendedSide": "away",
+          "liveHomeSpread": -3.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

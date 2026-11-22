@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T22:47:19.689Z",
+  "updatedAt": "2026-11-22T00:30:12.316Z",
   "weeks": [
     {
       "week": 1,
@@ -8256,7 +8256,7 @@
       "week": 12,
       "seasonYear": 2026,
       "label": "Week 12",
-      "capturedAt": "2026-11-21T19:32:50.904Z",
+      "capturedAt": "2026-11-22T00:30:12.316Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029328,
@@ -8331,8 +8331,8 @@
           },
           "neutralSite": false,
           "deviated": true,
-          "awayScore": 6,
-          "homeScore": 6
+          "awayScore": 31,
+          "homeScore": 29
         },
         {
           "cbsEventId": 50028843,
@@ -8360,8 +8360,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 14,
-          "homeScore": 21
+          "awayScore": 28,
+          "homeScore": 31
         },
         {
           "cbsEventId": 50028813,
@@ -8389,8 +8389,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 7,
-          "homeScore": 17
+          "awayScore": 24,
+          "homeScore": 41
         },
         {
           "cbsEventId": 50028795,
@@ -8418,7 +8418,9 @@
             "indoor": false
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 13,
+          "homeScore": 10
         },
         {
           "cbsEventId": 50028810,
@@ -8446,7 +8448,9 @@
             "indoor": false
           },
           "neutralSite": false,
-          "deviated": true
+          "deviated": true,
+          "awayScore": 13,
+          "homeScore": 20
         },
         {
           "cbsEventId": 50028883,
@@ -8473,7 +8477,9 @@
             "state": "WA",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 24,
+          "homeScore": 24
         },
         {
           "cbsEventId": 50028846,
@@ -8500,7 +8506,9 @@
             "state": "OK",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 7,
+          "homeScore": 21
         },
         {
           "cbsEventId": 50028830,
@@ -8914,16 +8922,16 @@
           "away": "MIN",
           "home": "SF",
           "homeSpread": -3.5,
-          "liveHomeSpread": -3,
-          "category": "slight",
-          "recommendedSide": "away",
+          "liveHomeSpread": -3.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

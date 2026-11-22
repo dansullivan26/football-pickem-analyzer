@@ -2,7 +2,7 @@
   "week": 12,
   "seasonYear": 2026,
   "label": "Week 12",
-  "updatedAt": "2026-11-22T00:30:18.329Z",
+  "updatedAt": "2026-11-22T16:29:17.419Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -3060,6 +3060,24 @@
           "teamAbbrev": "PIT",
           "teamName": "Pittsburgh",
           "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": 3.5,
+          "homeSpreadAfter": 3.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-22T16:29:17.419Z",
+          "cbsEventId": 50029327,
+          "athleteId": "4685759",
+          "name": "Jalen Carter",
+          "position": "DT",
+          "teamAbbrev": "PHI",
+          "teamName": "Philadelphia",
+          "side": "home",
           "fromStatus": null,
           "toStatus": "Questionable",
           "fromTier": null,

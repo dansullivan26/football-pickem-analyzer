@@ -1,0 +1,39 @@
+name: Deploy GitHub Pages
+description: Publish the uploaded Pages artifact, retrying the lookup that sometimes returns empty.
+
+outputs:
+  page_url:
+    description: Published Pages URL
+    value: ${{ steps.url.outputs.page_url }}
+
+runs:
+  using: composite
+  steps:
+    # deploy-pages asks for the artifact once. The upload can still be
+    # invisible for a moment, and that single miss fails the whole run.
+    - id: try1
+      uses: actions/deploy-pages@v4
+      continue-on-error: true
+    - if: steps.try1.outcome == 'failure'
+      shell: bash
+      run: sleep 20
+    - id: try2
+      if: steps.try1.outcome == 'failure'
+      uses: actions/deploy-pages@v4
+      continue-on-error: true
+    - if: steps.try2.outcome == 'failure'
+      shell: bash
+      run: sleep 20
+    - id: try3
+      if: steps.try2.outcome == 'failure'
+      uses: actions/deploy-pages@v4
+    - id: url
+      shell: bash
+      run: |
+        if [ "${{ steps.try1.outcome }}" = "success" ]; then
+          echo "page_url=${{ steps.try1.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+        elif [ "${{ steps.try2.outcome }}" = "success" ]; then
+          echo "page_url=${{ steps.try2.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+        else
+          echo "page_url=${{ steps.try3.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+        fi

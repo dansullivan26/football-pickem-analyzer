@@ -2,7 +2,7 @@
   "week": 13,
   "seasonYear": 2026,
   "label": "Week 13",
-  "updatedAt": "2026-11-26T02:56:50.492Z",
+  "updatedAt": "2026-11-26T12:55:28.135Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -418,6 +418,24 @@
           "teamAbbrev": "GB",
           "teamName": "Green Bay",
           "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
+          "homeSpreadBefore": -2.5,
+          "homeSpreadAfter": -2.5,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-26T12:55:28.135Z",
+          "cbsEventId": 50029190,
+          "athleteId": "2573401",
+          "name": "Tyler Higbee",
+          "position": "TE",
+          "teamAbbrev": "LAR",
+          "teamName": "L.A. Rams",
+          "side": "home",
           "fromStatus": null,
           "toStatus": "Questionable",
           "fromTier": null,

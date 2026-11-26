@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T12:55:19.174Z",
+  "updatedAt": "2026-11-26T14:13:59.772Z",
   "weeks": [
     {
       "week": 1,
@@ -9013,7 +9013,7 @@
       "week": 13,
       "seasonYear": 2026,
       "label": "Week 13",
-      "capturedAt": "2026-11-26T12:55:19.174Z",
+      "capturedAt": "2026-11-26T14:13:59.772Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029341,
@@ -9024,7 +9024,12 @@
         "cbsEventId": 50029333,
         "frozenAt": "2026-11-25T13:14:33.835Z"
       },
-      "playsOfTheDay": [],
+      "playsOfTheDay": [
+        {
+          "cbsEventId": 50029329,
+          "frozenAt": "2026-11-26T14:13:59.772Z"
+        }
+      ],
       "games": [
         {
           "cbsEventId": 50029190,
@@ -9234,7 +9239,7 @@
           "strength": "mild",
           "score": 3,
           "compositeEdge": 1,
-          "awayRank": 3,
+          "awayRank": 5,
           "homeRank": null,
           "venue": {
             "stadium": "Kyle Field",
@@ -9289,7 +9294,7 @@
           "score": 3,
           "compositeEdge": 1,
           "awayRank": null,
-          "homeRank": 21,
+          "homeRank": 25,
           "venue": {
             "stadium": "Ohio Stadium",
             "city": "Columbus",
@@ -9342,8 +9347,8 @@
           "strength": "mild",
           "score": 3,
           "compositeEdge": 1,
-          "awayRank": 17,
-          "homeRank": 23,
+          "awayRank": 19,
+          "homeRank": 24,
           "venue": {
             "stadium": "Memorial Stadium at Faurot Field",
             "city": "Columbia",
@@ -9369,7 +9374,7 @@
           "strength": null,
           "score": null,
           "compositeEdge": 0,
-          "awayRank": 5,
+          "awayRank": 7,
           "homeRank": null,
           "venue": {
             "stadium": "FirstBank Stadium",
@@ -9397,7 +9402,7 @@
           "score": 1.5,
           "compositeEdge": 0.5,
           "awayRank": 24,
-          "homeRank": 12,
+          "homeRank": 14,
           "venue": {
             "stadium": "Autzen Stadium",
             "city": "Eugene",
@@ -9602,16 +9607,16 @@
           "away": "WAS",
           "home": "ARI",
           "homeSpread": 7.5,
-          "liveHomeSpread": 7,
+          "liveHomeSpread": 6.5,
           "category": "slight",
           "recommendedSide": "home",
-          "hook": null,
+          "hook": "td",
           "cover": null,
           "source": "line-value",
           "pickedSide": "home",
           "strength": "solid",
-          "score": 6,
-          "compositeEdge": 2,
+          "score": 7.5,
+          "compositeEdge": 2.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

@@ -2,7 +2,7 @@
   "week": 13,
   "seasonYear": 2026,
   "label": "Week 13",
-  "updatedAt": "2026-11-27T05:11:40.460Z",
+  "updatedAt": "2026-11-27T14:23:42.871Z",
   "note": "Starter-status changes from the ESPN snapshot taken in the same hourly sportsbook refresh as DraftKings. A same-hour line print is shown only when it moved the way a causal injury story would (worse listing, against that team). Even then it is coincidence, not proof the injury caused the line.",
   "games": [
     {
@@ -919,6 +919,24 @@
           "fromTier": "questionable",
           "toTier": null,
           "availability": "better",
+          "homeSpreadBefore": -3,
+          "homeSpreadAfter": -3,
+          "towardTeam": 0
+        },
+        {
+          "at": "2026-11-27T14:23:42.871Z",
+          "cbsEventId": 50029329,
+          "athleteId": "4242459",
+          "name": "Trey Smith",
+          "position": "G",
+          "teamAbbrev": "KC",
+          "teamName": "Kansas City",
+          "side": "away",
+          "fromStatus": null,
+          "toStatus": "Questionable",
+          "fromTier": null,
+          "toTier": "questionable",
+          "availability": "worse",
           "homeSpreadBefore": -3,
           "homeSpreadAfter": -3,
           "towardTeam": 0

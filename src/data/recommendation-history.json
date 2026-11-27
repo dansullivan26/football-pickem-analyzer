@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T11:36:26.521Z",
+  "updatedAt": "2026-11-27T14:23:34.307Z",
   "weeks": [
     {
       "week": 1,
@@ -9013,7 +9013,7 @@
       "week": 13,
       "seasonYear": 2026,
       "label": "Week 13",
-      "capturedAt": "2026-11-27T05:11:33.920Z",
+      "capturedAt": "2026-11-27T14:23:34.307Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029341,
@@ -9028,6 +9028,10 @@
         {
           "cbsEventId": 50029329,
           "frozenAt": "2026-11-26T14:13:59.772Z"
+        },
+        {
+          "cbsEventId": 50029330,
+          "frozenAt": "2026-11-27T14:23:34.307Z"
         }
       ],
       "games": [
@@ -9145,8 +9149,8 @@
             "indoor": false
           },
           "neutralSite": true,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 10,
+          "homeScore": 13
         },
         {
           "cbsEventId": 50028896,
@@ -9236,16 +9240,16 @@
           "away": "TEXAS",
           "home": "TXAM",
           "homeSpread": 11.5,
-          "liveHomeSpread": 10.5,
-          "category": "slight",
-          "recommendedSide": "home",
+          "liveHomeSpread": 11.5,
+          "category": "neutral",
+          "recommendedSide": null,
           "hook": null,
           "cover": null,
-          "source": "line-value",
-          "pickedSide": "home",
-          "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "source": null,
+          "pickedSide": null,
+          "strength": null,
+          "score": null,
+          "compositeEdge": 0,
           "awayRank": 3,
           "homeRank": null,
           "venue": {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28T11:29:16.865Z",
+  "updatedAt": "2026-11-28T14:14:04.801Z",
   "weeks": [
     {
       "week": 1,
@@ -9013,7 +9013,7 @@
       "week": 13,
       "seasonYear": 2026,
       "label": "Week 13",
-      "capturedAt": "2026-11-28T08:09:16.379Z",
+      "capturedAt": "2026-11-28T14:14:04.801Z",
       "scored": false,
       "tiebreaker": {
         "cbsEventId": 50029341,
@@ -9032,6 +9032,10 @@
         {
           "cbsEventId": 50029330,
           "frozenAt": "2026-11-27T14:23:34.307Z"
+        },
+        {
+          "cbsEventId": 50028923,
+          "frozenAt": "2026-11-28T14:14:04.801Z"
         }
       ],
       "games": [
@@ -9264,7 +9268,9 @@
             "state": "TX",
             "indoor": false
           },
-          "neutralSite": false
+          "neutralSite": false,
+          "awayScore": 16,
+          "homeScore": 6
         },
         {
           "cbsEventId": 50028940,
@@ -9292,8 +9298,8 @@
             "indoor": false
           },
           "neutralSite": false,
-          "awayScore": 0,
-          "homeScore": 0
+          "awayScore": 5,
+          "homeScore": 28
         },
         {
           "cbsEventId": 50028919,
@@ -9302,7 +9308,7 @@
           "away": "MICH",
           "home": "OHIOST",
           "homeSpread": -9.5,
-          "liveHomeSpread": -10.5,
+          "liveHomeSpread": -10,
           "category": "slight",
           "recommendedSide": "home",
           "hook": null,
@@ -9310,8 +9316,8 @@
           "source": "line-value",
           "pickedSide": "home",
           "strength": "mild",
-          "score": 3,
-          "compositeEdge": 1,
+          "score": 1.5,
+          "compositeEdge": 0.5,
           "awayRank": null,
           "homeRank": 21,
           "venue": {
@@ -9329,16 +9335,16 @@
           "away": "UVA",
           "home": "VATECH",
           "homeSpread": -3.5,
-          "liveHomeSpread": -3,
+          "liveHomeSpread": -2.5,
           "category": "slight",
           "recommendedSide": "away",
-          "hook": null,
+          "hook": "fg",
           "cover": null,
           "source": "line-value",
           "pickedSide": "away",
           "strength": "solid",
           "score": 6,
-          "compositeEdge": 1,
+          "compositeEdge": 1.5,
           "awayRank": null,
           "homeRank": null,
           "venue": {

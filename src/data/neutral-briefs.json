@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T12:01:41.928Z",
+  "updatedAt": "2026-11-28T12:05:46.451Z",
   "games": [
     {
       "status": "ok",
@@ -2805,6 +2805,62 @@
     },
     {
       "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
+      "cbsEventId": 50028919,
+      "week": 13,
+      "seasonYear": 2026,
+      "away": "Michigan",
+      "home": "Ohio State",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Michigan is 3-1 ATS as a dog in 5 games and 3-1 ATS on normal rest in 5, which matches this week's role and rest. Those dog covers came at home, and the road record is 0-2 ATS in 3, with the lone road-dog result a loss at Oregon as an 11.5-point dog. Ohio State is 0-2 ATS at home in 3, 2-4 ATS as a favorite in 7, and 0-3 ATS on normal rest in 4, and there is no head-to-head sample. The Buckeyes have missed four straight covers, including home spots of 11.5 against Northwestern and 7.5 against Oregon. The line only swung from -10.5 to -10 and back to -10.5, and both injury lists are empty. The road cell is thin and the other samples are modest, but the home, favorite, and normal-rest misses line up with Michigan's dog covers, so the lean is Michigan to cover.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-28T12:03:50.864Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezdg===",
+      "cbsEventId": 50028923,
+      "week": 13,
+      "seasonYear": 2026,
+      "away": "Virginia",
+      "home": "Virginia Tech",
+      "side": "away",
+      "confidence": "light",
+      "why": "Samples are thin: Virginia is 1-2 ATS (33%) in 4 with 3 graded games, and Virginia Tech has 0 graded games, no recent covers, and no head-to-head on file. The split that matches this site is Virginia 0-1 ATS on the road in 1 game, a Week 5 non-cover at Florida State as a favorite; the dog bucket is 0-0 in 1, so this role has not been graded. Benign-weather ATS is 1-1 in 3 and normal rest is 0-0 in 1, travel is unlisted, the line path is empty, and both injury lists are blank. Virginia Tech’s home and favorite marks are the same empty 0-0. The latest result did cover, a Week 12 home win over North Carolina as a 1.5-point favorite, after non-covers against Florida State and West Virginia. With no graded cover history for Virginia Tech, that last cover is enough for a light lean to Virginia.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-28T12:04:55.786Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheztc===",
+      "cbsEventId": 50028931,
+      "week": 13,
+      "seasonYear": 2026,
+      "away": "Oklahoma",
+      "home": "Missouri",
+      "side": "home",
+      "confidence": "light",
+      "why": "Missouri is 2-0 ATS at home in 3, 2-0 ATS as a favorite in 3, and 2-0 ATS in benign weather in 3, one thin cluster on only 3 graded games. The soft spot in that same spot is normal rest, 0-1 ATS in 2. Oklahoma is 2-2 ATS on the road in 5 and 2-1 ATS as a dog in 4, with dog covers against Florida and Texas, a dog miss at Georgia, and a cover last week as a home favorite against Texas A&M. The line has moved from -2.5 to -1.5 toward the road dog, injury lists are empty, and there is no head-to-head. Samples are thin, so this is a light limb to Missouri: the home-favorite covers are the split that matches this game, and the dog record plus the one-point move are why it stays light.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-28T12:01:21.670Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezts===",
+      "cbsEventId": 50028939,
+      "week": 13,
+      "seasonYear": 2026,
+      "away": "Tennessee",
+      "home": "Vanderbilt",
+      "side": "away",
+      "confidence": "strong",
+      "why": "Tennessee is 7-1 ATS in 9 and 5-0 ATS as a favorite in 6, the role they hold on the road. The road split is thinner at 2-1 ATS in 3, but both road-favorite results in the log covered, including Georgia Tech at -12.5, and the last three graded games against LSU, Texas A&M, and Kentucky all covered. Vanderbilt is still a short sample at 3-0 ATS in 4 with only 3 decided games: 2-0 ATS as a dog in 3, both on the road at +2.5 and +8.5, and 1-0 ATS at home in 1 as a favorite. No head-to-head is listed and neither injury list has an entry, while the home number only moved from +14 to +13.5. Benign-weather ATS is 4-1 in 6 for Tennessee and 3-0 in 4 for Vanderbilt, and normal-rest ATS is 3-1 in 5 for Tennessee and 1-0 in 2 for Vanderbilt. The larger favorite and overall cover rates are the lean, with Tennessee.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-28T12:02:35.869Z"
+    },
+    {
+      "status": "ok",
       "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
       "cbsEventId": 50028940,
       "week": 13,
@@ -2816,6 +2872,20 @@
       "why": "Samples are thin — Minnesota has two graded games and Wisconsin four — and both short-week marks are 0-0. Minnesota is 2-0 ATS as a dog, but those covers were at home against Iowa (+6.5) and Michigan (+5.5), and the road split is 0-0 in one game. Wisconsin is 1-3 ATS overall and 0-0 as a favorite, while the home split is 1-0 ATS in two games and the only recent cover was at home against USC. The line walked -7.5 to -8.5, back to -7.5, then out to -9.5, with 58% of tickets on Minnesota. No head-to-head and no listed injuries, so the lean is Wisconsin at home: the site split and the move toward Wisconsin outweigh a dog record that has not been shown on the road.",
       "model": "cursor:grok-4.7",
       "frozenAt": "2026-11-27T12:00:44.207Z"
+    },
+    {
+      "status": "ok",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2do===",
+      "cbsEventId": 50028947,
+      "week": 13,
+      "seasonYear": 2026,
+      "away": "Washington",
+      "home": "Oregon",
+      "side": "away",
+      "confidence": "medium",
+      "why": "Washington’s book is thin: 1-1 ATS in 3, 1-0 ATS as a dog in 2, and 0-0 ATS on the road in 1, with the only cover a Week 12 home dog win against Indiana at +7.5. Oregon is the side with a real sample, and it runs against laying a big number at home: 2-3 ATS at home in 6 and 3-4 ATS as a favorite in 8, including home-favorite losses to UCLA (-11.5), Nebraska (-7.5), and Boise State (-24.5). A three-game cover streak (Michigan -11.5 at home, +7.5 at Ohio State, Northwestern -3.5 at home) and a flat 1-1 ATS on long rest in 3 keep that from being one-sided. The line has still moved from -14 to -13.5 toward Washington, while 59% of tickets and 16 of 18 pool calls are on Oregon. There is no head-to-head and neither side lists an injury. The road-dog sample is small, but Oregon’s home-favorite record and the line path lean Washington plus the points.",
+      "model": "cursor:grok-4.7",
+      "frozenAt": "2026-11-28T12:05:46.451Z"
     },
     {
       "status": "ok",

@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-28T06:27:36-05:00",
+    "fetchedAt": "2026-11-28T10:08:23-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -139017,10 +139017,10 @@
           "weekScore": 4,
           "weekRank": 8,
           "correctPicks": 5,
-          "picksCount": 9,
+          "picksCount": 14,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 9,
+          "revealedPicksCount": 14,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -139179,13 +139179,14 @@
               "away": "MICH",
               "home": "OHIOST",
               "homeSpread": -9.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ds===",
+              "pickedTeam": "MICH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-28T10:08:23-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezdg===",
@@ -139194,13 +139195,14 @@
               "away": "UVA",
               "home": "VATECH",
               "homeSpread": -3.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha4di===",
+              "pickedTeam": "UVA",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-28T10:08:23-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheztc===",
@@ -139209,13 +139211,14 @@
               "away": "OKLA",
               "home": "MIZZOU",
               "homeSpread": -1.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2g4ydi===",
+              "pickedTeam": "MIZZOU",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-28T10:08:23-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezts===",
@@ -139224,13 +139227,14 @@
               "away": "TENN",
               "home": "VANDY",
               "homeSpread": 13.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ds===",
+              "pickedTeam": "TENN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-28T10:08:23-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2do===",
@@ -139239,13 +139243,14 @@
               "away": "WASH",
               "home": "OREG",
               "homeSpread": -14.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha4tk===",
+              "pickedTeam": "WASH",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-28T10:08:23-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamrzgmztc===",
@@ -139814,9 +139819,9 @@
           "weekScore": 4,
           "weekRank": 8,
           "correctPicks": 5,
-          "picksCount": 9,
+          "picksCount": 25,
           "maxPicksCount": 25,
-          "pickStatus": "MAKE_PICKS",
+          "pickStatus": "PICKS_MADE",
           "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
@@ -333864,6 +333869,146 @@
         "after": "2026-11-27T15:43:41-05:00",
         "atOrBefore": "2026-11-27T19:38:53-05:00"
       }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
+      "cbsEventId": 50028919,
+      "away": "MICH",
+      "home": "OHIOST",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ds===",
+        "pickedTeam": "MICH"
+      },
+      "firstSeenAt": "2026-11-28T10:08:23-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezdg===",
+      "cbsEventId": 50028923,
+      "away": "UVA",
+      "home": "VATECH",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha4di===",
+        "pickedTeam": "UVA"
+      },
+      "firstSeenAt": "2026-11-28T10:08:23-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheztc===",
+      "cbsEventId": 50028931,
+      "away": "OKLA",
+      "home": "MIZZOU",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2g4ydi===",
+        "pickedTeam": "MIZZOU"
+      },
+      "firstSeenAt": "2026-11-28T10:08:23-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhezts===",
+      "cbsEventId": 50028939,
+      "away": "TENN",
+      "home": "VANDY",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2ds===",
+        "pickedTeam": "TENN"
+      },
+      "firstSeenAt": "2026-11-28T10:08:23-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2do===",
+      "cbsEventId": 50028947,
+      "away": "WASH",
+      "home": "OREG",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha4tk===",
+        "pickedTeam": "WASH"
+      },
+      "firstSeenAt": "2026-11-28T10:08:23-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
     }
   ],
   "picksCountChanges": [
@@ -338009,6 +338154,38 @@
       "window": {
         "after": "2026-11-27T19:38:53-05:00",
         "atOrBefore": "2026-11-28T06:27:36-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanjw",
+      "name": "Dan Sullivan",
+      "changeType": "picksCount",
+      "from": 9,
+      "to": 14,
+      "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "changeType": "picksCount",
+      "from": 9,
+      "to": 25,
+      "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
+      "previousFetchedAt": "2026-11-28T06:27:36-05:00",
+      "fetchedAt": "2026-11-28T10:08:23-05:00",
+      "window": {
+        "after": "2026-11-28T06:27:36-05:00",
+        "atOrBefore": "2026-11-28T10:08:23-05:00"
       }
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28T14:14:05.112Z",
+  "updatedAt": "2026-11-28T15:08:56.819Z",
   "weeks": [
     {
       "week": 1,
@@ -143921,8 +143921,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 180 prior chances",
               "sampleSize": 180,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": false
             },
             {
               "cbsEventId": 50028923,
@@ -143938,8 +143938,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 180 prior chances",
               "sampleSize": 180,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50028931,
@@ -143955,8 +143955,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 180 prior chances",
               "sampleSize": 180,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "home",
+              "correct": true
             },
             {
               "cbsEventId": 50028939,
@@ -143972,7 +143972,7 @@
               "habitKey": null,
               "reason": "Habits conflict or remain too close to 50/50",
               "sampleSize": 0,
-              "actualSide": null,
+              "actualSide": "away",
               "correct": null
             },
             {
@@ -143989,8 +143989,8 @@
               "habitKey": "line-value",
               "reason": "Line-value habit · 180 prior chances",
               "sampleSize": 180,
-              "actualSide": null,
-              "correct": null
+              "actualSide": "away",
+              "correct": true
             },
             {
               "cbsEventId": 50029331,
@@ -145491,15 +145491,15 @@
   ],
   "residuals": {
     "strategyId": "v1-habits",
-    "updatedAt": "2026-11-28T14:14:05.112Z",
+    "updatedAt": "2026-11-28T15:08:56.819Z",
     "overall": {
       "key": "overall",
       "games": 8425,
       "calls": 5709,
-      "graded": 5261,
-      "correct": 3544,
+      "graded": 5265,
+      "correct": 3547,
       "noCalls": 2716,
-      "accuracy": 0.6736361908382437,
+      "accuracy": 0.6736942070275403,
       "noCallRate": 0.3223738872403561
     },
     "byLeague": [
@@ -145507,10 +145507,10 @@
         "key": "NCAAF",
         "games": 3797,
         "calls": 2295,
-        "graded": 2134,
-        "correct": 1366,
+        "graded": 2138,
+        "correct": 1369,
         "noCalls": 1502,
-        "accuracy": 0.6401124648547329,
+        "accuracy": 0.6403180542563143,
         "noCallRate": 0.3955754543060311
       },
       {
@@ -145529,20 +145529,20 @@
         "key": "dog",
         "games": 711,
         "calls": 711,
-        "graded": 683,
-        "correct": 437,
+        "graded": 685,
+        "correct": 439,
         "noCalls": 0,
-        "accuracy": 0.6398243045387995,
+        "accuracy": 0.6408759124087591,
         "noCallRate": 0
       },
       {
         "key": "favorite",
         "games": 4998,
         "calls": 4998,
-        "graded": 4578,
-        "correct": 3107,
+        "graded": 4580,
+        "correct": 3108,
         "noCalls": 0,
-        "accuracy": 0.6786806465705548,
+        "accuracy": 0.6786026200873363,
         "noCallRate": 0
       },
       {
@@ -145581,10 +145581,10 @@
         "key": "line-value",
         "games": 492,
         "calls": 492,
-        "graded": 459,
-        "correct": 386,
+        "graded": 463,
+        "correct": 389,
         "noCalls": 0,
-        "accuracy": 0.840958605664488,
+        "accuracy": 0.8401727861771058,
         "noCallRate": 0
       },
       {
@@ -145623,10 +145623,10 @@
         "key": "high",
         "games": 1394,
         "calls": 1394,
-        "graded": 1346,
-        "correct": 1027,
+        "graded": 1350,
+        "correct": 1030,
         "noCalls": 0,
-        "accuracy": 0.763001485884101,
+        "accuracy": 0.762962962962963,
         "noCallRate": 0
       },
       {

@@ -1,6 +1,6 @@
 {
   "source": {
-    "fetchedAt": "2026-11-27T15:43:41-05:00",
+    "fetchedAt": "2026-11-27T19:38:53-05:00",
     "timezone": "America/Indianapolis"
   },
   "pool": {
@@ -130159,13 +130159,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
           "name": "Alec Bone",
-          "weekScore": 4,
-          "weekRank": 3,
-          "correctPicks": 4,
+          "weekScore": 5,
+          "weekRank": 1,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -130263,9 +130263,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -130279,9 +130279,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -130292,13 +130292,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -130307,13 +130308,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -130566,7 +130568,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -130664,9 +130666,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -130680,9 +130682,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -130693,13 +130695,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -130708,13 +130711,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -130961,13 +130965,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsmru",
           "name": "Dan Baker",
-          "weekScore": 1,
-          "weekRank": 22,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 17,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -131065,9 +131069,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -131081,9 +131085,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -131094,13 +131098,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -131109,13 +131114,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -131368,7 +131374,7 @@
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -131466,9 +131472,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -131482,9 +131488,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -131495,13 +131501,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -131510,13 +131517,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -131764,12 +131772,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
           "name": "DAVID KOLICH",
           "weekScore": 4,
-          "weekRank": 3,
+          "weekRank": 13,
           "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -131867,9 +131875,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -131883,9 +131891,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -131896,13 +131904,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -131911,13 +131920,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -132164,13 +132174,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
           "name": "Jay Kopas",
-          "weekScore": 1,
-          "weekRank": 22,
-          "correctPicks": 1,
+          "weekScore": 2,
+          "weekRank": 23,
+          "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -132268,9 +132278,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -132284,9 +132294,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -132297,13 +132307,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -132312,13 +132323,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -132565,13 +132577,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
           "name": "jeff miller",
-          "weekScore": 2,
-          "weekRank": 11,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 13,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -132669,9 +132681,9 @@
               "pickedTeamId": "krswc3j2gqzdm===",
               "pickedTeam": "PIT",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -132685,9 +132697,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -132698,13 +132710,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -132713,13 +132726,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -132966,13 +132980,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
           "name": "John Williams",
-          "weekScore": 4,
-          "weekRank": 3,
-          "correctPicks": 4,
+          "weekScore": 5,
+          "weekRank": 5,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -133070,9 +133084,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -133086,9 +133100,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -133099,13 +133113,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -133114,13 +133129,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -133368,12 +133384,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
           "name": "Joseph Lattanzi",
           "weekScore": 4,
-          "weekRank": 3,
+          "weekRank": 5,
           "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -133471,9 +133487,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -133487,9 +133503,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -133500,13 +133516,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -133515,13 +133532,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -133768,13 +133786,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
           "name": "Nancy Bone",
-          "weekScore": 3,
-          "weekRank": 3,
-          "correctPicks": 3,
+          "weekScore": 5,
+          "weekRank": 5,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -133872,9 +133890,9 @@
               "pickedTeamId": "krswc3j2gqzdm===",
               "pickedTeam": "PIT",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -133888,9 +133906,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -133901,13 +133919,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -133916,13 +133935,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -134268,8 +134288,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -134283,8 +134303,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -134563,13 +134583,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3dsojy",
           "name": "robert mchenry",
-          "weekScore": 4,
-          "weekRank": 3,
-          "correctPicks": 4,
+          "weekScore": 5,
+          "weekRank": 5,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -134667,9 +134687,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -134683,9 +134703,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -134696,13 +134716,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -134711,13 +134732,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -134964,13 +134986,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambu",
           "name": "Shawn  Sedate",
-          "weekScore": 2,
-          "weekRank": 11,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 17,
+          "correctPicks": 3,
           "picksCount": 24,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 6,
+          "revealedPicksCount": 8,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -135067,9 +135089,9 @@
               "pickedTeamId": "krswc3j2gqzdm===",
               "pickedTeam": "PIT",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -135083,9 +135105,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -135096,13 +135118,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -135111,13 +135134,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -135364,13 +135388,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tambx",
           "name": "Trevor Miller",
-          "weekScore": 2,
-          "weekRank": 18,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 13,
+          "correctPicks": 3,
           "picksCount": 24,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 6,
+          "revealedPicksCount": 8,
           "picksCountFirstSeenAt": "2026-11-26T06:25:31-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -135467,9 +135491,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -135483,9 +135507,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -135496,13 +135520,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -135511,13 +135536,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -135764,13 +135790,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjt",
           "name": "Tyler Kopas",
-          "weekScore": 2,
-          "weekRank": 18,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 17,
+          "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -135868,9 +135894,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -135884,9 +135910,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -135897,13 +135923,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -135912,13 +135939,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -136165,13 +136193,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamjw",
           "name": "James Harper",
-          "weekScore": 3,
-          "weekRank": 11,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -136269,9 +136297,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -136285,9 +136313,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -136298,13 +136326,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -136313,13 +136342,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -136567,12 +136597,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamrr",
           "name": "Ryan Eskew",
           "weekScore": 2,
-          "weekRank": 18,
+          "weekRank": 17,
           "correctPicks": 2,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -136670,9 +136700,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -136686,9 +136716,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -136699,13 +136729,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -136714,13 +136745,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -136967,13 +136999,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tamzr",
           "name": "Chuck Christopher",
-          "weekScore": 3,
-          "weekRank": 3,
-          "correctPicks": 3,
+          "weekScore": 5,
+          "weekRank": 1,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -137071,9 +137103,9 @@
               "pickedTeamId": "krswc3j2gqzdm===",
               "pickedTeam": "PIT",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -137087,9 +137119,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -137100,13 +137132,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -137115,13 +137148,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -137369,12 +137403,12 @@
           "entryId": "ivxhi4tzhizdiojvgm3tamzx",
           "name": "Mike Everson",
           "weekScore": 3,
-          "weekRank": 11,
+          "weekRank": 17,
           "correctPicks": 3,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -137472,9 +137506,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -137488,9 +137522,9 @@
               "pickedTeamId": "krswc3j2gu4dg===",
               "pickedTeam": "FSU",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -137501,13 +137535,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -137516,13 +137551,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -137769,13 +137805,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanbt",
           "name": "Drake Everson",
-          "weekScore": 3,
-          "weekRank": 11,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 13,
+          "correctPicks": 4,
           "picksCount": 9,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -137873,9 +137909,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -137889,9 +137925,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -137902,13 +137938,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -137917,13 +137954,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -138170,13 +138208,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanby",
           "name": "Breanne Hand",
-          "weekScore": 3,
-          "weekRank": 11,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -138274,9 +138312,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -138290,9 +138328,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -138303,13 +138341,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -138318,13 +138357,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -138571,13 +138611,13 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanju",
           "name": "Phil SQ",
-          "weekScore": 3,
-          "weekRank": 3,
-          "correctPicks": 3,
+          "weekScore": 5,
+          "weekRank": 5,
+          "correctPicks": 5,
           "picksCount": 25,
           "maxPicksCount": 25,
           "pickStatus": "PICKS_MADE",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -138675,9 +138715,9 @@
               "pickedTeamId": "krswc3j2gqzdm===",
               "pickedTeam": "PIT",
               "pickedSide": "home",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -138691,9 +138731,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -138704,13 +138744,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2tg===",
+              "pickedTeam": "TEXAS",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -138719,13 +138760,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2hezdq===",
+              "pickedTeam": "WISC",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -138972,9 +139014,9 @@
         {
           "entryId": "ivxhi4tzhizdiojvgm3tanjw",
           "name": "Dan Sullivan",
-          "weekScore": 2,
-          "weekRank": 18,
-          "correctPicks": 2,
+          "weekScore": 3,
+          "weekRank": 17,
+          "correctPicks": 3,
           "picksCount": 9,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
@@ -139076,9 +139118,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T12:09:09-05:00"
             },
@@ -139092,9 +139134,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T12:09:09-05:00"
             },
@@ -139474,8 +139516,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -139489,8 +139531,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -139769,13 +139811,13 @@
         {
           "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
           "name": "John Gannon",
-          "weekScore": 3,
-          "weekRank": 11,
-          "correctPicks": 3,
+          "weekScore": 4,
+          "weekRank": 5,
+          "correctPicks": 4,
           "picksCount": 9,
           "maxPicksCount": 25,
           "pickStatus": "MAKE_PICKS",
-          "revealedPicksCount": 7,
+          "revealedPicksCount": 9,
           "picksCountFirstSeenAt": "2026-11-25T20:10:16-05:00",
           "tiebreaker": {
             "question": "How many total points will be scored?",
@@ -139873,9 +139915,9 @@
               "pickedTeamId": "krswc3j2gqyte===",
               "pickedTeam": "DEN",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "loss",
+              "points": 0,
+              "pickStatus": "INCORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:08:21-05:00"
             },
@@ -139889,9 +139931,9 @@
               "pickedTeamId": "krswc3j2gu4dc===",
               "pickedTeam": "FLA",
               "pickedSide": "away",
-              "result": null,
-              "points": null,
-              "pickStatus": "NONE",
+              "result": "win",
+              "points": 1,
+              "pickStatus": "CORRECT",
               "matchStatus": "matched",
               "firstSeenAt": "2026-11-27T15:43:41-05:00"
             },
@@ -139902,13 +139944,14 @@
               "away": "TEXAS",
               "home": "TXAM",
               "homeSpread": 11.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2ha2ti===",
+              "pickedTeam": "TXAM",
+              "pickedSide": "home",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
@@ -139917,13 +139960,14 @@
               "away": "MINN",
               "home": "WISC",
               "homeSpread": -7.5,
-              "pickedTeamId": null,
-              "pickedTeam": null,
-              "pickedSide": null,
+              "pickedTeamId": "krswc3j2gy4ts===",
+              "pickedTeam": "MINN",
+              "pickedSide": "away",
               "result": null,
               "points": null,
               "pickStatus": "NONE",
-              "matchStatus": "unpicked"
+              "matchStatus": "matched",
+              "firstSeenAt": "2026-11-27T19:38:53-05:00"
             },
             {
               "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryheyts===",
@@ -140269,8 +140313,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -140284,8 +140328,8 @@
               "pickedTeamId": null,
               "pickedTeam": null,
               "pickedSide": null,
-              "result": null,
-              "points": null,
+              "result": "loss",
+              "points": 0,
               "pickStatus": "NONE",
               "matchStatus": "unpicked"
             },
@@ -332587,6 +332631,1238 @@
       "window": {
         "after": "2026-11-27T15:08:21-05:00",
         "atOrBefore": "2026-11-27T15:43:41-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmbw",
+      "name": "Alec Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmjv",
+      "name": "Bill Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmru",
+      "name": "Dan Baker",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzr",
+      "name": "Dave Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsmzz",
+      "name": "DAVID KOLICH",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnbu",
+      "name": "Jay Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjr",
+      "name": "jeff miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnjy",
+      "name": "John Williams",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnrt",
+      "name": "Joseph Lattanzi",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsnzt",
+      "name": "Nancy Bone",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3dsojy",
+      "name": "robert mchenry",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambu",
+      "name": "Shawn  Sedate",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tambx",
+      "name": "Trevor Miller",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjt",
+      "name": "Tyler Kopas",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamjw",
+      "name": "James Harper",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamrr",
+      "name": "Ryan Eskew",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzr",
+      "name": "Chuck Christopher",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tamzx",
+      "name": "Mike Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanbt",
+      "name": "Drake Everson",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanby",
+      "name": "Breanne Hand",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2ha2tg===",
+        "pickedTeam": "TEXAS"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdiojvgm3tanju",
+      "name": "Phil SQ",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2hezdq===",
+        "pickedTeam": "WISC"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryha4ts===",
+      "cbsEventId": 50028899,
+      "away": "TEXAS",
+      "home": "TXAM",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "home",
+        "pickedTeamId": "krswc3j2ha2ti===",
+        "pickedTeam": "TXAM"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
+      }
+    },
+    {
+      "week": 13,
+      "periodId": "kbxw63cqmvzgs33ehiytqnzthe2dkny=",
+      "entryId": "ivxhi4tzhizdkmjrgu4dqmbz",
+      "name": "John Gannon",
+      "gameId": "kbuwg23fnvig633miv3gk3tuhiytqnzthe2dknz2guydamryhe2da===",
+      "cbsEventId": 50028940,
+      "away": "MINN",
+      "home": "WISC",
+      "changeType": "appeared",
+      "from": {
+        "pickedSide": null,
+        "pickedTeamId": null,
+        "pickedTeam": null
+      },
+      "to": {
+        "pickedSide": "away",
+        "pickedTeamId": "krswc3j2gy4ts===",
+        "pickedTeam": "MINN"
+      },
+      "firstSeenAt": "2026-11-27T19:38:53-05:00",
+      "previousFetchedAt": "2026-11-27T15:43:41-05:00",
+      "fetchedAt": "2026-11-27T19:38:53-05:00",
+      "window": {
+        "after": "2026-11-27T15:43:41-05:00",
+        "atOrBefore": "2026-11-27T19:38:53-05:00"
       }
     }
   ],
